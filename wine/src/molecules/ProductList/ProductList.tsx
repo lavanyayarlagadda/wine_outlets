@@ -16,6 +16,7 @@ import { filtersData as categories } from "../../constant/curatedData";
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
 import ProductCard from "../../molecules/ProductCard/ProductCard";
 import ProductListCard from './ProductListCard';
+import { CustomDropdown } from '../../atoms';
 
 const ProductList = () => {
 
@@ -44,7 +45,12 @@ const ProductList = () => {
     );
   };
 
-
+const alcoholPreferences = [
+  { label: "Relevance", value: "relevance" },
+  { label: "Price (Low to High)", value: "price_low_high" },
+  { label: "Price (High to Low)", value: "price_high_low" },
+  { label: "Rating", value: "rating" },
+];
 
   return (
   
@@ -97,12 +103,17 @@ const ProductList = () => {
 
             <Box display="flex" alignItems="center" gap={2}>
               <FormControl size="small" sx={{ minWidth: 160 }}>
-                <Select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                  <MenuItem value="relevance">Sort by: Relevance</MenuItem>
-                  <MenuItem value="price_low_high">Sort by: Price (Low to High)</MenuItem>
-                  <MenuItem value="price_high_low">Sort by: Price (High to Low)</MenuItem>
-                  <MenuItem value="rating">Sort by: Rating</MenuItem>
-                </Select>
+                  <CustomDropdown
+  label="Sort by:"
+  value={sortBy}
+  onChange={
+    setSortBy
+  }
+  options={alcoholPreferences}
+  placeholder="Select Preference"
+  side={true}
+/>
+
               </FormControl>
               <ToggleButtonGroup
                 value={view}
