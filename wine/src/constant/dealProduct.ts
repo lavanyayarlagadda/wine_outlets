@@ -1,17 +1,24 @@
-interface Product {
+import { deal_img2, deal_img3, deal_img4 } from "../assets";
+
+export interface Product {
   id: string;
-  name: string;
-  year: number;
-  region: string;
-  volume: string;
-  rating: number;
-  vipPrice: number;
-  regularPrice: number;
-  imageUrl: string;
-  isFavorite?: boolean;
+  name: string;      // required
+  year: number;      // required
+  region: string;    // required
+  size: string;      // required
+  rating: number;    // required
+  price: number;     // required
+  vipPrice?: number;
+  salePrice?: number;
+  tag?: string;
+  isWishlisted?: boolean;
+  description?: string;
+  media: {
+    type: "image" | "video";
+    url: string;
+  };
 }
 
-import { deal_img2, deal_img3, deal_img4 } from "../assets";
 
 export const DEAL_PRODUCT: Product[] = [
   {
@@ -19,88 +26,72 @@ export const DEAL_PRODUCT: Product[] = [
     name: "Meiomi Pinot Noir",
     year: 2021,
     region: "California",
-    volume: "750 ML",
+    size: "750ML",
     rating: 4.8,
+    price: 16.53,
     vipPrice: 12.62,
-    regularPrice: 16.53,
-    imageUrl: deal_img4,
+    salePrice: 11.45,
+    tag: "Best Seller",
+    isWishlisted: true,
+    description: "This 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage represents",
+    media: {
+      type: "image",
+      url: deal_img4,
+    },
   },
   {
     id: "2",
     name: "Josh Cellars Cabernet",
     year: 2021,
     region: "California",
-    volume: "750 ML",
+    size: "750ML",
     rating: 4.8,
+    price: 16.53,
     vipPrice: 12.62,
-    regularPrice: 16.53,
-    imageUrl: deal_img2,
+    salePrice: 11.45,
+    tag: "New Arrival",
+    isWishlisted: false,
+    description: "Smooth and rich flavor...",
+    media: {
+      type: "image",
+      url: deal_img2,
+    },
   },
   {
     id: "3",
     name: "Jim Bean Bourbon Whiskey",
     year: 2021,
     region: "California",
-    volume: "750 ML",
+    size: "750ML",
     rating: 4.8,
+    price: 16.53,
     vipPrice: 12.62,
-    regularPrice: 16.53,
-    imageUrl: deal_img3,
+    salePrice: 11.45,
+    tag: "Limited Edition",
+    isWishlisted: false,
+    description: "Classic bourbon taste...",
+    media: {
+      type: "image",
+      url: deal_img3,
+    },
   },
   {
     id: "4",
     name: "La Marca Prosecco Sparkling",
     year: 2021,
     region: "California",
-    volume: "750 ML",
+    size: "750ML",
     rating: 4.8,
+    price: 16.53,
     vipPrice: 12.62,
-    regularPrice: 16.53,
-    imageUrl: deal_img2,
+    salePrice: 11.45,
+    tag: "Popular",
+    isWishlisted: true,
+    description: "Fresh and crisp sparkling wine...",
+    media: {
+      type: "image",
+      url: deal_img2,
+    },
   },
-  // Additional products for carousel
-  {
-    id: "5",
-    name: "Kendall Jackson Chardonnay",
-    year: 2021,
-    region: "California",
-    volume: "750 ML",
-    rating: 4.7,
-    vipPrice: 14.99,
-    regularPrice: 18.99,
-    imageUrl: deal_img4,
-  },
-  {
-    id: "6",
-    name: "Woodford Reserve Bourbon",
-    year: 2021,
-    region: "Kentucky",
-    volume: "750 ML",
-    rating: 4.9,
-    vipPrice: 35.99,
-    regularPrice: 42.99,
-    imageUrl: deal_img3,
-  },
-  {
-    id: "7",
-    name: "Jim Bean Bourbon Whiskey",
-    year: 2021,
-    region: "California",
-    volume: "750 ML",
-    rating: 4.8,
-    vipPrice: 12.62,
-    regularPrice: 16.53,
-    imageUrl: deal_img2,
-  },
-  {
-    id: "8",
-    name: "La Marca Prosecco Sparkling",
-    year: 2021,
-    region: "California",
-    volume: "750 ML",
-    rating: 4.8,
-    vipPrice: 12.62,
-    regularPrice: 16.53,
-    imageUrl: deal_img4,
-  },
+  // Add more products similarly...
 ];

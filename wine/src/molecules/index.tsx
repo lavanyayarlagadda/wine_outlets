@@ -10,4 +10,4 @@ export { default as EverydayCarousel } from "./EverydayCarousel/EverydayCarousel
 export { default as Brand } from "./Brands/Brands";
 export { default as RecentlyView } from "./RecentlyViewed/RecentlyView";
 export { default as Newsletter } from "./Newsletter/Newsletter";
-export {default as ProductListBanner} from "./ProductListBanner/ProductListBanner"
+export {default as ProductListBanner} from "./ProductList/ProductListBanner"

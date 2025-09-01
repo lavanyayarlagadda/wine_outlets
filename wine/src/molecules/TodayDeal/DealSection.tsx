@@ -158,14 +158,15 @@ const DealsSection: React.FC = () => {
         </Box>
       </Box>
       <Box sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 3, mb: 3, mt: 7 }}>
-        {getCurrentProducts().map((product) => (
-          <ProductCard
-            key={product.id}
-            {...product}
-            onAddToCart={handleAddToCart}
-            onToggleFavorite={handleToggleFavorite}
-          />
-        ))}
+      {getCurrentProducts().map((product) => (
+  <ProductCard
+    key={product.id}
+    product={product}                 // pass the entire product object
+    onAddToCart={handleAddToCart}
+    onToggleFavorite={handleToggleFavorite}
+  />
+))}
+
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
         {Array.from({ length: totalSlides }).map((_, index) => (

@@ -9,36 +9,39 @@ import {
   IconButton,
   Chip,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
-interface ProductCardProps {
+export interface Product {
   id: string;
   name: string;
   year: number;
   region: string;
-  volume: string;
+  size: string;
   rating: number;
-  regularPrice: number;
-  imageUrl: string;
+  price: number;
+  vipPrice?: number;
+  salePrice?: number;
+  tag?: string;
+  isWishlisted?: boolean;
+  description?: string;
+  media: {
+    type: "image" | "video";
+    url: string;
+  };
+}
+
+interface ProductCardProps {
+  product: Product;
   onAddToCart: (id: string) => void;
   onToggleFavorite: (id: string) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  id,
-  name,
-  year,
-  region,
-  volume,
-  rating,
-  regularPrice,
-  imageUrl,
-  onAddToCart,
-  onToggleFavorite,
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggleFavorite }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Card
@@ -53,36 +56,36 @@ const ProductCard: React.FC<ProductCardProps> = ({
         transition: "all 0.3s ease",
       }}
     >
-      {/* Favorite Button */}
-      <IconButton
-        sx={{
-          position: "absolute",
+        {/* Favorite Button */}
+        <IconButton
+          onClick={() => onToggleFavorite(product.id)}
+          sx={{
+            position: "absolute",
           top: 20,
           right: 22,
           backgroundColor: "white",
           border: `1px solid ${theme.palette.success.main}`,
           borderRadius: "4px",
           zIndex: 1,
-          "&:hover": { backgroundColor: "#f5f5f5" },
-        }}
-        onClick={() => onToggleFavorite(id)}
+            "&:hover": { backgroundColor: "#f5f5f5" },
+          }}
       >
         <FavoriteBorder sx={{ color: "#666" }} />
-      </IconButton>
+        </IconButton>
 
       {/* Product Image */}
       <CardMedia
         component="img"
-        height="400"
-        image={imageUrl}
-        alt={name}
+        height="150"
+        image={product.media.url}
+        alt={product.name}
         sx={{ objectFit: "contain", p: 2 }}
       />
 
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}
         <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, fontSize: "1rem" }}>
-          {name}
+          {product.name}
         </Typography>
 
         {/* Product Details */}
@@ -102,18 +105,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
               style={{ width: "12px", height: "12px", marginRight: "5px" }}
             />
             <Chip
-              label={year}
+              label={product.year}
               size="small"
               sx={{ backgroundColor: "#f5f5f5", fontSize: "0.75rem" }}
             />
-          </Box>
+        </Box>
           <Typography variant="body2" sx={{ color: "#666", fontSize: "0.75rem" }}>
             <img
               src={cityMap}
               alt={"city map"}
               style={{ width: "12px", height: "12px", marginRight: "5px" }}
             />
-            {region}
+            {product.region}
           </Typography>
         </Box>
 
@@ -132,7 +135,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               alt={"expand icon"}
               style={{ width: "12px", height: "12px", marginRight: "5px" }}
             />
-            {volume}
+            {product.size}
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <img
@@ -151,7 +154,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 lineHeight: 0,
               }}
             >
-              {rating}
+              {product.rating}
             </Typography>
           </Box>
         </Box>
@@ -174,12 +177,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 fontSize: "20px",
               }}
             >
-              ${regularPrice.toFixed(2)}
+              ${product.price.toFixed(2)}
             </Typography>
-            <Button
-              variant="outlined"
-              startIcon={<ShoppingCart />}
-              onClick={() => onAddToCart(id)}
+        <Button
+          variant="contained"
+          fullWidth={isMobile}
+          onClick={() => onAddToCart(product.id)}
+          startIcon={<ShoppingCart />}
               sx={{
                 borderColor: theme.palette.primary.dark,
                 color: theme.palette.primary.dark,
@@ -189,9 +193,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 fontWeight: 600,
                 width: "50%",
               }}
-            >
-              Add to Cart
-            </Button>
+        >
+          Add to Cart
+        </Button>
           </Box>
         </Box>
       </CardContent>

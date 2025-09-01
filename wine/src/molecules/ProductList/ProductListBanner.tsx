@@ -26,7 +26,7 @@ const ProductListBanner: React.FC = () => {
   return (
     <Container>
       <CarouselSlide
-        // bgVideo={current.media.type === "video" ? current.media.url : undefined}
+      //  bgVideo={current.media.type === "video" ? current.media.url : undefined}
       >
         {/* {current.media.type === "video" && (
           <video autoPlay loop muted playsInline>
