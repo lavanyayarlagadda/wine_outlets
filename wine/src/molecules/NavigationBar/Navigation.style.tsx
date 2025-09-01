@@ -13,7 +13,7 @@ import {
 // 🔴 Top Bar
 export const TopBar = styled(Box)(({ theme }) => ({
   backgroundColor: theme?.palette?.primary?.dark,
-  padding: "6px 16px",
+  padding: "6px 10px",
 }));
 
 export const CustomiseOfferText = styled(Typography)(({ theme }) => ({
@@ -44,7 +44,7 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: "space-between",
   flexWrap: "wrap",
   padding: "16px 0px !important",
-  margin: "0px 64px",
+  margin: "0px 30px",
   borderBottom: `1px solid ${theme.palette.success.main}`,
 }));
 

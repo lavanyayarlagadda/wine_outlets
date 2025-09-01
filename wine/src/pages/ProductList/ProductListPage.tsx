@@ -1,17 +1,23 @@
 import React from "react";
 
-import { ProductListBanner } from "../../molecules";
+import { Navigation, Newsletter, ProductListBanner } from "../../molecules";
 import { Box } from "@mui/material";
 import ProductList from "../../molecules/ProductList/ProductList";
+import Footer from "../../organisms/Footer/Footer";
 
 
 const ProductListPage = () => {
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 } }}>
+    <>
+        <Navigation />
       <ProductListBanner />
       <ProductList/>
-    </Box>
+          <Box sx={{mt:4}}>
+        <Newsletter />
+        </Box>
+             <Footer />
+    </>
   );
 };
 

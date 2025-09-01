@@ -3,7 +3,7 @@ import { Box, styled, Typography, Button } from "@mui/material";
 export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
-  padding: "80px 64px",
+  padding: "80px 30px",
   backgroundColor: theme.palette.primary.light,
   position: "relative",
 }));

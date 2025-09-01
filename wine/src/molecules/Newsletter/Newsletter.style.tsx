@@ -3,8 +3,8 @@ import { Box, Button, styled, Typography } from "@mui/material";
 export const NewsletterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
-  padding: "0px 80px 32px 80px",
-  backgroundColor: theme.palette.primary.light,
+  padding: "0px 30px 32px 30px",
+  // backgroundColor: theme.palette.primary.light,
 }));
 
 export const CustomizeTitleText = styled(Typography)(({ theme }) => ({

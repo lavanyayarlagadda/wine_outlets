@@ -5,7 +5,7 @@ import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
 export const FooterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
-  padding: "24px 80px 32px 80px",
+  padding: "24px 30px 24px 30px",
 }));
 
 export const InnerWrapper = styled(Box)({

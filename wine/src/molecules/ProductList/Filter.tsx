@@ -198,20 +198,32 @@ const FilterComponent: React.FC<FilterProps> = ({ categories, onFilterChange }) 
 
             {/* Price Range Slider */}
             {cat.categoryRange && typeof cat.categoryRange !== "string" && (
-              <Box>
+    <Box>
                 <Slider
-                  value={
-                    filters[cat.categoryId] || [
-                      cat.categoryRange.min,
-                      cat.categoryRange.max,
-                    ]
-                  }
+                  value={filters[cat.categoryId] || [cat.categoryRange.min, cat.categoryRange.max]}
                   onChange={(_, value) => handleSliderChange(cat.categoryId, value)}
                   valueLabelDisplay="auto"
                   min={cat.categoryRange.min}
                   max={cat.categoryRange.max}
-                  sx={{ color: "error.main" }}
+                  sx={{
+                    color: "error.main",
+                    "& .MuiSlider-thumb": { border: "2px solid white" },
+                  }}
                 />
+                <Box display="flex" gap={1}>
+                  <TextField
+                    size="small"
+                    value={`$${filters[cat.categoryId]?.[0] ?? cat.categoryRange.min}`}
+                    onChange={() => {}}
+                    fullWidth
+                  />
+                  <TextField
+                    size="small"
+                    value={`$${filters[cat.categoryId]?.[1] ?? cat.categoryRange.max}`}
+                    onChange={() => {}}
+                    fullWidth
+                  />
+                </Box>
               </Box>
             )}
 
