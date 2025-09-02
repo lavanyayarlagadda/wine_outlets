@@ -60,9 +60,7 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
       sx={{
         maxWidth: isMobile ? 340 : 470,
         width: "100%",
-        minHeight: isMobile ? 480 : 520,
-        // m: "auto",
-        p: isMobile ? 1 : 2,
+        minHeight: isMobile ? 380 : 470,
       }}
     >
       <FavoriteButton
@@ -74,7 +72,7 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
 
       <CardMedia
         component="img"
-        height={300}
+        height={250}
         image={product.media.url}
         alt={product.name}
         sx={{ objectFit: "contain", p: 2 }}
@@ -85,12 +83,14 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
 
         <DetailsRow>
           <Box display="flex" alignItems="center">
+  <SmallText>
             <img
               src={calendar}
-              alt="year"
+              alt="region"
               style={{ width: 20, height: 20, marginRight: 6 }}
             />
-            <SmallChip label={product.year} size="medium" />
+            {product.year}
+          </SmallText>
           </Box>
           <SmallText>
             <img
@@ -112,8 +112,8 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
             {product.size}
           </SmallText>
           <RatingBox>
-            <img src={empty_star} alt="star" style={{ width: 20, height: 20 }} />
-            <SmallText sx={{ fontWeight: 600, marginLeft: 2 }}>
+            <img src={empty_star} alt="star" style={{ width: 20, height: 20,marginRight:6 }} />
+            <SmallText>
               {product.rating}
             </SmallText>
           </RatingBox>
@@ -128,8 +128,6 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
   <PriceText>${product.price.toFixed(2)}</PriceText>
 </Box>
 
-
-        {/* New Add to Cart Button */}
         <Box
           sx={{
             display: "flex",
@@ -149,7 +147,7 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
                 padding: "12px 0px",
                 textTransform: "none",
                 fontWeight: 600,
-                width: "70%",
+                width: "100%",
                 whiteSpace:'nowrap'
               }}
         >

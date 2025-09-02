@@ -51,7 +51,7 @@ export const SmallText = styled(Typography)(() => ({
 }));
 
 export const SmallChip = styled(Chip)(() => ({
-  backgroundColor: "#f5f5f5",
+  backgroundColor: "transparent",
   fontSize: "1rem",
   height: 20,
 }));
@@ -59,7 +59,7 @@ export const SmallChip = styled(Chip)(() => ({
 export const RatingBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
-  gap: 4,
+  // gap: 4,
 }));
 
 export const PriceText = styled(Typography)(({ theme }) => ({

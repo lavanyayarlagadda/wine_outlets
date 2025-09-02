@@ -24,7 +24,7 @@ const ProductListBanner: React.FC = () => {
   console.log(current.media.url,"MEDIAURLE")
 
   return (
-    <Container>
+    <Container backgroundColor='white' padding='20px 20px'>
       <CarouselSlide
       //  bgVideo={current.media.type === "video" ? current.media.url : undefined}
       >
@@ -55,8 +55,6 @@ const ProductListBanner: React.FC = () => {
   </PriceButton>
 )}
 
-      </CarouselSlide>
-
       <DotsContainer>
         {slides.map((_, index) => (
           <Dot
@@ -66,6 +64,7 @@ const ProductListBanner: React.FC = () => {
           />
         ))}
       </DotsContainer>
+            </CarouselSlide>
     </Container>
   );
 };

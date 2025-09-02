@@ -1,10 +1,19 @@
 import { Box, styled, Typography, Button } from "@mui/material";
 
-export const Container = styled(Box)(({ theme }) => ({
+interface ContainerProps {
+  padding?: string;
+  backgroundColor?: string;
+  maxWidth?: string | number;
+}
+
+export const Container = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "padding" && prop !== "backgroundColor" && prop !== "maxWidth",
+})<ContainerProps>(({ theme, padding, backgroundColor, maxWidth }) => ({
   width: "100%",
   margin: "0 auto",
-  padding: "80px 30px",
-  backgroundColor: theme.palette.primary.light,
+  padding: padding || "80px 30px",
+  backgroundColor: backgroundColor || theme.palette.primary.light,
+  maxWidth: maxWidth || "100%",
   position: "relative",
 }));
 

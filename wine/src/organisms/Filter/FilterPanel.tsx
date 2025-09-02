@@ -48,7 +48,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
   } = useFilters(onFilterChange);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
 
   const handleSubSelect = (id: string) => {
@@ -127,7 +127,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
             </Button>
 
             {selectedSub === sub.categoryId && (
-              <Box sx={{ ml: 3 }}>
+               <Stack spacing={1}>
                 {sub.categoryList?.map((item: any) => (
                   <CustomCheckbox
                     key={item.listId}
@@ -137,7 +137,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                   />
                 ))}
                 {sub.subCategories?.map((innerSub,index) => renderCategory(innerSub,index))}
-              </Box>
+              </Stack>
             )}
           </Box>
         ))}
@@ -162,6 +162,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
             borderRadius: "8px",
             color: palette.black[800],
             fontSize: "14px",
+             textTransform: "capitalize"
           }}
           onClick={handleClearAll}
         >
@@ -177,7 +178,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
   return isMobile ? (
     <>
       <IconButton onClick={() => setOpenDrawer(true)}>
-        <FilterList />
+        <FilterList /> Filter
       </IconButton>
       <Drawer anchor="left" open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <Box display="flex" justifyContent="flex-end" p={1}>

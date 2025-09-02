@@ -33,7 +33,7 @@ export const DEAL_PRODUCT: Product[] = [
     salePrice: 11.45,
     tag: "Best Seller",
     isWishlisted: true,
-    description: "This 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage representsThis 2018 vintage represents",
+    description: "Elegant, fresh, and finely balanced, Tiefenbrunner Pinot Grigio 2023 showcases the purity of Alto Adige’s cool-climate terroir. This expressive white wine opens with aromas of green apple, white peach, and lemon blossom. On the palate, it delivers crisp acidity and minerality, with flavors of pear, citrus, and a subtle almond finish. Clean and polished, it’s a sophisticated choice for refreshing moments or refined meals.",
     media: {
       type: "image",
       url: deal_img4,

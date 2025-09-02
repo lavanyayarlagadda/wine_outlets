@@ -84,7 +84,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
     component="img"
     sx={{
       width: { xs: 80, sm: 100, md: 120 },  // responsive width
-      height: { xs: 150, sm: 210, md: 300 }, // responsive height
+      height: { xs: 150, sm: 210, md: 250 }, // responsive height
       objectFit: "contain",
       borderRadius: 2,
     }}
@@ -126,32 +126,47 @@ const ProductListCard: React.FC<ProductCardProps> = ({
     display="flex"
     flexWrap="wrap" // wrap on small screens
     alignItems="center"
+    justifyContent="space-between"
     gap={{ xs: 1, sm: 2 }} // smaller gap on mobile
     mb={1}
   >
     {location && (
       <SmallText>
-        <img src={cityMap} alt="region" style={{ width: 16, height: 16, marginRight: 4 }} />
-        {location}
-      </SmallText>
+                 <img
+                   src={cityMap}
+                   alt="region"
+                   style={{ width: 20, height: 20, marginRight: 6 }}
+                 />
+                 {location}
+               </SmallText>
     )}
     {year && (
-      <Box display="flex" alignItems="center">
-        <img src={calendar} alt="year" style={{ width: 16, height: 16, marginRight: 4 }} />
-        <SmallChip label={year} size="small" />
-      </Box>
+     <SmallText>
+                 <img
+                   src={calendar}
+                   alt="region"
+                   style={{ width: 20, height: 20, marginRight: 6 }}
+                 />
+                 {year}
+               </SmallText>
     )}
     {size && (
       <SmallText>
-        <img src={expandIcon} alt="size" style={{ width: 16, height: 16, marginRight: 4 }} />
-        {size}
-      </SmallText>
+                 <img
+                   src={expandIcon}
+                   alt="size"
+                   style={{ width: 20, height: 20, marginRight: 6 }}
+                 />
+                 {size}
+               </SmallText>
     )}
     {rating && (
-      <RatingBox>
-        <img src={empty_star} alt="star" style={{ width: 16, height: 16 }} />
-        <SmallText sx={{ fontWeight: 600, marginLeft: 2 }}>{rating}</SmallText>
-      </RatingBox>
+        <RatingBox>
+                  <img src={empty_star} alt="star" style={{ width: 20, height: 20,marginRight:6 }} />
+                  <SmallText>
+                    {rating}
+                  </SmallText>
+                </RatingBox>
     )}
   </Box>
 

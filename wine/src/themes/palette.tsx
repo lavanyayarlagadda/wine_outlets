@@ -19,6 +19,7 @@ export const WHITE_300 = "rgba(255, 255, 255, 0.3)";
 export const WHITE_400 = "#FFF7E0";
 export const WHITE = "#ffffff";
 export const BLACK_800 = "#1A1F29";
+export const LIGHT_GREY = "#F6F6F6";
 
 export const SECONDARY_ICON = "#0B9A64";
 export const ACCENT_ERROR = "#f44336";
@@ -73,6 +74,7 @@ const palette = {
     300: GREY_300,
     400: GREY_400,
     500: GREY_500,
+   light: LIGHT_GREY
   },
   white: {
     main: WHITE,

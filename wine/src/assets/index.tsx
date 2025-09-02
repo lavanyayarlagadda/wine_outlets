@@ -34,3 +34,7 @@ export { default as facebook } from "./icons/facebook.svg";
 export { default as twitter } from "./icons/twitter.svg";
 export { default as linkedin } from "./icons/linkedIn.svg";
 export { default as video } from "./banner/video.mp4";
+export { default as gridImageGrey } from "./icons/gridImageGrey.png";
+export { default as gridImage } from "./icons/gridImage.png";
+export { default as listImageGrey } from "./icons/listImageGrey.png";
+export { default as listImage } from "./icons/listImage.png";

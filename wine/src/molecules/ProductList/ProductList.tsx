@@ -18,6 +18,7 @@ import { CustomDropdown } from '../../atoms';
 import CustomPagination from "../Pagination/Pagination";
 import Breadcrumbs, { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
 import palette from "../../themes/palette";
+import { listImage,listImageGrey,gridImage,gridImageGrey } from "../../assets";
 
 
 const ProductList = () => {
@@ -68,16 +69,15 @@ const breadcrumbItems: BreadcrumbItem[] = [
   justifyContent="space-between"
   flexWrap={{ xs: "wrap", sm: "nowrap" }}
   py={{ xs: 1, sm: 1 }}
-  px={{ xs: 0, sm: 1 }}
+  px={{ xs: 0, sm: 2 }}
   gap={2}
 >
-  {/* Left: Breadcrumbs */}
+
   <Box flex="1 1 auto">
     <Breadcrumbs items={breadcrumbItems} separator=">" />
   </Box>
 
-  {/* Right: Product count */}
-  <Box flex="0 0 auto">
+  <Box flex="0 0 auto" sx={{pr:'12px'}}>
     <Typography variant="body2" color={palette.grey[200]}>
       {allProducts.length} Products Found
     </Typography>
@@ -87,7 +87,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
 <Box
   sx={{
     display: "flex",
-    flexDirection: { xs: "column", md: "row" },
+    flexDirection: { xs: "column", md: "column",lg:"row" },
     overflowX: "hidden",
     width: "100%",
     boxSizing: "border-box",
@@ -98,7 +98,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   {/* Left Sidebar */}
   <Box
     sx={{
-      flex: { xs: "0 0 auto", md: "0 0 20%" },
+      flex: { xs: "0 0 auto", md:"0 0 auto",lg: "0 0 20%" },
       mb: { xs: 2, md: 0 },
       px: { xs: 2, md: 2 }, // responsive horizontal padding
     }}
@@ -110,7 +110,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
   <Box
     sx={{
       flex: { xs: "1 1 auto", md: "0 0 69%",lg:"0 0 75%" },
-      px: { xs: 2, md: 4 },
+      px: { xs: 2, md: '14px' },
       overflowX: "hidden",
       boxSizing: "border-box",
     }}
@@ -152,19 +152,51 @@ const breadcrumbItems: BreadcrumbItem[] = [
           />
         </FormControl>
 
-        <ToggleButtonGroup
-          value={view}
-          exclusive
-          onChange={(e, val) => val && setView(val)}
-          size="small"
-        >
-          <ToggleButton value="grid">
-            <GridView />
-          </ToggleButton>
-          <ToggleButton value="list">
-            <ListAlt />
-          </ToggleButton>
-        </ToggleButtonGroup>
+      <Box
+  sx={{
+    backgroundColor: palette.grey.light,
+    p: 1,
+    border: `1px solid ${palette.grey.light}`,
+    borderRadius: "8px",
+    display: "flex",
+    justifyContent: "center", // centers buttons horizontally
+  }}
+>
+  <ToggleButtonGroup
+    value={view}
+    exclusive
+    onChange={(e, val) => val && setView(val)}
+    size="small"
+    sx={{
+      border: "none", // remove group border
+      "& .MuiToggleButton-root": {
+        border: "none",           // remove individual button borders
+        backgroundColor: "transparent", // no background
+        "&.Mui-selected": {
+          backgroundColor: "transparent", // no background when selected
+        },
+        "&:hover": {
+          backgroundColor: "transparent", // no hover background
+        },
+      },
+    }}
+  >
+    <ToggleButton value="grid" sx={{ p: 0 }}>
+      <img
+        src={view === "grid" ? gridImage : gridImageGrey}
+        alt="grid view"
+        style={{ width: 40, height: 40 }}
+      />
+    </ToggleButton>
+    <ToggleButton value="list" sx={{ p: 0 }}>
+      <img
+        src={view === "list" ? listImage : listImageGrey}
+        alt="list view"
+        style={{ width: 40, height: 40 }}
+      />
+    </ToggleButton>
+  </ToggleButtonGroup>
+</Box>
       </Box>
     </Box>
 
