@@ -17,6 +17,7 @@ import { DEAL_PRODUCT } from "../../constant/dealProduct";
 import ProductCard from "../../molecules/ProductCard/ProductCard";
 import ProductListCard from './ProductListCard';
 import { CustomDropdown } from '../../atoms';
+import FilterPanel from '../../organisms/Filter/FilterPanel';
 
 const ProductList = () => {
 
@@ -67,11 +68,11 @@ const alcoholPreferences = [
         <Box
           sx={{
             flex: { xs: "0 0 auto", md: "0 0 25%" },
-            pr: { md: 2 },
+          p:4,
             mb: { xs: 2, md: 0 },
           }}
         >
-          <FilterComponent
+          <FilterPanel
             categories={categories.categories}
             onFilterChange={handleFilters}
           />
