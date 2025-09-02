@@ -96,8 +96,20 @@ const DealsSection: React.FC = () => {
 
   return (
     <Container>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+      <Box sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "space-between",
+        alignItems: { xs: "flex-start", md: "center" },
+        gap: 3,
+        mb: 4
+      }}>
+        <Box sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: { xs: "flex-start", sm: "center" },
+          gap: 2
+        }}>
           <Typography variant="h4" sx={{ fontWeight: "bold", color: theme.palette.black[800] }}>
             Today's Deal for you!
           </Typography>
@@ -135,7 +147,19 @@ const DealsSection: React.FC = () => {
             ))}
           </Box>
         </Box>
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{
+          display: "flex",
+          gap: 2,
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+          maxWidth: "100%",
+          pb: 1,
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          "-ms-overflow-style": "none",
+          scrollbarWidth: "none",
+        }}>
           {filterButtons.map((filter) => (
             <Button
               key={filter.id}
@@ -150,6 +174,9 @@ const DealsSection: React.FC = () => {
                 },
                 textTransform: "none",
                 fontWeight: 600,
+                flexShrink: 0,
+                minWidth: "auto",
+                px: 2,
               }}
             >
               {filter.label}
@@ -157,18 +184,35 @@ const DealsSection: React.FC = () => {
           ))}
         </Box>
       </Box>
-      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 3, mb: 3, mt: 7 }}>
-      {getCurrentProducts().map((product) => (
-  <ProductCard
-    key={product.id}
-    product={product}                 // pass the entire product object
-    onAddToCart={handleAddToCart}
-    onToggleFavorite={handleToggleFavorite}
-  />
-))}
-
+      <Box sx={{
+        display: "flex",
+        overflowX: "auto",
+        gap: 3,
+        mb: 3,
+        mt: 7,
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+        "-ms-overflow-style": "none",
+        scrollbarWidth: "none",
+        px: 1,
+      }}>
+        {getCurrentProducts().map((product) => (
+          <Box key={product.id} sx={{ minWidth: "280px", flexShrink: 0 }}>
+            <ProductCard
+              product={product}
+              onAddToCart={handleAddToCart}
+              onToggleFavorite={handleToggleFavorite}
+            />
+          </Box>
+        ))}
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
+      <Box sx={{   
+        display: { xs: "none", md: "flex" },
+        justifyContent: "center", 
+        gap: 1 
+      }}
+      >
         {Array.from({ length: totalSlides }).map((_, index) => (
           <Box
             key={index}
