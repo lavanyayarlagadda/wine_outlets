@@ -1,6 +1,7 @@
 import type React from "react";
 import { Select, MenuItem, Box } from "@mui/material";
 import { StyledFormControl, StyledLabel } from "./CustomDropdown.style";
+import { ExpandMore } from "@mui/icons-material";
 
 interface DropdownOption {
   value: string;
@@ -42,6 +43,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           value={value}
           onChange={(e) => onChange(e.target.value as string)}
           displayEmpty
+           IconComponent={ExpandMore} 
          sx={{
     "& .MuiOutlinedInput-notchedOutline": {
       border: side ? "none" : undefined, // remove border if side is true

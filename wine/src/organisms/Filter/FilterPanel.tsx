@@ -146,8 +146,8 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
   );
 
   const content = (
-    <Box p={2}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" p={2}>
+    <Box p={0}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" p={1}>
         <Typography
           variant="subtitle1"
           fontWeight="bold"
@@ -189,7 +189,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
       </Drawer>
     </>
   ) : (
-    <Box border="1px solid #ddd" borderRadius={2} bgcolor="background.paper">
+    <Box border="1px solid #ddd" borderRadius={2} bgcolor="background.paper" p={2}>
       {content}
     </Box>
   );

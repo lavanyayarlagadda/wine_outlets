@@ -13,9 +13,7 @@ const ProductListPage = () => {
         <Navigation />
       <ProductListBanner />
       <ProductList/>
-          <Box sx={{mt:4}}>
         <Newsletter />
-        </Box>
              <Footer />
     </>
   );

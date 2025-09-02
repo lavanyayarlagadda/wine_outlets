@@ -1,18 +1,39 @@
-import FilterComponent from "./molecules/ProductList/Filter";
-import Home from "./pages/Home/Home";
-import ProductListPage from "./pages/ProductList/ProductListPage";
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CircularProgress, Box } from "@mui/material";
 
 
 
+const Home = lazy(() => import("./pages/Home/Home"));
+const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
 
-const App = () => {
-
-
-
+const App: React.FC = () => {
   return (
-    <>
-      <Home/>
-    </>
+    <Router>
+      <Suspense
+        fallback={
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="100vh"
+          >
+            {/* Reference GIF from public folder */}
+            <img
+              src="/loader.gif"
+              alt="Loading..."
+              style={{ width: 150, height: 150 }}
+            />
+          </Box>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/productsList" element={<ProductsList />} />
+          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+        </Routes>
+      </Suspense>
+    </Router>
   );
 };
 

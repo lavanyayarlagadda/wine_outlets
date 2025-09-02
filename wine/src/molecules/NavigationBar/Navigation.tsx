@@ -27,6 +27,7 @@ import {
   BottomToolbar,
   IconGroup,
 } from "./Navigation.style";
+import { useNavigate } from "react-router-dom";
 
 // Define menu items for dropdowns
 const menus: { [key: string]: string[] } = {
@@ -39,6 +40,7 @@ const Navigation = () => {
   const theme = useTheme();
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery"];
   const { anchorEl, menuOpen, handleMenuOpen, handleMenuClose } = useNavigation(menuKeys);
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -103,15 +105,24 @@ const Navigation = () => {
                 {item} {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </DropdownTriggerNoBorder>
 
-              <StyledMenu
-                anchorEl={anchorEl[item]}
-                open={menuOpen[item]}
-                onClose={() => handleMenuClose(item)}
-              >
-                {menus[item].map((val) => (
-                  <DropdownMenuItem key={val}>{val}</DropdownMenuItem>
-                ))}
-              </StyledMenu>
+<StyledMenu
+  anchorEl={anchorEl[item]}
+  open={menuOpen[item]}
+  onClose={() => handleMenuClose(item)}
+>
+  {menus[item].map((val) => (
+    <DropdownMenuItem
+      key={val}
+      onClick={() => {
+        navigate('/productsList'); // wrap in function
+        handleMenuClose(item); // optionally close the menu
+      }}
+    >
+      {val}
+    </DropdownMenuItem>
+  ))}
+</StyledMenu>
+
             </div>
           ))}
 

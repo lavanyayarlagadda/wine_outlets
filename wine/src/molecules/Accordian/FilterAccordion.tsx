@@ -43,7 +43,7 @@ const FilterAccordion: React.FC<Props> = ({ title, children,isLast }) => {
               color: palette.black[800],
               fontSize: "16px",
               fontWeight: 600,
-              p: 1,
+              
             }}
           >
             {title}

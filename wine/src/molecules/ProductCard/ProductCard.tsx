@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
     >
         {/* Favorite Button */}
         <IconButton
-          onClick={() => onToggleFavorite(product.id)}
+          onClick={() => onToggleFavorite(product?.id)}
           sx={{
             position: "absolute",
           top: 20,
@@ -77,15 +77,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
       <CardMedia
         component="img"
         height="150"
-        image={product.media.url}
-        alt={product.name}
+        image={product?.media?.url}
+        alt={product?.name}
         sx={{ objectFit: "contain", p: 2 }}
       />
 
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}
         <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, fontSize: "1rem" }}>
-          {product.name}
+          {product?.name}
         </Typography>
 
         {/* Product Details */}
@@ -105,7 +105,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
               style={{ width: "12px", height: "12px", marginRight: "5px" }}
             />
             <Chip
-              label={product.year}
+              label={product?.year}
               size="small"
               sx={{ backgroundColor: "#f5f5f5", fontSize: "0.75rem" }}
             />
@@ -116,7 +116,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
               alt={"city map"}
               style={{ width: "12px", height: "12px", marginRight: "5px" }}
             />
-            {product.region}
+            {product?.region}
           </Typography>
         </Box>
 
@@ -135,7 +135,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
               alt={"expand icon"}
               style={{ width: "12px", height: "12px", marginRight: "5px" }}
             />
-            {product.size}
+            {product?.size}
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <img
@@ -154,7 +154,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
                 lineHeight: 0,
               }}
             >
-              {product.rating}
+              {product?.rating}
             </Typography>
           </Box>
         </Box>
@@ -177,12 +177,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
                 fontSize: "20px",
               }}
             >
-              ${product.price.toFixed(2)}
+              ${product?.price.toFixed(2)}
             </Typography>
         <Button
           variant="contained"
           fullWidth={isMobile}
-          onClick={() => onAddToCart(product.id)}
+          onClick={() => onAddToCart(product?.id)}
           startIcon={<ShoppingCart />}
               sx={{
                 borderColor: theme.palette.primary.dark,

@@ -1,183 +1,231 @@
-import React from 'react'
+import React, { useState } from "react";
 import {
   Box,
   Chip,
   FormControl,
-  MenuItem,
-  Select,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import { GridView, ListAlt } from "@mui/icons-material";
-import FilterComponent from "../../molecules/ProductList/Filter";
+import FilterPanel from '../../organisms/Filter/FilterPanel';
 import { filtersData as categories } from "../../constant/curatedData";
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
-import ProductCard from "../../molecules/ProductCard/ProductCard";
 import ProductListCard from './ProductListCard';
+import { ProductGridCard } from './ProductGridCard';
 import { CustomDropdown } from '../../atoms';
-import FilterPanel from '../../organisms/Filter/FilterPanel';
+import CustomPagination from "../Pagination/Pagination";
+import Breadcrumbs, { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
+import palette from "../../themes/palette";
+
 
 const ProductList = () => {
-
-  const [sortBy, setSortBy] = React.useState("relevance");
-  const [view, setView] = React.useState("grid");
-  const [cartItems, setCartItems] = React.useState<number[]>([]);
-  const [wishlist, setWishlist] = React.useState<number[]>([]);
+  const [sortBy, setSortBy] = useState("relevance");
+  const [view, setView] = useState("grid");
+  const [cartItems, setCartItems] = useState<number[]>([]);
+  const [wishlist, setWishlist] = useState<number[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const isMobileOrTablet = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
+const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Category", href: "/" },
+    { label: "List" }, // current page, no href
+  ];
+  const PRODUCTS_PER_PAGE = 24;
+  const PRODUCTS_PER_ROW = 3;
 
-  const handleFilters = (filters: Record<string, any>) => {
-    console.log("Applied Filters:", filters);
-  };
-
-  const getCurrentProducts = () => DEAL_PRODUCT;
+  const allProducts = DEAL_PRODUCT;
 
   const handleAddToCart = (productId: any) => {
-    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
+    setCartItems(prev => (prev.includes(productId) ? prev : [...prev, productId]));
   };
 
   const handleToggleFavorite = (productId: any) => {
-    setWishlist((prev) =>
+    setWishlist(prev =>
       prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
+        ? prev.filter(id => id !== productId)
         : [...prev, productId]
     );
   };
 
-const alcoholPreferences = [
-  { label: "Relevance", value: "relevance" },
-  { label: "Price (Low to High)", value: "price_low_high" },
-  { label: "Price (High to Low)", value: "price_high_low" },
-  { label: "Rating", value: "rating" },
-];
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = startIndex + PRODUCTS_PER_PAGE;
+  const currentProducts = allProducts.slice(startIndex, endIndex);
+
+  const alcoholPreferences = [
+    { label: "Relevance", value: "relevance" },
+    { label: "Price (Low to High)", value: "price_low_high" },
+    { label: "Price (High to Low)", value: "price_high_low" },
+    { label: "Rating", value: "rating" },
+  ];
 
   return (
-  
-      <Box
-        sx={{
-          pt: 4,
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {/* Left: Filter Sidebar / Drawer */}
-        <Box
-          sx={{
-            flex: { xs: "0 0 auto", md: "0 0 25%" },
-          p:4,
-            mb: { xs: 2, md: 0 },
-          }}
-        >
-          <FilterPanel
-            categories={categories.categories}
-            onFilterChange={handleFilters}
-          />
-        </Box>
-
-        {/* Right: Main Content */}
-        <Box
-          sx={{
-            flex: { xs: "1 1 auto", md: "0 0 75%" },
-            pl: { md: 2 },
-          }}
-        >
-          {/* Applied Filters & Sort/View */}
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            flexWrap={isMobileOrTablet ? "wrap" : "nowrap"}
-            py={1}
-            px={isMobileOrTablet ? 1 : 3}
-            gap={2}
-          >
-            <Box display="flex" flexDirection="column" alignItems="flex-start" gap={1}>
-              <Typography variant="body2" color="text.secondary">
-                Applied filters:
-              </Typography>
-              <Chip label="Wines (30)" onDelete={() => {}} size="medium" variant="outlined" />
-            </Box>
-
-            <Box display="flex" alignItems="center" gap={2}>
-              <FormControl size="small" sx={{ minWidth: 160 }}>
-                  <CustomDropdown
-  label="Sort by:"
-  value={sortBy}
-  onChange={
-    setSortBy
-  }
-  options={alcoholPreferences}
-  placeholder="Select Preference"
-  side={true}
-/>
-
-              </FormControl>
-              <ToggleButtonGroup
-                value={view}
-                exclusive
-                onChange={(e, val) => val && setView(val)}
-                size="small"
-              >
-                <ToggleButton value="grid">
-                  <GridView />
-                </ToggleButton>
-                <ToggleButton value="list">
-                  <ListAlt />
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </Box>
-          </Box>
-
-{/* Products Grid/List */}
+    <>
 <Box
-  sx={{
-    display: "grid",
-    gridTemplateColumns:
-      view === "grid"
-        ? { xs: "repeat(1, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }
-        : "repeat(1, 1fr)",
-    gap: 3,
-    mb: 3,
-    mt: 7,
-  }}
+  display="flex"
+  alignItems="center"
+  justifyContent="space-between"
+  flexWrap={{ xs: "wrap", sm: "nowrap" }}
+  py={{ xs: 1, sm: 1 }}
+  px={{ xs: 0, sm: 1 }}
+  gap={2}
 >
-  {getCurrentProducts().map((product) =>
-    view === "list" ? (
- <ProductListCard
-      key={product.id}
-      id={product.id}
-      name={product.name}
-      image={product.media.url}          // map imageUrl -> image
-      price={product.price}      // map regularPrice -> price
-      vipPrice={product.vipPrice}
-      location={product.region}         // map region -> location
-      year={product.year}
-      size={product.size}             // map volume -> size
-      rating={product.rating}
-      description={product.description} // if available
-      onAddToCart={() => handleAddToCart(product.id)}
-      onToggleFavorite={() => handleToggleFavorite(product.id)}
-      isFavorite={wishlist.includes(Number(product.id))}
-    />
-    ) : (
-      <ProductCard
-        key={product.id}
-        product={product}
-        onAddToCart={() => handleAddToCart(product.id)}
-        onToggleFavorite={() => handleToggleFavorite(product.id)}
-        // isFavorite={wishlist.includes(product.id)}
-      />
-    )
-  )}
+  {/* Left: Breadcrumbs */}
+  <Box flex="1 1 auto">
+    <Breadcrumbs items={breadcrumbItems} separator=">" />
+  </Box>
+
+  {/* Right: Product count */}
+  <Box flex="0 0 auto">
+    <Typography variant="body2" color={palette.grey[200]}>
+      {allProducts.length} Products Found
+    </Typography>
+  </Box>
 </Box>
 
-        </Box>
-      </Box>
-  )
-}
+<Box
+  sx={{
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    overflowX: "hidden",
+    width: "100%",
+    boxSizing: "border-box",
+    py:2
+  }}
+>
 
-export default ProductList
+  {/* Left Sidebar */}
+  <Box
+    sx={{
+      flex: { xs: "0 0 auto", md: "0 0 20%" },
+      mb: { xs: 2, md: 0 },
+      px: { xs: 2, md: 2 }, // responsive horizontal padding
+    }}
+  >
+    <FilterPanel categories={categories.categories} onFilterChange={() => {}} />
+  </Box>
+
+  {/* Right Main Content */}
+  <Box
+    sx={{
+      flex: { xs: "1 1 auto", md: "0 0 69%",lg:"0 0 75%" },
+      px: { xs: 2, md: 4 },
+      overflowX: "hidden",
+      boxSizing: "border-box",
+    }}
+  >
+    {/* Top Filters & View Controls */}
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      flexWrap={{ xs: "wrap", sm: "nowrap" }}
+      py={{ xs: 1, sm: 1 }}
+      px={{ xs: 0, sm: 1 }}
+      gap={2}
+    >
+      {/* Applied Filters */}
+      <Box display="flex" flexDirection="column" alignItems="flex-start" gap={1} flex="1 1 auto">
+        <Typography variant="body2" color="text.secondary">
+          Applied filters:
+        </Typography>
+        <Chip
+          label="Wines (30)"
+          onDelete={() => {}}
+          size="medium"
+          variant="outlined"
+          sx={{ borderRadius: "8px" }}
+        />
+      </Box>
+
+      {/* Sort & View Toggle */}
+      <Box display="flex" alignItems="center" gap={1.5} flex="0 0 auto" flexWrap="wrap">
+        <FormControl size="small" sx={{ minWidth: 140 }}>
+          <CustomDropdown
+            label="Sort by:"
+            value={sortBy}
+            onChange={setSortBy}
+            options={alcoholPreferences}
+            placeholder="Select Preference"
+            side={true}
+          />
+        </FormControl>
+
+        <ToggleButtonGroup
+          value={view}
+          exclusive
+          onChange={(e, val) => val && setView(val)}
+          size="small"
+        >
+          <ToggleButton value="grid">
+            <GridView />
+          </ToggleButton>
+          <ToggleButton value="list">
+            <ListAlt />
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Box>
+    </Box>
+
+    {/* Products Grid/List */}
+    <Box sx={{ width: "100%", overflowX: "hidden", p: { xs: 0, sm: 0.5 } }}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns:
+            view === "grid"
+              ? {
+                  xs: "repeat(1, 1fr)",
+                  sm: "repeat(2, 1fr)",
+                  md: `repeat(${PRODUCTS_PER_ROW}, 1fr)`,
+                }
+              : "repeat(1, 1fr)",
+          gap: { xs: 2, sm: 3 },
+          mb: 3,
+          mt: 3,
+        }}
+      >
+        {currentProducts.map((product) =>
+          view === "list" ? (
+            <ProductListCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              image={product.media.url}
+              price={product.price}
+              vipPrice={product.vipPrice}
+              location={product.region}
+              year={product.year}
+              size={product.size}
+              rating={product.rating}
+              description={product.description}
+              onAddToCart={() => handleAddToCart(product.id)}
+              onToggleFavorite={() => handleToggleFavorite(product.id)}
+              isFavorite={wishlist.includes(Number(product.id))}
+            />
+          ) : (
+            <ProductGridCard
+              key={product.id}
+              product={product}
+              onAddToCart={() => handleAddToCart(product.id)}
+              onToggleFavorite={() => handleToggleFavorite(product.id)}
+            />
+          )
+        )}
+      </Box>
+
+      {/* Pagination */}
+      <CustomPagination
+        count={Math.ceil(allProducts.length / PRODUCTS_PER_PAGE)}
+        page={currentPage}
+        onChange={setCurrentPage}
+      />
+    </Box>
+  </Box>
+</Box>
+</>
+  );
+};
+
+export default ProductList;
