@@ -95,6 +95,7 @@ export const filtersData =
       "categoryId": "1-1",
       "categoryName": "Wines",
       "categoryCount": "28",
+      
       "categoryList": [
         { "listId": "1", "listName": "Pinot Noir Aisle" },
         { "listId": "2", "listName": "Cabernet Aisle" },
