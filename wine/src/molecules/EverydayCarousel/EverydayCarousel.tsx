@@ -32,12 +32,12 @@ const WineCarousel: React.FC = () => {
             <NorthEastIcon fontSize="small" sx={{ color: theme.palette.white.main }} />
           </IconWrapper>
         </PriceButton>
-      </CarouselSlide>
-      <DotsContainer>
+        <DotsContainer>
         {slides.map((_, index) => (
           <Dot key={index} active={index === currentSlide} onClick={() => setCurrentSlide(index)} />
         ))}
-      </DotsContainer>
+        </DotsContainer>
+      </CarouselSlide>   
     </Container>
   );
 };

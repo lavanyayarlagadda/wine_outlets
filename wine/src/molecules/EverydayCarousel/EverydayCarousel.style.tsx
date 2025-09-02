@@ -17,7 +17,7 @@ interface CarouselSlideProps {
 export const CarouselSlide = styled(Box, {
   shouldForwardProp: (prop) =>
     prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
-})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor }) => ({
+})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor,theme  }) => ({
   background: bgImage
     ? `url(${bgImage}) center/cover no-repeat`
     : bgVideo
@@ -65,12 +65,21 @@ export const CarouselSlide = styled(Box, {
     objectFit: "cover",
     zIndex: -1,
   },
+   [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    padding: '24px',
+  },
+  
 }));
 
 
 export const ContentSection = styled(Box)(({ theme }) => ({
   flex: 1,
   paddingRight: "32px",
+  [theme.breakpoints.down('sm')]: {
+    paddingRight: 0,
+  },
 }));
 
 export const SlideTitle = styled(Typography)(({ theme }) => ({
@@ -96,6 +105,11 @@ export const PriceButton = styled(Button)(({ theme }) => ({
   fontWeight: "600",
   textTransform: "none",
   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    marginTop: '24px',
+    marginBottom: '10px',
+  },
 }));
 
 export const DotsContainer = styled(Box)(({ theme }) => ({
@@ -104,8 +118,9 @@ export const DotsContainer = styled(Box)(({ theme }) => ({
   gap: "8px",
   marginTop: "20px",
   position: "absolute",
-  left: "50%",
-  bottom: "100px",
+  left: "40%",
+  right: "40%",
+  bottom: "10px",
 }));
 
 export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({
