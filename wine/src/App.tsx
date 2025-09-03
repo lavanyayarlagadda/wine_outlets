@@ -12,6 +12,7 @@ import { Box } from "@mui/material";
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
 const ProductView = lazy(() => import("./pages/ProductView/ProductViewPage"));
+const Layout = lazy(() => import("./layout/Layout"));
 
 const App: React.FC = () => {
   return (
@@ -33,10 +34,12 @@ const App: React.FC = () => {
         }
       >
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productsList" element={<ProductsList />} />
-          <Route path="/productView" element={<ProductView />} />
-          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          <Route path="/" element={<Layout />}>
+            <Route index  element={<Home />} />
+            <Route path="/productsList" element={<ProductsList />} />
+            <Route path="/productView" element={<ProductView />} />
+            <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>
