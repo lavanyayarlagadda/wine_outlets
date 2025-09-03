@@ -1,0 +1,42 @@
+import React from "react";
+import { Box } from "@mui/material";
+import { FilterTagList,SortAndViewContainer } from "../../molecules";
+
+
+interface ProductToolbarProps {
+  filters: { label: string; count: number }[];
+  onDeleteFilter: (label: string) => void;
+  sortBy: string;
+  onSortChange: (val: string) => void;
+  view: "grid" | "list";
+  onViewChange: (val: "grid" | "list") => void;
+}
+
+const ProductToolbar: React.FC<ProductToolbarProps> = ({
+  filters,
+  onDeleteFilter,
+  sortBy,
+  onSortChange,
+  view,
+  onViewChange,
+}) => (
+  <Box
+    display="flex"
+    alignItems="center"
+    justifyContent="space-between"
+    flexWrap={{ xs: "wrap", sm: "nowrap" }}
+    py={1}
+    px={{ xs: 0, sm: 1 }}
+    gap={2}
+  >
+    <FilterTagList filters={filters} onDelete={onDeleteFilter} />
+    <SortAndViewContainer
+      sortBy={sortBy}
+      onSortChange={onSortChange}
+      view={view}
+      onViewChange={onViewChange}
+    />
+  </Box>
+);
+
+export default ProductToolbar;

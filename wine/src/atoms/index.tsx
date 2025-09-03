@@ -6,3 +6,5 @@ export { default as CustomDropdown } from "./CustomDropdown/CustomDropdown";
 export { default as CustomTextField } from "./CustomTextField/CustomTextField";
 export {default as CustomCheckbox} from './CustomCheckbox/CustomCheckbox';
 export {default as CustomRangeSelector} from './CustomRangeSelector/CustomRangeSelector';
+export {default as CustomChip} from './CustomChip/CustomChip';
+export {default as CustomToggleButton} from './CustomToggleButton/CustomToggleButton';

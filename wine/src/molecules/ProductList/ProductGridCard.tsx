@@ -47,7 +47,7 @@ interface ProductCardProps {
   onToggleFavorite: (id: string) => void;
 }
 
-export const ProductGridCard: React.FC<ProductCardProps> = ({
+ const ProductGridCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onToggleFavorite,
@@ -158,3 +158,5 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
     </StyledCard>
   );
 };
+
+export default ProductGridCard;

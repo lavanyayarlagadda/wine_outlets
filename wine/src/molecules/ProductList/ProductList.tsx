@@ -13,17 +13,20 @@ import FilterPanel from '../../organisms/Filter/FilterPanel';
 import { filtersData as categories } from "../../constant/curatedData";
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
 import ProductListCard from './ProductListCard';
-import { ProductGridCard } from './ProductGridCard';
+import  ProductGridCard  from './ProductGridCard';
 import { CustomDropdown } from '../../atoms';
 import CustomPagination from "../Pagination/Pagination";
 import Breadcrumbs, { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
 import palette from "../../themes/palette";
 import { listImage,listImageGrey,gridImage,gridImageGrey } from "../../assets";
+import BreadcrumbHeader from "../Breadcrumbs/BreadCrumbsHeader";
+import FilterTagList from "../Filter/FilterTagList";
+import SortAndViewControls from "../SortAndView/SortAndViewControl";
 
 
 const ProductList = () => {
   const [sortBy, setSortBy] = useState("relevance");
-  const [view, setView] = useState("grid");
+const [view, setView] = useState<"grid" | "list">("grid");
   const [cartItems, setCartItems] = useState<number[]>([]);
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,28 +65,14 @@ const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Rating", value: "rating" },
   ];
 
+  const filters = [{
+    label:'wines',
+    count:28
+  }]
+
   return (
     <>
-<Box
-  display="flex"
-  alignItems="center"
-  justifyContent="space-between"
-  flexWrap={{ xs: "wrap", sm: "nowrap" }}
-  py={{ xs: 1, sm: 1 }}
-  px={{ xs: 0, sm: 2 }}
-  gap={2}
->
-
-  <Box flex="1 1 auto">
-    <Breadcrumbs items={breadcrumbItems} separator=">" />
-  </Box>
-
-  <Box flex="0 0 auto" sx={{pr:'12px'}}>
-    <Typography variant="body2" color={palette.grey[200]}>
-      {allProducts.length} Products Found
-    </Typography>
-  </Box>
-</Box>
+<BreadcrumbHeader items ={breadcrumbItems} productCount={allProducts.length}/>
 
 <Box
   sx={{
@@ -122,79 +111,11 @@ const breadcrumbItems: BreadcrumbItem[] = [
       px={{ xs: 0, sm: 1 }}
       gap={2}
     >
-      <Box display="flex" flexDirection="column" alignItems="flex-start" gap={1} flex="1 1 auto">
-        <Typography variant="body2" color="text.secondary">
-          Applied filters:
-        </Typography>
-        <Chip
-          label="Wines (30)"
-          onDelete={() => {}}
-          size="medium"
-          variant="outlined"
-          sx={{ borderRadius: "8px" }}
-        />
-      </Box>
-      <Box display="flex" alignItems="center" gap={1.5} flex="0 0 auto" flexWrap="wrap">
-        <FormControl size="small" sx={{ minWidth: 140 }}>
-          <CustomDropdown
-            label="Sort by:"
-            value={sortBy}
-            onChange={setSortBy}
-            options={alcoholPreferences}
-            placeholder="Select Preference"
-            side={true}
-          />
-        </FormControl>
-
-      <Box
-  sx={{
-    backgroundColor: palette.grey.light,
-    p: 1,
-    border: `1px solid ${palette.grey.light}`,
-    borderRadius: "8px",
-    display: "flex",
-    justifyContent: "center", 
-  }}
->
-  <ToggleButtonGroup
-    value={view}
-    exclusive
-    onChange={(e, val) => val && setView(val)}
-    size="small"
-    sx={{
-      border: "none", 
-      "& .MuiToggleButton-root": {
-        border: "none",          
-        backgroundColor: "transparent", 
-        "&.Mui-selected": {
-          backgroundColor: "transparent",
-        },
-        "&:hover": {
-          backgroundColor: "transparent", 
-        },
-      },
-    }}
-  >
-    <ToggleButton value="grid" sx={{ p: 0 }}>
-      <img
-        src={view === "grid" ? gridImage : gridImageGrey}
-        alt="grid view"
-        style={{ width: 40, height: 40 }}
-      />
-    </ToggleButton>
-    <ToggleButton value="list" sx={{ p: 0 }}>
-      <img
-        src={view === "list" ? listImage : listImageGrey}
-        alt="list view"
-        style={{ width: 40, height: 40 }}
-      />
-    </ToggleButton>
-  </ToggleButtonGroup>
-</Box>
-      </Box>
+<FilterTagList filters={filters} onDelete={()=>{}}/>
+<SortAndViewControls sortBy={sortBy} onSortChange={setSortBy} view={view} onViewChange={setView} />
     </Box>
 
-    <Box sx={{ width: "100%", overflowX: "hidden", p: { xs: 0, sm: 0.5 } }}>
+    <Box sx={{ width: "100%", overflowX: "hidden", p: { xs: 0, sm:'20px' } }}>
                   <Box ref={topRef} />
 
       <Box
