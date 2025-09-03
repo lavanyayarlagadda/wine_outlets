@@ -30,12 +30,21 @@ export const useNavigation = (menuKeys: string[]) => {
     setMenuOpen((prev) => ({ ...prev, [key]: false }));
   };
 
+   const handleMobileMenuToggle = (key: string) => {
+    setMenuOpen((prev) => ({ 
+      ...prev, 
+      [key]: !prev[key] 
+    }));
+  };
+
   const handleMobileMenuOpen = () => {
     setMobileMenuOpen(true);
   };
 
   const handleMobileMenuClose = () => {
     setMobileMenuOpen(false);
+    const resetMenuState = menuKeys.reduce((acc, key) => ({ ...acc, [key]: false }), {});
+    setMenuOpen(resetMenuState);
   };
 
   return {
@@ -46,5 +55,6 @@ export const useNavigation = (menuKeys: string[]) => {
     handleMenuClose,
     handleMobileMenuOpen,
     handleMobileMenuClose,
+    handleMobileMenuToggle,
   };
 };

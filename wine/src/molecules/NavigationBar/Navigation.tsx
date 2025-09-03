@@ -55,7 +55,8 @@ const Navigation = () => {
     handleMenuOpen, 
     handleMenuClose, 
     handleMobileMenuOpen, 
-    handleMobileMenuClose 
+    handleMobileMenuClose ,
+    handleMobileMenuToggle
   } = useNavigation(menuKeys);
   const navigate = useNavigate();
 
@@ -100,7 +101,7 @@ const Navigation = () => {
 
             <StyledMenu
               anchorEl={anchorEl.store}
-              open={menuOpen.store}
+              open={menuOpen.store && !mobileMenuOpen}
               onClose={() => handleMenuClose("store")}
               PaperProps={{ sx: { top: "95px !important", position: "absolute" } }}
             >
@@ -158,7 +159,7 @@ const Navigation = () => {
 
               <StyledMenu
                 anchorEl={anchorEl[item]}
-                open={menuOpen[item]}
+                open={menuOpen[item] && !mobileMenuOpen}
                 onClose={() => handleMenuClose(item)}
               >
                 {menus[item].map((val) => (
@@ -193,7 +194,7 @@ const Navigation = () => {
 
           <StyledMenu
             anchorEl={anchorEl.delivery}
-            open={menuOpen.delivery}
+            open={menuOpen.delivery && !mobileMenuOpen}
             onClose={() => handleMenuClose("delivery")}
             PaperProps={{ sx: { top: "170px !important", position: "absolute" } }}
           >
@@ -224,7 +225,7 @@ const Navigation = () => {
         {/* Main Menu Items */}
         {["Wine", "Beer", "Liquor"].map((item) => (
           <div key={item}>
-            <DrawerMenuItem onClick={() => handleMenuOpen({ currentTarget: document.createElement('div') } as any, item)}>
+            <DrawerMenuItem onClick={() => handleMobileMenuToggle(item)}>
               <span>{item}</span>
               {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </DrawerMenuItem>
@@ -258,7 +259,7 @@ const Navigation = () => {
         </DrawerMenuItem>
 
         {/* Delivery Options */}
-        <DrawerMenuItem onClick={() => handleMenuOpen({ currentTarget: document.createElement('div') } as any, "delivery")}>
+        <DrawerMenuItem onClick={() =>  handleMobileMenuToggle("delivery")}>
           <span>Delivery</span>
           {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </DrawerMenuItem>
