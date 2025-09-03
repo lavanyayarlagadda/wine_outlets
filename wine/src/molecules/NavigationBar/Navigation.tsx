@@ -1,5 +1,7 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { bike, bag, map, cart, userprofile, logo, star } from "../../assets";
@@ -26,6 +28,13 @@ import {
   StyledToolbar,
   BottomToolbar,
   IconGroup,
+  StyledDrawer,
+  DrawerHeader,
+  DrawerSubMenuItem,
+  DrawerMenuItem,
+  DrawerAccountSection,
+  MobileLocationDeliveryWrapper,
+  CloseButton,
 } from "./Navigation.style";
 import { useNavigate } from "react-router-dom";
 
@@ -39,8 +48,16 @@ const menus: { [key: string]: string[] } = {
 const Navigation = () => {
   const theme = useTheme();
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery"];
-  const { anchorEl, menuOpen, handleMenuOpen, handleMenuClose } = useNavigation(menuKeys);
-  const navigate = useNavigate()
+  const { 
+    anchorEl, 
+    menuOpen, 
+    mobileMenuOpen, 
+    handleMenuOpen, 
+    handleMenuClose, 
+    handleMobileMenuOpen, 
+    handleMobileMenuClose 
+  } = useNavigation(menuKeys);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -54,10 +71,14 @@ const Navigation = () => {
 
       <StyledAppBar>
         <StyledToolbar>
+           {/* Mobile Menu Button - Add this */}
+          <CustomizeIconButton onClick={handleMobileMenuOpen} sx={{ display: { xs: "flex", md: "none" } }}>
+            <MenuIcon sx={{fontSize:"24px",color:"red",mt:1}}/>
+          </CustomizeIconButton>
           <Logo src={logo} alt="Wine Outlet" />
 
           <IconGroup>
-            <SearchBox>
+            <SearchBox sx={{ display: { xs: "none", md: "flex" } }}>
               <SearchIcon sx={{ color: "gray" }} />
               <StyledInput
                 placeholder="Search wines, brands, or regions"
@@ -66,11 +87,14 @@ const Navigation = () => {
             </SearchBox>
 
             <DropdownTriggerWithIconMargin
-              sx={{ color: theme?.palette.grey[100] }}
+              sx={{ 
+                color: theme?.palette.grey[100],
+                display: { xs: "none", md: "flex" }
+              }}
               onClick={(e) => handleMenuOpen(e, "store")}
             >
               <img src={map} alt="map" />
-              Uptown Store
+              Uptown Store 
               {menuOpen.store ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </DropdownTriggerWithIconMargin>
 
@@ -94,34 +118,61 @@ const Navigation = () => {
               </CustomizeIconButton>
             </RightNavSection>
           </IconGroup>
+
+          {/* mobile view search */}
+          <SearchBox sx={{ display: { xs: "flex", md: "none"}, mt:2,}}>
+              <SearchIcon sx={{ color: "gray" }} />
+              <StyledInput
+                placeholder="Search wines, brands, or regions"
+                inputProps={{ "aria-label": "search" }}
+              />
+          </SearchBox>
+
+          <MobileLocationDeliveryWrapper>
+            <DropdownTriggerWithIconMargin
+              sx={{
+                color: theme.palette.grey[100],
+              }}
+              onClick={(e) => handleMenuOpen(e, "store")}
+            >
+              <img src={map} alt="map" />
+              Uptown Store
+              {menuOpen.store ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </DropdownTriggerWithIconMargin>
+
+            <DropdownTriggerWithGap onClick={(e) => handleMenuOpen(e, "delivery")}>
+              <img src={bike} alt="bike" /> Delivery
+              {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </DropdownTriggerWithGap>
+          </MobileLocationDeliveryWrapper>
         </StyledToolbar>
       </StyledAppBar>
 
-      <BottomToolbar>
-        <NavWrapper>
+      <BottomToolbar sx={{ display: { xs: "none", md: "flex" } }}>
+                <NavWrapper>
           {["Wine", "Beer", "Liquor"].map((item) => (
             <div key={item}>
               <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, item)}>
                 {item} {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </DropdownTriggerNoBorder>
 
-<StyledMenu
-  anchorEl={anchorEl[item]}
-  open={menuOpen[item]}
-  onClose={() => handleMenuClose(item)}
->
-  {menus[item].map((val) => (
-    <DropdownMenuItem
-      key={val}
-      onClick={() => {
-        navigate('/productsList'); // wrap in function
-        handleMenuClose(item); // optionally close the menu
-      }}
-    >
-      {val}
-    </DropdownMenuItem>
-  ))}
-</StyledMenu>
+              <StyledMenu
+                anchorEl={anchorEl[item]}
+                open={menuOpen[item]}
+                onClose={() => handleMenuClose(item)}
+              >
+                {menus[item].map((val) => (
+                  <DropdownMenuItem
+                    key={val}
+                    onClick={() => {
+                      navigate('/productsList'); // wrap in function
+                      handleMenuClose(item); // optionally close the menu
+                    }}
+                  >
+                    {val}
+                  </DropdownMenuItem>
+                ))}
+              </StyledMenu>
 
             </div>
           ))}
@@ -156,6 +207,106 @@ const Navigation = () => {
           </DropdownTriggerWithGap>
         </RightNavSection>
       </BottomToolbar>
+
+      {/* Mobile Menu - Add this section */}
+      <StyledDrawer
+        anchor="left"
+        open={mobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <DrawerHeader>
+          <Logo src={logo} alt="Wine Outlet" style={{ height: "30px" }} />
+          <CloseButton onClick={handleMobileMenuClose}>
+            <CloseIcon />
+          </CloseButton>
+        </DrawerHeader>
+
+        {/* Search Box for Mobile */}
+        <SearchBox sx={{ mt: 3, mb: 3, width: "100%", border: "4px solid blue" }}>
+          <SearchIcon sx={{
+            color: "gray", fontSize: {
+              xs: "20px", // Mobile
+              sm: "22px"  // Small tablet
+            }
+          }} />
+          <StyledInput
+            placeholder="Search wines, brands, or regions"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </SearchBox>
+
+        {/* Main Menu Items */}
+        {["Wine", "Beer", "Liquor"].map((item) => (
+          <div key={item}>
+            <DrawerMenuItem onClick={() => handleMenuOpen({ currentTarget: document.createElement('div') } as any, item)}>
+              <span>{item}</span>
+              {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </DrawerMenuItem>
+            {menuOpen[item] && menus[item].map((val) => (
+              <DrawerSubMenuItem
+                key={val}
+                onClick={() => {
+                  navigate('/productsList');
+                  handleMobileMenuClose();
+                }}
+              >
+                {val}
+              </DrawerSubMenuItem>
+            ))}
+          </div>
+        ))}
+
+        <DrawerMenuItem onClick={() => { navigate('/tastings'); handleMobileMenuClose(); }}>
+          Tastings
+        </DrawerMenuItem>
+        <DrawerMenuItem onClick={() => { navigate('/events'); handleMobileMenuClose(); }}>
+          Events
+        </DrawerMenuItem>
+        <DrawerMenuItem onClick={() => { navigate('/new-arrivals'); handleMobileMenuClose(); }}>
+          <span style={{ display: "flex", alignItems: "center" }}>
+            <img src={star} alt="star" style={{ marginRight: "8px" }} /> New Arrivals
+          </span>
+        </DrawerMenuItem>
+        <DrawerMenuItem onClick={() => { navigate('/promotions'); handleMobileMenuClose(); }}>
+          Promotions
+        </DrawerMenuItem>
+
+        {/* Delivery Options */}
+        <DrawerMenuItem onClick={() => handleMenuOpen({ currentTarget: document.createElement('div') } as any, "delivery")}>
+          <span>Delivery</span>
+          {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </DrawerMenuItem>
+        {menuOpen.delivery && (
+          <>
+            <DrawerSubMenuItem>Standard Delivery</DrawerSubMenuItem>
+            <DrawerSubMenuItem>Express Delivery</DrawerSubMenuItem>
+            <DrawerSubMenuItem>Pickup</DrawerSubMenuItem>
+          </>
+        )}
+
+        <DrawerMenuItem onClick={() => { navigate('/careers'); handleMobileMenuClose(); }}>
+          Hiring Now
+        </DrawerMenuItem>
+
+        {/* Account Section */}
+        <DrawerAccountSection>
+          <DrawerMenuItem onClick={() => { navigate('/account'); handleMobileMenuClose(); }}>
+            My Account
+          </DrawerMenuItem>
+          <DrawerMenuItem onClick={() => { navigate('/cart'); handleMobileMenuClose(); }}>
+            Shopping Cart
+          </DrawerMenuItem>
+          <DrawerMenuItem onClick={() => { navigate('/orders'); handleMobileMenuClose(); }}>
+            Order History
+          </DrawerMenuItem>
+          <DrawerMenuItem onClick={() => { navigate('/settings'); handleMobileMenuClose(); }}>
+            Settings
+          </DrawerMenuItem>
+          <DrawerMenuItem onClick={() => { console.log("Logout"); handleMobileMenuClose(); }}>
+            Log Out
+          </DrawerMenuItem>
+        </DrawerAccountSection>
+      </StyledDrawer>
     </div>
   );
 };

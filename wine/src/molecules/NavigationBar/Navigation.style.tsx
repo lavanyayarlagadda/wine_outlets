@@ -1,3 +1,4 @@
+import { Padding } from "@mui/icons-material";
 import {
   styled,
   Box,
@@ -8,6 +9,7 @@ import {
   IconButton,
   Toolbar,
   AppBar,
+  Drawer,
 } from "@mui/material";
 
 // 🔴 Top Bar
@@ -46,6 +48,10 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   padding: "16px 0px !important",
   margin: "0px 30px",
   borderBottom: `1px solid ${theme.palette.success.main}`,
+  [theme.breakpoints.down("md")]: {
+    margin: "0px 16px",
+    padding: "0px 0px !important",
+  },
 }));
 
 export const BottomToolbar = styled(Toolbar)(({ theme }) => ({
@@ -56,9 +62,12 @@ export const BottomToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 // 🔴 Logo
-export const Logo = styled("img")(() => ({
+export const Logo = styled("img")(({ theme }) => ({
   height: "40px",
   cursor: "pointer",
+  [theme.breakpoints.down("md")]: {
+    height: "30px",
+  },
 }));
 
 // 🔴 Search
@@ -70,15 +79,57 @@ export const SearchBox = styled(Box)(({ theme }) => ({
   minWidth: "300px",
   border: `1px solid ${theme.palette.success.main}`,
   width: "400px",
+    // Tablet styles
+  [theme.breakpoints.down('lg')]: {
+    minWidth: "250px",
+    width: "300px",
+    padding: "4px 10px",
+  },
+  // Mobile styles
+  [theme.breakpoints.down('md')]: {
+    minWidth: "auto",
+    width: "100%",
+    padding: "8px 16px",
+    borderRadius: "12px",
+  },
+  // Small mobile styles
+  [theme.breakpoints.down('sm')]: {
+    padding: "6px 12px",
+    borderRadius: "10px",
+  }
+
 }));
 
-export const StyledInput = styled(InputBase)(() => ({
+export const StyledInput = styled(InputBase)(({theme}) => ({
   marginLeft: "8px",
   flex: 1,
   color: "#4A515C", // text color
   "& input::placeholder": {
     color: "#4A515C", // placeholder color
     opacity: 1,
+  },
+  // Tablet styles
+  [theme.breakpoints.down('lg')]: {
+    fontSize: "13px",
+    "& input::placeholder": {
+      fontSize: "13px",
+    },
+  },
+  // Mobile styles
+  [theme.breakpoints.down('md')]: {
+    marginLeft: "6px",
+    fontSize: "16px", // Larger text for mobile touch devices
+    "& input::placeholder": {
+      fontSize: "16px",
+      color: theme.palette.grey[600],
+    },
+  },
+  // Small mobile styles
+  [theme.breakpoints.down('sm')]: {
+    fontSize: "14px",
+    "& input::placeholder": {
+      fontSize: "14px",
+    },
   },
 }));
 
@@ -118,23 +169,41 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.primary.light,
   },
+    [theme.breakpoints.down('md')]: {
+    padding: "4px 8px",
+    fontSize: "12px",
+    flex: 1, // Take equal width
+    justifyContent: "center", // Center content
+  },
 }));
 
 export const DropdownTriggerNoBorder = styled(DropdownTrigger)(() => ({
   border: "none",
 }));
 
-export const DropdownTriggerWithGap = styled(DropdownTrigger)(() => ({
+export const DropdownTriggerWithGap = styled(DropdownTrigger)(({theme}) => ({
   display: "flex",
   gap: "10px",
+   [theme.breakpoints.down('md')]: {
+    "& img": {
+      width: "14px", 
+      height: "14px",
+    },
+  },
 }));
 
-export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(() => ({
+export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({theme}) => ({
   display: "flex",
   alignItems: "center",
   gap: "8px",
   "& img": {
     marginRight: "0px",
+  },
+    [theme.breakpoints.down('md')]: {
+    "& img": {
+      width: "14px", // Smaller icon on mobile
+      height: "14px",
+    },
   },
 }));
 
@@ -162,10 +231,98 @@ export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
   border: `1px solid ${theme.palette.success.main} !important`,
   padding: "8px",
   borderRadius: "16px",
+  // Mobile styles
+  [theme.breakpoints.down('md')]: {
+    padding: "4px",
+    border: "none !important",
+    "& img": {
+      width: "20px",
+      height: "20px",
+    }
+  },
 }));
 
 export const IconGroup = styled(Box)(() => ({
   display: "flex",
   gap: "16px",
   marginTop: "8px",
+}));
+
+//  Mobile Drawer Styles
+export const MobileMenuButton = styled(IconButton)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.down("md")]: {
+    display: "block",
+    border:"2px solid blue"
+  },
+}));
+
+export const DesktopMenuWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "40px",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+
+export const StyledDrawer = styled(Drawer)(() => ({
+  "& .MuiDrawer-paper": {
+    width: "300px",
+    padding: "20px",
+    boxSizing: "border-box",
+  },
+}));
+
+export const DrawerHeader = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "30px",
+}));
+
+export const DrawerMenuItem = styled(Box)(({ theme }) => ({
+  padding: "16px 0",
+  borderBottom: `1px solid ${theme.palette.grey[200]}`,
+  fontSize: "16px",
+  fontWeight: 500,
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  "&:hover": {
+    color: theme.palette.primary.dark,
+  },
+}));
+
+export const MobileLocationDeliveryWrapper = styled(Box)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.down('md')]: {
+    display: "flex",
+    gap: "8px",
+    width: "100%",
+    margin: "10px 0",
+    color: theme.palette.grey[700],
+  },
+}));
+
+export const DrawerSubMenuItem = styled(Box)(({ theme }) => ({
+  padding: "12px 20px",
+  fontSize: "14px",
+  color: theme.palette.grey[700],
+  cursor: "pointer",
+  "&:hover": {
+    color: theme.palette.primary.dark,
+    backgroundColor: theme.palette.grey[100],
+  },
+}));
+
+export const DrawerAccountSection = styled(Box)(({ theme }) => ({
+  marginTop: "30px",
+  paddingTop: "20px",
+  borderTop: `2px solid ${theme.palette.grey[300]}`,
+}));
+
+export const CloseButton = styled(IconButton)(() => ({
+  padding: "8px",
 }));

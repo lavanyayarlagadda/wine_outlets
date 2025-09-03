@@ -17,6 +17,9 @@ export const useNavigation = (menuKeys: string[]) => {
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: null }), {})
   );
 
+  // mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, key: string) => {
     setAnchorEl((prev) => ({ ...prev, [key]: event.currentTarget }));
     setMenuOpen((prev) => ({ ...prev, [key]: true }));
@@ -27,10 +30,21 @@ export const useNavigation = (menuKeys: string[]) => {
     setMenuOpen((prev) => ({ ...prev, [key]: false }));
   };
 
+  const handleMobileMenuOpen = () => {
+    setMobileMenuOpen(true);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
+  };
+
   return {
     menuOpen,
     anchorEl,
+    mobileMenuOpen,
     handleMenuOpen,
     handleMenuClose,
+    handleMobileMenuOpen,
+    handleMobileMenuClose,
   };
 };
