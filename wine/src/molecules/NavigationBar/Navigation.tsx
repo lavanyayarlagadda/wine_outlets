@@ -1,7 +1,6 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { bike, bag, map, cart, userprofile, logo, star } from "../../assets";
@@ -28,14 +27,9 @@ import {
   StyledToolbar,
   BottomToolbar,
   IconGroup,
-  StyledDrawer,
-  DrawerHeader,
-  DrawerSubMenuItem,
-  DrawerMenuItem,
-  DrawerAccountSection,
   MobileLocationDeliveryWrapper,
-  CloseButton,
 } from "./Navigation.style";
+import MobileMenu from "./MobileMenu";
 import { useNavigate } from "react-router-dom";
 
 // Define menu items for dropdowns
@@ -79,7 +73,7 @@ const Navigation = () => {
           <Logo src={logo} alt="Wine Outlet" />
 
           <IconGroup>
-            <SearchBox sx={{ display: { xs: "none", md: "flex" } }}>
+            <SearchBox sx={{ display: { xs: "none", sm: "flex" } }}>
               <SearchIcon sx={{ color: "gray" }} />
               <StyledInput
                 placeholder="Search wines, brands, or regions"
@@ -121,7 +115,7 @@ const Navigation = () => {
           </IconGroup>
 
           {/* mobile view search */}
-          <SearchBox sx={{ display: { xs: "flex", md: "none"}, mt:2,}}>
+          <SearchBox sx={{ display: { xs: "flex", sm: "none"}, mt:2,}}>
               <SearchIcon sx={{ color: "gray" }} />
               <StyledInput
                 placeholder="Search wines, brands, or regions"
@@ -129,6 +123,7 @@ const Navigation = () => {
               />
           </SearchBox>
 
+          {/* mobile view location and delivery */}
           <MobileLocationDeliveryWrapper>
             <DropdownTriggerWithIconMargin
               sx={{
@@ -150,7 +145,7 @@ const Navigation = () => {
       </StyledAppBar>
 
       <BottomToolbar sx={{ display: { xs: "none", md: "flex" } }}>
-                <NavWrapper>
+        <NavWrapper>
           {["Wine", "Beer", "Liquor"].map((item) => (
             <div key={item}>
               <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, item)}>
@@ -210,90 +205,12 @@ const Navigation = () => {
       </BottomToolbar>
 
       {/* Mobile Menu - Add this section */}
-      <StyledDrawer
-        anchor="left"
-        open={mobileMenuOpen}
-        onClose={handleMobileMenuClose}
-      >
-        <DrawerHeader>
-          <Logo src={logo} alt="Wine Outlet" style={{ height: "30px" }} />
-          <CloseButton onClick={handleMobileMenuClose}>
-            <CloseIcon />
-          </CloseButton>
-        </DrawerHeader>
-
-        {/* Main Menu Items */}
-        {["Wine", "Beer", "Liquor"].map((item) => (
-          <div key={item}>
-            <DrawerMenuItem onClick={() => handleMobileMenuToggle(item)}>
-              <span>{item}</span>
-              {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </DrawerMenuItem>
-            {menuOpen[item] && menus[item].map((val) => (
-              <DrawerSubMenuItem
-                key={val}
-                onClick={() => {
-                  navigate('/productsList');
-                  handleMobileMenuClose();
-                }}
-              >
-                {val}
-              </DrawerSubMenuItem>
-            ))}
-          </div>
-        ))}
-
-        <DrawerMenuItem onClick={() => { navigate('/tastings'); handleMobileMenuClose(); }}>
-          Tastings
-        </DrawerMenuItem>
-        <DrawerMenuItem onClick={() => { navigate('/events'); handleMobileMenuClose(); }}>
-          Events
-        </DrawerMenuItem>
-        <DrawerMenuItem onClick={() => { navigate('/new-arrivals'); handleMobileMenuClose(); }}>
-          <span style={{ display: "flex", alignItems: "center" }}>
-            <img src={star} alt="star" style={{ marginRight: "8px" }} /> New Arrivals
-          </span>
-        </DrawerMenuItem>
-        <DrawerMenuItem onClick={() => { navigate('/promotions'); handleMobileMenuClose(); }}>
-          Promotions
-        </DrawerMenuItem>
-
-        {/* Delivery Options */}
-        <DrawerMenuItem onClick={() =>  handleMobileMenuToggle("delivery")}>
-          <span>Delivery</span>
-          {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </DrawerMenuItem>
-        {menuOpen.delivery && (
-          <>
-            <DrawerSubMenuItem>Standard Delivery</DrawerSubMenuItem>
-            <DrawerSubMenuItem>Express Delivery</DrawerSubMenuItem>
-            <DrawerSubMenuItem>Pickup</DrawerSubMenuItem>
-          </>
-        )}
-
-        <DrawerMenuItem onClick={() => { navigate('/careers'); handleMobileMenuClose(); }}>
-          Hiring Now
-        </DrawerMenuItem>
-
-        {/* Account Section */}
-        <DrawerAccountSection>
-          <DrawerMenuItem onClick={() => { navigate('/account'); handleMobileMenuClose(); }}>
-            My Account
-          </DrawerMenuItem>
-          <DrawerMenuItem onClick={() => { navigate('/cart'); handleMobileMenuClose(); }}>
-            Shopping Cart
-          </DrawerMenuItem>
-          <DrawerMenuItem onClick={() => { navigate('/orders'); handleMobileMenuClose(); }}>
-            Order History
-          </DrawerMenuItem>
-          <DrawerMenuItem onClick={() => { navigate('/settings'); handleMobileMenuClose(); }}>
-            Settings
-          </DrawerMenuItem>
-          <DrawerMenuItem onClick={() => { console.log("Logout"); handleMobileMenuClose(); }}>
-            Log Out
-          </DrawerMenuItem>
-        </DrawerAccountSection>
-      </StyledDrawer>
+      <MobileMenu
+        mobileMenuOpen={mobileMenuOpen}
+        menuOpen={menuOpen}
+        handleMobileMenuClose={handleMobileMenuClose}
+        handleMobileMenuToggle={handleMobileMenuToggle}
+      />
     </div>
   );
 };

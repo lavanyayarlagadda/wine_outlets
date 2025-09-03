@@ -89,8 +89,6 @@ export const SearchBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     minWidth: "auto",
     width: "100%",
-    padding: "8px 16px",
-    borderRadius: "12px",
   },
   // Small mobile styles
   [theme.breakpoints.down('sm')]: {
@@ -266,33 +264,33 @@ export const DesktopMenuWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledDrawer = styled(Drawer)(() => ({
+export const StyledDrawer = styled(Drawer)(({theme}) => ({
   "& .MuiDrawer-paper": {
-    width: "300px",
+    width: "260px",
+    borderRadius: "0 16px 16px 0",
+    boxShadow: theme.shadows[4],
+    backgroundColor: theme.palette.background.default,
     padding: "20px",
     boxSizing: "border-box",
   },
 }));
 
-export const DrawerHeader = styled(Box)(() => ({
+export const DrawerHeader = styled(Box)(({theme}) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "30px",
+  marginBottom: "16px",
+  borderBottom: theme.palette.grey[200]
 }));
 
 export const DrawerMenuItem = styled(Box)(({ theme }) => ({
-  padding: "16px 0",
-  borderBottom: `1px solid ${theme.palette.grey[200]}`,
-  fontSize: "16px",
+  padding: "12px",
+  fontSize: "14px",
   fontWeight: 500,
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  "&:hover": {
-    color: theme.palette.primary.dark,
-  },
 }));
 
 export const MobileLocationDeliveryWrapper = styled(Box)(({ theme }) => ({
@@ -307,22 +305,20 @@ export const MobileLocationDeliveryWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const DrawerSubMenuItem = styled(Box)(({ theme }) => ({
-  padding: "12px 20px",
+  padding: "10px 16px",
   fontSize: "14px",
   color: theme.palette.grey[700],
   cursor: "pointer",
-  "&:hover": {
-    color: theme.palette.primary.dark,
-    backgroundColor: theme.palette.grey[100],
-  },
 }));
 
 export const DrawerAccountSection = styled(Box)(({ theme }) => ({
-  marginTop: "30px",
-  paddingTop: "20px",
-  borderTop: `2px solid ${theme.palette.grey[300]}`,
+  marginTop: "16px",
+  paddingTop: "16px",
+  borderTop: `1px solid ${theme.palette.grey[200]}`,
 }));
 
-export const CloseButton = styled(IconButton)(() => ({
-  padding: "8px",
+export const CloseButton = styled(IconButton)(({theme}) => ({
+  backgroundColor: theme.palette.action.hover,
+  borderRadius: "50%",
+  padding: "4px",
 }));
