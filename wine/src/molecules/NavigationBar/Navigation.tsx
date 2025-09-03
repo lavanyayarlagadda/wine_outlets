@@ -221,20 +221,6 @@ const Navigation = () => {
           </CloseButton>
         </DrawerHeader>
 
-        {/* Search Box for Mobile */}
-        <SearchBox sx={{ mt: 3, mb: 3, width: "100%", border: "4px solid blue" }}>
-          <SearchIcon sx={{
-            color: "gray", fontSize: {
-              xs: "20px", // Mobile
-              sm: "22px"  // Small tablet
-            }
-          }} />
-          <StyledInput
-            placeholder="Search wines, brands, or regions"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </SearchBox>
-
         {/* Main Menu Items */}
         {["Wine", "Beer", "Liquor"].map((item) => (
           <div key={item}>
