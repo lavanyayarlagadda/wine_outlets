@@ -15,6 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import { PriceText, RatingBox, SmallChip, SmallText, VIPPriceText } from "./ProductGridCard.style";
+import { useNavigate } from "react-router-dom";
 
 export interface ProductCardProps {
   id: number | string;
@@ -49,7 +50,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const navigate = useNavigate();
   return (
     <Card
       elevation={0}
@@ -83,13 +84,15 @@ const ProductListCard: React.FC<ProductCardProps> = ({
   <CardMedia
     component="img"
     sx={{
-      width: { xs: 80, sm: 100, md: 120 },  // responsive width
-      height: { xs: 150, sm: 210, md: 250 }, // responsive height
+      width: { xs: 80, sm: 100, md: 120 }, 
+      height: { xs: 150, sm: 210, md: 250 }, 
       objectFit: "contain",
       borderRadius: 2,
+      cursor:"pointer"
     }}
     image={image}
     alt={name}
+     onClick={()=>{navigate('/productView')}}
   />
   <Box position="absolute" top={10} right={10} zIndex={1}>
     <IconButton

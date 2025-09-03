@@ -9,11 +9,9 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/100.css";
 import { Box } from "@mui/material";
 
-
-
-
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
+const ProductView = lazy(() => import("./pages/ProductView/ProductView"));
 
 const App: React.FC = () => {
   return (
@@ -37,6 +35,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productsList" element={<ProductsList />} />
+          <Route path="/productView" element={<ProductView />} />
           <Route path="*" element={<h1>404 - Page Not Found</h1>} />
         </Routes>
       </Suspense>

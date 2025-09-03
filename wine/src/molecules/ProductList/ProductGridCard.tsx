@@ -21,6 +21,7 @@ import {
   VIPPriceText,
 } from "./ProductGridCard.style";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
+import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: string;
@@ -54,7 +55,7 @@ interface ProductCardProps {
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const navigate = useNavigate();
   return (
     <StyledCard
       sx={{
@@ -75,7 +76,8 @@ interface ProductCardProps {
         height={250}
         image={product.media.url}
         alt={product.name}
-        sx={{ objectFit: "contain", p: 2 }}
+        sx={{ objectFit: "contain", p: 2,cursor:"pointer" }}
+        onClick={()=>{navigate('/productView')}}
       />
 
       <CardContent sx={{ pt: 1, pb: 0 }}>
