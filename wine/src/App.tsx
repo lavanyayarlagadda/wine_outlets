@@ -1,6 +1,14 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CircularProgress, Box } from "@mui/material";
+import "@fontsource/inter/400.css"; 
+import "@fontsource/inter/500.css"; 
+import "@fontsource/inter/700.css"; 
+import "@fontsource/inter/300.css"; 
+import "@fontsource/inter/200.css"; 
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/100.css";
+import { Box } from "@mui/material";
+
 
 
 
@@ -18,7 +26,6 @@ const App: React.FC = () => {
             alignItems="center"
             height="100vh"
           >
-            {/* Reference GIF from public folder */}
             <img
               src="/loader.gif"
               alt="Loading..."

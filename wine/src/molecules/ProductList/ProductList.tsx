@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   Chip,
@@ -27,6 +27,7 @@ const ProductList = () => {
   const [cartItems, setCartItems] = useState<number[]>([]);
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const topRef = useRef<HTMLDivElement | null>(null); 
 
   const isMobileOrTablet = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 const breadcrumbItems: BreadcrumbItem[] = [
@@ -95,18 +96,15 @@ const breadcrumbItems: BreadcrumbItem[] = [
   }}
 >
 
-  {/* Left Sidebar */}
   <Box
     sx={{
       flex: { xs: "0 0 auto", md:"0 0 auto",lg: "0 0 20%" },
       mb: { xs: 2, md: 0 },
-      px: { xs: 2, md: 2 }, // responsive horizontal padding
+      px: { xs: 2, md: 2 }, 
     }}
   >
     <FilterPanel categories={categories.categories} onFilterChange={() => {}} />
   </Box>
-
-  {/* Right Main Content */}
   <Box
     sx={{
       flex: { xs: "1 1 auto", md: "0 0 69%",lg:"0 0 75%" },
@@ -115,7 +113,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
       boxSizing: "border-box",
     }}
   >
-    {/* Top Filters & View Controls */}
     <Box
       display="flex"
       alignItems="center"
@@ -125,7 +122,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
       px={{ xs: 0, sm: 1 }}
       gap={2}
     >
-      {/* Applied Filters */}
       <Box display="flex" flexDirection="column" alignItems="flex-start" gap={1} flex="1 1 auto">
         <Typography variant="body2" color="text.secondary">
           Applied filters:
@@ -138,8 +134,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
           sx={{ borderRadius: "8px" }}
         />
       </Box>
-
-      {/* Sort & View Toggle */}
       <Box display="flex" alignItems="center" gap={1.5} flex="0 0 auto" flexWrap="wrap">
         <FormControl size="small" sx={{ minWidth: 140 }}>
           <CustomDropdown
@@ -159,7 +153,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
     border: `1px solid ${palette.grey.light}`,
     borderRadius: "8px",
     display: "flex",
-    justifyContent: "center", // centers buttons horizontally
+    justifyContent: "center", 
   }}
 >
   <ToggleButtonGroup
@@ -168,15 +162,15 @@ const breadcrumbItems: BreadcrumbItem[] = [
     onChange={(e, val) => val && setView(val)}
     size="small"
     sx={{
-      border: "none", // remove group border
+      border: "none", 
       "& .MuiToggleButton-root": {
-        border: "none",           // remove individual button borders
-        backgroundColor: "transparent", // no background
+        border: "none",          
+        backgroundColor: "transparent", 
         "&.Mui-selected": {
-          backgroundColor: "transparent", // no background when selected
+          backgroundColor: "transparent",
         },
         "&:hover": {
-          backgroundColor: "transparent", // no hover background
+          backgroundColor: "transparent", 
         },
       },
     }}
@@ -200,8 +194,9 @@ const breadcrumbItems: BreadcrumbItem[] = [
       </Box>
     </Box>
 
-    {/* Products Grid/List */}
     <Box sx={{ width: "100%", overflowX: "hidden", p: { xs: 0, sm: 0.5 } }}>
+                  <Box ref={topRef} />
+
       <Box
         sx={{
           display: "grid",
@@ -251,7 +246,10 @@ const breadcrumbItems: BreadcrumbItem[] = [
       <CustomPagination
         count={Math.ceil(allProducts.length / PRODUCTS_PER_PAGE)}
         page={currentPage}
-        onChange={setCurrentPage}
+      onChange={(newPage) => {
+                setCurrentPage(newPage);
+                topRef.current?.scrollIntoView({ behavior: "smooth" }); // 👈 scrolls only the list
+              }}
       />
     </Box>
   </Box>

@@ -194,7 +194,6 @@ const ProductListCard: React.FC<ProductCardProps> = ({
       onClick={() => onAddToCart(id)}
       startIcon={<ShoppingCart />}
       sx={{
-        borderColor: theme.palette.primary.dark,
         color: theme.palette.primary.dark,
         backgroundColor: theme.palette.primary.light,
         padding: "12px 0px",
@@ -202,6 +201,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
         fontWeight: 600,
         width: { xs: "100%", sm: "30%" },
         whiteSpace: "nowrap",
+         border:`1px solid ${theme.palette.primary.dark}`
       }}
     >
       Add to Cart

@@ -141,14 +141,14 @@ export const ProductGridCard: React.FC<ProductCardProps> = ({
           onClick={() => onAddToCart(product.id)}
           startIcon={<ShoppingCart />}
               sx={{
-                borderColor: theme.palette.primary.dark,
                 color: theme.palette.primary.dark,
                 backgroundColor: theme.palette.primary.light,
                 padding: "12px 0px",
                 textTransform: "none",
                 fontWeight: 600,
                 width: "100%",
-                whiteSpace:'nowrap'
+                whiteSpace:'nowrap',
+                border:`1px solid ${theme.palette.primary.dark}`
               }}
         >
           Add to Cart
