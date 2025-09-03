@@ -83,7 +83,7 @@ export const CarouselSlide = styled(Box, {
 }));
 
 
-export const ContentSection = styled(Box)(({ theme, }) => ({
+export const ContentSection = styled(Box)(({ theme }) => ({
   flex: 1,
   paddingRight: "32px",
   [theme.breakpoints.down('sm')]: {
@@ -94,13 +94,13 @@ export const ContentSection = styled(Box)(({ theme, }) => ({
 export const SlideTitle = styled(Typography)(({ theme }) => ({
   fontSize: "1.5rem",
   fontWeight: "bold",
-  color: theme.palette.white.main,
+  color: theme.palette.black[800],
   marginBottom: "12px",
 }));
 
 export const SlideDescription = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",
-  color: "rgba(255, 255, 255, 0.9)",
+  color: theme.palette.black[800],
   lineHeight: 1.5,
   maxWidth: "500px",
 }));
@@ -125,11 +125,9 @@ export const DotsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   gap: "8px",
-  marginTop: "20px",
   position: "absolute",
   left: "40%",
   right: "40%",
-  bottom: "10px",
 }));
 
 export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({

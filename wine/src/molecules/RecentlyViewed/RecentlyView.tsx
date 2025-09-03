@@ -41,25 +41,55 @@ const RecentlyViewed: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", mb: 4 }}>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+    <Container sx={{mb:4}}>
+      <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", mb: 4 }}>
+        <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", gap: 2 }}>
           <Typography variant="h4" sx={{ fontWeight: "bold", color: theme.palette.black[800] }}>
             Recently Viewed
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 3, mb: 3, mt: 7 }}>
+      <Box 
+        // ref={productCardsRef}
+        sx={{ 
+          display: "flex",
+          overflowX: "auto",
+          gap: 3, 
+          mb: 3, 
+          mt: 7,
+          cursor: "grab",
+          "&:active": {
+            cursor: "grabbing",
+          },
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          "-ms-overflow-style": "none",
+          scrollbarWidth: "none",
+        }}
+      >
         {getCurrentProducts().map((product) => (
-          <ProductCard
-            key={product.id}
-            {...product}
-            onAddToCart={handleAddToCart}
-            onToggleFavorite={handleToggleFavorite}
-          />
+          <Box key={product.id} sx={{ 
+            minWidth: { 
+              xs: "280px", 
+              // sm: "300px",
+              // md: "calc(25% - 18px)",
+            }, 
+            flexShrink: 0,
+          }}>
+            <ProductCard
+              product={product}
+              onAddToCart={handleAddToCart}
+              onToggleFavorite={handleToggleFavorite}
+            />
+          </Box>
         ))}
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
+      <Box sx={{   
+        display: { xs: "none", md: "flex" },
+        justifyContent: "center", 
+        gap: 1 
+      }}>
         {Array.from({ length: totalSlides }).map((_, index) => (
           <Box
             key={index}

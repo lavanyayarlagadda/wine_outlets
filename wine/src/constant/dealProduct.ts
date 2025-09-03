@@ -19,6 +19,11 @@ export interface Product {
   };
 }
 
+export interface SuggestedProducts {
+  totalVipPrice: number;
+  totalPrice: number;
+  products: Product[];
+}
 
 export const DEAL_PRODUCT: Product[] = [
   {
@@ -95,7 +100,7 @@ export const DEAL_PRODUCT: Product[] = [
   },
     {
     id: "1",
-    name: "Meiomi Pinot Noir",
+    name: "Meiomi Pinot Noir1",
     year: 2021,
     region: "California",
     size: "750ML",
@@ -958,3 +963,45 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
 ];
+export const suggestedProducts : SuggestedProducts = {
+  totalVipPrice: 200,
+  totalPrice: 400,
+  products: [
+    {
+      id: '1',
+      name: "Kim Crawford Wine",
+      year: 2021,
+      region: "California",
+      size: "750ML",
+      rating: 4.8,
+      price: 16.53,
+      vipPrice: 12.62,
+      salePrice: 11.45,
+      tag: "tagText",
+      isWishlisted: true,
+      description: "This 2018 vintage represents",
+      media: {
+        type: "image",
+        url: deal_img2,
+      },
+    },
+        {
+      id: '2',
+      name: "Wine",
+      year: 2021,
+      region: "California",
+      size: "750ML",
+      rating: 4.8,
+      price: 16.53,
+      vipPrice: 12.62,
+      salePrice: 11.45,
+      tag: "tagText",
+      isWishlisted: true,
+      description: "This 2018 vintage represents",
+      media: {
+        type: "image",
+        url: deal_img4,
+      },
+    },
+  ],
+};

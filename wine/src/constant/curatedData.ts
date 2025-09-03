@@ -217,3 +217,19 @@ export const filtersData =
 	}
   ]
 }
+
+export const tastingNotes = 
+[{
+            "title": "Wine Maker Notes",
+            "description": "some random description"
+        },
+        {
+            "title": "Wine Maker Notes1",
+            "description": "some random description"
+        }
+    ]
+
+
+
+
+

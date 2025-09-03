@@ -19,3 +19,5 @@ export {default as BreadCrumbsHeader }  from './Breadcrumbs/BreadCrumbsHeader';
 export {default as ProductListCard} from "./ProductList/ProductListCard";
 export {default as ProductGridCard }  from './ProductList/ProductGridCard';
 export {default as CustomPagination }  from './Pagination/Pagination';
+export {default as ProductWithDivider }  from './ProductDivider/ProductDivider';;
+export {default as SummaryCard }  from './SummaryCard/SummaryCard';

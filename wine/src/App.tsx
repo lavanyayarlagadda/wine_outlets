@@ -11,7 +11,7 @@ import { Box } from "@mui/material";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
-const ProductView = lazy(() => import("./pages/ProductView/ProductView"));
+const ProductView = lazy(() => import("./pages/ProductView/ProductViewPage"));
 
 const App: React.FC = () => {
   return (
