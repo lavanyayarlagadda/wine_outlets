@@ -1005,3 +1005,34 @@ export const suggestedProducts : SuggestedProducts = {
     },
   ],
 };
+
+export const ratingBreakDown =
+{
+  "average_rating": 4.8,
+  "satisfaction_percentage": '95% of buyers are satisfied', // need to discuss
+  "rating_count": '98 rating',
+  "review_count": '125 reviews',
+  "ratings_distribution": {
+    "5_star": 136,
+    "4_star": 100,
+    "3_star": 90,
+    "2_star": 25,
+    "1_star": 5
+  },
+
+  "sample_reviews": [
+    {
+      "rating": 5,
+      "title": "His favorite drink",
+      "vintage": 2015,
+      "size": "L",
+      "text": "This is such a versatile wine. I had it at a weekend dinner with friends, and everyone loved it. The subtle spice and mocha undertones gave it a rich depth, but it still felt approachable and smooth.",    },
+    {
+      "rating": 5,
+      "title": "Cool as a cucumber",
+      "vintage": 2025,
+      "size": "L",
+      "text": "I really enjoyed this wine! The deep ruby color was beautiful in the glass, and the aroma of dark berries and cocoa was inviting.",
+    }
+  ]
+}

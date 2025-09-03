@@ -9,3 +9,5 @@ export {default as CustomRangeSelector} from './CustomRangeSelector/CustomRangeS
 export {default as CustomChip} from './CustomChip/CustomChip';
 export {default as CustomToggleButton} from './CustomToggleButton/CustomToggleButton';
 export {default as CustomPlus} from './CustomPlus/CustomPlus';
+export {default as StarRating} from './StarRatng/StarRating';
+export {default as ProgressBar} from './ProgressBar/ProgressBar';
