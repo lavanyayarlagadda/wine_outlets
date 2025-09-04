@@ -14,6 +14,8 @@ import {
 import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
+// const isRecentlyViewedCard = true;
+
 export interface Product {
   id: string;
   name: string;
@@ -37,9 +39,15 @@ interface ProductCardProps {
   product: Product;
   onAddToCart: (id: string) => void;
   onToggleFavorite: (id: string) => void;
+  isRecentlyViewedCard?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggleFavorite }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onAddToCart,
+  onToggleFavorite,
+  isRecentlyViewedCard = false,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -56,30 +64,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
         transition: "all 0.3s ease",
       }}
     >
-        {/* Favorite Button */}
-        <IconButton
-          onClick={() => onToggleFavorite(product?.id)}
-          sx={{
-            position: "absolute",
+      {/* Favorite Button */}
+      <IconButton
+        onClick={() => onToggleFavorite(product?.id)}
+        sx={{
+          position: "absolute",
           top: 20,
           right: 22,
           backgroundColor: "white",
           border: `1px solid ${theme.palette.success.main}`,
           borderRadius: "4px",
           zIndex: 1,
-            "&:hover": { backgroundColor: "#f5f5f5" },
-          }}
+          "&:hover": { backgroundColor: "#f5f5f5" },
+        }}
       >
         <FavoriteBorder sx={{ color: "#666" }} />
-        </IconButton>
+      </IconButton>
 
       {/* Product Image */}
       <CardMedia
         component="img"
-        height="240"
+        height={isRecentlyViewedCard ? "300" : "240"}
         image={product?.media?.url}
         alt={product?.name}
-        sx={{ objectFit: "contain"}}
+        sx={{ objectFit: "contain" }}
       />
 
       <CardContent sx={{ p: 2 }}>
@@ -98,23 +106,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             mb: 1,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <img
               src={calendar}
               alt={"calendar icon"}
               style={{ width: "24px", height: "24px", marginRight: "5px" }}
             />
-            <Typography variant="h6" sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}>
+            <Typography
+              variant="h6"
+              sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}
+            >
               {product?.year}
             </Typography>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center", }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <img
               src={cityMap}
               alt={"city map"}
               style={{ width: "24px", height: "24px", marginRight: "5px" }}
             />
-            <Typography variant="body2" sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}>
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}
+            >
               {product?.region}
             </Typography>
           </Box>
@@ -130,7 +144,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             mt: 2,
           }}
         >
-          <Typography variant="body2" sx={{ color: theme.palette.grey[200], fontSize: "1rem", fontWeight: 500 }}>
+          <Typography
+            variant="body2"
+            sx={{ color: theme.palette.grey[200], fontSize: "1rem", fontWeight: 500 }}
+          >
             <img
               src={expandIcon}
               alt={"expand icon"}
@@ -162,7 +179,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
 
         {/* Pricing */}
         <Box>
-          <Box
+          {!isRecentlyViewedCard && <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -171,7 +188,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
               mb: 2,
             }}
           >
-
             <Typography
               variant="body2"
               sx={{
@@ -192,27 +208,42 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             >
               ${product?.price.toFixed(2)}
             </Typography>
-        
-          </Box>
-          <Button
-          variant="contained"
-          fullWidth={isMobile}
-          onClick={() => onAddToCart(product?.id)}
-          startIcon={<ShoppingCart />}
+          </Box>}
+          <Box
+            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 1 }}
+          >
+            {isRecentlyViewedCard && (
+              <Typography
+                variant="body2"
+                sx={{
+                  color: theme.palette.black[800],
+                  fontWeight: 600,
+                  fontSize: "20px",
+                }}
+              >
+                ${product?.price.toFixed(2)}
+              </Typography>
+            )}
+            <Button
+              variant="contained"
+              fullWidth={isMobile}
+              onClick={() => onAddToCart(product?.id)}
+              startIcon={<ShoppingCart />}
               sx={{
                 borderColor: theme.palette.primary.dark,
-                border:"1px solid",
+                border: "1px solid",
                 borderRadius: 1.5,
                 color: theme.palette.primary.dark,
                 backgroundColor: theme.palette.primary.light,
                 padding: "12px 0px",
                 textTransform: "none",
                 fontWeight: 600,
-                width: "100%",
+                width: isRecentlyViewedCard ? "60%" : "100%",
               }}
-        >
-          Add to Cart
-        </Button>
+            >
+              Add to Cart
+            </Button>
+          </Box>
         </Box>
       </CardContent>
     </Card>
