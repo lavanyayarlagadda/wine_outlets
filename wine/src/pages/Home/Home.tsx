@@ -16,12 +16,19 @@ import {
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
+import AuthDialog from "../../molecules/Authentication/AuthDialog";
 
 
 const Home = () => {
   const { agePopupOpen, isAgeVerified, handleVerifyAge, handleCategoryClick, handleBrandClick,setOpen,open,setIsAgeVerified } =
     useHomeLogic();
   const [selectedStore, setSelectedStore] = React.useState<number | 0>();
+  const [openLogin,setOpenLogin] = React.useState(true);
+  const [signIn,setSignIn] = React.useState(false)
+
+const onClose = ()=>{
+  setOpenLogin(false)
+}
 
 const stores =[
     {
@@ -49,8 +56,10 @@ const stores =[
 
   return (
     <>
+
       <AgePopup open={agePopupOpen} onClose={() => {}} onVerify={handleVerifyAge} />
-        {isAgeVerified && <StoreLocator open={open} onClose={() => setOpen(false)} selectedStoreId={selectedStore} stores={stores} onSelect={(id)=>setSelectedStore(id)} setIsAgeVerified={setIsAgeVerified} />}
+        {isAgeVerified && <StoreLocator open={open} onClose={() => setOpen(false)} selectedStoreId={selectedStore} stores={stores} onSelect={(id)=>setSelectedStore(id)} setIsAgeVerified={setIsAgeVerified} setSignIn={setSignIn} />}
+          {  (isAgeVerified && signIn)  && <AuthDialog open={openLogin} onClose={onClose}/>}
       {isAgeVerified && <HeroBanner slides={HERO_BANNER_SLIDES} />}
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}

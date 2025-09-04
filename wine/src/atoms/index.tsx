@@ -13,3 +13,4 @@ export {default as StarRating} from './StarRatng/StarRating';
 export {default as ProgressBar} from './ProgressBar/ProgressBar';
 export {default as CustomReviewForm} from './CustomForm/CustomForm';
 export {default as CircularProgressBar} from './CustomCircularProgressBar/CustomCircularProgressBar'
+export {default as CustomPopup} from './CustomPopup/CustomPopup';
