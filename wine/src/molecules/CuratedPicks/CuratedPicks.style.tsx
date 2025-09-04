@@ -30,16 +30,16 @@ export const StyledContainer = styled(Box)(({}) => ({
   position: "relative",
 }));
 
-export const StyledOverlay = styled(Box)(({}) => ({
+export const StyledOverlay = styled(Box)(({theme}) => ({
   position: "absolute",
   top: "30px",
-  left: "-10px",
+  left: "-14px",
   right: 0,
   bottom: 0,
-  height: "140px",
-  width: "140px",
-  backgroundColor: "rgba(252, 231, 243, 0.5)",
+  height: "150px",
+  width: "150px",
   borderRadius: "50%",
+  backgroundColor: theme.palette.primary.light,
   zIndex: -1,
 }));
 
@@ -65,7 +65,7 @@ export const StyledImageContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   marginBottom: "16px",
   transition: "transform 0.3s ease",
-  filter: "drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))",
+  // filter: "drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))",
 }));
 
 export const StyledCategoryLabel = styled(Typography)(({ theme }) => ({
