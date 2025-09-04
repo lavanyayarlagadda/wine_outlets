@@ -21,3 +21,4 @@ export {default as ProductGridCard }  from './ProductList/ProductGridCard';
 export {default as CustomPagination }  from './Pagination/Pagination';
 export {default as ProductWithDivider }  from './ProductDivider/ProductDivider';;
 export {default as SummaryCard }  from './SummaryCard/SummaryCard';
+export {default as StoreLocator }  from './StoreSelectorPopUp/StoreSelectorPopup';
