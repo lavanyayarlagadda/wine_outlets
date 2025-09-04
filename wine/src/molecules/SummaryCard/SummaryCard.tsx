@@ -20,8 +20,8 @@ const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
         border: "1px solid #f2f2f2",
         p: 2,
         backgroundColor: "#ffffff",
-        maxWidth: 320,
-        minWidth: 250,
+        maxWidth: 420,
+        minWidth: 400,
         boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
         alignSelf: "center",
       }}

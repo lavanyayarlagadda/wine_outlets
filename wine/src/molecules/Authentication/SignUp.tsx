@@ -129,7 +129,6 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
           label="VIP Customer ID"
           value={form.vipId}
           onChange={(val) => handleChange("vipId", val)}
-          required
           error={errors.vipId}
         />
       </Box>

@@ -16,7 +16,7 @@ interface Props {
 }
 
 const FilterAccordion: React.FC<Props> = ({ title, children,isLast }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   return (
     <>

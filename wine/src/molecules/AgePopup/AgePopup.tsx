@@ -29,9 +29,11 @@ const AgePopup = ({ open, onClose, onVerify }: AgePopupProps) => {
             <Form>
               <Styled.Container>
                 {/* Logo + icon */}
-                <Styled.LogoSection>
-                  <Styled.LogoImage alt="logo" src="/loader.gif"   />
-                </Styled.LogoSection>
+              <Styled.LogoSection>
+  <Styled.RedCircle />
+  <Styled.LogoImage alt="logo" src="/loader.gif" />
+</Styled.LogoSection>
+
 
                 {/* Heading */}
                 <Styled.Title>Age Verification Required</Styled.Title>

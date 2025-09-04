@@ -9,7 +9,7 @@ import palette from "../../themes/palette";
 import { CustomPopup } from "../../atoms";
 import { SearchBox, StyledInput } from "../NavigationBar/Navigation.style";
 import SearchIcon from "@mui/icons-material/Search";
-import * as Styled from "../AgePopup/AgePopup.style";
+import {mapIcon,mapIconSelected} from '../../assets'
 
 export interface Store {
   id: number;
@@ -26,7 +26,6 @@ interface StoreSelectorPopupProps {
   selectedStoreId?: number;
   onSelect: (id: number) => void;
   setIsAgeVerified: React.Dispatch<React.SetStateAction<boolean>>;
-  setSignIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
@@ -35,8 +34,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   stores,
   selectedStoreId,
   onSelect,
-  setIsAgeVerified,
-  setSignIn
+  setIsAgeVerified
 }) => {
   return (
     <CustomPopup
@@ -44,8 +42,8 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
       onClose={onClose}
       title="Select Your Store"
       footer={
-        <Typography variant="caption" color="text.secondary">
-          <strong>Note:</strong> If no store is selected, Oceanview Spirits & Liquors will be used
+        <Typography variant="caption" color="text.secondary" sx={{backgroundColor:palette.grey.border}}>
+          <strong>Note:</strong> If no store is selected, Wall WineOutlet will be used
           as default. You can change your store preference at any time using the store selector in
           the header.
         </Typography>
@@ -76,7 +74,6 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                 setIsAgeVerified(true);
                 setTimeout(() => {
                   onClose();
-                  setSignIn(true)
                 }, 5000);
               }}
               sx={{
@@ -93,20 +90,27 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                 <Box display="flex" alignItems="center" gap={2}>
                   <Typography fontWeight="bold">{store.name}</Typography>
                   <Button
-                    size="small"
-                    variant="outlined"
-                    endIcon={<RoomIcon />}
-                    onClick={(e) => e.stopPropagation()}
-                    sx={{
-                      color: isSelected ? palette.primary.dark : "inherit",
-                      borderRadius: "20px",
-                      border: `1px solid ${
-                        isSelected ? palette.primary.dark : palette.grey.border
-                      }`,
-                    }}
-                  >
-                    Open Map
-                  </Button>
+  size="small"
+  variant="outlined"
+  endIcon={
+    <img
+      src={isSelected ? mapIconSelected:mapIcon}    
+      alt="map"
+      style={{ width: 15, height: 15 }} 
+    />
+  }
+  onClick={(e) => e.stopPropagation()}
+  sx={{
+    color: isSelected ? palette.primary.dark : "inherit",
+    borderRadius: "20px",
+    border: `1px solid ${
+      isSelected ? palette.primary.dark : palette.grey.border
+    }`,
+  }}
+>
+  Open Map
+</Button>
+
                 </Box>
                 {isSelected && <Check sx={{ color: palette.primary.dark }} />}
               </Box>
@@ -114,16 +118,20 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
               <Typography variant="body2" color="text.secondary" mt={1}>
                 {store.address}
               </Typography>
+<Box display="flex" justifyContent="space-between" alignItems="center" mt={1}>
+  {/* Hours */}
+  <Box display="flex" alignItems="center" gap={1}>
+    <AccessTimeIcon fontSize="small" color="action" />
+    <Typography variant="body2">{store.hours}</Typography>
+  </Box>
 
-              <Box display="flex" alignItems="center" gap={1} mt={1}>
-                <AccessTimeIcon fontSize="small" color="action" />
-                <Typography variant="body2">{store.hours}</Typography>
-              </Box>
+  {/* Phone */}
+  <Box display="flex" alignItems="center" gap={1}>
+    <PhoneIcon fontSize="small" color="action" />
+    <Typography variant="body2">{store.phone}</Typography>
+  </Box>
+</Box>
 
-              <Box display="flex" alignItems="center" gap={1} mt={1}>
-                <PhoneIcon fontSize="small" color="action" />
-                <Typography variant="body2">{store.phone}</Typography>
-              </Box>
             </ButtonBase>
           );
         })}

@@ -1,11 +1,8 @@
 import React from "react";
 
-import { Navigation, Newsletter, ProductListBanner } from "../../molecules";
-import { Box } from "@mui/material";
-import ProductList from "../../molecules/ProductList/ProductList";
-import Footer from "../../organisms/Footer/Footer";
-import RecentlyViewed from '../../molecules/RecentlyViewed/RecentlyView';
-import ProductView from "../../molecules/ProductView/ProductView";
+import { Newsletter, ProductView, RecentlyView } from "../../molecules";
+
+
 
 
 const ProductViewPage = () => {
@@ -13,7 +10,7 @@ const ProductViewPage = () => {
   return (
     <>
       <ProductView />
-      <RecentlyViewed />
+      <RecentlyView />
       <Newsletter />
     </>
   );

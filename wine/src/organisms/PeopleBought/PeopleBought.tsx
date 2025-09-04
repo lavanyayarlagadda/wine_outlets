@@ -28,12 +28,9 @@ const PeopleBought = () => {
         <Typography variant="h6" sx={{ color: palette.black[800], fontWeight: 600 }}>
           People bought it along with
         </Typography>
-        <Link href="#" underline="hover" sx={{ fontSize: 14, fontWeight: 500 }}>
-          See more
-        </Link>
       </Box>
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, width: "100%" }}>
-        <Box sx={{ flex: 1, display: "flex", flexDirection: { xs: "column", md: "row" },alignItems: "center", gap: 2 }}>
+        <Box sx={{ flex: { xs: "1 1 100%", md: "0 0 60%" }, display: "flex", flexDirection: { xs: "column", md: "row" },alignItems: "center", gap: 2 }}>
           {currentProducts.map((product, index) => (
             <ProductWithDivider
               key={product.id}
@@ -45,6 +42,7 @@ const PeopleBought = () => {
           ))}
         </Box>
         <Divider orientation="vertical" flexItem sx={{ display: { xs: "none", md: "block" }, borderColor: "#e0e0e0" }} />
+        
         <SummaryCard totalVipPrice={suggestedProducts.totalVipPrice} totalPrice={suggestedProducts.totalPrice} />
       </Box>
     </Box>
