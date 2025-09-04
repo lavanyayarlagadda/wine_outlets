@@ -2,8 +2,9 @@ import { styled, Box } from "@mui/material";
 
 export const HeroBannerContainer = styled(Box)(({}) => ({
   position: "relative",
-  width: "99vw",
-  height: "calc(100vh - 197px)",
+  // width: "98vw",
+  width: "100%",
+  height: "calc(100vh - 200px)",
   overflow: "hidden",
   cursor: "grab",
   "&:active": {

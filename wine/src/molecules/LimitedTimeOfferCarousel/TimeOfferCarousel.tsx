@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme, useMediaQuery } from "@mui/material";
 import {
   CarouselContainer,
   HeaderSection,
@@ -11,6 +12,7 @@ import {
   CarouselSlide,
   DotsContainer,
   Dot,
+  MobileScrollWrapper
 } from "./TimeOfferCarousel.style";
 import { OFFERS } from "../../constant/offerData";
 import { CustomTitleSection } from "../../atoms";
@@ -24,6 +26,8 @@ interface OfferData {
 }
 
 const LimitedTimeOffersCarousel = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const totalSlides = Math.max(0, OFFERS.length - 2);
@@ -57,19 +61,30 @@ const LimitedTimeOffersCarousel = () => {
         title={"Limited-Time Offers"}
         subtitle={"Uncork exclusive savings this week."}
       />
-      <CarouselWrapper>
-        <CarouselTrack currentIndex={currentIndex}>
-          {OFFERS.map((offer) => (
-            <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
-          ))}
-        </CarouselTrack>
-      </CarouselWrapper>
+      {!isMobile && (<>
+        <CarouselWrapper>
+          <CarouselTrack currentIndex={currentIndex}>
+            {OFFERS.map((offer) => (
+              <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
+            ))}
+          </CarouselTrack>
+        </CarouselWrapper>
 
-      <DotsContainer>
-        {Array.from({ length: totalSlides }).map((_, index) => (
-          <Dot key={index} active={index === currentIndex} onClick={() => handleDotClick(index)} />
+        <DotsContainer>
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <Dot key={index} active={index === currentIndex} onClick={() => handleDotClick(index)} />
+          ))}
+        </DotsContainer>
+      </>)}
+
+       {/* Mobile horizontal scroll */}
+    {isMobile && (
+      <MobileScrollWrapper>
+        {OFFERS.map((offer) => (
+          <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
         ))}
-      </DotsContainer>
+      </MobileScrollWrapper>
+    )}
     </CarouselContainer>
   );
 };

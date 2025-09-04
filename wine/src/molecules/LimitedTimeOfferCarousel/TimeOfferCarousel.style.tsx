@@ -1,9 +1,12 @@
 import { Box, Typography, IconButton, styled } from "@mui/material";
 
-export const CarouselContainer = styled(Box)(({}) => ({
+export const CarouselContainer = styled(Box)(() => ({
   width: "100%",
   margin: "0 auto",
   padding: "80px 64px",
+  "@media (max-width: 900px)": {
+    padding: "40px 16px",
+  },
 }));
 
 export const HeaderSection = styled(Box)(({ theme }) => ({
@@ -42,6 +45,22 @@ export const CarouselSlide = styled(Box)({
   minWidth: "32%",
   boxSizing: "border-box",
   position: "relative",
+  "@media (max-width: 900px)": {
+    minWidth: "75%",
+  },
+});
+
+export const MobileScrollWrapper = styled(Box)({
+  display: "flex",
+  gap: "16px",
+  overflowX: "auto",
+  scrollSnapType: "x mandatory",
+  WebkitOverflowScrolling: "touch",
+  paddingTop: "24px",
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+  scrollbarWidth: "none",
 });
 
 // Offer card
@@ -52,6 +71,7 @@ export const OfferCard = styled(Box)({
   cursor: "pointer",
   paddingTop: "66%",
   transition: "transform 0.2s ease-in-out",
+  scrollSnapAlign: "start",
   "&:hover": {
     transform: "scale(1.02)",
   },

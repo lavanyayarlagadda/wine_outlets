@@ -15,6 +15,8 @@ export const OverlayContainer = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(0, 2),
+    justifyContent: "center", 
+    textAlign: "center",    
   },
 }));
 
@@ -30,6 +32,8 @@ export const OverlayContentBox = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down("sm")]: {
     maxWidth: "100%",
+    margin: "0 auto",   
+    textAlign: "center",   
   },
 }));
 
@@ -43,6 +47,9 @@ export const OverlayButtonGroup = styled(Box)(({ theme }) => ({
     "& .MuiButton-root": {
       width: "100%",
     },
+  },
+  "@media (max-height: 700px)": {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -58,7 +65,7 @@ export const CustomizeTagBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: "12px 8px",
-  width: "350px",
+  width: "100%", 
   justifyContent: "space-between",
   "& span": {
     backgroundColor: theme.palette.primary?.dark,
@@ -87,9 +94,24 @@ export const CustomizeTitleText = styled(Typography)(({ theme }) => ({
   fontSize: `${theme.typography.h2.fontSize}px !important`,
   fontWeight: 600,
   lineHeight: "72px",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: theme.typography.h5.fontSize, 
+    lineHeight: "54px", 
+  },
+  "@media (max-height: 700px)": {
+    fontSize: theme.typography.h4.fontSize,
+    lineHeight: "60px",
+  },
 }));
 
 export const CustomizeSubTitleText = styled(Typography)(({ theme }) => ({
   color: theme.palette.white.main,
   fontSize: `${theme?.typography?.h5?.fontSize}px !important`,
+  [theme.breakpoints.down("sm")]: {
+    fontSize: theme.typography.body2.fontSize,
+    lineHeight: "28px",
+    "@media (max-height: 700px)": {
+      fontSize: theme.typography.body2.fontSize,
+    },
+  },
 }));
