@@ -8,19 +8,34 @@ export const FooterContainer = styled(Box)(({ theme }) => ({
   padding: "24px 30px 24px 30px",
 }));
 
-export const InnerWrapper = styled(Box)({
+export const InnerWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
-});
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: theme.spacing(4), 
+  },
+}));
 
-export const LogoImage = styled("img")({
+
+export const LogoImage = styled("img")(({ theme }) => ({
   height: "40px",
   width: "auto",
   objectFit: "contain",
-});
+  [theme.breakpoints.down("sm")]: {
+    display: "block",
+    margin: "0 auto", 
+  },
+}));
 
-export const CustomizedGrid = styled(Grid)(() => ({
+export const CustomizedGrid = styled(Grid)(({theme}) => ({
   width: "200px",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    textAlign: "left",
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export const SocialIconsContainer = styled(Box)(({ theme }) => ({
@@ -52,6 +67,10 @@ export const LinksContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
+  [theme.breakpoints.down("md")]: {
+    alignItems: "left",
+    gap: theme.spacing(0.5),
+  },
 }));
 
 export const StyledLink = styled(Link)(({ theme }) => ({

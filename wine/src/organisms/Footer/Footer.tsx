@@ -54,7 +54,18 @@ const Footer: React.FC = () => {
           </SocialIconsContainer>
         </Grid>
 
-        <Box sx={{ display: "flex", width: "60%", justifyContent: "space-between" }}>
+        <Box sx={{
+          display: "flex",
+          width: {
+            xs: "100%",
+            md: "60%"
+          },
+          justifyContent: "space-between",
+          flexWrap: {
+            xs: "wrap",
+            md: "nowrap"
+          }
+        }}>
           {Object.values(FOOTER_DATA).map((section, index) => (
             <CustomizedGrid key={index}>{renderFooterSection(section)}</CustomizedGrid>
           ))}
