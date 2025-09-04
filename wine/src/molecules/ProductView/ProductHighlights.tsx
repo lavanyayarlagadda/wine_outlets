@@ -13,8 +13,8 @@ const ProductHighlights: React.FC<ProductHighlightsProps> = ({
 }) => {
   return (
     <HighlightsContainer>
-      <HighlightsTitle variant="subtitle1">{title}</HighlightsTitle>
-      <DetailValue variant="body2">{highlights}</DetailValue>
+      <HighlightsTitle >{title}</HighlightsTitle>
+      <DetailValue >{highlights}</DetailValue>
     </HighlightsContainer>
   );
 };

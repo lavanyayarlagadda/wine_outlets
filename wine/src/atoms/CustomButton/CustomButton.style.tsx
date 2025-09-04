@@ -40,7 +40,7 @@ export const IconWrapper = styled(Box)<{ border: string }>(({ theme, border }) =
 }));
 
 export const AddToCartButton = styled(Button)(({theme}) => ({
-  backgroundColor: "#8B0000", // dark red
+  backgroundColor: theme.palette.primary.dark, // dark red
   color: theme.palette.white.main,
   fontWeight: 600,
   textTransform: "none",
@@ -48,8 +48,6 @@ export const AddToCartButton = styled(Button)(({theme}) => ({
   padding: "10px 16px",
   width: "100%",
   "&:hover": {
-    backgroundColor: "#A40000", // lighter red on hover
+    backgroundColor: theme.palette.primary.main, // lighter red on hover
   },
 }));
-
-

@@ -7,7 +7,7 @@ export const StyledImageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   alignItems: "flex-start",
-  gap: theme.spacing(2),
+  // gap: theme.spacing(2),
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     alignItems: "center",
@@ -28,9 +28,9 @@ export const StyledThumbnailList = styled(Box)(({ theme }) => ({
 export const StyledCard = styled(Card)(({ theme }) => ({
   position: "relative",
   borderRadius: 16,
-  transition: "all 0.3s ease",
+  // transition: "all 0.3s ease",
   "&:hover": {
-    transform: "translateY(-2px)",
+    // transform: "translateY(-2px)",
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",
@@ -40,7 +40,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
 
 export const StyledCardMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({ theme }) => ({
   objectFit: "contain",
-  padding: 16,
+  // padding: 16,
   height: 500,
   width: 500,
   [theme.breakpoints.down("md")]: {
@@ -143,7 +143,7 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
   fontSize: "12px",
   color: theme.palette.primary.dark,
   border: `1px solid ${theme.palette.primary.dark}`,
-  backgroundColor: "transparent",
+  backgroundColor: theme.palette.primary.light,
   [theme.breakpoints.down("sm")]: {
     fontSize: "11px",
     padding: "0 4px",
@@ -157,7 +157,7 @@ export const RatingBox = styled(Box)(() => ({
 
 export const RatingTypography = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1),
-  color: theme.palette.grey[100] ,
+  color: theme.palette.grey[200] ,
   fontSize: "0.9rem",
   [theme.breakpoints.down("sm")]: {
     fontSize: "0.8rem",
@@ -253,7 +253,7 @@ export const DetailsBox = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "flex",
   flexDirection: "column",
-  maxHeight: "80vh", // Adjust based on your design
+  maxHeight: "82vh", // Adjust based on your design
   overflowY: "auto",
   padding: theme.spacing(0),
   [theme.breakpoints.up("md")]: {
@@ -264,21 +264,23 @@ export const DetailsBox = styled(Box)(({ theme }) => ({
 export const HighlightsContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: 16,
-  backgroundColor: theme. palette.success.main,
+  backgroundColor: palette.white.light,
   border: `1px solid ${theme.palette.success.main}`,
   marginTop: theme.spacing(2),
 }));
 
 export const HighlightsTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 600,
+  fontWeight: 500,
   marginBottom: theme.spacing(1),
-   color: theme.palette.text.primary,
+   color: theme.palette.black[800],
+   fontSize: "16px",
 }));
 
 export const HighlightsText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.grey[100],
-  fontSize: "14px",
-  lineHeight: 1.6,
+  color: theme.palette.black[800],
+  fontSize: "16px",
+  // lineHeight: 1.6,
+  fontWeight: 400,
 }));
 
 
@@ -304,6 +306,7 @@ export const DetailLabel = styled(Typography)(({ theme }) => ({
 
 export const DetailValue = styled(Typography)(({ theme }) => ({
    fontWeight: 400,
-   color: theme.palette.text.primary,
+   color: theme.palette.black[800],
   flex: 1,
+  fontSize: "16px",
 }));

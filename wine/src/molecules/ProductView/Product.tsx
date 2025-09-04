@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid, Box } from '@mui/material';
-import { productViewData } from '../../constant/productViewData';
+// import { productViewData } from '../../constant/productViewData';
 import ProductImage from './ProductImage';
 import ProductDetails from './ProductDetails';
+import type { ProductViewResponse } from '../../constant/productViewData';
 
 import {
   LayoutContainer,
@@ -13,7 +14,11 @@ import {
   DetailsBox,
 } from './ProductView.style';
 
-export default function Product() {
+interface ProductDetailsProps {
+    productViewData: ProductViewResponse;
+}
+
+const Product: React.FC<ProductDetailsProps> = ({ productViewData }) => {
   return (
     <LayoutContainer>
       <LayoutGrid container spacing={4}>
@@ -34,3 +39,5 @@ export default function Product() {
     </LayoutContainer>
   );
 }
+
+export default Product;

@@ -168,8 +168,9 @@ export const productViewData: ProductViewResponse = {
         ]
     },
     professionalRating: [
-        { title: "James Suckling", score: 90, description: "some random description for review" },
-        { title: "James Suckling", score: 90, description: "some random description for review" }
+        { title: "James Suckling", score: 40, description: "Beautiful, ripe redcurrants, bay leaf, violets and raspberries on the nose. Full-bodied with firm and very tight tannins" },
+        { title: "James Suckling", score: 90, description: "Beautiful, ripe redcurrants, bay leaf, violets and raspberries on the nose. Full-bodied with firm and very tight tannins" },
+        { title: "James Suckling", score: 40, description: "Beautiful, ripe redcurrants, bay leaf, violets and raspberries on the nose. Full-bodied with firm and very tight tannins" }
     ],
     tastingNotes: [
         { title: "Wine Maker Notes", description: "some random description" },
