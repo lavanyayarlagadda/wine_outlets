@@ -11,6 +11,7 @@ import {
   AppBar,
   Drawer,
 } from "@mui/material";
+import shape from "../../themes/shape";
 
 // 🔴 Top Bar
 export const TopBar = styled(Box)(({ theme }) => ({
@@ -75,7 +76,7 @@ export const SearchBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: "4px 12px",
-  borderRadius: "8px",
+  borderRadius: shape.borderRadius,
   minWidth: "300px",
   border: `1px solid ${theme.palette.success.main}`,
   width: "400px",
@@ -158,7 +159,7 @@ export const HighlightMenu = styled(Box)(({ theme }) => ({
 export const DropdownTrigger = styled(Box)(({ theme }) => ({
   cursor: "pointer",
   padding: "6px 12px",
-  borderRadius: "8px",
+  borderRadius: shape.borderRadius,
   border: "1px solid #ddd",
   display: "flex",
   alignItems: "center",
@@ -207,7 +208,7 @@ export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({theme}) =
 
 export const StyledMenu = styled(Menu)(() => ({
   "& .MuiPaper-root": {
-    borderRadius: "8px",
+    borderRadius: shape.borderRadius,
     marginTop: "8px",
     minWidth: "168px",
   },

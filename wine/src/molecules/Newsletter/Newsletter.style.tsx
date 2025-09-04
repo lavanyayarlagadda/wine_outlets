@@ -1,4 +1,5 @@
 import { Box, Button, styled, Typography } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const NewsletterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -17,7 +18,7 @@ export const SubscribeButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.white.main,
   padding: "12px 24px",
-  borderRadius: "8px",
+  borderRadius: shape.borderRadius,
   textTransform: "none",
   fontSize: "16px",
   fontWeight: 600,

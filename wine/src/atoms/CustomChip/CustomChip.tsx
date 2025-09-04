@@ -1,5 +1,6 @@
 import React from "react";
 import { Chip } from "@mui/material";
+import shape from "../../themes/shape";
 
 interface CustomChipProps {
   label: string;
@@ -13,7 +14,7 @@ const CustomChip: React.FC<CustomChipProps> = ({ label, onDelete }) => {
       onDelete={onDelete}
       size="medium"
       variant="outlined"
-      sx={{ borderRadius: "8px" }}
+      sx={{ borderRadius: shape.borderRadius }}
     />
   );
 };

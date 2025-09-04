@@ -1,20 +1,26 @@
-import { Box, LinearProgress, Typography } from "@mui/material";
+import { LinearProgress, Box } from "@mui/material";
+import React from "react";
 
-interface Props {
-  label: string;
-  value: number; // percentage
+interface ProgressBarProps {
+  value: number;
+  color?: string;
 }
 
-const ProgressBar: React.FC<Props> = ({ label, value }) => (
-  <Box display="flex" alignItems="center" gap={1}>
-    <Typography variant="body2">{label}</Typography>
-    <LinearProgress
-      variant="determinate"
-      value={value}
-      sx={{ flex: 1, height: 8, borderRadius: 5 }}
-    />
-    <Typography variant="body2">{value}%</Typography>
-  </Box>
-);
+const ProgressBar: React.FC<ProgressBarProps> = ({ value, color = "#000" }) => {
+  return (
+    <Box sx={{ flexGrow: 1, mx: 2 }}>
+      <LinearProgress
+        variant="determinate"
+        value={value}
+        sx={{
+          height: 8,
+          borderRadius: 5,
+          backgroundColor: "#e0e0e0",
+          "& .MuiLinearProgress-bar": { backgroundColor: color },
+        }}
+      />
+    </Box>
+  );
+};
 
 export default ProgressBar;

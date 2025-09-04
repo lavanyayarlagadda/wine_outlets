@@ -1,9 +1,10 @@
 import { TextField, Select, Typography, styled } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     backgroundColor: theme.palette.white.main,
-    borderRadius: "8px",
+    borderRadius: shape.borderRadius,
     "& fieldset": {
       borderColor: "#e0e0e0",
     },

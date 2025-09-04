@@ -23,7 +23,6 @@ const Home = () => {
   return (
     <>
       <AgePopup open={agePopupOpen} onClose={() => {}} onVerify={handleVerifyAge} />
-      {isAgeVerified && <Navigation />}
       {isAgeVerified && <HeroBanner slides={HERO_BANNER_SLIDES} />}
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}
@@ -34,7 +33,6 @@ const Home = () => {
       {isAgeVerified && <Brand handleBrandClick={handleBrandClick} />}
       {isAgeVerified && <RecentlyView />}
       {isAgeVerified && <Newsletter />}
-      {isAgeVerified && <Footer />}
     </>
   );
 };

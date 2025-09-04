@@ -15,7 +15,6 @@ const ProductViewPage = () => {
       <ProductView />
       <RecentlyViewed />
       <Newsletter />
-      <Footer />
     </>
   );
 };

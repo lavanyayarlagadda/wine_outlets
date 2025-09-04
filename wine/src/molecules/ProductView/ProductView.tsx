@@ -4,8 +4,8 @@ import Breadcrumbs, { type BreadcrumbItem } from '../../molecules/Breadcrumbs/Br
 import BreadcrumbHeader from '../Breadcrumbs/BreadCrumbsHeader';
 import Product from './Product';
 import ProfessionalRating from './ProfessionalRating';
-import RatingsBreakdown from '../ReviewRating/ReviewRating';
 import { ratingBreakDown } from '../../constant/dealProduct';
+import RatingsBreakdown from '../../organisms/ProductView/RatingsBreakDown';
 const ProductView = () => {
       const breadcrumbItems: BreadcrumbItem[] = [
         { label: "List", href:"/" }, 
