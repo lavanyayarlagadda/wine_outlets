@@ -24,7 +24,4 @@ export const agePopupSchema = Yup.object({
 
       return age >= 21;
     }),
-  confirmAge: Yup.boolean()
-    .oneOf([true], "You must confirm that you are of legal drinking age")
-    .required("You must confirm that you are of legal drinking age"),
 });
