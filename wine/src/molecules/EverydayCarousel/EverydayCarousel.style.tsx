@@ -34,7 +34,7 @@ export const CarouselSlide = styled(Box, {
     : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
 
   borderRadius: "16px",
-  padding: "40px",
+  padding: "32px 32px 64px 32px",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -129,11 +129,11 @@ export const DotsContainer = styled(Box)(({ theme }) => ({
   position: "absolute",
   left: "40%",
   right: "40%",
-  bottom: "10px",
+  bottom: "20px",
 }));
 
 export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({
-  width: active ? "24px" : "12px",
+  width: active ? "30px" : "12px",
   height: "12px",
   borderRadius: active ? "12px" : "50%",
   border: `1px solid ${theme.palette.white.main}`,
