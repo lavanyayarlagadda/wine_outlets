@@ -58,12 +58,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
   const currentProducts = allProducts.slice(startIndex, endIndex);
 
-  const alcoholPreferences = [
-    { label: "Relevance", value: "relevance" },
-    { label: "Price (Low to High)", value: "price_low_high" },
-    { label: "Price (High to Low)", value: "price_high_low" },
-    { label: "Rating", value: "rating" },
-  ];
 
   const filters = [{
     label:'wines',

@@ -10,17 +10,18 @@ import {
   FormHelperText,
   styled
 } from "@mui/material";
+import palette from "../../themes/palette";
 
 export const LogoImage = styled("img")({
-  height: "40px",
-  width: "auto",
+  height: "100px",
+  width: "100px",
   objectFit: "contain",
 });
 
 export const StyledDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
-    borderRadius: "16px",
-    maxWidth: 450,
+    borderRadius: "24px",
+    maxWidth: 550,
     margin: theme.spacing(2),
     boxShadow: theme.shadows[8],
   },
@@ -69,8 +70,9 @@ export const Subtitle = styled(Typography)(({ theme }) => ({
 
 export const InputLabel = styled(Typography)(({ theme }) => ({
   ...theme.typography.body2,
-  color: "gray",
+  color: palette.black[800],
   fontWeight: 500,
+  marginBottom:8,
   alignSelf: "flex-start",
   "& span": {
     color: "red",
@@ -113,7 +115,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     },
   },
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1.5, 1.75),
+    padding: theme.spacing(1.5, 1.5),
     fontSize: theme.typography.body2.fontSize,
     color: theme.palette.text.primary,
   },
@@ -156,7 +158,8 @@ export const VerifyButton = styled(Button)(({ theme }) => ({
 
 export const ExitButton = styled(Button)(({ theme }) => ({
   flex: 1,
-  borderColor: theme.palette.divider,
+ borderColor: theme.palette.text.secondary,
+    backgroundColor: theme.palette.action.hover,
   color: theme.palette.text.secondary,
   fontWeight: theme.typography.fontWeightMedium,
   fontSize: theme.typography.body2.fontSize,

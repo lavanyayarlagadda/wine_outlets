@@ -20,8 +20,6 @@ const BreadcrumbHeader: React.FC<BreadcrumbHeaderProps> = ({
     justifyContent="space-between"
     flexWrap={{ xs: "wrap", sm: "nowrap" }}
     px={{ xs: 2, md:4 }}
-    // py={{ xs: 1, sm: 1 }}
-    // px={{ xs: 0, sm: 2 }}
     gap={2}
   >
     <Box flex="1 1 auto">
