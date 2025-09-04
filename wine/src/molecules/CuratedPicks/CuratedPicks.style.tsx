@@ -1,9 +1,12 @@
 import { Box, Typography, styled } from "@mui/material";
 
-export const Container = styled(Box)(({}) => ({
+export const Container = styled(Box)(({theme}) => ({
   width: "100%",
   margin: "0 auto",
   padding: "80px 64px",
+  [theme.breakpoints.down("sm")]: {
+    padding: "40px 16px", 
+  },
 }));
 export const HeaderSection = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -18,12 +21,18 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   color: theme.palette.black[800],
   marginBottom: theme.spacing(1),
+   [theme.breakpoints.down("sm")]: {
+    fontSize: "22px",
+  },
 }));
 
 export const Subtitle = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
   color: theme.palette.grey[200],
   fontWeight: 400,
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px", 
+  },
 }));
 
 export const StyledContainer = styled(Box)(({}) => ({
@@ -33,11 +42,11 @@ export const StyledContainer = styled(Box)(({}) => ({
 export const StyledOverlay = styled(Box)(({theme}) => ({
   position: "absolute",
   top: "30px",
-  left: "-14px",
+  left: "-26px",
   right: 0,
   bottom: 0,
-  height: "150px",
-  width: "150px",
+  height: "170px",
+  width: "170px",
   borderRadius: "50%",
   backgroundColor: theme.palette.primary.light,
   zIndex: -1,
@@ -49,6 +58,18 @@ export const StyledGridContainer = styled(Box)(({ theme }) => ({
   padding: "32px",
   display: "flex",
   justifyContent: "space-between",
+  flexWrap: "wrap",
+   [theme.breakpoints.up("md")]: {
+    flexWrap: "nowrap",  
+    justifyContent: "space-between",
+  },
+   [theme.breakpoints.down("sm")]: {
+     flexWrap: "wrap",  
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "24px",  
+    padding: "16px",  
+  },
 }));
 
 export const StyledWineItem = styled(Box)(({ theme }) => ({
@@ -56,8 +77,14 @@ export const StyledWineItem = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   cursor: "pointer",
+  width: "180px", 
+  flex: "0 1 auto",  
   "&:hover .wine-image": {
     transform: "scale(1.05)",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "140px", 
+    flex: "0 1 auto", 
   },
 }));
 

@@ -33,7 +33,7 @@ const CuratedPicks = () => {
                     src={item.imageUrl || "/placeholder.svg"}
                     alt={`${item.category} wine bottle`}
                     width={120}
-                    height={200}
+                    height={240}
                     style={{ objectFit: "contain" }}
                   />
                 </StyledImageContainer>
