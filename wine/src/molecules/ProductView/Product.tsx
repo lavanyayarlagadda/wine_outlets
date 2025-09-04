@@ -21,7 +21,7 @@ interface ProductDetailsProps {
 const Product: React.FC<ProductDetailsProps> = ({ productViewData }) => {
   return (
     <LayoutContainer>
-      <LayoutGrid container spacing={4}>
+      <LayoutGrid container spacing={4} >
         {/* Image Section */}
         <ImageSection size={{ xs: 12, md: 6 }} >
           <ImageBox>

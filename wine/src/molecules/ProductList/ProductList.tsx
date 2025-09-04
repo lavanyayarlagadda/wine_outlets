@@ -34,8 +34,8 @@ const [view, setView] = useState<"grid" | "list">("grid");
 
   const isMobileOrTablet = useMediaQuery((theme: any) => theme.breakpoints.down("md"));
 const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "Category", href: "/" },
-    { label: "List" }, // current page, no href
+    { label: "Home", href: "/" },
+    { label: "Wine" }, // current page, no href
   ];
   const PRODUCTS_PER_PAGE = 24;
   const PRODUCTS_PER_ROW = 3;

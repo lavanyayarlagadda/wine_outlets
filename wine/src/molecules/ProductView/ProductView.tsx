@@ -11,10 +11,10 @@ import { ratingBreakDown } from '../../constant/dealProduct';
 import RatingsBreakdown from '../../organisms/ProductView/RatingsBreakDown';
 const ProductView = () => {
   const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "List", href: "/" },
-    { label: "Category", href: "/" },
-    { label: "Wines", href: "/" },
-    { label: "Product" }, // current page, no href
+    { label: "Home", href: "/" },
+    // { label: "Category", href: "/" },
+    { label: "Wines", href: "/productsList" },
+    { label: "Kim Crawford Wine" }, // current page, no href
   ];
   return (
     <>

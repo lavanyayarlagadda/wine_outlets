@@ -1,6 +1,6 @@
 import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import  palette from "../../themes/palette";
+import palette from "../../themes/palette";
 
 
 export const StyledImageContainer = styled(Box)(({ theme }) => ({
@@ -26,7 +26,7 @@ export const StyledThumbnailList = styled(Box)(({ theme }) => ({
 }));
 
 export const StyledCard = styled(Card)(({ theme }) => ({
-  position: "relative",
+  position: "sticky",
   borderRadius: 16,
   // transition: "all 0.3s ease",
   "&:hover": {
@@ -157,7 +157,7 @@ export const RatingBox = styled(Box)(() => ({
 
 export const RatingTypography = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1),
-  color: theme.palette.grey[200] ,
+  color: theme.palette.grey[200],
   fontSize: "0.9rem",
   [theme.breakpoints.down("sm")]: {
     fontSize: "0.8rem",
@@ -165,7 +165,7 @@ export const RatingTypography = styled(Typography)(({ theme }) => ({
 }));
 
 export const InfoValues = styled(Typography)(({ theme }) => ({
- color: theme.palette.text.primary,
+  color: theme.palette.text.primary,
   fontWeight: 500,
   fontSize: "16px",
   display: "inline",
@@ -196,7 +196,7 @@ export const RegularPriceText = styled(Typography)(({ theme }) => ({
   fontSize: "18px",
   fontWeight: 600,
   textDecoration: "line-through",
- color: theme.palette.text.primary,
+  color: theme.palette.text.primary,
   whiteSpace: "nowrap",
   [theme.breakpoints.down("sm")]: {
     fontSize: "16px",
@@ -223,6 +223,8 @@ export const LayoutContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
+
+
 // Grid Container
 export const LayoutGrid = styled(Grid)(() => ({
   height: "100%",
@@ -230,14 +232,26 @@ export const LayoutGrid = styled(Grid)(() => ({
 
 // Image Section
 export const ImageSection = styled(Grid)(() => ({
-  display: "flex",
+  // display: "flex",
 }));
 
+// export const ImageBox = styled(Box)(({ theme }) => ({
+//   flex: 1,
+//   display: "flex",
+//   justifyContent: "center",
+//   alignItems: "center",
+//   padding: theme.spacing(0),
+//   [theme.breakpoints.up("md")]: {
+//     padding: theme.spacing(2),
+//   },
+// }));
+
 export const ImageBox = styled(Box)(({ theme }) => ({
-  flex: 1,
+  position: "sticky",
+  top: theme.spacing(3), // distance from top when scrolling
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "flex-start",
   padding: theme.spacing(0),
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(2),
@@ -253,7 +267,7 @@ export const DetailsBox = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "flex",
   flexDirection: "column",
-  maxHeight: "82vh", // Adjust based on your design
+  // maxHeight: "82vh", // Adjust based on your design
   overflowY: "auto",
   padding: theme.spacing(0),
   [theme.breakpoints.up("md")]: {
@@ -272,8 +286,8 @@ export const HighlightsContainer = styled(Box)(({ theme }) => ({
 export const HighlightsTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
   marginBottom: theme.spacing(1),
-   color: theme.palette.black[800],
-   fontSize: "16px",
+  color: theme.palette.black[800],
+  fontSize: "16px",
 }));
 
 export const HighlightsText = styled(Typography)(({ theme }) => ({
@@ -287,7 +301,7 @@ export const HighlightsText = styled(Typography)(({ theme }) => ({
 export const DetailsTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
-   color: theme.palette.text.primary,
+  color: theme.palette.text.primary,
 }));
 
 export const DetailRow = styled(Box)(({ theme }) => ({
@@ -305,8 +319,18 @@ export const DetailLabel = styled(Typography)(({ theme }) => ({
 }));
 
 export const DetailValue = styled(Typography)(({ theme }) => ({
-   fontWeight: 400,
-   color: theme.palette.black[800],
+  fontWeight: 400,
+  color: theme.palette.black[800],
   flex: 1,
   fontSize: "16px",
+}));
+
+export const AccordianHead = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  cursor: "pointer",
+  backgroundColor: "#FAFAFA",
+  padding: "8px 16px",
+  borderRadius: "4px",
 }));

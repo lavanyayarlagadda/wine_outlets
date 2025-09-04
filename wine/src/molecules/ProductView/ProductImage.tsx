@@ -25,7 +25,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ productViewData }) => {
                             component="img"
                             image={img.url}
                             alt={`Thumbnail ${idx + 1}`}
-                            sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                            sx={{ objectFit: 'cover', width: '100%', height: '100%', px:3 }}
                         />
                     </StyledThumbnailCard>
                 ))}
