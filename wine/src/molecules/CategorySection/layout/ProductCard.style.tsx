@@ -9,6 +9,7 @@ export const CustomizeCardWrapper = styled(Grid)(({ theme }) => ({
   },
   [theme.breakpoints.down("sm")]: {
     gridTemplateColumns: "1fr", 
+  },
 }));
 
 export const StyledCard = styled(Card)(({}) => ({
