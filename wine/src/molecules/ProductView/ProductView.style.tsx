@@ -270,9 +270,9 @@ export const DetailsBox = styled(Box)(({ theme }) => ({
   // maxHeight: "82vh", // Adjust based on your design
   overflowY: "auto",
   padding: theme.spacing(0),
-  [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(2),
-  },
+    // [theme.breakpoints.up("md")]: {
+  //   padding: theme.spacing(2),
+  // },
 }));
 
 export const HighlightsContainer = styled(Box)(({ theme }) => ({
