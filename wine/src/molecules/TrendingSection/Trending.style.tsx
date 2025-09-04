@@ -6,13 +6,20 @@ export const Container = styled(Box)(({ theme }) => ({
   margin: "0 auto",
   padding: "80px 64px",
   backgroundColor: theme.palette.primary.light,
+  [theme.breakpoints.down("md")]: {
+    padding: "40px 16px",
+  },
 }));
-export const Wrapper = styled(Box)(({}) => ({
+export const Wrapper = styled(Box)(({theme}) => ({
   display: "flex",
   justifyContent: "space-between",
   gap: "40px",
+    [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
 }));
-export const LeftSectionBox = styled(Box)(({}) => ({
+export const LeftSectionBox = styled(Box)(({theme}) => ({
   position: "relative",
   width: "30%",
   height: "100%",
@@ -24,6 +31,9 @@ export const LeftSectionBox = styled(Box)(({}) => ({
   "&:hover": {
     transform: "translateY(-4px)",
     boxShadow: "0 8px 30px rgba(0, 0, 0, 0.15)",
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "none",
   },
 }));
 
@@ -60,15 +70,22 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   lineHeight: 1.2,
   color: "white",
+   [theme.breakpoints.down("md")]: {
+    fontSize: "18px", 
+  },
 }));
 
-export const Description = styled(Typography)({
+export const Description = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   fontWeight: 400,
   lineHeight: 1.5,
   color: "rgba(255, 255, 255, 0.95)",
   maxWidth: "320px",
-});
+  [theme.breakpoints.down("md")]: {
+    fontSize: "14px",
+    maxWidth: "100%",
+  },
+}));
 
 export const CTAButton = styled(Button)({
   alignSelf: "flex-start",
@@ -96,9 +113,20 @@ export const CTAButton = styled(Button)({
   },
 });
 
-export const RightSectionBox = styled(Box)(({}) => ({
+export const RightSectionBox = styled(Box)(({theme}) => ({
   width: "70%",
   display: "grid",
   gridTemplateColumns: "repeat(2,1fr)",
   gap: "40px",
+    [theme.breakpoints.down("md")]: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "24px",
+    "& > *": {
+      flex: "1 1 100%",
+      maxWidth: "300px", 
+    },
+  },
 }));

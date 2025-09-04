@@ -10,6 +10,14 @@ export const CardWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+    [theme.breakpoints.down("md")]: {
+    padding: "16px",
+    height: "auto",
+  },
+
+   [theme.breakpoints.between("md", "lg")]: {
+    padding: "20px",
+  },
 }));
 
 export const CartTitleText = styled(Typography)(({ theme }) => ({

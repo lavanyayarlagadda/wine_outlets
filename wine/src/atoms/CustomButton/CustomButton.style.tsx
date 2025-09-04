@@ -18,12 +18,25 @@ export const StyledButton = styled(Button)<{ bgColor: string; btnBorderColor: st
       backgroundColor: bgColor,
       opacity: 0.9,
     },
+     [theme.breakpoints.down("md")]: {
+      padding: "10px 14px",
+      fontSize: "14px",
+      maxWidth: "100%",
+    },
+      [theme.breakpoints.between("md", "lg")]: {
+      padding: "12px 16px", 
+      fontSize: "14px",
+      maxWidth: "250px", 
+    },
   })
 );
 
 export const ButtonText = styled(Typography)(({ theme }) => ({
   fontWeight: "500",
   fontSize: `${theme?.typography?.body2}px !important`,
+    [theme.breakpoints.down("md")]: {
+    fontSize: "13px",
+  },
 }));
 
 export const IconWrapper = styled(Box)<{ border: string }>(({ theme, border }) => ({
@@ -49,5 +62,9 @@ export const AddToCartButton = styled(Button)(({theme}) => ({
   width: "100%",
   "&:hover": {
     backgroundColor: theme.palette.primary.main, // lighter red on hover
+  },
+   [theme.breakpoints.down("md")]: {
+    padding: "8px 12px",
+    fontSize: "14px",
   },
 }));
