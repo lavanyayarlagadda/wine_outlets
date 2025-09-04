@@ -46,6 +46,7 @@ export const RED_ALERT = "#f44336";
 export const GREY_TERTIARY = "#737372E5";
 
 export const JUNK_MAIN = "#542DBA";
+export const GRAY_BORDER = "#eee";
 
 const palette = {
   primary: {
@@ -74,7 +75,8 @@ const palette = {
     300: GREY_300,
     400: GREY_400,
     500: GREY_500,
-   light: LIGHT_GREY
+   light: LIGHT_GREY,
+   border:GRAY_BORDER
   },
   white: {
     main: WHITE,

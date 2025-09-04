@@ -12,10 +12,10 @@ const ProductViewPage = () => {
 
   return (
     <>
-    <ProductView/>
-      <RecentlyViewed/>
-        <Newsletter />
-             <Footer />
+      <ProductView />
+      <RecentlyViewed />
+      <Newsletter />
+      <Footer />
     </>
   );
 };
