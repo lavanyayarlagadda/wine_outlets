@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
     <Card
       sx={{
         position: "relative",
-        borderRadius: 2,
+        borderRadius: 3,
         boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
         "&:hover": {
           boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
@@ -76,15 +76,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
       {/* Product Image */}
       <CardMedia
         component="img"
-        height="150"
+        height="240"
         image={product?.media?.url}
         alt={product?.name}
-        sx={{ objectFit: "contain", p: 2 }}
+        sx={{ objectFit: "contain"}}
       />
 
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}
-        <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, fontSize: "1rem" }}>
+        <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: "1rem" }}>
           {product?.name}
         </Typography>
 
@@ -98,26 +98,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             mb: 1,
           }}
         >
-          <Box>
+          <Box sx={{ display: "flex", alignItems: "center", }}>
             <img
               src={calendar}
               alt={"calendar icon"}
-              style={{ width: "12px", height: "12px", marginRight: "5px" }}
+              style={{ width: "24px", height: "24px", marginRight: "5px" }}
             />
-            <Chip
-              label={product?.year}
-              size="small"
-              sx={{ backgroundColor: "#f5f5f5", fontSize: "0.75rem" }}
-            />
-        </Box>
-          <Typography variant="body2" sx={{ color: "#666", fontSize: "0.75rem" }}>
+            <Typography variant="h6" sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}>
+              {product?.year}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center", }}>
             <img
               src={cityMap}
               alt={"city map"}
-              style={{ width: "12px", height: "12px", marginRight: "5px" }}
+              style={{ width: "24px", height: "24px", marginRight: "5px" }}
             />
-            {product?.region}
-          </Typography>
+            <Typography variant="body2" sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}>
+              {product?.region}
+            </Typography>
+          </Box>
         </Box>
 
         <Box
@@ -127,13 +127,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             justifyContent: "space-between",
             gap: 2,
             mb: 2,
+            mt: 2,
           }}
         >
-          <Typography variant="body2" sx={{ color: "#666", fontSize: "0.75rem" }}>
+          <Typography variant="body2" sx={{ color: theme.palette.grey[200], fontSize: "1rem", fontWeight: 500 }}>
             <img
               src={expandIcon}
               alt={"expand icon"}
-              style={{ width: "12px", height: "12px", marginRight: "5px" }}
+              style={{ width: "18px", height: "18px", marginRight: "5px" }}
             />
             {product?.size}
           </Typography>
@@ -141,14 +142,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             <img
               src={empty_star}
               alt="empty-star"
-              style={{ height: "12px", marginBottom: "2px" }}
+              style={{ height: "18px", marginBottom: "2px" }}
             />
             <Typography
               variant="body2"
               sx={{
-                color: "#666",
-                fontSize: "0.75rem",
-                fontWeight: 600,
+                color: theme.palette.grey[200],
+                fontSize: "1rem",
+                fontWeight: 500,
                 display: "flex",
                 alignItems: "center",
                 lineHeight: 0,
@@ -167,8 +168,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
               justifyContent: "space-between",
               alignItems: "center",
               gap: 1,
+              mb: 2,
             }}
           >
+
+            <Typography
+              variant="body2"
+              sx={{
+                color: theme.palette.warning.light,
+                fontWeight: 600,
+                fontSize: "20px",
+              }}
+            >
+              VIP: ${product?.price.toFixed(2)}
+            </Typography>
             <Typography
               variant="body2"
               sx={{
@@ -179,24 +192,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggl
             >
               ${product?.price.toFixed(2)}
             </Typography>
-        <Button
+        
+          </Box>
+          <Button
           variant="contained"
           fullWidth={isMobile}
           onClick={() => onAddToCart(product?.id)}
           startIcon={<ShoppingCart />}
               sx={{
                 borderColor: theme.palette.primary.dark,
+                border:"1px solid",
+                borderRadius: 1.5,
                 color: theme.palette.primary.dark,
                 backgroundColor: theme.palette.primary.light,
                 padding: "12px 0px",
                 textTransform: "none",
                 fontWeight: 600,
-                width: "50%",
+                width: "100%",
               }}
         >
           Add to Cart
         </Button>
-          </Box>
         </Box>
       </CardContent>
     </Card>
