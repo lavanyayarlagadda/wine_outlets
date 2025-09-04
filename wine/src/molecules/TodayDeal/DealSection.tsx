@@ -300,6 +300,7 @@ const DealsSection: React.FC = () => {
           gap: 3, 
           mb: 3, 
           mt: 7,
+          py: 1,
           cursor: "grab",
           "&:active": {
             cursor: "grabbing",

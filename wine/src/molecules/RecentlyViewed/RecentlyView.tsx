@@ -81,6 +81,7 @@ const RecentlyViewed: React.FC = () => {
               product={product}
               onAddToCart={handleAddToCart}
               onToggleFavorite={handleToggleFavorite}
+              isRecentlyViewedCard={true}
             />
           </Box>
         ))}

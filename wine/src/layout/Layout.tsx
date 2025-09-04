@@ -13,7 +13,7 @@ const Layout = () => {
       </header>
 
       {/* Main content (children via Outlet) */}
-      <main className="app-main" style={{ marginTop: "150px" }}>
+      <main className="app-main" style={{ marginTop: "200px" }}>
         <Outlet />
       </main>
 

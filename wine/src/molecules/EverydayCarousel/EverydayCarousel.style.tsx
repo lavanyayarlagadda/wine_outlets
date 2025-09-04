@@ -130,6 +130,9 @@ export const DotsContainer = styled(Box)(({ theme }) => ({
   left: "40%",
   right: "40%",
   bottom: "20px",
+  [theme.breakpoints.down('sm')]: {
+    bottom: "10px",
+  },
 }));
 
 export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({
