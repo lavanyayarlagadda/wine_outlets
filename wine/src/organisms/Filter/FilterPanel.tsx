@@ -16,6 +16,7 @@ import { FilterAccordion } from "../../molecules";
 import { useState } from "react";
 import Theme from "../../themes";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export interface Category {
   categoryId: string;
@@ -103,7 +104,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
               sx={{
                 width: "100%",
                 justifyContent: "space-between",
-                borderRadius: "8px",
+                borderRadius: shape.borderRadius,
                 textTransform: "none",
                 fontWeight: 500,
                 border: selectedSub === sub.categoryId ? `1px solid ${ palette.primary.dark}`:`1px solid ${ palette.grey[200]}`,
@@ -159,7 +160,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
           size="small"
           sx={{
             border: `1px solid ${palette.grey[200]}`,
-            borderRadius: "8px",
+            borderRadius: shape.borderRadius,
             color: palette.black[800],
             fontSize: "14px",
              textTransform: "capitalize"

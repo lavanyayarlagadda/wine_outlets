@@ -1,4 +1,5 @@
 import { Button, Box, Typography, styled } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const StyledButton = styled(Button)<{ bgColor: string; btnBorderColor: string }>(
   ({ bgColor, btnBorderColor, theme }) => ({
@@ -43,7 +44,7 @@ export const AddToCartButton = styled(Button)(({theme}) => ({
   color: theme.palette.white.main,
   fontWeight: 600,
   textTransform: "none",
-  borderRadius: "8px",
+  borderRadius: shape.borderRadius,
   padding: "10px 16px",
   width: "100%",
   "&:hover": {

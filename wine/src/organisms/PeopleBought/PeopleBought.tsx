@@ -32,11 +32,8 @@ const PeopleBought = () => {
           See more
         </Link>
       </Box>
-
-      {/* Content Row */}
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, width: "100%" }}>
-        {/* Left: Products */}
-        <Box sx={{ flex: 1, display: "flex", alignItems: "center", gap: 2 }}>
+        <Box sx={{ flex: 1, display: "flex", flexDirection: { xs: "column", md: "row" },alignItems: "center", gap: 2 }}>
           {currentProducts.map((product, index) => (
             <ProductWithDivider
               key={product.id}
@@ -47,11 +44,7 @@ const PeopleBought = () => {
             />
           ))}
         </Box>
-
-        {/* Divider */}
         <Divider orientation="vertical" flexItem sx={{ display: { xs: "none", md: "block" }, borderColor: "#e0e0e0" }} />
-
-        {/* Right: Summary */}
         <SummaryCard totalVipPrice={suggestedProducts.totalVipPrice} totalPrice={suggestedProducts.totalPrice} />
       </Box>
     </Box>

@@ -1,6 +1,9 @@
 import { Box, Typography, Button, Divider } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { PriceText, VIPPriceText } from "../ProductList/ProductGridCard.style";
+import shape from "../../themes/shape";
+import AddToCart from "../../atoms/CustomButton/AddToCart";
+import palette from "../../themes/palette";
 
 
 interface Props {
@@ -28,23 +31,10 @@ const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
       </Typography>
       <Box display="flex" alignItems="center" gap={1.5} mb={2}>
         <VIPPriceText>VIP: ${totalVipPrice.toFixed(2)}</VIPPriceText>
-        <Divider orientation="vertical" flexItem sx={{ borderColor: "#ccc" }} />
+        <Divider orientation="vertical" flexItem sx={{ borderColor: palette.grey.divider }} />
         <PriceText>${totalPrice.toFixed(2)}</PriceText>
       </Box>
-      <Button
-        variant="contained"
-        fullWidth
-        sx={{
-          backgroundColor: "#a62828",
-          borderRadius: "8px",
-          textTransform: "none",
-          fontWeight: 600,
-          "&:hover": { backgroundColor: "#861f1f" },
-        }}
-        startIcon={<ShoppingCart />}
-      >
-        Add to Cart
-      </Button>
+     <AddToCart onClick={() => console.log("Added to cart")} label='Add to Cart' />
     </Box>
   );
 };

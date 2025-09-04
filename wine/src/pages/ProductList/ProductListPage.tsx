@@ -10,11 +10,9 @@ const ProductListPage = () => {
 
   return (
     <>
-        <Navigation />
       <ProductListBanner />
       <ProductList/>
         <Newsletter />
-             <Footer />
     </>
   );
 };

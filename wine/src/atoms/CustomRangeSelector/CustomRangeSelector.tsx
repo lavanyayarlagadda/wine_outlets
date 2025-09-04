@@ -29,7 +29,7 @@ const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, single 
   sx={{
     width: 200,
     "& .MuiSlider-rail": {
-      color: "#ccc",
+      color: palette.grey.divider,
       opacity: 1,
       height: 4,
     },

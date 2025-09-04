@@ -47,6 +47,7 @@ export const GREY_TERTIARY = "#737372E5";
 
 export const JUNK_MAIN = "#542DBA";
 export const GRAY_BORDER = "#eee";
+export const GREY_Divider = "#ccc"
 
 const palette = {
   primary: {
@@ -76,7 +77,8 @@ const palette = {
     400: GREY_400,
     500: GREY_500,
    light: LIGHT_GREY,
-   border:GRAY_BORDER
+   border:GRAY_BORDER,
+   divider: GREY_Divider
   },
   white: {
     main: WHITE,

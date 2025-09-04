@@ -2,6 +2,7 @@ import type React from "react";
 import { Select, MenuItem, Box } from "@mui/material";
 import { StyledFormControl, StyledLabel } from "./CustomDropdown.style";
 import { ExpandMore } from "@mui/icons-material";
+import palette from "../../themes/palette";
 
 interface DropdownOption {
   value: string;
@@ -33,7 +34,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
       flexDirection={side ? "row" : "column"}
       alignItems={side ? "center" : "flex-start"}
       gap={1} // spacing between label and select
-      border={side ? "1px solid #ccc" : "none"} // border if side
+      border={side ? `1px solid ${palette.grey.divider}` : "none"} // border if side
       borderRadius={side ? "4px" : "0"} 
       padding={side ? "8px" : "0"}
     >

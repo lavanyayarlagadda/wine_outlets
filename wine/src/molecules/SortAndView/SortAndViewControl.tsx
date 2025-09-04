@@ -8,6 +8,7 @@ import {
   gridImageGrey,
 } from "../../assets";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 interface SortAndViewControlsProps {
   sortBy: string;
@@ -47,7 +48,7 @@ const SortAndViewControls: React.FC<SortAndViewControlsProps> = ({
           backgroundColor: palette.grey.light,
           p: 1,
           border: `1px solid ${palette.grey.light}`,
-          borderRadius: "8px",
+          borderRadius: shape.borderRadius,
           display: "flex",
           justifyContent: "center",
           
