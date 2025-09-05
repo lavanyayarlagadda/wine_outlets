@@ -15,16 +15,16 @@ const CategorySection = ({ handleClick }: CategoryProps) => {
       <CustomTitleSection
         title={"Shop by Category"}
         subtitle={"Find your favorite by type."}
-        rightElement={
-          <CustomButton
-            text={"View All Category"}
-            bgColor={theme.palette.white.main}
-            color={theme.palette.black[800]}
-            border={""}
-            btnBorderColor={theme.palette.success.main}
-            onClick={handleClick}
-          />
-        }
+        // rightElement={
+        //   <CustomButton
+        //     text={"View All Category"}
+        //     bgColor={theme.palette.white.main}
+        //     color={theme.palette.black[800]}
+        //     border={""}
+        //     btnBorderColor={theme.palette.success.main}
+        //     onClick={handleClick}
+        //   />
+        // }
       />
       <ProductCardSection />
     </Container>

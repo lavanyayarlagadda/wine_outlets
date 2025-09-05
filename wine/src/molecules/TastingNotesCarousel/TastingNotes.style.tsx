@@ -11,7 +11,7 @@ export const Container = styled(Box, {
 })<ContainerProps>(({ theme, padding, backgroundColor, maxWidth }) => ({
   width: "100%",
   margin: "0 auto",
-  padding: padding || "80px 30px",
+  padding: padding || "30px 30px",
   backgroundColor: backgroundColor || theme.palette.primary.light,
   maxWidth: maxWidth || "100%",
   position: "relative",

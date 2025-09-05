@@ -3,6 +3,7 @@ import React from "react";
 import { Dialog, IconButton, Box, Typography, Divider } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import * as Styled from "../../molecules/AgePopup/AgePopup.style";
+import palette from "../../themes/palette";
 
 interface BasePopupProps {
   open: boolean;
@@ -40,7 +41,7 @@ const CustomPopup: React.FC<BasePopupProps> = ({ open, onClose, title, children,
           p={2}
           borderTop="1px solid"
           borderColor="divider"
-          bgcolor="background.paper"
+          bgcolor={palette.grey.border}
           position="sticky"
           bottom={0}
         >

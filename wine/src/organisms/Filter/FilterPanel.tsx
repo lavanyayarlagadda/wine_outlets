@@ -104,7 +104,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
               sx={{
                 width: "100%",
                 justifyContent: "space-between",
-                borderRadius: shape.borderRadius,
+                borderRadius: '8px',
                 textTransform: "none",
                 fontWeight: 500,
                 border: selectedSub === sub.categoryId ? `1px solid ${ palette.primary.dark}`:`1px solid ${ palette.grey[200]}`,
@@ -160,7 +160,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
           size="small"
           sx={{
             border: `1px solid ${palette.grey[200]}`,
-            borderRadius: shape.borderRadius,
+            borderRadius: "8px",
             color: palette.black[800],
             fontSize: "14px",
              textTransform: "capitalize"

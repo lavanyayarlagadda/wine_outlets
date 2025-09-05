@@ -13,9 +13,24 @@ import {
 import palette from "../../themes/palette";
 
 export const LogoImage = styled("img")({
-  height: "100px",
-  width: "100px",
+  height: "80px",
+  width: "80px",
   objectFit: "contain",
+  position: "relative", // ensure it participates in stacking
+  zIndex: 2,           // above the circle
+});
+
+
+export const RedCircle = styled("div")({
+  position: "absolute",
+  top: "70%",
+  left: "35%",
+  transform: "translate(-50%, -50%)",
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  backgroundColor:palette.primary.dark,
+  zIndex: 1, 
 });
 
 export const StyledDialog = styled(Dialog)(({ theme }) => ({
@@ -41,11 +56,10 @@ export const Container = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2.5),
 }));
 
-export const LogoSection = styled(Box)(() => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+export const LogoSection = styled("div")({
+  position: "relative", // important for absolute positioning of the circle
+  display: "inline-block",
+});
 
 // Typography
 export const BrandText = styled(Typography)(({ theme }) => ({
@@ -147,7 +161,7 @@ export const ButtonsSection = styled(Box)(({ theme }) => ({
 
 export const VerifyButton = styled(Button)(({ theme }) => ({
   flex: 1,
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.primary.dark,
   color: theme.palette.primary.contrastText,
   fontWeight: theme.typography.fontWeightMedium,
   fontSize: theme.typography.body2.fontSize,

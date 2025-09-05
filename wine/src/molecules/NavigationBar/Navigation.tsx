@@ -31,6 +31,7 @@ import {
 } from "./Navigation.style";
 import MobileMenu from "./MobileMenu";
 import { useNavigate } from "react-router-dom";
+import AuthDialog from "../Authentication/AuthDialog";
 
 // Define menu items for dropdowns
 const menus: { [key: string]: string[] } = {
@@ -53,6 +54,12 @@ const Navigation = () => {
     handleMobileMenuToggle
   } = useNavigation(menuKeys);
   const navigate = useNavigate();
+    const [openLogin,setOpenLogin] = React.useState(true);
+  const [signIn,setSignIn] = React.useState(false)
+
+const onClose = ()=>{
+  setOpenLogin(false)
+}
 
   return (
     <div>
@@ -108,7 +115,7 @@ const Navigation = () => {
               <CustomizeIconButton>
                 <img src={cart} alt="cart" />
               </CustomizeIconButton>
-              <CustomizeIconButton>
+              <CustomizeIconButton onClick={()=>setSignIn(true)}>
                 <img src={userprofile} alt="userProfile" />
               </CustomizeIconButton>
             </RightNavSection>
@@ -211,6 +218,7 @@ const Navigation = () => {
         handleMobileMenuClose={handleMobileMenuClose}
         handleMobileMenuToggle={handleMobileMenuToggle}
       />
+                {  signIn  && <AuthDialog open={openLogin} onClose={onClose}/>}
     </div>
   );
 };

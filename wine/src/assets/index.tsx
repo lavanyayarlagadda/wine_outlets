@@ -42,3 +42,5 @@ export {default as groupIcon} from "./productView/group.svg";
 export {default as starIcon} from "./productView/star.svg";
 export {default as sizeIcon} from "./productView/size.svg";
 export {default as originIcon} from "./productView/origin.svg";
+export {default as mapIcon} from "./icons/map.png";
+export {default as mapIconSelected} from "./icons/mapSelected.png";

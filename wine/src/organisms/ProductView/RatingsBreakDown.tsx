@@ -137,6 +137,7 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
                 title={review.title}
                 size={review.size}
                 text={review.text}
+                vintage={review.vintage}
               />
             </Grid>
           ))}

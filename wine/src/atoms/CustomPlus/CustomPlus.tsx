@@ -8,8 +8,8 @@ const PlusDivider = () => (
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      width: 32,
-      height: 32,
+      width: 50,
+      height: 30,
       border: `1px solid ${palette.primary.dark}`,
       borderRadius: "30%",
     }}
