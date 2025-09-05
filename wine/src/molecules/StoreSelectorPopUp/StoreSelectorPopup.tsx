@@ -42,7 +42,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
       onClose={onClose}
       title="Select Your Store"
       footer={
-        <Typography variant="caption" color="text.secondary" sx={{backgroundColor:palette.grey.border}}>
+        <Typography variant="caption" color="text.secondary" >
           <strong>Note:</strong> If no store is selected, Wall WineOutlet will be used
           as default. You can change your store preference at any time using the store selector in
           the header.

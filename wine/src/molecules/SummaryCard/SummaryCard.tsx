@@ -13,29 +13,42 @@ interface Props {
 
 const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
   return (
-    <Box
-      sx={{
-        flexShrink: 0,
-        borderRadius: 2,
-        border: "1px solid #f2f2f2",
-        p: 2,
-        backgroundColor: "#ffffff",
-        maxWidth: 420,
-        minWidth: 400,
-        boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
-        alignSelf: "center",
-      }}
-    >
-      <Typography variant="body2" sx={{ color: "green", fontWeight: 500, mb: 1 }}>
-        In Stock
-      </Typography>
-      <Box display="flex" alignItems="center" gap={1.5} mb={2}>
-        <VIPPriceText>VIP: ${totalVipPrice.toFixed(2)}</VIPPriceText>
-        <Divider orientation="vertical" flexItem sx={{ borderColor: palette.grey.divider }} />
-        <PriceText>${totalPrice.toFixed(2)}</PriceText>
-      </Box>
-     <AddToCart onClick={() => console.log("Added to cart")} label='Add to Cart' />
-    </Box>
+<Box
+  sx={{
+    flexShrink: 0,
+    borderRadius: 2,
+    border: "1px solid #f2f2f2",
+    p: 2,
+    backgroundColor: "#ffffff",
+    width: { xs: "100%", sm: "100%", md: "100%", lg: 400 }, // responsive width
+    maxWidth: { xs: "100%", lg: 400 },
+    boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+    alignSelf: "center",
+  }}
+>
+  <Typography
+    variant="body2"
+    sx={{ color: "green", fontWeight: 500, mb: 1 }}
+  >
+    In Stock
+  </Typography>
+
+  <Box display="flex" alignItems="center" gap={1.5} mb={2}>
+    <VIPPriceText>VIP: ${totalVipPrice.toFixed(2)}</VIPPriceText>
+    <Divider
+      orientation="vertical"
+      flexItem
+      sx={{ borderColor: palette.grey.divider }}
+    />
+    <PriceText>${totalPrice.toFixed(2)}</PriceText>
+  </Box>
+
+  <AddToCart
+    onClick={() => console.log("Added to cart")}
+    label="Add to Cart"
+  />
+</Box>
+
   );
 };
 
