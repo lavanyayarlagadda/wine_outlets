@@ -10,6 +10,7 @@ import {
   MobileHint,
   StyledRating,
 } from "./CustomForm.style";
+import palette from "../../themes/palette";
 
 interface ReviewFormProps {
   title?: string;
@@ -75,7 +76,7 @@ const ReusableReviewForm: React.FC<ReviewFormProps> = ({
             btnBorderColor=""
           />
           {!isSm && (
-            <span style={{ color: "#757575" }}>
+            <span style={{ color:palette.grey.greyDark }}>
               Your feedback is essential for us!
             </span>
           )}

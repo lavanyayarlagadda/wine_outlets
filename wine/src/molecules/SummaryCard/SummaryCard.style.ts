@@ -8,7 +8,7 @@ export const SummaryCardWrapper = styled(Box)(({ theme }) => ({
   borderRadius: 16,
   border:shape.bordergreyshade,
   padding: theme.spacing(2),
-  backgroundColor: "#ffffff",
+  backgroundColor: palette.white.main,
   boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
   alignSelf: "center",
 
@@ -29,7 +29,7 @@ export const SummaryCardWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const StockText = styled(Typography)(() => ({
-  color: "green",
+  color: palette.icon.secondary,
   fontWeight: 500,
   marginBottom: 8,
 }));

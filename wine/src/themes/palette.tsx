@@ -2,6 +2,7 @@ export const PRIMARY_COLOR = "#c92a2a";
 export const SECONDARY_COLOR = "#f0f4ef";
 export const PRIMARY_DARK = "#AD1113";
 export const PRIMARY_LIGHT = "#FFF3F3";
+export const Yellow = "#fbc02d";
 
 export const SECONDARY_COLOR_100 = "#f4f7f4";
 export const GREY_50 = "#2F2F2F";
@@ -48,7 +49,10 @@ export const GREY_TERTIARY = "#737372E5";
 export const JUNK_MAIN = "#542DBA";
 export const GRAY_BORDER = "#eee";
 export const GREY_Divider = "#ccc";
-export const LIGHT_BLUE="#FAFAFA"
+export const LIGHT_BLUE="#FAFAFA";
+export const GREY_MAIN ="#bdbdbd";
+export const BLUE = "#1976d2"
+export const GREY_DARK = "#666666"
 
 const palette = {
   primary: {
@@ -68,6 +72,9 @@ const palette = {
     contrastText: COMMON_DEFAULT,
     100: SECONDARY_COLOR_100,
   },
+  yellow:{
+    default:Yellow
+  },
   grey: {
     main: GRAY_COLOR,
     tertiary: GREY_TERTIARY,
@@ -77,9 +84,12 @@ const palette = {
     300: GREY_300,
     400: GREY_400,
     500: GREY_500,
+    150:GREY_150,
    light: LIGHT_GREY,
    border:GRAY_BORDER,
-   divider: GREY_Divider
+   divider: GREY_Divider,
+   greyMain:GREY_MAIN,
+   greyDark:GREY_DARK
   },
    white: {
     main: WHITE,
@@ -125,6 +135,9 @@ const palette = {
     default: WHITE,
     bg_dark: BG_DARK,
   },
+  blue:{
+    default:BLUE
+  }
 };
 
 export default palette;

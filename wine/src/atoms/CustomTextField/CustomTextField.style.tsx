@@ -1,5 +1,6 @@
 import { TextField, Select, Typography, styled } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
@@ -9,14 +10,14 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
       borderColor: shape.borderSuccess,
     },
     "&:hover fieldset": {
-      borderColor: "#bdbdbd",
+      borderColor: palette.grey.greyMain,
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#1976d2",
+      borderColor: palette.blue.default,
     },
   },
   "& .MuiInputLabel-root": {
-    color: "#666666",
+    color: palette.grey.greyDark,
     fontSize: "14px",
   },
   "& .MuiOutlinedInput-input": {

@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box, Card, CardContent, Typography, Button, CardMedia, IconButton, type CardMediaProps } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 // Main Card
 export const StyledCard = styled(Card)(({ theme }) => ({
@@ -76,11 +77,11 @@ export const FavoriteWrapper = styled(Box)(() => ({
 
 // Favorite button
 export const FavoriteButton = styled(IconButton)(() => ({
-  backgroundColor: "#fff",
+  backgroundColor: palette.white.main,
   borderRadius: "50%",
   boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   "&:hover": {
-    backgroundColor: "#f8f8f8",
+    backgroundColor:palette.white.main,
   },
 }));
 
@@ -160,6 +161,6 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   },
   "&:hover": {
     backgroundColor: theme.palette.primary.main,
-    color: "#fff",
+    color: palette.white.main,
   },
 }));

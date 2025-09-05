@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography, type CardMediaProps } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 interface ProductImageProps extends CardMediaProps {
   alt?: string;
@@ -32,11 +33,11 @@ export const FavoriteButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
   top: 20,
   right: 22,
-  backgroundColor: "white",
+  backgroundColor: palette.white.main,
   border: shape.borderSuccess,
   borderRadius: "4px",
   zIndex: 1,
-  "&:hover": { backgroundColor: "#f5f5f5" },
+  "&:hover": { backgroundColor: palette.grey[150] },
 }));
 
 export const ProductImage = styled(CardMedia)<ProductImageProps>(
@@ -69,7 +70,7 @@ export const DetailsRow = styled(Box)(() => ({
 }));
 
 export const SmallText = styled(Typography)(() => ({
-  color: "#666",
+  color: palette.grey[150],
   fontSize: "1rem",
   display: "flex",
   alignItems: "center",

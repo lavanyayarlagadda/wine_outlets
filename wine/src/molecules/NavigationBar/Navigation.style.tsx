@@ -12,6 +12,7 @@ import {
   Drawer,
 } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 // 🔴 Top Bar
 export const TopBar = styled(Box)(({ theme }) => ({
@@ -39,7 +40,7 @@ export const TopBarContent = styled(Box)(() => ({
 // 🔴 AppBar
 export const StyledAppBar = styled(AppBar)(() => ({
   position: "static",
-  backgroundColor: "#fff !important",
+  backgroundColor: palette.white.main,
   boxShadow: "none",
 }));
 
@@ -102,9 +103,9 @@ export const SearchBox = styled(Box)(({ theme }) => ({
 export const StyledInput = styled(InputBase)(({theme}) => ({
   marginLeft: "8px",
   flex: 1,
-  color: "#4A515C", // text color
+  color: palette.grey[200], // text color
   "& input::placeholder": {
-    color: "#4A515C", // placeholder color
+    color: palette.grey[200], // placeholder color
     opacity: 1,
   },
   // Tablet styles

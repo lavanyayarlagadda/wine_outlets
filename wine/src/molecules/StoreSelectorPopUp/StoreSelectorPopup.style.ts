@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import { Box, Typography, Button, ButtonBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const TitleText = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
@@ -30,7 +31,7 @@ export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const SearchIconStyled = styled(SearchIcon)(() => ({
-  color: "gray",
+  color: palette.grey.border,
   marginRight: 8,
 }));
 

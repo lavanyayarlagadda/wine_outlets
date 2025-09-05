@@ -1,6 +1,7 @@
 import { Card, IconButton, CardMedia, Typography, Box, Chip, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const StyledCard = styled(Card)(({ theme }) => ({
   position: "relative",
@@ -17,11 +18,11 @@ export const FavoriteButton = styled(IconButton)(({ theme }) => ({
   position: "absolute",
   top: 20,
   right: 22,
-  backgroundColor: "white",
+  backgroundColor: palette.white.main,
   border: shape.borderSuccess,
   borderRadius: "4px",
   zIndex: 1,
-  "&:hover": { backgroundColor: "#f5f5f5" },
+  "&:hover": { backgroundColor: palette.white.main },
 }));
 
 export const ProductImage = styled(CardMedia)(() => ({
@@ -45,14 +46,14 @@ export const DetailsRow = styled(Box)(() => ({
 }));
 
 export const SmallText = styled(Typography)(() => ({
-  color: "#666",
+  color: palette.grey.greyDark,
   fontSize: "0.75rem",
   display: "flex",
   alignItems: "center",
 }));
 
 export const SmallChip = styled(Chip)(() => ({
-  backgroundColor: "#f5f5f5",
+  backgroundColor: palette.white[300],
   fontSize: "0.75rem",
   height: 20,
 }));

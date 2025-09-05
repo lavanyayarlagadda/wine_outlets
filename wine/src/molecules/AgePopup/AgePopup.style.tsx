@@ -89,7 +89,7 @@ export const InputLabel = styled(Typography)(({ theme }) => ({
   marginBottom:8,
   alignSelf: "flex-start",
   "& span": {
-    color: "red",
+    color: palette.primary.dark,
   },
 }));
 

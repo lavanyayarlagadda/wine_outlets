@@ -1,11 +1,11 @@
-import { Box, Button, styled, Typography, type BoxProps } from "@mui/material";
+import { Box, Button, patch, styled, Typography, type BoxProps } from "@mui/material";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
 
 export const TabsWrapper = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
-  backgroundColor: "#f5f5f5",
+  backgroundColor: palette.white.main,
   borderRadius: "8px",
   padding: "4px",
 }));
@@ -18,7 +18,7 @@ export const StyledButton = styled(Button, {
   borderRadius: "8px",
   minHeight: "36px",
   backgroundColor: active ? palette.primary.light : "transparent",
-  color: active ? "black" : "#6b6b6b", // fallback for text.secondary
+  color: active ? palette.primary.dark : palette.grey.greyDark, // fallback for text.secondary
   boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
   "&:hover": {
     backgroundColor: active ? palette.primary.light : "transparent",

@@ -12,13 +12,14 @@ import {
 } from "./TastingNotes.style";
 import PeopleBought from "../../organisms/PeopleBought/PeopleBought";
 import { useTastingNotesCarousel } from "./TastingNotesCarousel.hook";
+import palette from "../../themes/palette";
 
 const TastingNotesCarousel: React.FC = () => {
   const { slides, currentSlide, current, goToSlide } = useTastingNotesCarousel();
 
   return (
     <Container>
-      <CarouselSlide bgColor="white">
+      <CarouselSlide bgColor={palette.white.main}>
         <ContentSection>
           <SlideTitle>{current.title}</SlideTitle>
           <SlideDescription>{current.description}</SlideDescription>

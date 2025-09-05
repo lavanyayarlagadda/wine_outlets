@@ -11,13 +11,14 @@ import {
 } from "../EverydayCarousel/EverydayCarousel.style";
 import { CustomButton } from "../../atoms";
 import { useProductList } from "./ProductList.hook";
+import palette from "../../themes/palette";
 
 const ProductListBanner: React.FC = () => {
   const theme = useTheme();
   const { currentSlide, slides, goToSlide, current } = useProductList();
 
   return (
-    <Container backgroundColor="white" padding="20px 20px">
+    <Container backgroundColor={palette.white.main} padding="20px 20px">
       <CarouselSlide>
         <ContentSection>
           <SlideTitle variant="h2">{current.title}</SlideTitle>

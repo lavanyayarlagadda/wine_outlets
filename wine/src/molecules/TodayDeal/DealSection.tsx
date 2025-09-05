@@ -14,6 +14,7 @@ import {
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
 import { Container } from "./DealSection.style";
 import ProductCard from "../ProductCard/ProductCard";
+import palette from "../../themes/palette";
 
 interface Product {
   id: string;
@@ -208,7 +209,7 @@ const DealsSection: React.FC = () => {
               <React.Fragment key={time.label}>
                 <Box
                   sx={{
-                    backgroundColor: "#d32f2f",
+                    backgroundColor: palette.primary.dark,
                     color: theme.palette.white.main,
                     px: { xs: 1, sm: 1.5 },
                     py: { xs: 0.25, sm: 0.5 },
@@ -229,7 +230,7 @@ const DealsSection: React.FC = () => {
                 </Box>
                 {index < 2 && (
                   <Typography sx={{ 
-                    color: "#d32f2f", 
+                    color: palette.primary.dark, 
                     fontWeight: "bold", 
                     fontSize: {
                       xs: "0.9rem",
@@ -271,12 +272,12 @@ const DealsSection: React.FC = () => {
               variant={filter.isActive ? "contained" : "outlined"}
               startIcon={filter.icon}
               sx={{
-                backgroundColor: filter.isActive ? theme.palette.primary.main : "#fff",
-                borderColor: filter.isActive ? theme.palette.primary.main : "#ddd",
-                color: filter.isActive ? "#fff" : theme.palette.black[800],
+                backgroundColor: filter.isActive ? theme.palette.primary.main : palette.white.main,
+                borderColor: filter.isActive ? theme.palette.primary.main : palette.grey[50],
+                color: filter.isActive ? palette.white.main : theme.palette.black[800],
                 "&:hover": {
-                  backgroundColor: filter.isActive ? theme.palette.primary.dark : "#f5f5f5",
-                  borderColor: filter.isActive ? theme.palette.primary.dark : "#ddd",
+                  backgroundColor: filter.isActive ? theme.palette.primary.dark : palette.grey[150] ,
+                  borderColor: filter.isActive ? theme.palette.primary.dark : palette.grey[50],
                 },
                 textTransform: "none",
                 fontWeight: 600,

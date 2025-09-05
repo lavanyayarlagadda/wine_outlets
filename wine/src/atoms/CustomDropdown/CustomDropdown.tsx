@@ -2,6 +2,7 @@ import React from "react";
 import { MenuItem, Select } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import { DropdownWrapper, StyledFormControl, StyledLabel } from "./CustomDropdown.style";
+import palette from "../../themes/palette";
 
 interface DropdownOption {
   value: string;
@@ -37,7 +38,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           displayEmpty
           IconComponent={ExpandMore}
           renderValue={(selected) => {
-            if (!selected && placeholder) return <span style={{ color: "#999" }}>{placeholder}</span>;
+            if (!selected && placeholder) return <span style={{ color:palette.grey.greyDark }}>{placeholder}</span>;
             const selectedOption = options.find((option) => option.value === selected);
             return selectedOption ? selectedOption.label : placeholder;
           }}

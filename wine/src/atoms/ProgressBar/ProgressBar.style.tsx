@@ -1,6 +1,7 @@
 import { LinearProgress, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const ProgressWrapper = styled(Box)({
   flexGrow: 1,
@@ -13,6 +14,6 @@ export const StyledLinearProgress = styled(LinearProgress)<{ barcolor?: string }
   borderRadius: 5,
   backgroundColor: shape.borderSuccess,
   "& .MuiLinearProgress-bar": {
-    backgroundColor: barcolor || "#000",
+    backgroundColor: barcolor || palette.black[800],
   },
 }));

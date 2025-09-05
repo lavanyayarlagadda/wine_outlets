@@ -11,6 +11,7 @@ import {
   CustomizeUnsubscribeText,
   CustomizeTitleText,
 } from "./Newsletter.style";
+import palette from "../../themes/palette";
 
 const Newsletter: React.FC = () => {
   const theme = useTheme();
@@ -41,7 +42,7 @@ const Newsletter: React.FC = () => {
             value={formData.fullName}
             onChange={handleInputChange("fullName")}
             placeholder="John Cena"
-            startIcon={<PersonIcon sx={{ color: "#666" }} />}
+            startIcon={<PersonIcon sx={{ color:palette.grey[150] }} />}
           />
 
           <CustomTextField

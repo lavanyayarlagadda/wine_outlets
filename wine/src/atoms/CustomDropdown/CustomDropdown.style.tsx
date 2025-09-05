@@ -10,10 +10,10 @@ export const StyledFormControl = styled(FormControl)(({ theme }) => ({
       borderColor: theme.palette.success.main,
     },
     "&:hover fieldset": {
-      borderColor: "#bdbdbd",
+      borderColor: palette.grey.greyMain,
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#1976d2",
+      borderColor: palette.blue.default,
     },
     
   },

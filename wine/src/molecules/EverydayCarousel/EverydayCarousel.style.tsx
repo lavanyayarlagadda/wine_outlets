@@ -106,7 +106,7 @@ export const SlideTitle = styled(Typography)(({ theme }) => ({
 
 export const SlideDescription = styled(Typography)(({ theme }) => ({
   fontSize: "1rem",
-  color: "rgba(255, 255, 255, 0.9)",
+  color: palette.secondary[100],
   lineHeight: 1.5,
   maxWidth: "500px",
 }));

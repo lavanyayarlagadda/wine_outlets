@@ -32,6 +32,7 @@ import {
 import MobileMenu from "./MobileMenu";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
+import palette from "../../themes/palette";
 
 // Define menu items for dropdowns
 const menus: { [key: string]: string[] } = {
@@ -78,13 +79,13 @@ const Navigation = () => {
             onClick={handleMobileMenuOpen}
             sx={{ display: { xs: "flex", md: "none" } }}
           >
-            <MenuIcon sx={{ fontSize: "24px", color: "red", mt: 1 }} />
+            <MenuIcon sx={{ fontSize: "24px", color: palette.primary.dark, mt: 1 }} />
           </CustomizeIconButton>
           <Logo src={logo} alt="Wine Outlet" />
 
           <IconGroup>
             <SearchBox sx={{ display: { xs: "none", sm: "flex" } }}>
-              <SearchIcon sx={{ color: "gray" }} />
+              <SearchIcon sx={{ color: palette.grey.greyDark }} />
               <StyledInput
                 placeholder="Search wines, brands, or regions"
                 inputProps={{ "aria-label": "search" }}
@@ -126,7 +127,7 @@ const Navigation = () => {
 
           {/* mobile view search */}
           <SearchBox sx={{ display: { xs: "flex", sm: "none" }, mt: 2 }}>
-            <SearchIcon sx={{ color: "gray" }} />
+            <SearchIcon sx={{  color: palette.grey.greyDark}} />
             <StyledInput
               placeholder="Search wines, brands, or regions"
               inputProps={{ "aria-label": "search" }}

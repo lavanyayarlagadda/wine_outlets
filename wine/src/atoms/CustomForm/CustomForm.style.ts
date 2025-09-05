@@ -1,12 +1,13 @@
 import { styled, Box, Typography, TextField, Rating } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const FormWrapper = styled(Box)(({ theme }) => ({
   border: shape.borderSuccess,
   borderRadius: 16, // 2*8px
   padding: theme.spacing(2, 3),
   width: "100%",
-  backgroundColor: "#fff",
+  backgroundColor: palette.white.main,
   [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(3),
   },
@@ -37,11 +38,11 @@ export const ButtonHintWrapper = styled(Box)<{ isSm: boolean }>(({ isSm }) => ({
 }));
 
 export const MobileHint = styled(Typography)({
-  color: "#757575", // text.secondary
+  color: palette.grey.greyDark, // text.secondary
   textAlign: "center",
   marginTop: 8,
 });
 
 export const StyledRating = styled(Rating)({
-  color: "#fbc02d",
+  color: palette.yellow.default,
 });

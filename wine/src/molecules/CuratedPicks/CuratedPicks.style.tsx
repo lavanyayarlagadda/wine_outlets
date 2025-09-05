@@ -1,4 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
+import palette from "../../themes/palette";
 
 export const Container = styled(Box)(({theme}) => ({
   width: "100%",
@@ -98,7 +99,7 @@ export const StyledImageContainer = styled(Box)(({ theme }) => ({
 export const StyledCategoryLabel = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   fontWeight: 600,
-  color: "#1f2937",
+  color: palette.grey[50],
   fontSize: "0.875rem",
   [theme.breakpoints.up("md")]: {
     fontSize: "1rem",

@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import { Box, Typography, Link, Grid } from "@mui/material";
 import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const FooterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -53,7 +54,7 @@ export const StyledIconButton = styled((props: IconButtonProps) => <IconButton {
     height: 36,
     marginTop: "18px",
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      backgroundColor: palette.grey.greyDark,
     },
   })
 );

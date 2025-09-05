@@ -14,6 +14,7 @@ import {
 import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 // const isRecentlyViewedCard = true;
 
@@ -72,14 +73,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
           position: "absolute",
           top: 20,
           right: 22,
-          backgroundColor: "white",
+          backgroundColor: palette.white.main,
           border: shape.borderSuccess,
           borderRadius: "4px",
           zIndex: 1,
-          "&:hover": { backgroundColor: "#f5f5f5" },
+          "&:hover": { backgroundColor: palette.white.main },
         }}
       >
-        <FavoriteBorder sx={{ color: "#666" }} />
+        <FavoriteBorder sx={{ color: palette.grey[150]}} />
       </IconButton>
 
       {/* Product Image */}

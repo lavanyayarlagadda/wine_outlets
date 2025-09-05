@@ -1,4 +1,5 @@
 import { Box, Typography, IconButton, styled } from "@mui/material";
+import palette from "../../themes/palette";
 
 export const CarouselContainer = styled(Box)(() => ({
   width: "100%",
@@ -102,7 +103,7 @@ export const CardOverlay = styled(Box)({
   textAlign: "center",
 });
 export const OfferText = styled(Typography)({
-  color: "#fff",
+  color: palette.white.main,
   fontSize: "1.5rem",
   fontWeight: 700,
   marginBottom: "8px",
@@ -110,7 +111,7 @@ export const OfferText = styled(Typography)({
 });
 
 export const OfferSubtext = styled(Typography)({
-  color: "#fff",
+  color: palette.white.main,
   fontSize: "0.9rem",
   fontWeight: 400,
   opacity: 0.9,
@@ -118,7 +119,7 @@ export const OfferSubtext = styled(Typography)({
 });
 
 export const HighlightText = styled("span")({
-  color: "#4CAF50",
+  color: palette.primary[500],
   fontSize: "2rem",
   fontWeight: 800,
 });
@@ -127,13 +128,13 @@ export const NavigationButton = styled(IconButton)(({}) => ({
   position: "absolute",
   top: "50%",
   transform: "translateY(-50%)",
-  backgroundColor: "rgba(255,255,255,0.9)",
+  backgroundColor: palette.white.main,
   color: "#333",
   width: "40px",
   height: "40px",
   zIndex: 2,
   "&:hover": {
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor:palette.white.main,
   },
 }));
 

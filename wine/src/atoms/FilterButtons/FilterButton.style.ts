@@ -7,11 +7,11 @@ interface StyledButtonProps {
 
 export const StyledFilterButton = styled(Button)<StyledButtonProps>(({ isActive }) => ({
   minWidth: 90,
-  color: isActive ? "#fff" : palette.black[800],
+  color: isActive ? palette.white.main : palette.black[800],
   backgroundColor: isActive ? palette.black[800] : "transparent",
   borderColor: palette.black[800],
   "&:hover": {
-    color: isActive ? "#fff" : palette.black[800],
+    color: isActive ? palette.white.main : palette.black[800],
     backgroundColor: isActive ? palette.black[800] : "transparent",
     borderColor: palette.black[800],
   },

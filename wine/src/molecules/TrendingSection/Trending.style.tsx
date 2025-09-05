@@ -1,5 +1,6 @@
 import { Typography, Box, Button, styled } from "@mui/material";
 import { banner_img1 } from "../../assets";
+import palette from "../../themes/palette";
 
 export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -56,7 +57,7 @@ export const ContentContainer = styled(Box)({
   display: "flex",
   flexDirection: "column",
   padding: "32px 24px",
-  color: "white",
+  color: palette.white.main,
 });
 
 export const TextContent = styled(Box)({
@@ -69,7 +70,7 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontSize: `${theme.typography.body1.fontSize}px`,
   fontWeight: 600,
   lineHeight: 1.2,
-  color: "white",
+  color: palette.white.main,
    [theme.breakpoints.down("md")]: {
     fontSize: "18px", 
   },
@@ -79,7 +80,7 @@ export const Description = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   fontWeight: 400,
   lineHeight: 1.5,
-  color: "rgba(255, 255, 255, 0.95)",
+  color: palette.grey.light,
   maxWidth: "320px",
   [theme.breakpoints.down("md")]: {
     fontSize: "14px",
@@ -90,7 +91,7 @@ export const Description = styled(Typography)(({ theme }) => ({
 export const CTAButton = styled(Button)({
   alignSelf: "flex-start",
   backgroundColor: "transparent",
-  color: "white",
+  color: palette.white.main,
   fontSize: "16px",
   fontWeight: 500,
   marginTop: "40px",
@@ -102,7 +103,7 @@ export const CTAButton = styled(Button)({
   transition: "border-bottom-color 0.3s ease",
   "&:hover": {
     backgroundColor: "transparent",
-    borderBottomColor: "white",
+    borderBottomColor: palette.white.main,
   },
   "& .MuiButton-endIcon": {
     marginLeft: "8px",
