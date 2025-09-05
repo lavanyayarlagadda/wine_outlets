@@ -4,7 +4,7 @@ import palette from "../../themes/palette";
 
 export const FilterWrapper = styled(Box)(({ theme }) => ({
   border: "1px solid #ddd",
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: '16px',
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(2),
 }));

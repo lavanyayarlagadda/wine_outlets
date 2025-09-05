@@ -1,5 +1,5 @@
 import React from "react";
-import { VIPPriceText, PriceText } from "../ProductList/ProductGridCard.style";
+import { VIPPriceText, PriceText } from "../ProductListGrid/ProductGridCard.style";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
 import { SummaryCardWrapper, StockText, PriceContainer, StyledDivider } from "./SummaryCard.style";
 

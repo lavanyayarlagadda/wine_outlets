@@ -1,5 +1,5 @@
 import React from "react";
-import ProductGridCard from "../../molecules/ProductList/ProductGridCard";
+import ProductGridCard from "../ProductListGrid/ProductGridCard";
 import { CustomPlus } from "../../atoms";
 
 

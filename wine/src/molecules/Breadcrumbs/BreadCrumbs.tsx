@@ -1,7 +1,12 @@
-// Breadcrumbs.tsx
+
 import React from "react";
-import { Breadcrumbs as MUIBreadcrumbs, Link, Typography } from "@mui/material";
-import palette from "../../themes/palette";
+
+import {
+  BreadcrumbsWrapper,
+  ActiveCrumb,
+  CrumbLink,
+  CrumbText,
+} from "./BreadCrumbs.style";
 
 export interface BreadcrumbItem {
   label: string;
@@ -15,31 +20,21 @@ interface BreadcrumbsProps {
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, separator = ">" }) => {
   return (
-    <MUIBreadcrumbs separator={separator} aria-label="breadcrumb" sx={{p:2}}>
+    <BreadcrumbsWrapper separator={separator} aria-label="breadcrumb">
       {items.map((item, idx) => {
         const isLast = idx === items.length - 1;
 
         return isLast ? (
-          <Typography key={idx} color={palette.primary.dark} sx={{ fontWeight: 500 }}>
-            {item.label}
-          </Typography>
+          <ActiveCrumb key={idx}>{item.label}</ActiveCrumb>
         ) : item.href ? (
-          <Link
-            key={idx}
-            href={item.href}
-            underline="none"
-            color={palette.black[800]}
-            sx={{ "&:hover": { textDecoration: "underline" } }}
-          >
+          <CrumbLink key={idx} href={item.href}>
             {item.label}
-          </Link>
+          </CrumbLink>
         ) : (
-          <Typography key={idx} color={palette.black[800]}>
-            {item.label}
-          </Typography>
+          <CrumbText key={idx}>{item.label}</CrumbText>
         );
       })}
-    </MUIBreadcrumbs>
+    </BreadcrumbsWrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
-import { CustomChip} from "../../atoms";
+import { CustomChip } from "../../atoms";
+import { Wrapper, FilterHeader, ChipsWrapper } from "./FilterTagList.style";
 
 interface FilterTagListProps {
   filters: { label: string; count: number }[];
@@ -8,11 +8,9 @@ interface FilterTagListProps {
 }
 
 const FilterTagList: React.FC<FilterTagListProps> = ({ filters, onDelete }) => (
-  <Box display="flex" flexDirection="column" alignItems="flex-start" gap={1}>
-    <Typography variant="body2" color="text.secondary">
-      Applied filters:
-    </Typography>
-    <Box display="flex" flexWrap="wrap" gap={1}>
+  <Wrapper>
+    <FilterHeader>Applied filters:</FilterHeader>
+    <ChipsWrapper>
       {filters.map((filter) => (
         <CustomChip
           key={filter.label}
@@ -20,8 +18,8 @@ const FilterTagList: React.FC<FilterTagListProps> = ({ filters, onDelete }) => (
           onDelete={() => onDelete(filter.label)}
         />
       ))}
-    </Box>
-  </Box>
+    </ChipsWrapper>
+  </Wrapper>
 );
 
 export default FilterTagList;

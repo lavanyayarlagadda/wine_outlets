@@ -1,14 +1,17 @@
 import React from "react";
-import { Box, FormControl, ToggleButtonGroup } from "@mui/material";
-import { CustomDropdown,CustomToggleButton } from "../../atoms";
+import { CustomDropdown, CustomToggleButton } from "../../atoms";
 import {
   listImage,
   listImageGrey,
   gridImage,
   gridImageGrey,
 } from "../../assets";
-import palette from "../../themes/palette";
-import shape from "../../themes/shape";
+import {
+  Wrapper,
+  StyledFormControl,
+  ViewBox,
+  StyledToggleButtonGroup,
+} from "./SortAndViewControl.style";
 
 interface SortAndViewControlsProps {
   sortBy: string;
@@ -31,8 +34,8 @@ const SortAndViewControls: React.FC<SortAndViewControlsProps> = ({
   ];
 
   return (
-    <Box display="flex" alignItems="center" gap={1.5} flexWrap="wrap" >
-      <FormControl size="small" sx={{ minWidth: 140,pr:'20px' }}>
+    <Wrapper>
+      <StyledFormControl size="small">
         <CustomDropdown
           label="Sort by:"
           value={sortBy}
@@ -41,37 +44,14 @@ const SortAndViewControls: React.FC<SortAndViewControlsProps> = ({
           placeholder="Select Preference"
           side
         />
-      </FormControl>
+      </StyledFormControl>
 
-      <Box
-        sx={{
-          backgroundColor: palette.grey.light,
-          p: 1,
-          border: `1px solid ${palette.grey.light}`,
-          borderRadius: '8px',
-          display: "flex",
-          justifyContent: "center",
-          
-        }}
-      >
-        <ToggleButtonGroup
+      <ViewBox>
+        <StyledToggleButtonGroup
           value={view}
           exclusive
           onChange={(e, val) => val && onViewChange(val)}
           size="small"
-           sx={{
-      border: "none", 
-      "& .MuiToggleButton-root": {
-        border: "none",          
-        backgroundColor: "transparent", 
-        "&.Mui-selected": {
-          backgroundColor: "transparent",
-        },
-        "&:hover": {
-          backgroundColor: "transparent", 
-        },
-      },
-    }}
         >
           <CustomToggleButton
             value="grid"
@@ -85,9 +65,9 @@ const SortAndViewControls: React.FC<SortAndViewControlsProps> = ({
             icon={view === "list" ? listImage : listImageGrey}
             alt="list view"
           />
-        </ToggleButtonGroup>
-      </Box>
-    </Box>
+        </StyledToggleButtonGroup>
+      </ViewBox>
+    </Wrapper>
   );
 };
 

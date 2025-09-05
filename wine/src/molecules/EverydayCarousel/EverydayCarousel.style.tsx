@@ -1,4 +1,6 @@
 import { Box, styled, Typography, Button } from "@mui/material";
+import palette from "../../themes/palette";
+import { NorthEast } from "@mui/icons-material";
 
 interface ContainerProps {
   padding?: string;
@@ -90,6 +92,11 @@ export const ContentSection = styled(Box)(({ theme, }) => ({
     paddingRight: 0,
   },
 }));
+
+export const StyledNorthEastIcon = styled(NorthEast)(() => ({
+  color: palette.white.main,
+  fontSize: "small", // can override with theme if needed
+}))
 
 export const SlideTitle = styled(Typography)(({ theme }) => ({
   fontSize: "1.5rem",

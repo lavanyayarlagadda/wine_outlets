@@ -12,8 +12,10 @@ import {
   DotsContainer,
   Dot,
   IconWrapper,
+  StyledNorthEastIcon,
 } from "../EverydayCarousel/EverydayCarousel.style";
 import { BannerData as bannerData } from "../../constant/curatedData";
+import { CustomButton } from "../../atoms";
 
 const ProductListBanner: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -31,15 +33,13 @@ const ProductListBanner: React.FC = () => {
         </ContentSection>
 
         {current.action && (
-          <PriceButton
-            variant="contained"
-            onClick={() => current.action && (window.location.href = current.action.url)}
-          >
-            {current.action.label}
-            <IconWrapper>
-              <NorthEastIcon fontSize="small" className="arrow-icon" />
-            </IconWrapper>
-          </PriceButton>
+  <CustomButton
+          text={current.action.label}
+          bgColor={theme.palette.primary.dark}
+          onClick={() => current.action && (window.location.href = current.action.url)}
+          color=""
+          border=""
+        />
         )}
 
         <DotsContainer>
