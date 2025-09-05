@@ -1,5 +1,4 @@
-import type React from "react";
-import { useState } from "react";
+import React from "react";
 import { useTheme } from "@mui/material";
 import {
   Container,
@@ -10,15 +9,12 @@ import {
   DotsContainer,
   Dot,
 } from "../EverydayCarousel/EverydayCarousel.style";
-import { BannerData as bannerData } from "../../constant/curatedData";
 import { CustomButton } from "../../atoms";
+import { useProductList } from "./ProductList.hook";
 
 const ProductListBanner: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const theme = useTheme();
-  const slides = bannerData.banners;
-
-  const current = slides[currentSlide];
+  const { currentSlide, slides, goToSlide, current } = useProductList();
 
   return (
     <Container backgroundColor="white" padding="20px 20px">
@@ -32,7 +28,7 @@ const ProductListBanner: React.FC = () => {
           <CustomButton
             text={current.action.label}
             bgColor={theme.palette.primary.dark}
-            onClick={() => current.action && (window.location.href = current.action.url)}
+            onClick={() => (window.location.href = current.action.url)}
             color=""
             border=""
           />
@@ -43,7 +39,7 @@ const ProductListBanner: React.FC = () => {
             <Dot
               key={index}
               active={index === currentSlide}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => goToSlide(index)}
             />
           ))}
         </DotsContainer>

@@ -1,8 +1,8 @@
-import { Box, Drawer, IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
+import { Box, Drawer, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { Check, Close, FilterList, Liquor, LocalBar, SportsBar } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { CustomCheckbox, CustomRangeSelector } from "../../atoms";
-import { useFilters } from "../../hooks/useFiters";
+import { useFilterPanel } from "./FilterPanel.hook";
 import { FilterAccordion } from "../../molecules";
 import { useState } from "react";
 import {
@@ -39,14 +39,8 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
-  const {
-    filters,
-    openDrawer,
-    setOpenDrawer,
-    handleCheckboxChange,
-    handleSliderChange,
-    handleClearAll,
-  } = useFilters(onFilterChange);
+  const { filters, openDrawer, setOpenDrawer, handleCheckboxChange, handleSliderChange, handleClearAll } =
+    useFilterPanel(onFilterChange);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
@@ -59,11 +53,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
   const getIcon = (name: string) => iconMap[name.toLowerCase()] ?? <LocalBar fontSize="small" />;
 
   const renderCategory = (cat: Category, idx: number) => (
-    <FilterAccordion
-      key={cat.categoryId}
-      title={cat.categoryName}
-      isLast={categories.length - 1 === idx}
-    >
+    <FilterAccordion key={cat.categoryId} title={cat.categoryName} isLast={categories.length - 1 === idx}>
       <ContentStack>
         {cat.categoryList?.map((item) => (
           <CustomCheckbox
@@ -87,11 +77,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
           <Row>
             <CustomRangeSelector
               single
-              value={
-                filters[cat.categoryId] !== undefined
-                  ? Number(filters[cat.categoryId])
-                  : parseInt(cat.categoryRange)
-              }
+              value={filters[cat.categoryId] !== undefined ? Number(filters[cat.categoryId]) : parseInt(cat.categoryRange)}
               min={0}
               max={100}
               onChange={(val: number | number[]) => handleSliderChange(cat.categoryId, val)}
@@ -115,7 +101,6 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                   {sub.categoryName} ({sub.categoryCount})
                 </Typography>
               </Row>
-
               <Row>{selectedSub === sub.categoryId && <Check fontSize="small" />}</Row>
             </SubCategoryButton>
 
@@ -161,7 +146,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
           <IconButton onClick={() => setOpenDrawer(false)}>
             <Close />
           </IconButton>
-        </DrawerHeader>{" "}
+        </DrawerHeader>
         {content}
       </Drawer>
     </>
