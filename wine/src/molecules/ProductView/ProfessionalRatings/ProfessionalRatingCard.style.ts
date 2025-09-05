@@ -1,18 +1,20 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid, IconButton } from "@mui/material";
+import spacing from "../../../themes/spacing";
+import palette from "../../../themes/palette";
 
-export const RatingContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderRadius: 16,
-  border: `1px solid ${theme.palette.grey[300]}`,
-  backgroundColor: theme.palette.background.paper,
-}));
 
 export const RatingHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: theme.spacing(1),
+}));
+
+export const RatingTitle = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,   // bold
+  fontSize: "1rem",  // adjust as needed
+  color: theme.palette.text.primary,
 }));
 
 export const RatingBadge = styled(Box)(({ theme }) => ({
@@ -44,4 +46,24 @@ export const ReviewerName = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
   fontSize: "14px",
   color: theme.palette.text.primary,
+}));
+export const Container = styled(Box)(({ theme }) => ({
+  border: `1px solid ${theme.palette.success.main}`,
+  borderRadius: spacing.outlineSpace,
+  padding: theme.spacing(0.5), // 2px
+}));
+
+export const Header = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  cursor: "pointer",
+  backgroundColor: palette.white.light,
+  padding: theme.spacing(1, 2), // 8px 16px
+  borderRadius: 4,
+}));
+
+export const RatingsGrid = styled(Grid)(({ theme }) => ({
+ backgroundColor: palette.white.light,
+  padding: theme.spacing(2),
 }));

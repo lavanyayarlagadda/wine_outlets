@@ -20,10 +20,7 @@ const CustomWishlist: React.FC<CustomWishlistProps> = ({ defaultSelected = false
   return (
     <CustomWishlistButton
       onClick={handleToggle}
-      sx={{
-        color: selected ? "#AD1113" : "inherit",
-        borderColor: selected ? "#AD1113" : "#E0E0E0",
-      }}
+      selected={selected}
     >
       {selected ? <FavoriteIcon /> : <FavoriteBorderIcon />}
     </CustomWishlistButton>

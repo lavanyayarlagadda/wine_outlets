@@ -25,6 +25,12 @@ const fontSizes = {
 		md: '12px',
 		lg: '14px',
 	},
+	14: {
+		default:'14px',
+		sm:'8px',
+		md:'10px',
+		lg:'12px'
+	}
 };
 
 type FontSizeKey = keyof typeof fontSizes;

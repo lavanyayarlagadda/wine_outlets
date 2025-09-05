@@ -1,6 +1,13 @@
-import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid } from "@mui/material";
+import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "../../themes/palette";
+// import { useFontSize } from "../../themes/fontSize";
+
+
+// const font24 = useFontSize(24)
+
+
+
 
 
 export const StyledImageContainer = styled(Box)(({ theme }) => ({
@@ -37,7 +44,13 @@ export const StyledCard = styled(Card)(({ theme }) => ({
     maxWidth: 350,
   },
 }));
-
+export const StyledThumbnailMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({}) => ({
+  objectFit: "cover",
+  width: "100%",
+  height: "100%",
+  paddingLeft: "12px",  // px:3 => 3 * 4px = 12px
+  paddingRight: "12px",
+}));
 export const StyledCardMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({ theme }) => ({
   objectFit: "contain",
   // padding: 16,
@@ -93,13 +106,15 @@ export const DetailsContainer = styled(Box)(({ theme }) => ({
 
 export const ProductTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
-  fontSize: "24px",
-  [theme.breakpoints.down("md")]: {
-    fontSize: "22px",
-  },
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "18px",
-  },
+  fontSize:"24px"
+  // fontSize:getFontSize(24)
+  // fontSize: "24px",
+  // [theme.breakpoints.down("md")]: {
+  //   fontSize: "22px",
+  // },
+  // [theme.breakpoints.down("sm")]: {
+  //   fontSize: "18px",
+  // },
 }));
 
 export const ProductInfoRow = styled(Box)(({ theme }) => ({
@@ -158,10 +173,10 @@ export const RatingBox = styled(Box)(() => ({
 export const RatingTypography = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1),
   color: theme.palette.grey[200],
-  fontSize: "0.9rem",
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.8rem",
-  },
+  fontSize: "16px",
+  // [theme.breakpoints.down("sm")]: {
+  //   fontSize: "0.8rem",
+  // },
 }));
 
 export const InfoValues = styled(Typography)(({ theme }) => ({
@@ -203,6 +218,13 @@ export const RegularPriceText = styled(Typography)(({ theme }) => ({
   },
 }));
 
+export const StyledDivider = styled(Divider)(({ theme }) => ({  
+  marginLeft: theme.spacing(2),
+  marginRight: theme.spacing(2),
+  height: 28,
+  alignSelf: "center", // keeps it centered inside flex
+}));
+
 export const DescriptionText = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   color: theme.palette.text.primary,
@@ -228,7 +250,10 @@ export const LayoutContainer = styled(Box)(({ theme }) => ({
 // Grid Container
 export const LayoutGrid = styled(Grid)(() => ({
   height: "100%",
+  
 }));
+
+
 
 // Image Section
 export const ImageSection = styled(Grid)(() => ({
@@ -330,7 +355,13 @@ export const AccordianHead = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   cursor: "pointer",
-  backgroundColor: "#FAFAFA",
+  backgroundColor: palette.white.light,
   padding: "8px 16px",
   borderRadius: "4px",
+}));
+export const InfoIcon = styled("img")(({ theme }) => ({
+  width: 18,
+  height: 18,
+  objectFit: "contain",
+  marginRight: theme.spacing(1),
 }));

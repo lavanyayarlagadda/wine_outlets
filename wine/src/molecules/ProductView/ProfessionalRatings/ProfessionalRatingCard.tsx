@@ -7,7 +7,8 @@ import {
   Box,
   Rating,
 } from "@mui/material";
-import { RatingContainer, RatingHeader, RatingBadge, RatingText, ReviewerBox,  ReviewerName} from "./ProfessionalRatingCard.style";
+import {RatingHeader, RatingBadge, RatingText, ReviewerBox,  ReviewerName, RatingTitle} from "./ProfessionalRatingCard.style";
+
 
 type ProfessionalRatingCardProps = {
   title: string;
@@ -27,9 +28,7 @@ const ProfessionalRatingCard: React.FC<ProfessionalRatingCardProps> = ({
       <CardContent>
         {/* Header with reviewer + badge */}
         <RatingHeader>
-          <Typography variant="subtitle1" fontWeight={600}>
-            {title}
-          </Typography>
+          <RatingTitle>{title}</RatingTitle>
           <RatingBadge>{score}</RatingBadge>
         </RatingHeader>
 

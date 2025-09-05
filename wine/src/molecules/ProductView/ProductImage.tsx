@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CardMedia } from '@mui/material';
 import type { ProductViewResponse } from '../../constant/productViewData';
-import { StyledCardMedia, StyledCard, StyledThumbnailCard, StyledImageContainer, StyledThumbnailList } from './ProductView.style';
+import { StyledCardMedia, StyledCard, StyledThumbnailCard, StyledImageContainer, StyledThumbnailList, StyledThumbnailMedia } from './ProductView.style';
 
 interface ProductImageProps {
     productViewData: ProductViewResponse;
@@ -21,11 +21,11 @@ const ProductImage: React.FC<ProductImageProps> = ({ productViewData }) => {
                         selected={selectedIndex === idx}
                         onClick={() => setSelectedIndex(idx)}
                     >
-                        <CardMedia
-                            component="img"
-                            image={img.url}
+                        <StyledThumbnailMedia
+                            as="img"
+                            src={img.url}
                             alt={`Thumbnail ${idx + 1}`}
-                            sx={{ objectFit: 'cover', width: '100%', height: '100%', px:3 }}
+                            // sx={{ objectFit: 'cover', width: '100%', height: '100%', px:3 }}
                         />
                     </StyledThumbnailCard>
                 ))}
