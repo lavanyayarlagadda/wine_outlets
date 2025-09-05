@@ -65,8 +65,9 @@ export const CustomizeTagBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: "12px 8px",
-  width: "100%", 
-  justifyContent: "space-between",
+  width: "fit-content",
+  // width: "100%", 
+  // justifyContent: "space-between",
   "& span": {
     backgroundColor: theme.palette.primary?.dark,
     color: theme.palette.common.white,

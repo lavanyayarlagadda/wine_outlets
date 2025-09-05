@@ -19,18 +19,28 @@ import ProductCard from "../ProductCard/ProductCard";
 
 const RecentlyViewed: React.FC = () => {
   const theme = useTheme();
+  const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const totalSlides = Math.ceil(DEAL_PRODUCT.length / 4);
 
-  const getCurrentProducts = () => {
-    const startIndex = currentSlide * 4;
-    return DEAL_PRODUCT.slice(startIndex, startIndex + 4);
-  };
+  // const getCurrentProducts = () => {
+  //   const startIndex = currentSlide * 4;
+  //   return DEAL_PRODUCT.slice(startIndex, startIndex + 4);
+  // };
 
-  const handleDotClick = (index: number) => {
-    setCurrentSlide(index);
-  };
+const handleDotClick = (index: number) => {
+  setCurrentSlide(index);
+
+  if (scrollRef.current) {
+    const container = scrollRef.current;
+    const containerWidth = container.clientWidth; // viewport width of carousel
+    container.scrollTo({
+      left: index * containerWidth,
+      behavior: "smooth",
+    });
+  }
+};
 
   const handleAddToCart = (productId: string) => {
     console.log("Add to cart:", productId);
@@ -49,39 +59,30 @@ const RecentlyViewed: React.FC = () => {
           </Typography>
         </Box>
       </Box>
-      <Box 
-        // ref={productCardsRef}
-        sx={{ 
+      <Box
+        ref={scrollRef}
+        sx={{
           display: "flex",
-          overflowX: "auto",
-          gap: 3, 
-          mb: 3, 
+          overflowX: "hidden",
+          gap: 3,
+          mb: 3,
           mt: 7,
-          cursor: "grab",
-          "&:active": {
-            cursor: "grabbing",
-          },
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-          "-ms-overflow-style": "none",
-          scrollbarWidth: "none",
+          scrollBehavior: "smooth",
         }}
       >
-        {getCurrentProducts().map((product) => (
-          <Box key={product.id} sx={{ 
-            minWidth: { 
-              xs: "280px", 
-              // sm: "300px",
-              // md: "calc(25% - 18px)",
-            }, 
-            flexShrink: 0,
-          }}>
+        {DEAL_PRODUCT.map((product) => (
+          <Box
+            key={product.id}
+            sx={{
+              minWidth: { xs: "280px", md: "calc(25% - 18px)" }, 
+              flexShrink: 0,
+            }}
+          >
             <ProductCard
               product={product}
               onAddToCart={handleAddToCart}
               onToggleFavorite={handleToggleFavorite}
-              isRecentlyViewedCard={true}
+              isRecentlyViewedCard
             />
           </Box>
         ))}

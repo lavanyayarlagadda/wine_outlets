@@ -144,7 +144,17 @@ const DealsSection: React.FC = () => {
 
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);
+
+    if (productCardsRef.current) {
+      const container = productCardsRef.current;
+      const containerWidth = container.clientWidth; // visible width
+      container.scrollTo({
+        left: index * containerWidth,
+        behavior: "smooth",
+      });
+    }
   };
+
 
   const handleAddToCart = (productId: string) => {
     console.log("Add to cart:", productId);
@@ -292,35 +302,31 @@ const DealsSection: React.FC = () => {
         </Box>
       </Box>
 
-      <Box 
+      <Box
         ref={productCardsRef}
-        sx={{ 
+        sx={{
           display: "flex",
           overflowX: "auto",
-          gap: 3, 
-          mb: 3, 
+          gap: 3,
+          mb: 3,
           mt: 7,
           py: 1,
           cursor: "grab",
-          "&:active": {
-            cursor: "grabbing",
-          },
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
+          "&:active": { cursor: "grabbing" },
+          "&::-webkit-scrollbar": { display: "none" },
           "-ms-overflow-style": "none",
           scrollbarWidth: "none",
+          scrollBehavior: "smooth", // ✅ add this
         }}
       >
-        {getCurrentProducts().map((product) => (
-          <Box key={product.id} sx={{ 
-            minWidth: { 
-              xs: "280px", 
-              // sm: "300px",
-              // md: "calc(25% - 18px)",
-            }, 
-            flexShrink: 0,
-          }}>
+        {DEAL_PRODUCT.map((product) => (
+          <Box
+            key={product.id}
+            sx={{
+              minWidth: { xs: "280px", md: "calc(25% - 18px)" },
+              flexShrink: 0,
+            }}
+          >
             <ProductCard
               product={product}
               onAddToCart={handleAddToCart}

@@ -14,19 +14,19 @@ const Brands = ({ handleBrandClick }: BrandProps) => {
       <CustomTitleSection
         title={"Featured Brands"}
         subtitle={""}
-        rightElement={
-          <CustomButton
-            text={"View All Category"}
-            bgColor={theme.palette.white.main}
-            color={theme.palette.black[800]}
-            border={""}
-            btnBorderColor={theme.palette.success.main}
-            onClick={handleBrandClick}
-          />
-        }
+        // rightElement={
+        //   <CustomButton
+        //     text={"View All Category"}
+        //     bgColor={theme.palette.white.main}
+        //     color={theme.palette.black[800]}
+        //     border={""}
+        //     btnBorderColor={theme.palette.success.main}
+        //     onClick={handleBrandClick}
+        //   />
+        // }
       />
       <ImageWrapper>
-        {[...Array(6)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <img key={i} src={willow} alt={`brand image ${i}`} />
         ))}
       </ImageWrapper>

@@ -8,8 +8,9 @@ export const Container = styled(Box)(({ theme }) => ({
 
 export const ImageWrapper = styled(Box)({
   display: "flex",
-  justifyContent: "space-between",
-  gap: "40px",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "30px",
   marginTop: "40px",
   flexWrap: "wrap",
 });

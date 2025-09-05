@@ -13,7 +13,7 @@ export const Dot = styled(Box)<{ active: boolean }>(({ active, theme }) => ({
   borderRadius: active ? "8px" : "50%",
   backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   cursor: "pointer",
-  transition: "background-color 0.2s ease-in-out",
+  transition: "all 0.3s ease",
   "&:hover": {
     backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   },
