@@ -8,7 +8,7 @@ import ProfessionalRating from './ProfessionalRatings/ProfessionalRating';
 import { productViewData } from '../../constant/productViewData';
 
 import { ratingBreakDown } from '../../constant/dealProduct';
-import RatingsBreakdown from '../../organisms/ProductView/RatingsBreakDown';
+import RatingsBreakdown from '../../organisms/RatingsBreakDown/RatingsBreakDown';
 const ProductView = () => {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },

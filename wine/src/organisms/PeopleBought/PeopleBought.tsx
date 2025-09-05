@@ -1,9 +1,14 @@
-import { Box, Typography, Link, Divider } from "@mui/material";
 import React, { useState } from "react";
-import palette from "../../themes/palette";
 import { suggestedProducts } from "../../constant/dealProduct";
 import { ProductWithDivider, SummaryCard } from "../../molecules";
-
+import {
+  PeopleBoughtWrapper,
+  HeaderRow,
+  HeaderTitle,
+  ProductsContainer,
+  ProductsWrapper,
+  VerticalDivider,
+} from "./PeopleBought.style";
 
 const PeopleBought = () => {
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -22,15 +27,13 @@ const PeopleBought = () => {
   };
 
   return (
-    <Box sx={{ py: 4 }}>
-      {/* Header Row */}
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
-        <Typography variant="h6" sx={{ color: palette.black[800], fontWeight: 600 }}>
-          People bought it along with
-        </Typography>
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, width: "100%" }}>
-        <Box sx={{ flex: { xs: "1 1 100%", md: "0 0 60%" }, display: "flex", flexDirection: { xs: "column", md: "row" },alignItems: "center", gap: 2 }}>
+    <PeopleBoughtWrapper>
+      <HeaderRow>
+        <HeaderTitle variant="h6">People bought it along with</HeaderTitle>
+      </HeaderRow>
+
+      <ProductsContainer>
+        <ProductsWrapper>
           {currentProducts.map((product, index) => (
             <ProductWithDivider
               key={product.id}
@@ -40,12 +43,16 @@ const PeopleBought = () => {
               onToggleFavorite={() => handleToggleFavorite(product.id)}
             />
           ))}
-        </Box>
-        <Divider orientation="vertical" flexItem sx={{ display: { xs: "none", md: "block" }, borderColor: "#e0e0e0" }} />
-        
-        <SummaryCard totalVipPrice={suggestedProducts.totalVipPrice} totalPrice={suggestedProducts.totalPrice} />
-      </Box>
-    </Box>
+        </ProductsWrapper>
+
+        <VerticalDivider orientation="vertical" flexItem />
+
+        <SummaryCard
+          totalVipPrice={suggestedProducts.totalVipPrice}
+          totalPrice={suggestedProducts.totalPrice}
+        />
+      </ProductsContainer>
+    </PeopleBoughtWrapper>
   );
 };
 

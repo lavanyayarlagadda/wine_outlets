@@ -9,7 +9,8 @@ interface ContainerProps {
 }
 
 export const Container = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "padding" && prop !== "backgroundColor" && prop !== "maxWidth",
+  shouldForwardProp: (prop) =>
+    prop !== "padding" && prop !== "backgroundColor" && prop !== "maxWidth",
 })<ContainerProps>(({ theme, padding, backgroundColor, maxWidth }) => ({
   width: "100%",
   margin: "0 auto",
@@ -26,14 +27,13 @@ interface CarouselSlideProps {
 }
 
 export const CarouselSlide = styled(Box, {
-  shouldForwardProp: (prop) =>
-    prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
-})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor,theme  }) => ({
+  shouldForwardProp: (prop) => prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
+})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor, theme }) => ({
   background: bgImage
     ? `url(${bgImage}) center/cover no-repeat`
     : bgVideo
-    ? "transparent"
-    : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
+      ? "transparent"
+      : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
 
   borderRadius: "16px",
   padding: "32px 32px 64px 32px",
@@ -76,19 +76,17 @@ export const CarouselSlide = styled(Box, {
     objectFit: "cover",
     zIndex: -1,
   },
-   [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding: '24px',
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    padding: "24px",
   },
-  
 }));
 
-
-export const ContentSection = styled(Box)(({ theme, }) => ({
+export const ContentSection = styled(Box)(({ theme }) => ({
   flex: 1,
   paddingRight: "32px",
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     paddingRight: 0,
   },
 }));
@@ -96,7 +94,7 @@ export const ContentSection = styled(Box)(({ theme, }) => ({
 export const StyledNorthEastIcon = styled(NorthEast)(() => ({
   color: palette.white.main,
   fontSize: "small", // can override with theme if needed
-}))
+}));
 
 export const SlideTitle = styled(Typography)(({ theme }) => ({
   fontSize: "1.5rem",
@@ -121,10 +119,10 @@ export const PriceButton = styled(Button)(({ theme }) => ({
   fontWeight: "600",
   textTransform: "none",
   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    marginTop: '24px',
-    marginBottom: '10px',
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    marginTop: "24px",
+    marginBottom: "10px",
   },
 }));
 
@@ -137,7 +135,7 @@ export const DotsContainer = styled(Box)(({ theme }) => ({
   left: "40%",
   right: "40%",
   bottom: "20px",
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     bottom: "10px",
   },
 }));

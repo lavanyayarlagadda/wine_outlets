@@ -1,7 +1,14 @@
-import { Box, Typography, CircularProgress } from "@mui/material";
-import palette from "../../themes/palette";
+import React from "react";
 import StarRating from "../StarRatng/StarRating";
-
+import {
+  AverageRatingWrapper,
+  CircularProgressWrapper,
+  CircularProgressStyled,
+  CircularLabel,
+  RatingNumber,
+  RatingInfo,
+  RatingText,
+} from "./CustomCircularProgressBar.style";
 
 interface AverageRatingCardProps {
   averageRating: number;
@@ -17,41 +24,27 @@ const AverageRatingCard: React.FC<AverageRatingCardProps> = ({
   reviewCount,
 }) => {
   return (
-    <Box display="flex" alignItems="center">
-      <Box position="relative" display="inline-flex">
-        <CircularProgress
+    <AverageRatingWrapper>
+      <CircularProgressWrapper>
+        <CircularProgressStyled
           variant="determinate"
           value={(averageRating / 5) * 100}
           size={100}
           thickness={4}
-          sx={{ color: palette.black[800] }}
         />
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          bottom={0}
-          right={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Typography variant="h4" fontWeight="bold">
-            {averageRating.toFixed(1)}
-          </Typography>
-        </Box>
-      </Box>
+        <CircularLabel>
+          <RatingNumber variant="h4">{averageRating.toFixed(1)}</RatingNumber>
+        </CircularLabel>
+      </CircularProgressWrapper>
 
-      <Box display="flex" flexDirection="column" alignItems="center" ml={2}>
+      <RatingInfo>
         <StarRating value={averageRating} />
-        <Typography variant="body2" color="text.secondary" mt={1}>
-          {satisfaction}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <RatingText variant="body2">{satisfaction}</RatingText>
+        <RatingText variant="body2">
           {ratingCount} • {reviewCount}
-        </Typography>
-      </Box>
-    </Box>
+        </RatingText>
+      </RatingInfo>
+    </AverageRatingWrapper>
   );
 };
 

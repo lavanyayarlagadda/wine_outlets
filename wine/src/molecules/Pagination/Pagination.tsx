@@ -1,21 +1,9 @@
 // atoms/Pagination/index.tsx
 import React from "react";
-import {
-  Box,
-  Pagination,
-  PaginationItem,
-  Button,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Pagination, PaginationItem, Button, useMediaQuery, useTheme } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import {
-  container,
-  prevButton,
-  nextButton,
-  paginationItem,
-} from "./Pagination.style";
+import { container, prevButton, nextButton, paginationItem } from "./Pagination.style";
 
 interface CustomPaginationProps {
   count: number;
@@ -23,11 +11,7 @@ interface CustomPaginationProps {
   onChange: (page: number) => void;
 }
 
-const CustomPagination: React.FC<CustomPaginationProps> = ({
-  count,
-  page,
-  onChange,
-}) => {
+const CustomPagination: React.FC<CustomPaginationProps> = ({ count, page, onChange }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -60,9 +44,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           boundaryCount={1}
           hidePrevButton
           hideNextButton
-          renderItem={(item) => (
-            <PaginationItem {...item} sx={paginationItem} />
-          )}
+          renderItem={(item) => <PaginationItem {...item} sx={paginationItem} />}
         />
       </Box>
 

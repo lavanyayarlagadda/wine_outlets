@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import React from "react";
 import { ProgressBar, StarRating } from "../../atoms";
-
+import { RatingRowWrapper, StarsText, CountText } from "./RatingDistributionRow.style";
 
 interface RatingDistributionRowProps {
   stars: number;
@@ -9,14 +9,12 @@ interface RatingDistributionRowProps {
 }
 
 const RatingDistributionRow: React.FC<RatingDistributionRowProps> = ({ stars, percentage, count }) => (
-  <Box display="flex" alignItems="center" width="100%">
-    <Typography width={20}>{stars}</Typography>
+  <RatingRowWrapper>
+    <StarsText>{stars}</StarsText>
     <StarRating value={stars} size="small" />
     <ProgressBar value={percentage} />
-    <Typography variant="body2" color="text.secondary">
-      {count}
-    </Typography>
-  </Box>
+    <CountText variant="body2">{count}</CountText>
+  </RatingRowWrapper>
 );
 
 export default RatingDistributionRow;

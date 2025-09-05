@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { CustomReviewForm } from "../../atoms";
 import AverageRatingCard from "../../atoms/CustomCircularProgressBar/CustomCircularProgressBar";
-import RatingDistributionRow from "../../molecules/ProductView/RatingDistributionRow";
+import RatingDistributionRow from "../../molecules/RatingDistributionRow/RatingDistributionRow";
 import FilterButton from "../../atoms/FilterButtons/FilterButtons";
-import ReviewCard from "../../molecules/ProductView/ReviewCard";
+import ReviewCard from "../../molecules/ReviewCard/ReviewCard";
+import {
+  RatingsWrapper,
+  RatingsHeader,
+  RatingsContent,
+  DistributionContainer,
+  RatingDistributionWrapper,
+  FilterButtonsWrapper,
+  ReviewsGrid,
+  ReviewFormWrapper,
+  ReviewGridItem,
+} from "./RatingsBreakDown.style";
 
 interface RatingsBreakdownProps {
   data: {
@@ -12,9 +23,7 @@ interface RatingsBreakdownProps {
     satisfaction_percentage: string;
     rating_count: string;
     review_count: string;
-    ratings_distribution: {
-      [key: string]: number;
-    };
+    ratings_distribution: { [key: string]: number };
     sample_reviews: {
       rating: number;
       title: string;
@@ -35,24 +44,16 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
     sample_reviews,
   } = data;
 
-  const totalRatings = Object.values(ratings_distribution).reduce(
-    (a, b) => a + b,
-    0
-  );
+  const totalRatings = Object.values(ratings_distribution).reduce((a, b) => a + b, 0);
 
-  const getPercentage = (count: number) =>
-    totalRatings > 0 ? (count / totalRatings) * 100 : 0;
+  const getPercentage = (count: number) => (totalRatings > 0 ? (count / totalRatings) * 100 : 0);
 
-  // ✅ State for selected filter
   const [selectedFilter, setSelectedFilter] = useState<string>("All");
 
-  // ✅ Filtered reviews
   const filteredReviews =
     selectedFilter === "All"
       ? sample_reviews
-      : sample_reviews.filter(
-          (review) => review.rating === Number(selectedFilter)
-        );
+      : sample_reviews.filter((review) => review.rating === Number(selectedFilter));
 
   const filterButtons = [
     { label: `All (${totalRatings})`, value: "All" },
@@ -65,19 +66,10 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
 
   return (
     <>
-      <Box sx={{ width: "100%", p: { xs: 2, md: 4 } }}>
-        {/* Header */}
-        <Typography variant="h6" fontWeight="bold" mb={2}>
-          Ratings Breakdown
-        </Typography>
+      <RatingsWrapper>
+        <RatingsHeader variant="h6">Ratings Breakdown</RatingsHeader>
 
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", md: "row" }}
-          gap={4}
-          flexWrap="wrap"
-        >
-          {/* Left: Average Rating */}
+        <RatingsContent>
           <AverageRatingCard
             averageRating={average_rating}
             satisfaction={satisfaction_percentage}
@@ -85,20 +77,8 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
             reviewCount={review_count}
           />
 
-          {/* Middle: Distribution */}
-          <Box
-            display="flex"
-  flexDirection={{ xs: "column", md: "column", lg: "row" }}
-            gap={4}
-            flex={1}
-          >
-             <Box
-               flex={{ xs: "1 1 100%", md: "1 1 100%", lg: "0 0 70%" }}
-               width={{ xs: "100%", md: "100%", lg: "60%" }}
-               display="flex"
-               flexDirection="column"
-               gap={1}
-             >
+          <DistributionContainer>
+            <RatingDistributionWrapper>
               {Object.entries(ratings_distribution)
                 .sort((a, b) => Number(b[0][0]) - Number(a[0][0]))
                 .map(([key, count]) => {
@@ -112,10 +92,9 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
                     />
                   );
                 })}
-            </Box>
+            </RatingDistributionWrapper>
 
-            {/* Right: Filter Buttons */}
-            <Box display="flex" flexWrap="wrap" gap={2}>
+            <FilterButtonsWrapper>
               {filterButtons.map((btn, idx) => (
                 <FilterButton
                   key={idx}
@@ -124,14 +103,13 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
                   onClick={() => setSelectedFilter(btn.value)}
                 />
               ))}
-            </Box>
-          </Box>
-        </Box>
+            </FilterButtonsWrapper>
+          </DistributionContainer>
+        </RatingsContent>
 
-        {/* Sample Reviews */}
-        <Grid container spacing={2} mt={2}>
+        <ReviewsGrid container spacing={1}>
           {filteredReviews.map((review, idx) => (
-            <Grid key={idx}  size={{xs:12,sm:6,md:6}}>
+            <ReviewGridItem key={idx}>
               <ReviewCard
                 rating={review.rating}
                 title={review.title}
@@ -139,13 +117,12 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
                 text={review.text}
                 vintage={review.vintage}
               />
-            </Grid>
+            </ReviewGridItem>
           ))}
-        </Grid>
-      </Box>
+        </ReviewsGrid>
+      </RatingsWrapper>
 
-      {/* Review Form */}
-      <Box sx={{ p: 4 }}>
+      <ReviewFormWrapper>
         <CustomReviewForm
           title="Write a Review"
           placeholder="Write a Comment"
@@ -154,7 +131,7 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
           initialComment="Great product!"
           onSubmit={(review) => console.log("Submitted:", review)}
         />
-      </Box>
+      </ReviewFormWrapper>
     </>
   );
 };

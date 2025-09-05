@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Rating,
-  TextField,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import SendIcon from "@mui/icons-material/Send";
+import { useTheme, useMediaQuery } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
+import {
+  FormWrapper,
+  HeaderText,
+  CommentField,
+  RatingBox,
+  ButtonHintWrapper,
+  MobileHint,
+  StyledRating,
+} from "./CustomForm.style";
 
 interface ReviewFormProps {
   title?: string;
@@ -43,82 +43,48 @@ const ReusableReviewForm: React.FC<ReviewFormProps> = ({
   };
 
   return (
-    <Box
-      sx={{
-        border: "1px solid #e0e0e0",
-        borderRadius: 2,
-        p: { xs: 2, sm: 3 },
-        width: "100%",
-        backgroundColor: "#fff",
-      }}
-    >
+    <FormWrapper>
       {/* Header */}
-      <Typography variant="subtitle1" fontWeight="bold" mb={2}>
-        {title}
-      </Typography>
+      <HeaderText variant="subtitle1">{title}</HeaderText>
 
-      {/* Comment box */}
-      <TextField
+      {/* Comment Field */}
+      <CommentField
         placeholder={placeholder}
         multiline
         rows={4}
         fullWidth
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        sx={{ mb: 2 }}
       />
 
       {/* Rating + Button */}
-      <Box
-        display="flex"
-        flexDirection={isSm ? "column" : "row"}
-        alignItems={isSm ? "flex-start" : "center"}
-        justifyContent="space-between"
-        gap={2}
-      >
-        {/* Rating */}
-        <Rating
+      <RatingBox isSm={isSm}>
+        <StyledRating
           value={rating}
           onChange={(_, newValue) => setRating(newValue)}
           size="large"
-          sx={{ color: "#fbc02d" }}
         />
 
-        {/* Button + Hint */}
-        <Box
-          display="flex"
-          alignItems="center"
-          gap={2}
-          width={isSm ? "100%" : "auto"}
-        >
+        <ButtonHintWrapper isSm={isSm}>
           <CustomButton
-              text={buttonText}
-              bgColor={theme.palette.primary.dark}
-              onClick={() => console.log("subscribe")}
-              color={""}
-              border={""}
-              btnBorderColor={""}
-            />
+            text={buttonText}
+            bgColor={theme.palette.primary.dark}
+            onClick={handleSubmit}
+            color=""
+            border=""
+            btnBorderColor=""
+          />
           {!isSm && (
-            <Typography variant="body2" color="text.secondary">
+            <span style={{ color: "#757575" }}>
               Your feedback is essential for us!
-            </Typography>
+            </span>
           )}
-        </Box>
-      </Box>
+        </ButtonHintWrapper>
+      </RatingBox>
 
       {/* Mobile hint */}
-      {isSm && (
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          textAlign="center"
-          mt={1}
-        >
-          Your feedback is essential for us!
-        </Typography>
-      )}
-    </Box>
+      {isSm && <MobileHint>Your feedback is essential for us!</MobileHint>}
+    </FormWrapper>
   );
 };
 

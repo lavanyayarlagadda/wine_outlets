@@ -1,6 +1,5 @@
 import type React from "react";
 import { useState } from "react";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { useTheme } from "@mui/material";
 import {
   Container,
@@ -8,11 +7,8 @@ import {
   SlideTitle,
   ContentSection,
   SlideDescription,
-  PriceButton,
   DotsContainer,
   Dot,
-  IconWrapper,
-  StyledNorthEastIcon,
 } from "../EverydayCarousel/EverydayCarousel.style";
 import { BannerData as bannerData } from "../../constant/curatedData";
 import { CustomButton } from "../../atoms";
@@ -33,13 +29,13 @@ const ProductListBanner: React.FC = () => {
         </ContentSection>
 
         {current.action && (
-  <CustomButton
-          text={current.action.label}
-          bgColor={theme.palette.primary.dark}
-          onClick={() => current.action && (window.location.href = current.action.url)}
-          color=""
-          border=""
-        />
+          <CustomButton
+            text={current.action.label}
+            bgColor={theme.palette.primary.dark}
+            onClick={() => current.action && (window.location.href = current.action.url)}
+            color=""
+            border=""
+          />
         )}
 
         <DotsContainer>
