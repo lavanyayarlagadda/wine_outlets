@@ -1,68 +1,26 @@
-import React, { useState } from "react";
-import { Grid } from "@mui/material";
-import { CustomReviewForm } from "../../atoms";
+import React from "react";
+import { RatingsWrapper, RatingsHeader, RatingsContent, DistributionContainer, RatingDistributionWrapper, FilterButtonsWrapper, ReviewsGrid, ReviewFormWrapper, ReviewGridItem } from "./RatingsBreakDown.style";
 import AverageRatingCard from "../../atoms/CustomCircularProgressBar/CustomCircularProgressBar";
 import RatingDistributionRow from "../../molecules/RatingDistributionRow/RatingDistributionRow";
 import FilterButton from "../../atoms/FilterButtons/FilterButtons";
 import ReviewCard from "../../molecules/ReviewCard/ReviewCard";
-import {
-  RatingsWrapper,
-  RatingsHeader,
-  RatingsContent,
-  DistributionContainer,
-  RatingDistributionWrapper,
-  FilterButtonsWrapper,
-  ReviewsGrid,
-  ReviewFormWrapper,
-  ReviewGridItem,
-} from "./RatingsBreakDown.style";
+import { CustomReviewForm } from "../../atoms";
+import { useRatingsBreakdown } from "./RatingsBreakDown.hook";
+import type { RatingsData } from "./RatingsBreakDown.hook";
 
 interface RatingsBreakdownProps {
-  data: {
-    average_rating: number;
-    satisfaction_percentage: string;
-    rating_count: string;
-    review_count: string;
-    ratings_distribution: { [key: string]: number };
-    sample_reviews: {
-      rating: number;
-      title: string;
-      vintage: number;
-      size: string;
-      text: string;
-    }[];
-  };
+  data: RatingsData;
 }
 
 const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
-  const {
-    average_rating,
-    satisfaction_percentage,
-    rating_count,
-    review_count,
-    ratings_distribution,
-    sample_reviews,
-  } = data;
-
-  const totalRatings = Object.values(ratings_distribution).reduce((a, b) => a + b, 0);
-
-  const getPercentage = (count: number) => (totalRatings > 0 ? (count / totalRatings) * 100 : 0);
-
-  const [selectedFilter, setSelectedFilter] = useState<string>("All");
-
-  const filteredReviews =
-    selectedFilter === "All"
-      ? sample_reviews
-      : sample_reviews.filter((review) => review.rating === Number(selectedFilter));
-
-  const filterButtons = [
-    { label: `All (${totalRatings})`, value: "All" },
-    { label: `5 Stars (${ratings_distribution["5_star"] || 0})`, value: "5" },
-    { label: `4 Stars (${ratings_distribution["4_star"] || 0})`, value: "4" },
-    { label: `3 Stars (${ratings_distribution["3_star"] || 0})`, value: "3" },
-    { label: `2 Stars (${ratings_distribution["2_star"] || 0})`, value: "2" },
-    { label: `1 Star (${ratings_distribution["1_star"] || 0})`, value: "1" },
-  ];
+  const { 
+    selectedFilter, 
+    setSelectedFilter, 
+    totalRatings, 
+    getPercentage, 
+    filterButtons, 
+    filteredReviews 
+  } = useRatingsBreakdown(data);
 
   return (
     <>
@@ -71,15 +29,15 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
 
         <RatingsContent>
           <AverageRatingCard
-            averageRating={average_rating}
-            satisfaction={satisfaction_percentage}
-            ratingCount={rating_count}
-            reviewCount={review_count}
+            averageRating={data.average_rating}
+            satisfaction={data.satisfaction_percentage}
+            ratingCount={data.rating_count}
+            reviewCount={data.review_count}
           />
 
           <DistributionContainer>
             <RatingDistributionWrapper>
-              {Object.entries(ratings_distribution)
+              {Object.entries(data.ratings_distribution)
                 .sort((a, b) => Number(b[0][0]) - Number(a[0][0]))
                 .map(([key, count]) => {
                   const stars = parseInt(key.split("_")[0], 10);

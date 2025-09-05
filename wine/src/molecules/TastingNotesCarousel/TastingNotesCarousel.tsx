@@ -1,6 +1,4 @@
-import type React from "react";
-import { useState } from "react";
-import { useTheme } from "@mui/material";
+import React from "react";
 import {
   Container,
   CarouselSlide,
@@ -12,14 +10,11 @@ import {
   Dot,
   PeopleBoughtWrapper,
 } from "./TastingNotes.style";
-import { tastingNotes as tastingNotesData } from "../../constant/curatedData";
 import PeopleBought from "../../organisms/PeopleBought/PeopleBought";
+import { useTastingNotesCarousel } from "./TastingNotesCarousel.hook";
 
 const TastingNotesCarousel: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = tastingNotesData;
-
-  const current = slides[currentSlide];
+  const { slides, currentSlide, current, goToSlide } = useTastingNotesCarousel();
 
   return (
     <Container>
@@ -36,7 +31,7 @@ const TastingNotesCarousel: React.FC = () => {
             <Dot
               key={index}
               active={index === currentSlide}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => goToSlide(index)}
             />
           ))}
         </DotsContainer>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { suggestedProducts } from "../../constant/dealProduct";
 import { ProductWithDivider, SummaryCard } from "../../molecules";
 import {
@@ -9,22 +9,11 @@ import {
   ProductsWrapper,
   VerticalDivider,
 } from "./PeopleBought.style";
+import { usePeopleBought } from "./PeopleBought.hook";
 
-const PeopleBought = () => {
-  const [wishlist, setWishlist] = useState<string[]>([]);
-  const [cartItems, setCartItems] = useState<string[]>([]);
-
-  const currentProducts = suggestedProducts.products;
-
-  const handleAddToCart = (productId: string) => {
-    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
-  };
-
-  const handleToggleFavorite = (productId: string) => {
-    setWishlist((prev) =>
-      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
-    );
-  };
+const PeopleBought: React.FC = () => {
+  const { wishlist, cartItems, handleAddToCart, handleToggleFavorite, currentProducts } =
+    usePeopleBought(suggestedProducts.products);
 
   return (
     <PeopleBoughtWrapper>
