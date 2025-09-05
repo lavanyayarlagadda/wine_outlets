@@ -1,7 +1,7 @@
 import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "../../themes/palette";
-import shape from "../../themes/shape";
+import spacing from "../../themes/spacing";
 // import { useFontSize } from "../../themes/fontSize";
 
 
@@ -75,7 +75,7 @@ export const StyledThumbnailCard = styled(Card, {
   width: 80,
   height: 124,
   marginBottom: 2,
-  border: selected ? shape.borderMain: shape.borderGrey2px,
+  border: selected ? `2px solid ${theme.palette.primary.main}` : `2px solid ${palette.grey.border}`,
   cursor: "pointer",
   overflow: "hidden",
   transition: "border 0.2s, box-shadow 0.2s",
@@ -158,7 +158,7 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
   fontWeight: 500,
   fontSize: "12px",
   color: theme.palette.primary.dark,
-  border:shape.borderRed,
+  border: `1px solid ${theme.palette.primary.dark}`,
   backgroundColor: theme.palette.primary.light,
   [theme.breakpoints.down("sm")]: {
     fontSize: "11px",
@@ -238,7 +238,7 @@ export const DescriptionText = styled(Typography)(({ theme }) => ({
 }));
 
 // Outer container
-export const LayoutContainer = styled(Box)(({ theme }) => ({
+export const ProductLayoutContainer = styled(Box)(({ theme }) => ({
   flexGrow: 1,
   padding: theme.spacing(2),
   [theme.breakpoints.up("md")]: {
@@ -249,7 +249,7 @@ export const LayoutContainer = styled(Box)(({ theme }) => ({
 
 
 // Grid Container
-export const LayoutGrid = styled(Grid)(() => ({
+export const ProductLayoutGrid = styled(Grid)(() => ({
   height: "100%",
   
 }));
@@ -257,7 +257,7 @@ export const LayoutGrid = styled(Grid)(() => ({
 
 
 // Image Section
-export const ImageSection = styled(Grid)(() => ({
+export const ProductImageSection = styled(Grid)(() => ({
   // display: "flex",
 }));
 
@@ -272,7 +272,7 @@ export const ImageSection = styled(Grid)(() => ({
 //   },
 // }));
 
-export const ImageBox = styled(Box)(({ theme }) => ({
+export const ProductImageBox = styled(Box)(({ theme }) => ({
   position: "sticky",
   top: '200px', // distance from top when scrolling
   display: "flex",
@@ -285,11 +285,11 @@ export const ImageBox = styled(Box)(({ theme }) => ({
 }));
 
 // Details Section
-export const DetailsSection = styled(Grid)(() => ({
+export const ProductDetailsSection = styled(Grid)(() => ({
   display: "flex",
 }));
 
-export const DetailsBox = styled(Box)(({ theme }) => ({
+export const ProductDetailsBox = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "flex",
   flexDirection: "column",
@@ -305,7 +305,7 @@ export const HighlightsContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: 16,
   backgroundColor: palette.white.light,
-  border: shape.borderSuccess,
+  border: `1px solid ${theme.palette.success.main}`,
   marginTop: theme.spacing(2),
 }));
 
@@ -366,3 +366,71 @@ export const InfoIcon = styled("img")(({ theme }) => ({
   objectFit: "contain",
   marginRight: theme.spacing(1),
 }));
+
+export const RatingHeader = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: theme.spacing(1),
+}));
+
+export const RatingTitle = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,   // bold
+  fontSize: "1rem",  // adjust as needed
+  color: theme.palette.text.primary,
+}));
+
+export const RatingBadge = styled(Box)(({ theme }) => ({
+  border: `2px solid ${theme.palette.primary.dark}`,
+  borderRadius: "50%",
+  width: 36,
+  height: 36,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  fontWeight: 600,
+//   color: theme.palette.error.main,
+}));
+
+export const RatingText = styled(Typography)(({ theme }) => ({
+  fontSize: "16px",
+  lineHeight: 1.6,
+  color: theme.palette.grey[200],
+  marginBottom: theme.spacing(2),
+}));
+
+export const ReviewerBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
+export const ReviewerName = styled(Typography)(({ theme }) => ({
+  fontWeight: 500,
+  fontSize: "14px",
+  color: theme.palette.text.primary,
+}));
+export const Container = styled(Box)(({ theme }) => ({
+  border: `1px solid ${theme.palette.success.main}`,
+  borderRadius: spacing.outlineSpace,
+  padding: theme.spacing(0.5), // 2px
+}));
+
+export const Header = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  cursor: "pointer",
+  backgroundColor: palette.white.light,
+  padding: theme.spacing(1, 2), // 8px 16px
+  borderRadius: 4,
+}));
+
+export const RatingsGrid = styled(Grid)(({ theme }) => ({
+ backgroundColor: palette.white.light,
+  padding: theme.spacing(2),
+}));
+
+
+
+

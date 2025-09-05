@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Grid, IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { HighlightsContainer, LayoutContainer, ProductTitle, AccordianHead } from '../ProductView.style';
-import type { ProductViewResponse } from '../../../constant/productViewData';
-import ProfessionalRatingCard from './ProfessionalRatingCard';
-import { Container, Header, RatingsGrid } from "./ProfessionalRatingCard.style";
+import { ProductLayoutContainer } from './ProductView.style';
+import { ProductTitle } from "../../molecules/ProductListCard/ProductListCard.style";
+import type { ProductViewResponse } from "../../constant/productViewData";
+import ProfessionalRatingCard from "../../molecules/ProductView/ProfessionalRatingCard";
+import { Container, Header, RatingsGrid } from "../../molecules/ProductView/ProductView.style";
+// import { ProductLayoutContainer } from "./ProductView.style";
 
 
 interface ProductDetailsProps {
@@ -20,7 +22,7 @@ const ProfessionalRating: React.FC<ProductDetailsProps> = ({ productViewData }) 
     };
 
     return (
-         <LayoutContainer>
+         <ProductLayoutContainer>
       <Container>
         <Header onClick={toggleExpand}>
           <ProductTitle>Professional Rating</ProductTitle>
@@ -61,7 +63,7 @@ const ProfessionalRating: React.FC<ProductDetailsProps> = ({ productViewData }) 
           <p>No professional ratings available.</p>
         ) : null}
       </Container>
-    </LayoutContainer>
+    </ProductLayoutContainer>
     );
 };
 

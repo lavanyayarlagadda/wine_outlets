@@ -7,7 +7,8 @@ import CustomCounter from '../../atoms/CustomCounter/CustomCounter';
 import CustomWishlist from '../../atoms/CustomWishlist/CustomWhisList';
 import { CustomButton } from '../../atoms';
 import AddToCart from '../../atoms/CustomButton/AddToCart';
-import ProductDetailsBlock from './ProductDetailsBlock';
+import ProductDetailsBlock from '../../molecules/ProductView/ProductDetailsBlock';
+
 import {
     DetailsContainer,
     ProductTitle,
@@ -24,8 +25,8 @@ import {
     DescriptionText,
     StyledDivider,
     InfoIcon
-} from './ProductView.style';
-import ProductHighlights from './ProductHighlights';
+} from '../../molecules/ProductView/ProductView.style';
+import ProductHighlights from '../../molecules/ProductView/ProductHighlights';
 import { useFontSize } from '../../themes/fontSize';
 import palette from '../../themes/palette';
 
@@ -154,6 +155,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ productViewData }) => {
                 highlights={product.highlights}
             />
             <ProductDetailsBlock
+            title="Product Details"
                 details={Object.entries(product.details).map(([label, value]) => ({ label, value }))}
             />
              <ProductHighlights

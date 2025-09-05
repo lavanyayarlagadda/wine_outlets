@@ -18,7 +18,7 @@ interface ProductDetailsBlockProps {
 }
 
 const ProductDetailsBlock: React.FC<ProductDetailsBlockProps> = ({
-    title = "Product Details",
+    title ,
     details,
 }) => {
     return (

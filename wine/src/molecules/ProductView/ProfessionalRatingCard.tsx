@@ -7,7 +7,8 @@ import {
   Box,
   Rating,
 } from "@mui/material";
-import {RatingHeader, RatingBadge, RatingText, ReviewerBox,  ReviewerName, RatingTitle} from "./ProfessionalRatingCard.style";
+
+import {RatingHeader, RatingBadge, RatingText, RatingTitle} from "./ProductView.style";
 
 
 type ProfessionalRatingCardProps = {

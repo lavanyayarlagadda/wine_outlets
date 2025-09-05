@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Newsletter, ProductView, RecentlyView } from "../../molecules";
+import { Newsletter,  RecentlyView } from "../../molecules";
+import ProductViewBreadCrumbs from "../../organisms/ProductView/ProductViewBreadCrumbs";
+import Product from "../../organisms/ProductView/Product";
+import { productViewData } from "../../constant/productViewData";
+import ProfessionalRating from "../../organisms/ProductView/ProfessionalRating";
+import {ProductView} from "../../molecules";
+
 
 
 
@@ -9,7 +15,11 @@ const ProductViewPage = () => {
 
   return (
     <>
-      <ProductView />
+      {/* <ProductView /> */}
+      <ProductViewBreadCrumbs/>
+      <Product productViewData={productViewData} />
+       <ProfessionalRating productViewData={productViewData} />
+       <ProductView/>
       <RecentlyView />
       <Newsletter />
     </>
