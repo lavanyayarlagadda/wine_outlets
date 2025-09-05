@@ -12,9 +12,8 @@ import RatingsBreakdown from '../../organisms/RatingsBreakDown/RatingsBreakDown'
 const ProductView = () => {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },
-    // { label: "Category", href: "/" },
     { label: "Wines", href: "/productsList" },
-    { label: "Kim Crawford Wine" }, // current page, no href
+    { label: "Kim Crawford Wine" }, 
   ];
   return (
     <>

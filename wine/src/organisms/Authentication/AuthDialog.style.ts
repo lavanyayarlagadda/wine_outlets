@@ -1,5 +1,6 @@
 import { Box, Button, styled, Typography, type BoxProps } from "@mui/material";
 import palette from "../../themes/palette";
+import { useFontSize } from "../../themes/fontSize";
 
 export const TabsWrapper = styled(Box)(() => ({
   display: "flex",
@@ -35,7 +36,7 @@ export const HalfField = styled(Box)(() => ({
 }));
 
 export const SwitchText = styled(Typography)(() => ({
-  fontSize: "14px",
+   fontSize:useFontSize(24),
   textAlign: "center",
 }));
 

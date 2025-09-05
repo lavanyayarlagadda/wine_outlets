@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box, FormControl, ToggleButtonGroup } from "@mui/material";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export const Wrapper = styled(Box)(() => ({
   display: "flex",
@@ -17,7 +18,7 @@ export const StyledFormControl = styled(FormControl)(() => ({
 export const ViewBox = styled(Box)(() => ({
   backgroundColor: palette.grey.light,
   padding: "8px",
-  border: `1px solid ${palette.grey.light}`,
+  border: shape.borderGreyLight,
   borderRadius: "8px",
   display: "flex",
   justifyContent: "center",

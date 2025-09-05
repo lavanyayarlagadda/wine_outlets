@@ -5,7 +5,7 @@ import shape from "../../themes/shape";
 export const CounterBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  border: "1px solid #E0E0E0",
+  border: shape.borderSuccess,
   borderRadius: shape.borderRadius,
   padding: "6px",
 }));

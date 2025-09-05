@@ -27,7 +27,7 @@ export const SubscribeButton = styled(Button)(({ theme }) => ({
 export const WrapperBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.white.main,
   borderRadius: "24px",
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   padding: "24px",
 }));
 

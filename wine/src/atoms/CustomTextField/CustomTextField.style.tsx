@@ -6,7 +6,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     backgroundColor: theme.palette.white.main,
     borderRadius: shape.borderRadius,
     "& fieldset": {
-      borderColor: "#e0e0e0",
+      borderColor: shape.borderSuccess,
     },
     "&:hover fieldset": {
       borderColor: "#bdbdbd",

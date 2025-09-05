@@ -48,7 +48,7 @@ export const ProductsWrapper = styled(Box)(() => ({
 
 export const VerticalDivider = styled(Divider)(() => ({
   display: "none",
-  borderColor: "#e0e0e0",
+  borderColor: palette.success.main,
   '@media (min-width: 900px)': {
     display: "block",
   },

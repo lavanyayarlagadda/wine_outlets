@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
+import shape from "../../themes/shape";
 
 // const isRecentlyViewedCard = true;
 
@@ -72,7 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           top: 20,
           right: 22,
           backgroundColor: "white",
-          border: `1px solid ${theme.palette.success.main}`,
+          border: shape.borderSuccess,
           borderRadius: "4px",
           zIndex: 1,
           "&:hover": { backgroundColor: "#f5f5f5" },

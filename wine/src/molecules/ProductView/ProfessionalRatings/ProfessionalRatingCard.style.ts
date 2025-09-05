@@ -2,6 +2,7 @@ import { styled } from "@mui/material/styles";
 import { Box, Typography, Grid, IconButton } from "@mui/material";
 import spacing from "../../../themes/spacing";
 import palette from "../../../themes/palette";
+import shape from "../../../themes/shape";
 
 
 export const RatingHeader = styled(Box)(({ theme }) => ({
@@ -18,7 +19,7 @@ export const RatingTitle = styled(Typography)(({ theme }) => ({
 }));
 
 export const RatingBadge = styled(Box)(({ theme }) => ({
-  border: `2px solid ${theme.palette.primary.dark}`,
+  border: shape.borderRed2px,
   borderRadius: "50%",
   width: 36,
   height: 36,
@@ -48,7 +49,7 @@ export const ReviewerName = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 export const Container = styled(Box)(({ theme }) => ({
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   borderRadius: spacing.outlineSpace,
   padding: theme.spacing(0.5), // 2px
 }));

@@ -1,11 +1,12 @@
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Divider } from "@mui/material";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export const SummaryCardWrapper = styled(Box)(({ theme }) => ({
   flexShrink: 0,
   borderRadius: 16,
-  border: "1px solid #f2f2f2",
+  border:shape.bordergreyshade,
   padding: theme.spacing(2),
   backgroundColor: "#ffffff",
   boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",

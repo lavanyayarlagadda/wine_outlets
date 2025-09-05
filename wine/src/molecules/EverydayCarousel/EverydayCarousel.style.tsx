@@ -1,6 +1,7 @@
 import { Box, styled, Typography, Button } from "@mui/material";
 import palette from "../../themes/palette";
 import { NorthEast } from "@mui/icons-material";
+import shape from "../../themes/shape";
 
 interface ContainerProps {
   padding?: string;
@@ -144,7 +145,7 @@ export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({
   width: active ? "30px" : "12px",
   height: "12px",
   borderRadius: active ? "12px" : "50%",
-  border: `1px solid ${theme.palette.white.main}`,
+  border: shape.borderWhiteMain,
   backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   cursor: "pointer",
   transition: "all 0.3s ease",

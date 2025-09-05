@@ -1,7 +1,8 @@
 import { styled, Box, Typography, TextField, Rating } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const FormWrapper = styled(Box)(({ theme }) => ({
-  border: "1px solid #e0e0e0",
+  border: shape.borderSuccess,
   borderRadius: 16, // 2*8px
   padding: theme.spacing(2, 3),
   width: "100%",

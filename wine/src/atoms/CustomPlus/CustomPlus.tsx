@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 
 const PlusDivider = () => (
@@ -10,7 +11,7 @@ const PlusDivider = () => (
       justifyContent: "center",
       width: 50,
       height: 30,
-      border: `1px solid ${palette.primary.dark}`,
+      border: shape.borderRed,
       borderRadius: "30%",
     }}
   >

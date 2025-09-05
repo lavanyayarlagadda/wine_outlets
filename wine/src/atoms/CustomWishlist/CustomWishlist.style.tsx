@@ -23,7 +23,7 @@ import palette from "../../themes/palette";
 export const CustomWishlistButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== "selected", // prevent passing to DOM
 })<{ selected?: boolean }>(({ theme, selected }) => ({
-  border: `1px solid ${selected ? theme.palette.primary.dark : theme.palette.secondary.main}`,
+  border:  selected ? shape.borderRed:shape.borderSecondary,
   borderRadius: shape.borderRadius,
   marginLeft: "8px",
   transition: "all 0.2s ease-in-out",

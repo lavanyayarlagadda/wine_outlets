@@ -1,6 +1,7 @@
 import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 // import { useFontSize } from "../../themes/fontSize";
 
 
@@ -74,7 +75,7 @@ export const StyledThumbnailCard = styled(Card, {
   width: 80,
   height: 124,
   marginBottom: 2,
-  border: selected ? `2px solid ${theme.palette.primary.main}` : `2px solid ${palette.grey.border}`,
+  border: selected ? shape.borderMain: shape.borderGrey2px,
   cursor: "pointer",
   overflow: "hidden",
   transition: "border 0.2s, box-shadow 0.2s",
@@ -157,7 +158,7 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
   fontWeight: 500,
   fontSize: "12px",
   color: theme.palette.primary.dark,
-  border: `1px solid ${theme.palette.primary.dark}`,
+  border:shape.borderRed,
   backgroundColor: theme.palette.primary.light,
   [theme.breakpoints.down("sm")]: {
     fontSize: "11px",
@@ -304,7 +305,7 @@ export const HighlightsContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: 16,
   backgroundColor: palette.white.light,
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   marginTop: theme.spacing(2),
 }));
 

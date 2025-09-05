@@ -1,11 +1,12 @@
 import { Typography, Box, styled } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const CardWrapper = styled(Box)(({ theme }) => ({
   height: "300px",
   width: "100%",
   padding: "32px",
   backgroundColor: theme.palette.white.main,
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   borderRadius: "24px",
   display: "flex",
   flexDirection: "column",

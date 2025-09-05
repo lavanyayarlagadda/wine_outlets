@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
@@ -13,6 +13,8 @@ import {
   SwitchText,
   SwitchLink,
 } from "../../organisms/Authentication/AuthDialog.style";
+import { useSignUp } from "./SignUpPopup.hook";
+
 
 interface SignUpProps {
   setTab: (tab: "signin" | "signup") => void;
@@ -20,46 +22,7 @@ interface SignUpProps {
 }
 
 const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    contact: "",
-    password: "",
-    confirmPassword: "",
-    vipId: "",
-  });
-
-  const [errors, setErrors] = useState<Partial<typeof form>>({});
-
-  const handleChange = (name: string, value: string) => {
-    setForm({ ...form, [name]: value });
-  };
-
-  const validate = () => {
-    const newErrors: Partial<typeof form> = {};
-    if (!form.fullName) newErrors.fullName = "Full Name is required";
-    if (!form.email) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = "Invalid email";
-    if (!form.contact) newErrors.contact = "Contact Number is required";
-    if (!form.password) newErrors.password = "Password is required";
-    else if (form.password.length < 6)
-      newErrors.password = "Password must be at least 6 characters";
-    if (!form.confirmPassword) newErrors.confirmPassword = "Confirm Password is required";
-    else if (form.confirmPassword !== form.password)
-      newErrors.confirmPassword = "Passwords do not match";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      console.log("Form Submitted ", form);
-      onClose();
-    }
-  };
+  const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } = useSignUp(onClose);
 
   return (
     <FormWrapper onSubmit={handleSubmit}>
@@ -136,8 +99,7 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
       </SubmitButton>
 
       <SwitchText>
-        If you have existing account?{" "}
-        <SwitchLink onClick={() => setTab("signin")}>Login</SwitchLink>
+        If you have existing account? <SwitchLink onClick={() => setTab("signin")}>Login</SwitchLink>
       </SwitchText>
     </FormWrapper>
   );

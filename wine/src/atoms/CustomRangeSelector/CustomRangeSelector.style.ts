@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box, Slider } from "@mui/material";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export const SliderWrapper = styled(Box)(() => ({
   display: "flex",
@@ -26,6 +27,6 @@ export const StyledSlider = styled(Slider)(() => ({
     height: 4,
   },
   "& .MuiSlider-thumb": {
-    border: "2px solid white",
+    border: shape.borderWhite,
   },
 }));

@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { Box, Card, CardContent, Typography, Button, CardMedia, IconButton, type CardMediaProps } from "@mui/material";
+import shape from "../../themes/shape";
 
 // Main Card
 export const StyledCard = styled(Card)(({ theme }) => ({
@@ -10,7 +11,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   },
   alignItems: "flex-start",
   borderRadius: 16,
-  border: "1px solid #eee",
+  border: shape.borderGreyline,
   padding: theme.spacing(3),
   width: "100%",
   minHeight: 210,
@@ -22,7 +23,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
 export const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   borderRadius: 16,
-  border: "1px solid #eee",
+  border: shape.borderGreyline,
   padding: theme.spacing(2),
   display: "flex",
   justifyContent: "center",
@@ -152,7 +153,7 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
   fontWeight: 600,
   whiteSpace: "nowrap",
-  border: `1px solid ${theme.palette.primary.dark}`,
+  border: shape.borderRed,
    width: "100%", // default for xs
   [theme.breakpoints.up("sm")]: {
     width: "30%",

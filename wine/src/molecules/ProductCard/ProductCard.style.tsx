@@ -1,5 +1,6 @@
 import { Card, IconButton, CardMedia, Typography, Box, Chip, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import shape from "../../themes/shape";
 
 export const StyledCard = styled(Card)(({ theme }) => ({
   position: "relative",
@@ -17,7 +18,7 @@ export const FavoriteButton = styled(IconButton)(({ theme }) => ({
   top: 20,
   right: 22,
   backgroundColor: "white",
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   borderRadius: "4px",
   zIndex: 1,
   "&:hover": { backgroundColor: "#f5f5f5" },

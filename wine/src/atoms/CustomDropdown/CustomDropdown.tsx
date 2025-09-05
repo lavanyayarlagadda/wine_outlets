@@ -1,8 +1,7 @@
-import type React from "react";
-import { Select, MenuItem, Box } from "@mui/material";
-import { StyledFormControl, StyledLabel } from "./CustomDropdown.style";
+import React from "react";
+import { MenuItem, Select } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
-import palette from "../../themes/palette";
+import { DropdownWrapper, StyledFormControl, StyledLabel } from "./CustomDropdown.style";
 
 interface DropdownOption {
   value: string;
@@ -29,34 +28,16 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   side = false,
 }) => {
   return (
-    <Box
-      display="flex"
-      flexDirection={side ? "row" : "column"}
-      alignItems={side ? "center" : "flex-start"}
-      gap={1} // spacing between label and select
-      border={side ? `1px solid ${palette.grey.divider}` : "none"} // border if side
-      borderRadius={side ? "4px" : "0"} 
-      padding={side ? "8px" : "0"}
-    >
-      <StyledLabel sx={{whiteSpace:'nowrap',marginTop:side?'5px':'0px'}}>{label}</StyledLabel>
+    <DropdownWrapper side={side}>
+      <StyledLabel side={side}>{label}</StyledLabel>
       <StyledFormControl fullWidth={fullWidth} variant="outlined">
         <Select
           value={value}
-          onChange={(e) => onChange(e.target.value as string)}
+          onChange={(e) => onChange(e.target.value)}
           displayEmpty
-           IconComponent={ExpandMore} 
-         sx={{
-    "& .MuiOutlinedInput-notchedOutline": {
-      border: side ? "none" : undefined, // remove border if side is true
-    },
-    "& .MuiSelect-select":{
-      padding:side ?"0px":undefined
-    }
-  }}
+          IconComponent={ExpandMore}
           renderValue={(selected) => {
-            if (!selected && placeholder) {
-              return <span style={{ color: "#999" }}>{placeholder}</span>;
-            }
+            if (!selected && placeholder) return <span style={{ color: "#999" }}>{placeholder}</span>;
             const selectedOption = options.find((option) => option.value === selected);
             return selectedOption ? selectedOption.label : placeholder;
           }}
@@ -68,7 +49,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           ))}
         </Select>
       </StyledFormControl>
-    </Box>
+    </DropdownWrapper>
   );
 };
 

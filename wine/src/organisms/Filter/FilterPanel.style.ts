@@ -1,9 +1,10 @@
 import { styled } from "@mui/material/styles";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export const FilterWrapper = styled(Box)(({ theme }) => ({
-  border: "1px solid #ddd",
+  border: shape.boderGrey200,
   borderRadius: '16px',
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(2),
@@ -34,7 +35,7 @@ export const HeaderTitle = styled(Typography)(() => ({
 }));
 
 export const ClearButton = styled(Button)(() => ({
-  border: `1px solid ${palette.grey[200]}`,
+  border:shape.boderGrey200,
   borderRadius: "8px",
   color: palette.black[800],
   fontSize: "14px",
@@ -54,7 +55,7 @@ export const SubCategoryButton = styled(Button)<{ selected?: boolean }>(({ selec
   textTransform: "none",
   fontWeight: 500,
   marginBottom: "8px",
-  border: selected ? `1px solid ${palette.primary.dark}` : `1px solid ${palette.grey[200]}`,
+  border: selected ? shape.borderRed : shape.boderGrey200,
   backgroundColor: selected ? palette.primary.light : theme.palette.common.white,
   color: selected ? palette.primary.dark : palette.grey[200],
 }));

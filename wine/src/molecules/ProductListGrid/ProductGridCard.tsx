@@ -1,27 +1,21 @@
 import React from "react";
+import { ShoppingCart, FavoriteBorder } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import {
-  CardContent,
-  Box,
-  Typography,
-  Button,
-  CardMedia,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
-import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
-import {
-  StyledCard,
+  ResponsiveCard,
   FavoriteButton,
+  ProductImage,
+  ProductCardContent,
   ProductName,
   DetailsRow,
   SmallText,
-  SmallChip,
   RatingBox,
+  PriceRow,
   PriceText,
   VIPPriceText,
+  AddToCartButton,
 } from "./ProductGridCard.style";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
-import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: string;
@@ -48,121 +42,62 @@ interface ProductCardProps {
   onToggleFavorite: (id: string) => void;
 }
 
-const ProductGridCard: React.FC<ProductCardProps> = ({
-  product,
-  onAddToCart,
-  onToggleFavorite,
-}) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isLaptop = useMediaQuery(theme.breakpoints.up("lg"))
+const ProductGridCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggleFavorite }) => {
   const navigate = useNavigate();
+
   return (
-    <StyledCard
-      sx={{
-        maxWidth: isMobile ? 340 :  isLaptop ? 700:470,
-        width: "100%",
-        minHeight: isMobile ? 380 : 470,
-      }}
-    >
-      <FavoriteButton
-        aria-label="add to favorites"
-        onClick={() => onToggleFavorite(product.id)}
-      >
-        <FavoriteBorder sx={{ color: "#666" }} />
+    <ResponsiveCard>
+      <FavoriteButton onClick={() => onToggleFavorite(product.id)}>
+        <FavoriteBorder />
       </FavoriteButton>
 
-      <CardMedia
+      <ProductImage
         component="img"
-        height={250}
         image={product.media.url}
         alt={product.name}
-        sx={{ objectFit: "contain", p: 2, cursor: "pointer" }}
-        // onClick={()=>{navigate('/productView')}}
         onClick={() => {
           navigate("/productView");
           window.scrollTo(0, 0);
         }}
       />
 
-      <CardContent sx={{ pt: 1, pb: 0 }}>
-        <ProductName sx={{ textAlign: "left" }}>{product.name}</ProductName>
+      <ProductCardContent>
+        <ProductName>{product.name}</ProductName>
 
         <DetailsRow>
-          <Box display="flex" alignItems="center">
-            <SmallText>
-              <img
-                src={calendar}
-                alt="region"
-                style={{ width: 20, height: 20, marginRight: 6 }}
-              />
-              {product.year}
-            </SmallText>
-          </Box>
           <SmallText>
-            <img
-              src={cityMap}
-              alt="region"
-              style={{ width: 20, height: 20, marginRight: 6 }}
-            />
+            <img src={calendar} alt="year" style={{ width: 20, height: 20, marginRight: 6 }} />
+            {product.year}
+          </SmallText>
+
+          <SmallText>
+            <img src={cityMap} alt="region" style={{ width: 20, height: 20, marginRight: 6 }} />
             {product.region}
           </SmallText>
         </DetailsRow>
 
         <DetailsRow>
           <SmallText>
-            <img
-              src={expandIcon}
-              alt="size"
-              style={{ width: 20, height: 20, marginRight: 6 }}
-            />
+            <img src={expandIcon} alt="size" style={{ width: 20, height: 20, marginRight: 6 }} />
             {product.size}
           </SmallText>
+
           <RatingBox>
-            <img src={empty_star} alt="star" style={{ width: 20, height: 20, marginRight: 6 }} />
-            <SmallText>
-              {product.rating}
-            </SmallText>
+            <img src={empty_star} alt="rating" style={{ width: 20, height: 20, marginRight: 6 }} />
+            <SmallText>{product.rating}</SmallText>
           </RatingBox>
         </DetailsRow>
 
-        <Box sx={{ mb: 2, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2 }}>
-          {product.vipPrice && (
-            <VIPPriceText>
-              VIP: ${product.vipPrice.toFixed(2)}
-            </VIPPriceText>
-          )}
+        <PriceRow>
+          {product.vipPrice && <VIPPriceText>VIP: ${product.vipPrice.toFixed(2)}</VIPPriceText>}
           <PriceText>${product.price.toFixed(2)}</PriceText>
-        </Box>
+        </PriceRow>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mt: 1,
-          }}
-        >
-          <Button
-            variant="contained"
-            fullWidth={isMobile}
-            onClick={() => onAddToCart(product.id)}
-            startIcon={<ShoppingCart />}
-            sx={{
-              color: theme.palette.primary.dark,
-              backgroundColor: theme.palette.primary.light,
-              padding: "12px 0px",
-              textTransform: "none",
-              fontWeight: 600,
-              width: "100%",
-              whiteSpace: 'nowrap',
-              border: `1px solid ${theme.palette.primary.dark}`
-            }}
-          >
-            Add to Cart
-          </Button>
-        </Box>
-      </CardContent>
-    </StyledCard>
+        <AddToCartButton onClick={() => onAddToCart(product.id)} startIcon={<ShoppingCart />}>
+          Add to Cart
+        </AddToCartButton>
+      </ProductCardContent>
+    </ResponsiveCard>
   );
 };
 

@@ -1,4 +1,5 @@
 import { styled, Box } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const HeroBannerContainer = styled(Box)(({}) => ({
   position: "relative",
@@ -52,7 +53,7 @@ export const Dot = styled(Box)<{ isActive: boolean }>(({ theme, isActive }) => (
   backgroundColor: isActive ? theme.palette.primary.main : theme?.palette.warning.light,
   cursor: "pointer",
   transition: "all 0.3s ease",
-  border: `2px solid ${theme.palette.white.main}`,
+  border: shape.borderWidthWhiteMain,
   "&:hover": {
     backgroundColor: isActive ? theme.palette.primary.main : "rgba(255,255,255,0.8)",
     transform: "scale(1.1)",

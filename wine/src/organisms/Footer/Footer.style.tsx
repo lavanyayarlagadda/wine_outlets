@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Link, Grid } from "@mui/material";
 import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
+import shape from "../../themes/shape";
 
 export const FooterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -45,7 +46,7 @@ export const SocialIconsContainer = styled(Box)(({ theme }) => ({
 
 export const StyledIconButton = styled((props: IconButtonProps) => <IconButton {...props} />)(
   ({ theme }) => ({
-    border: `1px solid ${theme.palette.primary.dark}`,
+    border: shape.borderRed,
     background: theme.palette.primary.light,
     borderRadius: "6px",
     width: 36,

@@ -78,7 +78,7 @@ export const SearchBox = styled(Box)(({ theme }) => ({
   padding: "4px 12px",
   borderRadius: shape.borderRadius,
   minWidth: "300px",
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   width: "400px",
     // Tablet styles
   [theme.breakpoints.down('lg')]: {
@@ -160,7 +160,7 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
   cursor: "pointer",
   padding: "6px 12px",
   borderRadius: shape.borderRadius,
-  border: "1px solid #ddd",
+  border: shape.borderSuccess,
   display: "flex",
   alignItems: "center",
   fontSize: "14px",
@@ -227,13 +227,13 @@ export const RightNavSection = styled(Box)(() => ({
 
 export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.white.main,
-  border: `1px solid ${theme.palette.success.main} !important`,
+  border: shape.borderSuccess,
   padding: "8px",
   borderRadius: "16px",
   // Mobile styles
   [theme.breakpoints.down('md')]: {
     padding: "4px",
-    border: "none !important",
+    border: "none",
     "& img": {
       width: "20px",
       height: "20px",
@@ -252,7 +252,7 @@ export const MobileMenuButton = styled(IconButton)(({ theme }) => ({
   display: "none",
   [theme.breakpoints.down("md")]: {
     display: "block",
-    border:"2px solid blue"
+    border:shape.borderBlue
   },
 }));
 
