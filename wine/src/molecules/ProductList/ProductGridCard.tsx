@@ -48,7 +48,7 @@ interface ProductCardProps {
   onToggleFavorite: (id: string) => void;
 }
 
- const ProductGridCard: React.FC<ProductCardProps> = ({
+const ProductGridCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onToggleFavorite,
@@ -76,8 +76,12 @@ interface ProductCardProps {
         height={250}
         image={product.media.url}
         alt={product.name}
-        sx={{ objectFit: "contain", p: 2,cursor:"pointer" }}
-        onClick={()=>{navigate('/productView')}}
+        sx={{ objectFit: "contain", p: 2, cursor: "pointer" }}
+        // onClick={()=>{navigate('/productView')}}
+        onClick={() => {
+          navigate("/productView");
+          window.scrollTo(0, 0);
+        }}
       />
 
       <CardContent sx={{ pt: 1, pb: 0 }}>
@@ -85,14 +89,14 @@ interface ProductCardProps {
 
         <DetailsRow>
           <Box display="flex" alignItems="center">
-  <SmallText>
-            <img
-              src={calendar}
-              alt="region"
-              style={{ width: 20, height: 20, marginRight: 6 }}
-            />
-            {product.year}
-          </SmallText>
+            <SmallText>
+              <img
+                src={calendar}
+                alt="region"
+                style={{ width: 20, height: 20, marginRight: 6 }}
+              />
+              {product.year}
+            </SmallText>
           </Box>
           <SmallText>
             <img
@@ -114,21 +118,21 @@ interface ProductCardProps {
             {product.size}
           </SmallText>
           <RatingBox>
-            <img src={empty_star} alt="star" style={{ width: 20, height: 20,marginRight:6 }} />
+            <img src={empty_star} alt="star" style={{ width: 20, height: 20, marginRight: 6 }} />
             <SmallText>
               {product.rating}
             </SmallText>
           </RatingBox>
         </DetailsRow>
 
-<Box sx={{ mb: 2, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2 }}>
-  {product.vipPrice && (
-    <VIPPriceText>
-      VIP: ${product.vipPrice.toFixed(2)}
-    </VIPPriceText>
-  )}
-  <PriceText>${product.price.toFixed(2)}</PriceText>
-</Box>
+        <Box sx={{ mb: 2, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2 }}>
+          {product.vipPrice && (
+            <VIPPriceText>
+              VIP: ${product.vipPrice.toFixed(2)}
+            </VIPPriceText>
+          )}
+          <PriceText>${product.price.toFixed(2)}</PriceText>
+        </Box>
 
         <Box
           sx={{
@@ -137,24 +141,24 @@ interface ProductCardProps {
             mt: 1,
           }}
         >
-        <Button
-          variant="contained"
-          fullWidth={isMobile}
-          onClick={() => onAddToCart(product.id)}
-          startIcon={<ShoppingCart />}
-              sx={{
-                color: theme.palette.primary.dark,
-                backgroundColor: theme.palette.primary.light,
-                padding: "12px 0px",
-                textTransform: "none",
-                fontWeight: 600,
-                width: "100%",
-                whiteSpace:'nowrap',
-                border:`1px solid ${theme.palette.primary.dark}`
-              }}
-        >
-          Add to Cart
-        </Button>
+          <Button
+            variant="contained"
+            fullWidth={isMobile}
+            onClick={() => onAddToCart(product.id)}
+            startIcon={<ShoppingCart />}
+            sx={{
+              color: theme.palette.primary.dark,
+              backgroundColor: theme.palette.primary.light,
+              padding: "12px 0px",
+              textTransform: "none",
+              fontWeight: 600,
+              width: "100%",
+              whiteSpace: 'nowrap',
+              border: `1px solid ${theme.palette.primary.dark}`
+            }}
+          >
+            Add to Cart
+          </Button>
         </Box>
       </CardContent>
     </StyledCard>
