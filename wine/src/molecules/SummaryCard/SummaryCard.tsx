@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Divider } from "@mui/material";
+import { Box, Typography, Button, Divider, useMediaQuery, useTheme } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { PriceText, VIPPriceText } from "../ProductList/ProductGridCard.style";
 import shape from "../../themes/shape";
@@ -11,7 +11,8 @@ interface Props {
   totalPrice: number;
 }
 
-const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
+const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {  
+  const isLaptop = useMediaQuery("(min-width:2000px) and (max-width:2560px)")
   return (
 <Box
   sx={{
@@ -20,8 +21,8 @@ const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
     border: "1px solid #f2f2f2",
     p: 2,
     backgroundColor: "#ffffff",
-    width: { xs: "100%", sm: "100%", md: "100%", lg: 400 }, // responsive width
-    maxWidth: { xs: "100%", lg: 400 },
+   width : isLaptop ? "976px" : { xs: "100%", sm: "100%", md: "100%", lg: 400 },
+    maxWidth: isLaptop ? "1000px" : { xs: "100%", md:'36%',lg: 400 },
     boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
     alignSelf: "center",
   }}

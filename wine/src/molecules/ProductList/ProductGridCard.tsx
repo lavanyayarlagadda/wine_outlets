@@ -55,11 +55,12 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLaptop = useMediaQuery(theme.breakpoints.up("lg"))
   const navigate = useNavigate();
   return (
     <StyledCard
       sx={{
-        maxWidth: isMobile ? 340 : 470,
+        maxWidth: isMobile ? 340 :  isLaptop ? 700:470,
         width: "100%",
         minHeight: isMobile ? 380 : 470,
       }}
