@@ -31,7 +31,7 @@ import {
 } from "./Navigation.style";
 import MobileMenu from "./MobileMenu";
 import { useNavigate } from "react-router-dom";
-import AuthDialog from "../Authentication/AuthDialog";
+import AuthDialog from "../../organisms/Authentication/AuthDialog";
 
 // Define menu items for dropdowns
 const menus: { [key: string]: string[] } = {
@@ -43,23 +43,23 @@ const menus: { [key: string]: string[] } = {
 const Navigation = () => {
   const theme = useTheme();
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery"];
-  const { 
-    anchorEl, 
-    menuOpen, 
-    mobileMenuOpen, 
-    handleMenuOpen, 
-    handleMenuClose, 
-    handleMobileMenuOpen, 
-    handleMobileMenuClose ,
-    handleMobileMenuToggle
+  const {
+    anchorEl,
+    menuOpen,
+    mobileMenuOpen,
+    handleMenuOpen,
+    handleMenuClose,
+    handleMobileMenuOpen,
+    handleMobileMenuClose,
+    handleMobileMenuToggle,
   } = useNavigation(menuKeys);
   const navigate = useNavigate();
-    const [openLogin,setOpenLogin] = React.useState(true);
-  const [signIn,setSignIn] = React.useState(false)
+  const [openLogin, setOpenLogin] = React.useState(true);
+  const [signIn, setSignIn] = React.useState(false);
 
-const onClose = ()=>{
-  setOpenLogin(false)
-}
+  const onClose = () => {
+    setOpenLogin(false);
+  };
 
   return (
     <div>
@@ -73,9 +73,12 @@ const onClose = ()=>{
 
       <StyledAppBar>
         <StyledToolbar>
-           {/* Mobile Menu Button - Add this */}
-          <CustomizeIconButton onClick={handleMobileMenuOpen} sx={{ display: { xs: "flex", md: "none" } }}>
-            <MenuIcon sx={{fontSize:"24px",color:"red",mt:1}}/>
+          {/* Mobile Menu Button - Add this */}
+          <CustomizeIconButton
+            onClick={handleMobileMenuOpen}
+            sx={{ display: { xs: "flex", md: "none" } }}
+          >
+            <MenuIcon sx={{ fontSize: "24px", color: "red", mt: 1 }} />
           </CustomizeIconButton>
           <Logo src={logo} alt="Wine Outlet" />
 
@@ -89,14 +92,14 @@ const onClose = ()=>{
             </SearchBox>
 
             <DropdownTriggerWithIconMargin
-              sx={{ 
+              sx={{
                 color: theme?.palette.grey[100],
-                display: { xs: "none", md: "flex" }
+                display: { xs: "none", md: "flex" },
               }}
               onClick={(e) => handleMenuOpen(e, "store")}
             >
               <img src={map} alt="map" />
-              Uptown Store 
+              Uptown Store
               {menuOpen.store ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </DropdownTriggerWithIconMargin>
 
@@ -115,19 +118,19 @@ const onClose = ()=>{
               <CustomizeIconButton>
                 <img src={cart} alt="cart" />
               </CustomizeIconButton>
-              <CustomizeIconButton onClick={()=>setSignIn(true)}>
+              <CustomizeIconButton onClick={() => setSignIn(true)}>
                 <img src={userprofile} alt="userProfile" />
               </CustomizeIconButton>
             </RightNavSection>
           </IconGroup>
 
           {/* mobile view search */}
-          <SearchBox sx={{ display: { xs: "flex", sm: "none"}, mt:2,}}>
-              <SearchIcon sx={{ color: "gray" }} />
-              <StyledInput
-                placeholder="Search wines, brands, or regions"
-                inputProps={{ "aria-label": "search" }}
-              />
+          <SearchBox sx={{ display: { xs: "flex", sm: "none" }, mt: 2 }}>
+            <SearchIcon sx={{ color: "gray" }} />
+            <StyledInput
+              placeholder="Search wines, brands, or regions"
+              inputProps={{ "aria-label": "search" }}
+            />
           </SearchBox>
 
           {/* mobile view location and delivery */}
@@ -168,7 +171,7 @@ const onClose = ()=>{
                   <DropdownMenuItem
                     key={val}
                     onClick={() => {
-                      navigate('/productsList'); // wrap in function
+                      navigate("/productsList"); // wrap in function
                       handleMenuClose(item); // optionally close the menu
                     }}
                   >
@@ -176,7 +179,6 @@ const onClose = ()=>{
                   </DropdownMenuItem>
                 ))}
               </StyledMenu>
-
             </div>
           ))}
 
@@ -218,7 +220,7 @@ const onClose = ()=>{
         handleMobileMenuClose={handleMobileMenuClose}
         handleMobileMenuToggle={handleMobileMenuToggle}
       />
-                {  signIn  && <AuthDialog open={openLogin} onClose={onClose}/>}
+      {signIn && <AuthDialog open={openLogin} onClose={onClose} />}
     </div>
   );
 };

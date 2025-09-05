@@ -1,63 +1,41 @@
 import { useState } from "react";
+import { AccordionDetails } from "@mui/material";
 import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Divider,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import palette from "../../themes/palette";
+  StyledAccordion,
+  StyledAccordionSummary,
+  StyledExpandMoreIcon,
+  Title,
+  StyledDivider,
+} from "./FilterAccordion.style";
 
 interface Props {
   title: string;
   children: React.ReactNode;
-  isLast?:boolean
+  isLast?: boolean;
 }
 
-const FilterAccordion: React.FC<Props> = ({ title, children,isLast }) => {
+const FilterAccordion: React.FC<Props> = ({ title, children, isLast }) => {
   const [expanded, setExpanded] = useState(true);
 
   return (
     <>
-      <Accordion
+      <StyledAccordion
         disableGutters
         elevation={0}
         square
         expanded={expanded}
         onChange={(_, isExpanded) => setExpanded(isExpanded)}
-        sx={{
-          border: "none",
-          "&:before": { display: "none" },
-        }}
       >
-        <AccordionSummary
-          expandIcon={
-            <ExpandMoreIcon
-              sx={{ color: palette.black[800], fontSize: "16px", fontWeight: 600 }}
-            />
-          }
-        >
-          <Typography
-            sx={{
-              color: palette.black[800],
-              fontSize: "16px",
-              fontWeight: 600,
-              
-            }}
-          >
-            {title}
-          </Typography>
-        </AccordionSummary>
+        <StyledAccordionSummary expandIcon={<StyledExpandMoreIcon />}>
+          <Title>{title}</Title>
+        </StyledAccordionSummary>
 
         <AccordionDetails>{children}</AccordionDetails>
 
-        {/* Divider only when expanded */}
-        {!isLast && expanded && <Divider sx={{ mb: 1, mx: -2 }} />}
-      </Accordion>
+        {!isLast && expanded && <StyledDivider />}
+      </StyledAccordion>
 
-      {/* Divider only when not expanded */}
-      {!isLast && !expanded && <Divider sx={{ mb: 1, mx: -2 }} />}
+      {!isLast && !expanded && <StyledDivider />}
     </>
   );
 };

@@ -7,7 +7,8 @@ interface ContainerProps {
 }
 
 export const Container = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "padding" && prop !== "backgroundColor" && prop !== "maxWidth",
+  shouldForwardProp: (prop) =>
+    prop !== "padding" && prop !== "backgroundColor" && prop !== "maxWidth",
 })<ContainerProps>(({ theme, padding, backgroundColor, maxWidth }) => ({
   width: "100%",
   margin: "0 auto",
@@ -15,8 +16,10 @@ export const Container = styled(Box, {
   backgroundColor: backgroundColor || theme.palette.primary.light,
   maxWidth: maxWidth || "100%",
   position: "relative",
+  marginBottom: theme.spacing(6), // replaces sx={{ mb: 6 }}
 }));
 
+// Slide container
 interface CarouselSlideProps {
   bgImage?: string;
   bgVideo?: string;
@@ -24,15 +27,13 @@ interface CarouselSlideProps {
 }
 
 export const CarouselSlide = styled(Box, {
-  shouldForwardProp: (prop) =>
-    prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
-})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor,theme  }) => ({
+  shouldForwardProp: (prop) => prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
+})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor, theme }) => ({
   background: bgImage
     ? `url(${bgImage}) center/cover no-repeat`
     : bgVideo
-    ? "transparent"
-    : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
-
+      ? "transparent"
+      : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
   borderRadius: "16px",
   padding: "40px",
   display: "flex",
@@ -74,23 +75,32 @@ export const CarouselSlide = styled(Box, {
     objectFit: "cover",
     zIndex: -1,
   },
-   [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding: '24px',
+
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    padding: "24px",
   },
-  
 }));
 
-
+// Content section
 export const ContentSection = styled(Box)(({ theme }) => ({
   flex: 1,
   paddingRight: "32px",
-  [theme.breakpoints.down('sm')]: {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  height: "100%",
+  padding: theme.spacing(3),
+
+  [theme.breakpoints.down("sm")]: {
     paddingRight: 0,
   },
 }));
 
+// Title + description
 export const SlideTitle = styled(Typography)(({ theme }) => ({
   fontSize: "1.5rem",
   fontWeight: "bold",
@@ -105,6 +115,7 @@ export const SlideDescription = styled(Typography)(({ theme }) => ({
   maxWidth: "500px",
 }));
 
+// Price button
 export const PriceButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.white.main,
   color: theme.palette.primary.dark,
@@ -114,20 +125,25 @@ export const PriceButton = styled(Button)(({ theme }) => ({
   fontWeight: "600",
   textTransform: "none",
   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    marginTop: '24px',
-    marginBottom: '10px',
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    marginTop: "24px",
+    marginBottom: "10px",
   },
+}));
+
+// Dots wrapper
+export const DotsWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  marginTop: theme.spacing(4),
+  marginBottom: theme.spacing(3),
 }));
 
 export const DotsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
-  gap: "8px",
-  position: "absolute",
-  left: "40%",
-  right: "40%",
+  gap: "12px",
 }));
 
 export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({
@@ -140,6 +156,12 @@ export const Dot = styled(Box)<{ active: boolean }>(({ theme, active }) => ({
   transition: "all 0.3s ease",
 }));
 
+// PeopleBought wrapper
+export const PeopleBoughtWrapper = styled(Box)(() => ({
+  textAlign: "left",
+}));
+
+// Icon wrapper
 export const IconWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
   color: theme?.palette?.primary.dark,

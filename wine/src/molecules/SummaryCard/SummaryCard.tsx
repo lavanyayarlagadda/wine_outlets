@@ -1,55 +1,26 @@
-import { Box, Typography, Button, Divider, useMediaQuery, useTheme } from "@mui/material";
-import { ShoppingCart } from "@mui/icons-material";
-import { PriceText, VIPPriceText } from "../ProductList/ProductGridCard.style";
-import shape from "../../themes/shape";
+import React from "react";
+import { VIPPriceText, PriceText } from "../ProductList/ProductGridCard.style";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
-import palette from "../../themes/palette";
-
+import { SummaryCardWrapper, StockText, PriceContainer, StyledDivider } from "./SummaryCard.style";
 
 interface Props {
   totalVipPrice: number;
   totalPrice: number;
 }
 
-const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {  
-  const isLaptop = useMediaQuery("(min-width:2000px) and (max-width:2560px)")
+const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
   return (
-<Box
-  sx={{
-    flexShrink: 0,
-    borderRadius: 2,
-    border: "1px solid #f2f2f2",
-    p: 2,
-    backgroundColor: "#ffffff",
-   width : isLaptop ? "976px" : { xs: "100%", sm: "100%", md: "100%", lg: 400 },
-    maxWidth: isLaptop ? "1000px" : { xs: "100%", md:'36%',lg: 400 },
-    boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
-    alignSelf: "center",
-  }}
->
-  <Typography
-    variant="body2"
-    sx={{ color: "green", fontWeight: 500, mb: 1 }}
-  >
-    In Stock
-  </Typography>
+    <SummaryCardWrapper>
+      <StockText variant="body2">In Stock</StockText>
 
-  <Box display="flex" alignItems="center" gap={1.5} mb={2}>
-    <VIPPriceText>VIP: ${totalVipPrice.toFixed(2)}</VIPPriceText>
-    <Divider
-      orientation="vertical"
-      flexItem
-      sx={{ borderColor: palette.grey.divider }}
-    />
-    <PriceText>${totalPrice.toFixed(2)}</PriceText>
-  </Box>
+      <PriceContainer>
+        <VIPPriceText>VIP: ${totalVipPrice.toFixed(2)}</VIPPriceText>
+        <StyledDivider orientation="vertical" flexItem />
+        <PriceText>${totalPrice.toFixed(2)}</PriceText>
+      </PriceContainer>
 
-  <AddToCart
-    onClick={() => console.log("Added to cart")}
-    label="Add to Cart"
-  />
-</Box>
-
+      <AddToCart onClick={() => console.log("Added to cart")} label="Add to Cart" />
+    </SummaryCardWrapper>
   );
 };
 

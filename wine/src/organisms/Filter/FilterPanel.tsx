@@ -1,22 +1,22 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  IconButton,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Drawer, IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
 import { Check, Close, FilterList, Liquor, LocalBar, SportsBar } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { CustomCheckbox, CustomRangeSelector } from "../../atoms";
 import { useFilters } from "../../hooks/useFiters";
 import { FilterAccordion } from "../../molecules";
 import { useState } from "react";
-import Theme from "../../themes";
-import palette from "../../themes/palette";
-import shape from "../../themes/shape";
+import {
+  FilterWrapper,
+  Header,
+  HeaderTitle,
+  ClearButton,
+  StyledDivider,
+  SubCategoryButton,
+  Row,
+  DrawerHeader,
+  ContentStack,
+  PercentageText,
+} from "./FilterPanel.style";
 
 export interface Category {
   categoryId: string;
@@ -58,9 +58,13 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
 
   const getIcon = (name: string) => iconMap[name.toLowerCase()] ?? <LocalBar fontSize="small" />;
 
-  const renderCategory = (cat: Category,idx:number) => (
-    <FilterAccordion key={cat.categoryId} title={cat.categoryName} isLast={categories.length - 1===idx} >
-      <Stack spacing={1}>
+  const renderCategory = (cat: Category, idx: number) => (
+    <FilterAccordion
+      key={cat.categoryId}
+      title={cat.categoryName}
+      isLast={categories.length - 1 === idx}
+    >
+      <ContentStack>
         {cat.categoryList?.map((item) => (
           <CustomCheckbox
             key={item.listId}
@@ -69,6 +73,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
             onChange={() => handleCheckboxChange(cat.categoryId, item.listName)}
           />
         ))}
+
         {cat.categoryRange && typeof cat.categoryRange !== "string" && (
           <CustomRangeSelector
             value={filters[cat.categoryId] || [cat.categoryRange.min, cat.categoryRange.max]}
@@ -77,8 +82,9 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
             onChange={(val: number | number[]) => handleSliderChange(cat.categoryId, val)}
           />
         )}
+
         {typeof cat.categoryRange === "string" && (
-          <Box display="flex" alignItems="center" gap={2}>
+          <Row>
             <CustomRangeSelector
               single
               value={
@@ -90,45 +96,31 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
               max={100}
               onChange={(val: number | number[]) => handleSliderChange(cat.categoryId, val)}
             />
-            <Typography variant="body2" color="text.secondary">
+            <PercentageText variant="body2">
               {filters[cat.categoryId] ?? parseInt(cat.categoryRange)}%
-            </Typography>
-          </Box>
+            </PercentageText>
+          </Row>
         )}
+
         {cat.subCategories?.map((sub) => (
-          <Box key={sub.categoryId} sx={{ mt: 1 }}>
-            <Button
+          <Box key={sub.categoryId}>
+            <SubCategoryButton
               onClick={() => handleSubSelect(sub.categoryId)}
               variant={selectedSub === sub.categoryId ? "contained" : "outlined"}
-              color={selectedSub === sub.categoryId ? "error" : "inherit"}
-              sx={{
-                width: "100%",
-                justifyContent: "space-between",
-                borderRadius: '8px',
-                textTransform: "none",
-                fontWeight: 500,
-                border: selectedSub === sub.categoryId ? `1px solid ${ palette.primary.dark}`:`1px solid ${ palette.grey[200]}`,
-                backgroundColor: selectedSub === sub.categoryId ? palette.primary.light: "white",
-                color: selectedSub === sub.categoryId ? palette.primary.dark: palette.grey[200],
-                mb: 1,
-              }}
+              selected={selectedSub === sub.categoryId}
             >
-              {/* Left side: Icon + Name */}
-              <Box display="flex" alignItems="center" gap={1}>
+              <Row>
                 {getIcon(sub.categoryName)}
                 <Typography>
                   {sub.categoryName} ({sub.categoryCount})
                 </Typography>
-              </Box>
+              </Row>
 
-              {/* Right side: Count + Tick */}
-              <Box display="flex" alignItems="center" gap={1}>
-                {selectedSub === sub.categoryId && <Check fontSize="small" />}
-              </Box>
-            </Button>
+              <Row>{selectedSub === sub.categoryId && <Check fontSize="small" />}</Row>
+            </SubCategoryButton>
 
             {selectedSub === sub.categoryId && (
-               <Stack spacing={1}>
+              <ContentStack>
                 {sub.categoryList?.map((item: any) => (
                   <CustomCheckbox
                     key={item.listId}
@@ -137,42 +129,25 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                     onChange={() => handleCheckboxChange(cat.categoryId, item.listName)}
                   />
                 ))}
-                {sub.subCategories?.map((innerSub,index) => renderCategory(innerSub,index))}
-              </Stack>
+                {sub.subCategories?.map((innerSub, index) => renderCategory(innerSub, index))}
+              </ContentStack>
             )}
           </Box>
         ))}
-      </Stack>
+      </ContentStack>
     </FilterAccordion>
   );
 
   const content = (
-    <Box p={0}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" p={1}>
-        <Typography
-          variant="subtitle1"
-          fontWeight="bold"
-          sx={{ color: palette.black[800], fontSize: "18px" }}
-        >
-          Main Filter
-        </Typography>
-        <Button
-          size="small"
-          sx={{
-            border: `1px solid ${palette.grey[200]}`,
-            borderRadius: "8px",
-            color: palette.black[800],
-            fontSize: "14px",
-             textTransform: "capitalize"
-          }}
-          onClick={handleClearAll}
-        >
+    <Box>
+      <Header>
+        <HeaderTitle variant="subtitle1">Main Filter</HeaderTitle>
+        <ClearButton size="small" onClick={handleClearAll}>
           Clear All
-        </Button>
-      </Box>
-       <Divider sx={{ mb: 1, mx: -2 }} />
-
-      {categories.map((cat,index) => renderCategory(cat,index))}
+        </ClearButton>
+      </Header>
+      <StyledDivider />
+      {categories.map((cat, index) => renderCategory(cat, index))}
     </Box>
   );
 
@@ -182,18 +157,16 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
         <FilterList /> Filter
       </IconButton>
       <Drawer anchor="left" open={openDrawer} onClose={() => setOpenDrawer(false)}>
-        <Box display="flex" justifyContent="flex-end" p={1}>
+        <DrawerHeader>
           <IconButton onClick={() => setOpenDrawer(false)}>
             <Close />
           </IconButton>
-        </Box>
+        </DrawerHeader>{" "}
         {content}
       </Drawer>
     </>
   ) : (
-    <Box border="1px solid #ddd" borderRadius={2} bgcolor="background.paper" p={2}>
-      {content}
-    </Box>
+    <FilterWrapper>{content}</FilterWrapper>
   );
 };
 

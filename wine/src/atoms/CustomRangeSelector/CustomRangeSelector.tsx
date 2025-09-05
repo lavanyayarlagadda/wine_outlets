@@ -1,5 +1,5 @@
-import { Box, Slider, TextField, Typography } from "@mui/material";
-import palette from "../../themes/palette";
+import { TextField, Typography } from "@mui/material";
+import { SliderWrapper, RangeInputsWrapper, StyledSlider } from "./CustomRangeSelector.style";
 
 interface RangeProps {
   value: number[];
@@ -18,54 +18,41 @@ interface SingleProps {
 type Props = (RangeProps | SingleProps) & { single?: boolean };
 
 const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, single }) => (
-  <Box>
+  <>
     {single ? (
-<Box display="flex" alignItems="center" gap={2} width="100%">
-<Slider
-  value={value as number}
-  min={min}
-  max={max}
-  onChange={(_, val) => (onChange as (value: number) => void)(val as number)}
-  sx={{
-    width: 200,
-    "& .MuiSlider-rail": {
-      color: palette.grey.divider,
-      opacity: 1,
-      height: 4,
-    },
-    "& .MuiSlider-track": {
-      color: palette.primary.dark,
-      height: 4,
-    },
-    "& .MuiSlider-thumb": {
-      border: "2px solid white",
-    },
-  }}
-/>
-</Box>
-
-
+      <SliderWrapper>
+        <StyledSlider
+          value={value as number}
+          min={min}
+          max={max}
+          onChange={(_, val) => {
+            if (typeof val === "number") {
+              (onChange as (value: number) => void)(val);
+            }
+          }}
+        />
+      </SliderWrapper>
     ) : (
       <>
-        <Slider
+        <StyledSlider
           value={value as number[]}
           min={min}
           max={max}
-          onChange={(_, val) => (onChange as (value: number[]) => void)(val as number[])}
-          sx={{
-            color: palette.primary.dark,
-            "& .MuiSlider-thumb": { border: "2px solid white" },
+          onChange={(_, val) => {
+            if (Array.isArray(val)) {
+              (onChange as (value: number[]) => void)(val);
+            }
           }}
         />
-       <Box display="flex" gap={1} alignItems="center">
-  <TextField size="small" value={`$${(value as number[])[0]}`} fullWidth />
-  <Typography>-</Typography>
-  <TextField size="small" value={`$${(value as number[])[1]}`} fullWidth />
-</Box>
 
+        <RangeInputsWrapper>
+          <TextField size="small" value={`$${(value as number[])[0]}`} fullWidth />
+          <Typography>-</Typography>
+          <TextField size="small" value={`$${(value as number[])[1]}`} fullWidth />
+        </RangeInputsWrapper>
       </>
     )}
-  </Box>
+  </>
 );
 
 export default CustomRangeSlider;

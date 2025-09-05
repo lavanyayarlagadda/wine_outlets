@@ -21,50 +21,37 @@ const ProductListBanner: React.FC = () => {
   const slides = bannerData.banners;
 
   const current = slides[currentSlide];
-  console.log(current.media.url,"MEDIAURLE")
 
   return (
-    <Container backgroundColor='white' padding='20px 20px'>
-      <CarouselSlide
-      //  bgVideo={current.media.type === "video" ? current.media.url : undefined}
-      >
-        {/* {current.media.type === "video" && (
-          <video autoPlay loop muted playsInline>
-            <source src={current.media.url} type="video/mp4" />
-          </video>
-        )} */}
-
+    <Container backgroundColor="white" padding="20px 20px">
+      <CarouselSlide>
         <ContentSection>
           <SlideTitle variant="h2">{current.title}</SlideTitle>
           <SlideDescription>{current.description}</SlideDescription>
         </ContentSection>
 
-     
-{current.action && (
-  <PriceButton
-    variant="contained"
-    onClick={() => current.action && (window.location.href = current.action.url)}
-  >
-    {current.action.label}
-    <IconWrapper>
-      <NorthEastIcon
-        fontSize="small"
-        sx={{ color: theme.palette.white.main }}
-      />
-    </IconWrapper>
-  </PriceButton>
-)}
+        {current.action && (
+          <PriceButton
+            variant="contained"
+            onClick={() => current.action && (window.location.href = current.action.url)}
+          >
+            {current.action.label}
+            <IconWrapper>
+              <NorthEastIcon fontSize="small" className="arrow-icon" />
+            </IconWrapper>
+          </PriceButton>
+        )}
 
-      <DotsContainer>
-        {slides.map((_, index) => (
-          <Dot
-            key={index}
-            active={index === currentSlide}
-            onClick={() => setCurrentSlide(index)}
-          />
-        ))}
-      </DotsContainer>
-            </CarouselSlide>
+        <DotsContainer>
+          {slides.map((_, index) => (
+            <Dot
+              key={index}
+              active={index === currentSlide}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
+        </DotsContainer>
+      </CarouselSlide>
     </Container>
   );
 };

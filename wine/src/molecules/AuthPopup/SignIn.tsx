@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button, Typography, IconButton } from "@mui/material";
-import { Email, Lock as LockIcon, Visibility, VisibilityOff } from "@mui/icons-material";
-import palette from "../../themes/palette";
+import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
 import { CustomTextField } from "../../atoms";
+import {
+  FormWrapper,
+  SubmitButton,
+  SwitchLink,
+  SwitchText,
+} from "../../organisms/Authentication/AuthDialog.style";
 
 const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,12 +34,12 @@ const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
     e.preventDefault();
     if (validate()) {
       onClose();
-      console.log("Form submitted ✅", form);
+      console.log("Form submitted ", form);
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={2}>
+    <FormWrapper component="form" onSubmit={handleSubmit}>
       <CustomTextField
         label="Email Address"
         value={form.email}
@@ -58,41 +63,14 @@ const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
         }
       />
 
-      <Typography
-        variant="body2"
-        textAlign="right"
-        sx={{ cursor: "pointer", color: palette.primary.dark }}
-      >
-        Forgot password?
-      </Typography>
-
-      {/* Submit Button */}
-      <Button
-        type="submit"
-        variant="contained"
-        fullWidth
-        sx={{
-          backgroundColor: palette.primary.dark,
-          borderRadius: "8px",
-          py: 1.2,
-          fontWeight: "bold",
-        }}
-      >
+      <SubmitButton type="submit" variant="contained" fullWidth>
         Submit
-      </Button>
+      </SubmitButton>
 
-      {/* Bottom Sign Up Text */}
-      <Typography variant="body2" align="center">
-        Don’t have an account?{" "}
-        <Typography
-          component="span"
-          sx={{ color: palette.primary.dark, cursor: "pointer", fontWeight: "bold" }}
-          onClick={() => setTab("signup")}
-        >
-          Sign Up
-        </Typography>
-      </Typography>
-    </Box>
+      <SwitchText variant="body2" align="center">
+        Don't have an account? <SwitchLink onClick={() => setTab("signup")}>Sign Up</SwitchLink>
+      </SwitchText>
+    </FormWrapper>
   );
 };
 

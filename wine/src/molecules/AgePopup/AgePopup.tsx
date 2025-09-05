@@ -1,4 +1,3 @@
-// AgePopup.tsx
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { useAgePopup } from "./AgePopup.hook";
@@ -28,47 +27,41 @@ const AgePopup = ({ open, onClose, onVerify }: AgePopupProps) => {
           {({ errors, touched, values, setFieldValue }) => (
             <Form>
               <Styled.Container>
-                {/* Logo + icon */}
-              <Styled.LogoSection>
-  <Styled.RedCircle />
-  <Styled.LogoImage alt="logo" src="/loader.gif" />
-</Styled.LogoSection>
-
-
-                {/* Heading */}
+                <Styled.LogoSection>
+                  <Styled.RedCircle />
+                  <Styled.LogoImage alt="logo" src="/loader.gif" />
+                </Styled.LogoSection>
                 <Styled.Title>Age Verification Required</Styled.Title>
                 <Styled.Subtitle>
                   You must be 21 years or older to access this website
                 </Styled.Subtitle>
-
-                {/* Date Input */}
                 <Styled.InputSection>
                   <Styled.InputLabel>Date of Birth</Styled.InputLabel>
-                 <Field name="dateOfBirth">
-  {({ field, form }: any) => (
-    <Styled.StyledTextField
-      {...field}
-      value={field.value}
-      onChange={(e) => {
-        const formatted = formatDate(e.target.value);
-        form.setFieldValue("dateOfBirth", formatted);
-      }}
-      placeholder="MM/DD/YYYY"
-      variant="outlined"
-      fullWidth
-      error={form.touched.dateOfBirth && !!form.errors.dateOfBirth}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <IconButton edge="start" disableRipple>
-              <CalendarToday fontSize="small" />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-    />
-  )}
-</Field>
+                  <Field name="dateOfBirth">
+                    {({ field, form }: any) => (
+                      <Styled.StyledTextField
+                        {...field}
+                        value={field.value}
+                        onChange={(e) => {
+                          const formatted = formatDate(e.target.value);
+                          form.setFieldValue("dateOfBirth", formatted);
+                        }}
+                        placeholder="MM/DD/YYYY"
+                        variant="outlined"
+                        fullWidth
+                        error={form.touched.dateOfBirth && !!form.errors.dateOfBirth}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton edge="start" disableRipple>
+                                <CalendarToday fontSize="small" />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                  </Field>
                   {touched.dateOfBirth && errors.dateOfBirth && (
                     <Styled.ErrorText>{errors.dateOfBirth}</Styled.ErrorText>
                   )}
