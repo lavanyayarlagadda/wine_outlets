@@ -19,7 +19,7 @@ export const StyledThumbnailList = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   [theme.breakpoints.down("md")]: {
     flexDirection: "row",
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
     justifyContent: "center",
     width: "100%",
   },
@@ -248,7 +248,7 @@ export const ImageSection = styled(Grid)(() => ({
 
 export const ImageBox = styled(Box)(({ theme }) => ({
   position: "sticky",
-  top: theme.spacing(3), // distance from top when scrolling
+  top: '200px', // distance from top when scrolling
   display: "flex",
   justifyContent: "center",
   alignItems: "flex-start",
