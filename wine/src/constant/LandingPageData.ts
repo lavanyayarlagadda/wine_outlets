@@ -3,6 +3,7 @@ import { Offer_img1, Offer_img2, Offer_img3 } from "../assets";
 import { curated_img1, curated_img2,   curated_img3,
   curated_img4,
   curated_img5, } from "../assets";
+import {category_img1, category_img2, category_img3, category_img4} from "../assets";
 export const LandingPageData = {
   heroSection: {
     isVisible: true,
@@ -279,47 +280,47 @@ export const LandingPageData = {
     categories: [
       {
         id: 1,
-        name: "Red Wines",
+        productName: "Red Wines",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: category_img1,
         },
 
         productCount: 128,
-        url: "/collections/seasonal",
+        categoryAction: "/collections/seasonal",
       },
       {
         id: 2,
-        name: "Beer",
+        productName: "Beer",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: category_img2,
         },
-        url: "/collections/seasonal",
+        categoryAction: "/collections/seasonal",
 
         productCount: 65,
       },
       {
         id: 3,
-        name: "Liquor",
+        productName: "Liquor",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: category_img3,
         },
 
-        url: "/collections/seasonal",
+        categoryAction: "/collections/seasonal",
 
         productCount: 40,
       },
       {
         id: 4,
-        name: "White Wines",
+        productName: "White Wines",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: category_img4,
         },
 
-        url: "/collections/seasonal",
+        categoryAction: "/collections/seasonal",
 
         productCount: 112,
       },
