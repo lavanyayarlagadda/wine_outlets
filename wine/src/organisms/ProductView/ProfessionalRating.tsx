@@ -1,31 +1,24 @@
-import { useState } from "react";
 import { Grid, IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { ProductLayoutContainer } from "./ProductView.style";
+import { ProductLayoutContainer } from './ProductView.style';
 import { ProductTitle } from "../../molecules/ProductListCard/ProductListCard.style";
-import type { ProductViewResponse } from "../../constant/productViewData";
 import ProfessionalRatingCard from "../../molecules/ProductView/ProfessionalRatingCard";
 import { Container, Header, RatingsGrid } from "../../molecules/ProductView/ProductView.style";
-// import { ProductLayoutContainer } from "./ProductView.style";
+import { UseProductView } from "./UseProductView.hook";
 
-interface ProductDetailsProps {
-  productViewData: ProductViewResponse;
-}
 
-const ProfessionalRating: React.FC<ProductDetailsProps> = ({ productViewData }) => {
-  const [expanded, setExpanded] = useState(true);
+const ProfessionalRating = () => {
+   const { expanded, toggleExpand, productViewData } = UseProductView();
 
-  const toggleExpand = () => {
-    setExpanded((prev) => !prev);
-  };
-
-  return (
-    <ProductLayoutContainer>
+    return (
+         <ProductLayoutContainer>
       <Container>
         <Header onClick={toggleExpand}>
           <ProductTitle>Professional Rating</ProductTitle>
-          <IconButton>{expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}</IconButton>
+          <IconButton>
+            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
         </Header>
 
         {expanded && productViewData?.professionalRating?.length ? (
@@ -46,7 +39,7 @@ const ProfessionalRating: React.FC<ProductDetailsProps> = ({ productViewData }) 
               }
 
               return (
-                <Grid size={{ xs: 12, sm: gridSize, md: gridSize }} key={index}>
+                <Grid size={{ xs: 12, sm: gridSize, md: gridSize }}  key={index}>
                   <ProfessionalRatingCard
                     title={rating.title}
                     score={rating.score}
@@ -61,7 +54,7 @@ const ProfessionalRating: React.FC<ProductDetailsProps> = ({ productViewData }) 
         ) : null}
       </Container>
     </ProductLayoutContainer>
-  );
+    );
 };
 
 export default ProfessionalRating;

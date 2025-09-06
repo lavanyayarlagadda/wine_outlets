@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import type { ProductViewResponse } from "../../constant/productViewData";
+import React from "react";
+
 import {
   StyledCardMedia,
   StyledCard,
@@ -8,14 +8,27 @@ import {
   StyledThumbnailList,
   StyledThumbnailMedia,
 } from "./ProductView.style";
+import { UseProductView } from "./UseProductView.hook";
 
-interface ProductImageProps {
-  productViewData: ProductViewResponse;
+interface ImageGalleryProps {
+  images: { url: string }[]; // generic array of images
+  initialIndex?: number;
+   onImageChange?: (_index: number, _image: string) => void;
+    thumbnailPosition?: "left" | "right" | "top" | "bottom";
+  imageFit?: "cover" | "contain";
+  height?: number | string;
 }
 
-const ProductImage: React.FC<ProductImageProps> = ({ productViewData }) => {
-  const images = productViewData.product.images;
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const ImageGallery: React.FC<ImageGalleryProps> = ({
+  images,
+  initialIndex = 0,
+  onImageChange,
+}) => {
+   const { selectedIndex, selectedImage, handleSelect } = UseProductView(
+    images,
+    initialIndex,
+    onImageChange
+  );
 
   return (
     <StyledImageContainer>
@@ -25,23 +38,27 @@ const ProductImage: React.FC<ProductImageProps> = ({ productViewData }) => {
           <StyledThumbnailCard
             key={idx}
             selected={selectedIndex === idx}
-            onClick={() => setSelectedIndex(idx)}
+            onClick={() => handleSelect(idx)}
           >
             <StyledThumbnailMedia
               as="img"
               src={img.url}
               alt={`Thumbnail ${idx + 1}`}
-              // sx={{ objectFit: 'cover', width: '100%', height: '100%', px:3 }}
             />
           </StyledThumbnailCard>
         ))}
       </StyledThumbnailList>
+
       {/* Main Image */}
       <StyledCard>
-        <StyledCardMedia as="img" src={images[selectedIndex]?.url} alt="Wine Bottle" />
+        <StyledCardMedia
+          as="img"
+          src={selectedImage?.url}
+          alt="Selected Image"
+        />
       </StyledCard>
     </StyledImageContainer>
   );
 };
 
-export default ProductImage;
+export default ImageGallery;

@@ -1,71 +1,71 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-const paddings = {
-  32: {
-    default: "32px",
-    sm: "16px",
-    md: "20px",
-    lg: "28px",
-  },
-  24: {
-    default: "24px",
-    sm: "12px",
-    md: "16px",
-    lg: "20px",
-  },
-  16: {
-    default: "16px",
-    sm: "8px",
-    md: "12px",
-    lg: "14px",
-  },
-  12: {
-    default: "12px",
-    sm: "6px",
-    md: "8px",
-    lg: "10px",
-  },
-  8: {
-    default: "8px",
-    sm: "4px",
-    md: "6px",
-    lg: "6px",
-  },
+const fontSizes = {
+    32: {
+        default: '32px',
+        sm: '16px',
+        md: '18px',
+        lg: '24px',
+    },
+    24: {
+        default: '24px',
+        sm: '14px',
+        md: '16px',
+        lg: '20px',
+    },
+    18: {
+        default: '18px',
+        sm: '12px',
+        md: '14px',
+        lg: '16px',
+    },
+    16: {
+        default: '16px',
+        sm: '10px',
+        md: '12px',
+        lg: '14px',
+    },
+    14: {
+        default:'14px',
+        sm:'8px',
+        md:'10px',
+        lg:'12px'
+    }
 };
 
-type PaddingKey = keyof typeof paddings;
+type FontSizeKey = keyof typeof fontSizes;
 
-export const getPadding = (sizeKey: PaddingKey): string => {
-  const screenWidth = window.innerWidth;
+export const getFontSize = (sizeKey: FontSizeKey): string => {
+    const screenWidth = window.innerWidth;
 
-  if (screenWidth <= 767) {
-    return paddings[sizeKey].sm;
-  } else if (screenWidth <= 992) {
-    return paddings[sizeKey].md;
-  } else if (screenWidth <= 1280) {
-    return paddings[sizeKey].lg;
-  } else {
-    return paddings[sizeKey].default;
-  }
+    if (screenWidth <= 767) {
+        return fontSizes[sizeKey].sm;
+    } else if (screenWidth <= 992) {
+        return fontSizes[sizeKey].md;
+    } else if (screenWidth <= 1280) {
+        return fontSizes[sizeKey].lg;
+    } else {
+        return fontSizes[sizeKey].default;
+    }
 };
 
-const usePadding = (sizeKey: PaddingKey): string => {
-  const [padding, setPadding] = useState(getPadding(sizeKey));
+const useFontSize = (sizeKey: FontSizeKey): string => {
+    const [fontSize, setFontSize] = useState(getFontSize(sizeKey));
 
-  useEffect(() => {
-    const handleResize = (): void => {
-      setPadding(getPadding(sizeKey));
-    };
+    useEffect(() => {
+        const handleResize = (): void => {
+            setFontSize(getFontSize(sizeKey));
+        };
 
-    window.addEventListener("resize", handleResize);
+        window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [sizeKey]);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [sizeKey]);
 
-  return padding;
+    return fontSize;
 };
 
-export default paddings;
-export { usePadding };
+export default fontSizes;
+export { useFontSize };

@@ -1,8 +1,6 @@
-import React from "react";
-import type { ProductViewResponse } from "../../constant/productViewData";
-import ProductImage from "../../molecules/ProductView/ProductImage";
-import ProductDetails from "./ProductDetails";
-
+import React from 'react';
+import ProductDetails from './ProductDetails';
+import ProductImageWrapper from './ProductImage';
 import {
   ProductLayoutContainer,
   ProductLayoutGrid,
@@ -10,34 +8,33 @@ import {
   ProductImageBox,
   ProductDetailsSection,
   ProductDetailsBox,
-} from "./ProductView.style";
+} from './ProductView.style';
 
-// import { ProductLayoutContainer } from './ProductView.style';
 
-interface ProductDetailsProps {
-  productViewData: ProductViewResponse;
-}
 
-const Product: React.FC<ProductDetailsProps> = ({ productViewData }) => {
+
+const Product: React.FC = () => {
+
   return (
     <ProductLayoutContainer>
-      <ProductLayoutGrid container spacing={4}>
+      <ProductLayoutGrid container spacing={4} >
         {/* Image Section */}
-        <ProductImageSection size={{ xs: 12, md: 6 }}>
+        <ProductImageSection size={{ xs: 12, md: 6 }} >
           <ProductImageBox>
-            <ProductImage productViewData={productViewData} />
+             <ProductImageWrapper />
           </ProductImageBox>
         </ProductImageSection>
 
         {/* Details Section */}
-        <ProductDetailsSection size={{ xs: 12, md: 6 }}>
+        <ProductDetailsSection size={{ xs: 12, md: 6 }} >
           <ProductDetailsBox>
-            <ProductDetails productViewData={productViewData} />
+            <ProductDetails/>
           </ProductDetailsBox>
         </ProductDetailsSection>
       </ProductLayoutGrid>
     </ProductLayoutContainer>
   );
-};
+}
 
 export default Product;
+
