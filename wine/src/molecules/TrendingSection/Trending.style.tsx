@@ -39,17 +39,17 @@ export const LeftSectionBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BackgroundImage = styled(Box)({
+export const BackgroundImage = styled(Box)<{ backgroundImage?: string }>(({ backgroundImage }) => ({
   position: "absolute",
   top: 0,
   left: 0,
   width: "100%",
   height: "100%",
-  backgroundImage: `url(${banner_img1})`,
+  backgroundImage: backgroundImage ? `url(${backgroundImage})` : banner_img1,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
-});
+}));
 
 export const ContentContainer = styled(Box)({
   position: "relative",

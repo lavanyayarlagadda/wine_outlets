@@ -140,25 +140,19 @@ export const LandingPageData = {
         "Enjoy high-quality wines, beers, and spirits at affordable prices—perfect for daily moments without compromising on taste",
       media: {
         type: "image",
-        url: "https://example.com/images/wine-1.jpg",
+        url: banner_img1,
       },
-      action: {
-        id: 1,
-        label: "View All",
-        url: "/collections/everyday-value",
-      },
+      btnText:  "View All",
+      btnAction: "/collections/everyday-value",
     },
-    categories: [
+    cards: [
       {
         id: "2",
         title: "Trending Now",
         description:
           "Discover our most-loved wines, beers, & spirits making waves this week—perfect picks for your next celebration.",
-        action: {
-          id: 1,
-          label: "Shop Trending",
-          url: "/collections/trending",
-        },
+        btnText:  "View All",
+        btnAction: "/collections/everyday-value",
       },
       {
         id: "3",
@@ -167,8 +161,8 @@ export const LandingPageData = {
           "Shop our best-selling wines, beers, and spirits that customers love. Tried, tested, and trusted for moments every time.",
         action: {
           id: 1,
-          label: "View Bestsellers",
-          url: "/collections/bestsellers",
+          btnText: "View Bestsellers",
+          btnAction: "/collections/bestsellers",
         },
       },
       {
@@ -176,22 +170,16 @@ export const LandingPageData = {
         title: "New Arrivals",
         description:
           "Be the first to taste our latest additions. Fresh arrivals of premium wines, craft beers, and spirits just for you.",
-        action: {
-          id: 1,
-          label: "Starting from $9.50",
-          url: "/collections/new-arrivals",
-        },
+        btnText: "Starting from $9.50",
+        btnAction: "/collections/new-arrivals",
       },
       {
         id: "5",
         title: "Seasonal Picks",
         description:
           "Celebrate the season with specially curated wines, beers, & spirits designed to pair perfectly with moods & gatherings.",
-        action: {
-          id: 1,
-          label: "Shop Seasonal Collection",
-          url: "/collections/seasonal",
-        },
+        btnText: "Shop Seasonal Collection",
+        btnAction: "/collections/seasonal",
       },
     ],
   },
