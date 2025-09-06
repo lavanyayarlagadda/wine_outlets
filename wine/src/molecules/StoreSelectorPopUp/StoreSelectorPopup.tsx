@@ -80,7 +80,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
               setIsAgeVerified(true);
               setTimeout(() => {
                 onClose();
-              }, 5000);
+              }, 2000);
             }}
           >
             <StoreHeader>

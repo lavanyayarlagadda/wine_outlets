@@ -1,7 +1,7 @@
 import palette from "./palette";
 
 const shape = {
-  borderRadius: 8,
+  borderRadius: "16px",
   borderRadiuspx: "8px",
   borderRadius12: "12px",
   borderGrey: `1px solid ${palette.grey[400]}`,
