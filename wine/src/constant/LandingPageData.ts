@@ -1,5 +1,8 @@
 import { banner_img1, banner_img2, banner_img3 } from "../assets";
 import { Offer_img1, Offer_img2, Offer_img3 } from "../assets";
+import { curated_img1, curated_img2,   curated_img3,
+  curated_img4,
+  curated_img5, } from "../assets";
 export const LandingPageData = {
   heroSection: {
     isVisible: true,
@@ -184,28 +187,55 @@ export const LandingPageData = {
     ],
   },
 
-  shopOurCuratedPicks: {
+  curatedPicks: {
     isVisible: true,
     title: "Shop Our Curated Picks",
     subtitle: "Find your favorite by type.",
     categories: [
       {
         id: 1,
-        name: "Limited Edition",
+        category: "Limited Edition",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: curated_img1,
         },
-        url: "Url",
+        categoryAction: "Url",
       },
       {
         id: 2,
-        name: "Top Sellers",
+        category: "Top Sellers",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: curated_img2,
         },
-        url: "Url",
+        categoryAction: "Url",
+      },
+      {
+        id: 3,
+        category: "Wine under $20",
+        media: {
+          type: "image",
+          url: curated_img3,
+        },
+        categoryAction: "Url",
+      },
+      {
+        id: 4,
+        category: "Premium Selection",
+        media: {
+          type: "image",
+          url: curated_img4,
+        },
+        categoryAction: "Url",
+      },
+      {
+        id: 5,
+        category: "Best Value",
+        media: {
+          type: "image",
+          url: curated_img5,
+        },
+        categoryAction: "Url",
       },
     ],
   },

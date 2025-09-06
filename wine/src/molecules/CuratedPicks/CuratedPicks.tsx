@@ -12,27 +12,49 @@ import {
   StyledImageContainer,
   StyledCategoryLabel,
 } from "./CuratedPicks.style";
-
-import { curatedData } from "../../constant/curatedData";
+import { LandingPageData } from "../../constant/LandingPageData"
+// import { curatedData } from "../../constant/curatedData";
 import { useNavigate } from "react-router-dom";
+
+interface CuratedCategory {
+  id: number;
+  category: string;
+  media?: {
+    type?: string;
+    url?: string;
+  };
+  categoryAction?: string;
+}
+
+interface CuratedPicksSection {
+  isVisible?: boolean;
+  title?: string;
+  subtitle?: string;
+  categories?: CuratedCategory[];
+}
+
+const {title,subtitle,categories}: CuratedPicksSection = LandingPageData?.curatedPicks ?? {};
+// const title = curatedSection.title ?? "Shop Our Curated Picks";
+// const subtitle = curatedSection.subtitle ?? "Find your favorite by type.";
+// const categories = curatedSection.categories ?? [];
 
 const CuratedPicks = () => {
   const navigate = useNavigate();
   return (
     <Container>
       <HeaderSection>
-        <Title>Shop Our Curated Picks</Title>
-        <Subtitle>Find your favorite by type.</Subtitle>
+        <Title>{title}</Title>
+        <Subtitle>{subtitle}</Subtitle>
       </HeaderSection>
       <StyledContainer>
         <StyledGridContainer>
-          {curatedData.map((item, index) => (
+          {categories?.map((item, index) => (
             <Grid key={index}>
               <StyledWineItem>
                 <StyledImageContainer onClick={() => navigate("/productsList")}>
                   <StyledOverlay />
                   <img
-                    src={item.imageUrl || "/placeholder.svg"}
+                    src={item.media?.url || "/placeholder.svg"}
                     alt={`${item.category} wine bottle`}
                     width={120}
                     height={240}
