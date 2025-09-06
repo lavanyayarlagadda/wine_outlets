@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import palette from "../../themes/palette";
 import spacing from "../../themes/spacing";
 import { useFontSize } from "../../themes/fontSize";
+import shape from "../../themes/shape";
 
 export const StyledImageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -62,7 +63,7 @@ export const StyledThumbnailCard = styled(Card, {
   width: 80,
   height: 124,
   marginBottom: 2,
-  border: selected ? `2px solid ${theme.palette.primary.main}` : `2px solid ${palette.grey.border}`,
+  border: selected ? shape.borderMain : shape.borderGrey2px,
   cursor: "pointer",
   overflow: "hidden",
   transition: "border 0.2s, box-shadow 0.2s",
@@ -136,7 +137,7 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
   fontWeight: 500,
   fontSize: useFontSize(14),
   color: theme.palette.primary.dark,
-  border: `1px solid ${theme.palette.primary.dark}`,
+  border: shape.borderRed,
   backgroundColor: theme.palette.primary.light,
   [theme.breakpoints.down("sm")]: {
     padding: "0 4px",
@@ -152,9 +153,6 @@ export const RatingTypography = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1),
   color: theme.palette.grey[200],
   fontSize: useFontSize(16),
-  // [theme.breakpoints.down("sm")]: {
-  //   fontSize: "0.8rem",
-  // },
 }));
 
 export const InfoValues = styled(Typography)(({ theme }) => ({
@@ -223,17 +221,6 @@ export const ProductImageSection = styled(Grid)(() => ({
   // display: "flex",
 }));
 
-// export const ImageBox = styled(Box)(({ theme }) => ({
-//   flex: 1,
-//   display: "flex",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   padding: theme.spacing(0),
-//   [theme.breakpoints.up("md")]: {
-//     padding: theme.spacing(2),
-//   },
-// }));
-
 export const ProductImageBox = styled(Box)(({ theme }) => ({
   position: "sticky",
   top: "200px", // distance from top when scrolling
@@ -267,7 +254,7 @@ export const HighlightsContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: 16,
   backgroundColor: palette.white.light,
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   marginTop: theme.spacing(2),
 }));
 
@@ -336,13 +323,13 @@ export const RatingHeader = styled(Box)(({ theme }) => ({
 }));
 
 export const RatingTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 600, // bold
-  fontSize: useFontSize(16), // adjust as needed
+  fontWeight: 600,
+  fontSize: useFontSize(16),
   color: theme.palette.text.primary,
 }));
 
-export const RatingBadge = styled(Box)(({ theme }) => ({
-  border: `2px solid ${theme.palette.primary.dark}`,
+export const RatingBadge = styled(Box)(() => ({
+  border: shape.borderRed2px,
   borderRadius: "50%",
   width: 36,
   height: 36,
@@ -372,7 +359,7 @@ export const ReviewerName = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 export const Container = styled(Box)(({ theme }) => ({
-  border: `1px solid ${theme.palette.success.main}`,
+  border: shape.borderSuccess,
   borderRadius: spacing.outlineSpace,
   padding: theme.spacing(0.5), // 2px
 }));

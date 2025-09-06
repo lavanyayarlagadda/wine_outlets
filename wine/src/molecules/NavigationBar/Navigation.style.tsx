@@ -48,7 +48,7 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   flexWrap: "wrap",
   padding: "16px 0px !important",
   margin: "0px 30px",
-  borderBottom: `1px solid ${theme.palette.success.main}`,
+  borderBottom: shape.borderSuccess,
   [theme.breakpoints.down("md")]: {
     margin: "0px 16px",
     padding: "0px 0px !important",
@@ -311,10 +311,10 @@ export const DrawerSubMenuItem = styled(Box)(({ theme }) => ({
   cursor: "pointer",
 }));
 
-export const DrawerAccountSection = styled(Box)(({ theme }) => ({
+export const DrawerAccountSection = styled(Box)(() => ({
   marginTop: "16px",
   paddingTop: "16px",
-  borderTop: `1px solid ${theme.palette.grey[200]}`,
+  borderTop: shape.boderGrey200,
 }));
 
 export const CloseButton = styled(IconButton)(({ theme }) => ({

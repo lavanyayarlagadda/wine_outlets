@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { storesData } from "../../constant/storesData";
 
 type MenuState = {
   [key: string]: boolean;
@@ -19,6 +20,8 @@ export const useNavigation = (menuKeys: string[]) => {
 
   // mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [storeData] = useState(storesData); // ✅ constant store data
+  const [selectedStore, setSelectedStore] = useState<number | null>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, key: string) => {
     setAnchorEl((prev) => ({ ...prev, [key]: event.currentTarget }));
@@ -56,5 +59,8 @@ export const useNavigation = (menuKeys: string[]) => {
     handleMobileMenuOpen,
     handleMobileMenuClose,
     handleMobileMenuToggle,
+    storeData,
+    selectedStore,
+    setSelectedStore,
   };
 };
