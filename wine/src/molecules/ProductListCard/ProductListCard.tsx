@@ -4,7 +4,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
-import { PriceText, RatingBox, SmallText, VIPPriceText } from "../ProductListGrid/ProductGridCard.style";
+import {
+  PriceText,
+  RatingBox,
+  SmallText,
+  VIPPriceText,
+} from "../ProductListGrid/ProductGridCard.style";
 import { useNavigate } from "react-router-dom";
 import {
   StyledCard,
@@ -106,7 +111,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
 
         <FooterRow>
           {typeof vipPrice === "number" && <VIPPriceText>VIP: ${vipPrice.toFixed(2)}</VIPPriceText>}
-    <PriceText>${price.toFixed(2)}</PriceText>
+          <PriceText>${price.toFixed(2)}</PriceText>
           <AddToCartButton
             variant="contained"
             fullWidth={isMobile}

@@ -5,13 +5,19 @@ import { CounterBox, CounterIconButton, CounterValue } from "./CustomCounter.sty
 
 interface CounterProps {
   value: number;
-onChange: (_newValue: number) => void;
+  onChange: (_newValue: number) => void;
   min?: number;
   max?: number;
   step?: number;
 }
 
-const CustomCounter: React.FC<CounterProps> = ({ value, onChange, min = 0, max = Infinity, step = 1 }) => {
+const CustomCounter: React.FC<CounterProps> = ({
+  value,
+  onChange,
+  min = 0,
+  max = Infinity,
+  step = 1,
+}) => {
   const handleDecrement = () => {
     if (value > min) {
       onChange(value - step);

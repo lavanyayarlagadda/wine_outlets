@@ -1,4 +1,4 @@
-import { Box, Typography,  styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 
 export const HeaderSection = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -17,7 +17,7 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   color: theme.palette.black[800],
   marginBottom: theme.spacing(1),
-   [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("sm")]: {
     fontSize: "22px",
   },
 }));

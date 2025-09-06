@@ -60,11 +60,7 @@ const ReusableReviewForm: React.FC<ReviewFormProps> = ({
 
       {/* Rating + Button */}
       <RatingBox isSm={isSm}>
-        <StyledRating
-          value={rating}
-          onChange={(_, newValue) => setRating(newValue)}
-          size="large"
-        />
+        <StyledRating value={rating} onChange={(_, newValue) => setRating(newValue)} size="large" />
 
         <ButtonHintWrapper isSm={isSm}>
           <CustomButton
@@ -76,9 +72,7 @@ const ReusableReviewForm: React.FC<ReviewFormProps> = ({
             btnBorderColor=""
           />
           {!isSm && (
-            <span style={{ color:palette.grey.greyDark }}>
-              Your feedback is essential for us!
-            </span>
+            <span style={{ color: palette.grey.greyDark }}>Your feedback is essential for us!</span>
           )}
         </ButtonHintWrapper>
       </RatingBox>

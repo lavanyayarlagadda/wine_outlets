@@ -5,7 +5,7 @@ export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
   padding: "80px 64px",
-   [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("md")]: {
     padding: "40px 16px",
   },
 }));

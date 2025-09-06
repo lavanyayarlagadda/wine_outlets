@@ -9,11 +9,7 @@ interface AddToCartProps {
 
 const AddToCart: React.FC<AddToCartProps> = ({ onClick, label }) => {
   return (
-    <AddToCartButton
-      variant="contained"
-      startIcon={<ShoppingCartIcon />}
-      onClick={onClick}
-    >
+    <AddToCartButton variant="contained" startIcon={<ShoppingCartIcon />} onClick={onClick}>
       {label}
     </AddToCartButton>
   );

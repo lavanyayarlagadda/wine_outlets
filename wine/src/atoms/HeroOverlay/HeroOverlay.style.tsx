@@ -15,8 +15,8 @@ export const OverlayContainer = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(0, 2),
-    justifyContent: "center", 
-    textAlign: "center",    
+    justifyContent: "center",
+    textAlign: "center",
   },
 }));
 
@@ -32,8 +32,8 @@ export const OverlayContentBox = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down("sm")]: {
     maxWidth: "100%",
-    margin: "0 auto",   
-    textAlign: "center",   
+    margin: "0 auto",
+    textAlign: "center",
   },
 }));
 
@@ -53,7 +53,7 @@ export const OverlayButtonGroup = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const CustomiseBannerContentWrapper = styled(Box)(({ }) => ({
+export const CustomiseBannerContentWrapper = styled(Box)(({}) => ({
   display: "flex",
   flexDirection: "column",
   gap: "16px",
@@ -66,7 +66,7 @@ export const CustomizeTagBox = styled(Box)(({ theme }) => ({
   alignItems: "center",
   padding: "12px 8px",
   width: "fit-content",
-  // width: "100%", 
+  // width: "100%",
   // justifyContent: "space-between",
   "& span": {
     backgroundColor: theme.palette.primary?.dark,
@@ -96,8 +96,8 @@ export const CustomizeTitleText = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   lineHeight: "72px",
   [theme.breakpoints.down("sm")]: {
-    fontSize: theme.typography.h5.fontSize, 
-    lineHeight: "54px", 
+    fontSize: theme.typography.h5.fontSize,
+    lineHeight: "54px",
   },
   "@media (max-height: 700px)": {
     fontSize: theme.typography.h4.fontSize,

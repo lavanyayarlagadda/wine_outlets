@@ -5,7 +5,7 @@ import shape from "../../themes/shape";
 
 export const FilterWrapper = styled(Box)(({ theme }) => ({
   border: shape.boderGrey200,
-  borderRadius: '16px',
+  borderRadius: "16px",
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(2),
 }));
@@ -35,7 +35,7 @@ export const HeaderTitle = styled(Typography)(() => ({
 }));
 
 export const ClearButton = styled(Button)(() => ({
-  border:shape.boderGrey200,
+  border: shape.boderGrey200,
   borderRadius: "8px",
   color: palette.black[800],
   fontSize: "14px",

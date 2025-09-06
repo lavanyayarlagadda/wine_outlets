@@ -1,6 +1,5 @@
-
 import React from "react";
-import {  IconButton, Box, Typography, Divider } from "@mui/material";
+import { IconButton, Box, Typography, Divider } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import * as Styled from "../../molecules/AgePopup/AgePopup.style";
 import palette from "../../themes/palette";
@@ -15,7 +14,7 @@ interface BasePopupProps {
 
 const CustomPopup: React.FC<BasePopupProps> = ({ open, onClose, title, children, footer }) => {
   return (
-        <Styled.StyledDialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
+    <Styled.StyledDialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       {/* Header */}
       {title && (
         <Box display="flex" justifyContent="space-between" alignItems="center" p={2}>

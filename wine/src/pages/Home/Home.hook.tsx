@@ -3,11 +3,11 @@ import { useState } from "react";
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
   const [isAgeVerified, setIsAgeVerified] = useState(false);
-        const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleVerifyAge = () => {
     setAgePopupOpen(false);
-    setOpen(true)
+    setOpen(true);
     setIsAgeVerified(true);
   };
   const handleCategoryClick = () => {
@@ -24,6 +24,6 @@ export const useHomeLogic = () => {
     handleBrandClick,
     setOpen,
     open,
-    setIsAgeVerified
+    setIsAgeVerified,
   };
 };

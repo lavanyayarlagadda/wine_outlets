@@ -1,4 +1,3 @@
-
 import {
   styled,
   Box,
@@ -81,26 +80,25 @@ export const SearchBox = styled(Box)(({ theme }) => ({
   minWidth: "300px",
   border: shape.borderSuccess,
   width: "400px",
-    // Tablet styles
-  [theme.breakpoints.down('lg')]: {
+  // Tablet styles
+  [theme.breakpoints.down("lg")]: {
     minWidth: "250px",
     width: "300px",
     padding: "4px 10px",
   },
   // Mobile styles
-  [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     minWidth: "auto",
     width: "100%",
   },
   // Small mobile styles
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     padding: "6px 12px",
     borderRadius: "10px",
-  }
-
+  },
 }));
 
-export const StyledInput = styled(InputBase)(({theme}) => ({
+export const StyledInput = styled(InputBase)(({ theme }) => ({
   marginLeft: "8px",
   flex: 1,
   color: palette.grey[200], // text color
@@ -109,14 +107,14 @@ export const StyledInput = styled(InputBase)(({theme}) => ({
     opacity: 1,
   },
   // Tablet styles
-  [theme.breakpoints.down('lg')]: {
+  [theme.breakpoints.down("lg")]: {
     fontSize: "13px",
     "& input::placeholder": {
       fontSize: "13px",
     },
   },
   // Mobile styles
-  [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     marginLeft: "6px",
     fontSize: "16px", // Larger text for mobile touch devices
     "& input::placeholder": {
@@ -125,7 +123,7 @@ export const StyledInput = styled(InputBase)(({theme}) => ({
     },
   },
   // Small mobile styles
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     fontSize: "14px",
     "& input::placeholder": {
       fontSize: "14px",
@@ -169,7 +167,7 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.primary.light,
   },
-    [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     padding: "4px 8px",
     fontSize: "12px",
     flex: 1, // Take equal width
@@ -181,25 +179,25 @@ export const DropdownTriggerNoBorder = styled(DropdownTrigger)(() => ({
   border: "none",
 }));
 
-export const DropdownTriggerWithGap = styled(DropdownTrigger)(({theme}) => ({
+export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
   display: "flex",
   gap: "10px",
-   [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     "& img": {
-      width: "14px", 
+      width: "14px",
       height: "14px",
     },
   },
 }));
 
-export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({theme}) => ({
+export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: "8px",
   "& img": {
     marginRight: "0px",
   },
-    [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     "& img": {
       width: "14px", // Smaller icon on mobile
       height: "14px",
@@ -232,13 +230,13 @@ export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
   padding: "8px",
   borderRadius: "16px",
   // Mobile styles
-  [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     padding: "4px",
     border: "none",
     "& img": {
       width: "20px",
       height: "20px",
-    }
+    },
   },
 }));
 
@@ -253,7 +251,7 @@ export const MobileMenuButton = styled(IconButton)(({ theme }) => ({
   display: "none",
   [theme.breakpoints.down("md")]: {
     display: "block",
-    border:shape.borderBlue
+    border: shape.borderBlue,
   },
 }));
 
@@ -266,7 +264,7 @@ export const DesktopMenuWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledDrawer = styled(Drawer)(({theme}) => ({
+export const StyledDrawer = styled(Drawer)(({ theme }) => ({
   "& .MuiDrawer-paper": {
     width: "260px",
     borderRadius: "0 16px 16px 0",
@@ -277,12 +275,12 @@ export const StyledDrawer = styled(Drawer)(({theme}) => ({
   },
 }));
 
-export const DrawerHeader = styled(Box)(({theme}) => ({
+export const DrawerHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "16px",
-  borderBottom: theme.palette.grey[200]
+  borderBottom: theme.palette.grey[200],
 }));
 
 export const DrawerMenuItem = styled(Box)(() => ({
@@ -297,7 +295,7 @@ export const DrawerMenuItem = styled(Box)(() => ({
 
 export const MobileLocationDeliveryWrapper = styled(Box)(({ theme }) => ({
   display: "none",
-  [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.down("md")]: {
     display: "flex",
     gap: "8px",
     width: "100%",
@@ -319,7 +317,7 @@ export const DrawerAccountSection = styled(Box)(({ theme }) => ({
   borderTop: `1px solid ${theme.palette.grey[200]}`,
 }));
 
-export const CloseButton = styled(IconButton)(({theme}) => ({
+export const CloseButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.action.hover,
   borderRadius: "50%",
   padding: "4px",

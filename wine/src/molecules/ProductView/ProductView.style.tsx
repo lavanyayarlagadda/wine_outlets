@@ -1,12 +1,7 @@
-import { Card,  CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
+import { Card, CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "../../themes/palette";
 import spacing from "../../themes/spacing";
-
-
-
-
-
 
 export const StyledImageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -31,8 +26,7 @@ export const StyledThumbnailList = styled(Box)(({ theme }) => ({
 export const StyledCard = styled(Card)(({ theme }) => ({
   position: "sticky",
   borderRadius: 16,
-  "&:hover": {
-  },
+  "&:hover": {},
   [theme.breakpoints.down("md")]: {
     width: "100%",
     maxWidth: 350,
@@ -42,7 +36,7 @@ export const StyledThumbnailMedia = styled(CardMedia)<{ alt?: string; src?: stri
   objectFit: "cover",
   width: "100%",
   height: "100%",
-  paddingLeft: "12px",  // px:3 => 3 * 4px = 12px
+  paddingLeft: "12px", // px:3 => 3 * 4px = 12px
   paddingRight: "12px",
 }));
 export const StyledCardMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({ theme }) => ({
@@ -99,7 +93,7 @@ export const DetailsContainer = styled(Box)(({ theme }) => ({
 
 export const ProductTitle = styled(Typography)(() => ({
   fontWeight: 600,
-  fontSize:"24px"
+  fontSize: "24px",
 }));
 
 export const ProductInfoRow = styled(Box)(({ theme }) => ({
@@ -203,7 +197,7 @@ export const RegularPriceText = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const StyledDivider = styled(Divider)(({ theme }) => ({  
+export const StyledDivider = styled(Divider)(({ theme }) => ({
   marginLeft: theme.spacing(2),
   marginRight: theme.spacing(2),
   height: 28,
@@ -230,15 +224,10 @@ export const ProductLayoutContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-
-
 // Grid Container
 export const ProductLayoutGrid = styled(Grid)(() => ({
   height: "100%",
-  
 }));
-
-
 
 // Image Section
 export const ProductImageSection = styled(Grid)(() => ({
@@ -258,7 +247,7 @@ export const ProductImageSection = styled(Grid)(() => ({
 
 export const ProductImageBox = styled(Box)(({ theme }) => ({
   position: "sticky",
-  top: '200px', // distance from top when scrolling
+  top: "200px", // distance from top when scrolling
   display: "flex",
   justifyContent: "center",
   alignItems: "flex-start",
@@ -280,7 +269,7 @@ export const ProductDetailsBox = styled(Box)(({ theme }) => ({
   // maxHeight: "82vh", // Adjust based on your design
   overflowY: "auto",
   padding: theme.spacing(0),
-    // [theme.breakpoints.up("md")]: {
+  // [theme.breakpoints.up("md")]: {
   //   padding: theme.spacing(2),
   // },
 }));
@@ -306,7 +295,6 @@ export const HighlightsText = styled(Typography)(({ theme }) => ({
   // lineHeight: 1.6,
   fontWeight: 400,
 }));
-
 
 export const DetailsTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
@@ -359,8 +347,8 @@ export const RatingHeader = styled(Box)(({ theme }) => ({
 }));
 
 export const RatingTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 600,   // bold
-  fontSize: "1rem",  // adjust as needed
+  fontWeight: 600, // bold
+  fontSize: "1rem", // adjust as needed
   color: theme.palette.text.primary,
 }));
 
@@ -373,7 +361,7 @@ export const RatingBadge = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   fontWeight: 600,
-//   color: theme.palette.error.main,
+  //   color: theme.palette.error.main,
 }));
 
 export const RatingText = styled(Typography)(({ theme }) => ({
@@ -411,10 +399,6 @@ export const Header = styled(Box)(({ theme }) => ({
 }));
 
 export const RatingsGrid = styled(Grid)(({ theme }) => ({
- backgroundColor: palette.white.light,
+  backgroundColor: palette.white.light,
   padding: theme.spacing(2),
 }));
-
-
-
-

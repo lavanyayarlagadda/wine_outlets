@@ -1,5 +1,15 @@
 import React from "react";
-import { RatingsWrapper, RatingsHeader, RatingsContent, DistributionContainer, RatingDistributionWrapper, FilterButtonsWrapper, ReviewsGrid, ReviewFormWrapper, ReviewGridItem } from "./RatingsBreakDown.style";
+import {
+  RatingsWrapper,
+  RatingsHeader,
+  RatingsContent,
+  DistributionContainer,
+  RatingDistributionWrapper,
+  FilterButtonsWrapper,
+  ReviewsGrid,
+  ReviewFormWrapper,
+  ReviewGridItem,
+} from "./RatingsBreakDown.style";
 import AverageRatingCard from "../../atoms/CustomCircularProgressBar/CustomCircularProgressBar";
 import RatingDistributionRow from "../../molecules/RatingDistributionRow/RatingDistributionRow";
 import FilterButton from "../../atoms/FilterButtons/FilterButtons";
@@ -13,13 +23,8 @@ interface RatingsBreakdownProps {
 }
 
 const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
-  const { 
-    selectedFilter, 
-    setSelectedFilter, 
-    getPercentage, 
-    filterButtons, 
-    filteredReviews 
-  } = useRatingsBreakdown(data);
+  const { selectedFilter, setSelectedFilter, getPercentage, filterButtons, filteredReviews } =
+    useRatingsBreakdown(data);
 
   return (
     <>

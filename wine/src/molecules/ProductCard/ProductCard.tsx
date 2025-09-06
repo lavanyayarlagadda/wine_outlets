@@ -79,7 +79,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           "&:hover": { backgroundColor: palette.white.main },
         }}
       >
-        <FavoriteBorder sx={{ color: palette.grey[150]}} />
+        <FavoriteBorder sx={{ color: palette.grey[150] }} />
       </IconButton>
 
       {/* Product Image */}
@@ -180,36 +180,38 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Pricing */}
         <Box>
-          {!isRecentlyViewedCard && <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 1,
-              mb: 2,
-            }}
-          >
-            <Typography
-              variant="body2"
+          {!isRecentlyViewedCard && (
+            <Box
               sx={{
-                color: theme.palette.warning.light,
-                fontWeight: 600,
-                fontSize: "20px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: 1,
+                mb: 2,
               }}
             >
-              VIP: ${product?.price.toFixed(2)}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: theme.palette.black[800],
-                fontWeight: 600,
-                fontSize: "20px",
-              }}
-            >
-              ${product?.price.toFixed(2)}
-            </Typography>
-          </Box>}
+              <Typography
+                variant="body2"
+                sx={{
+                  color: theme.palette.warning.light,
+                  fontWeight: 600,
+                  fontSize: "20px",
+                }}
+              >
+                VIP: ${product?.price.toFixed(2)}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: theme.palette.black[800],
+                  fontWeight: 600,
+                  fontSize: "20px",
+                }}
+              >
+                ${product?.price.toFixed(2)}
+              </Typography>
+            </Box>
+          )}
           <Box
             sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 1 }}
           >

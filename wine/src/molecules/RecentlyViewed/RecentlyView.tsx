@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
 import { Container } from "./RecentlyView.style";
 import ProductCard from "../ProductCard/ProductCard";
@@ -20,18 +16,18 @@ const RecentlyViewed: React.FC = () => {
   //   return DEAL_PRODUCT.slice(startIndex, startIndex + 4);
   // };
 
-const handleDotClick = (index: number) => {
-  setCurrentSlide(index);
+  const handleDotClick = (index: number) => {
+    setCurrentSlide(index);
 
-  if (scrollRef.current) {
-    const container = scrollRef.current;
-    const containerWidth = container.clientWidth; // viewport width of carousel
-    container.scrollTo({
-      left: index * containerWidth,
-      behavior: "smooth",
-    });
-  }
-};
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const containerWidth = container.clientWidth; // viewport width of carousel
+      container.scrollTo({
+        left: index * containerWidth,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const handleAddToCart = (productId: string) => {
     console.log("Add to cart:", productId);
@@ -42,9 +38,11 @@ const handleDotClick = (index: number) => {
   };
 
   return (
-    <Container sx={{mb:4}}>
+    <Container sx={{ mb: 4 }}>
       <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", mb: 4 }}>
-        <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", gap: 2 }}>
+        <Box
+          sx={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", gap: 2 }}
+        >
           <Typography variant="h4" sx={{ fontWeight: "bold", color: theme.palette.black[800] }}>
             Recently Viewed
           </Typography>
@@ -65,7 +63,7 @@ const handleDotClick = (index: number) => {
           <Box
             key={product.id}
             sx={{
-              minWidth: { xs: "280px", md: "calc(25% - 18px)" }, 
+              minWidth: { xs: "280px", md: "calc(25% - 18px)" },
               flexShrink: 0,
             }}
           >
@@ -78,11 +76,13 @@ const handleDotClick = (index: number) => {
           </Box>
         ))}
       </Box>
-      <Box sx={{   
-        display: { xs: "none", md: "flex" },
-        justifyContent: "center", 
-        gap: 1 
-      }}>
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          justifyContent: "center",
+          gap: 1,
+        }}
+      >
         {Array.from({ length: totalSlides }).map((_, index) => (
           <Box
             key={index}

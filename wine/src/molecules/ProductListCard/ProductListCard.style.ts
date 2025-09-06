@@ -1,5 +1,14 @@
 import { styled } from "@mui/material/styles";
-import { Box, Card, CardContent, Typography, Button, CardMedia, IconButton, type CardMediaProps } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardMedia,
+  IconButton,
+  type CardMediaProps,
+} from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 
@@ -48,24 +57,22 @@ interface ProductImageProps extends CardMediaProps {
   alt?: string;
 }
 
-export const ProductImage = styled(CardMedia)<ProductImageProps>(
-  ({ theme }) => ({
-    width: 80,
-    height: 150,
-    objectFit: "contain",
-    borderRadius: 8,
-    cursor: "pointer",
+export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => ({
+  width: 80,
+  height: 150,
+  objectFit: "contain",
+  borderRadius: 8,
+  cursor: "pointer",
 
-    [theme.breakpoints.up("sm")]: {
-      width: 100,
-      height: 210,
-    },
-    [theme.breakpoints.up("md")]: {
-      width: 120,
-      height: 250,
-    },
-  })
-);
+  [theme.breakpoints.up("sm")]: {
+    width: 100,
+    height: 210,
+  },
+  [theme.breakpoints.up("md")]: {
+    width: 120,
+    height: 250,
+  },
+}));
 
 // Favorite Button wrapper
 export const FavoriteWrapper = styled(Box)(() => ({
@@ -81,7 +88,7 @@ export const FavoriteButton = styled(IconButton)(() => ({
   borderRadius: "50%",
   boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   "&:hover": {
-    backgroundColor:palette.white.main,
+    backgroundColor: palette.white.main,
   },
 }));
 
@@ -131,8 +138,6 @@ export const DescriptionText = styled(Typography)(({ theme }) => ({
   minHeight: 48,
 }));
 
-
-
 // Footer (price + button container)
 export const FooterRow = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -155,7 +160,7 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   fontWeight: 600,
   whiteSpace: "nowrap",
   border: shape.borderRed,
-   width: "100%", // default for xs
+  width: "100%", // default for xs
   [theme.breakpoints.up("sm")]: {
     width: "30%",
   },

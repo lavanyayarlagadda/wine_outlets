@@ -16,10 +16,9 @@ export const InnerWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     alignItems: "center",
-    gap: theme.spacing(4), 
+    gap: theme.spacing(4),
   },
 }));
-
 
 export const LogoImage = styled("img")(({ theme }) => ({
   height: "40px",
@@ -27,11 +26,11 @@ export const LogoImage = styled("img")(({ theme }) => ({
   objectFit: "contain",
   [theme.breakpoints.down("sm")]: {
     display: "block",
-    margin: "0 auto", 
+    margin: "0 auto",
   },
 }));
 
-export const CustomizedGrid = styled(Grid)(({theme}) => ({
+export const CustomizedGrid = styled(Grid)(({ theme }) => ({
   width: "200px",
   [theme.breakpoints.down("sm")]: {
     width: "100%",

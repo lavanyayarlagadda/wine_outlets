@@ -18,12 +18,11 @@ import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import shape from "../../themes/shape";
 
-
 // extend props to include "selected"
 export const CustomWishlistButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== "selected", // prevent passing to DOM
 })<{ selected?: boolean }>(({ theme, selected }) => ({
-  border:  selected ? shape.borderRed:shape.borderSecondary,
+  border: selected ? shape.borderRed : shape.borderSecondary,
   borderRadius: shape.borderRadius,
   marginLeft: "8px",
   transition: "all 0.2s ease-in-out",

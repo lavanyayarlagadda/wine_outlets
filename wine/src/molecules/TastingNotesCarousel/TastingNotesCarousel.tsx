@@ -29,11 +29,7 @@ const TastingNotesCarousel: React.FC = () => {
       <DotsWrapper>
         <DotsContainer>
           {slides.map((_, index) => (
-            <Dot
-              key={index}
-              active={index === currentSlide}
-              onClick={() => goToSlide(index)}
-            />
+            <Dot key={index} active={index === currentSlide} onClick={() => goToSlide(index)} />
           ))}
         </DotsContainer>
       </DotsWrapper>

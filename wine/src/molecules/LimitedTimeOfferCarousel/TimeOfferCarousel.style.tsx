@@ -134,7 +134,7 @@ export const NavigationButton = styled(IconButton)(() => ({
   height: "40px",
   zIndex: 2,
   "&:hover": {
-    backgroundColor:palette.white.main,
+    backgroundColor: palette.white.main,
   },
 }));
 

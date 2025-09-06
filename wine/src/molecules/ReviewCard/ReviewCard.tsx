@@ -1,6 +1,13 @@
 import React from "react";
 import { StarRating } from "../../atoms";
-import { StyledCard, StyledCardContent, InfoRow, TitleText, InfoText, BodyText } from "./ReviewCard.style";
+import {
+  StyledCard,
+  StyledCardContent,
+  InfoRow,
+  TitleText,
+  InfoText,
+  BodyText,
+} from "./ReviewCard.style";
 
 interface ReviewCardProps {
   rating: number;

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { signUpValidationSchema } from "../../validationSchemas/authPopupSchema";
 
-
 export interface SignUpForm {
   fullName: string;
   email: string;

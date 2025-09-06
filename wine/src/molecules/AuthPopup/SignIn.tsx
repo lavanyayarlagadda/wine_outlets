@@ -11,7 +11,8 @@ import {
 import { useSignIn } from "./SignInPopup.hook";
 
 const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
-  const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } = useSignIn(onClose);
+  const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } =
+    useSignIn(onClose);
 
   return (
     <FormWrapper component="form" onSubmit={handleSubmit}>

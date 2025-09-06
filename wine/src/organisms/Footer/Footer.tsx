@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import {
@@ -54,18 +54,20 @@ const Footer: React.FC = () => {
           </SocialIconsContainer>
         </Grid>
 
-        <Box sx={{
-          display: "flex",
-          width: {
-            xs: "100%",
-            md: "60%"
-          },
-          justifyContent: "space-between",
-          flexWrap: {
-            xs: "wrap",
-            md: "nowrap"
-          }
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            width: {
+              xs: "100%",
+              md: "60%",
+            },
+            justifyContent: "space-between",
+            flexWrap: {
+              xs: "wrap",
+              md: "nowrap",
+            },
+          }}
+        >
           {Object.values(FOOTER_DATA).map((section, index) => (
             <CustomizedGrid key={index}>{renderFooterSection(section)}</CustomizedGrid>
           ))}

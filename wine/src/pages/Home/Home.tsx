@@ -16,7 +16,6 @@ import {
 import { useHomeLogic } from "./Home.hook";
 import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
 
-
 const Home = () => {
   const {
     agePopupOpen,

@@ -8,19 +8,10 @@ interface ViewToggleButtonProps {
   alt: string;
 }
 
-const ViewToggleButton: React.FC<ViewToggleButtonProps> = ({
-  value,
-  selected,
-  icon,
-  alt,
-}) => {
+const ViewToggleButton: React.FC<ViewToggleButtonProps> = ({ value, selected, icon, alt }) => {
   return (
     <ToggleButton value={value} sx={{ p: 0 }}>
-      <img
-        src={icon}
-        alt={alt}
-        style={{ width: 40, height: 40, opacity: selected ? 1 : 0.6 }}
-      />
+      <img src={icon} alt={alt} style={{ width: 40, height: 40, opacity: selected ? 1 : 0.6 }} />
     </ToggleButton>
   );
 };

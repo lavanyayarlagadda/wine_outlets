@@ -1,4 +1,4 @@
-import React, {  type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { HeaderSection, Title, Subtitle } from "./CustomTitleSection.style";
 import { Box } from "@mui/material";
 

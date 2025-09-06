@@ -15,14 +15,14 @@ import {
 } from "../../organisms/Authentication/AuthDialog.style";
 import { useSignUp } from "./SignUpPopup.hook";
 
-
 interface SignUpProps {
   setTab: (tab: "signin" | "signup") => void;
   onClose: () => void;
 }
 
 const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
-  const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } = useSignUp(onClose);
+  const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } =
+    useSignUp(onClose);
 
   return (
     <FormWrapper onSubmit={handleSubmit}>
@@ -99,7 +99,8 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
       </SubmitButton>
 
       <SwitchText>
-        If you have existing account? <SwitchLink onClick={() => setTab("signin")}>Login</SwitchLink>
+        If you have existing account?{" "}
+        <SwitchLink onClick={() => setTab("signin")}>Login</SwitchLink>
       </SwitchText>
     </FormWrapper>
   );

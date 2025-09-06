@@ -4,7 +4,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { CustomWishlistButton } from "./CustomWishlist.style";
 
 interface CustomWishlistProps {
-  defaultSelected?: boolean;         // initial state
+  defaultSelected?: boolean; // initial state
   onToggle?: (selected: boolean) => void; // callback when toggled
 }
 
@@ -18,10 +18,7 @@ const CustomWishlist: React.FC<CustomWishlistProps> = ({ defaultSelected = false
   };
 
   return (
-    <CustomWishlistButton
-      onClick={handleToggle}
-      selected={selected}
-    >
+    <CustomWishlistButton onClick={handleToggle} selected={selected}>
       {selected ? <FavoriteIcon /> : <FavoriteBorderIcon />}
     </CustomWishlistButton>
   );

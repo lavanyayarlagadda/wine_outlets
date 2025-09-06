@@ -8,7 +8,11 @@ interface RatingDistributionRowProps {
   count: number;
 }
 
-const RatingDistributionRow: React.FC<RatingDistributionRowProps> = ({ stars, percentage, count }) => (
+const RatingDistributionRow: React.FC<RatingDistributionRowProps> = ({
+  stars,
+  percentage,
+  count,
+}) => (
   <RatingRowWrapper>
     <StarsText>{stars}</StarsText>
     <StarRating value={stars} size="small" />

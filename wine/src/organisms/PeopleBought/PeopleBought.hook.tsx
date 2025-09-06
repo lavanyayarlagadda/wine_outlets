@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Product } from "../../constant/dealProduct";
 
-
 export const usePeopleBought = (initialProducts: Product[]) => {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [cartItems, setCartItems] = useState<string[]>([]);

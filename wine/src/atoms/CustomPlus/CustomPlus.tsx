@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import palette from "../../themes/palette";
 import shape from "../../themes/shape";
 
-
 const PlusDivider = () => (
   <Box
     sx={{

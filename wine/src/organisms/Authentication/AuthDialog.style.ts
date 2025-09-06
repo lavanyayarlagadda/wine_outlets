@@ -1,4 +1,4 @@
-import { Box, Button,  styled, Typography, type BoxProps } from "@mui/material";
+import { Box, Button, styled, Typography, type BoxProps } from "@mui/material";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
 
@@ -36,7 +36,7 @@ export const HalfField = styled(Box)(() => ({
 }));
 
 export const SwitchText = styled(Typography)(() => ({
-   fontSize:useFontSize(24),
+  fontSize: useFontSize(24),
   textAlign: "center",
 }));
 

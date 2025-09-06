@@ -26,11 +26,7 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
 }) => (
   <StyledFormControl fullWidth={fullWidth} variant="outlined" size="small">
     <StyledLabel>{label}</StyledLabel>
-    <Select
-      value={value}
-      onChange={(e) => onChange(e.target.value as string)}
-      displayEmpty
-    >
+    <Select value={value} onChange={(e) => onChange(e.target.value as string)} displayEmpty>
       {placeholder && (
         <MenuItem value="">
           <span>{placeholder}</span>

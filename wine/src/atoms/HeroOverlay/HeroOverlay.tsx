@@ -1,4 +1,3 @@
-import type React from "react";
 import { useTheme } from "@mui/material";
 import {
   OverlayContainer,

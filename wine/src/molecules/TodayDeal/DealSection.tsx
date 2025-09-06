@@ -1,21 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  useTheme,
-} from "@mui/material";
-import {
-  LocalFireDepartment,
-  Star,
-  ThumbUp,
-  PersonOutline,
-} from "@mui/icons-material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
+import { LocalFireDepartment, Star, ThumbUp, PersonOutline } from "@mui/icons-material";
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
 import { Container } from "./DealSection.style";
 import ProductCard from "../ProductCard/ProductCard";
 import palette from "../../themes/palette";
-
 
 interface FilterButton {
   id: string;
@@ -43,7 +32,7 @@ const DealsSection: React.FC = () => {
     { id: "popular", label: "Most Popular", icon: <ThumbUp />, isActive: false },
     { id: "foryou", label: "Just For You", icon: <PersonOutline />, isActive: false },
   ];
-  
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -67,27 +56,27 @@ const DealsSection: React.FC = () => {
     let startX: number;
     let scrollLeft: number;
 
-    element.addEventListener('mousedown', (e) => {
+    element.addEventListener("mousedown", (e) => {
       isDown = true;
       startX = e.pageX - element.offsetLeft;
       scrollLeft = element.scrollLeft;
-      element.style.cursor = 'grabbing';
-      element.style.userSelect = 'none';
+      element.style.cursor = "grabbing";
+      element.style.userSelect = "none";
     });
 
-    element.addEventListener('mouseleave', () => {
+    element.addEventListener("mouseleave", () => {
       isDown = false;
-      element.style.cursor = 'grab';
-      element.style.userSelect = 'auto';
+      element.style.cursor = "grab";
+      element.style.userSelect = "auto";
     });
 
-    element.addEventListener('mouseup', () => {
+    element.addEventListener("mouseup", () => {
       isDown = false;
-      element.style.cursor = 'grab';
-      element.style.userSelect = 'auto';
+      element.style.cursor = "grab";
+      element.style.userSelect = "auto";
     });
 
-    element.addEventListener('mousemove', (e) => {
+    element.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - element.offsetLeft;
@@ -96,17 +85,17 @@ const DealsSection: React.FC = () => {
     });
 
     // Touch events for mobile
-    element.addEventListener('touchstart', (e) => {
+    element.addEventListener("touchstart", (e) => {
       isDown = true;
       startX = e.touches[0].pageX - element.offsetLeft;
       scrollLeft = element.scrollLeft;
     });
 
-    element.addEventListener('touchend', () => {
+    element.addEventListener("touchend", () => {
       isDown = false;
     });
 
-    element.addEventListener('touchmove', (e) => {
+    element.addEventListener("touchmove", (e) => {
       if (!isDown) return;
       const x = e.touches[0].pageX - element.offsetLeft;
       const walk = (x - startX) * 2;
@@ -126,8 +115,6 @@ const DealsSection: React.FC = () => {
 
   const totalSlides = Math.ceil(DEAL_PRODUCT.length / 4);
 
-
-
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);
 
@@ -141,7 +128,6 @@ const DealsSection: React.FC = () => {
     }
   };
 
-
   const handleAddToCart = (productId: string) => {
     console.log("Add to cart:", productId);
   };
@@ -152,40 +138,49 @@ const DealsSection: React.FC = () => {
 
   return (
     <Container>
-      <Box sx={{ 
-        display: "flex", 
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: "space-between", 
-        alignItems: { xs: "flex-start", md: "center" }, 
-        gap: { xs: 2, md: 3 },
-        mb: 4 
-      }}>
-        <Box sx={{ 
-          display: "flex", 
-          flexDirection: { xs: "column", sm: "row" },
-          alignItems: { xs: "flex-start", sm: "center" },
-          gap: { xs: 1, sm: 2 },
-          flexWrap: "wrap"
-        }}>
-          <Typography variant="h4" sx={{ 
-            fontWeight: "bold", 
-            color: theme.palette.black[800],
-            fontSize: {
-              xs: "1.5rem",
-              sm: "1.75rem", 
-              md: "2rem",
-              lg: "2.125rem"
-            }
-          }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", md: "center" },
+          gap: { xs: 2, md: 3 },
+          mb: 4,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "flex-start", sm: "center" },
+            gap: { xs: 1, sm: 2 },
+            flexWrap: "wrap",
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              color: theme.palette.black[800],
+              fontSize: {
+                xs: "1.5rem",
+                sm: "1.75rem",
+                md: "2rem",
+                lg: "2.125rem",
+              },
+            }}
+          >
             Today's Deal for you!
           </Typography>
-          
+
           {/* Timer Component */}
-          <Box sx={{ 
-            display: "flex", 
-            gap: 1,
-            alignItems: "center"
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+            }}
+          >
             {[
               { value: timeLeft.hours.toString().padStart(2, "0"), label: "hours" },
               { value: timeLeft.minutes.toString().padStart(2, "0"), label: "minutes" },
@@ -207,21 +202,23 @@ const DealsSection: React.FC = () => {
                     fontWeight: "bold",
                     fontSize: {
                       xs: "0.9rem",
-                      sm: "1.1rem"
+                      sm: "1.1rem",
                     },
                   }}
                 >
                   {time.value}
                 </Box>
                 {index < 2 && (
-                  <Typography sx={{ 
-                    color: palette.primary.dark, 
-                    fontWeight: "bold", 
-                    fontSize: {
-                      xs: "0.9rem",
-                      sm: "1.1rem"
-                    } 
-                  }}>
+                  <Typography
+                    sx={{
+                      color: palette.primary.dark,
+                      fontWeight: "bold",
+                      fontSize: {
+                        xs: "0.9rem",
+                        sm: "1.1rem",
+                      },
+                    }}
+                  >
                     :
                   </Typography>
                 )}
@@ -229,11 +226,11 @@ const DealsSection: React.FC = () => {
             ))}
           </Box>
         </Box>
-        
-        <Box 
+
+        <Box
           ref={filterButtonsRef}
-          sx={{ 
-            display: "flex", 
+          sx={{
+            display: "flex",
             gap: { xs: 1, sm: 2 },
             overflowX: "auto",
             whiteSpace: "nowrap",
@@ -261,7 +258,7 @@ const DealsSection: React.FC = () => {
                 borderColor: filter.isActive ? theme.palette.primary.main : palette.grey[50],
                 color: filter.isActive ? palette.white.main : theme.palette.black[800],
                 "&:hover": {
-                  backgroundColor: filter.isActive ? theme.palette.primary.dark : palette.grey[150] ,
+                  backgroundColor: filter.isActive ? theme.palette.primary.dark : palette.grey[150],
                   borderColor: filter.isActive ? theme.palette.primary.dark : palette.grey[50],
                 },
                 textTransform: "none",
@@ -272,14 +269,14 @@ const DealsSection: React.FC = () => {
                 py: { xs: 0.5, sm: 1 },
                 fontSize: {
                   xs: "0.75rem",
-                  sm: "0.875rem"
+                  sm: "0.875rem",
                 },
-                '& .MuiButton-startIcon': {
+                "& .MuiButton-startIcon": {
                   marginRight: { xs: 0.5, sm: 1 },
-                  '& > svg': {
-                    fontSize: { xs: "1rem", sm: "1.25rem" }
-                  }
-                }
+                  "& > svg": {
+                    fontSize: { xs: "1rem", sm: "1.25rem" },
+                  },
+                },
               }}
             >
               {filter.label}
@@ -323,11 +320,13 @@ const DealsSection: React.FC = () => {
       </Box>
 
       {/* Navigation Dots */}
-      <Box sx={{   
-        display: { xs: "none", md: "flex" },
-        justifyContent: "center", 
-        gap: 1 
-      }}>
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          justifyContent: "center",
+          gap: 1,
+        }}
+      >
         {Array.from({ length: totalSlides }).map((_, index) => (
           <Box
             key={index}

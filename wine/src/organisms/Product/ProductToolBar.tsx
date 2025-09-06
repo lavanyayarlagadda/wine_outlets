@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { FilterTagList,SortAndViewContainer } from "../../molecules";
-
+import { FilterTagList, SortAndViewContainer } from "../../molecules";
 
 interface ProductToolbarProps {
   filters: { label: string; count: number }[];

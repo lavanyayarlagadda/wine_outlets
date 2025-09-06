@@ -1,4 +1,4 @@
-import  React from "react";
+import React from "react";
 import { InputAdornment, MenuItem, Box, Typography } from "@mui/material";
 import { StyledTextField, CountrySelect, StyledLabel } from "./CustomTextField.style";
 import palette from "../../themes/palette";
@@ -21,7 +21,7 @@ interface CustomTextFieldProps {
   countryValue?: string;
   onCountryChange?: (value: string) => void;
   countryOptions?: DropdownOption[];
-  error?: string; 
+  error?: string;
   required?: boolean;
 }
 
@@ -64,7 +64,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   return (
     <Box>
       <StyledLabel>
-        {label} {required && <span style={{ color: palette.primary.dark  }}>*</span>}
+        {label} {required && <span style={{ color: palette.primary.dark }}>*</span>}
       </StyledLabel>
       <StyledTextField
         value={value}
@@ -73,7 +73,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
         type={type}
         fullWidth={fullWidth}
         variant="outlined"
-        error={!!error} 
+        error={!!error}
         InputProps={{
           startAdornment: countryDropdown,
           endAdornment: endIcon ? (
@@ -83,7 +83,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
       />
 
       {error && (
-        <Typography variant="caption"  mt={0.5} display="block" sx={{color:palette.primary.dark }}>
+        <Typography variant="caption" mt={0.5} display="block" sx={{ color: palette.primary.dark }}>
           {error}
         </Typography>
       )}

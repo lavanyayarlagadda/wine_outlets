@@ -1,11 +1,6 @@
 import React from "react";
 import { CustomDropdown, CustomToggleButton } from "../../atoms";
-import {
-  listImage,
-  listImageGrey,
-  gridImage,
-  gridImageGrey,
-} from "../../assets";
+import { listImage, listImageGrey, gridImage, gridImageGrey } from "../../assets";
 import {
   Wrapper,
   StyledFormControl,

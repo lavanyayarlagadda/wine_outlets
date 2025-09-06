@@ -9,8 +9,8 @@ interface CustomButtonProps {
   color: string;
   border?: string;
   btnBorderColor?: string;
-  btnbgColor?:string;
-  btnColor?:string;
+  btnbgColor?: string;
+  btnColor?: string;
 }
 
 const CustomButton = ({
@@ -20,8 +20,8 @@ const CustomButton = ({
   color = "",
   border = "",
   btnBorderColor = "",
-  btnbgColor="",
-  btnColor=""
+  btnbgColor = "",
+  btnColor = "",
 }: CustomButtonProps) => {
   return (
     <StyledButton onClick={onClick} bgColor={bgColor} btnBorderColor={btnBorderColor}>

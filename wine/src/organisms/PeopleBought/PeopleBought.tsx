@@ -12,8 +12,9 @@ import {
 import { usePeopleBought } from "./PeopleBought.hook";
 
 const PeopleBought: React.FC = () => {
-  const { handleAddToCart, handleToggleFavorite, currentProducts } =
-    usePeopleBought(suggestedProducts.products);
+  const { handleAddToCart, handleToggleFavorite, currentProducts } = usePeopleBought(
+    suggestedProducts.products
+  );
 
   return (
     <PeopleBoughtWrapper>

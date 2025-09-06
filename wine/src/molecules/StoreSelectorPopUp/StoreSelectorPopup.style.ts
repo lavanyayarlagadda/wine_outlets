@@ -9,19 +9,17 @@ export const TitleText = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[900],
 }));
 
-
 export const SearchContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   width: "100%",
   marginBottom: theme.spacing(2),
 }));
 
-
 export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flex: 1,
-  border:shape.borderGrey,
+  border: shape.borderGrey,
   borderRadius: "12px",
   padding: "0 12px",
   backgroundColor: theme.palette.background.paper,
@@ -80,7 +78,7 @@ export const MapButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "selected",
 })<{ selected?: boolean }>(({ theme, selected }) => ({
   borderRadius: "20px",
-  border: selected ? shape.borderRed:shape.borderGrey,
+  border: selected ? shape.borderRed : shape.borderGrey,
   color: selected ? theme.palette.primary.dark : "inherit",
   textTransform: "none",
   minWidth: "100px",

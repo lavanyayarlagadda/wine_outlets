@@ -48,16 +48,12 @@ export const useProductList = ({
   const currentProducts = allProducts.slice(startIndex, endIndex);
 
   const handleAddToCart = (productId: string) => {
-    setCartItems((prev) =>
-      prev.includes(productId) ? prev : [...prev, productId]
-    );
+    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
   };
 
   const handleToggleFavorite = (productId: string) => {
     setWishlist((prev) =>
-      prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
+      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
     );
   };
 
@@ -65,8 +61,6 @@ export const useProductList = ({
     setCurrentPage(newPage);
     topRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = bannerData.banners;
@@ -85,7 +79,6 @@ export const useProductList = ({
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-
   return {
     sortBy,
     setSortBy,
@@ -103,7 +96,7 @@ export const useProductList = ({
     handleAddToCart,
     handleToggleFavorite,
     handlePageChange,
-        currentSlide,
+    currentSlide,
     slides,
     goToSlide,
     nextSlide,

@@ -42,7 +42,11 @@ interface ProductCardProps {
   onToggleFavorite: (id: string) => void;
 }
 
-const ProductGridCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onToggleFavorite }) => {
+const ProductGridCard: React.FC<ProductCardProps> = ({
+  product,
+  onAddToCart,
+  onToggleFavorite,
+}) => {
   const navigate = useNavigate();
 
   return (

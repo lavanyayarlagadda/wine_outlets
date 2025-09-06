@@ -9,7 +9,7 @@ import {
   CarouselSlide,
   DotsContainer,
   Dot,
-  MobileScrollWrapper
+  MobileScrollWrapper,
 } from "./TimeOfferCarousel.style";
 import { OFFERS } from "../../constant/offerData";
 import { CustomTitleSection } from "../../atoms";
@@ -58,30 +58,36 @@ const LimitedTimeOffersCarousel = () => {
         title={"Limited-Time Offers"}
         subtitle={"Uncork exclusive savings this week."}
       />
-      {!isMobile && (<>
-        <CarouselWrapper>
-          <CarouselTrack currentIndex={currentIndex}>
-            {OFFERS.map((offer) => (
-              <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
+      {!isMobile && (
+        <>
+          <CarouselWrapper>
+            <CarouselTrack currentIndex={currentIndex}>
+              {OFFERS.map((offer) => (
+                <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
+              ))}
+            </CarouselTrack>
+          </CarouselWrapper>
+
+          <DotsContainer>
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <Dot
+                key={index}
+                active={index === currentIndex}
+                onClick={() => handleDotClick(index)}
+              />
             ))}
-          </CarouselTrack>
-        </CarouselWrapper>
+          </DotsContainer>
+        </>
+      )}
 
-        <DotsContainer>
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <Dot key={index} active={index === currentIndex} onClick={() => handleDotClick(index)} />
+      {/* Mobile horizontal scroll */}
+      {isMobile && (
+        <MobileScrollWrapper>
+          {OFFERS.map((offer) => (
+            <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
           ))}
-        </DotsContainer>
-      </>)}
-
-       {/* Mobile horizontal scroll */}
-    {isMobile && (
-      <MobileScrollWrapper>
-        {OFFERS.map((offer) => (
-          <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
-        ))}
-      </MobileScrollWrapper>
-    )}
+        </MobileScrollWrapper>
+      )}
     </CarouselContainer>
   );
 };

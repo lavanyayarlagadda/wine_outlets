@@ -58,13 +58,11 @@ export const ProductsGrid = styled(Box, {
       : "repeat(1, 1fr)",
 
   [theme.breakpoints.up("sm")]: {
-    gridTemplateColumns:
-      view === "grid" ? `repeat(2, 1fr)` : "repeat(1, 1fr)",
+    gridTemplateColumns: view === "grid" ? `repeat(2, 1fr)` : "repeat(1, 1fr)",
   },
 
   [theme.breakpoints.up("md")]: {
-    gridTemplateColumns:
-      view === "grid" ? `repeat(${columns}, 1fr)` : "repeat(1, 1fr)",
+    gridTemplateColumns: view === "grid" ? `repeat(${columns}, 1fr)` : "repeat(1, 1fr)",
   },
 
   [theme.breakpoints.down("sm")]: {
@@ -79,5 +77,3 @@ export const ProductsWrapper = styled(Box)(({ theme }) => ({
   padding: 0,
   [theme.breakpoints.up("sm")]: { padding: "1px" },
 }));
-
-

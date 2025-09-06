@@ -8,7 +8,12 @@ interface FilterButtonProps {
 }
 
 const FilterButton: React.FC<FilterButtonProps> = ({ label, isActive, onClick }) => (
-  <StyledFilterButton isActive={isActive} onClick={onClick} size="small" variant={isActive ? "contained" : "outlined"}>
+  <StyledFilterButton
+    isActive={isActive}
+    onClick={onClick}
+    size="small"
+    variant={isActive ? "contained" : "outlined"}
+  >
     {label}
   </StyledFilterButton>
 );

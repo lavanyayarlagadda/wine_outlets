@@ -38,7 +38,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           displayEmpty
           IconComponent={ExpandMore}
           renderValue={(selected) => {
-            if (!selected && placeholder) return <span style={{ color:palette.grey.greyDark }}>{placeholder}</span>;
+            if (!selected && placeholder)
+              return <span style={{ color: palette.grey.greyDark }}>{placeholder}</span>;
             const selectedOption = options.find((option) => option.value === selected);
             return selectedOption ? selectedOption.label : placeholder;
           }}

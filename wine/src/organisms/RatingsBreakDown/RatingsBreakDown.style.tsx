@@ -5,7 +5,7 @@ import { Box, Typography, Grid } from "@mui/material";
 export const RatingsWrapper = styled(Box)(() => ({
   width: "100%",
   padding: "16px",
-  '@media (min-width: 900px)': {
+  "@media (min-width: 900px)": {
     padding: "32px",
   },
 }));
@@ -22,7 +22,7 @@ export const RatingsContent = styled(Box)(() => ({
   flexDirection: "column",
   gap: 32,
   flexWrap: "wrap",
-  '@media (min-width: 900px)': {
+  "@media (min-width: 900px)": {
     flexDirection: "row",
   },
 }));
@@ -33,7 +33,7 @@ export const DistributionContainer = styled(Box)(() => ({
   flexDirection: "column",
   gap: 32,
   flex: 1,
-  '@media (min-width: 1200px)': {
+  "@media (min-width: 1200px)": {
     flexDirection: "row",
   },
 }));
@@ -45,7 +45,7 @@ export const RatingDistributionWrapper = styled(Box)(() => ({
   gap: 8,
   flex: "1 1 100%",
   width: "100%",
-  '@media (min-width: 1200px)': {
+  "@media (min-width: 1200px)": {
     flex: "0 0 70%",
     width: "60%",
   },
@@ -70,10 +70,10 @@ export const ReviewFormWrapper = styled(Box)(() => ({
 
 export const ReviewGridItem = styled(Grid)(() => ({
   width: "100%",
-  '@media (min-width: 600px)': {
+  "@media (min-width: 600px)": {
     width: "48%",
   },
-  '@media (min-width: 900px)': {
+  "@media (min-width: 900px)": {
     width: "49%",
   },
 }));

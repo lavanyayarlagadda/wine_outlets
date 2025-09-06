@@ -127,7 +127,7 @@ const Navigation = () => {
 
           {/* mobile view search */}
           <SearchBox sx={{ display: { xs: "flex", sm: "none" }, mt: 2 }}>
-            <SearchIcon sx={{  color: palette.grey.greyDark}} />
+            <SearchIcon sx={{ color: palette.grey.greyDark }} />
             <StyledInput
               placeholder="Search wines, brands, or regions"
               inputProps={{ "aria-label": "search" }}

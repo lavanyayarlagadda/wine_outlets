@@ -30,10 +30,10 @@ export const useNavigation = (menuKeys: string[]) => {
     setMenuOpen((prev) => ({ ...prev, [key]: false }));
   };
 
-   const handleMobileMenuToggle = (key: string) => {
-    setMenuOpen((prev) => ({ 
-      ...prev, 
-      [key]: !prev[key] 
+  const handleMobileMenuToggle = (key: string) => {
+    setMenuOpen((prev) => ({
+      ...prev,
+      [key]: !prev[key],
     }));
   };
 

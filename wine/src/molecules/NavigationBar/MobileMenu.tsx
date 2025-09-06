@@ -6,7 +6,7 @@ import {
   DrawerMenuItem,
   DrawerAccountSection,
   CloseButton,
-  Logo
+  Logo,
 } from "./Navigation.style";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
@@ -40,11 +40,7 @@ const MobileMenu: React.FC<MobileNavigationProps> = ({
   };
 
   return (
-    <StyledDrawer
-      anchor="left"
-      open={mobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+    <StyledDrawer anchor="left" open={mobileMenuOpen} onClose={handleMobileMenuClose}>
       <DrawerHeader>
         <Logo src={logo} alt="Wine Outlet" style={{ height: "30px" }} />
         <CloseButton onClick={handleMobileMenuClose}>
@@ -61,30 +57,21 @@ const MobileMenu: React.FC<MobileNavigationProps> = ({
           </DrawerMenuItem>
           {menuOpen[item] &&
             menus[item].map((val) => (
-              <DrawerSubMenuItem
-                key={val}
-                onClick={() => handleNavigation("/productsList")}
-              >
+              <DrawerSubMenuItem key={val} onClick={() => handleNavigation("/productsList")}>
                 {val}
               </DrawerSubMenuItem>
             ))}
         </div>
       ))}
 
-      <DrawerMenuItem onClick={() => handleNavigation("/tastings")}>
-        Tastings
-      </DrawerMenuItem>
-      <DrawerMenuItem onClick={() => handleNavigation("/events")}>
-        Events
-      </DrawerMenuItem>
+      <DrawerMenuItem onClick={() => handleNavigation("/tastings")}>Tastings</DrawerMenuItem>
+      <DrawerMenuItem onClick={() => handleNavigation("/events")}>Events</DrawerMenuItem>
       <DrawerMenuItem onClick={() => handleNavigation("/new-arrivals")}>
         <span style={{ display: "flex", alignItems: "center" }}>
           <img src={star} alt="star" style={{ marginRight: "8px" }} /> New Arrivals
         </span>
       </DrawerMenuItem>
-      <DrawerMenuItem onClick={() => handleNavigation("/promotions")}>
-        Promotions
-      </DrawerMenuItem>
+      <DrawerMenuItem onClick={() => handleNavigation("/promotions")}>Promotions</DrawerMenuItem>
 
       {/* Delivery Options */}
       <DrawerMenuItem onClick={() => handleMobileMenuToggle("delivery")}>
@@ -99,24 +86,14 @@ const MobileMenu: React.FC<MobileNavigationProps> = ({
         </>
       )}
 
-      <DrawerMenuItem onClick={() => handleNavigation("/careers")}>
-        Hiring Now
-      </DrawerMenuItem>
+      <DrawerMenuItem onClick={() => handleNavigation("/careers")}>Hiring Now</DrawerMenuItem>
 
       {/* Account Section */}
       <DrawerAccountSection>
-        <DrawerMenuItem onClick={() => handleNavigation("/account")}>
-          My Account
-        </DrawerMenuItem>
-        <DrawerMenuItem onClick={() => handleNavigation("/cart")}>
-          Shopping Cart
-        </DrawerMenuItem>
-        <DrawerMenuItem onClick={() => handleNavigation("/orders")}>
-          Order History
-        </DrawerMenuItem>
-        <DrawerMenuItem onClick={() => handleNavigation("/settings")}>
-          Settings
-        </DrawerMenuItem>
+        <DrawerMenuItem onClick={() => handleNavigation("/account")}>My Account</DrawerMenuItem>
+        <DrawerMenuItem onClick={() => handleNavigation("/cart")}>Shopping Cart</DrawerMenuItem>
+        <DrawerMenuItem onClick={() => handleNavigation("/orders")}>Order History</DrawerMenuItem>
+        <DrawerMenuItem onClick={() => handleNavigation("/settings")}>Settings</DrawerMenuItem>
         <DrawerMenuItem
           onClick={() => {
             console.log("Logout");

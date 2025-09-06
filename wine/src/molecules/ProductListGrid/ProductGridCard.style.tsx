@@ -1,5 +1,14 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Card, CardContent, CardMedia, IconButton, Typography, type CardMediaProps } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+  type CardMediaProps,
+} from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 
@@ -40,8 +49,7 @@ export const FavoriteButton = styled(IconButton)(() => ({
   "&:hover": { backgroundColor: palette.grey[150] },
 }));
 
-export const ProductImage = styled(CardMedia)<ProductImageProps>(
-  ({ theme }) => ({
+export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => ({
   objectFit: "contain",
   padding: theme.spacing(2),
   height: 250,

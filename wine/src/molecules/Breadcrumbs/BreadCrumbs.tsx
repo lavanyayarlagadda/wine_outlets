@@ -1,12 +1,6 @@
-
 import React from "react";
 
-import {
-  BreadcrumbsWrapper,
-  ActiveCrumb,
-  CrumbLink,
-  CrumbText,
-} from "./BreadCrumbs.style";
+import { BreadcrumbsWrapper, ActiveCrumb, CrumbLink, CrumbText } from "./BreadCrumbs.style";
 
 export interface BreadcrumbItem {
   label: string;

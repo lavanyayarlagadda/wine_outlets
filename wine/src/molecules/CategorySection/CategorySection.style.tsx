@@ -1,10 +1,10 @@
 import { Box, styled } from "@mui/material";
 
-export const Container = styled(Box)(({theme}) => ({
+export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
   padding: "80px 64px",
   [theme.breakpoints.down("sm")]: {
-    padding: "40px 16px", 
+    padding: "40px 16px",
   },
 }));

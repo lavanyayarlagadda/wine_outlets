@@ -28,7 +28,7 @@ export const ProductsContainer = styled(Box)(() => ({
   gap: 16,
   width: "100%",
   // Responsive
-  '@media (min-width: 900px)': {
+  "@media (min-width: 900px)": {
     flexDirection: "row",
   },
 }));
@@ -39,7 +39,7 @@ export const ProductsWrapper = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   gap: 16,
-  '@media (min-width: 900px)': {
+  "@media (min-width: 900px)": {
     flex: "0 0 60%",
     flexDirection: "row",
     alignItems: "center",
@@ -49,7 +49,7 @@ export const ProductsWrapper = styled(Box)(() => ({
 export const VerticalDivider = styled(Divider)(() => ({
   display: "none",
   borderColor: palette.success.main,
-  '@media (min-width: 900px)': {
+  "@media (min-width: 900px)": {
     display: "block",
   },
 }));

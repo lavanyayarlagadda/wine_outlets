@@ -30,20 +30,16 @@ const ProductListBanner: React.FC = () => {
             text={current.action.label}
             bgColor={theme.palette.white.main}
             onClick={() => (window.location.href = current.action.url)}
-            color={palette.primary.dark}            
+            color={palette.primary.dark}
             border={palette.primary.dark}
             btnColor={theme.palette.white.main}
-            btnbgColor={palette.primary.dark}             
+            btnbgColor={palette.primary.dark}
           />
         )}
 
         <DotsContainer>
           {slides.map((_, index) => (
-            <Dot
-              key={index}
-              active={index === currentSlide}
-              onClick={() => goToSlide(index)}
-            />
+            <Dot key={index} active={index === currentSlide} onClick={() => goToSlide(index)} />
           ))}
         </DotsContainer>
       </CarouselSlide>

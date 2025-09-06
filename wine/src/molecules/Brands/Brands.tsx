@@ -7,10 +7,7 @@ import { willow } from "../../assets";
 const Brands = () => {
   return (
     <Container>
-      <CustomTitleSection
-        title={"Featured Brands"}
-        subtitle={""}
-      />
+      <CustomTitleSection title={"Featured Brands"} subtitle={""} />
       <ImageWrapper>
         {[...Array(5)].map((_, i) => (
           <img key={i} src={willow} alt={`brand image ${i}`} />

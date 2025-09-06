@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import { useState } from "react";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { useTheme } from "@mui/material";
@@ -33,11 +33,15 @@ const WineCarousel: React.FC = () => {
           </IconWrapper>
         </PriceButton>
         <DotsContainer>
-        {slides.map((_, index) => (
-          <Dot key={index} active={index === currentSlide} onClick={() => setCurrentSlide(index)} />
-        ))}
+          {slides.map((_, index) => (
+            <Dot
+              key={index}
+              active={index === currentSlide}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
         </DotsContainer>
-      </CarouselSlide>   
+      </CarouselSlide>
     </Container>
   );
 };

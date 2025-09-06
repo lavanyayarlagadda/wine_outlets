@@ -4,7 +4,7 @@ import { filtersData as categories } from "../../constant/curatedData";
 import ProductListCard from "../ProductListCard/ProductListCard";
 import ProductGridCard from "../ProductListGrid/ProductGridCard";
 import CustomPagination from "../Pagination/Pagination";
-import  { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
+import { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
 import BreadcrumbHeader from "../Breadcrumbs/BreadCrumbsHeader";
 import FilterTagList from "../FilterTag/FilterTagList";
 import SortAndViewControls from "../SortAndView/SortAndViewControl";
@@ -38,11 +38,7 @@ const ProductList = () => {
     handlePageChange,
   } = useProductList();
 
-
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "Home", href: "/" },
-    { label: "Wine" },
-  ];
+  const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
 
   const filters = [{ label: "wines", count: 28 }];
 
@@ -98,11 +94,7 @@ const ProductList = () => {
               )}
             </ProductsGrid>
 
-            <CustomPagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-            />
+            <CustomPagination count={totalPages} page={currentPage} onChange={handlePageChange} />
           </ProductsWrapper>
         </ContentWrapper>
       </LayoutContainer>

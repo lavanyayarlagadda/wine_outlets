@@ -11,16 +11,16 @@ export const Container = styled(Box)(({ theme }) => ({
     padding: "40px 16px",
   },
 }));
-export const Wrapper = styled(Box)(({theme}) => ({
+export const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   gap: "40px",
-    [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     alignItems: "center",
   },
 }));
-export const LeftSectionBox = styled(Box)(({theme}) => ({
+export const LeftSectionBox = styled(Box)(({ theme }) => ({
   position: "relative",
   width: "30%",
   height: "100%",
@@ -71,8 +71,8 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   lineHeight: 1.2,
   color: palette.white.main,
-   [theme.breakpoints.down("md")]: {
-    fontSize: "18px", 
+  [theme.breakpoints.down("md")]: {
+    fontSize: "18px",
   },
 }));
 
@@ -114,12 +114,12 @@ export const CTAButton = styled(Button)({
   },
 });
 
-export const RightSectionBox = styled(Box)(({theme}) => ({
+export const RightSectionBox = styled(Box)(({ theme }) => ({
   width: "70%",
   display: "grid",
   gridTemplateColumns: "repeat(2,1fr)",
   gap: "40px",
-    [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("md")]: {
     width: "100%",
     display: "flex",
     flexWrap: "wrap",
@@ -127,7 +127,7 @@ export const RightSectionBox = styled(Box)(({theme}) => ({
     gap: "24px",
     "& > *": {
       flex: "1 1 100%",
-      maxWidth: "300px", 
+      maxWidth: "300px",
     },
   },
 }));

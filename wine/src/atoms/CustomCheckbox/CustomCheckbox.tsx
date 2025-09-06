@@ -7,10 +7,7 @@ interface Props {
 }
 
 const CustomCheckbox: React.FC<Props> = ({ label, checked, onChange }) => (
-  <FormControlLabel
-    control={<Checkbox checked={checked} onChange={onChange} />}
-    label={label}
-  />
+  <FormControlLabel control={<Checkbox checked={checked} onChange={onChange} />} label={label} />
 );
 
 export default CustomCheckbox;

@@ -9,11 +9,13 @@ export const ProgressWrapper = styled(Box)({
   marginRight: 8,
 });
 
-export const StyledLinearProgress = styled(LinearProgress)<{ barcolor?: string }>(({ barcolor }) => ({
-  height: 8,
-  borderRadius: 5,
-  backgroundColor: shape.borderSuccess,
-  "& .MuiLinearProgress-bar": {
-    backgroundColor: barcolor || palette.black[800],
-  },
-}));
+export const StyledLinearProgress = styled(LinearProgress)<{ barcolor?: string }>(
+  ({ barcolor }) => ({
+    height: 8,
+    borderRadius: 5,
+    backgroundColor: shape.borderSuccess,
+    "& .MuiLinearProgress-bar": {
+      backgroundColor: barcolor || palette.black[800],
+    },
+  })
+);

@@ -1,12 +1,12 @@
 import { Box, Typography, styled } from "@mui/material";
 import palette from "../../themes/palette";
 
-export const Container = styled(Box)(({theme}) => ({
+export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
   padding: "80px 64px",
   [theme.breakpoints.down("sm")]: {
-    padding: "40px 16px", 
+    padding: "40px 16px",
   },
 }));
 export const HeaderSection = styled(Box)(({ theme }) => ({
@@ -22,7 +22,7 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   color: theme.palette.black[800],
   marginBottom: theme.spacing(1),
-   [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("sm")]: {
     fontSize: "22px",
   },
 }));
@@ -32,7 +32,7 @@ export const Subtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[200],
   fontWeight: 400,
   [theme.breakpoints.down("sm")]: {
-    fontSize: "16px", 
+    fontSize: "16px",
   },
 }));
 
@@ -40,7 +40,7 @@ export const StyledContainer = styled(Box)(() => ({
   position: "relative",
 }));
 
-export const StyledOverlay = styled(Box)(({theme}) => ({
+export const StyledOverlay = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "30px",
   left: "-26px",
@@ -60,16 +60,16 @@ export const StyledGridContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   flexWrap: "wrap",
-   [theme.breakpoints.up("md")]: {
-    flexWrap: "nowrap",  
+  [theme.breakpoints.up("md")]: {
+    flexWrap: "nowrap",
     justifyContent: "space-between",
   },
-   [theme.breakpoints.down("sm")]: {
-     flexWrap: "wrap",  
+  [theme.breakpoints.down("sm")]: {
+    flexWrap: "wrap",
     flexDirection: "column",
     alignItems: "center",
-    gap: "24px",  
-    padding: "16px",  
+    gap: "24px",
+    padding: "16px",
   },
 }));
 
@@ -78,14 +78,14 @@ export const StyledWineItem = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   cursor: "pointer",
-  width: "180px", 
-  flex: "0 1 auto",  
+  width: "180px",
+  flex: "0 1 auto",
   "&:hover .wine-image": {
     transform: "scale(1.05)",
   },
   [theme.breakpoints.down("sm")]: {
-    width: "140px", 
-    flex: "0 1 auto", 
+    width: "140px",
+    flex: "0 1 auto",
   },
 }));
 

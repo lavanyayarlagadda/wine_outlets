@@ -15,7 +15,6 @@ export const StyledFormControl = styled(FormControl)(({ theme }) => ({
     "&.Mui-focused fieldset": {
       borderColor: palette.blue.default,
     },
-    
   },
   "& .MuiSelect-select": {
     padding: "12px 14px",
@@ -31,17 +30,13 @@ export const DropdownWrapper = styled(Box)<{ side?: boolean }>(({ theme, side })
   border: side ? shape.borderDivider : "none",
   borderRadius: side ? 4 : 0,
   padding: side ? 8 : 0,
-   "& .MuiOutlinedInput-notchedOutline": {
-      border: side ? "none" : undefined, // remove border if side is true
-    },
-    "& .MuiSelect-select":{
-      padding:side ?"0px":undefined
-    }
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: side ? "none" : undefined, // remove border if side is true
+  },
+  "& .MuiSelect-select": {
+    padding: side ? "0px" : undefined,
+  },
 }));
-
-
-
-
 
 export const StyledLabel = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "side", // prevent side from being passed to DOM
@@ -51,5 +46,4 @@ export const StyledLabel = styled(Typography, {
   fontWeight: 400,
   marginBottom: side ? 0 : 8,
   whiteSpace: side ? "nowrap" : "normal",
-  
 }));

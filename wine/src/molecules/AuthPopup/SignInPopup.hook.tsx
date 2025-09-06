@@ -35,7 +35,8 @@ export const useSignIn = (onClose: () => void) => {
       const newErrors: SignInErrors = {};
       if (err.inner) {
         err.inner.forEach((validationError: any) => {
-          if (validationError.path) newErrors[validationError.path as keyof SignInForm] = validationError.message;
+          if (validationError.path)
+            newErrors[validationError.path as keyof SignInForm] = validationError.message;
         });
       }
       setErrors(newErrors);

@@ -2,7 +2,6 @@ import React from "react";
 import ProductGridCard from "../ProductListGrid/ProductGridCard";
 import { CustomPlus } from "../../atoms";
 
-
 interface Props {
   product: any;
   showDivider: boolean;
@@ -10,7 +9,12 @@ interface Props {
   onToggleFavorite: () => void;
 }
 
-const ProductWithDivider: React.FC<Props> = ({ product, showDivider, onAddToCart, onToggleFavorite }) => {
+const ProductWithDivider: React.FC<Props> = ({
+  product,
+  showDivider,
+  onAddToCart,
+  onToggleFavorite,
+}) => {
   return (
     <>
       <ProductGridCard

@@ -1,5 +1,4 @@
-
-import {Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
 export const CounterBox = styled(Box)(() => ({

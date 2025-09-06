@@ -8,7 +8,7 @@ import {
   TextField,
   FormControlLabel,
   FormHelperText,
-  styled
+  styled,
 } from "@mui/material";
 import palette from "../../themes/palette";
 
@@ -17,9 +17,8 @@ export const LogoImage = styled("img")({
   width: "80px",
   objectFit: "contain",
   position: "relative", // ensure it participates in stacking
-  zIndex: 2,           // above the circle
+  zIndex: 2, // above the circle
 });
-
 
 export const RedCircle = styled("div")({
   position: "absolute",
@@ -29,8 +28,8 @@ export const RedCircle = styled("div")({
   width: "40px",
   height: "40px",
   borderRadius: "50%",
-  backgroundColor:palette.primary.dark,
-  zIndex: 1, 
+  backgroundColor: palette.primary.dark,
+  zIndex: 1,
 });
 
 export const StyledDialog = styled(Dialog)(({ theme }) => ({
@@ -86,7 +85,7 @@ export const InputLabel = styled(Typography)(({ theme }) => ({
   ...theme.typography.body2,
   color: palette.black[800],
   fontWeight: 500,
-  marginBottom:8,
+  marginBottom: 8,
   alignSelf: "flex-start",
   "& span": {
     color: palette.primary.dark,
@@ -172,8 +171,8 @@ export const VerifyButton = styled(Button)(({ theme }) => ({
 
 export const ExitButton = styled(Button)(({ theme }) => ({
   flex: 1,
- borderColor: theme.palette.text.secondary,
-    backgroundColor: theme.palette.action.hover,
+  borderColor: theme.palette.text.secondary,
+  backgroundColor: theme.palette.action.hover,
   color: theme.palette.text.secondary,
   fontWeight: theme.typography.fontWeightMedium,
   fontSize: theme.typography.body2.fontSize,
