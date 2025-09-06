@@ -1,6 +1,7 @@
 import palette from "./palette";
 
 const shape = {
+  baseBorderRadius: 8,
   borderRadius: "16px",
   borderRadiuspx: "8px",
   borderRadius12: "12px",
