@@ -11,32 +11,47 @@ import {
   Dot,
   MobileScrollWrapper,
 } from "./TimeOfferCarousel.style";
-import { OFFERS } from "../../constant/offerData";
+// import { OFFERS } from "../../constant/offerData";
+import { LandingPageData } from "../../constant/LandingPageData";
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 
+interface Offer {
+  id: string;
+  media: {
+    type: string;
+    url: string;
+  };
+  offerAction?: string;
+}
 interface OfferData {
-  id: number;
-  image: string;
+  isVisible: boolean;
   title: string;
   subtitle: string;
   highlight?: string;
+  offers: Offer[];
 }
+
+const { title, subtitle , offers } : OfferData = LandingPageData?.limitedTimeOffer ?? {
+  title: "",
+  subtitle: "",
+  offers: [],
+};
 
 const LimitedTimeOffersCarousel = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalSlides = Math.max(0, OFFERS.length - 2);
+  const totalSlides = Math.max(0, offers.length);
 
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
   };
 
-  const renderOfferCard = (offer: OfferData) => (
+  const renderOfferCard = (offer: Offer) => (
     <OfferCard key={offer.id}>
-      <CardImage src={offer.image} alt={offer.title} />
+      <CardImage src={offer.media?.url} alt={`offer-${offer.id}`} />
       {/* this part may be needed later on */}
       {/* <CardOverlay>
         {offer.highlight && <HighlightText>{offer.highlight}</HighlightText>}
@@ -58,14 +73,14 @@ const LimitedTimeOffersCarousel = () => {
   return (
     <CarouselContainer>
       <CustomTitleSection
-        title={"Limited-Time Offers"}
-        subtitle={"Uncork exclusive savings this week."}
+        title={title}
+        subtitle={subtitle}
       />
       {!isMobile && (
         <>
           <CarouselWrapper>
             <CarouselTrack currentIndex={currentIndex}>
-              {OFFERS.map((offer) => (
+              {offers.map((offer) => (
                 <CarouselSlide key={offer.id} onClick={() => navigate("/productsList")}>
                   {renderOfferCard(offer)}
                 </CarouselSlide>
@@ -88,7 +103,7 @@ const LimitedTimeOffersCarousel = () => {
       {/* Mobile horizontal scroll */}
       {isMobile && (
         <MobileScrollWrapper>
-          {OFFERS.map((offer) => (
+          {offers.map((offer) => (
             <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
           ))}
         </MobileScrollWrapper>

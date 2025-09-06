@@ -1,4 +1,5 @@
-import { banner_img1,banner_img2, banner_img3 }   from "../assets";
+import { banner_img1, banner_img2, banner_img3 } from "../assets";
+import { Offer_img1, Offer_img2, Offer_img3 } from "../assets";
 export const LandingPageData = {
   heroSection: {
     isVisible: true,
@@ -21,88 +22,111 @@ export const LandingPageData = {
         secondBtnAction: "/staff-picks",
       },
       {
-  id: "2",
-  order: 2,
-  tagText: "Seasonal",
-  tagActionText: "Limited-Time Favorites",
-  tagActionUrl: "/collections/seasonal",
-  title: "Celebrate the Season.",
-  subtitle: "Discover limited-edition wines perfect for holidays and special gatherings.",
-  backgroundMedia: {
-    type: "image",
-    url: banner_img1,
-  },
-  firstBtnText: "Shop Seasonal Picks",
-  secondBtnText: "Gift Ideas",
-  firstBtnAction: "/shop/seasonal",
-  secondBtnAction: "/gifts",
-},
-{
-  id: "3",
-  order: 3,
-  tagText: "Best Sellers",
-  tagActionText: "Customer Favorites",
-  tagActionUrl: "/collections/best-sellers",
-  title: "Loved by Thousands.",
-  subtitle: "Explore our most popular wines, rated highly by customers like you.",
-  backgroundMedia: {
-    type: "image",
-    url: banner_img2,
-  },
-  firstBtnText: "Shop Best Sellers",
-  secondBtnText: "Read Reviews",
-  firstBtnAction: "/shop/best-sellers",
-  secondBtnAction: "/reviews",
-},
-{
-  id: "4",
-  order: 4,
-  tagText: "Exclusive",
-  tagActionText: "Only at Wine Outlet",
-  tagActionUrl: "/collections/exclusive",
-  title: "Exclusive Labels.",
-  subtitle: "Unique wines available only here — crafted for true enthusiasts.",
-  backgroundMedia: {
-    type: "image",
-    url: banner_img3,
-  },
-  firstBtnText: "Shop Exclusives",
-  secondBtnText: "Join Wine Club",
-  firstBtnAction: "/shop/exclusive",
-  secondBtnAction: "/wine-club",
-}
-
+        id: "2",
+        order: 2,
+        tagText: "Seasonal",
+        tagActionText: "Limited-Time Favorites",
+        tagActionUrl: "/collections/seasonal",
+        title: "Celebrate the Season.",
+        subtitle: "Discover limited-edition wines perfect for holidays and special gatherings.",
+        backgroundMedia: {
+          type: "image",
+          url: banner_img1,
+        },
+        firstBtnText: "Shop Seasonal Picks",
+        secondBtnText: "Gift Ideas",
+        firstBtnAction: "/shop/seasonal",
+        secondBtnAction: "/gifts",
+      },
+      {
+        id: "3",
+        order: 3,
+        tagText: "Best Sellers",
+        tagActionText: "Customer Favorites",
+        tagActionUrl: "/collections/best-sellers",
+        title: "Loved by Thousands.",
+        subtitle: "Explore our most popular wines, rated highly by customers like you.",
+        backgroundMedia: {
+          type: "image",
+          url: banner_img2,
+        },
+        firstBtnText: "Shop Best Sellers",
+        secondBtnText: "Read Reviews",
+        firstBtnAction: "/shop/best-sellers",
+        secondBtnAction: "/reviews",
+      },
+      {
+        id: "4",
+        order: 4,
+        tagText: "Exclusive",
+        tagActionText: "Only at Wine Outlet",
+        tagActionUrl: "/collections/exclusive",
+        title: "Exclusive Labels.",
+        subtitle: "Unique wines available only here — crafted for true enthusiasts.",
+        backgroundMedia: {
+          type: "image",
+          url: banner_img3,
+        },
+        firstBtnText: "Shop Exclusives",
+        secondBtnText: "Join Wine Club",
+        firstBtnAction: "/shop/exclusive",
+        secondBtnAction: "/wine-club",
+      },
     ],
   },
 
-  limitedSection: {
+  limitedTimeOffer: {
     isVisible: true,
-    heading: "Limited-Time Offers",
-    subHeading: "Uncork exclusive savings this week.",
-    sections: [
+    title: "Limited-Time Offers",
+    subtitle: "Uncork exclusive savings this week.",
+    offers: [
       {
         id: "1",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: Offer_img1,
         },
-        url: "/offers/6-bottles",
+        offerAction: "/offers/6-bottles",
       },
       {
         id: "2",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: Offer_img2,
         },
-        url: "/offers/organic",
+        offerAction: "/offers/organic",
       },
       {
         id: "3",
         media: {
           type: "image",
-          url: "https://example.com/images/wine-1.jpg",
+          url: Offer_img3,
         },
-        url: "/offers/sparkling",
+        offerAction: "/offers/sparkling",
+      },
+      {
+        id: "1",
+        media: {
+          type: "image",
+          url: Offer_img1,
+        },
+        offerAction: "/offers/6-bottles",
+      },
+      {
+        id: "2",
+        media: {
+          type: "image",
+          url: Offer_img2,
+        },
+        offerAction: "/offers/organic",
+      },
+      {
+        id: "3",
+        media: {
+          type: "image",
+          url: Offer_img3,
+        },
+        offerAction: "/offers/sparkling",
       },
     ],
   },
