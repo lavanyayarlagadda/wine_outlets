@@ -29,7 +29,7 @@ import {
   IconGroup,
   MobileLocationDeliveryWrapper,
 } from "./Navigation.style";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "./NavigationMobileMenu";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";

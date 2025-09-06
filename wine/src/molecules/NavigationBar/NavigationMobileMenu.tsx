@@ -4,7 +4,7 @@ import {
   DrawerHeader,
   DrawerSubMenuItem,
   DrawerMenuItem,
-  DrawerAccountSection,
+  // DrawerAccountSection,
   CloseButton,
   Logo,
 } from "./Navigation.style";
@@ -21,7 +21,7 @@ interface MobileNavigationProps {
   handleMobileMenuToggle: (item: string) => void;
 }
 
-const MobileMenu: React.FC<MobileNavigationProps> = ({
+const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
   mobileMenuOpen,
   menuOpen,
   handleMobileMenuClose,
@@ -89,7 +89,7 @@ const MobileMenu: React.FC<MobileNavigationProps> = ({
       <DrawerMenuItem onClick={() => handleNavigation("/careers")}>Hiring Now</DrawerMenuItem>
 
       {/* Account Section */}
-      <DrawerAccountSection>
+      {/* <DrawerAccountSection>
         <DrawerMenuItem onClick={() => handleNavigation("/account")}>My Account</DrawerMenuItem>
         <DrawerMenuItem onClick={() => handleNavigation("/cart")}>Shopping Cart</DrawerMenuItem>
         <DrawerMenuItem onClick={() => handleNavigation("/orders")}>Order History</DrawerMenuItem>
@@ -102,9 +102,9 @@ const MobileMenu: React.FC<MobileNavigationProps> = ({
         >
           Log Out
         </DrawerMenuItem>
-      </DrawerAccountSection>
+      </DrawerAccountSection> */}
     </StyledDrawer>
   );
 };
 
-export default MobileMenu;
+export default NavigationMobileMenu;
