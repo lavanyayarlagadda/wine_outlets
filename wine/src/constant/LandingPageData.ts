@@ -240,19 +240,16 @@ export const LandingPageData = {
     ],
   },
 
-  miniBanner: {
+  everyDaySlides: {
     isVisible: true,
-    banners: [
+    slides: [
       {
         id: 1,
         title: "Everyday Value",
         description:
           "Enjoy high-quality wines, beers, and spirits at affordable prices—perfect for daily moments without compromising on taste",
-        action: {
-          id: 1,
-          label: "Starting from $9.50",
-          url: "/shop/everyday-value",
-        },
+        btnText: "Starting from $9.50",
+        btnAction: "/shop/everyday-value",
         media: {
           type: "video",
           url: "https://example.com/images/wine-1.jpg",
@@ -263,17 +260,12 @@ export const LandingPageData = {
         id: 2,
         title: "Premium Collection",
         description: "Discover our premium wines handpicked from the best vineyards worldwide.",
-        Action: {
-          id: 1,
-          label: "Shop Premium",
-          url: "/shop/premium",
-        },
-
+        btnText: "Shop Premium $9.50",
+        btnAction: "/shop/everyday-value",
         media: {
           type: "video",
           url: "https://example.com/images/wine-1.jpg",
         },
-
         order: 2,
       },
     ],

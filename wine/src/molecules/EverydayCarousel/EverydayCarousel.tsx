@@ -13,8 +13,32 @@ import {
   Dot,
   IconWrapper,
 } from "./EverydayCarousel.style";
-import { EVERYDAY_SLIDES as slides } from "../../constant/curatedData";
+import { LandingPageData } from "../../constant/LandingPageData";
+// import { EVERYDAY_SLIDES as slides } from "../../constant/curatedData";
 import { useNavigate } from "react-router-dom";
+
+interface EverydaySlide {
+  id: number | string;
+  title?: string;
+  description?: string;
+  btnText?: string;
+  btnAction?: string;
+  media?: {
+    type?: string;
+    url?: string;
+  };
+  order?: number;
+}
+
+interface EveryDaySlidesSection {
+  isVisible?: boolean;
+  slides?: EverydaySlide[];
+}
+
+
+const everyDaySection: EveryDaySlidesSection = LandingPageData?.everyDaySlides ?? {};
+const slides = everyDaySection.slides ?? [];
+
 
 const WineCarousel: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -29,7 +53,7 @@ const WineCarousel: React.FC = () => {
           <SlideDescription>{slides[currentSlide].description}</SlideDescription>
         </ContentSection>
         <PriceButton variant="contained" onClick={() => navigate("/productsList")}>
-          Starting from {slides[currentSlide].price}
+          {slides[currentSlide].btnText}
           <IconWrapper>
             <NorthEastIcon fontSize="small" sx={{ color: theme.palette.white.main }} />
           </IconWrapper>
