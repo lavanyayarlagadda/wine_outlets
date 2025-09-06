@@ -108,10 +108,18 @@ export const useHeroBanner = (
     }, 3000);
   }, [nextSlide, prevSlide, isAutoPlaying, startAutoPlay]);
 
+  const handleTagClick = () => {
+    console.log("Tag clicked");
+  }
+
   // Button actions
   const firstBtnAction = () => {
     if (!slides) return;
     const slide = slides[currentSlide];
+    // if (slide.firstBtnAction) {
+    //   navigate(slide.firstBtnAction);
+    //   return;
+    // }
     if (slide.firstBtnText === "Browse Wines") navigate("/productsList?category=wines");
     else navigate("/productsList");
   };
@@ -119,8 +127,14 @@ export const useHeroBanner = (
   const secondBtnAction = () => {
     if (!slides) return;
     const slide = slides[currentSlide];
-    if (slide.secondBtnText === "Find a Store" && setOpen) setOpen(true);
-    else navigate("/productsList");
+    if (slide.secondBtnAction) {
+    if (slide.secondBtnAction === "openStoreModal" && setOpen) {
+      setOpen(true);
+      return;
+    }
+    navigate(slide.secondBtnAction);
+    return;
+  }
   };
 
   // Auto-play & hover management
@@ -159,5 +173,6 @@ export const useHeroBanner = (
     handleTouchEnd,
     firstBtnAction,
     secondBtnAction,
+    handleTagClick
   };
 };

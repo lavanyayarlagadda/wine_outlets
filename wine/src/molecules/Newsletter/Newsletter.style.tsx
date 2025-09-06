@@ -31,7 +31,7 @@ export const SubscribeButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.white.main,
   padding: theme.spacing(1.5, 3),
-  borderRadius: `${shape.borderRadius}px`,
+  borderRadius: shape.baseBorderRadius * 1.5,
   textTransform: "none",
   fontSize: theme.typography.button.fontSize,
   fontWeight: 600,
@@ -39,12 +39,12 @@ export const SubscribeButton = styled(Button)(({ theme }) => ({
 
 export const WrapperBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.white.main,
-  borderRadius: `${shape.borderRadius * 3}px`,
+  borderRadius: shape.baseBorderRadius * 3,
   border: shape.borderSuccess,
   padding: theme.spacing(3),
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(2),
-    borderRadius: `${shape.borderRadius * 2}px`,
+    borderRadius: shape.baseBorderRadius * 2,
   },
 }));
 

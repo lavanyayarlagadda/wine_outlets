@@ -14,7 +14,7 @@ import {
   StoreLocator,
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
-import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
+// import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
 
 const Home = () => {
   const { agePopupOpen, isAgeVerified, handleVerifyAge, setOpen, open, setIsAgeVerified } =
@@ -55,7 +55,7 @@ const Home = () => {
           setIsAgeVerified={setIsAgeVerified}
         />
       )}
-      {isAgeVerified && <HeroBanner slides={HERO_BANNER_SLIDES} setOpen={setOpen} />}
+      {isAgeVerified && <HeroBanner  setOpen={setOpen} />}
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}
       {isAgeVerified && <CuratedPicks />}

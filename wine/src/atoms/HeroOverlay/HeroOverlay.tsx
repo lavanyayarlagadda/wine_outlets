@@ -19,8 +19,10 @@ export interface HeroOverlayProps {
   secondBtnText: string;
   onFirstBtnClick: () => void;
   onSecondBtnClick: () => void;
+  handleTagClick?: () => void;
   tagText?: string;
   tagActionText: string;
+  tagActionUrl?: string;
 }
 
 const HeroOverlay = ({
@@ -32,6 +34,7 @@ const HeroOverlay = ({
   onSecondBtnClick,
   tagText,
   tagActionText,
+  handleTagClick,
 }: HeroOverlayProps) => {
   const theme = useTheme();
   return (
@@ -43,7 +46,7 @@ const HeroOverlay = ({
               <span>{tagText}</span>
               <CustomizeTagActionBox>
                 {tagActionText}
-                <KeyboardArrowRightIcon />
+                <KeyboardArrowRightIcon onClick={handleTagClick}/>
               </CustomizeTagActionBox>
             </CustomizeTagBox>
           )}

@@ -7,7 +7,7 @@ import "@fontsource/inter/300.css";
 import "@fontsource/inter/200.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/100.css";
-import { Box } from "@mui/material";
+import AppLoader from "./atoms/AppLoader/AppLoader";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
@@ -19,9 +19,7 @@ const App: React.FC = () => {
     <Router>
       <Suspense
         fallback={
-          <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-            <img src="/loader.gif" alt="Loading..." style={{ width: 150, height: 150 }} />
-          </Box>
+          <AppLoader/>
         }
       >
         <Routes>

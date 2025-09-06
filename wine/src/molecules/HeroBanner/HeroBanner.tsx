@@ -7,31 +7,36 @@ import {
   DotsContainer,
   Dot,
 } from "./HeroBanner.style";
-import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
+// import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
 import { HeroOverlay } from "../../atoms";
+import { LandingPageData } from "../../constant/LandingPageData";
 
 export interface SlideData {
-  id: number;
-  backgroundImage: string;
-  title: string;
-  subtitle: string;
-  firstBtnText: string;
-  secondBtnText: string;
-  onFirstBtnClick: () => void;
-  onSecondBtnClick: () => void;
+  id: string; 
+  order?: number;
   tagText?: string;
-  tagActionText: string;
+  tagActionText?: string;
+  tagActionUrl?: string;
+  title?: string;
+  subtitle?: string;
+  backgroundMedia?: {
+    type: "image" | "video" | string;
+    url: string;
+  };
+  firstBtnText?: string;
+  secondBtnText?: string;
+  firstBtnAction?: string; 
+  secondBtnAction?: string; 
 }
 
 export interface HeroBannerProps {
-  slides: SlideData[];
+  slides?: SlideData[];
   autoPlayInterval?: number;
   height?: string | number;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const HeroBanner = ({
-  slides = HERO_BANNER_SLIDES,
+  slides = LandingPageData.heroSection.slides,
   autoPlayInterval = 5000,
   setOpen,
 }: HeroBannerProps) => {
@@ -44,6 +49,7 @@ const HeroBanner = ({
     handleTouchEnd,
     firstBtnAction,
     secondBtnAction,
+    handleTagClick
   } = useHeroBanner(slides.length, autoPlayInterval, setOpen, slides);
 
   const currentSlideData = slides[currentSlide];
@@ -58,7 +64,7 @@ const HeroBanner = ({
       {slides.map((slide, index) => (
         <SlideContainer key={slide.id} isActive={index === currentSlide}>
           <SlideBackground
-            backgroundImage={slide.backgroundImage}
+            backgroundImage={slide.backgroundMedia?.url ?? ""}
             role="img"
             aria-label={slide.title}
           />
@@ -66,14 +72,16 @@ const HeroBanner = ({
       ))}
 
       <HeroOverlay
-        title={currentSlideData.title}
-        subtitle={currentSlideData.subtitle}
-        firstBtnText={currentSlideData.firstBtnText}
-        secondBtnText={currentSlideData.secondBtnText}
+        title={currentSlideData?.title || ""}
+        subtitle={currentSlideData?.subtitle || ""}
+        firstBtnText={currentSlideData?.firstBtnText || ""}
+        secondBtnText={currentSlideData.secondBtnText || ""}
         onFirstBtnClick={firstBtnAction}
         onSecondBtnClick={secondBtnAction}
         tagText={currentSlideData.tagText}
-        tagActionText={currentSlideData.tagActionText}
+        tagActionText={currentSlideData.tagActionText || ""}
+        tagActionUrl={currentSlideData?.tagActionUrl}
+        handleTagClick={handleTagClick}
       />
 
       <DotsContainer>
