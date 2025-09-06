@@ -38,10 +38,11 @@ export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
     padding: theme.spacing(0.5, 1),
   },
   [theme.breakpoints.down("sm")]: {
-    width: "100%",
-    padding: theme.spacing(0.5, 1),
-    borderRadius: `${theme.shape.borderRadius}px`,
-  },
+  width: "100%",
+  padding: theme.spacing(0.5, 0.75),
+  borderRadius: `${theme.shape.borderRadius}px`,
+  minHeight: theme.spacing(4),
+},
 }));
 
 export const SearchIconStyled = styled(SearchIcon)(({ theme }) => ({
@@ -52,6 +53,12 @@ export const SearchIconStyled = styled(SearchIcon)(({ theme }) => ({
   svg: {
     fontSize: theme.typography.body1.fontSize,
   },
+  [theme.breakpoints.down("sm")]: {
+  marginRight: theme.spacing(0.5),
+  svg: {
+    fontSize: theme.typography.body2.fontSize,
+  },
+},
 }));
 
 export const StyledSearchButton = styled(Button)(({ theme }) => ({
@@ -64,11 +71,13 @@ export const StyledSearchButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.primary.dark,
   },
-  [theme.breakpoints.down("sm")]: {
-    marginLeft: 0,
-    width: "100%",
-    alignSelf: "stretch",
-  },
+ [theme.breakpoints.down("sm")]: {
+  marginLeft: 0,
+  width: "100%",
+  alignSelf: "stretch",
+  padding: theme.spacing(0.5, 1),
+  fontSize: theme.typography.caption.fontSize,
+},
 }));
 
 export const StoreButtonBase = styled(ButtonBase, {
@@ -83,16 +92,16 @@ export const StoreButtonBase = styled(ButtonBase, {
   display: "block",
   transition: "background-color 0.2s ease",
   [theme.breakpoints.down("sm")]: {
-    padding: theme.spacing(1.5),
-    marginBottom: theme.spacing(1.5),
-    borderRadius: shape.borderRadius,
-  },
+  padding: theme.spacing(1), 
+  marginBottom: theme.spacing(1),
+  borderRadius: `${theme.shape.borderRadius}px`,
+},
 }));
 
 export const StoreHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between", // pushes Check icon to far right
+  justifyContent: "space-between", 
   width: "100%",
   gap: theme.spacing(1),
 }));
@@ -112,8 +121,9 @@ export const StoreName = styled(Typography)(({ theme }) => ({
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   [theme.breakpoints.down("sm")]: {
-    ...theme.typography.body1,
-  },
+  ...theme.typography.body2,
+  fontWeight: "bold",
+},
 }));
 
 export const MapButton = styled(Button, {
@@ -130,10 +140,10 @@ export const MapButton = styled(Button, {
   alignItems: "center",
   justifyContent: "center",
   [theme.breakpoints.down("sm")]: {
-    minWidth: theme.spacing(10),
-    padding: theme.spacing(0.5, 1),
-    fontSize: theme.typography.caption.fontSize,
-  },
+  minWidth: theme.spacing(8),
+  padding: theme.spacing(0.4, 0.75),
+  fontSize: theme.typography.caption.fontSize,
+},
 }));
 
 export const MapIconImage = styled("img")(({ theme }) => ({
@@ -149,10 +159,10 @@ export const StoreInfoRow = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(1),
   gap: theme.spacing(2),
   [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: theme.spacing(0.75),
-  },
+  flexDirection: "column",
+  alignItems: "flex-start",
+  gap: theme.spacing(0.5),
+},
 }));
 
 export const InfoItem = styled(Box)(({ theme }) => ({
@@ -163,4 +173,13 @@ export const InfoItem = styled(Box)(({ theme }) => ({
   "& svg": {
     fontSize: theme.typography.body2.fontSize,
   },
+  [theme.breakpoints.down("sm")]: {
+  gap: theme.spacing(0.5),
+  "& svg": {
+    fontSize: theme.typography.caption.fontSize,
+  },
+  "& > p, & > span": {
+    ...theme.typography.caption,
+  },
+},
 }));
