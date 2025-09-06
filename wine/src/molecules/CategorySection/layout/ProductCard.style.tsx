@@ -12,7 +12,7 @@ export const CustomizeCardWrapper = styled(Grid)(({ theme }) => ({
   },
 }));
 
-export const StyledCard = styled(Card)(({}) => ({
+export const StyledCard = styled(Card)(() => ({
   position: "relative",
   borderRadius: "24px",
   overflow: "hidden",

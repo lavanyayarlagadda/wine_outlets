@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import { CustomCheckbox, CustomRangeSelector } from "../../atoms";
 import { useFilterPanel } from "./FilterPanel.hook";
 import { FilterAccordion } from "../../molecules";
-import { useState } from "react";
+
 import {
   FilterWrapper,
   Header,
@@ -17,6 +17,7 @@ import {
   ContentStack,
   PercentageText,
 } from "./FilterPanel.style";
+// import { useSearchParams } from "react-router-dom";
 
 export interface Category {
   categoryId: string;
@@ -46,15 +47,12 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
     handleCheckboxChange,
     handleSliderChange,
     handleClearAll,
-  } = useFilterPanel(onFilterChange);
+    selectedSub,
+    handleSubSelect,
+  } = useFilterPanel(categories, onFilterChange); // ✅ pass categories here
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-  const [selectedSub, setSelectedSub] = useState<string | null>(null);
-
-  const handleSubSelect = (id: string) => {
-    setSelectedSub(id === selectedSub ? null : id);
-  };
 
   const getIcon = (name: string) => iconMap[name.toLowerCase()] ?? <LocalBar fontSize="small" />;
 
@@ -69,8 +67,8 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
           <CustomCheckbox
             key={item.listId}
             label={item.listName}
-            checked={(filters[cat.categoryId] || []).includes(item.listName)}
-            onChange={() => handleCheckboxChange(cat.categoryId, item.listName)}
+            checked={(filters[cat.categoryId] || []).includes(item.listId)}
+            onChange={() => handleCheckboxChange(cat.categoryId, item.listId)}
           />
         ))}
 
@@ -124,8 +122,8 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                   <CustomCheckbox
                     key={item.listId}
                     label={item.listName}
-                    checked={(filters[cat.categoryId] || []).includes(item.listName)}
-                    onChange={() => handleCheckboxChange(cat.categoryId, item.listName)}
+                    checked={(filters[sub.categoryId] || []).includes(item.listId)}
+                    onChange={() => handleCheckboxChange(sub.categoryId, item.listId)}
                   />
                 ))}
                 {sub.subCategories?.map((innerSub, index) => renderCategory(innerSub, index))}

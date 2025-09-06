@@ -53,7 +53,7 @@ export const OverlayButtonGroup = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const CustomiseBannerContentWrapper = styled(Box)(({}) => ({
+export const CustomiseBannerContentWrapper = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "16px",

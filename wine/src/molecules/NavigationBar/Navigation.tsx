@@ -34,12 +34,15 @@ import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
 
-// Define menu items for dropdowns
-const menus: { [key: string]: string[] } = {
-  Wine: ["Red Wine", "White Wine", "Rose Wine"],
-  Beer: ["Lager", "Ale", "Stout"],
-  Liquor: ["Whiskey", "Vodka", "Rum"],
-};
+// // Define menu items for dropdowns
+// const menus: { [key: string]: string[] } = {
+//   Wine:   [{ listId: "1", listName: "Pinot Noir Aisle" },
+//               { listId: "2", listName: "Cabernet Aisle" },
+//               { listId: "3", listName: "Sparkling Aisle" },
+//               { listId: "4", listName: "Italian" },],
+//   Beer: ["Lager", "Ale", "Stout"],
+//   Liquor: ["Whiskey", "Vodka", "Rum"],
+// };
 
 const Navigation = () => {
   const theme = useTheme();
@@ -60,6 +63,32 @@ const Navigation = () => {
 
   const onClose = () => {
     setOpenLogin(false);
+  };
+
+  // Example menu data (can come from props or API)
+  const menuData = {
+    menuList: [
+      {
+        id: 1,
+        name: "Wines",
+        itemsList: [
+          { id: 1, listName: "Wines1" },
+          { id: 2, listName: "Wines2" },
+          { id: 3, listName: "Wines3" },
+          { id: 4, listName: "Wines4" },
+        ],
+      },
+      {
+        id: 2,
+        name: "Beers",
+        itemsList: [
+          { id: 1, listName: "Beers1" },
+          { id: 2, listName: "Beers2" },
+          { id: 3, listName: "Beers3" },
+          { id: 4, listName: "Beers4" },
+        ],
+      },
+    ],
   };
 
   return (
@@ -157,26 +186,29 @@ const Navigation = () => {
 
       <BottomToolbar sx={{ display: { xs: "none", md: "flex" } }}>
         <NavWrapper>
-          {["Wine", "Beer", "Liquor"].map((item) => (
-            <div key={item}>
-              <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, item)}>
-                {item} {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          {menuData.menuList.map((menu) => (
+            <div key={menu.id}>
+              {/* Dropdown Trigger */}
+              <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, menu.name)}>
+                {menu.name}{" "}
+                {menuOpen[menu.name] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </DropdownTriggerNoBorder>
 
+              {/* Dropdown Menu */}
               <StyledMenu
-                anchorEl={anchorEl[item]}
-                open={menuOpen[item] && !mobileMenuOpen}
-                onClose={() => handleMenuClose(item)}
+                anchorEl={anchorEl[menu.name]}
+                open={menuOpen[menu.name] && !mobileMenuOpen}
+                onClose={() => handleMenuClose(menu.name)}
               >
-                {menus[item].map((val) => (
+                {menu.itemsList.map((item) => (
                   <DropdownMenuItem
-                    key={val}
+                    key={item.id}
                     onClick={() => {
-                      navigate("/productsList"); // wrap in function
-                      handleMenuClose(item); // optionally close the menu
+                      navigate(`/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`);
+                      handleMenuClose(menu.name);
                     }}
                   >
-                    {val}
+                    {item.listName}
                   </DropdownMenuItem>
                 ))}
               </StyledMenu>

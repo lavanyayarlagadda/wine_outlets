@@ -23,22 +23,24 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   options,
   placeholder,
   fullWidth = true,
-}) => (
-  <StyledFormControl fullWidth={fullWidth} variant="outlined" size="small">
-    <StyledLabel>{label}</StyledLabel>
-    <Select value={value} onChange={(e) => onChange(e.target.value as string)} displayEmpty>
-      {placeholder && (
-        <MenuItem value="">
-          <span>{placeholder}</span>
-        </MenuItem>
-      )}
-      {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </Select>
-  </StyledFormControl>
-);
+}) => {
+  return (
+    <StyledFormControl fullWidth={fullWidth} variant="outlined" size="small">
+      <StyledLabel>{label}</StyledLabel>
+      <Select value={value} onChange={(e) => onChange(e.target.value as string)} displayEmpty>
+        {placeholder && (
+          <MenuItem value="">
+            <span>{placeholder}</span>
+          </MenuItem>
+        )}
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </StyledFormControl>
+  );
+};
 
 export default SimpleDropdown;

@@ -10,7 +10,7 @@ export interface FormValues {
 export const useAgePopup = (onVerify: () => void) => {
   const initialValues: FormValues = AGE_POPUP_INITIAL_VALUES;
   const validationSchema = useMemo(() => agePopupSchema, []);
-  const handleSubmit = (values: FormValues) => {
+  const handleSubmit = () => {
     onVerify();
   };
 
