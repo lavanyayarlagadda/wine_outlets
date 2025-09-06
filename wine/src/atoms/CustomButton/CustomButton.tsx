@@ -9,6 +9,8 @@ interface CustomButtonProps {
   color: string;
   border?: string;
   btnBorderColor?: string;
+  btnbgColor?:string;
+  btnColor?:string;
 }
 
 const CustomButton = ({
@@ -18,11 +20,13 @@ const CustomButton = ({
   color = "",
   border = "",
   btnBorderColor = "",
+  btnbgColor="",
+  btnColor=""
 }: CustomButtonProps) => {
   return (
     <StyledButton onClick={onClick} bgColor={bgColor} btnBorderColor={btnBorderColor}>
       <ButtonText style={{ color }}>{text}</ButtonText>
-      <IconWrapper border={border}>
+      <IconWrapper border={border} bgcolor={btnbgColor} color={btnColor}>
         <NorthEastIcon fontSize="small" />
       </IconWrapper>
     </StyledButton>

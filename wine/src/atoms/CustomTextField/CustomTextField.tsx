@@ -1,4 +1,4 @@
-import type React from "react";
+import  React from "react";
 import { InputAdornment, MenuItem, Box, Typography } from "@mui/material";
 import { StyledTextField, CountrySelect, StyledLabel } from "./CustomTextField.style";
 import palette from "../../themes/palette";

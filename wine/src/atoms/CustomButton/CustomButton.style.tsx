@@ -39,9 +39,12 @@ export const ButtonText = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const IconWrapper = styled(Box)<{ border: string }>(({ theme, border }) => ({
-  backgroundColor: theme.palette.white.main,
-  color: theme?.palette?.primary.dark,
+export const IconWrapper = styled(Box)<{ border: string,color:string,bgcolor:string }>(({ theme, border,color,bgcolor }) => ({
+  backgroundColor: bgcolor ? bgcolor :theme.palette.white.main,
+ color: color ? color:theme?.palette?.primary.dark, // <-- will apply to the icon
+    "& svg": {
+      color: color ? color:theme?.palette?.primary.dark, // apply btnColor to icon itself
+    },
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",

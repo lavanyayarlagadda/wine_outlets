@@ -2,7 +2,7 @@
 import {Box, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
-export const CounterBox = styled(Box)(({ theme }) => ({
+export const CounterBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   border: shape.borderSuccess,
@@ -11,7 +11,7 @@ export const CounterBox = styled(Box)(({ theme }) => ({
 }));
 
 // IconButton with default small size
-export const CounterIconButton = styled(IconButton)(({ theme }) => ({
+export const CounterIconButton = styled(IconButton)(() => ({
   padding: 4, // default MUI small padding
   "& svg": {
     fontSize: "16px", // small icon size
@@ -19,7 +19,7 @@ export const CounterIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 // Typography for value display
-export const CounterValue = styled(Typography)(({ theme }) => ({
+export const CounterValue = styled(Typography)(() => ({
   margin: "0 4px",
   minWidth: 16,
   textAlign: "center",

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Dialog, IconButton, Box, Typography, Divider } from "@mui/material";
+import {  IconButton, Box, Typography, Divider } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import * as Styled from "../../molecules/AgePopup/AgePopup.style";
 import palette from "../../themes/palette";

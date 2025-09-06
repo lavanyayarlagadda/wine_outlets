@@ -1,12 +1,11 @@
 import React from "react";
-import { Box, IconButton, Typography } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { CounterBox, CounterIconButton, CounterValue } from "./CustomCounter.style";
 
 interface CounterProps {
   value: number;
-  onChange: (newValue: number) => void;
+onChange: (_newValue: number) => void;
   min?: number;
   max?: number;
   step?: number;

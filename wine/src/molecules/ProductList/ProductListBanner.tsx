@@ -28,10 +28,12 @@ const ProductListBanner: React.FC = () => {
         {current.action && (
           <CustomButton
             text={current.action.label}
-            bgColor={theme.palette.primary.dark}
+            bgColor={theme.palette.white.main}
             onClick={() => (window.location.href = current.action.url)}
-            color=""
-            border=""
+            color={palette.primary.dark}            
+            border={palette.primary.dark}
+            btnColor={theme.palette.white.main}
+            btnbgColor={palette.primary.dark}             
           />
         )}
 

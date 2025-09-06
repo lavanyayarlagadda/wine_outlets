@@ -7,6 +7,7 @@ export function useFilters(onFilterChange?: (filters: Record<string, any>) => vo
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const updateFilters = (newFilters: Record<string, any>) => {
+  console.log(filters)
     setFilters(newFilters);
     onFilterChange?.(newFilters);
   };

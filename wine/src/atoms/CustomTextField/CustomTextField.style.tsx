@@ -26,7 +26,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-export const CountrySelect = styled(Select)(({ theme }) => ({
+export const CountrySelect = styled(Select)(() => ({
   "& .MuiSelect-select": {
     padding: "0 8px",
     fontSize: "14px",
