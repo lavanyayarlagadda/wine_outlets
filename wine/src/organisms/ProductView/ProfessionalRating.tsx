@@ -1,24 +1,21 @@
 import { Grid, IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { ProductLayoutContainer } from './ProductView.style';
+import { ProductLayoutContainer } from "./ProductView.style";
 import { ProductTitle } from "../../molecules/ProductListCard/ProductListCard.style";
 import ProfessionalRatingCard from "../../molecules/ProductView/ProfessionalRatingCard";
 import { Container, Header, RatingsGrid } from "../../molecules/ProductView/ProductView.style";
 import { UseProductView } from "./UseProductView.hook";
 
-
 const ProfessionalRating = () => {
-   const { expanded, toggleExpand, productViewData } = UseProductView();
+  const { expanded, toggleExpand, productViewData } = UseProductView();
 
-    return (
-         <ProductLayoutContainer>
+  return (
+    <ProductLayoutContainer>
       <Container>
         <Header onClick={toggleExpand}>
           <ProductTitle>Professional Rating</ProductTitle>
-          <IconButton>
-            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </IconButton>
+          <IconButton>{expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}</IconButton>
         </Header>
 
         {expanded && productViewData?.professionalRating?.length ? (
@@ -39,7 +36,7 @@ const ProfessionalRating = () => {
               }
 
               return (
-                <Grid size={{ xs: 12, sm: gridSize, md: gridSize }}  key={index}>
+                <Grid size={{ xs: 12, sm: gridSize, md: gridSize }} key={index}>
                   <ProfessionalRatingCard
                     title={rating.title}
                     score={rating.score}
@@ -54,7 +51,7 @@ const ProfessionalRating = () => {
         ) : null}
       </Container>
     </ProductLayoutContainer>
-    );
+  );
 };
 
 export default ProfessionalRating;

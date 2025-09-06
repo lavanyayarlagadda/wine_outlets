@@ -19,7 +19,7 @@ export const container: SxProps<Theme> = (theme) => ({
 export const buttonBase: SxProps<Theme> = {
   textTransform: "none",
   px: 3,
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   color: palette.black[800],
   border: shape.boderGrey200,
   fontWeight: 600,
@@ -39,7 +39,7 @@ export const paginationItem: SxProps<Theme> = {
   "&.Mui-selected": {
     bgcolor: palette.primary.light,
     color: palette.primary.dark,
-    borderRadius: "8px",
+    borderRadius: shape.borderRadiuspx,
   },
   fontWeight: 500,
   minWidth: 36,

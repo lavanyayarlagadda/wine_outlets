@@ -1,5 +1,6 @@
-import type React from "react";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import type { SlideData } from "../../constant/heroBannerSlides";
 
 interface TouchState {
   startX: number;
@@ -9,11 +10,18 @@ interface TouchState {
   isDragging: boolean;
 }
 
-export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
+export const useHeroBanner = (
+  totalSlides: number,
+  autoPlayInterval = 5000,
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>,
+  slides?: SlideData[]
+) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
+
   const touchState = useRef<TouchState>({
     startX: 0,
     startY: 0,
@@ -22,11 +30,9 @@ export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
     isDragging: false,
   });
 
-  // Auto-play functionality
+  // Carousel auto-play
   const startAutoPlay = useCallback(() => {
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current);
-    }
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
 
     autoPlayRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -40,29 +46,26 @@ export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
     }
   }, []);
 
-  // Navigation functions
+  // Slide navigation
   const goToSlide = useCallback(
     (slideIndex: number) => {
-      if (slideIndex >= 0 && slideIndex < totalSlides) {
-        setCurrentSlide(slideIndex);
-        stopAutoPlay();
-        setTimeout(() => {
-          if (isAutoPlaying) {
-            startAutoPlay();
-          }
-        }, 3000);
-      }
+      setCurrentSlide(slideIndex);
+      stopAutoPlay();
+      setTimeout(() => {
+        if (isAutoPlaying) startAutoPlay();
+      }, 3000);
     },
-    [totalSlides, isAutoPlaying, startAutoPlay, stopAutoPlay]
+    [isAutoPlaying, startAutoPlay, stopAutoPlay]
   );
 
-  const nextSlide = useCallback(() => {
-    goToSlide((currentSlide + 1) % totalSlides);
-  }, [currentSlide, totalSlides, goToSlide]);
-
-  const prevSlide = useCallback(() => {
-    goToSlide(currentSlide === 0 ? totalSlides - 1 : currentSlide - 1);
-  }, [currentSlide, totalSlides, goToSlide]);
+  const nextSlide = useCallback(
+    () => goToSlide((currentSlide + 1) % totalSlides),
+    [currentSlide, totalSlides, goToSlide]
+  );
+  const prevSlide = useCallback(
+    () => goToSlide(currentSlide === 0 ? totalSlides - 1 : currentSlide - 1),
+    [currentSlide, totalSlides, goToSlide]
+  );
 
   // Touch/swipe handlers
   const handleTouchStart = useCallback(
@@ -82,7 +85,6 @@ export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (!touchState.current.isDragging) return;
-
     const touch = e.touches[0];
     touchState.current.currentX = touch.clientX;
     touchState.current.currentY = touch.clientY;
@@ -95,74 +97,48 @@ export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
     const deltaY = Math.abs(touchState.current.startY - touchState.current.currentY);
     const minSwipeDistance = 50;
 
-    // Only trigger swipe if horizontal movement is greater than vertical
     if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaX) > deltaY) {
-      if (deltaX > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
+      if (deltaX > 0) nextSlide();
+      else prevSlide();
     }
 
     touchState.current.isDragging = false;
-
-    // Restart auto-play after touch interaction
     setTimeout(() => {
-      if (isAutoPlaying) {
-        startAutoPlay();
-      }
+      if (isAutoPlaying) startAutoPlay();
     }, 3000);
   }, [nextSlide, prevSlide, isAutoPlaying, startAutoPlay]);
 
-  // Keyboard navigation
+  // Button actions
+  const firstBtnAction = () => {
+    if (!slides) return;
+    const slide = slides[currentSlide];
+    if (slide.firstBtnText === "Browse Wines") navigate("/productsList?category=wines");
+    else navigate("/productsList");
+  };
+
+  const secondBtnAction = () => {
+    if (!slides) return;
+    const slide = slides[currentSlide];
+    if (slide.secondBtnText === "Find a Store" && setOpen) setOpen(true);
+    else navigate("/productsList");
+  };
+
+  // Auto-play & hover management
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowLeft":
-          prevSlide();
-          break;
-        case "ArrowRight":
-          nextSlide();
-          break;
-        case " ":
-          e.preventDefault();
-          setIsAutoPlaying((prev) => !prev);
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [nextSlide, prevSlide]);
-
-  // Auto-play management
-  useEffect(() => {
-    if (isAutoPlaying) {
-      startAutoPlay();
-    } else {
-      stopAutoPlay();
-    }
-
+    if (isAutoPlaying) startAutoPlay();
+    else stopAutoPlay();
     return () => stopAutoPlay();
   }, [isAutoPlaying, startAutoPlay, stopAutoPlay]);
 
-  // Pause auto-play on hover
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-
     const handleMouseEnter = () => stopAutoPlay();
     const handleMouseLeave = () => {
-      if (isAutoPlaying) {
-        startAutoPlay();
-      }
+      if (isAutoPlaying) startAutoPlay();
     };
-
     container.addEventListener("mouseenter", handleMouseEnter);
     container.addEventListener("mouseleave", handleMouseLeave);
-
     return () => {
       container.removeEventListener("mouseenter", handleMouseEnter);
       container.removeEventListener("mouseleave", handleMouseLeave);
@@ -171,6 +147,7 @@ export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
 
   return {
     currentSlide,
+    currentSlideData: slides ? slides[currentSlide] : undefined,
     isAutoPlaying,
     setIsAutoPlaying,
     goToSlide,
@@ -180,5 +157,7 @@ export const useHeroBanner = (totalSlides: number, autoPlayInterval = 5000) => {
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
+    firstBtnAction,
+    secondBtnAction,
   };
 };

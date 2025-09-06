@@ -60,10 +60,7 @@ export function useRecentlyViewed<T>({
   }, [onScroll]);
 
   const scrollToSlide = useCallback(
-    (
-      index: number,
-      behavior: "auto" | "instant" | "smooth" = "smooth"
-    ) => {
+    (index: number, behavior: "auto" | "instant" | "smooth" = "smooth") => {
       const clamped = Math.max(0, Math.min(index, totalSlides - 1));
       const container = scrollRef.current;
       if (!container) {
@@ -92,19 +89,13 @@ export function useRecentlyViewed<T>({
     [scrollToSlide]
   );
 
-  const handleAddToCart = useCallback(
-    (productId: string, cb?: (id: string) => void) => {
-      cb?.(productId);
-    },
-    []
-  );
+  const handleAddToCart = useCallback((productId: string, cb?: (id: string) => void) => {
+    cb?.(productId);
+  }, []);
 
-  const handleToggleFavorite = useCallback(
-    (productId: string, cb?: (id: string) => void) => {
-      cb?.(productId);
-    },
-    []
-  );
+  const handleToggleFavorite = useCallback((productId: string, cb?: (id: string) => void) => {
+    cb?.(productId);
+  }, []);
 
   useEffect(() => {
     if (initialSlide && initialSlide >= 0 && initialSlide !== currentSlide) {

@@ -14,8 +14,10 @@ import {
 } from "./CuratedPicks.style";
 
 import { curatedData } from "../../constant/curatedData";
+import { useNavigate } from "react-router-dom";
 
 const CuratedPicks = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <HeaderSection>
@@ -27,7 +29,7 @@ const CuratedPicks = () => {
           {curatedData.map((item, index) => (
             <Grid key={index}>
               <StyledWineItem>
-                <StyledImageContainer>
+                <StyledImageContainer onClick={() => navigate("/productsList")}>
                   <StyledOverlay />
                   <img
                     src={item.imageUrl || "/placeholder.svg"}

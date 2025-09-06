@@ -5,7 +5,7 @@ import shape from "../../themes/shape";
 
 export const FilterWrapper = styled(Box)(({ theme }) => ({
   border: shape.boderGrey200,
-  borderRadius: "16px",
+  borderRadius: shape.borderRadius,
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(2),
 }));
@@ -36,7 +36,7 @@ export const HeaderTitle = styled(Typography)(() => ({
 
 export const ClearButton = styled(Button)(() => ({
   border: shape.boderGrey200,
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   color: palette.black[800],
   fontSize: "14px",
   textTransform: "capitalize",
@@ -51,7 +51,7 @@ export const StyledDivider = styled(Divider)(() => ({
 export const SubCategoryButton = styled(Button)<{ selected?: boolean }>(({ selected, theme }) => ({
   width: "100%",
   justifyContent: "space-between",
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   textTransform: "none",
   fontWeight: 500,
   marginBottom: "8px",

@@ -258,7 +258,7 @@ const DealsSection: React.FC = () => {
                 borderColor: filter.isActive ? theme.palette.primary.main : palette.grey[50],
                 color: filter.isActive ? palette.white.main : theme.palette.black[800],
                 "&:hover": {
-                  backgroundColor: filter.isActive ? theme.palette.primary.dark : palette.grey[150],
+                  backgroundColor: filter.isActive ? theme.palette.primary.dark : palette.grey[200],
                   borderColor: filter.isActive ? theme.palette.primary.dark : palette.grey[50],
                 },
                 textTransform: "none",

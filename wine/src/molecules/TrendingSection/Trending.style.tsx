@@ -1,6 +1,7 @@
 import { Typography, Box, Button, styled } from "@mui/material";
 import { banner_img1 } from "../../assets";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -24,7 +25,7 @@ export const LeftSectionBox = styled(Box)(({ theme }) => ({
   position: "relative",
   width: "30%",
   height: "100%",
-  borderRadius: "16px",
+  borderRadius: shape.borderRadius,
   overflow: "hidden",
   cursor: "pointer",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",

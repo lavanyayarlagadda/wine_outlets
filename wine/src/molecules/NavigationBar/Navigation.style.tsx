@@ -228,7 +228,7 @@ export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.white.main,
   border: shape.borderSuccess,
   padding: "8px",
-  borderRadius: "16px",
+  borderRadius: shape.borderRadius,
   // Mobile styles
   [theme.breakpoints.down("md")]: {
     padding: "4px",

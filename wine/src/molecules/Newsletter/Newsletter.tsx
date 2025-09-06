@@ -42,7 +42,7 @@ const Newsletter: React.FC = () => {
             value={formData.fullName}
             onChange={handleInputChange("fullName")}
             placeholder="John Cena"
-            startIcon={<PersonIcon sx={{ color: palette.grey[150] }} />}
+            startIcon={<PersonIcon sx={{ color: palette.grey[200] }} />}
           />
 
           <CustomTextField

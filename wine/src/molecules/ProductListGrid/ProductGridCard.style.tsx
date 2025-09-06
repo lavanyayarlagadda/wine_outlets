@@ -46,7 +46,7 @@ export const FavoriteButton = styled(IconButton)(() => ({
   border: shape.borderSuccess,
   borderRadius: "4px",
   zIndex: 1,
-  "&:hover": { backgroundColor: palette.grey[150] },
+  "&:hover": { backgroundColor: palette.grey[200] },
 }));
 
 export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => ({
@@ -78,7 +78,7 @@ export const DetailsRow = styled(Box)(() => ({
 }));
 
 export const SmallText = styled(Typography)(() => ({
-  color: palette.grey[150],
+  color: palette.grey[200],
   fontSize: "1rem",
   display: "flex",
   alignItems: "center",

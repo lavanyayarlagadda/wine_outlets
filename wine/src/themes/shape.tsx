@@ -2,6 +2,8 @@ import palette from "./palette";
 
 const shape = {
   borderRadius: 8,
+  borderRadiuspx: "8px",
+  borderRadius12: "12px",
   borderGrey: `1px solid ${palette.grey[400]}`,
   borderRed: `1px solid ${palette.primary.dark}`,
   borderSuccess: `1px solid ${palette.success.main}`,

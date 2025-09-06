@@ -14,8 +14,11 @@ import {
 import { CARD_DATA } from "../../constant/trendingData";
 import CustomCard from "../../atoms/CustomCard/CustomCard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useNavigate } from "react-router-dom";
 
 const Trending = () => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Wrapper>
@@ -30,7 +33,11 @@ const Trending = () => {
                 }
               </Description>
             </TextContent>
-            <CTAButton endIcon={<ArrowForwardIcon />} disableRipple>
+            <CTAButton
+              endIcon={<ArrowForwardIcon />}
+              disableRipple
+              onClick={() => navigate("/productsList")}
+            >
               {"View All"}
             </CTAButton>
           </ContentContainer>
@@ -42,7 +49,7 @@ const Trending = () => {
               title={card.title}
               subTitle={card.subTitle}
               btnText={card.btnText}
-              handleClick={card.handleClick}
+              handleClick={() => navigate("/productsList")}
             />
           ))}
         </RightSectionBox>

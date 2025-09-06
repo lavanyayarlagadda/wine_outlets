@@ -1,4 +1,5 @@
 import { Box, styled } from "@mui/material";
+import shape from "./../../themes/shape";
 
 export const Container = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
@@ -13,7 +14,7 @@ export const Container = styled(Box)(({ theme }) => ({
 export const Dot = styled(Box)<{ active: boolean }>(({ active, theme }) => ({
   width: active ? "32px" : "12px",
   height: "12px",
-  borderRadius: active ? "8px" : "50%",
+  borderRadius: active ? shape.borderRadiuspx : "50%",
   backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   cursor: "pointer",
   transition: "background-color 0.2s ease-in-out",

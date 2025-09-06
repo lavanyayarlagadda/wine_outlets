@@ -14,10 +14,12 @@ import {
   IconWrapper,
 } from "./EverydayCarousel.style";
 import { EVERYDAY_SLIDES as slides } from "../../constant/curatedData";
+import { useNavigate } from "react-router-dom";
 
 const WineCarousel: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -26,7 +28,7 @@ const WineCarousel: React.FC = () => {
           <SlideTitle variant="h2">{slides[currentSlide].title}</SlideTitle>
           <SlideDescription>{slides[currentSlide].description}</SlideDescription>
         </ContentSection>
-        <PriceButton variant="contained">
+        <PriceButton variant="contained" onClick={() => navigate("/productsList")}>
           Starting from {slides[currentSlide].price}
           <IconWrapper>
             <NorthEastIcon fontSize="small" sx={{ color: theme.palette.white.main }} />

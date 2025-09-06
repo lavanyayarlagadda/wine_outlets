@@ -36,7 +36,7 @@ export const CarouselSlide = styled(Box, {
       ? "transparent"
       : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
 
-  borderRadius: "16px",
+  borderRadius: shape.borderRadius,
   padding: "32px 32px 64px 32px",
   display: "flex",
   justifyContent: "space-between",
@@ -114,7 +114,7 @@ export const SlideDescription = styled(Typography)(() => ({
 export const PriceButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.white.main,
   color: theme.palette.primary.dark,
-  borderRadius: "12px",
+  borderRadius: shape.borderRadius12,
   padding: "8px 20px",
   fontSize: "0.875rem",
   fontWeight: "600",

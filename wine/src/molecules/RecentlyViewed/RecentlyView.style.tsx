@@ -24,10 +24,10 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
 
   [theme.breakpoints.down("sm")]: {
-    fontSize: theme.typography.h6.fontSize, 
+    fontSize: theme.typography.h6.fontSize,
   },
   [theme.breakpoints.between("sm", "md")]: {
-    fontSize: theme.typography.h5.fontSize, 
+    fontSize: theme.typography.h5.fontSize,
   },
 }));
 
@@ -67,14 +67,10 @@ export const Dot = styled(Box)<{ active: boolean }>(({ active, theme }) => ({
   width: active ? theme.spacing(4) : theme.spacing(1.5),
   height: theme.spacing(1.5),
   borderRadius: active ? theme.shape.borderRadius : "50%",
-  backgroundColor: active
-    ? theme.palette.primary.dark
-    : theme.palette.warning.light,
+  backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   cursor: "pointer",
   transition: "all 0.16s ease",
   "&:hover": {
-    backgroundColor: active
-      ? theme.palette.primary.dark
-      : theme.palette.warning.light,
+    backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   },
 }));

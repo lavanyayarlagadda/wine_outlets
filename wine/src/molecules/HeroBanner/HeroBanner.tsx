@@ -27,9 +27,14 @@ export interface HeroBannerProps {
   slides: SlideData[];
   autoPlayInterval?: number;
   height?: string | number;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const HeroBanner = ({ slides = HERO_BANNER_SLIDES, autoPlayInterval = 5000 }: HeroBannerProps) => {
+const HeroBanner = ({
+  slides = HERO_BANNER_SLIDES,
+  autoPlayInterval = 5000,
+  setOpen,
+}: HeroBannerProps) => {
   const {
     currentSlide,
     goToSlide,
@@ -37,7 +42,9 @@ const HeroBanner = ({ slides = HERO_BANNER_SLIDES, autoPlayInterval = 5000 }: He
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-  } = useHeroBanner(slides.length, autoPlayInterval);
+    firstBtnAction,
+    secondBtnAction,
+  } = useHeroBanner(slides.length, autoPlayInterval, setOpen, slides);
 
   const currentSlideData = slides[currentSlide];
 
@@ -63,8 +70,8 @@ const HeroBanner = ({ slides = HERO_BANNER_SLIDES, autoPlayInterval = 5000 }: He
         subtitle={currentSlideData.subtitle}
         firstBtnText={currentSlideData.firstBtnText}
         secondBtnText={currentSlideData.secondBtnText}
-        onFirstBtnClick={currentSlideData.onFirstBtnClick}
-        onSecondBtnClick={currentSlideData.onSecondBtnClick}
+        onFirstBtnClick={firstBtnAction}
+        onSecondBtnClick={secondBtnAction}
         tagText={currentSlideData.tagText}
         tagActionText={currentSlideData.tagActionText}
       />

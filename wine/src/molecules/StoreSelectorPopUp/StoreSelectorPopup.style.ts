@@ -20,7 +20,7 @@ export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
   alignItems: "center",
   flex: 1,
   border: shape.borderGrey,
-  borderRadius: "12px",
+  borderRadius: shape.borderRadius12,
   padding: "0 12px",
   backgroundColor: theme.palette.background.paper,
   [theme.breakpoints.down("sm")]: {
@@ -29,7 +29,7 @@ export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const SearchIconStyled = styled(SearchIcon)(() => ({
-  color: palette.grey.border,
+  color: palette.grey[200],
   marginRight: 8,
 }));
 
@@ -37,7 +37,7 @@ export const SearchIconStyled = styled(SearchIcon)(() => ({
 export const StyledSearchButton = styled(Button)(({ theme }) => ({
   marginLeft: theme.spacing(1),
   backgroundColor: theme.palette.primary.dark,
-  borderRadius: "12px",
+  borderRadius: shape.borderRadius12,
   whiteSpace: "nowrap",
   "&:hover": {
     backgroundColor: theme.palette.primary.dark,

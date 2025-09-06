@@ -1,4 +1,5 @@
 import { styled, Box, Card, CardContent, Typography, Grid } from "@mui/material";
+import shape from "../../../themes/shape";
 
 export const CustomizeCardWrapper = styled(Grid)(({ theme }) => ({
   display: "grid",
@@ -21,7 +22,7 @@ export const StyledCard = styled(Card)(() => ({
 
 export const ImageWrapper = styled(Box)(() => ({
   position: "relative",
-  borderRadius: "12px",
+  borderRadius: shape.borderRadius12,
   overflow: "hidden",
   paddingTop: "140%",
   width: "100%",

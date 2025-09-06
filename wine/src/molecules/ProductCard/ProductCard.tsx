@@ -14,6 +14,7 @@ import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
+import { useNavigate } from "react-router-dom";
 
 // const isRecentlyViewedCard = true;
 
@@ -51,7 +52,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const navigate = useNavigate();
   return (
     <Card
       sx={{
@@ -79,7 +80,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           "&:hover": { backgroundColor: palette.white.main },
         }}
       >
-        <FavoriteBorder sx={{ color: palette.grey[150] }} />
+        <FavoriteBorder sx={{ color: palette.grey[200] }} />
       </IconButton>
 
       {/* Product Image */}
@@ -88,7 +89,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         height={isRecentlyViewedCard ? "300" : "240"}
         image={product?.media?.url}
         alt={product?.name}
-        sx={{ objectFit: "contain" }}
+        sx={{ objectFit: "contain", cursor: "pointer" }}
+        onClick={() => navigate("/productView")}
       />
 
       <CardContent sx={{ p: 2 }}>

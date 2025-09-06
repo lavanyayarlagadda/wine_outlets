@@ -1,4 +1,5 @@
 import { styled, Box, Typography } from "@mui/material";
+import shape from "../../themes/shape";
 
 export const OverlayContainer = styled(Box)(({ theme }) => ({
   position: "absolute",
@@ -78,7 +79,7 @@ export const CustomizeTagBox = styled(Box)(({ theme }) => ({
   `,
     fontWeight: 600,
     padding: "4px 10px",
-    borderRadius: "12px",
+    borderRadius: shape.borderRadius12,
     marginRight: "8px",
   },
 }));

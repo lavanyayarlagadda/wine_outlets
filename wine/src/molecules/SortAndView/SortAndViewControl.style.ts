@@ -19,7 +19,7 @@ export const ViewBox = styled(Box)(() => ({
   backgroundColor: palette.grey.light,
   padding: "8px",
   border: shape.borderGreyLight,
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   display: "flex",
   justifyContent: "center",
 }));

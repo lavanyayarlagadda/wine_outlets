@@ -1,18 +1,16 @@
-import { Newsletter,  RecentlyView } from "../../molecules";
+import { Newsletter, RecentlyView } from "../../molecules";
 import ProductViewBreadCrumbs from "../../organisms/ProductView/ProductViewBreadCrumbs";
 import Product from "../../organisms/ProductView/Product";
 import ProfessionalRating from "../../organisms/ProductView/ProfessionalRating";
-import {ProductView} from "../../molecules";
-
+import { ProductView } from "../../molecules";
 
 const ProductViewPage = () => {
-
   return (
     <>
-      <ProductViewBreadCrumbs/>
-      <Product/>
-       <ProfessionalRating />
-       <ProductView/>
+      <ProductViewBreadCrumbs />
+      <Product />
+      <ProfessionalRating />
+      <ProductView />
       <RecentlyView />
       <Newsletter />
     </>
@@ -20,4 +18,3 @@ const ProductViewPage = () => {
 };
 
 export default ProductViewPage;
-

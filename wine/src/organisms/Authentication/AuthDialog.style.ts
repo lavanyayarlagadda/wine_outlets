@@ -1,12 +1,13 @@
 import { Box, Button, styled, Typography, type BoxProps } from "@mui/material";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
+import shape from "../../themes/shape";
 
 export const TabsWrapper = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
   backgroundColor: palette.white.main,
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   padding: "4px",
 }));
 
@@ -15,7 +16,7 @@ export const StyledButton = styled(Button, {
 })<{ active: boolean }>(({ active }) => ({
   textTransform: "none",
   fontWeight: "bold",
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   minHeight: "36px",
   backgroundColor: active ? palette.primary.light : "transparent",
   color: active ? palette.primary.dark : palette.grey.greyDark, // fallback for text.secondary
@@ -54,7 +55,7 @@ export const FormWrapper = styled(Box)<BoxProps>(() => ({
 
 export const SubmitButton = styled(Button)(() => ({
   backgroundColor: palette.primary.dark,
-  borderRadius: "8px",
+  borderRadius: shape.borderRadiuspx,
   padding: "10px 0",
   fontWeight: "bold",
   "&:hover": {

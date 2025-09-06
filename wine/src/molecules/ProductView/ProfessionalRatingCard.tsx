@@ -1,26 +1,21 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 
-import {RatingHeader, RatingBadge, RatingText, RatingTitle} from "./ProductView.style";
-
+import { RatingHeader, RatingBadge, RatingText, RatingTitle } from "./ProductView.style";
 
 type ProfessionalRatingCardProps = {
   title: string;
   description: string;
   score: number; // numeric rating (e.g., 90)
-
 };
 
 const ProfessionalRatingCard: React.FC<ProfessionalRatingCardProps> = ({
- title, 
- score, 
- description
+  title,
+  score,
+  description,
   // reviewer,
 }) => {
-  return (  
+  return (
     <Card elevation={2}>
       <CardContent>
         {/* Header with reviewer + badge */}

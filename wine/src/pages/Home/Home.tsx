@@ -17,16 +17,8 @@ import { useHomeLogic } from "./Home.hook";
 import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
 
 const Home = () => {
-  const {
-    agePopupOpen,
-    isAgeVerified,
-    handleVerifyAge,
-    handleCategoryClick,
-    handleBrandClick,
-    setOpen,
-    open,
-    setIsAgeVerified,
-  } = useHomeLogic();
+  const { agePopupOpen, isAgeVerified, handleVerifyAge, setOpen, open, setIsAgeVerified } =
+    useHomeLogic();
   const [selectedStore, setSelectedStore] = React.useState<number | 0>();
 
   const stores = [
@@ -63,14 +55,14 @@ const Home = () => {
           setIsAgeVerified={setIsAgeVerified}
         />
       )}
-      {isAgeVerified && <HeroBanner slides={HERO_BANNER_SLIDES} />}
+      {isAgeVerified && <HeroBanner slides={HERO_BANNER_SLIDES} setOpen={setOpen} />}
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}
       {isAgeVerified && <CuratedPicks />}
       {isAgeVerified && <EverydayCarousel />}
-      {isAgeVerified && <CategorySection handleClick={handleCategoryClick} />}
+      {isAgeVerified && <CategorySection />}
       {isAgeVerified && <DealSection />}
-      {isAgeVerified && <Brand handleBrandClick={handleBrandClick} />}
+      {isAgeVerified && <Brand />}
       {isAgeVerified && <RecentlyView />}
       {isAgeVerified && <Newsletter />}
     </>

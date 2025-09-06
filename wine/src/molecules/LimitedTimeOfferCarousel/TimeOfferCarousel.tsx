@@ -13,6 +13,7 @@ import {
 } from "./TimeOfferCarousel.style";
 import { OFFERS } from "../../constant/offerData";
 import { CustomTitleSection } from "../../atoms";
+import { useNavigate } from "react-router-dom";
 
 interface OfferData {
   id: number;
@@ -52,6 +53,8 @@ const LimitedTimeOffersCarousel = () => {
     </OfferCard>
   );
 
+  const navigate = useNavigate();
+
   return (
     <CarouselContainer>
       <CustomTitleSection
@@ -63,7 +66,9 @@ const LimitedTimeOffersCarousel = () => {
           <CarouselWrapper>
             <CarouselTrack currentIndex={currentIndex}>
               {OFFERS.map((offer) => (
-                <CarouselSlide key={offer.id}>{renderOfferCard(offer)}</CarouselSlide>
+                <CarouselSlide key={offer.id} onClick={() => navigate("/productsList")}>
+                  {renderOfferCard(offer)}
+                </CarouselSlide>
               ))}
             </CarouselTrack>
           </CarouselWrapper>

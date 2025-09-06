@@ -1,5 +1,6 @@
 import { Box, Typography, IconButton, styled } from "@mui/material";
 import palette from "../../themes/palette";
+import shape from "../../themes/shape";
 
 export const CarouselContainer = styled(Box)(() => ({
   width: "100%",
@@ -67,7 +68,7 @@ export const MobileScrollWrapper = styled(Box)({
 // Offer card
 export const OfferCard = styled(Box)({
   position: "relative",
-  borderRadius: "12px",
+  borderRadius: shape.borderRadius12,
   overflow: "hidden",
   cursor: "pointer",
   paddingTop: "66%",
