@@ -33,7 +33,7 @@ import MobileMenu from "./NavigationMobileMenu";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
-
+import CustomPopover from "../CustomPopOver/CustomPopOver";
 // // Define menu items for dropdowns
 // const menus: { [key: string]: string[] } = {
 //   Wine:   [{ listId: "1", listName: "Pinot Noir Aisle" },
@@ -228,8 +228,13 @@ const Navigation = () => {
             <img src={bike} alt="bike" /> Delivery{" "}
             {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </DropdownTriggerWithGap>
+          <CustomPopover
+            open={menuOpen.delivery && !mobileMenuOpen}
+            anchorEl={anchorEl.delivery}
+            onClose={() => handleMenuClose("delivery")}
+          />
 
-          <StyledMenu
+          {/* <StyledMenu
             anchorEl={anchorEl.delivery}
             open={menuOpen.delivery && !mobileMenuOpen}
             onClose={() => handleMenuClose("delivery")}
@@ -238,7 +243,7 @@ const Navigation = () => {
             <DropdownMenuItem>Standard Delivery</DropdownMenuItem>
             <DropdownMenuItem>Express Delivery</DropdownMenuItem>
             <DropdownMenuItem>Pickup</DropdownMenuItem>
-          </StyledMenu>
+          </StyledMenu> */}
 
           <DropdownTriggerWithGap>
             <img src={bag} alt="bag" /> Hiring Now

@@ -18,8 +18,8 @@ export const LogoImage = styled("img")(({ theme }) => ({
   height: theme.spacing(10),
   width: theme.spacing(10),
   objectFit: "contain",
-  position: "relative", 
-  zIndex: 2, 
+  position: "relative",
+  zIndex: 2,
   [theme.breakpoints.down("sm")]: {
     height: theme.spacing(8),
     width: theme.spacing(8),
@@ -31,13 +31,13 @@ export const RedCircle = styled("div")(({ theme }) => ({
   top: "70%",
   left: "35%",
   transform: "translate(-50%, -50%)",
-  width: theme.spacing(5), 
+  width: theme.spacing(5),
   height: theme.spacing(5),
   borderRadius: "50%",
   backgroundColor: palette.primary.dark,
   zIndex: 1,
   [theme.breakpoints.down("sm")]: {
-    width: theme.spacing(4), 
+    width: theme.spacing(4),
     height: theme.spacing(4),
     top: "72%",
     left: "40%",
@@ -46,13 +46,13 @@ export const RedCircle = styled("div")(({ theme }) => ({
 
 export const StyledDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
-    borderRadius: shape.baseBorderRadius *3,
+    borderRadius: shape.baseBorderRadius * 3,
     maxWidth: 550,
     margin: theme.spacing(2),
     boxShadow: theme.shadows[8],
     [theme.breakpoints.down("sm")]: {
       margin: theme.spacing(2),
-      width: `calc(100% - ${theme.spacing(4)})`, 
+      width: `calc(100% - ${theme.spacing(4)})`,
       maxWidth: `calc(100% - ${theme.spacing(4)})`,
       maxHeight: `calc(100vh - ${theme.spacing(6)})`,
       overflow: "auto",
