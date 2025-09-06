@@ -16,7 +16,6 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({ data }) => {
   const { 
     selectedFilter, 
     setSelectedFilter, 
-    totalRatings, 
     getPercentage, 
     filterButtons, 
     filteredReviews 

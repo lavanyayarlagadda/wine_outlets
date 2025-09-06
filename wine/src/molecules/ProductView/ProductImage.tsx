@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { CardMedia } from '@mui/material';
 import type { ProductViewResponse } from '../../constant/productViewData';
 import { StyledCardMedia, StyledCard, StyledThumbnailCard, StyledImageContainer, StyledThumbnailList, StyledThumbnailMedia } from './ProductView.style';
 

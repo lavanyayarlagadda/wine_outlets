@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 
-export const StyledCard = styled(Card)(({ theme }) => ({
+export const StyledCard = styled(Card)(() => ({
   position: "relative",
   borderRadius: 16,
   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
@@ -14,7 +14,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-export const FavoriteButton = styled(IconButton)(({ theme }) => ({
+export const FavoriteButton = styled(IconButton)(() => ({
   position: "absolute",
   top: 20,
   right: 22,

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Rating, Select, MenuItem, Typography, Box, IconButton, Divider } from '@mui/material';
+import { Rating} from '@mui/material';
 import type { ProductViewResponse } from '../../constant/productViewData';
 import { starIcon, groupIcon, sizeIcon, originIcon } from '../../assets';
 import SimpleDropdown from '../../atoms/CustomDropdown/SimpleDropdown';
 import CustomCounter from '../../atoms/CustomCounter/CustomCounter';
 import CustomWishlist from '../../atoms/CustomWishlist/CustomWhisList';
-import { CustomButton } from '../../atoms';
 import AddToCart from '../../atoms/CustomButton/AddToCart';
 import ProductDetailsBlock from '../../molecules/ProductView/ProductDetailsBlock';
 
@@ -14,7 +13,6 @@ import {
     ProductTitle,
     ProductInfoRow,
     PriceRow,
-    AddToCartBtn,
     StyledChip,
     RatingBox,
     RatingTypography,
@@ -27,7 +25,6 @@ import {
     InfoIcon
 } from '../../molecules/ProductView/ProductView.style';
 import ProductHighlights from '../../molecules/ProductView/ProductHighlights';
-import { useFontSize } from '../../themes/fontSize';
 import palette from '../../themes/palette';
 
 interface ProductDetailsProps {
@@ -67,8 +64,6 @@ const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ productViewData }) => {
     const { product } = productViewData;
-    const fontSize24 = useFontSize(24)
-    const fontSize16 = useFontSize(16)
     console.log("Product Data:", product);
     const [selectedSize, setSelectedSize] = useState(product.bottle_size[0]?.id || '');
     const [selectedVintage, setSelectedVintage] = useState(product.other_vintages[0]?.year || '');

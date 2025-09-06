@@ -1,4 +1,4 @@
-import { Padding } from "@mui/icons-material";
+
 import {
   styled,
   Box,
@@ -285,7 +285,7 @@ export const DrawerHeader = styled(Box)(({theme}) => ({
   borderBottom: theme.palette.grey[200]
 }));
 
-export const DrawerMenuItem = styled(Box)(({ theme }) => ({
+export const DrawerMenuItem = styled(Box)(() => ({
   padding: "12px",
   fontSize: "14px",
   fontWeight: 500,

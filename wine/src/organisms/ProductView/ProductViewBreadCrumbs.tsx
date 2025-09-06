@@ -1,6 +1,6 @@
 import React from 'react';
 import BreadcrumbHeader from '../../molecules/Breadcrumbs/BreadCrumbsHeader';
-import Breadcrumbs, { type BreadcrumbItem }  from "../../molecules/Breadcrumbs/BreadCrumbs";
+import  { type BreadcrumbItem }  from "../../molecules/Breadcrumbs/BreadCrumbs";
 
 const ProductViewBreadCrumbs = () => {
     const breadcrumbItems: BreadcrumbItem[] = [

@@ -16,18 +16,6 @@ import { Container } from "./DealSection.style";
 import ProductCard from "../ProductCard/ProductCard";
 import palette from "../../themes/palette";
 
-interface Product {
-  id: string;
-  name: string;
-  year: number;
-  region: string;
-  volume: string;
-  rating: number;
-  vipPrice: number;
-  regularPrice: number;
-  imageUrl: string;
-  isFavorite?: boolean;
-}
 
 interface FilterButton {
   id: string;
@@ -138,10 +126,7 @@ const DealsSection: React.FC = () => {
 
   const totalSlides = Math.ceil(DEAL_PRODUCT.length / 4);
 
-  const getCurrentProducts = () => {
-    const startIndex = currentSlide * 4;
-    return DEAL_PRODUCT.slice(startIndex, startIndex + 4);
-  };
+
 
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);

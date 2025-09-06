@@ -5,11 +5,11 @@ import { FilterTagList,SortAndViewContainer } from "../../molecules";
 
 interface ProductToolbarProps {
   filters: { label: string; count: number }[];
-  onDeleteFilter: (label: string) => void;
+  onDeleteFilter: () => void;
   sortBy: string;
-  onSortChange: (val: string) => void;
+  onSortChange: () => void;
   view: "grid" | "list";
-  onViewChange: (val: "grid" | "list") => void;
+  onViewChange: () => void;
 }
 
 const ProductToolbar: React.FC<ProductToolbarProps> = ({

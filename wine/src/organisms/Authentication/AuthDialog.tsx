@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Box} from "@mui/material";
 import { CustomPopup } from "../../atoms";
-import palette from "../../themes/palette";
 import SignIn from "../../molecules/AuthPopup/SignIn";
 import SignUp from "../../molecules/AuthPopup/SignUp";
 import { TabsWrapper, StyledButton } from "./AuthDialog.style";

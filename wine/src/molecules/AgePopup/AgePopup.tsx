@@ -3,7 +3,6 @@ import { Formik, Form, Field } from "formik";
 import { useAgePopup } from "./AgePopup.hook";
 import * as Styled from "./AgePopup.style";
 import { formatDate } from "../../utils/dateFormate";
-import { logo } from "../../assets";
 import { IconButton, InputAdornment } from "@mui/material";
 import { CalendarToday } from "@mui/icons-material";
 
@@ -24,7 +23,7 @@ const AgePopup = ({ open, onClose, onVerify }: AgePopupProps) => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched, values, setFieldValue }) => (
+          {({ errors, touched }) => (
             <Form>
               <Styled.Container>
                 <Styled.LogoSection>

@@ -1,7 +1,7 @@
 
-import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import palette from "../../themes/palette";
+
 // Outer container
 export const ProductLayoutContainer = styled(Box)(({ theme }) => ({
   flexGrow: 1,

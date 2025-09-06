@@ -2,19 +2,10 @@ import React, { useState } from "react";
 import {
   Box,
   Typography,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Chip,
   useTheme,
 } from "@mui/material";
-import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
 import { DEAL_PRODUCT } from "../../constant/dealProduct";
-import { empty_star } from "../../assets";
 import { Container } from "./RecentlyView.style";
-import { expandIcon, calendar, cityMap } from "../../assets";
 import ProductCard from "../ProductCard/ProductCard";
 
 const RecentlyViewed: React.FC = () => {

@@ -1,11 +1,6 @@
 import React from 'react';
-import { Grid, Box } from '@mui/material';
-// import { productViewData } from '../../constant/productViewData';
-// import ProductImage from './ProductImage';
-// import ProductDetails from './ProductDetails';
 import type { ProductViewResponse } from '../../constant/productViewData';
 import ProductImage from '../../molecules/ProductView/ProductImage';
-// import ProductDetails from '../../molecules/ProductView/ProductDetails';
 import ProductDetails from './ProductDetails';
 
 

@@ -1,11 +1,8 @@
-import { Card, IconButton, CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
+import { Card,  CardMedia, Typography, Box, Chip, Button, Grid, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import palette from "../../themes/palette";
 import spacing from "../../themes/spacing";
-// import { useFontSize } from "../../themes/fontSize";
 
-
-// const font24 = useFontSize(24)
 
 
 
@@ -15,7 +12,6 @@ export const StyledImageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   alignItems: "flex-start",
-  // gap: theme.spacing(2),
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     alignItems: "center",
@@ -27,7 +23,6 @@ export const StyledThumbnailList = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   [theme.breakpoints.down("md")]: {
     flexDirection: "row",
-    // marginBottom: theme.spacing(2),
     justifyContent: "center",
     width: "100%",
   },
@@ -36,16 +31,14 @@ export const StyledThumbnailList = styled(Box)(({ theme }) => ({
 export const StyledCard = styled(Card)(({ theme }) => ({
   position: "sticky",
   borderRadius: 16,
-  // transition: "all 0.3s ease",
   "&:hover": {
-    // transform: "translateY(-2px)",
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",
     maxWidth: 350,
   },
 }));
-export const StyledThumbnailMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({}) => ({
+export const StyledThumbnailMedia = styled(CardMedia)<{ alt?: string; src?: string }>(() => ({
   objectFit: "cover",
   width: "100%",
   height: "100%",
@@ -54,7 +47,6 @@ export const StyledThumbnailMedia = styled(CardMedia)<{ alt?: string; src?: stri
 }));
 export const StyledCardMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({ theme }) => ({
   objectFit: "contain",
-  // padding: 16,
   height: 500,
   width: 500,
   [theme.breakpoints.down("md")]: {
@@ -105,17 +97,9 @@ export const DetailsContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ProductTitle = styled(Typography)(({ theme }) => ({
+export const ProductTitle = styled(Typography)(() => ({
   fontWeight: 600,
   fontSize:"24px"
-  // fontSize:getFontSize(24)
-  // fontSize: "24px",
-  // [theme.breakpoints.down("md")]: {
-  //   fontSize: "22px",
-  // },
-  // [theme.breakpoints.down("sm")]: {
-  //   fontSize: "18px",
-  // },
 }));
 
 export const ProductInfoRow = styled(Box)(({ theme }) => ({
@@ -351,7 +335,7 @@ export const DetailValue = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
 }));
 
-export const AccordianHead = styled(Box)(({ theme }) => ({
+export const AccordianHead = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -399,7 +383,7 @@ export const RatingText = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-export const ReviewerBox = styled(Box)(({ theme }) => ({
+export const ReviewerBox = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",

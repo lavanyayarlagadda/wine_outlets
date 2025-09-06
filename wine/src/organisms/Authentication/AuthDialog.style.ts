@@ -1,4 +1,4 @@
-import { Box, Button, patch, styled, Typography, type BoxProps } from "@mui/material";
+import { Box, Button,  styled, Typography, type BoxProps } from "@mui/material";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
 

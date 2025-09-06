@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
-import { HighlightsContainer, HighlightsTitle, HighlightsText, DetailValue } from "./ProductView.style";
+import { HighlightsContainer, HighlightsTitle,  DetailValue } from "./ProductView.style";
 
 interface ProductHighlightsProps {
   title?: string;

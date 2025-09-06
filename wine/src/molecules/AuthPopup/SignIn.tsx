@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
 import { CustomTextField } from "../../atoms";
 import {

@@ -2,11 +2,8 @@ import { useState } from "react";
 import { useTheme, useMediaQuery } from "@mui/material";
 import {
   CarouselContainer,
-  HeaderSection,
-  Title,
   OfferCard,
   CardImage,
-  Subtitle,
   CarouselWrapper,
   CarouselTrack,
   CarouselSlide,

@@ -36,7 +36,7 @@ export const Subtitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const StyledContainer = styled(Box)(({}) => ({
+export const StyledContainer = styled(Box)(() => ({
   position: "relative",
 }));
 
@@ -89,7 +89,7 @@ export const StyledWineItem = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledImageContainer = styled(Box)(({ theme }) => ({
+export const StyledImageContainer = styled(Box)(() => ({
   position: "relative",
   marginBottom: "16px",
   transition: "transform 0.3s ease",

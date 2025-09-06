@@ -4,7 +4,7 @@ import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 
-export const FooterContainer = styled(Box)(({ theme }) => ({
+export const FooterContainer = styled(Box)(() => ({
   width: "100%",
   margin: "0 auto",
   padding: "24px 30px 24px 30px",
@@ -40,7 +40,7 @@ export const CustomizedGrid = styled(Grid)(({theme}) => ({
   },
 }));
 
-export const SocialIconsContainer = styled(Box)(({ theme }) => ({
+export const SocialIconsContainer = styled(Box)(() => ({
   display: "flex",
   gap: "22px",
 }));

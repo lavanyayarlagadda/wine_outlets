@@ -1,12 +1,10 @@
 import React from "react";
-import { useMediaQuery } from "@mui/material";
-
 import FilterPanel from "../../organisms/Filter/FilterPanel";
 import { filtersData as categories } from "../../constant/curatedData";
 import ProductListCard from "../ProductListCard/ProductListCard";
 import ProductGridCard from "../ProductListGrid/ProductGridCard";
 import CustomPagination from "../Pagination/Pagination";
-import Breadcrumbs, { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
+import  { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
 import BreadcrumbHeader from "../Breadcrumbs/BreadCrumbsHeader";
 import FilterTagList from "../FilterTag/FilterTagList";
 import SortAndViewControls from "../SortAndView/SortAndViewControl";
@@ -40,9 +38,6 @@ const ProductList = () => {
     handlePageChange,
   } = useProductList();
 
-  const isMobileOrTablet = useMediaQuery((theme: any) =>
-    theme.breakpoints.down("md")
-  );
 
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },

@@ -141,7 +141,7 @@ export const DotsWrapper = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(3),
 }));
 
-export const DotsContainer = styled(Box)(({ theme }) => ({
+export const DotsContainer = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
   gap: "12px",

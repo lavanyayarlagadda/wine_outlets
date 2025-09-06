@@ -1,11 +1,7 @@
 import React from "react";
 import {
   Card,
-  CardContent,
-  Typography,
-  Avatar,
-  Box,
-  Rating,
+  CardContent
 } from "@mui/material";
 
 import {RatingHeader, RatingBadge, RatingText, RatingTitle} from "./ProductView.style";

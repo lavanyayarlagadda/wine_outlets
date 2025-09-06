@@ -29,7 +29,7 @@ export const ResponsiveCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-export const FavoriteButton = styled(IconButton)(({ theme }) => ({
+export const FavoriteButton = styled(IconButton)(() => ({
   position: "absolute",
   top: 20,
   right: 22,

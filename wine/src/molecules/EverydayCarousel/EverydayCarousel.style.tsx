@@ -104,7 +104,7 @@ export const SlideTitle = styled(Typography)(({ theme }) => ({
   marginBottom: "12px",
 }));
 
-export const SlideDescription = styled(Typography)(({ theme }) => ({
+export const SlideDescription = styled(Typography)(() => ({
   fontSize: "1rem",
   color: palette.secondary[100],
   lineHeight: 1.5,

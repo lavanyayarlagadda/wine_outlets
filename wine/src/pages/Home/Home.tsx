@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AgePopup,
-  Navigation,
   HeroBanner,
   TimeOfferCarousel,
   Trending,
@@ -16,7 +15,7 @@ import {
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
-import AuthDialog from "../../organisms/Authentication/AuthDialog";
+
 
 const Home = () => {
   const {

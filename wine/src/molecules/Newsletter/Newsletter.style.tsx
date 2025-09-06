@@ -1,7 +1,7 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import shape from "../../themes/shape";
 
-export const NewsletterContainer = styled(Box)(({ theme }) => ({
+export const NewsletterContainer = styled(Box)(() => ({
   width: "100%",
   margin: "0 auto",
   padding: "0px 30px 32px 30px",

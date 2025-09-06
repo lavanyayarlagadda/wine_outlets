@@ -12,7 +12,7 @@ import {
 import { usePeopleBought } from "./PeopleBought.hook";
 
 const PeopleBought: React.FC = () => {
-  const { wishlist, cartItems, handleAddToCart, handleToggleFavorite, currentProducts } =
+  const { handleAddToCart, handleToggleFavorite, currentProducts } =
     usePeopleBought(suggestedProducts.products);
 
   return (

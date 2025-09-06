@@ -124,7 +124,7 @@ export const HighlightText = styled("span")({
   fontWeight: 800,
 });
 
-export const NavigationButton = styled(IconButton)(({}) => ({
+export const NavigationButton = styled(IconButton)(() => ({
   position: "absolute",
   top: "50%",
   transform: "translateY(-50%)",
