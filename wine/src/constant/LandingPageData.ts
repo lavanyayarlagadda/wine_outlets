@@ -333,64 +333,65 @@ export const LandingPageData = {
     props: {
       showTimer: true,
       timer: {
-        endTime: "2025-08-25T23:59:59Z",
+        endTime: "2025-09-15T23:59:59Z",
         format: "HH:mm:ss",
       },
-      tabs: [
+      filterButtons: [
         {
           id: "trending",
-          label: "Trending",
+          label: "🎉Trending",
         },
         {
           id: "staff",
-          label: "Staff Picks",
+          label: "🍬Staff Picks",
         },
         {
           id: "popular",
-          label: "Most Popular",
+          label: "🍺Most Popular",
         },
         {
           id: "justforyou",
-          label: "Just For You",
+          label: "🎯Just For You",
         },
       ],
-      defaultTab: "trending",
     },
-    items: {
+    dealProducts: {
       trending: [
         {
           id: "1",
-          title: "Kim Crawford Wine",
+          name: "Kim Crawford Wine",
           media: {
             type: "image",
             url: "https://example.com/images/wine-1.jpg",
           },
 
-          year: "2021",
+          year: 2021,
           region: "California",
-          quantity: "750ML",
+          size: "750ML",
           rating: 4.8,
           price: 16.53,
           vipPrice: 12.62,
           salePrice: 11.45,
           tag: "tagText",
+          isWishlisted: false,
         },
         {
           id: "2",
-          title: "Kim Crawford Wine",
+          name: "Kim Crawford Wine",
           media: {
             type: "image",
             url: "https://example.com/images/wine-1.jpg",
           },
 
-          year: "2021",
+          year: 2021,
           region: "California",
-          quantity: "750ML",
+          size: "750ML",
           rating: 4.8,
           price: 16.53,
           vipPrice: 12.62,
           salePrice: 11.45,
           tag: "tagText",
+          isWishlisted: false,
         },
       ],
       staff: [],

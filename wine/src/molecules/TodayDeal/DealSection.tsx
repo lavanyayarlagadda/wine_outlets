@@ -1,54 +1,79 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Box, Typography, Button, useTheme } from "@mui/material";
-import { LocalFireDepartment, Star, ThumbUp, PersonOutline } from "@mui/icons-material";
-import { DEAL_PRODUCT } from "../../constant/dealProduct";
+import { LandingPageData } from "../../constant/LandingPageData";
+import type { Product } from "../ProductCard/ProductCard";
 import { Container } from "./DealSection.style";
 import ProductCard from "../ProductCard/ProductCard";
 import palette from "../../themes/palette";
 
-interface FilterButton {
+interface TimerConfig {
+  endTime: string; // ISO string
+  format?: string;
+}
+
+interface DealFilterBtn {
   id: string;
   label: string;
-  icon: React.ReactNode;
-  isActive?: boolean;
 }
+
+interface DealProductsGroup {
+  trending?: Product[];
+  staff?: Product[];
+  popular?: Product[];
+  justforyou?: Product[];
+  // allow other keys
+  [key: string]: Product[] | undefined;
+}
+
+interface DealSectionPropsFromData {
+  isVisible?: boolean | string;
+  title?: string;
+  props?: {
+    showTimer?: boolean;
+    timer?: TimerConfig;
+    filterButtons?: DealFilterBtn[];
+  };
+  dealProducts?: DealProductsGroup;
+}
+
+const dealSection: DealSectionPropsFromData = (LandingPageData as any)?.dealSection ?? {};
+
+const title = dealSection.title ?? "Today's Deal for you!";
+const sectionProps = dealSection.props ?? {};
+
+const timerConfig = sectionProps?.timer;
+const filterButtonsFromData: DealFilterBtn[] = sectionProps?.filterButtons ?? [];
+const dealProducts: DealProductsGroup = (dealSection.dealProducts as DealProductsGroup) ?? {};
+
 
 const DealsSection: React.FC = () => {
   const theme = useTheme();
+  const showTimer = !!sectionProps?.showTimer;
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [timeLeft, setTimeLeft] = useState({
-    hours: 9,
-    minutes: 17,
-    seconds: 45,
+  const [activeFilter, setActiveFilter] = useState<string>(
+    filterButtonsFromData[0]?.id ?? "trending"
+  );
+  const [remainingMs, setRemainingMs] = useState<number | null>(() => {
+    if (!timerConfig?.endTime) return null;
+    const ms = Date.parse(timerConfig.endTime) - Date.now();
+    return Number.isFinite(ms) ? Math.max(0, ms) : null;
   });
+
+  const productsForActiveFilter: Product[] = (dealProducts[activeFilter] ?? []) as Product[];
+  const totalSlides = Math.max(1, Math.ceil((productsForActiveFilter?.length ?? 0) / 4));
+
+  const timeParts =
+    remainingMs !== null
+      ? {
+          hours: Math.floor(remainingMs / (1000 * 60 * 60)),
+          minutes: Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((remainingMs % (1000 * 60)) / 1000),
+        }
+      : { hours: 0, minutes: 0, seconds: 0 };
 
   // Refs for drag scrolling
   const filterButtonsRef = useRef<HTMLDivElement>(null);
   const productCardsRef = useRef<HTMLDivElement>(null);
-
-  const filterButtons: FilterButton[] = [
-    { id: "trending", label: "Trending", icon: <LocalFireDepartment />, isActive: true },
-    { id: "staff", label: "Staff Picks", icon: <Star />, isActive: false },
-    { id: "popular", label: "Most Popular", icon: <ThumbUp />, isActive: false },
-    { id: "foryou", label: "Just For You", icon: <PersonOutline />, isActive: false },
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // Drag scrolling functions
   const enableDragScroll = (element: HTMLDivElement) => {
@@ -113,7 +138,7 @@ const DealsSection: React.FC = () => {
     }
   }, []);
 
-  const totalSlides = Math.ceil(DEAL_PRODUCT.length / 4);
+ 
 
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);
@@ -135,6 +160,22 @@ const DealsSection: React.FC = () => {
   const handleToggleFavorite = (productId: string) => {
     console.log("Toggle favorite:", productId);
   };
+
+useEffect(() => {
+  if (!showTimer || remainingMs === null) return undefined;
+
+  const tick = () => {
+    setRemainingMs((prev) => {
+      if (prev === null) return null;
+      const next = prev - 1000;
+      return next >= 0 ? next : 0;
+    });
+  };
+
+  const id = setInterval(tick, 1000);
+  return () => clearInterval(id);
+}, [showTimer, remainingMs]);
+
 
   return (
     <Container>
@@ -170,61 +211,51 @@ const DealsSection: React.FC = () => {
               },
             }}
           >
-            Today's Deal for you!
+            {title}
           </Typography>
 
           {/* Timer Component */}
-          <Box
-            sx={{
-              display: "flex",
-              gap: 1,
-              alignItems: "center",
-            }}
-          >
-            {[
-              { value: timeLeft.hours.toString().padStart(2, "0"), label: "hours" },
-              { value: timeLeft.minutes.toString().padStart(2, "0"), label: "minutes" },
-              { value: timeLeft.seconds.toString().padStart(2, "0"), label: "seconds" },
-            ].map((time, index) => (
-              <React.Fragment key={time.label}>
-                <Box
-                  sx={{
-                    backgroundColor: palette.primary.dark,
-                    color: theme.palette.white.main,
-                    px: { xs: 1, sm: 1.5 },
-                    py: { xs: 0.25, sm: 0.5 },
-                    borderRadius: "50%",
-                    height: { xs: "32px", sm: "40px" },
-                    width: { xs: "32px", sm: "40px" },
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                    fontSize: {
-                      xs: "0.9rem",
-                      sm: "1.1rem",
-                    },
-                  }}
-                >
-                  {time.value}
-                </Box>
-                {index < 2 && (
-                  <Typography
+          {showTimer && remainingMs !== null && (
+            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+              {[
+                { value: String(timeParts.hours).padStart(2, "0"), label: "hours" },
+                { value: String(timeParts.minutes).padStart(2, "0"), label: "minutes" },
+                { value: String(timeParts.seconds).padStart(2, "0"), label: "seconds" },
+              ].map((time, index) => (
+                <React.Fragment key={time.label}>
+                  <Box
                     sx={{
-                      color: palette.primary.dark,
+                      backgroundColor: palette.primary.dark,
+                      color: theme.palette.white.main,
+                      px: { xs: 1, sm: 1.5 },
+                      py: { xs: 0.25, sm: 0.5 },
+                      borderRadius: "50%",
+                      height: { xs: "32px", sm: "40px" },
+                      width: { xs: "32px", sm: "40px" },
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                       fontWeight: "bold",
-                      fontSize: {
-                        xs: "0.9rem",
-                        sm: "1.1rem",
-                      },
+                      fontSize: { xs: "0.9rem", sm: "1.1rem" },
                     }}
                   >
-                    :
-                  </Typography>
-                )}
-              </React.Fragment>
-            ))}
-          </Box>
+                    {time.value}
+                  </Box>
+                  {index < 2 && (
+                    <Typography
+                      sx={{
+                        color: palette.primary.dark,
+                        fontWeight: "bold",
+                        fontSize: { xs: "0.9rem", sm: "1.1rem" },
+                      }}
+                    >
+                      :
+                    </Typography>
+                  )}
+                </React.Fragment>
+              ))}
+            </Box>
+          )}
         </Box>
 
         <Box
@@ -248,40 +279,44 @@ const DealsSection: React.FC = () => {
             scrollbarWidth: "none",
           }}
         >
-          {filterButtons.map((filter) => (
-            <Button
-              key={filter.id}
-              variant={filter.isActive ? "contained" : "outlined"}
-              startIcon={filter.icon}
-              sx={{
-                backgroundColor: filter.isActive ? theme.palette.primary.main : palette.white.main,
-                borderColor: filter.isActive ? theme.palette.primary.main : palette.grey[50],
-                color: filter.isActive ? palette.white.main : theme.palette.black[800],
-                "&:hover": {
-                  backgroundColor: filter.isActive ? theme.palette.primary.dark : palette.grey[200],
-                  borderColor: filter.isActive ? theme.palette.primary.dark : palette.grey[50],
-                },
-                textTransform: "none",
-                fontWeight: 600,
-                flexShrink: 0,
-                minWidth: "auto",
-                px: { xs: 1.5, sm: 2 },
-                py: { xs: 0.5, sm: 1 },
-                fontSize: {
-                  xs: "0.75rem",
-                  sm: "0.875rem",
-                },
-                "& .MuiButton-startIcon": {
-                  marginRight: { xs: 0.5, sm: 1 },
-                  "& > svg": {
-                    fontSize: { xs: "1rem", sm: "1.25rem" },
+          {filterButtonsFromData.map((filter) => {
+            const isActive = filter.id === activeFilter;
+            return (
+              <Button
+                key={filter.id}
+                variant={isActive ? "contained" : "outlined"}
+                startIcon={/* optionally map icons by id if you want */ undefined}
+                onClick={() => setActiveFilter(filter.id)}
+                sx={{
+                  backgroundColor: isActive ? theme.palette.primary.main : palette.white.main,
+                  borderColor: isActive ? theme.palette.primary.main : palette.grey[50],
+                  color: isActive ? palette.white.main : theme.palette.black[800],
+                  "&:hover": {
+                    backgroundColor: isActive ? theme.palette.primary.dark : palette.grey[200],
+                    borderColor: isActive ? theme.palette.primary.dark : palette.grey[50],
                   },
-                },
-              }}
-            >
-              {filter.label}
-            </Button>
-          ))}
+                  textTransform: "none",
+                  fontWeight: 600,
+                  flexShrink: 0,
+                  minWidth: "auto",
+                  px: { xs: 1.5, sm: 2 },
+                  py: { xs: 0.5, sm: 1 },
+                  fontSize: {
+                    xs: "0.75rem",
+                    sm: "0.875rem",
+                  },
+                  "& .MuiButton-startIcon": {
+                    marginRight: { xs: 0.5, sm: 1 },
+                    "& > svg": {
+                      fontSize: { xs: "1rem", sm: "1.25rem" },
+                    },
+                  },
+                }}
+              >
+                {filter.label}
+              </Button>
+            );
+          })}
         </Box>
       </Box>
 
@@ -299,10 +334,10 @@ const DealsSection: React.FC = () => {
           "&::-webkit-scrollbar": { display: "none" },
           "-ms-overflow-style": "none",
           scrollbarWidth: "none",
-          scrollBehavior: "smooth", // ✅ add this
+          scrollBehavior: "smooth",
         }}
       >
-        {DEAL_PRODUCT.map((product) => (
+        {(productsForActiveFilter ?? []).map((product) => (
           <Box
             key={product.id}
             sx={{
