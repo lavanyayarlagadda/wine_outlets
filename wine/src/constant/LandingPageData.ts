@@ -4,7 +4,8 @@ import { curated_img1, curated_img2,   curated_img3,
   curated_img4,
   curated_img5, } from "../assets";
 import {category_img1, category_img2, category_img3, category_img4} from "../assets";
-import {deal_img2, deal_img3, deal_img4} from "../assets";
+import {deal_img2, deal_img3} from "../assets";
+import { willow } from "../assets";
 export const LandingPageData = {
   heroSection: {
     isVisible: true,
@@ -404,19 +405,30 @@ export const LandingPageData = {
   brandSection: {
     title: "Featured Brands",
     isVisible: "true",
-    items: [
+    brands: [
       {
         id: "1",
-        image: "https://example.com/images/willow.png",
+        image: willow,
         brandId: 1,
         order: 1,
       },
       {
         id: "2",
-        name: "Willow Vineyards",
-        Image: "https://example.com/images/willow.png",
+        Image: willow,
         brandId: 2,
         order: 2,
+      },
+       {
+        id: "3",
+        Image: willow,
+        brandId: 3,
+        order: 3,
+      },
+       {
+        id: "4",
+        Image: willow,
+        brandId: 4,
+        order: 4,
       },
     ],
   },

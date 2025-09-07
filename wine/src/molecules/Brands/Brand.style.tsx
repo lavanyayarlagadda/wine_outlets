@@ -4,7 +4,7 @@ export const Container = styled(Box)(() => ({
   width: "100%",
   margin: "0 auto",
   padding: "80px 64px",
-  cursor: "pointer",
+  // cursor: "pointer",
 }));
 
 export const ImageWrapper = styled(Box)({

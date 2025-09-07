@@ -1,19 +1,21 @@
 import React from "react";
 import { Container, ImageWrapper } from "./Brand.style";
 import { CustomTitleSection } from "../../atoms";
-
-import { willow } from "../../assets";
-import { useNavigate } from "react-router-dom";
+import {useBrands} from "./Brands.hook";
 
 const Brands = () => {
-  const navigate = useNavigate();
+  const { title, isVisible, brands, brandImageSrc, handleContainerClick } = useBrands();
+
+if (!isVisible) return null
   return (
-    <Container onClick={() => navigate("/productsList")}>
-      <CustomTitleSection title={"Featured Brands"} subtitle={""} />
+    <Container>
+      <CustomTitleSection title={title} subtitle={""} />
       <ImageWrapper>
-        {[...Array(5)].map((_, i) => (
-          <img key={i} src={willow} alt={`brand image ${i}`} />
-        ))}
+        {brands.map((b) => {
+          const src = brandImageSrc(b);
+          if (!src) return null;
+          return <img key={b.id ?? b.brandId ?? Math.random()} src={src} alt={`brand-${b.id ?? b.brandId}`} onClick={handleContainerClick}/>;
+        })}
       </ImageWrapper>
     </Container>
   );
