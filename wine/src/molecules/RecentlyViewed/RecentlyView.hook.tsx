@@ -1,4 +1,3 @@
-// recentlyviewd.hook.tsx
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type UseRecentlyViewedArgs<T> = {

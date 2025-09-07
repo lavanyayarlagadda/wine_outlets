@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import React from "react";
-import { DEAL_PRODUCT } from "../../constant/dealProduct";
+import { RecentlyViewedData } from "../../constant/LandingPageData";
 import ProductCard from "../ProductCard/ProductCard";
 import {
   Container,
@@ -28,6 +28,11 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   onAddToCart,
   onToggleFavorite,
 }) => {
+  const rvData = (RecentlyViewedData as any) ?? {};
+  const isVisible = rvData.isVisible === undefined ? true : String(rvData.isVisible).toLowerCase() !== "false";
+  const titleText = rvData.title ?? "Recently Viewed";
+
+  
   const {
     scrollRef,
     currentSlide,
@@ -36,21 +41,22 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
     handleAddToCart,
     handleToggleFavorite,
   } = useRecentlyViewed({
-    items: DEAL_PRODUCT,
+    items: Array.isArray(rvData.products) ? rvData.products : [],
     cardsPerSlide,
     initialSlide,
     onSlideChange,
   });
+  if (!isVisible) return null;
 
   return (
     <Container>
       <HeaderWrapper>
-        <Title>Recently Viewed</Title>
+        <Title>{titleText}</Title>
       </HeaderWrapper>
 
       <CarouselWrapper ref={scrollRef}>
-        {DEAL_PRODUCT.map((product) => (
-          <ProductBox key={product.id}>
+        {(rvData.products ?? []).map((product: any) => (
+          <ProductBox key={product.id ?? product.name ?? Math.random()}>
             <ProductCard
               product={product}
               onAddToCart={(id) => handleAddToCart(id, onAddToCart)}
