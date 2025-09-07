@@ -4,6 +4,7 @@ import { curated_img1, curated_img2,   curated_img3,
   curated_img4,
   curated_img5, } from "../assets";
 import {category_img1, category_img2, category_img3, category_img4} from "../assets";
+import {deal_img2, deal_img3, deal_img4} from "../assets";
 export const LandingPageData = {
   heroSection: {
     isVisible: true,
@@ -362,7 +363,7 @@ export const LandingPageData = {
           name: "Kim Crawford Wine",
           media: {
             type: "image",
-            url: "https://example.com/images/wine-1.jpg",
+            url: deal_img2,
           },
 
           year: 2021,
@@ -380,7 +381,7 @@ export const LandingPageData = {
           name: "Kim Crawford Wine",
           media: {
             type: "image",
-            url: "https://example.com/images/wine-1.jpg",
+            url: deal_img3,
           },
 
           year: 2021,
