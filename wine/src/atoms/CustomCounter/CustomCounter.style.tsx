@@ -5,7 +5,7 @@ export const CounterBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   border: shape.borderSuccess,
-  borderRadius: shape.borderRadius,
+     borderRadius: shape.borderRadiuspx,
   padding: "6px",
 }));
 

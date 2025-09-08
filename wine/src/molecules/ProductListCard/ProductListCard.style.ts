@@ -32,7 +32,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
 // Image wrapper
 export const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
-  borderRadius: 16,
+  borderRadius: shape.borderRadius,
   border: shape.borderGreyline,
   padding: theme.spacing(2),
   display: "flex",
@@ -168,4 +168,5 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: palette.white.main,
   },
+  borderRadius:shape.borderRadiuspx
 }));

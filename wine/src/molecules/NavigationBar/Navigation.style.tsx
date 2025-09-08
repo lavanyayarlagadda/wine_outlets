@@ -76,7 +76,7 @@ export const SearchBox = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: "4px 12px",
-  borderRadius: shape.borderRadius,
+  borderRadius: shape.borderRadiuspx,
   minWidth: "300px",
   border: shape.borderSuccess,
   width: "400px",
@@ -158,7 +158,7 @@ export const HighlightMenu = styled(Box)(({ theme }) => ({
 export const DropdownTrigger = styled(Box)(({ theme }) => ({
   cursor: "pointer",
   padding: "6px 12px",
-  borderRadius: shape.borderRadius,
+  borderRadius: shape.borderRadiuspx,
   border: shape.borderSuccess,
   display: "flex",
   alignItems: "center",
@@ -207,7 +207,7 @@ export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({ theme })
 
 export const StyledMenu = styled(Menu)(() => ({
   "& .MuiPaper-root": {
-    borderRadius: shape.borderRadius,
+    borderRadius: shape.borderRadiuspx,
     marginTop: "8px",
     minWidth: "168px",
   },
@@ -228,7 +228,7 @@ export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.white.main,
   border: shape.borderSuccess,
   padding: "8px",
-  borderRadius: shape.borderRadius,
+  borderRadius: shape.borderRadiuspx,
   // Mobile styles
   [theme.breakpoints.down("md")]: {
     padding: "4px",

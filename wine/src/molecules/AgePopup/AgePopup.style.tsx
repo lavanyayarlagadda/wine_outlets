@@ -150,7 +150,7 @@ export const CheckBoxSection = styled(Box)({
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   width: "100%",
   "& .MuiOutlinedInput-root": {
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.shape.borderRadiuspx,
     backgroundColor: theme.palette.background.paper,
     "& fieldset": {
       borderColor: theme.palette.divider,
@@ -211,7 +211,7 @@ export const VerifyButton = styled(Button)(({ theme }) => ({
   fontWeight: theme.typography.fontWeightMedium,
   fontSize: theme.typography.body2.fontSize,
   textTransform: "none",
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: theme.shape.borderRadiuspx,
   padding: theme.spacing(1.5, 3),
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(1.25, 2),

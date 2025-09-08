@@ -18,7 +18,7 @@ interface ProductImageProps extends CardMediaProps {
 
 export const ResponsiveCard = styled(Card)(({ theme }) => ({
   position: "relative",
-  borderRadius: 16,
+  borderRadius: shape.borderRadius,
   transition: "all 0.3s ease",
   width: "100%",
   minHeight: 470,
@@ -118,4 +118,5 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   fontWeight: 600,
   width: "100%",
   whiteSpace: "nowrap",
+  borderRadius:shape.borderRadiuspx
 }));

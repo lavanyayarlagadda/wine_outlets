@@ -64,7 +64,7 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   color: theme.palette.white.main,
   fontWeight: 600,
   textTransform: "none",
-  borderRadius: shape.borderRadius,
+    borderRadius: shape.borderRadiuspx,
   padding: "10px 16px",
   width: "100%",
   "&:hover": {
