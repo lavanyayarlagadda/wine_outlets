@@ -7,6 +7,22 @@ import * as Styled from "./ProfileTabs.style";
 
 const ProfileTabs = () => {
   const [tab, setTab] = useState<"profile" | "vip" | "pwd">("profile");
+  const ProfileData = {
+    CustomerID: "1",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
+    phoneNumber: "+1 9876543210",
+    address: "abc",
+    zipCode: "1234",
+    vipMembership: {
+      isActive: true,
+      barcodeNumber: "VIP123456789",
+      expiryDate: "2025-12-31",
+      memberId: "1234",
+      memberName: "MEMBERNAME",
+    },
+  };
 
   return (
     <Styled.ProfileTabsContainer>
@@ -24,16 +40,7 @@ const ProfileTabs = () => {
 
       <Styled.TabFieldsStyled>
         {tab === "profile" ? (
-          <ProfileInformation
-            initialData={{
-              firstName: "Wine",
-              lastName: "Outlets",
-              email: "wineOutlets@example.com",
-              phoneNumber: "(123) 456-7890",
-              address: "Hyderabad, Telangana",
-              zipCode: "500001",
-            }}
-          />
+          <ProfileInformation initialData={ProfileData} />
         ) : tab === "vip" ? (
           <VIPMembership />
         ) : (
