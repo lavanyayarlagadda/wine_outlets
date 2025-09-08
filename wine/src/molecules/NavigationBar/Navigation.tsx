@@ -34,6 +34,9 @@ import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
 import CustomPopover from "../CustomPopOver/CustomPopOver";
+import { CustomDeliveryButton } from "../CustomPopOver/CustomPopOver.style";
+import uberImg from "../../assets/orderWith/uber.svg";
+import doordashImg from "../../assets/orderWith/doordash.svg";
 // // Define menu items for dropdowns
 // const menus: { [key: string]: string[] } = {
 //   Wine:   [{ listId: "1", listName: "Pinot Noir Aisle" },
@@ -46,7 +49,7 @@ import CustomPopover from "../CustomPopOver/CustomPopOver";
 
 const Navigation = () => {
   const theme = useTheme();
-  const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery"];
+  const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
   const {
     anchorEl,
     menuOpen,
@@ -145,7 +148,7 @@ const Navigation = () => {
             </StyledMenu>
 
             <RightNavSection>
-              <CustomizeIconButton>
+              <CustomizeIconButton onClick={(e) => handleMenuOpen(e, "cart")}>
                 <img src={cart} alt="cart" />
               </CustomizeIconButton>
               <CustomizeIconButton onClick={() => setSignIn(true)}>
@@ -228,11 +231,44 @@ const Navigation = () => {
             <img src={bike} alt="bike" /> Delivery{" "}
             {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </DropdownTriggerWithGap>
+          {/* <CustomPopover
+            open={menuOpen.delivery && !mobileMenuOpen}
+            anchorEl={anchorEl.delivery}
+            onClose={() => handleMenuClose("delivery")}
+          /> */}
+
+          {/* Cart popover */}
+          <CustomPopover
+            open={menuOpen.cart && !mobileMenuOpen}
+            anchorEl={anchorEl.cart}
+            onClose={() => handleMenuClose("cart")}
+            title="1 Item Added"
+            titleAlign="left"
+            showDivider={true}
+            headerRightIcon="cart"
+          >
+            <CustomDeliveryButton></CustomDeliveryButton>
+          </CustomPopover>
+
+          {/* Order with popover */}
           <CustomPopover
             open={menuOpen.delivery && !mobileMenuOpen}
             anchorEl={anchorEl.delivery}
             onClose={() => handleMenuClose("delivery")}
-          />
+            title="Order with"
+            titleAlign="center"
+            showDivider={false}
+          >
+            <CustomDeliveryButton>
+              <img src={uberImg} alt="Uber Eats" />
+              Uber Eats
+            </CustomDeliveryButton>
+
+            <CustomDeliveryButton>
+              <img src={doordashImg} alt="DoorDash" />
+              DoorDash
+            </CustomDeliveryButton>
+          </CustomPopover>
 
           {/* <StyledMenu
             anchorEl={anchorEl.delivery}

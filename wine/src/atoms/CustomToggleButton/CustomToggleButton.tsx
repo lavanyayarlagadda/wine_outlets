@@ -3,7 +3,7 @@ import { ToggleButton } from "@mui/material";
 
 interface ViewToggleButtonProps {
   value: string;
-  selected: boolean;
+  selected?: boolean;
   icon: string;
   alt: string;
 }

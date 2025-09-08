@@ -2,6 +2,10 @@ import { Box, Button, Popover, styled, Typography } from "@mui/material";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
 
+interface PopOverHeadingProps {
+  title?: string;
+}
+
 export const CustomDeliveryButton = styled(Button)(({ theme }) => ({
   fontWeight: "600",
   fontSize: useFontSize(14),
@@ -35,16 +39,20 @@ export const PopoverContainer = styled(Popover)(({ theme }) => ({
 
 export const PopOverWrapper = styled(Box)(() => ({
   borderRadius: shape.baseBorderRadius,
-  width: 240,
+  minWidth: 240,
   border: shape.borderSuccess,
   textAlign: "center",
 }));
 
-export const PopOverHeading = styled(Typography)(({ theme }) => ({
+export const PopOverHeading = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "title",
+})<PopOverHeadingProps>(({ theme, title }) => ({
   fontWeight: "500",
-  color: theme.palette.grey[200],
+  color: title?.toLowerCase().includes("order")
+    ? theme.palette.grey[200]
+    : theme.palette.text.primary,
   padding: shape.baseBorderRadius,
-  fontSize: useFontSize(16),
+  fontSize: useFontSize(14),
 }));
 
 export const PopoverContent = styled(Box)(() => ({
@@ -52,4 +60,31 @@ export const PopoverContent = styled(Box)(() => ({
   justifyContent: "center",
   alignItems: "center",
   position: "relative",
+}));
+
+export const PopOverHeader = styled(Box)<{ titleAlign: "center" | "left" }>(({ titleAlign }) => ({
+  display: "flex",
+  justifyContent: titleAlign === "center" ? "center" : "space-between",
+  alignItems: "center",
+  padding: "12px 16px",
+}));
+export const HeaderIconWrapper = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+}));
+
+export const CartText = styled(Typography)(({ theme }) => ({
+  fontWeight: 500,
+  color: theme.palette.error.contrastText,
+  fontSize: useFontSize(14),
+}));
+
+export const CartIconImage = styled("img")(({ theme }) => ({
+  width: "24px",
+  height: "24px",
+  objectFit: "contain",
+  filter:
+    "invert(15%) sepia(98%) saturate(3134%) hue-rotate(354deg) brightness(85%) contrast(110%)",
+  color: theme.palette.error.contrastText,
 }));
