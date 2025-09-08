@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
 import { CustomPopup } from "../../atoms";
 import SignIn from "../../molecules/AuthPopup/SignIn";
 import SignUp from "../../molecules/AuthPopup/SignUp";
-import { TabsWrapper, StyledButton } from "./AuthDialog.style";
+import { TabsWrapper, StyledButton, TabFields } from "./AuthDialog.style";
 
 interface AuthDialogProps {
   open: boolean;
@@ -29,13 +28,13 @@ const AuthDialog: React.FC<AuthDialogProps> = ({ open, onClose, setIsSubmit }) =
         </StyledButton>
       </TabsWrapper>
 
-      <Box sx={{ pt: 2 }}>
+      <TabFields>
         {tab === "signin" ? (
           <SignIn setTab={setTab} onClose={onClose} setIsSubmit={setIsSubmit} />
         ) : (
           <SignUp setTab={setTab} onClose={onClose} setIsSubmit={setIsSubmit} />
         )}
-      </Box>
+      </TabFields>
     </CustomPopup>
   );
 };

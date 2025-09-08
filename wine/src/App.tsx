@@ -14,6 +14,7 @@ const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
 const ProductViewPage = lazy(() => import("./pages/ProductView/ProductViewPage"));
 const Layout = lazy(() => import("./layout/Layout"));
+const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             <Route index element={<Home />} />
             <Route path="/productsList" element={<ProductsList />} />
             <Route path="/productView" element={<ProductViewPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

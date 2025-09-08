@@ -3,12 +3,20 @@ import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
 import shape from "../../themes/shape";
 
-export const TabsWrapper = styled(Box)(() => ({
+interface TabsWrapperProps {
+  profile?: boolean;
+}
+
+export const TabsWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "profile",
+})<TabsWrapperProps>(({ profile }) => ({
   display: "flex",
   justifyContent: "center",
   backgroundColor: palette.grey.border,
   borderRadius: shape.borderRadiuspx,
   padding: "4px",
+  flexDirection: profile ? "column" : "row",
+  width: profile ? "200px" : "100%", // 👈 adjust width as needed
 }));
 
 export const StyledButton = styled(Button, {
@@ -30,6 +38,9 @@ export const PasswordFields = styled(Box)(() => ({
   display: "flex",
   gap: "16px",
   width: "100%",
+}));
+export const TabFields = styled(Box)(() => ({
+  paddingTop: 2,
 }));
 
 export const HalfField = styled(Box)(() => ({
