@@ -78,13 +78,12 @@ export const StyledFilterButton = styled(Button, {
   minWidth: "auto",
   padding: `${theme.spacing(0.5)} ${theme.spacing(2)}`,
   fontSize: "0.875rem",
-  borderRadius: theme.shape.borderRadius,
-  // active vs default
+  borderRadius: shape.baseBorderRadius,
   backgroundColor: active ? theme.palette.primary.main : theme.palette.common.white,
   border: `1px solid ${active ? theme.palette.primary.main : theme.palette.grey[200]}`,
   color: active ? theme.palette.common.white : theme.palette.text.primary,
   "&:hover": {
-    backgroundColor: active ? theme.palette.primary.dark : theme.palette.grey[100],
+    backgroundColor: active ? theme.palette.primary.dark : theme.palette.grey[300],
     borderColor: active ? theme.palette.primary.dark : theme.palette.grey[200],
   },
   "& .MuiButton-startIcon": {

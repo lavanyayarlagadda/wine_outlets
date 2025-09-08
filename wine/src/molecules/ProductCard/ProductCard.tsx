@@ -237,7 +237,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               sx={{
                 borderColor: theme.palette.primary.dark,
                 border: "1px solid",
-                borderRadius: 1.5,
+                borderRadius: 1,
                 color: theme.palette.primary.dark,
                 backgroundColor: theme.palette.primary.light,
                 padding: "12px 0px",
