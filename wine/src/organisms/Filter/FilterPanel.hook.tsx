@@ -11,13 +11,16 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const selectedId = searchParams.get("id"); // e.g., "1"
 
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
+  const [selectedNestedSub, setSelectedNestedSub] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({});
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleSubSelect = (id: string) => {
     setSelectedSub(id === selectedSub ? null : id);
   };
-
+  const handleNestedSubSelect = (id: string) => {
+    setSelectedNestedSub(id === selectedNestedSub ? null : id);
+  };
   const handleCheckboxChange = (categoryId: string, value: string) => {
     setFilters((prev) => {
       const existing = prev[categoryId] || [];
@@ -90,5 +93,8 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     handleClearAll,
     handleSubSelect,
     selectedSub,
+    selectedNestedSub,
+    setSelectedNestedSub,
+    handleNestedSubSelect,
   };
 };

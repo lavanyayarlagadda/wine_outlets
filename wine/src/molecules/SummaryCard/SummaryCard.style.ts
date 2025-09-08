@@ -23,8 +23,8 @@ export const SummaryCardWrapper = styled(Box)(({ theme }) => ({
     maxWidth: 400,
   },
   [theme.breakpoints.up("xl")]: {
-    width: "976px",
-    maxWidth: "1000px",
+    width: 600,
+    maxWidth: 600,
   },
 }));
 

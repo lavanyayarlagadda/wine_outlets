@@ -101,7 +101,14 @@ export const filtersData = {
           categoryCount: "28",
 
           categoryList: [
-            { listId: "1", listName: "Pinot Noir Aisle" },
+            {
+              listId: "1",
+              listName: "Pinot Noir Aisle",
+              categories: [
+                { categoryId: "1-1-1-1", categoryName: "Premium Pinot" },
+                { categoryId: "1-1-1-2", categoryName: "Classic Pinot" },
+              ],
+            },
             { listId: "2", listName: "Cabernet Aisle" },
             { listId: "3", listName: "Sparkling Aisle" },
             { listId: "4", listName: "Italian" },

@@ -8,6 +8,7 @@ import "@fontsource/inter/200.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/100.css";
 import AppLoader from "./atoms/AppLoader/AppLoader";
+import ScrollToTop from "./ScrollTop";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
@@ -17,6 +18,7 @@ const Layout = lazy(() => import("./layout/Layout"));
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<AppLoader />}>
         <Routes>
           <Route path="/" element={<Layout />}>

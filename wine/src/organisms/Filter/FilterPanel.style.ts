@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Stack, Typography } from "@mui/material";
 import palette from "../../themes/palette";
 import shape from "../../themes/shape";
 
@@ -9,6 +9,24 @@ export const FilterWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(2),
 }));
+export const NestedContainer = styled(Box)(() => ({
+  paddingLeft: "16px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "4px",
+}));
+
+// Icon button for expand/collapse without any bg or border
+export const ExpandButton = styled(IconButton)(() => ({
+  padding: 0,
+  backgroundColor: "transparent",
+  border: "none",
+  color: palette.black[800],
+  "&:hover": {
+    backgroundColor: "transparent",
+  },
+}));
+
 export const PercentageText = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));

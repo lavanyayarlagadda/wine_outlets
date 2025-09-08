@@ -78,9 +78,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
             onClick={() => {
               onSelect(store.id);
               setIsAgeVerified(true);
-              setTimeout(() => {
-                onClose();
-              }, 2000);
+              onClose();
             }}
           >
             <StoreHeader>

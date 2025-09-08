@@ -1,5 +1,14 @@
 import { Box, Drawer, IconButton, Typography, useMediaQuery } from "@mui/material";
-import { Check, Close, FilterList, Liquor, LocalBar, SportsBar } from "@mui/icons-material";
+import {
+  Check,
+  Close,
+  ExpandLess,
+  ExpandMore,
+  FilterList,
+  Liquor,
+  LocalBar,
+  SportsBar,
+} from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { CustomCheckbox, CustomRangeSelector } from "../../atoms";
 import { useFilterPanel } from "./FilterPanel.hook";
@@ -16,6 +25,8 @@ import {
   DrawerHeader,
   ContentStack,
   PercentageText,
+  ExpandButton,
+  NestedContainer,
 } from "./FilterPanel.style";
 // import { useSearchParams } from "react-router-dom";
 
@@ -26,6 +37,7 @@ export interface Category {
   categoryRange?: { min: number; max: number } | string;
   subCategories?: Category[];
   categoryCount?: string;
+  categories?: [{ categoryId: string; categoryName: string }];
 }
 
 interface Props {
@@ -49,6 +61,8 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
     handleClearAll,
     selectedSub,
     handleSubSelect,
+    handleNestedSubSelect,
+    selectedNestedSub,
   } = useFilterPanel(categories, onFilterChange); // ✅ pass categories here
 
   const theme = useTheme();
@@ -115,17 +129,47 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
               </Row>
               <Row>{selectedSub === sub.categoryId && <Check fontSize="small" />}</Row>
             </SubCategoryButton>
-
             {selectedSub === sub.categoryId && (
               <ContentStack>
-                {sub.categoryList?.map((item: any) => (
-                  <CustomCheckbox
-                    key={item.listId}
-                    label={item.listName}
-                    checked={(filters[sub.categoryId] || []).includes(item.listId)}
-                    onChange={() => handleCheckboxChange(sub.categoryId, item.listId)}
-                  />
-                ))}
+                {sub.categoryList?.map((item: any) => {
+                  const hasNested = item.categories && item.categories.length > 0;
+                  const isExpanded = selectedNestedSub === item.listId;
+
+                  return (
+                    <Box key={item.listId}>
+                      <Row>
+                        <CustomCheckbox
+                          label={item.listName}
+                          checked={(filters[sub.categoryId] || []).includes(item.listId)}
+                          onChange={() => handleCheckboxChange(sub.categoryId, item.listId)}
+                        />
+                        {hasNested && (
+                          <ExpandButton onClick={() => handleNestedSubSelect(item.listId)}>
+                            {isExpanded ? <ExpandLess /> : <ExpandMore />}
+                          </ExpandButton>
+                        )}
+                      </Row>
+
+                      {hasNested && isExpanded && (
+                        <NestedContainer>
+                          {item.categories.map((nestedItem: any) => (
+                            <CustomCheckbox
+                              key={nestedItem.categoryId}
+                              label={nestedItem.categoryName}
+                              checked={(filters[sub.categoryId] || []).includes(
+                                nestedItem.categoryId
+                              )}
+                              onChange={() =>
+                                handleCheckboxChange(sub.categoryId, nestedItem.categoryId)
+                              }
+                            />
+                          ))}
+                        </NestedContainer>
+                      )}
+                    </Box>
+                  );
+                })}
+
                 {sub.subCategories?.map((innerSub, index) => renderCategory(innerSub, index))}
               </ContentStack>
             )}
