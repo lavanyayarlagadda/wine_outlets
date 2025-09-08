@@ -168,5 +168,5 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: palette.white.main,
   },
-  borderRadius:shape.borderRadiuspx
+  borderRadius: shape.borderRadiuspx,
 }));

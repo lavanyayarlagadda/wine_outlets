@@ -5,7 +5,7 @@ import palette from "../../themes/palette";
 export const StyledFormControl = styled(FormControl)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     backgroundColor: theme.palette.white.main,
-       borderRadius: shape.borderRadiuspx,
+    borderRadius: shape.borderRadiuspx,
     "& fieldset": {
       borderColor: theme.palette.success.main,
     },

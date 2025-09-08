@@ -118,5 +118,5 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   fontWeight: 600,
   width: "100%",
   whiteSpace: "nowrap",
-  borderRadius:shape.borderRadiuspx
+  borderRadius: shape.borderRadiuspx,
 }));
