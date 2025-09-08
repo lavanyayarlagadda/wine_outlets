@@ -9,6 +9,7 @@ import {
   Toolbar,
   AppBar,
   Drawer,
+  ListItemIcon,
 } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
@@ -60,6 +61,10 @@ export const BottomToolbar = styled(Toolbar)(({ theme }) => ({
   background: theme.palette.white.main,
   gap: "40px",
   padding: "20px 64px !important",
+  display: "none",
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
+  },
 }));
 
 // 🔴 Logo
@@ -203,6 +208,8 @@ export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({ theme })
       height: "14px",
     },
   },
+  color: theme.palette.grey[100],
+  cursor: "pointer",
 }));
 
 export const StyledMenu = styled(Menu)(() => ({
@@ -212,6 +219,42 @@ export const StyledMenu = styled(Menu)(() => ({
     minWidth: "168px",
   },
 }));
+export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
+  "& .MuiPaper-root": {
+    marginTop: theme.spacing(1),
+    borderRadius: theme.shape.borderRadiuspx,
+    boxShadow: theme.shadows[3],
+    minWidth: 180,
+  },
+}));
+
+// Each menu item
+export const StyledProfileMenuItem = styled(MenuItem)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(1),
+  padding: theme.spacing(1.2, 2),
+  "&:hover": {
+    backgroundColor: theme.palette.action.hover,
+  },
+}));
+
+// Icon wrapper
+export const ProfileMenuIcon = styled(ListItemIcon)(() => ({
+  minWidth: 30,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+}));
+
+// Text (with logout in red)
+export const ProfileMenuText = styled(Typography)<{ colorType?: string }>(
+  ({ theme, colorType }) => ({
+    color: colorType === "error" ? theme.palette.error.main : "inherit",
+    fontWeight: 400,
+    fontSize: "0.9rem",
+  })
+);
 
 export const DropdownMenuItem = styled(MenuItem)(() => ({
   fontSize: "14px",

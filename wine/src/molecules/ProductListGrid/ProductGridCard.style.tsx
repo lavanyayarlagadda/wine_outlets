@@ -46,7 +46,6 @@ export const FavoriteButton = styled(IconButton)(() => ({
   border: shape.borderSuccess,
   borderRadius: "4px",
   zIndex: 1,
-  "&:hover": { backgroundColor: palette.grey[200] },
 }));
 
 export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => ({

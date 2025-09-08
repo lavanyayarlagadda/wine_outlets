@@ -6,7 +6,7 @@ import shape from "../../themes/shape";
 export const TabsWrapper = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
-  backgroundColor: palette.grey.greyMain,
+  backgroundColor: palette.grey.border,
   borderRadius: shape.borderRadiuspx,
   padding: "4px",
 }));
@@ -37,7 +37,7 @@ export const HalfField = styled(Box)(() => ({
 }));
 
 export const SwitchText = styled(Typography)(() => ({
-  fontSize: useFontSize(24),
+  fontSize: useFontSize(20),
   textAlign: "center",
 }));
 

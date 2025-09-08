@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { storesData } from "../../constant/storesData";
+import { stores } from "../../constant/curatedData";
 
 type MenuState = {
   [key: string]: boolean;
@@ -13,6 +13,13 @@ export const useNavigation = (menuKeys: string[]) => {
   const [menuOpen, setMenuOpen] = useState<MenuState>(
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: false }), {})
   );
+  const [anchorElProfile, setAnchorElProfile] = useState<null | HTMLElement>(null);
+  const popup = Boolean(anchorElProfile);
+  const [open, setOpen] = useState(false);
+  // Auth states
+  const [openLogin, setOpenLogin] = useState(true);
+  const [signIn, setSignIn] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState<AnchorState>(
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: null }), {})
@@ -20,8 +27,18 @@ export const useNavigation = (menuKeys: string[]) => {
 
   // mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [storeData] = useState(storesData); // ✅ constant store data
-  const [selectedStore, setSelectedStore] = useState<number | null>(null);
+  const firstStoreName = stores.length > 0 ? stores[0].name : "Select Store";
+  const [selectedStore, setSelectedStore] = useState<number>(stores.length > 0 ? stores[0].id : 0);
+
+  const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElProfile(event.currentTarget);
+  };
+
+  const handleProfileClose = () => {
+    setAnchorElProfile(null);
+  };
+
+  const handleLoginClose = () => setOpenLogin(false);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, key: string) => {
     setAnchorEl((prev) => ({ ...prev, [key]: event.currentTarget }));
@@ -59,8 +76,23 @@ export const useNavigation = (menuKeys: string[]) => {
     handleMobileMenuOpen,
     handleMobileMenuClose,
     handleMobileMenuToggle,
-    storeData,
+    firstStoreName,
     selectedStore,
     setSelectedStore,
+    anchorElProfile,
+    popup,
+    handleProfileClick,
+    handleProfileClose,
+    setOpenLogin,
+
+    // auth
+    openLogin,
+    signIn,
+    setSignIn,
+    isSubmit,
+    setIsSubmit,
+    handleLoginClose,
+    setOpen,
+    open,
   };
 };

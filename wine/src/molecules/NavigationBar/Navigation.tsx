@@ -28,6 +28,10 @@ import {
   BottomToolbar,
   IconGroup,
   MobileLocationDeliveryWrapper,
+  StyledProfileMenu,
+  StyledProfileMenuItem,
+  ProfileMenuIcon,
+  ProfileMenuText,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
 import { useNavigate } from "react-router-dom";
@@ -37,15 +41,10 @@ import CustomPopover from "../CustomPopOver/CustomPopOver";
 import { CustomDeliveryButton } from "../CustomPopOver/CustomPopOver.style";
 import uberImg from "../../assets/orderWith/uber.svg";
 import doordashImg from "../../assets/orderWith/doordash.svg";
-// // Define menu items for dropdowns
-// const menus: { [key: string]: string[] } = {
-//   Wine:   [{ listId: "1", listName: "Pinot Noir Aisle" },
-//               { listId: "2", listName: "Cabernet Aisle" },
-//               { listId: "3", listName: "Sparkling Aisle" },
-//               { listId: "4", listName: "Italian" },],
-//   Beer: ["Lager", "Ale", "Stout"],
-//   Liquor: ["Whiskey", "Vodka", "Rum"],
-// };
+import { stores } from "../../constant/curatedData";
+import { StoreLocator } from "..";
+import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
+import { logout, profile, myorders, mytastings, wishlist } from "../../assets";
 
 const Navigation = () => {
   const theme = useTheme();
@@ -59,16 +58,24 @@ const Navigation = () => {
     handleMobileMenuOpen,
     handleMobileMenuClose,
     handleMobileMenuToggle,
+    firstStoreName,
+    anchorElProfile,
+    popup,
+    handleProfileClick,
+    handleProfileClose,
+    openLogin,
+    signIn,
+    setSignIn,
+    isSubmit,
+    setIsSubmit,
+    handleLoginClose,
+    selectedStore,
+    setSelectedStore,
+    setOpen,
+    open,
   } = useNavigation(menuKeys);
   const navigate = useNavigate();
-  const [openLogin, setOpenLogin] = React.useState(true);
-  const [signIn, setSignIn] = React.useState(false);
 
-  const onClose = () => {
-    setOpenLogin(false);
-  };
-
-  // Example menu data (can come from props or API)
   const menuData = {
     menuList: [
       {
@@ -93,6 +100,35 @@ const Navigation = () => {
       },
     ],
   };
+
+  const profileMenuOptions = [
+    {
+      label: "Profile",
+      imgSrc: profile,
+      onClick: () => navigate("/profile"),
+    },
+    {
+      label: "My Orders",
+      imgSrc: myorders,
+      onClick: () => navigate("/myorders"),
+    },
+    {
+      label: "Wishlist",
+      imgSrc: wishlist,
+      onClick: () => navigate("/wishlist"),
+    },
+    {
+      label: "Tasting",
+      imgSrc: mytastings,
+      onClick: () => navigate("/mytastings"),
+    },
+    {
+      label: "Logout",
+      imgSrc: logout,
+      color: palette.primary.dark,
+      onClick: () => navigate("/"),
+    },
+  ];
 
   return (
     <div>
@@ -129,31 +165,61 @@ const Navigation = () => {
                 color: theme?.palette.grey[100],
                 display: { xs: "none", md: "flex" },
               }}
-              onClick={(e) => handleMenuOpen(e, "store")}
+              onClick={(e) => {
+                (handleMenuOpen(e, "store"), setOpen(true));
+              }}
             >
               <img src={map} alt="map" />
-              Uptown Store
+              {firstStoreName}
               {menuOpen.store ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </DropdownTriggerWithIconMargin>
 
-            <StyledMenu
-              anchorEl={anchorEl.store}
-              open={menuOpen.store && !mobileMenuOpen}
-              onClose={() => handleMenuClose("store")}
-              PaperProps={{ sx: { top: "95px !important", position: "absolute" } }}
-            >
-              <DropdownMenuItem>Uptown Store</DropdownMenuItem>
-              <DropdownMenuItem>Downtown Store</DropdownMenuItem>
-              <DropdownMenuItem>Suburban Store</DropdownMenuItem>
-            </StyledMenu>
+            <StoreLocator
+              open={open}
+              onClose={() => setOpen(false)}
+              selectedStoreId={selectedStore}
+              stores={stores}
+              onSelect={(id) => setSelectedStore(id)}
+              navigation={true}
+            />
 
             <RightNavSection>
               <CustomizeIconButton onClick={(e) => handleMenuOpen(e, "cart")}>
                 <img src={cart} alt="cart" />
               </CustomizeIconButton>
-              <CustomizeIconButton onClick={() => setSignIn(true)}>
-                <img src={userprofile} alt="userProfile" />
-              </CustomizeIconButton>
+              {isSubmit ? (
+                <>
+                  <CustomizeIconButton onClick={handleProfileClick}>
+                    <img src={userprofile} alt="userProfile" />
+                  </CustomizeIconButton>
+                  <StyledProfileMenu
+                    anchorEl={anchorElProfile}
+                    open={popup}
+                    onClose={handleProfileClose}
+                  >
+                    {profileMenuOptions.map((option) => (
+                      <StyledProfileMenuItem
+                        key={option.label}
+                        onClick={() => {
+                          option.onClick();
+                          handleProfileClose();
+                        }}
+                      >
+                        <ProfileMenuIcon>
+                          <img src={option.imgSrc} alt={option.label} width={20} height={20} />
+                        </ProfileMenuIcon>
+                        <ProfileMenuText
+                          colorType={option.label === "Logout" ? "error" : undefined}
+                        >
+                          {option.label}
+                        </ProfileMenuText>
+                      </StyledProfileMenuItem>
+                    ))}
+                  </StyledProfileMenu>
+                </>
+              ) : (
+                <AddToCartButton onClick={() => setSignIn(true)}>Sign In</AddToCartButton>
+              )}
             </RightNavSection>
           </IconGroup>
 
@@ -168,14 +234,9 @@ const Navigation = () => {
 
           {/* mobile view location and delivery */}
           <MobileLocationDeliveryWrapper>
-            <DropdownTriggerWithIconMargin
-              sx={{
-                color: theme.palette.grey[100],
-              }}
-              onClick={(e) => handleMenuOpen(e, "store")}
-            >
+            <DropdownTriggerWithIconMargin onClick={(e) => handleMenuOpen(e, "store")}>
               <img src={map} alt="map" />
-              Uptown Store
+              {firstStoreName}
               {menuOpen.store ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </DropdownTriggerWithIconMargin>
 
@@ -187,7 +248,7 @@ const Navigation = () => {
         </StyledToolbar>
       </StyledAppBar>
 
-      <BottomToolbar sx={{ display: { xs: "none", md: "flex" } }}>
+      <BottomToolbar>
         <NavWrapper>
           {menuData.menuList.map((menu) => (
             <div key={menu.id}>
@@ -231,13 +292,6 @@ const Navigation = () => {
             <img src={bike} alt="bike" /> Delivery{" "}
             {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </DropdownTriggerWithGap>
-          {/* <CustomPopover
-            open={menuOpen.delivery && !mobileMenuOpen}
-            anchorEl={anchorEl.delivery}
-            onClose={() => handleMenuClose("delivery")}
-          /> */}
-
-          {/* Cart popover */}
           <CustomPopover
             open={menuOpen.cart && !mobileMenuOpen}
             anchorEl={anchorEl.cart}
@@ -269,18 +323,6 @@ const Navigation = () => {
               DoorDash
             </CustomDeliveryButton>
           </CustomPopover>
-
-          {/* <StyledMenu
-            anchorEl={anchorEl.delivery}
-            open={menuOpen.delivery && !mobileMenuOpen}
-            onClose={() => handleMenuClose("delivery")}
-            PaperProps={{ sx: { top: "170px !important", position: "absolute" } }}
-          >
-            <DropdownMenuItem>Standard Delivery</DropdownMenuItem>
-            <DropdownMenuItem>Express Delivery</DropdownMenuItem>
-            <DropdownMenuItem>Pickup</DropdownMenuItem>
-          </StyledMenu> */}
-
           <DropdownTriggerWithGap>
             <img src={bag} alt="bag" /> Hiring Now
           </DropdownTriggerWithGap>
@@ -294,7 +336,9 @@ const Navigation = () => {
         handleMobileMenuClose={handleMobileMenuClose}
         handleMobileMenuToggle={handleMobileMenuToggle}
       />
-      {signIn && <AuthDialog open={openLogin} onClose={onClose} />}
+      {signIn && (
+        <AuthDialog open={openLogin} onClose={handleLoginClose} setIsSubmit={setIsSubmit} />
+      )}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import shape from "../../themes/shape";
 export const NewsletterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   margin: "0 auto",
-  padding: `${theme.spacing(0)} ${theme.spacing(4)} ${theme.spacing(4)}`,
+  padding: `${theme.spacing(4)} ${theme.spacing(4)} ${theme.spacing(4)}`,
   backgroundColor: theme.palette.primary.light,
   [theme.breakpoints.down("sm")]: {
     padding: `${theme.spacing(0)} ${theme.spacing(2)} ${theme.spacing(2)}`,

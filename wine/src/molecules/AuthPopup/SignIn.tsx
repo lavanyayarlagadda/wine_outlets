@@ -10,7 +10,15 @@ import {
 } from "../../organisms/Authentication/AuthDialog.style";
 import { useSignIn } from "./SignInPopup.hook";
 
-const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
+const SignIn = ({
+  setTab,
+  onClose,
+  setIsSubmit,
+}: {
+  setTab: any;
+  onClose: any;
+  setIsSubmit: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } =
     useSignIn(onClose);
 
@@ -39,7 +47,14 @@ const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
         }
       />
 
-      <SubmitButton type="submit" variant="contained" fullWidth>
+      <SubmitButton
+        type="submit"
+        variant="contained"
+        fullWidth
+        onClick={() => {
+          setIsSubmit(true);
+        }}
+      >
         Submit
       </SubmitButton>
 

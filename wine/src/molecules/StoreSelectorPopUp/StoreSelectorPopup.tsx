@@ -36,7 +36,8 @@ interface StoreSelectorPopupProps {
   stores: Store[];
   selectedStoreId?: number;
   onSelect: (id: number) => void;
-  setIsAgeVerified: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAgeVerified?: React.Dispatch<React.SetStateAction<boolean>>;
+  navigation?: boolean;
 }
 
 const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
@@ -46,6 +47,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   selectedStoreId,
   onSelect,
   setIsAgeVerified,
+  navigation = false,
 }) => {
   return (
     <CustomPopup
@@ -58,17 +60,18 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
           You can change your store preference at any time using the store selector in the header.
         </Typography>
       }
+      navigation={navigation}
     >
       <TitleText>Find stores near me</TitleText>
-
-      <SearchContainer>
-        <SearchBoxWrapper>
-          <SearchIconStyled />
-          <StyledInput placeholder="Enter Zip Code" inputProps={{ "aria-label": "search" }} />
-        </SearchBoxWrapper>
-        <StyledSearchButton variant="contained">Search</StyledSearchButton>
-      </SearchContainer>
-
+      {!navigation && (
+        <SearchContainer>
+          <SearchBoxWrapper>
+            <SearchIconStyled />
+            <StyledInput placeholder="Enter Zip Code" inputProps={{ "aria-label": "search" }} />
+          </SearchBoxWrapper>
+          <StyledSearchButton variant="contained">Search</StyledSearchButton>
+        </SearchContainer>
+      )}
       {stores.map((store) => {
         const isSelected = selectedStoreId === store.id;
         return (
@@ -77,7 +80,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
             selected={isSelected}
             onClick={() => {
               onSelect(store.id);
-              setIsAgeVerified(true);
+              setIsAgeVerified && setIsAgeVerified(true);
               onClose();
             }}
           >
