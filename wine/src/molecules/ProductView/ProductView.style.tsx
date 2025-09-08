@@ -38,8 +38,8 @@ export const StyledThumbnailMedia = styled(CardMedia)<{ alt?: string; src?: stri
   objectFit: "cover",
   width: "100%",
   height: "100%",
-  paddingLeft: "12px", // px:3 => 3 * 4px = 12px
-  paddingRight: "12px",
+  paddingLeft: "24px",
+  paddingRight: "24px",
 }));
 export const StyledCardMedia = styled(CardMedia)<{ alt?: string; src?: string }>(({ theme }) => ({
   objectFit: "contain",

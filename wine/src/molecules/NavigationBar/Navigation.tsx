@@ -98,6 +98,16 @@ const Navigation = () => {
           { id: 4, listName: "Beers4" },
         ],
       },
+      {
+        id: 3,
+        name: "Liquor",
+        itemsList: [
+          { id: 1, listName: "Liquor1" },
+          { id: 2, listName: "Liquor2" },
+          { id: 3, listName: "Liquor3" },
+          { id: 4, listName: "Liquor4" },
+        ],
+      },
     ],
   };
 
