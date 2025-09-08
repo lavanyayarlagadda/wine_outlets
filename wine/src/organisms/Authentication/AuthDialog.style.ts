@@ -6,7 +6,7 @@ import shape from "../../themes/shape";
 export const TabsWrapper = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
-  backgroundColor: palette.white.main,
+  backgroundColor: palette.grey.greyMain,
   borderRadius: shape.borderRadiuspx,
   padding: "4px",
 }));
@@ -18,7 +18,7 @@ export const StyledButton = styled(Button, {
   fontWeight: "bold",
   borderRadius: shape.borderRadiuspx,
   minHeight: "36px",
-  backgroundColor: active ? palette.primary.light : "transparent",
+  backgroundColor: active ? palette.primary.light : "transpar",
   color: active ? palette.primary.dark : palette.grey.greyDark, // fallback for text.secondary
   boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
   "&:hover": {

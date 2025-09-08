@@ -55,7 +55,7 @@ const Home = () => {
           setIsAgeVerified={setIsAgeVerified}
         />
       )}
-      {isAgeVerified && <HeroBanner  setOpen={setOpen} />}
+      {isAgeVerified && <HeroBanner setOpen={setOpen} />}
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}
       {isAgeVerified && <CuratedPicks />}

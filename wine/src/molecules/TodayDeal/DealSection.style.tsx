@@ -26,7 +26,6 @@ export const HeaderRow = styled(Box)(({ theme }) => ({
   },
 }));
 
-
 export const TitleAndTimer = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(2),
@@ -52,7 +51,7 @@ export const TimerBox = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
   alignItems: "center",
-}));;
+}));
 
 export const FilterButtonsRow = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -118,7 +117,6 @@ export const CardsRow = styled(Box)(({ theme }) => ({
   scrollBehavior: "smooth",
 }));
 
-
 export const DotsRow = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
@@ -139,7 +137,6 @@ export const Dot = styled(Box, {
     backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
   },
 }));
-
 
 export const TimerChip = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,

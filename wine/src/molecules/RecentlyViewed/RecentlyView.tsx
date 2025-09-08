@@ -29,10 +29,10 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   onToggleFavorite,
 }) => {
   const rvData = (RecentlyViewedData as any) ?? {};
-  const isVisible = rvData.isVisible === undefined ? true : String(rvData.isVisible).toLowerCase() !== "false";
+  const isVisible =
+    rvData.isVisible === undefined ? true : String(rvData.isVisible).toLowerCase() !== "false";
   const titleText = rvData.title ?? "Recently Viewed";
 
-  
   const {
     scrollRef,
     currentSlide,

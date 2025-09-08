@@ -1,10 +1,8 @@
 import { banner_img1, banner_img2, banner_img3 } from "../assets";
 import { Offer_img1, Offer_img2, Offer_img3 } from "../assets";
-import { curated_img1, curated_img2,   curated_img3,
-  curated_img4,
-  curated_img5, } from "../assets";
-import {category_img1, category_img2, category_img3, category_img4} from "../assets";
-import {deal_img2, deal_img3} from "../assets";
+import { curated_img1, curated_img2, curated_img3, curated_img4, curated_img5 } from "../assets";
+import { category_img1, category_img2, category_img3, category_img4 } from "../assets";
+import { deal_img2, deal_img3 } from "../assets";
 import { willow } from "../assets";
 export const LandingPageData = {
   heroSection: {
@@ -148,7 +146,7 @@ export const LandingPageData = {
         type: "image",
         url: banner_img1,
       },
-      btnText:  "View All",
+      btnText: "View All",
       btnAction: "/collections/everyday-value",
     },
     cards: [
@@ -157,7 +155,7 @@ export const LandingPageData = {
         title: "Trending Now",
         description:
           "Discover our most-loved wines, beers, & spirits making waves this week—perfect picks for your next celebration.",
-        btnText:  "View All",
+        btnText: "View All",
         btnAction: "/collections/everyday-value",
       },
       {
@@ -418,13 +416,13 @@ export const LandingPageData = {
         brandId: 2,
         order: 2,
       },
-       {
+      {
         id: "3",
         Image: willow,
         brandId: 3,
         order: 3,
       },
-       {
+      {
         id: "4",
         Image: willow,
         brandId: 4,
@@ -432,7 +430,7 @@ export const LandingPageData = {
       },
     ],
   },
-}
+};
 
 export const RecentlyViewedData = {
   title: "Recently Viewed",

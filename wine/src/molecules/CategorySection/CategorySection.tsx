@@ -20,11 +20,10 @@ interface ShopByCategorySection {
   categories?: ShopCategory[];
 }
 
-
-  const shopSection: ShopByCategorySection = LandingPageData?.shopByCategory ?? {};
-  const title = shopSection.title ?? "Shop by Category";
-  const subtitle = shopSection.subtitle ?? "Find your favorite by type.";
-  const categories = shopSection.categories ?? [];
+const shopSection: ShopByCategorySection = LandingPageData?.shopByCategory ?? {};
+const title = shopSection.title ?? "Shop by Category";
+const subtitle = shopSection.subtitle ?? "Find your favorite by type.";
+const categories = shopSection.categories ?? [];
 
 const CategorySection = () => {
   const navigate = useNavigate();

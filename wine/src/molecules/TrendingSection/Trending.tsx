@@ -40,7 +40,7 @@ interface ValueSection {
 }
 
 const valueSection: ValueSection = LandingPageData?.valueSection ?? {};
-const {title,description,btnText,media,btnAction} = valueSection.mainCard ?? {};
+const { title, description, btnText, media, btnAction } = valueSection.mainCard ?? {};
 const cards = valueSection.cards ?? [];
 
 const Trending = () => {
@@ -50,22 +50,18 @@ const Trending = () => {
     <Container>
       <Wrapper>
         <LeftSectionBox>
-          <BackgroundImage backgroundImage={media?.url}/>
+          <BackgroundImage backgroundImage={media?.url} />
           <ContentContainer>
             <TextContent>
               <Title variant="h2">{title ?? ""}</Title>
-              <Description variant="body1">
-                {
-                  description ?? ""
-                }
-              </Description>
+              <Description variant="body1">{description ?? ""}</Description>
             </TextContent>
             <CTAButton
               endIcon={<ArrowForwardIcon />}
               disableRipple
-              onClick={() =>{ 
-                navigate("/productsList")
-                console.log(btnAction)
+              onClick={() => {
+                navigate("/productsList");
+                console.log(btnAction);
               }}
             >
               {btnText ?? ""}

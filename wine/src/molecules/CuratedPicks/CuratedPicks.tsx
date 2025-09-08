@@ -12,7 +12,7 @@ import {
   StyledImageContainer,
   StyledCategoryLabel,
 } from "./CuratedPicks.style";
-import { LandingPageData } from "../../constant/LandingPageData"
+import { LandingPageData } from "../../constant/LandingPageData";
 // import { curatedData } from "../../constant/curatedData";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ interface CuratedPicksSection {
   categories?: CuratedCategory[];
 }
 
-const {title,subtitle,categories}: CuratedPicksSection = LandingPageData?.curatedPicks ?? {};
+const { title, subtitle, categories }: CuratedPicksSection = LandingPageData?.curatedPicks ?? {};
 // const title = curatedSection.title ?? "Shop Our Curated Picks";
 // const subtitle = curatedSection.subtitle ?? "Find your favorite by type.";
 // const categories = curatedSection.categories ?? [];

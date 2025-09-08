@@ -12,7 +12,7 @@ import { HeroOverlay } from "../../atoms";
 import { LandingPageData } from "../../constant/LandingPageData";
 
 export interface SlideData {
-  id: string; 
+  id: string;
   order?: number;
   tagText?: string;
   tagActionText?: string;
@@ -25,8 +25,8 @@ export interface SlideData {
   };
   firstBtnText?: string;
   secondBtnText?: string;
-  firstBtnAction?: string; 
-  secondBtnAction?: string; 
+  firstBtnAction?: string;
+  secondBtnAction?: string;
 }
 
 export interface HeroBannerProps {
@@ -49,7 +49,7 @@ const HeroBanner = ({
     handleTouchEnd,
     firstBtnAction,
     secondBtnAction,
-    handleTagClick
+    handleTagClick,
   } = useHeroBanner(slides.length, autoPlayInterval, setOpen, slides);
 
   const currentSlideData = slides[currentSlide];

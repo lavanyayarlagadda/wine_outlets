@@ -17,11 +17,7 @@ const Layout = lazy(() => import("./layout/Layout"));
 const App: React.FC = () => {
   return (
     <Router>
-      <Suspense
-        fallback={
-          <AppLoader/>
-        }
-      >
+      <Suspense fallback={<AppLoader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />

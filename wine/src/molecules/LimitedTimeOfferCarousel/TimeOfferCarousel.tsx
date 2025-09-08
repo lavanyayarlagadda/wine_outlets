@@ -32,7 +32,7 @@ interface OfferData {
   offers: Offer[];
 }
 
-const { title, subtitle , offers } : OfferData = LandingPageData?.limitedTimeOffer ?? {
+const { title, subtitle, offers }: OfferData = LandingPageData?.limitedTimeOffer ?? {
   title: "",
   subtitle: "",
   offers: [],
@@ -72,10 +72,7 @@ const LimitedTimeOffersCarousel = () => {
 
   return (
     <CarouselContainer>
-      <CustomTitleSection
-        title={title}
-        subtitle={subtitle}
-      />
+      <CustomTitleSection title={title} subtitle={subtitle} />
       {!isMobile && (
         <>
           <CarouselWrapper>

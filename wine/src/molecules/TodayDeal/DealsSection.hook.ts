@@ -2,13 +2,21 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { LandingPageData } from "../../constant/LandingPageData";
 import type { Product } from "../ProductCard/ProductCard";
 
-interface TimerConfig { endTime: string; format?: string; }
-interface DealFilterBtn { id: string; label: string; }
-interface DealProductsGroup { [key: string]: Product[] | undefined; }
+interface TimerConfig {
+  endTime: string;
+  format?: string;
+}
+interface DealFilterBtn {
+  id: string;
+  label: string;
+}
+interface DealProductsGroup {
+  [key: string]: Product[] | undefined;
+}
 interface DealSectionFromData {
   isVisible?: boolean | string;
   title?: string;
-  props?: { showTimer?: boolean; timer?: TimerConfig; filterButtons?: DealFilterBtn[]; };
+  props?: { showTimer?: boolean; timer?: TimerConfig; filterButtons?: DealFilterBtn[] };
   dealProducts?: DealProductsGroup;
 }
 
@@ -17,12 +25,16 @@ export const useDealsSection = () => {
   const title = dealSection.title ?? "Today's Deal for you!";
   const sectionProps = dealSection.props ?? {};
   const timerConfig = sectionProps?.timer;
-  const filterButtonsFromData: DealFilterBtn[] = sectionProps?.filterButtons ?? [{ id: "trending", label: "Trending" }];
+  const filterButtonsFromData: DealFilterBtn[] = sectionProps?.filterButtons ?? [
+    { id: "trending", label: "Trending" },
+  ];
   const dealProducts: DealProductsGroup = (dealSection.dealProducts as DealProductsGroup) ?? {};
 
   // UI state
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [activeFilter, setActiveFilter] = useState<string>(filterButtonsFromData[0]?.id ?? "trending");
+  const [activeFilter, setActiveFilter] = useState<string>(
+    filterButtonsFromData[0]?.id ?? "trending"
+  );
 
   // timer remaining ms initial calc
   const [remainingMs, setRemainingMs] = useState<number | null>(() => {
@@ -86,7 +98,9 @@ export const useDealsSection = () => {
         startX = e.touches[0].pageX - element.offsetLeft;
         scrollLeft = element.scrollLeft;
       };
-      const onTouchEnd = () => { isDown = false; };
+      const onTouchEnd = () => {
+        isDown = false;
+      };
       const onTouchMove = (e: TouchEvent) => {
         if (!isDown) return;
         const x = e.touches[0].pageX - element.offsetLeft;

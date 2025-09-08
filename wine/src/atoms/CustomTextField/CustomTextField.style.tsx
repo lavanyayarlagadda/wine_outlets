@@ -5,7 +5,7 @@ import palette from "../../themes/palette";
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     backgroundColor: theme.palette.white.main,
-    borderRadius: shape.borderRadius,
+    borderRadius: shape.borderRadiuspx,
     "& fieldset": {
       borderColor: shape.borderSuccess,
     },

@@ -12,8 +12,8 @@ export interface SlideData {
   };
   firstBtnText?: string;
   secondBtnText?: string;
-  firstBtnAction?: string; 
-  secondBtnAction?: string; 
+  firstBtnAction?: string;
+  secondBtnAction?: string;
 }
 // import { banner_img1, banner_img2, banner_img3 } from "../assets";
 

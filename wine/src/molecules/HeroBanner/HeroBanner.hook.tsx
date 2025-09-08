@@ -110,7 +110,7 @@ export const useHeroBanner = (
 
   const handleTagClick = () => {
     console.log("Tag clicked");
-  }
+  };
 
   // Button actions
   const firstBtnAction = () => {
@@ -128,13 +128,13 @@ export const useHeroBanner = (
     if (!slides) return;
     const slide = slides[currentSlide];
     if (slide.secondBtnAction) {
-    if (slide.secondBtnAction === "openStoreModal" && setOpen) {
-      setOpen(true);
+      if (slide.secondBtnAction === "openStoreModal" && setOpen) {
+        setOpen(true);
+        return;
+      }
+      navigate(slide.secondBtnAction);
       return;
     }
-    navigate(slide.secondBtnAction);
-    return;
-  }
   };
 
   // Auto-play & hover management
@@ -173,6 +173,6 @@ export const useHeroBanner = (
     handleTouchEnd,
     firstBtnAction,
     secondBtnAction,
-    handleTagClick
+    handleTagClick,
   };
 };

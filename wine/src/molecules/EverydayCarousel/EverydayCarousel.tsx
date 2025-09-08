@@ -35,10 +35,8 @@ interface EveryDaySlidesSection {
   slides?: EverydaySlide[];
 }
 
-
 const everyDaySection: EveryDaySlidesSection = LandingPageData?.everyDaySlides ?? {};
 const slides = everyDaySection.slides ?? [];
-
 
 const WineCarousel: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

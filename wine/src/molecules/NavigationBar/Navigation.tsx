@@ -110,7 +110,7 @@ const Navigation = () => {
           >
             <MenuIcon sx={{ fontSize: "24px", color: palette.primary.dark, mt: 1 }} />
           </CustomizeIconButton>
-          <Logo src={logo} alt="Wine Outlet" onClick={()=>navigate("/")}/>
+          <Logo src={logo} alt="Wine Outlet" onClick={() => navigate("/")} />
 
           <IconGroup>
             <SearchBox sx={{ display: { xs: "none", sm: "flex" } }}>

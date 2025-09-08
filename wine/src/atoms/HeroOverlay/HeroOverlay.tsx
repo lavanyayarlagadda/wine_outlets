@@ -46,7 +46,7 @@ const HeroOverlay = ({
               <span>{tagText}</span>
               <CustomizeTagActionBox>
                 {tagActionText}
-                <KeyboardArrowRightIcon onClick={handleTagClick}/>
+                <KeyboardArrowRightIcon onClick={handleTagClick} />
               </CustomizeTagActionBox>
             </CustomizeTagBox>
           )}
