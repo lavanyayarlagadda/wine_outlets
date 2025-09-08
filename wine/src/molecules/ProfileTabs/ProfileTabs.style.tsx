@@ -4,6 +4,7 @@ import {
   TabsWrapper as OriginalTabsWrapper,
   TabFields as OriginalTabFields,
 } from "../../organisms/Authentication/AuthDialog.style";
+import palette from "../../themes/palette";
 
 export const ProfileTabsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -27,6 +28,7 @@ export const TabsWrapperStyled = styled(OriginalTabsWrapper)(({ theme }) => ({
   height: 150,
   flexShrink: 0,
   overflowY: "auto",
+  backgroundColor: palette.primary.light,
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     height: "auto",

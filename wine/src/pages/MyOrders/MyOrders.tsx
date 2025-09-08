@@ -4,7 +4,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CancelIcon from "@mui/icons-material/Cancel";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -33,7 +32,7 @@ import {
   SecondaryButton,
 } from "./MyOrders.style";
 
-import { useMyOrders,formatOrderDate } from "./MyOrders.hook";
+import { useMyOrders, formatOrderDate } from "./MyOrders.hook";
 
 /** Helper to format currency */
 const formatCurrency = (value: number) =>
@@ -53,7 +52,7 @@ export default function MyOrders() {
     clearActive,
   } = useMyOrders();
 
-  const filtered = orders.filter(o =>
+  const filtered = orders.filter((o) =>
     selectedTab === "current"
       ? o.status !== "Cancelled" && o.status !== "Picked"
       : o.status === "Cancelled" || o.status === "Picked"
@@ -66,17 +65,11 @@ export default function MyOrders() {
           Orders
         </Typography>
 
-        <SidebarButton
-          active={selectedTab === "current"}
-          onClick={() => setSelectedTab("current")}
-        >
+        <SidebarButton active={selectedTab === "current"} onClick={() => setSelectedTab("current")}>
           Current Orders
         </SidebarButton>
 
-        <SidebarButton
-          active={selectedTab === "past"}
-          onClick={() => setSelectedTab("past")}
-        >
+        <SidebarButton active={selectedTab === "past"} onClick={() => setSelectedTab("past")}>
           Past Orders
         </SidebarButton>
       </Sidebar>
@@ -108,9 +101,7 @@ export default function MyOrders() {
                     <OrderHeader>
                       <OrderMeta>
                         <OrderIdChip label={order.orderId} color="default" />
-                        <DateText>
-                            {formatOrderDate(order.date)}
-                        </DateText>
+                        <DateText>{formatOrderDate(order.date)}</DateText>
                       </OrderMeta>
 
                       <PriceTag variant="body1">{formatCurrency(order.totalAmount)}</PriceTag>

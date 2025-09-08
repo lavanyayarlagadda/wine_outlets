@@ -28,7 +28,7 @@ const App: React.FC = () => {
             <Route path="/productsList" element={<ProductsList />} />
             <Route path="/productView" element={<ProductViewPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/myOrders" element={<MyOrders/>} />
+            <Route path="/myOrders" element={<MyOrders />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

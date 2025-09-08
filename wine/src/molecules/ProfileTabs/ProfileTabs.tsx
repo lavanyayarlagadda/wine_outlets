@@ -27,13 +27,18 @@ const ProfileTabs = () => {
   return (
     <Styled.ProfileTabsContainer>
       <Styled.TabsWrapperStyled profile={true}>
-        <StyledButton active={tab === "profile"} onClick={() => setTab("profile")} fullWidth>
+        <StyledButton
+          active={tab === "profile"}
+          onClick={() => setTab("profile")}
+          fullWidth
+          profile={true}
+        >
           Profile Information
         </StyledButton>
-        <StyledButton active={tab === "vip"} onClick={() => setTab("vip")} fullWidth>
+        <StyledButton active={tab === "vip"} onClick={() => setTab("vip")} fullWidth profile={true}>
           VIP Membership
         </StyledButton>
-        <StyledButton active={tab === "pwd"} onClick={() => setTab("pwd")} fullWidth>
+        <StyledButton active={tab === "pwd"} onClick={() => setTab("pwd")} fullWidth profile={true}>
           Password
         </StyledButton>
       </Styled.TabsWrapperStyled>
@@ -42,7 +47,7 @@ const ProfileTabs = () => {
         {tab === "profile" ? (
           <ProfileInformation initialData={ProfileData} />
         ) : tab === "vip" ? (
-          <VIPMembership />
+          <VIPMembership initialData={ProfileData.vipMembership} />
         ) : (
           <Password />
         )}

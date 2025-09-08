@@ -47,14 +47,15 @@ const MOCK_DATA: { orders: Order[] } = {
   ],
 };
 
-export function formatOrderDate(
-  value?: string | number | Date | null,
-  locale = "en-US"
-): string {
+export function formatOrderDate(value?: string | number | Date | null, locale = "en-US"): string {
   if (value === undefined || value === null || value === "") return "";
 
   const date =
-    value instanceof Date ? value : typeof value === "number" ? new Date(value) : new Date(String(value));
+    value instanceof Date
+      ? value
+      : typeof value === "number"
+        ? new Date(value)
+        : new Date(String(value));
 
   if (!isFinite(date.getTime())) return String(value);
 
@@ -86,8 +87,8 @@ export function useMyOrders() {
   }, []);
 
   const cancelOrder = useCallback((orderId: string) => {
-    setOrders(prev =>
-      prev.map(o =>
+    setOrders((prev) =>
+      prev.map((o) =>
         o.orderId === orderId
           ? {
               ...o,
@@ -99,8 +100,8 @@ export function useMyOrders() {
   }, []);
 
   const markReadyForPickup = useCallback((orderId: string) => {
-    setOrders(prev =>
-      prev.map(o =>
+    setOrders((prev) =>
+      prev.map((o) =>
         o.orderId === orderId
           ? {
               ...o,

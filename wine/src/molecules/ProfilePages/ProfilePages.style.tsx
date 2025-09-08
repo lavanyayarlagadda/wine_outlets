@@ -1,7 +1,8 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Alert, Box, Card, Divider, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
 import { PasswordFields as OriginalPasswordFields } from "../../organisms/Authentication/AuthDialog.style";
+import palette from "../../themes/palette";
 
 export const Container = styled(Box)(() => ({
   paddingLeft: "48px",
@@ -44,3 +45,86 @@ export const InfoText = styled(Typography)(({ theme }) => ({
     marginTop: "35px",
   },
 }));
+export const TextBox = styled(Box)({
+  flex: 1, // take remaining space beside the button
+  display: "flex",
+  justifyContent: "space-between",
+});
+
+export const VIPContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "16px",
+  marginTop: "20px",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  },
+}));
+
+export const GridItem = styled(Grid)(() => ({
+  flex: 1,
+  minWidth: "280px",
+}));
+
+export const VIPCard = styled(Card)<{ active?: boolean }>(({ active, theme }) => ({
+  backgroundColor: !active ? palette.grey.border : palette.primary.dark,
+  color: !active ? palette.black[800] : palette.white.main,
+  borderRadius: "12px",
+  minHeight: "280px", // increased height
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between", // top and bottom spaced
+  padding: "16px",
+  [theme.breakpoints.down("sm")]: {
+    minHeight: "240px",
+  },
+}));
+
+export const CardTopRow = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+});
+
+export const CardBottomRow = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-end",
+  marginTop: "auto", // ensures bottom positioning
+});
+
+export const BarcodeForm = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+  width: "100%",
+  [theme.breakpoints.down("sm")]: {
+    marginTop: "16px",
+  },
+}));
+
+export const NoteAlert = styled(Alert)(({ theme }) => ({
+  marginTop: "16px",
+  backgroundColor: "#fef3c7",
+  color: "#92400e",
+  fontSize: "0.95rem",
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.85rem",
+  },
+}));
+
+export const AlertIcon = styled("span")({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "20px",
+  height: "20px",
+  borderRadius: "50%",
+  backgroundColor: "#facc15",
+  color: "#92400e",
+  fontWeight: 700,
+  fontSize: "0.85rem",
+});

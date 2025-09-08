@@ -21,7 +21,7 @@ export const Sidebar = styled(Paper)(({ theme }) => ({
   height: "fit-content",
   padding: theme.spacing(2),
   borderRadius: shape.baseBorderRadius * 3,
-  background:  theme.palette.primary.light,
+  background: theme.palette.primary.light,
   boxShadow: "none",
 }));
 
@@ -34,7 +34,7 @@ export const SidebarButton = styled(Box)<{ active?: boolean }>(({ theme, active 
   padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
   marginBottom: theme.spacing(1),
   color: active ? theme.palette.black[800] : theme.palette.text.primary,
-  background: active  ? theme.palette.white.main : "transparent",
+  background: active ? theme.palette.white.main : "transparent",
   borderRadius: theme.shape.borderRadius,
   border: active ? `1px solid ${theme.palette.success.main}` : "1px solid transparent",
   cursor: "pointer",
@@ -71,11 +71,11 @@ export const OrderMeta = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
 }));
 
-export const OrderIdChip = styled(Chip)(({theme}) => ({
-  borderRadius: shape.baseBorderRadius*3,
+export const OrderIdChip = styled(Chip)(({ theme }) => ({
+  borderRadius: shape.baseBorderRadius * 3,
   height: theme.spacing(4),
   fontWeight: theme.typography.fontWeightMedium,
-  borderColor:  `1px solid ${theme.palette.warning.light}`,
+  borderColor: `1px solid ${theme.palette.warning.light}`,
   backgroundColor: theme.palette.white[400],
   color: theme.palette.warning.light,
 }));
@@ -151,5 +151,5 @@ export const SecondaryButton = styled(Button)(({ theme }) => ({
 export const DateText = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.body2.fontSize,
   color: theme.palette.black[800],
-  ml: 1
+  ml: 1,
 }));

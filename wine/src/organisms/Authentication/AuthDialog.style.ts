@@ -21,13 +21,24 @@ export const TabsWrapper = styled(Box, {
 
 export const StyledButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "active",
-})<{ active: boolean }>(({ active }) => ({
+})<{ active: boolean; profile?: boolean }>(({ active, profile }) => ({
   textTransform: "none",
   fontWeight: "bold",
   borderRadius: shape.borderRadiuspx,
   minHeight: "36px",
-  backgroundColor: active ? palette.primary.light : "transpar",
-  color: active ? palette.primary.dark : palette.grey.greyDark, // fallback for text.secondary
+  backgroundColor:
+    active && !profile
+      ? palette.primary.light
+      : active && profile
+        ? palette.white.main
+        : "transpar",
+  color:
+    active && !profile
+      ? palette.primary.dark
+      : active && profile
+        ? palette.black[800]
+        : palette.grey.greyDark, // fallback for text.secondary
+  border: active && profile ? shape.borderGreyline : "transparent",
   boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
   "&:hover": {
     backgroundColor: active ? palette.primary.light : "transparent",
