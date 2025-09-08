@@ -13,6 +13,7 @@ import ScrollToTop from "./ScrollTop";
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
 const ProductViewPage = lazy(() => import("./pages/ProductView/ProductViewPage"));
+const MyOrders = lazy(() => import("./pages/MyOrders/MyOrders"));
 const Layout = lazy(() => import("./layout/Layout"));
 const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
             <Route path="/productsList" element={<ProductsList />} />
             <Route path="/productView" element={<ProductViewPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/myOrders" element={<MyOrders/>} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>
