@@ -1,4 +1,3 @@
-// src/organisms/pages/MyOrders/MyOrders.style.tsx
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -179,14 +178,15 @@ export const SecondaryButton = styled(Button)(({ theme }) => ({
   padding: `${theme.spacing(0.8)} ${theme.spacing(2)}`,
 }));
 
-export const ReadyForPickUp = styled(PrimaryButton)(({ theme }) => ({
+export const RedOutlineBtn = styled(PrimaryButton)(({ theme }) => ({
   color: theme.palette.primary.main,
   border: `1px solid ${theme.palette.primary.main}`,
 }));
 
-export const CancelOrder = styled(SecondaryButton)(({ theme }) => ({
+export const GreyOutlineBtn = styled(SecondaryButton)(({ theme }) => ({
   color: theme.palette.grey?.[200] ?? theme.palette.text.primary,
   border: `1px solid ${theme.palette.grey?.[200] ?? "transparent"}`,
+  maxWidth: theme.spacing(18)
 }));
 
 export const PageTitle = styled(Typography)(({ theme }) => ({
@@ -203,3 +203,63 @@ export const PageSubtitle = styled(Typography)(({ theme }) => ({
 export const SectionDivider = styled(Divider)(({ theme }) => ({
   marginBottom: theme.spacing(4),
 }));
+
+/* add near the bottom of MyOrders.style.tsx */
+
+export const ItemRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(2),
+  alignItems: "center",
+  padding: `${theme.spacing(1.5)} 0`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
+}));
+
+export const ItemDetails = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(2),
+  alignItems: "center",
+  flex: 1,
+}));
+
+export const ItemRight = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-end",
+  gap: theme.spacing(1),
+  minWidth: 160,
+}));
+
+export const ItemPrice = styled(Typography)(({ theme }) => ({
+  fontWeight: theme.typography.fontWeightMedium,
+  fontSize: theme.typography.body1.fontSize,
+  color: theme.palette.warning.light,
+}));
+
+export const ItemSubPrice = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.body2.fontSize,
+  color: theme.palette.text.primary,
+}));
+
+export const AddReviewButton = styled(SecondaryButton)(({ theme }) => ({
+  textTransform: "none",
+  padding: `${theme.spacing(0.5)} ${theme.spacing(2)}`,
+  borderRadius: shape.baseBorderRadius,
+  fontSize: theme.typography.body2.fontSize,
+}));
+
+export const OrderFooter = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "flex-start",
+  gap: theme.spacing(2),
+  padding: `${theme.spacing(1.5)} 0 0 0`,
+}));
+export const ReorderButton = styled(PrimaryButton)(({ theme }) => ({
+  color: theme.palette.primary.dark,
+  border: `1px solid ${theme.palette.primary.dark}`,
+  background: "transparent",
+}));
+export const ViewInvoiceButton = styled(SecondaryButton)(({ theme }) => ({
+  background: "transparent",
+  border: `1px solid ${theme.palette.divider}`,
+}));
+

@@ -6,7 +6,7 @@ import {
   PageContainer,
   Sidebar,
   SidebarButton,
-  ReadyForPickUp,
+  RedOutlineBtn,
   Content,
   OrdersList,
   OrderCard,
@@ -25,7 +25,7 @@ import {
   ActionRow,
   LeftActions,
   RightAction,
-  CancelOrder,
+  GreyOutlineBtn,
   PageTitle,
   PageSubtitle,
   SectionDivider,
@@ -35,6 +35,7 @@ import {
 import { InfoIcon } from "../../molecules/ProductListCard/ProductListCard.style";
 import { InfoItem } from "../../organisms/ProductView/ProductDetails";
 import { starIcon, calendarRed, sizeIcon, originIcon } from "../../assets";
+import PastOrderCard from "../../molecules/PastOrderCard/PastOrderCard";
 
 import { useMyOrders, formatOrderDate, formatCurrency } from "./MyOrders.hook";
 
@@ -97,6 +98,20 @@ export default function MyOrders() {
                 // const isCancelled = order.status === "Cancelled";
                 // const isReady = order.status === "Ready for Pickup";
 
+                 if (selectedTab === "past") {
+                   return (
+                     <PastOrderCard
+                       key={order.orderId}
+                       order={order}
+                       onReorder={(id) => {
+                         console.log("reorder", id);
+                         // TODO: implement reorder flow
+                       }}
+                       onViewInvoice={(id) => viewInvoice(id)}
+                     />
+                   );
+                 }
+
                 return (
                   <OrderCard key={order.orderId}>
                     <OrderHeader>
@@ -151,26 +166,26 @@ export default function MyOrders() {
 
                       <ActionRow>
                         <LeftActions>
-                          <ReadyForPickUp
+                          <RedOutlineBtn
                             onClick={() => markReadyForPickup(order.orderId)}
                             //   disabled={isReady || isCancelled}
                             aria-label="mark ready"
                           >
                             Ready for Pickup
-                          </ReadyForPickUp>
+                          </RedOutlineBtn>
 
-                          <CancelOrder onClick={() => {
+                          <GreyOutlineBtn onClick={() => {
                             setPendingCancelOrderId(order.orderId);
                             setConfirmOpen(true);
                           }}>
                             Cancel Order
-                          </CancelOrder>
+                          </GreyOutlineBtn>
                         </LeftActions>
 
                         <RightAction>
-                          <CancelOrder onClick={() => viewInvoice(order.orderId)}>
+                          <GreyOutlineBtn onClick={() => viewInvoice(order.orderId)}>
                             View Invoice
-                          </CancelOrder>
+                          </GreyOutlineBtn>
                         </RightAction>
                       </ActionRow>
                     </OrderBody>
