@@ -245,3 +245,48 @@ export const ErrorText = styled(FormHelperText)(({ theme }) => ({
   marginLeft: 0,
   color: `${theme.palette.error.main}`,
 }));
+
+// Confirm popup specific layout (small additions)
+export const ConfirmTitle = styled(Title)(({ theme }) => ({
+  ...theme.typography.h6,
+  fontWeight: 700,
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(0.5),
+  textAlign: "center",
+}));
+
+export const ConfirmSubtitle = styled(Subtitle)(({ theme }) => ({
+  ...theme.typography.body2,
+  color: theme.palette.text.secondary,
+  textAlign: "center",
+  maxWidth: 420,
+  marginBottom: theme.spacing(1.5),
+}));
+
+export const ConfirmButtonsSection = styled(Box)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  gap: theme.spacing(2),
+  justifyContent: "center",
+  marginTop: theme.spacing(1),
+  // on small screens stack vertically
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column-reverse",
+    gap: theme.spacing(1),
+  },
+}));
+
+export const ConfirmPrimary = styled(VerifyButton)(({ theme }) => ({
+  minWidth: 220,
+  maxWidth: 320,
+  borderRadius: shape.baseBorderRadius * 1.25,
+  padding: theme.spacing(1.25, 4),
+}));
+
+export const ConfirmSecondary = styled(ExitButton)(({ theme }) => ({
+  minWidth: 220,
+  maxWidth: 320,
+  borderRadius: shape.baseBorderRadius * 1.25,
+  padding: theme.spacing(1.25, 4),
+}));
+

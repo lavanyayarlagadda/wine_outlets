@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import Divider from "@mui/material/Divider";
+import CancelOrderConfirm from "../../molecules/CancelOrderConfirm/CancelOrderConfirm";
 import Typography from "@mui/material/Typography";
-
+import { useState } from "react";
 import {
   PageContainer,
   Sidebar,
@@ -53,6 +53,8 @@ export default function MyOrders() {
     // activeOrderId,
     // clearActive,
   } = useMyOrders();
+   const [confirmOpen, setConfirmOpen] = useState(false);
+ const [pendingCancelOrderId, setPendingCancelOrderId] = useState<string | null>(null);
 
   const filtered = orders.filter((o) =>
     selectedTab === "current"
@@ -157,14 +159,17 @@ export default function MyOrders() {
                             Ready for Pickup
                           </ReadyForPickUp>
 
-                          <CancelOrder onClick={() => cancelOrder(order.orderId)}>
+                          <CancelOrder onClick={() => {
+                            setPendingCancelOrderId(order.orderId);
+                            setConfirmOpen(true);
+                          }}>
                             Cancel Order
                           </CancelOrder>
                         </LeftActions>
 
                         <RightAction>
                           <CancelOrder onClick={() => viewInvoice(order.orderId)}>
-                            Ready for Pickup
+                            View Invoice
                           </CancelOrder>
                         </RightAction>
                       </ActionRow>
@@ -176,6 +181,22 @@ export default function MyOrders() {
           </OrdersList>
         )}
       </Content>
+
+      <CancelOrderConfirm
+  open={confirmOpen}
+  orderId={pendingCancelOrderId}
+  onClose={() => {
+    setConfirmOpen(false);
+    setPendingCancelOrderId(null);
+  }}
+  onConfirm={(orderId) => {
+    // call your existing cancelOrder from hook
+    if (orderId) cancelOrder(orderId);
+    setConfirmOpen(false);
+    setPendingCancelOrderId(null);
+  }}
+/>
+
     </PageContainer>
   );
 }
