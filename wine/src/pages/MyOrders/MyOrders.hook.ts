@@ -1,7 +1,7 @@
 // myOrder.hook.tsx
 import { useCallback, useEffect, useState } from "react";
+import { deal_img2 } from "../../assets";
 
-/** Types matching your mockData */
 export type OrderItem = {
   productId: string;
   name: string;
@@ -17,7 +17,7 @@ export type OrderItem = {
 export type Order = {
   orderId: string;
   date: string;
-  status: string; // e.g. "Ready for Pickup", "Processing", "Cancelled"
+  status: string; 
   totalAmount: number;
   items: OrderItem[];
 };
@@ -40,7 +40,7 @@ const MOCK_DATA: { orders: Order[] } = {
           year: 2021,
           quantity: 1,
           price: 18.14,
-          imageUrl: "https://example.com/images/wine-1.jpg",
+          imageUrl: deal_img2,
         },
       ],
     },

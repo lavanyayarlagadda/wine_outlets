@@ -48,7 +48,7 @@ const Pricing: React.FC<PricingProps> = ({ vipPrice, price }) => {
   );
 };
 
-const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
+export const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
   <RatingBox>
     {icon}
     <RatingTypography as="span">

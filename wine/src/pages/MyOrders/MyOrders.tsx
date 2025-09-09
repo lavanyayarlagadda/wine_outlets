@@ -1,17 +1,12 @@
-// Myorders.tsx
-import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import CancelIcon from "@mui/icons-material/Cancel";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 import {
   PageContainer,
   Sidebar,
   SidebarButton,
+  ReadyForPickUp,
   Content,
   OrdersList,
   OrderCard,
@@ -24,17 +19,18 @@ import {
   ProductImage,
   ProductInfo,
   ProductTitle,
-  SmallMeta,
   ActionRow,
   LeftActions,
   RightAction,
-  PrimaryButton,
-  SecondaryButton,
+  CancelOrder,
 } from "./MyOrders.style";
+
+import { InfoIcon } from "../../molecules/ProductListCard/ProductListCard.style";
+import { InfoItem } from "../../organisms/ProductView/ProductDetails";
+import { starIcon, calendarRed, sizeIcon, originIcon } from "../../assets";
 
 import { useMyOrders, formatOrderDate } from "./MyOrders.hook";
 
-/** Helper to format currency */
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
 
@@ -61,10 +57,6 @@ export default function MyOrders() {
   return (
     <PageContainer>
       <Sidebar elevation={0}>
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>
-          Orders
-        </Typography>
-
         <SidebarButton active={selectedTab === "current"} onClick={() => setSelectedTab("current")}>
           Current Orders
         </SidebarButton>
@@ -82,7 +74,7 @@ export default function MyOrders() {
           View active orders with live tracking and estimated delivery
         </Typography>
 
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ mb: 4 }} />
 
         {loading ? (
           <CircularProgress />
@@ -93,8 +85,8 @@ export default function MyOrders() {
             ) : (
               filtered.map((order) => {
                 const item = order.items[0];
-                const isCancelled = order.status === "Cancelled";
-                const isReady = order.status === "Ready for Pickup";
+                // const isCancelled = order.status === "Cancelled";
+                // const isReady = order.status === "Ready for Pickup";
 
                 return (
                   <OrderCard key={order.orderId}>
@@ -108,69 +100,103 @@ export default function MyOrders() {
                     </OrderHeader>
 
                     <OrderBody>
-                      <ProductImage
-                        src={item.imageUrl}
-                        alt={item.name}
-                        variant="square"
-                        sx={{ objectFit: "cover" }}
-                      />
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "16px",
+                          padding: "16px 0",
+                          borderBottom: "1px solid #E0E0E0",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ProductImage sx={{}}>
+                          <img
+                            src={item.imageUrl}
+                            alt={item.name}
+                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          />
+                        </ProductImage>
 
-                      <ProductInfo>
-                        <ProductTitle variant="subtitle1">{item.name}</ProductTitle>
+                        <ProductInfo
+                          sx={{ display: "flex", justifyContent: "space-between", gap: "24px" }}
+                        >
+                          <div
+                            style={{
+                              width: "50%",
+                              height: "120px",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <ProductTitle>{item.name}</ProductTitle>
 
-                        <SmallMeta>
-                          <strong>Origin:</strong> {item.origin ?? "—"} {" • "}
-                          <strong>Brand:</strong> {item.brand ?? "—"}
-                        </SmallMeta>
+                            <InfoItem
+                              icon={<InfoIcon src={originIcon} alt="origin" />}
+                              label="Origin:"
+                              value={item.origin ?? "—"}
+                            />
 
-                        <SmallMeta>
-                          <strong>Size:</strong> {item.size ?? "—"} {" • "}
-                          <strong>Year:</strong> {item.year ?? "—"} {" • "}
-                          <strong>Qty:</strong> {item.quantity}
-                        </SmallMeta>
+                            <InfoItem
+                              icon={<InfoIcon src={sizeIcon} alt="origin" />}
+                              label="Size:"
+                              value={item.size ?? "—"}
+                            />
+                          </div>
 
-                        <SmallMeta>
+                          <div
+                            style={{
+                              width: "50%",
+                              height: "120px",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                              alignItems: "flex-end",
+                            }}
+                          >
+                            <InfoItem
+                              icon={<InfoIcon src={starIcon} alt="origin" />}
+                              label="Qty:"
+                              value={item.quantity ?? "—"}
+                            />
+                            <InfoItem
+                              icon={<InfoIcon src={starIcon} alt="origin" />}
+                              label="Brand:"
+                              value={item.brand ?? "—"}
+                            />
+                            <InfoItem
+                              icon={<InfoIcon src={calendarRed} alt="origin" />}
+                              label="Brand:"
+                              value={item.brand ?? "—"}
+                            />
+                          </div>
+                        </ProductInfo>
+                      </div>
+                      {/* <SmallMeta>
                           <strong>Item Price:</strong> {formatCurrency(item.price)}
-                        </SmallMeta>
+                        </SmallMeta> */}
 
-                        <ActionRow>
-                          <LeftActions>
-                            <PrimaryButton
-                              variant="contained"
-                              startIcon={<LocalShippingIcon />}
-                              onClick={() => markReadyForPickup(order.orderId)}
-                              disabled={isReady || isCancelled}
-                              aria-label="mark ready"
-                            >
-                              {isReady ? "Ready" : "Ready for Pickup"}
-                            </PrimaryButton>
+                      <ActionRow>
+                        <LeftActions>
+                          <ReadyForPickUp
+                            onClick={() => markReadyForPickup(order.orderId)}
+                            //   disabled={isReady || isCancelled}
+                            aria-label="mark ready"
+                          >
+                            Ready for Pickup
+                          </ReadyForPickUp>
 
-                            <SecondaryButton
-                              variant="outlined"
-                              startIcon={<CancelIcon />}
-                              onClick={() => cancelOrder(order.orderId)}
-                              disabled={isCancelled}
-                              aria-label="cancel order"
-                            >
-                              {isCancelled ? "Cancelled" : "Cancel Order"}
-                            </SecondaryButton>
-                          </LeftActions>
+                          <CancelOrder onClick={() => cancelOrder(order.orderId)}>
+                            Cancel Order
+                          </CancelOrder>
+                        </LeftActions>
 
-                          <RightAction>
-                            <IconButton
-                              size="small"
-                              aria-label="view invoice"
-                              onClick={() => viewInvoice(order.orderId)}
-                            >
-                              <OpenInNewIcon />
-                            </IconButton>
-
-                            <Typography variant="caption" color="text.secondary">
-                              {order.status}
-                            </Typography>
-                          </RightAction>
-                        </ActionRow>
-                      </ProductInfo>
+                        <RightAction>
+                          <CancelOrder onClick={() => viewInvoice(order.orderId)}>
+                            Ready for Pickup
+                          </CancelOrder>
+                        </RightAction>
+                      </ActionRow>
                     </OrderBody>
                   </OrderCard>
                 );
