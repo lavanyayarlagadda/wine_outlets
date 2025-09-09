@@ -21,7 +21,6 @@ import {
   ItemColRight,
   ItemCol,
   OrderBodyRow,
-  ProductInfo,
   ProductTitle,
   ActionRow,
   LeftActions,
