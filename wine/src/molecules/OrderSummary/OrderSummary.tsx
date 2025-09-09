@@ -1,46 +1,3 @@
-// import React from "react";
-// import {
-//   MainContainer,
-//   ProductHeader,
-//   HeaderTitle,
-//   ProductContent,
-//   ContentRow,
-//   LabelText,
-//   ValueText,
-//   DividerLine,
-// } from "./OrderSummary.style";
-
-// import 
-
-// const OrderSummary = () => {
-//   return (
-//     <MainContainer>
-//       <ProductHeader>
-//         <HeaderTitle>Order Summary</HeaderTitle>
-//         <HeaderTitle>(1 Item)</HeaderTitle>
-//       </ProductHeader>
-//       <DividerLine />
-//       <ProductContent>
-//         <ContentRow>
-//           <LabelText>Subtotal</LabelText>
-//           <ValueText>$53.00</ValueText>
-//         </ContentRow>
-
-//         <ContentRow>
-//           <LabelText>Estimated Tax</LabelText>
-//           <ValueText>$4.45</ValueText>
-//         </ContentRow>
-//       </ProductContent>
-//       <DividerLine />
-//       <ContentRow>
-//         <LabelText>Total</LabelText>
-//         <ValueText>$57.45</ValueText>
-//       </ContentRow>
-//     </MainContainer>
-//   );
-// };
-
-// export default OrderSummary;
 import React from "react";
 import {
   MainContainer,
@@ -52,6 +9,7 @@ import {
   ValueText,
   DividerLine,
   SavingContent,
+  StyledChip,
 } from "./OrderSummary.style";
 
 interface SummaryItem {
@@ -61,10 +19,10 @@ interface SummaryItem {
 
 interface OrderSummaryProps {
   title: string;
-  itemCount: number;
+  itemCount?: number;
   items: SummaryItem[];
   totalItem?: SummaryItem;
-  vipCodeMessage?:string
+  vipCodeMessage?: string;
 }
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -72,37 +30,47 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   itemCount,
   items,
   totalItem,
-  vipCodeMessage
+  vipCodeMessage,
 }) => {
   return (
     <MainContainer>
+      {/* ---- Header ---- */}
       <ProductHeader>
         <HeaderTitle>{title}</HeaderTitle>
-        <HeaderTitle>({itemCount} Item{itemCount > 1 ? "s" : ""})</HeaderTitle>
+        {itemCount && (
+          <HeaderTitle>
+            ({itemCount} Item{itemCount > 1 ? "s" : ""})
+          </HeaderTitle>
+        )}
       </ProductHeader>
 
       <DividerLine />
 
+      {/* ---- Items ---- */}
       <ProductContent>
         {items.map((item, index) => (
           <ContentRow key={index}>
             <LabelText>{item.label}</LabelText>
-            <ValueText>{item.value}</ValueText>
+            {item.label === "Order Number" ? (
+              <StyledChip label={item.value} variant="filled" />
+            ) : (
+              <ValueText>{item.value}</ValueText>
+            )}
           </ContentRow>
         ))}
       </ProductContent>
 
+      {/* ---- Total + VIP Message ---- */}
       {totalItem && (
         <>
           <DividerLine />
           <ProductContent>
-          <ContentRow>
-            <LabelText>{totalItem.label}</LabelText>
-            <ValueText>{totalItem.value}</ValueText>
-          </ContentRow>
-       
+            <ContentRow>
+              <LabelText>{totalItem.label}</LabelText>
+              <ValueText>{totalItem.value}</ValueText>
+            </ContentRow>
           </ProductContent>
-             <SavingContent>{vipCodeMessage}</SavingContent>
+          {vipCodeMessage && <SavingContent>{vipCodeMessage}</SavingContent>}
         </>
       )}
     </MainContainer>

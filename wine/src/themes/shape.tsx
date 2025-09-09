@@ -20,6 +20,7 @@ const shape = {
   borderGrey2px: `2px solid ${palette.grey.border}`,
   borderGreyLight: `1px solid ${palette.grey.light}`,
   borderRed2px: `2px solid ${palette.primary.dark}`,
+  borderWarning: `2px solid ${palette.warning.light}`,
   bordergreyshade: "1px solid #f2f2f2",
 };
 

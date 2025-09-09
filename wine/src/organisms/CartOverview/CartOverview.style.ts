@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import shape from "../../themes/shape";
 import AddIcon from "@mui/icons-material/Add";
 import { useFontSize } from "../../themes/fontSize";
@@ -8,8 +8,8 @@ export const MainContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(4),
 }));
 export const CartOverViewHeader = styled(Typography)(() => ({
-fontSize:useFontSize(20),
-fontWeight:600
+  fontSize: useFontSize(20),
+  fontWeight: 600,
 }));
 export const LayoutContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -31,7 +31,7 @@ export const ProductListWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("sm")]: { flex: "0 0 65%" },
 }));
 
-export const LeftContent= styled(Box)(({ theme }) => ({
+export const LeftContent = styled(Box)(({ theme }) => ({
   border: shape.borderSuccess,
   borderRadius: theme.shape.borderRadius,
 }));
@@ -42,9 +42,9 @@ export const ContentWrapper = styled(Box)(({ theme }) => ({
   paddingRight: theme.spacing(2),
   overflowX: "hidden",
   boxSizing: "border-box",
-    display: "flex",
-   flexDirection: "column",
-   gap: theme.spacing(3), 
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(3),
   // border: shape.borderSuccess,
   // borderRadius: theme.shape.borderRadius,
   [theme.breakpoints.up("sm")]: { flex: "1 0 30%", marginBottom: 0 },
@@ -90,3 +90,37 @@ export const SmallAddIcon = styled(AddIcon)(() => ({
   fontSize: useFontSize(12),
   color: "inherit",
 }));
+
+export const Wrapper = styled(Box)(({ theme }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+}));
+
+export const HeaderBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  marginBottom: theme.spacing(6),
+}));
+
+export const Illustration = styled("img")(({ theme }) => ({
+  width: 60,
+  height: 60,
+  marginBottom: theme.spacing(2),
+  [theme.breakpoints.down("sm")]: {
+    width: 60,
+    height: 60,
+  },
+}));
+
+export const Description = styled(Typography)(() => ({
+  maxWidth: 600,
+}));
+
+// Grid styles
+export const TwoColumnGrid = styled(Grid)(() => ({
+  width: "100%",
+}));
+
+export const ColumnGrid = styled(Grid)(() => ({}));

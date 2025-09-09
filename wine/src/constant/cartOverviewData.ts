@@ -1,6 +1,5 @@
 import { deal_img2, deal_img3 } from "../assets";
 
-
 export interface UnitPrice {
   original: string;
   discounted: string;

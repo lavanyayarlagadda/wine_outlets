@@ -3,7 +3,6 @@ import shape from "../../themes/shape";
 import { theme } from "../../themes/theme";
 import { useFontSize } from "../../themes/fontSize";
 
-
 // Popover container
 export const PopoverContent = styled(Box)(() => ({
   display: "flex",
@@ -60,19 +59,18 @@ export const TimeSlotButton = styled(Button, {
   backgroundColor: selected
     ? theme.palette.primary.light
     : disabledSlot
-    ? theme.palette.grey[300]
-    : "transparent",
+      ? theme.palette.grey[300]
+      : "transparent",
   "&:hover": {
     border: selected ? shape.borderRed : shape.borderGrey2px,
     color: selected ? theme.palette.error.dark : "black",
     backgroundColor: selected
       ? theme.palette.primary.light
       : disabledSlot
-      ? theme.palette.grey[300]
-      : "transparent ",
+        ? theme.palette.grey[300]
+        : "transparent ",
   },
 }));
-
 
 export const Footer = styled(Box)(({ theme }) => ({
   padding: "8px 16px",
@@ -89,7 +87,6 @@ export const Footer = styled(Box)(({ theme }) => ({
   },
 }));
 
-
 export const SelectedSlotsBtn = styled(Button)(() => ({
   width: "100%",
   justifyContent: "center",
@@ -98,7 +95,7 @@ export const SelectedSlotsBtn = styled(Button)(() => ({
   display: "flex",
   borderRadius: shape.baseBorderRadius,
   padding: "8px 16px",
-  fontSize:useFontSize(16)
+  fontSize: useFontSize(16),
 }));
 
 export const Container = styled(Box)(({ theme }) => ({
@@ -119,5 +116,5 @@ export const FooterConfirmButtons = styled(Button)(() => ({
   display: "flex",
   borderRadius: shape.baseBorderRadius,
   padding: "8px 16px",
-  backgroundColor:theme.palette.primary.dark
+  backgroundColor: theme.palette.primary.dark,
 }));

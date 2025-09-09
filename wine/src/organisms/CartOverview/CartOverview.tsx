@@ -11,48 +11,56 @@ import {
   BorderedIcon,
   SmallAddIcon,
   LeftContent,
-  CartOverViewHeader
+  CartOverViewHeader,
 } from "../CartOverview/CartOverview.style";
+import { Typography } from "@mui/material";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
 import cartOverviewData from "../../constant/cartOverviewData";
 import OrderSummary from "../../molecules/OrderSummary/OrderSummary";
 import PickupInformation from "../../molecules/PickupInfo/PickupInfo";
 import { DividerLine } from "../../molecules/OrderSummary/OrderSummary.style";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
+import { useDispatch } from "react-redux";
+import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
+import { useCartOverView } from "./CartOverview.hook";
 
 const CartOverview = () => {
+  const dispatch = useDispatch();
+  const { error } = useCartOverView();
+  if (error !== "") return <Typography color="error">{error}</Typography>;
+
   return (
     <MainContainer>
       <CartOverViewHeader>Cart Overview</CartOverViewHeader>
       <LayoutContainer>
         <ProductListWrapper>
           <LeftContent>
-          <ProductHeader>
-            <HeaderTitle>Product List</HeaderTitle>
+            <ProductHeader>
+              <HeaderTitle>Product List</HeaderTitle>
 
-            <HeaderAction>
-              <BorderedIcon>
-                <SmallAddIcon />
-              </BorderedIcon>
-              Continue Shopping
-            </HeaderAction>
-          </ProductHeader>
-          {cartOverviewData.items.map((item) => (
-            <>
-              <DividerLine />
-              <CartProduct
-                key={item.id}
-                imageUrl={item.imageUrl}
-                name={item.name}
-                origin={item.origin}
-                brand={item.brand}
-                size={item.size}
-                year={item.year}
-                unitPrice={item.unitPrice}
-                quantity={item.quantity}
-              />
-            </>
-          ))}
+              <HeaderAction>
+                <BorderedIcon>
+                  <SmallAddIcon />
+                </BorderedIcon>
+                Continue Shopping
+              </HeaderAction>
+            </ProductHeader>
+            {cartOverviewData.items.map((item) => (
+              <>
+                <DividerLine />
+                <CartProduct
+                  key={item.id}
+                  imageUrl={item.imageUrl}
+                  name={item.name}
+                  origin={item.origin}
+                  brand={item.brand}
+                  size={item.size}
+                  year={item.year}
+                  unitPrice={item.unitPrice}
+                  quantity={item.quantity}
+                />
+              </>
+            ))}
           </LeftContent>
         </ProductListWrapper>
         <ContentWrapper>
@@ -79,7 +87,7 @@ const CartOverview = () => {
             />
           )}
 
-          <AddToCart label="Place Order" />
+          <AddToCart label="Place Order" onClick={() => dispatch(setPlaceOrder(true))} />
         </ContentWrapper>
       </LayoutContainer>
     </MainContainer>

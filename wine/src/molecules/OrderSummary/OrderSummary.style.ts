@@ -1,13 +1,13 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography} from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
 import { theme } from "../../themes/theme";
-
+import palette from "../../themes/palette";
 
 export const MainContainer = styled(Box)(({ theme }) => ({
-//   padding: theme.spacing(4),
-   border: shape.borderSuccess,
+  //   padding: theme.spacing(4),
+  border: shape.borderSuccess,
   borderRadius: theme.shape.borderRadius,
 }));
 export const ProductHeader = styled(Box)(() => ({
@@ -52,21 +52,23 @@ export const ValueText = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   fontSize: useFontSize(16),
 }));
-export const DividerLine = styled('hr')(({ theme }) => ({
+export const DividerLine = styled("hr")(({ theme }) => ({
   border: "none",
   borderTop: `1px solid ${theme.palette.divider}`,
   margin: theme.spacing(1, 0),
 }));
 
 export const SavingContent = styled(Typography)(({ theme }) => ({
-display:"flex",
-textAlign:"center",
-color:theme.palette.warning.light,
-justifyContent:"center",
-fontSize:useFontSize(16),
-marginBottom:"20px"
+  display: "flex",
+  textAlign: "center",
+  color: theme.palette.warning.light,
+  justifyContent: "center",
+  fontSize: useFontSize(16),
+  marginBottom: "20px",
 }));
-
-
-
-
+export const StyledChip = styled(Chip)(() => ({
+  fontWeight: 500,
+  color: palette.warning.light,
+  border: shape.borderWarning,
+  backgroundColor: palette.white[400],
+}));

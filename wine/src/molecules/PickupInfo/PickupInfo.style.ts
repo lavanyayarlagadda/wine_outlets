@@ -3,18 +3,17 @@ import { Typography, Box, Button } from "@mui/material";
 import { useFontSize } from "../../themes/fontSize";
 import palette from "../../themes/palette";
 import shape from "../../themes/shape";
-import RotateRightRoundedIcon from '@mui/icons-material/RotateRightRounded';
+import RotateRightRoundedIcon from "@mui/icons-material/RotateRightRounded";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 export const StoreName = styled(Typography)(() => ({
-//   color: palette.text.primary,
+  //   color: palette.text.primary,
   fontWeight: 600,
   fontSize: useFontSize(16),
-  
 }));
 export const StoreAddress = styled(Typography)(() => ({
-  color:palette.text.secondary,
-    fontWeight: 600,
+  color: palette.text.secondary,
+  fontWeight: 600,
   fontSize: useFontSize(16),
 }));
 
@@ -29,8 +28,8 @@ export const PhoneNumber = styled(Typography)(() => ({
   fontWeight: 600,
   fontSize: useFontSize(16),
   color: palette.text.secondary,
-  display:"flex",
-  gap:"5px"
+  display: "flex",
+  gap: "5px",
 }));
 
 export const PickupTime = styled(Typography)(() => ({
@@ -54,11 +53,11 @@ export const StoreButton = styled(Button)({
   gap: "10px",
   textTransform: "none",
   border: shape.borderRed,
-  backgroundColor:palette.primary.light,
-  color: palette.primary.dark, 
-  "&:hover":{
-    color:palette.primary.dark,
-    backgroundColor:palette.primary.light
+  backgroundColor: palette.primary.light,
+  color: palette.primary.dark,
+  "&:hover": {
+    color: palette.primary.dark,
+    backgroundColor: palette.primary.light,
   },
 });
 
@@ -73,16 +72,40 @@ export const ButtonText = styled(Typography)(() => ({
   fontSize: useFontSize(12),
 }));
 export const SmallRotateIcon = styled(RotateRightRoundedIcon)(() => ({
-  fontSize: useFontSize(16),  
+  fontSize: useFontSize(16),
 }));
 
-
 export const SmallAccessTimeIcon = styled(AccessTimeRoundedIcon)(() => ({
-  fontSize: '18px',  
-  verticalAlign: 'middle',  
+  fontSize: "18px",
+  verticalAlign: "middle",
 }));
 
 export const SmallLocalPhoneIcon = styled(LocalPhoneRoundedIcon)(() => ({
-  fontSize: '18px',
-  verticalAlign: 'middle',
+  fontSize: "18px",
+  verticalAlign: "middle",
+}));
+
+export const Wrapper = styled(Box)(() => ({
+  marginBottom: 2,
+  padding: "4px",
+}));
+
+export const Row = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  width: "100%",
+  paddingLeft: "3px",
+  paddingRight: "3px",
+}));
+
+export const SideBox = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+}));
+
+export const IconImage = styled("img")(() => ({
+  width: 24,
+  height: 24,
+  marginRight: 8,
 }));

@@ -106,7 +106,6 @@ export const ProductInfoRow = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: theme.spacing(0.5),
-    
 
     "& > *": {
       marginLeft: 0,
@@ -114,7 +113,6 @@ export const ProductInfoRow = styled(Box)(({ theme }) => ({
     },
   },
 }));
-
 
 export const RatingBox = styled(Box)(() => ({
   display: "flex",
@@ -149,7 +147,7 @@ export const IconRow = styled(Box)(({ theme }) => ({
 }));
 
 export const BackspaceIcon = styled(IconButton, {
-  shouldForwardProp: (prop) => prop !== "selected", 
+  shouldForwardProp: (prop) => prop !== "selected",
 })<{ selected?: boolean }>(({ theme, selected }) => ({
   border: selected ? shape.borderRed : shape.borderSuccess,
   borderRadius: shape.borderRadiuspx,

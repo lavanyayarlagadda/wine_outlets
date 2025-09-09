@@ -194,7 +194,11 @@ const Navigation = () => {
             />
 
             <RightNavSection>
-              <CustomizeIconButton onClick={(e) => handleMenuOpen(e, "cart")}>
+              <CustomizeIconButton
+                onClick={(e) => {
+                  (handleMenuOpen(e, "cart"), navigate("/cartOverview"));
+                }}
+              >
                 <img src={cart} alt="cart" />
               </CustomizeIconButton>
               {isSubmit ? (

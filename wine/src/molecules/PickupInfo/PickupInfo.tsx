@@ -6,14 +6,23 @@ import {
   ProductContent,
   ProductHeader,
 } from "../OrderSummary/OrderSummary.style";
-// import RotateRightRoundedIcon from '@mui/icons-material/RotateRightRounded';
-import {SmallAccessTimeIcon, SmallLocalPhoneIcon,PhoneNumber, SmallRotateIcon, StoreName, StoreAddress, PhoneTimeRow,  ButtonIcon, ButtonText, StoreButton } from "./PickupInfo.style";
+import {
+  SmallAccessTimeIcon,
+  SmallLocalPhoneIcon,
+  PhoneNumber,
+  StoreName,
+  StoreAddress,
+  PhoneTimeRow,
+  Wrapper,
+  Row,
+  SideBox,
+  IconImage,
+} from "./PickupInfo.style";
 import PickupDateTimePicker from "../PickupDateTimePicker/PickupDateTimePicker";
+import { Box, Typography } from "@mui/material";
+import { calendarRed, clock, call, mapIconSelected } from "../../assets";
+import { MapButton, MapIconImage } from "../StoreSelectorPopUp/StoreSelectorPopup.style";
 
-//  storeName: "Oceanview Spirits & Liquors",
-//     address: "1234 Coastal Blvd, Ocean City, NJ 08226",
-//     hours: "9:00 a.m - 10:00 p.m",
-//     phone: "827-377-72512",
 interface PickupInformationProps {
   title: string;
   storeName: string;
@@ -21,7 +30,11 @@ interface PickupInformationProps {
   hours?: string;
   vipCodeMessage?: string;
   phone: string;
-  footerTitle:string
+  footerTitle: string;
+  order?: boolean;
+  pickupday?: string;
+  pickupDate?: string;
+  pickupTime?: string;
 }
 const PickupInformation: React.FC<PickupInformationProps> = ({
   title,
@@ -29,38 +42,86 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
   address,
   hours,
   phone,
-  footerTitle
+  footerTitle,
+  order = false,
+  pickupday,
+  pickupDate,
+  pickupTime,
 }) => {
   return (
     <MainContainer>
       <ProductHeader>
         <HeaderTitle>{title}</HeaderTitle>
-        {/* <HeaderTitle>
-          ({itemCount} Item{itemCount > 1 ? "s" : ""})
-        </HeaderTitle> */}
-         <StoreButton >
-      <ButtonIcon>
-        <SmallRotateIcon />
-      </ButtonIcon>
-      <ButtonText>Change Store</ButtonText>
-    </StoreButton>
       </ProductHeader>
-      <DividerLine/>
+      <DividerLine />
       <ProductContent>
-        <StoreName>{storeName}</StoreName>
+        {order && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              mb: 1,
+            }}
+          >
+            <StoreName>{storeName}</StoreName>
+            <MapButton
+              size="small"
+              variant="outlined"
+              endIcon={<MapIconImage src={mapIconSelected} alt="map" />}
+              selected={true}
+              onClick={(e) => e.stopPropagation()}
+            >
+              Open Map
+            </MapButton>
+          </Box>
+        )}
         <StoreAddress>{address}</StoreAddress>
 
         <PhoneTimeRow>
-          <PhoneNumber><SmallAccessTimeIcon/>{hours}</PhoneNumber>
-          <PhoneNumber><SmallLocalPhoneIcon/>{phone}</PhoneNumber>
+          <PhoneNumber>
+            {order ? <IconImage src={clock} alt="left" /> : <SmallAccessTimeIcon />}
+            {hours}
+          </PhoneNumber>
+          <PhoneNumber>
+            {order ? <IconImage src={call} alt="left" /> : <SmallLocalPhoneIcon />}
+            {phone}
+          </PhoneNumber>
         </PhoneTimeRow>
       </ProductContent>
       <DividerLine />
       <ProductContent>
         <HeaderTitle>{footerTitle}</HeaderTitle>
       </ProductContent>
+      {order ? (
+        <Wrapper>
+          <Row>
+            {/* Left side */}
+            <SideBox>
+              <IconImage src={calendarRed} alt="left" />
+              <Box>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  {pickupday}
+                </Typography>
+                <Typography variant="body2">{pickupDate}</Typography>
+              </Box>
+            </SideBox>
 
-      <PickupDateTimePicker/>
+            {/* Right side */}
+            <SideBox>
+              <IconImage src={clock} alt="right" />
+              <Box>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  {pickupTime}
+                </Typography>
+                <Typography variant="body2">Please arrive during this window</Typography>
+              </Box>
+            </SideBox>
+          </Row>
+        </Wrapper>
+      ) : (
+        <PickupDateTimePicker />
+      )}
     </MainContainer>
   );
 };

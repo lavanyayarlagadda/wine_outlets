@@ -49,3 +49,8 @@ export { default as myorders } from "./icons/myorders.png";
 export { default as wishlist } from "./icons/wishlist.png";
 export { default as mytastings } from "./icons/mytastings.png";
 export { default as mapIconSelected } from "./icons/mapSelected.png";
+export { default as oderConfirmed } from "./icons/orderConfirmed.png";
+export { default as time } from "./icons/time.svg";
+export { default as calendarRed } from "./icons/calendarRed.svg";
+export { default as call } from "./icons/call.svg";
+export { default as clock } from "./icons/clock.svg";

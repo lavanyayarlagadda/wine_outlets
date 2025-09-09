@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { CustomWishlistButton, SmallFavoriteIcon, SmallFavoriteBorderIcon } from "./CustomWishlist.style";
+import {
+  CustomWishlistButton,
+  SmallFavoriteIcon,
+  SmallFavoriteBorderIcon,
+} from "./CustomWishlist.style";
 
 interface CustomWishlistProps {
   defaultSelected?: boolean; // initial state

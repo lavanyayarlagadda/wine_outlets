@@ -59,7 +59,6 @@ const PickupDateTimeSelector = () => {
         }}
       >
         <PopoverContent>
-         
           <PickerContainer>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <StaticDatePicker
@@ -102,7 +101,7 @@ const PickupDateTimeSelector = () => {
             <Box display="flex" gap={1}>
               <FooterButtons onClick={handleClosePopover}>Cancel</FooterButtons>
               <FooterConfirmButtons
-              disabled={!selectedDate || !selectedTime}
+                disabled={!selectedDate || !selectedTime}
                 onClick={() => {
                   handleClosePopover();
                   console.log("Confirmed:", selectedDate, selectedTime);
@@ -112,7 +111,6 @@ const PickupDateTimeSelector = () => {
               </FooterConfirmButtons>
             </Box>
           </Footer>
-
         </PopoverContent>
       </Popover>
     </Container>

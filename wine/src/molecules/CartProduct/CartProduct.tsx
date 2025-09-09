@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import type { UnitPrice } from "../../constant/cartOverviewData";
 import {
   CardContainer,
@@ -15,7 +15,7 @@ import {
   VipPriceText,
   RegularPriceText,
   BackSpaceIcon,
-  CounterWrapper
+  CounterWrapper,
 } from "./CartProduct.style";
 import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
@@ -52,10 +52,9 @@ interface PricingProps {
 const Pricing: React.FC<PricingProps> = ({ vipPrice, price }) => {
   return (
     <RatingBox>
-     
       {/* <StyledDivide orientation="vertical" flexItem /> */}
       <RegularPriceText>{vipPrice}</RegularPriceText>
-       <VipPriceText>{price}</VipPriceText>
+      <VipPriceText>{price}</VipPriceText>
     </RatingBox>
   );
 };
@@ -67,9 +66,9 @@ const CartProduct: React.FC<CartProductProps> = ({
   size,
   year,
   quantity,
-    unitPrice,
+  unitPrice,
 }) => {
-     const [customQuantity, setCustomQuantity] = useState(quantity);
+  const [customQuantity, setCustomQuantity] = useState(quantity);
 
   const handleQuantityChange = (newQuantity: number) => {
     setCustomQuantity(newQuantity);
@@ -97,8 +96,7 @@ const CartProduct: React.FC<CartProductProps> = ({
         <InfoItem icon={<InfoIcon src={sizeIcon} alt="size" />} label="size:" value={size} />
         <InfoItem icon={<InfoIcon src={calendarIcon} alt="year" />} label="Year:" value={year} />
         <CounterWrapper>
-
-        <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
+          <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
         </CounterWrapper>
         <PricingBox>
           <Pricing vipPrice={unitPrice.original} price={unitPrice.discounted} />
