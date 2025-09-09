@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Dialog, Box } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const StyledDialog = styled(Dialog)(() => ({
   "& .MuiPaper-root": {
@@ -24,7 +25,7 @@ export const Content = styled(Box)(({ theme }) => ({
 export const Footer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: `1px solid ${theme.palette.divider}`,
-  backgroundColor: theme.palette.grey[200],
+  backgroundColor: palette.grey.border,
   position: "sticky",
   bottom: 0,
 }));

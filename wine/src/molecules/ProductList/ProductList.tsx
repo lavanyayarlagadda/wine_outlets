@@ -19,6 +19,8 @@ import {
   ProductsWrapper,
   ProductsGrid,
 } from "./ProductList.style";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const ProductList = () => {
   const {
@@ -41,6 +43,9 @@ const ProductList = () => {
   const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
 
   const filters = [{ label: "wines", count: 28 }];
+
+  const { cartList } = useSelector((store: RootState) => store.productListSlice);
+  console.log(cartList, "CARTLIST");
 
   return (
     <>
