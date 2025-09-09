@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { CustomWishlistButton } from "./CustomWishlist.style";
+import { CustomWishlistButton, SmallFavoriteIcon, SmallFavoriteBorderIcon } from "./CustomWishlist.style";
 
 interface CustomWishlistProps {
   defaultSelected?: boolean; // initial state
@@ -19,7 +17,7 @@ const CustomWishlist: React.FC<CustomWishlistProps> = ({ defaultSelected = false
 
   return (
     <CustomWishlistButton onClick={handleToggle} selected={selected}>
-      {selected ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      {selected ? <SmallFavoriteIcon /> : <SmallFavoriteBorderIcon />}
     </CustomWishlistButton>
   );
 };

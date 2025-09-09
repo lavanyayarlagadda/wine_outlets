@@ -31,6 +31,12 @@ const fontSizes = {
     md: "10px",
     lg: "12px",
   },
+  12: {
+    default: "12px",
+    sm: "8px",
+    md: "10px",
+    lg: "12px",
+  },
   20: {
     default: "20px",
     sm: "8px",
