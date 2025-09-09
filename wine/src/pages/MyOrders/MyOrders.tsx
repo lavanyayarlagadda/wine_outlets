@@ -17,24 +17,31 @@ import {
   PriceTag,
   OrderBody,
   ProductImage,
+  ProductImageImg,
+  ItemColRight,
+  ItemCol,
+  OrderBodyRow,
   ProductInfo,
   ProductTitle,
   ActionRow,
   LeftActions,
   RightAction,
   CancelOrder,
+  PageTitle,
+  PageSubtitle,
+  SectionDivider,
+  ProductInfoGrid,
 } from "./MyOrders.style";
 
 import { InfoIcon } from "../../molecules/ProductListCard/ProductListCard.style";
 import { InfoItem } from "../../organisms/ProductView/ProductDetails";
 import { starIcon, calendarRed, sizeIcon, originIcon } from "../../assets";
 
-import { useMyOrders, formatOrderDate } from "./MyOrders.hook";
+import { useMyOrders, formatOrderDate, formatCurrency } from "./MyOrders.hook";
 
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
 
-/** Component */
+
+
 export default function MyOrders() {
   const {
     orders,
@@ -44,8 +51,8 @@ export default function MyOrders() {
     cancelOrder,
     markReadyForPickup,
     viewInvoice,
-    activeOrderId,
-    clearActive,
+    // activeOrderId,
+    // clearActive,
   } = useMyOrders();
 
   const filtered = orders.filter((o) =>
@@ -67,14 +74,15 @@ export default function MyOrders() {
       </Sidebar>
 
       <Content>
-        <Typography variant="h6" sx={{ mb: 0.5 }}>
+        <PageTitle variant="h6">
           {selectedTab === "current" ? "Current Orders" : "Past Orders"}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          View active orders with live tracking and estimated delivery
-        </Typography>
+        </PageTitle>
 
-        <Divider sx={{ mb: 4 }} />
+        <PageSubtitle variant="body2">
+          View active orders with live tracking and estimated delivery
+        </PageSubtitle>
+
+        <SectionDivider />
 
         {loading ? (
           <CircularProgress />
@@ -100,81 +108,45 @@ export default function MyOrders() {
                     </OrderHeader>
 
                     <OrderBody>
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "16px",
-                          padding: "16px 0",
-                          borderBottom: "1px solid #E0E0E0",
-                          alignItems: "center",
-                        }}
-                      >
-                        <ProductImage sx={{}}>
-                          <img
-                            src={item.imageUrl}
-                            alt={item.name}
-                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                          />
+                      <OrderBodyRow>
+                        <ProductImage>
+                          <ProductImageImg src={item.imageUrl} alt={item.name} />
                         </ProductImage>
 
-                        <ProductInfo
-                          sx={{ display: "flex", justifyContent: "space-between", gap: "24px" }}
-                        >
-                          <div
-                            style={{
-                              width: "50%",
-                              height: "120px",
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "space-between",
-                            }}
-                          >
+                        <ProductInfoGrid>
+                          <ItemCol>
                             <ProductTitle>{item.name}</ProductTitle>
-
                             <InfoItem
                               icon={<InfoIcon src={originIcon} alt="origin" />}
                               label="Origin:"
                               value={item.origin ?? "—"}
                             />
-
                             <InfoItem
-                              icon={<InfoIcon src={sizeIcon} alt="origin" />}
+                              icon={<InfoIcon src={sizeIcon} alt="size" />}
                               label="Size:"
                               value={item.size ?? "—"}
                             />
-                          </div>
+                          </ItemCol>
 
-                          <div
-                            style={{
-                              width: "50%",
-                              height: "120px",
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "space-between",
-                              alignItems: "flex-end",
-                            }}
-                          >
+                          <ItemColRight>
                             <InfoItem
-                              icon={<InfoIcon src={starIcon} alt="origin" />}
+                              icon={<InfoIcon src={starIcon} alt="qty" />}
                               label="Qty:"
                               value={item.quantity ?? "—"}
                             />
                             <InfoItem
-                              icon={<InfoIcon src={starIcon} alt="origin" />}
+                              icon={<InfoIcon src={starIcon} alt="brand" />}
                               label="Brand:"
                               value={item.brand ?? "—"}
                             />
                             <InfoItem
-                              icon={<InfoIcon src={calendarRed} alt="origin" />}
-                              label="Brand:"
+                              icon={<InfoIcon src={calendarRed} alt="date" />}
+                              label="Date:"
                               value={item.brand ?? "—"}
                             />
-                          </div>
-                        </ProductInfo>
-                      </div>
-                      {/* <SmallMeta>
-                          <strong>Item Price:</strong> {formatCurrency(item.price)}
-                        </SmallMeta> */}
+                          </ItemColRight>
+                        </ProductInfoGrid>
+                      </OrderBodyRow>
 
                       <ActionRow>
                         <LeftActions>
@@ -204,30 +176,6 @@ export default function MyOrders() {
             )}
           </OrdersList>
         )}
-
-        {/* small invoice indicator for demo */}
-        {activeOrderId ? (
-          <Typography
-            variant="caption"
-            sx={{ mt: 2, display: "flex", alignItems: "center", gap: 1 }}
-            color="text.secondary"
-          >
-            Viewing invoice for <strong>{activeOrderId}</strong>
-            <button
-              onClick={() => clearActive()}
-              style={{
-                marginLeft: 8,
-                padding: "4px 8px",
-                borderRadius: 6,
-                border: "1px solid rgba(0,0,0,0.12)",
-                background: "transparent",
-                cursor: "pointer",
-              }}
-            >
-              Close
-            </button>
-          </Typography>
-        ) : null}
       </Content>
     </PageContainer>
   );

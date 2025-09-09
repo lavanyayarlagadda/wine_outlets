@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import { Divider } from "@mui/material";
 import Button from "@mui/material/Button";
 import shape from "../../themes/shape";
 
@@ -40,30 +40,7 @@ export const SidebarButton = styled(Box)<{ active?: boolean }>(({ theme, active 
   cursor: "pointer",
 }));
 
-export const ReadyForPickUp = styled(Typography)(({ theme }) => ({
-  display: "block",
-  fontWeight: theme.typography.fontWeightMedium,
-  fontSize: theme.typography.subtitle2.fontSize,
-  padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
-  marginBottom: theme.spacing(1),
-  color: theme.palette.primary.main,
-  //   background:  theme.palette.white.main ,
-  borderRadius: shape.baseBorderRadius * 1.5,
-  border: `1px solid ${theme.palette.primary.main}`,
-  cursor: "pointer",
-}));
 
-export const CancelOrder = styled(Typography)(({ theme }) => ({
-  display: "block",
-  fontWeight: theme.typography.fontWeightMedium,
-  fontSize: theme.typography.subtitle2.fontSize,
-  padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
-  marginBottom: theme.spacing(1),
-  color: theme.palette.grey[200],
-  borderRadius: shape.baseBorderRadius * 1.5,
-  border: `1px solid ${theme.palette.grey[200]}`,
-  cursor: "pointer",
-}));
 
 export const Content = styled(Box)(() => ({
   flex: 1,
@@ -113,12 +90,9 @@ export const PriceTag = styled(Typography)(({ theme }) => ({
 }));
 
 export const OrderBody = styled(Box)(({ theme }) => ({
-  //   display: "flex",
   gap: theme.spacing(2.5),
   alignItems: "flex-start",
   borderTop: `1px solid ${theme.palette.divider}`,
-
-  //   paddingTop: theme.spacing(2),
 }));
 
 export const ProductImage = styled(Box)(({ theme }) => ({
@@ -184,3 +158,69 @@ export const DateText = styled(Typography)(({ theme }) => ({
   color: theme.palette.black[800],
   ml: 1,
 }));
+
+export const OrderItemRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(2),
+  padding: `${theme.spacing(2)} 0`,
+  borderBottom: `1px solid #E0E0E0`,
+  alignItems: "center",
+}));
+
+export const ProductImageImg = styled("img")(() => ({
+  width: "100%",
+  height: "100%",
+  objectFit: "contain",
+  display: "block",
+}));
+
+export const ItemCol = styled(Box)(({ theme }) => ({
+  width: "50%",
+  height: theme.spacing(15), // 120px roughly
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+}));
+export const ItemColRight = styled(ItemCol)(() => ({
+  alignItems: "flex-end",
+}));
+
+export const ReadyForPickUp = styled(PrimaryButton)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  border: `1px solid ${theme.palette.primary.main}`,
+}));
+export const CancelOrder = styled(SecondaryButton)(({ theme }) => ({
+  color: theme.palette.grey[200],
+  border: `1px solid ${theme.palette.grey[200]}`,
+}));
+
+export const OrderBodyRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(2),
+  padding: `${theme.spacing(2)} 0`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  alignItems: "center",
+}));
+
+export const PageTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(0.5),
+  fontWeight: theme.typography.fontWeightMedium,
+}));
+
+export const PageSubtitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  color: theme.palette.text.secondary,
+  fontSize: theme.typography.body2.fontSize,
+}));
+
+export const SectionDivider = styled(Divider)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+}));
+
+export const ProductInfoGrid = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  gap: theme.spacing(3), // matches your earlier 24px
+  flex: 1,
+}));
+

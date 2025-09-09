@@ -66,6 +66,9 @@ export function formatOrderDate(value?: string | number | Date | null, locale = 
   }).format(date);
 }
 
+export const formatCurrency = (value: number) =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
+
 /** Hook */
 export function useMyOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
