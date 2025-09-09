@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Popover, Button } from "@mui/material";
+import { Popover, Box } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
@@ -13,7 +13,9 @@ import {
   Footer,
   VerticalDivider,
   SelectedSlotsBtn,
-  Container
+  Container,
+  FooterButtons,
+  FooterConfirmButtons,
 } from "./PickupDateTimeSelector.style";
 
 const timeSlots = [
@@ -25,8 +27,8 @@ const timeSlots = [
 
 const PickupDateTimeSelector = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [selectedTime, setSelectedTime] = useState<string>(timeSlots[0]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string>("");
 
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,6 +43,7 @@ const PickupDateTimeSelector = () => {
   return (
     <Container>
       <SelectedSlotsBtn onClick={handleOpenPopover}>
+        {/* Select Date & Time */}
         {selectedDate
           ? `${format(selectedDate, "MMM dd, yyyy")} - ${selectedTime}`
           : "Select Pickup Date & Time"}
@@ -56,21 +59,17 @@ const PickupDateTimeSelector = () => {
         }}
       >
         <PopoverContent>
+         
           <PickerContainer>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <StaticDatePicker
                 displayStaticWrapperAs="desktop"
                 value={selectedDate}
                 onChange={(newDate) => setSelectedDate(newDate)}
-                slotProps={{
-                  actionBar: {
-                    actions: [],
-                  },
-                }}
+                slotProps={{ actionBar: { actions: [] } }}
               />
             </LocalizationProvider>
 
-            {/* Vertical Divider */}
             <VerticalDivider />
 
             <TimeSlotsContainer>
@@ -89,23 +88,31 @@ const PickupDateTimeSelector = () => {
               ))}
             </TimeSlotsContainer>
           </PickerContainer>
-
           <Footer>
-            <Button variant="outlined">{selectedDate ? format(selectedDate, "MMM dd, yyyy") : "-"}</Button>
-            -
-            <Button variant="outlined">{selectedTime}</Button>
-            <Button onClick={handleClosePopover}>Cancel</Button>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => {
-                handleClosePopover();
-                console.log("Confirmed:", selectedDate, selectedTime);
-              }}
-            >
-              Confirm
-            </Button>
+            <Box display="flex" gap={1} flexWrap="wrap">
+              {selectedDate && (
+                <FooterButtons variant="outlined">
+                  {format(selectedDate, "MMM dd, yyyy")}
+                </FooterButtons>
+              )}
+              {selectedTime && <FooterButtons variant="outlined">{selectedTime}</FooterButtons>}
+            </Box>
+
+            {/* Actions (Always present and aligned to the left) */}
+            <Box display="flex" gap={1}>
+              <FooterButtons onClick={handleClosePopover}>Cancel</FooterButtons>
+              <FooterConfirmButtons
+              disabled={!selectedDate || !selectedTime}
+                onClick={() => {
+                  handleClosePopover();
+                  console.log("Confirmed:", selectedDate, selectedTime);
+                }}
+              >
+                Confirm
+              </FooterConfirmButtons>
+            </Box>
           </Footer>
+
         </PopoverContent>
       </Popover>
     </Container>

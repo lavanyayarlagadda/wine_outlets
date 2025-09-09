@@ -22,9 +22,14 @@ export const LayoutContainer = styled(Box)(({ theme }) => ({
 export const ProductListWrapper = styled(Box)(({ theme }) => ({
   flex: "0 0 auto",
   marginBottom: theme.spacing(2),
+  // border: shape.borderSuccess,
+  // borderRadius: theme.shape.borderRadius,
+  [theme.breakpoints.up("sm")]: { flex: "0 0 65%" },
+}));
+
+export const LeftContent= styled(Box)(({ theme }) => ({
   border: shape.borderSuccess,
   borderRadius: theme.shape.borderRadius,
-  [theme.breakpoints.up("sm")]: { flex: "0 0 65%" },
 }));
 
 export const ContentWrapper = styled(Box)(({ theme }) => ({

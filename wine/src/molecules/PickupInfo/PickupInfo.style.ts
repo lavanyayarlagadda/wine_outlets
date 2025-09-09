@@ -9,13 +9,13 @@ import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 export const StoreName = styled(Typography)(() => ({
 //   color: palette.text.primary,
   fontWeight: 600,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(16),
   
 }));
 export const StoreAddress = styled(Typography)(() => ({
   color:palette.text.secondary,
     fontWeight: 600,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(16),
 }));
 
 export const PhoneTimeRow = styled(Box)(() => ({
@@ -27,7 +27,7 @@ export const PhoneTimeRow = styled(Box)(() => ({
 
 export const PhoneNumber = styled(Typography)(() => ({
   fontWeight: 600,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(16),
   color: palette.text.secondary,
   display:"flex",
   gap:"5px"
@@ -35,7 +35,7 @@ export const PhoneNumber = styled(Typography)(() => ({
 
 export const PickupTime = styled(Typography)(() => ({
   fontWeight: 500,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(16),
   color: palette.text.primary,
 }));
 

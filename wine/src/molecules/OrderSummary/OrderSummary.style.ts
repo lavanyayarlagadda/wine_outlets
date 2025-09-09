@@ -44,13 +44,13 @@ export const ContentRow = styled(Box)(() => ({
 export const LabelText = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
   fontWeight: 500,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(16),
 }));
 
 export const ValueText = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
   fontWeight: 600,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(16),
 }));
 export const DividerLine = styled('hr')(({ theme }) => ({
   border: "none",

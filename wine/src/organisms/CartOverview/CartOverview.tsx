@@ -10,6 +10,7 @@ import {
   HeaderAction,
   BorderedIcon,
   SmallAddIcon,
+  LeftContent
 } from "../CartOverview/CartOverview.style";
 import { Typography } from "@mui/material";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
@@ -25,6 +26,7 @@ const CartOverview = () => {
       <Typography>Cart Overview</Typography>
       <LayoutContainer>
         <ProductListWrapper>
+          <LeftContent>
           <ProductHeader>
             <HeaderTitle>Product List</HeaderTitle>
 
@@ -51,6 +53,7 @@ const CartOverview = () => {
               />
             </>
           ))}
+          </LeftContent>
         </ProductListWrapper>
         <ContentWrapper>
           {cartOverviewData.cartSummary && (
