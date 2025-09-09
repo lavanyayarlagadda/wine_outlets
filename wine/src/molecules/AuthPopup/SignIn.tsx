@@ -3,6 +3,7 @@ import { IconButton } from "@mui/material";
 import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
 import { CustomTextField } from "../../atoms";
 import {
+  ForgotPasswordBox,
   FormWrapper,
   SubmitButton,
   SwitchLink,
@@ -46,7 +47,9 @@ const SignIn = ({
           </IconButton>
         }
       />
-
+      <ForgotPasswordBox>
+        <SwitchLink onClick={() => setTab("forgotPassword")}>Forgot Password</SwitchLink>
+      </ForgotPasswordBox>
       <SubmitButton
         type="submit"
         variant="contained"

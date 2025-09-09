@@ -63,10 +63,17 @@ export const SwitchText = styled(Typography)(() => ({
   textAlign: "center",
 }));
 
+export const ForgotPasswordBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "flex-end",
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(2),
+  color: palette.primary.dark,
+}));
 export const SwitchLink = styled(Typography)(() => ({
   color: palette.primary.dark,
   cursor: "pointer",
-  fontWeight: "bold",
+  fontWeight: 400,
   display: "inline-block",
 }));
 export const FormWrapper = styled(Box)<BoxProps>(() => ({
