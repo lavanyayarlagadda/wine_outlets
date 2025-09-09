@@ -10,9 +10,9 @@ import {
   HeaderAction,
   BorderedIcon,
   SmallAddIcon,
-  LeftContent
+  LeftContent,
+  CartOverViewHeader
 } from "../CartOverview/CartOverview.style";
-import { Typography } from "@mui/material";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
 import cartOverviewData from "../../constant/cartOverviewData";
 import OrderSummary from "../../molecules/OrderSummary/OrderSummary";
@@ -23,7 +23,7 @@ import AddToCart from "../../atoms/CustomButton/AddToCart";
 const CartOverview = () => {
   return (
     <MainContainer>
-      <Typography>Cart Overview</Typography>
+      <CartOverViewHeader>Cart Overview</CartOverViewHeader>
       <LayoutContainer>
         <ProductListWrapper>
           <LeftContent>

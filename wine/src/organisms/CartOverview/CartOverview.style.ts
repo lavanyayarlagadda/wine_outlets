@@ -7,6 +7,10 @@ import { useFontSize } from "../../themes/fontSize";
 export const MainContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(4),
 }));
+export const CartOverViewHeader = styled(Typography)(() => ({
+fontSize:useFontSize(20),
+fontWeight:600
+}));
 export const LayoutContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
