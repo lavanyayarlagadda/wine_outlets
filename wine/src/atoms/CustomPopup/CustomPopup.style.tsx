@@ -9,12 +9,14 @@ export const StyledDialog = styled(Dialog)(() => ({
   },
 }));
 
-export const Header = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: theme.spacing(2),
-}));
+export const Header = styled(Box)<{ selected?: boolean; dropdown?: boolean }>(
+  ({ theme, dropdown }) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: dropdown ? theme.spacing(1) : theme.spacing(2),
+  })
+);
 
 export const Content = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),

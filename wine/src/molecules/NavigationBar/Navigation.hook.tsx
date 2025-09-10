@@ -17,13 +17,15 @@ export const useNavigation = (menuKeys: string[]) => {
   const popup = Boolean(anchorElProfile);
   const [open, setOpen] = useState(false);
   // Auth states
-  const [openLogin, setOpenLogin] = useState(true);
+  const [openLogin, setOpenLogin] = useState(false);
   const [signIn, setSignIn] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState<AnchorState>(
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: null }), {})
   );
+
+  console.log(signIn, "SIGNIN");
 
   // mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,7 +40,10 @@ export const useNavigation = (menuKeys: string[]) => {
     setAnchorElProfile(null);
   };
 
-  const handleLoginClose = () => setOpenLogin(false);
+  const handleLoginClose = () => {
+    setOpenLogin(false);
+    setSignIn(false);
+  };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, key: string) => {
     setAnchorEl((prev) => ({ ...prev, [key]: event.currentTarget }));

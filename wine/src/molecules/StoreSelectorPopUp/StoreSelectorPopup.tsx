@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Typography, Divider, IconButton } from "@mui/material";
 import { Check } from "@mui/icons-material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -20,7 +20,10 @@ import {
   StoreInfoRow,
   InfoItem,
   StoreLeftGroup,
+  DropdownPaper,
 } from "./StoreSelectorPopup.style";
+import { Header } from "../../atoms/CustomPopup/CustomPopup.style";
+import Close from "@mui/icons-material/Close";
 
 export interface Store {
   id: number;
@@ -38,6 +41,7 @@ interface StoreSelectorPopupProps {
   onSelect: (id: number) => void;
   setIsAgeVerified?: React.Dispatch<React.SetStateAction<boolean>>;
   navigation?: boolean;
+  dropdown?: boolean;
 }
 
 const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
@@ -48,7 +52,75 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   onSelect,
   setIsAgeVerified,
   navigation = false,
+  dropdown = false,
 }) => {
+  if (dropdown && open && navigation) {
+    return (
+      <DropdownPaper elevation={3}>
+        <Header dropdown>
+          <Typography variant="h6" fontWeight="bold">
+            Select Your Store
+          </Typography>
+          <IconButton onClick={onClose}>
+            <Close />
+          </IconButton>
+        </Header>
+
+        <Divider />
+        {stores.map((store) => {
+          const isSelected = selectedStoreId === store.id;
+          return (
+            <StoreButtonBase
+              dropdown
+              key={store.id}
+              selected={isSelected}
+              onClick={() => {
+                onSelect(store.id);
+                setIsAgeVerified?.(true);
+                onClose(); // close dropdown
+              }}
+            >
+              <StoreHeader>
+                <StoreLeftGroup>
+                  <StoreName>{store.name}</StoreName>
+                  {isSelected && (
+                    <MapButton
+                      size="small"
+                      variant="outlined"
+                      endIcon={
+                        <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
+                      }
+                      selected={isSelected}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Open Map
+                    </MapButton>
+                  )}
+                </StoreLeftGroup>
+                {isSelected && <Check color="primary" />}
+              </StoreHeader>
+
+              <Typography variant="body2" color="text.secondary" mt={1}>
+                {store.address}
+              </Typography>
+
+              <StoreInfoRow>
+                <InfoItem>
+                  <AccessTimeIcon fontSize="small" color="action" />
+                  <Typography variant="body2">{store.hours}</Typography>
+                </InfoItem>
+                <InfoItem>
+                  <PhoneIcon fontSize="small" color="action" />
+                  <Typography variant="body2">{store.phone}</Typography>
+                </InfoItem>
+              </StoreInfoRow>
+            </StoreButtonBase>
+          );
+        })}
+      </DropdownPaper>
+    );
+  }
+
   return (
     <CustomPopup
       open={open}
@@ -114,7 +186,6 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                 <AccessTimeIcon fontSize="small" color="action" />
                 <Typography variant="body2">{store.hours}</Typography>
               </InfoItem>
-
               <InfoItem>
                 <PhoneIcon fontSize="small" color="action" />
                 <Typography variant="body2">{store.phone}</Typography>

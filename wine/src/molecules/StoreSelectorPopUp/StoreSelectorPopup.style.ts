@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Button, ButtonBase } from "@mui/material";
+import { Box, Typography, Button, ButtonBase, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
@@ -80,14 +80,28 @@ export const StyledSearchButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+export const DropdownPaper = styled(Paper)(({ theme }) => ({
+  marginTop: theme.spacing(6),
+  padding: theme.spacing(2),
+  borderRadius: shape.borderRadius,
+  position: "absolute",
+  zIndex: 10,
+  width: 400, // optional: fix width
+  maxHeight: 400, // fixed max height
+  overflowY: "auto", // enables vertical scroll
+  overflowX: "hidden", // prevent horizontal scroll
+  boxSizing: "border-box",
+  right: "20px",
+}));
+
 export const StoreButtonBase = styled(ButtonBase, {
   shouldForwardProp: (prop) => prop !== "selected",
-})<{ selected?: boolean }>(({ theme, selected }) => ({
+})<{ selected?: boolean; dropdown?: boolean }>(({ theme, selected, dropdown }) => ({
   width: "100%",
   textAlign: "left",
   backgroundColor: selected ? theme.palette.primary.light : theme.palette.background.paper,
   borderRadius: shape.baseBorderRadius * 2,
-  padding: theme.spacing(2),
+  padding: dropdown ? theme.spacing(1) : theme.spacing(2),
   marginBottom: theme.spacing(2),
   display: "block",
   transition: "background-color 0.2s ease",

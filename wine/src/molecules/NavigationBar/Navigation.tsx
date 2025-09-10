@@ -71,6 +71,7 @@ const Navigation = () => {
     setSelectedStore,
     setOpen,
     open,
+    setOpenLogin,
   } = useNavigation(menuKeys);
   const navigate = useNavigate();
 
@@ -189,6 +190,7 @@ const Navigation = () => {
               stores={stores}
               onSelect={(id) => setSelectedStore(id)}
               navigation={true}
+              dropdown={true}
             />
 
             <RightNavSection>
@@ -230,7 +232,13 @@ const Navigation = () => {
                   </StyledProfileMenu>
                 </>
               ) : (
-                <AddToCartButton onClick={() => setSignIn(true)}>Sign In</AddToCartButton>
+                <AddToCartButton
+                  onClick={() => {
+                    (setSignIn(true), setOpenLogin(true));
+                  }}
+                >
+                  Sign In
+                </AddToCartButton>
               )}
             </RightNavSection>
           </IconGroup>
