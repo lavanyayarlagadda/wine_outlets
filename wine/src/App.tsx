@@ -17,6 +17,7 @@ const MyOrders = lazy(() => import("./pages/MyOrders/MyOrders"));
 const Layout = lazy(() => import("./layout/Layout"));
 const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
 const CartOverview = lazy(() => import("./pages/CartOverView/CartOverViewPage"));
+const Invoice = lazy(()=> import("./pages/Invoice/Invoice"))
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/myOrders" element={<MyOrders />} />
             <Route path="/cartOverview" element={<CartOverview />} />
+            <Route path="/orders/invoice/:id" element={<Invoice />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

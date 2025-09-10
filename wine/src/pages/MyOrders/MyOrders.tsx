@@ -36,6 +36,7 @@ import { InfoIcon } from "../../molecules/ProductListCard/ProductListCard.style"
 import { InfoItem } from "../../organisms/ProductView/ProductDetails";
 import { starIcon, calendarRed, sizeIcon, originIcon } from "../../assets";
 import PastOrderCard from "../../molecules/PastOrderCard/PastOrderCard";
+import { useNavigate } from "react-router-dom";
 
 import { useMyOrders, formatOrderDate, formatCurrency } from "./MyOrders.hook";
 
@@ -54,6 +55,7 @@ export default function MyOrders() {
     // activeOrderId,
     // clearActive,
   } = useMyOrders();
+  const navigate = useNavigate();
    const [confirmOpen, setConfirmOpen] = useState(false);
  const [pendingCancelOrderId, setPendingCancelOrderId] = useState<string | null>(null);
 
@@ -81,7 +83,7 @@ export default function MyOrders() {
         </PageTitle>
 
         <PageSubtitle variant="body2">
-          View active orders with live tracking and estimated delivery
+          {selectedTab === "past" ? "Full order history with option to re-order or view invoice." : "View active orders with live tracking and estimated delivery" }
         </PageSubtitle>
 
         <SectionDivider />
@@ -98,19 +100,19 @@ export default function MyOrders() {
                 // const isCancelled = order.status === "Cancelled";
                 // const isReady = order.status === "Ready for Pickup";
 
-                 if (selectedTab === "past") {
-                   return (
-                     <PastOrderCard
-                       key={order.orderId}
-                       order={order}
-                       onReorder={(id) => {
-                         console.log("reorder", id);
-                         // TODO: implement reorder flow
-                       }}
-                       onViewInvoice={(id) => viewInvoice(id)}
-                     />
-                   );
-                 }
+                if (selectedTab === "past") {
+                  return (
+                    <PastOrderCard
+                      key={order.orderId}
+                      order={order}
+                      onReorder={(id) => {
+                        console.log("reorder", id);
+                        // TODO: implement reorder flow
+                      }}
+                      onViewInvoice={(id) => viewInvoice(id)}
+                    />
+                  );
+                }
 
                 return (
                   <OrderCard key={order.orderId}>
@@ -174,16 +176,22 @@ export default function MyOrders() {
                             Ready for Pickup
                           </RedOutlineBtn>
 
-                          <GreyOutlineBtn onClick={() => {
-                            setPendingCancelOrderId(order.orderId);
-                            setConfirmOpen(true);
-                          }}>
+                          <GreyOutlineBtn
+                            onClick={() => {
+                              setPendingCancelOrderId(order.orderId);
+                              setConfirmOpen(true);
+                            }}
+                          >
                             Cancel Order
                           </GreyOutlineBtn>
                         </LeftActions>
 
                         <RightAction>
-                          <GreyOutlineBtn onClick={() => viewInvoice(order.orderId)}>
+                          <GreyOutlineBtn
+                            onClick={() => {
+                              navigate(`/orders/invoice/${encodeURIComponent(order.orderId)}`);
+                            }}
+                          >
                             View Invoice
                           </GreyOutlineBtn>
                         </RightAction>
@@ -198,20 +206,19 @@ export default function MyOrders() {
       </Content>
 
       <CancelOrderConfirm
-  open={confirmOpen}
-  orderId={pendingCancelOrderId}
-  onClose={() => {
-    setConfirmOpen(false);
-    setPendingCancelOrderId(null);
-  }}
-  onConfirm={(orderId) => {
-    // call your existing cancelOrder from hook
-    if (orderId) cancelOrder(orderId);
-    setConfirmOpen(false);
-    setPendingCancelOrderId(null);
-  }}
-/>
-
+        open={confirmOpen}
+        orderId={pendingCancelOrderId}
+        onClose={() => {
+          setConfirmOpen(false);
+          setPendingCancelOrderId(null);
+        }}
+        onConfirm={(orderId) => {
+          // call your existing cancelOrder from hook
+          if (orderId) cancelOrder(orderId);
+          setConfirmOpen(false);
+          setPendingCancelOrderId(null);
+        }}
+      />
     </PageContainer>
   );
 }

@@ -227,9 +227,10 @@ export const ItemRight = styled(Box)(({ theme }) => ({
   alignItems: "flex-end",
   gap: theme.spacing(1),
   minWidth: 160,
+  fontSize:theme.typography.body2.fontSize
 }));
 
-export const ItemPrice = styled(Typography)(({ theme }) => ({
+export const ItemPrice = styled("span")(({ theme }) => ({
   fontWeight: theme.typography.fontWeightMedium,
   fontSize: theme.typography.body1.fontSize,
   color: theme.palette.warning.light,

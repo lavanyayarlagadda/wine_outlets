@@ -29,7 +29,7 @@ const MOCK_DATA: { orders: Order[] } = {
       orderId: "ORD-2024-001",
       date: "2025-01-21",
       status: "Ready for Pickup",
-      totalAmount: 18.14,
+      totalAmount: 36.28,
       items: [
         {
           productId: "P-1001",
@@ -38,7 +38,7 @@ const MOCK_DATA: { orders: Order[] } = {
           origin: "California",
           size: "750ml - Standard",
           year: 2021,
-          quantity: 1,
+          quantity: 2,
           price: 18.14,
           imageUrl: deal_img2,
         },

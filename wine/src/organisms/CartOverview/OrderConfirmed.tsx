@@ -13,7 +13,9 @@ import PickupInformation from "../../molecules/PickupInfo/PickupInfo";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
 import { oderConfirmed } from "../../assets";
 
-const OrderConfirmed = () => {
+type Props = { orderId?: string | null };
+
+const OrderConfirmed = ({ orderId }: Props) => {
   const steps = [
     {
       title: "We’ll prepare your order",
@@ -51,7 +53,7 @@ const OrderConfirmed = () => {
   return (
     <Wrapper>
       {/* Header */}
-      <HeaderBox>
+      {!orderId && <HeaderBox>
         <Illustration src={oderConfirmed} alt="Order Confirmed Illustration" />
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Order Confirmed
@@ -60,7 +62,7 @@ const OrderConfirmed = () => {
           Thank you for your order! Your wines will be ready for pickup as per your selected date
           and time.
         </Description>
-      </HeaderBox>
+      </HeaderBox>}
 
       {/* Two Column Layout */}
       <TwoColumnGrid container spacing={4}>
@@ -108,7 +110,7 @@ const OrderConfirmed = () => {
         <ColumnGrid size={{ xs: 12, md: 6 }}>
           <Stack spacing={3} alignItems="center">
             <StepsCard heading="What's Next?" steps={steps} />
-            <AddToCart label="Continue Shopping" />
+            {!orderId && <AddToCart label="Continue Shopping" />}
           </Stack>
         </ColumnGrid>
       </TwoColumnGrid>

@@ -24,6 +24,7 @@ import { InfoItem } from "../../organisms/ProductView/ProductDetails";
 import { InfoIcon } from "../ProductListCard/ProductListCard.style";
 import { sizeIcon, starIcon, calendarRed } from "../../assets";
 import type { Order } from "../../pages/MyOrders/MyOrders.hook";
+import { formatOrderDate } from "../../pages/MyOrders/MyOrders.hook";
 
 export interface PastOrderCardProps {
   order: Order;
@@ -37,7 +38,7 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
       <OrderHeader>
         <OrderMeta>
           <OrderIdChip label={order.orderId} color="default" />
-          <DateText>{new Date(order.date).toLocaleDateString()}</DateText>
+          <DateText>{formatOrderDate(order.date)}</DateText>
         </OrderMeta>
 
         <PriceTag variant="body1">
@@ -79,10 +80,10 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
 
                 <div style={{ height: 8 }} />
 
-                <ItemSubPrice>{new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.price)} Each</ItemSubPrice>
-                <ItemPrice>
+                <ItemSubPrice>{new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.price)} Each x 2 = <ItemPrice>
                   {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(subtotal)}
-                </ItemPrice>
+                </ItemPrice></ItemSubPrice>
+                
               </ItemRight>
             </ItemRow>
           );
