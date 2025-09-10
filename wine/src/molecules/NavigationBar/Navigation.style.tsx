@@ -222,7 +222,7 @@ export const StyledMenu = styled(Menu)(() => ({
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
     marginTop: theme.spacing(1),
-    borderRadius: theme.shape.borderRadiuspx,
+    borderRadius: shape.borderRadiuspx,
     boxShadow: theme.shadows[3],
     minWidth: 180,
   },
