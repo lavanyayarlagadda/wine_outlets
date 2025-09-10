@@ -10,11 +10,12 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { FavoriteBorder, ShoppingCart } from "@mui/icons-material";
+import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 import { useNavigate } from "react-router-dom";
+import { FavoriteBorderIcon, FavoriteIcon } from "../ProductListGrid/ProductGridCard.style";
 
 // const isRecentlyViewedCard = true;
 
@@ -42,6 +43,7 @@ interface ProductCardProps {
   onAddToCart: (id: string) => void;
   onToggleFavorite: (id: string) => void;
   isRecentlyViewedCard?: boolean;
+  isFavorite: boolean;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -49,6 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onAddToCart,
   onToggleFavorite,
   isRecentlyViewedCard = false,
+  isFavorite,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -80,7 +83,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           "&:hover": { backgroundColor: palette.white.main },
         }}
       >
-        <FavoriteBorder sx={{ color: palette.grey[200] }} />
+        {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </IconButton>
 
       {/* Product Image */}

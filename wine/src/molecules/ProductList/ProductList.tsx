@@ -94,6 +94,7 @@ const ProductList = () => {
                     product={product}
                     onAddToCart={() => handleAddToCart(product.id)}
                     onToggleFavorite={() => handleToggleFavorite(product.id)}
+                    isFavorite={wishlist.includes(product.id)}
                   />
                 )
               )}

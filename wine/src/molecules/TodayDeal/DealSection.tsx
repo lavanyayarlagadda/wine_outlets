@@ -33,6 +33,7 @@ const DealsSection: React.FC = () => {
     totalSlides,
     handleAddToCart,
     handleToggleFavorite,
+    wishlist,
   } = useDealsSection();
 
   return (
@@ -77,6 +78,7 @@ const DealsSection: React.FC = () => {
               product={product}
               onAddToCart={handleAddToCart}
               onToggleFavorite={handleToggleFavorite}
+              isFavorite={wishlist.includes(product.id)}
             />
           </CardWrapper>
         ))}

@@ -17,16 +17,12 @@ type RecentlyViewedProps = {
   onSlideChange?: (index: number) => void;
   cardsPerSlide?: number;
   initialSlide?: number;
-  onAddToCart?: (productId: string) => void;
-  onToggleFavorite?: (productId: string) => void;
 };
 
 const RecentlyViewed: FC<RecentlyViewedProps> = ({
   onSlideChange,
   cardsPerSlide = 4,
   initialSlide = 0,
-  onAddToCart,
-  onToggleFavorite,
 }) => {
   const rvData = (RecentlyViewedData as any) ?? {};
   const isVisible =
@@ -40,6 +36,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
     handleDotClick,
     handleAddToCart,
     handleToggleFavorite,
+    wishlist,
   } = useRecentlyViewed({
     items: Array.isArray(rvData.products) ? rvData.products : [],
     cardsPerSlide,
@@ -59,9 +56,10 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
           <ProductBox key={product.id ?? product.name ?? Math.random()}>
             <ProductCard
               product={product}
-              onAddToCart={(id) => handleAddToCart(id, onAddToCart)}
-              onToggleFavorite={(id) => handleToggleFavorite(id, onToggleFavorite)}
+              onAddToCart={() => handleAddToCart(product.id)}
+              onToggleFavorite={() => handleToggleFavorite(product.id)}
               isRecentlyViewedCard
+              isFavorite={wishlist.includes(product.id)}
             />
           </ProductBox>
         ))}

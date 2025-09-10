@@ -1,10 +1,10 @@
 import React from "react";
 import { useTheme, useMediaQuery } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import {
+  FavoriteBorderIcon,
+  FavoriteIcon,
   PriceText,
   RatingBox,
   SmallText,
@@ -72,7 +72,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
         />
         <FavoriteWrapper>
           <FavoriteButton onClick={() => onToggleFavorite(id)}>
-            {isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+            {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </FavoriteButton>
         </FavoriteWrapper>
       </ImageWrapper>

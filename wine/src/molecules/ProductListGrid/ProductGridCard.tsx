@@ -1,5 +1,5 @@
 import React from "react";
-import { ShoppingCart, FavoriteBorder } from "@mui/icons-material";
+import { ShoppingCart } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {
   ResponsiveCard,
@@ -14,6 +14,8 @@ import {
   PriceText,
   VIPPriceText,
   AddToCartButton,
+  FavoriteIcon,
+  FavoriteBorderIcon,
 } from "./ProductGridCard.style";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
@@ -38,21 +40,23 @@ export interface Product {
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (id: string) => void;
-  onToggleFavorite: (id: string) => void;
+  onAddToCart: (id: number | string) => void;
+  onToggleFavorite: (id: number | string) => void;
+  isFavorite: boolean;
 }
 
 const ProductGridCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onToggleFavorite,
+  isFavorite,
 }) => {
   const navigate = useNavigate();
 
   return (
     <ResponsiveCard>
       <FavoriteButton onClick={() => onToggleFavorite(product.id)}>
-        <FavoriteBorder />
+        {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </FavoriteButton>
 
       <ProductImage

@@ -1,7 +1,6 @@
 import React from "react";
 import CartOverview from "../../organisms/CartOverview/CartOverview";
-import RecentlyViewed from "../../molecules/RecentlyViewed/RecentlyView";
-import { Newsletter } from "../../molecules";
+import { Newsletter, RecentlyView } from "../../molecules";
 import OrderConfirmed from "../../organisms/CartOverview/OrderConfirmed";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
@@ -15,7 +14,7 @@ const CartOverViewPage = () => {
       ) : (
         <>
           <CartOverview />
-          <RecentlyViewed />
+          <RecentlyView />
         </>
       )}
 

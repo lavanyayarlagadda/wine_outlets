@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 interface ProductImageProps extends CardMediaProps {
   alt?: string;
@@ -46,6 +47,14 @@ export const FavoriteButton = styled(IconButton)(() => ({
   border: shape.borderSuccess,
   borderRadius: "4px",
   zIndex: 1,
+}));
+
+export const FavoriteIcon = styled(Favorite)(() => ({
+  color: palette.primary.dark,
+}));
+
+export const FavoriteBorderIcon = styled(FavoriteBorder)(() => ({
+  color: palette.grey[500], // or whatever you want for border
 }));
 
 export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => ({

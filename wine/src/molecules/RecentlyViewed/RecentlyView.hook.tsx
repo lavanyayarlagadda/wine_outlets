@@ -16,6 +16,8 @@ export function useRecentlyViewed<T>({
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastIndexRef = useRef<number>(initialSlide);
+  const [cartItems, setCartItems] = useState<string[]>([]);
+  const [wishlist, setWishlist] = useState<string[]>([]);
 
   const [currentSlide, setCurrentSlide] = useState<number>(initialSlide);
 
@@ -88,13 +90,15 @@ export function useRecentlyViewed<T>({
     [scrollToSlide]
   );
 
-  const handleAddToCart = useCallback((productId: string, cb?: (id: string) => void) => {
-    cb?.(productId);
-  }, []);
+  const handleAddToCart = (productId: string) => {
+    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
+  };
 
-  const handleToggleFavorite = useCallback((productId: string, cb?: (id: string) => void) => {
-    cb?.(productId);
-  }, []);
+  const handleToggleFavorite = (productId: string) => {
+    setWishlist((prev) =>
+      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
+    );
+  };
 
   useEffect(() => {
     if (initialSlide && initialSlide >= 0 && initialSlide !== currentSlide) {
@@ -120,5 +124,7 @@ export function useRecentlyViewed<T>({
     handleAddToCart,
     handleToggleFavorite,
     scrollToSlide,
+    cartItems,
+    wishlist,
   } as const;
 }

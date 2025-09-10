@@ -22,6 +22,8 @@ interface DealSectionFromData {
 
 export const useDealsSection = () => {
   const dealSection = (LandingPageData as any)?.dealSection ?? ({} as DealSectionFromData);
+  const [wishlist, setWishlist] = useState<string[]>([]);
+  const [cartItems, setCartItems] = useState<string[]>([]);
   const title = dealSection.title ?? "Today's Deal for you!";
   const sectionProps = dealSection.props ?? {};
   const timerConfig = sectionProps?.timer;
@@ -165,13 +167,14 @@ export const useDealsSection = () => {
   };
 
   const handleAddToCart = (productId: string) => {
-    console.log("Add to cart:", productId);
+    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
   };
 
   const handleToggleFavorite = (productId: string) => {
-    console.log("Toggle favorite:", productId);
+    setWishlist((prev) =>
+      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
+    );
   };
-
   // expose everything UI needs
   return {
     title,
@@ -188,6 +191,8 @@ export const useDealsSection = () => {
     totalSlides,
     handleAddToCart,
     handleToggleFavorite,
+    wishlist,
+    cartItems,
   };
 };
 

@@ -7,6 +7,7 @@ interface Props {
   showDivider: boolean;
   onAddToCart: () => void;
   onToggleFavorite: () => void;
+  isFavorite: boolean;
 }
 
 const ProductWithDivider: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const ProductWithDivider: React.FC<Props> = ({
   showDivider,
   onAddToCart,
   onToggleFavorite,
+  isFavorite,
 }) => {
   return (
     <>
@@ -21,6 +23,7 @@ const ProductWithDivider: React.FC<Props> = ({
         product={product}
         onAddToCart={onAddToCart}
         onToggleFavorite={onToggleFavorite}
+        isFavorite={isFavorite}
       />
       {showDivider && <CustomPlus />}
     </>

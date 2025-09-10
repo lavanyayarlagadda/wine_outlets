@@ -12,7 +12,7 @@ import {
 import { usePeopleBought } from "./PeopleBought.hook";
 
 const PeopleBought: React.FC = () => {
-  const { handleAddToCart, handleToggleFavorite, currentProducts } = usePeopleBought(
+  const { handleAddToCart, handleToggleFavorite, currentProducts, wishlist } = usePeopleBought(
     suggestedProducts.products
   );
 
@@ -31,6 +31,7 @@ const PeopleBought: React.FC = () => {
               showDivider={index < currentProducts.length - 1}
               onAddToCart={() => handleAddToCart(product.id)}
               onToggleFavorite={() => handleToggleFavorite(product.id)}
+              isFavorite={wishlist.includes(product.id)}
             />
           ))}
         </ProductsWrapper>
