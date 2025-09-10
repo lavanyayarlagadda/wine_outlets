@@ -111,8 +111,8 @@ export function formatOrderDate(value?: string | number | Date | null, locale = 
     value instanceof Date
       ? value
       : typeof value === "number"
-      ? new Date(value)
-      : new Date(String(value));
+        ? new Date(value)
+        : new Date(String(value));
 
   if (!isFinite(date.getTime())) return String(value);
 

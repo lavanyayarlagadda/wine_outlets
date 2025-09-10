@@ -42,7 +42,9 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
         </OrderMeta>
 
         <PriceTag variant="body1">
-          {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(order.totalAmount)}
+          {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+            order.totalAmount
+          )}
         </PriceTag>
       </OrderHeader>
 
@@ -60,10 +62,16 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
                   <ProductTitle>{item.name}</ProductTitle>
 
                   <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                    <InfoItem icon={<InfoIcon src={sizeIcon} alt="size" />} label="Size:" value={item.size ?? "—"} />
+                    <InfoItem
+                      icon={<InfoIcon src={sizeIcon} alt="size" />}
+                      label="Size:"
+                      value={item.size ?? "—"}
+                    />
                   </div>
 
-                  <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>Add Review</GreyOutlineBtn>
+                  <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>
+                    Add Review
+                  </GreyOutlineBtn>
                 </div>
               </ItemDetails>
 
@@ -80,10 +88,17 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
 
                 <div style={{ height: 8 }} />
 
-                <ItemSubPrice>{new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.price)} Each x 2 = <ItemPrice>
-                  {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(subtotal)}
-                </ItemPrice></ItemSubPrice>
-                
+                <ItemSubPrice>
+                  {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+                    item.price
+                  )}{" "}
+                  Each x 2 ={" "}
+                  <ItemPrice>
+                    {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+                      subtotal
+                    )}
+                  </ItemPrice>
+                </ItemSubPrice>
               </ItemRight>
             </ItemRow>
           );
@@ -91,7 +106,9 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
 
         <OrderFooter>
           <RedOutlineBtn onClick={() => onReorder?.(order.orderId)}>Reorder</RedOutlineBtn>
-          <GreyOutlineBtn onClick={() => onViewInvoice?.(order.orderId)}>View Invoice</GreyOutlineBtn>
+          <GreyOutlineBtn onClick={() => onViewInvoice?.(order.orderId)}>
+            View Invoice
+          </GreyOutlineBtn>
         </OrderFooter>
       </OrderBody>
     </OrderCard>

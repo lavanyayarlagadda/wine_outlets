@@ -87,7 +87,12 @@ const CartOverview = () => {
             />
           )}
 
-          <AddToCart label="Place Order" onClick={() => dispatch(setPlaceOrder(true))} />
+          <AddToCart
+            label="Place Order"
+            onClick={() => {
+              (dispatch(setPlaceOrder(true)), window.scrollTo(0, 0));
+            }}
+          />
         </ContentWrapper>
       </LayoutContainer>
     </MainContainer>

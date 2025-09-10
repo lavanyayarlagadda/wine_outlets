@@ -17,7 +17,7 @@ const MyOrders = lazy(() => import("./pages/MyOrders/MyOrders"));
 const Layout = lazy(() => import("./layout/Layout"));
 const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
 const CartOverview = lazy(() => import("./pages/CartOverView/CartOverViewPage"));
-const Invoice = lazy(()=> import("./pages/Invoice/Invoice"))
+const Invoice = lazy(() => import("./pages/Invoice/Invoice"));
 
 const App: React.FC = () => {
   return (

@@ -33,8 +33,10 @@ export const SidebarButton = styled(Box)<{ active?: boolean }>(({ theme, active 
   fontSize: theme.typography.body2.fontSize,
   padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
   marginBottom: theme.spacing(1),
-  color: active ? theme.palette.black?.[800] ?? theme.palette.text.primary : theme.palette.text.primary,
-  background: active ? theme.palette.white?.main ?? "transparent" : "transparent",
+  color: active
+    ? (theme.palette.black?.[800] ?? theme.palette.text.primary)
+    : theme.palette.text.primary,
+  background: active ? (theme.palette.white?.main ?? "transparent") : "transparent",
   borderRadius: shape.baseBorderRadius,
   border: active ? `1px solid ${theme.palette.success.main}` : "1px solid transparent",
   cursor: "pointer",
@@ -186,7 +188,7 @@ export const RedOutlineBtn = styled(PrimaryButton)(({ theme }) => ({
 export const GreyOutlineBtn = styled(SecondaryButton)(({ theme }) => ({
   color: theme.palette.grey?.[200] ?? theme.palette.text.primary,
   border: `1px solid ${theme.palette.grey?.[200] ?? "transparent"}`,
-  maxWidth: theme.spacing(18)
+  maxWidth: theme.spacing(18),
 }));
 
 export const PageTitle = styled(Typography)(({ theme }) => ({
@@ -227,7 +229,7 @@ export const ItemRight = styled(Box)(({ theme }) => ({
   alignItems: "flex-end",
   gap: theme.spacing(1),
   minWidth: 160,
-  fontSize:theme.typography.body2.fontSize
+  fontSize: theme.typography.body2.fontSize,
 }));
 
 export const ItemPrice = styled("span")(({ theme }) => ({
@@ -263,4 +265,3 @@ export const ViewInvoiceButton = styled(SecondaryButton)(({ theme }) => ({
   background: "transparent",
   border: `1px solid ${theme.palette.divider}`,
 }));
-

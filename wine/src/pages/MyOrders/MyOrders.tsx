@@ -40,14 +40,11 @@ import { useNavigate } from "react-router-dom";
 
 import { useMyOrders, formatOrderDate, formatCurrency } from "./MyOrders.hook";
 
-
-
-
 export default function MyOrders() {
   const {
     currentOrders,
     pastOrders,
-   loading,
+    loading,
     selectedTab,
     setSelectedTab,
     cancelOrder,
@@ -55,10 +52,10 @@ export default function MyOrders() {
     viewInvoice,
   } = useMyOrders();
   const navigate = useNavigate();
-   const [confirmOpen, setConfirmOpen] = useState(false);
- const [pendingCancelOrderId, setPendingCancelOrderId] = useState<string | null>(null);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingCancelOrderId, setPendingCancelOrderId] = useState<string | null>(null);
 
-   const listToRender = selectedTab === "current" ? currentOrders : pastOrders;
+  const listToRender = selectedTab === "current" ? currentOrders : pastOrders;
 
   return (
     <PageContainer>
@@ -78,7 +75,9 @@ export default function MyOrders() {
         </PageTitle>
 
         <PageSubtitle variant="body2">
-          {selectedTab === "past" ? "Full order history with option to re-order or view invoice." : "View active orders with live tracking and estimated delivery" }
+          {selectedTab === "past"
+            ? "Full order history with option to re-order or view invoice."
+            : "View active orders with live tracking and estimated delivery"}
         </PageSubtitle>
 
         <SectionDivider />

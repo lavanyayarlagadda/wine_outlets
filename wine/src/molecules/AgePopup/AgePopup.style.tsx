@@ -289,4 +289,3 @@ export const ConfirmSecondary = styled(ExitButton)(({ theme }) => ({
   borderRadius: shape.baseBorderRadius * 1.25,
   padding: theme.spacing(1.25, 4),
 }));
-

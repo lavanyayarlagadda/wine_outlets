@@ -53,16 +53,18 @@ const OrderConfirmed = ({ orderId }: Props) => {
   return (
     <Wrapper>
       {/* Header */}
-      {!orderId && <HeaderBox>
-        <Illustration src={oderConfirmed} alt="Order Confirmed Illustration" />
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Order Confirmed
-        </Typography>
-        <Description variant="body1" color="text.secondary">
-          Thank you for your order! Your wines will be ready for pickup as per your selected date
-          and time.
-        </Description>
-      </HeaderBox>}
+      {!orderId && (
+        <HeaderBox>
+          <Illustration src={oderConfirmed} alt="Order Confirmed Illustration" />
+          <Typography variant="h5" fontWeight="bold" gutterBottom>
+            Order Confirmed
+          </Typography>
+          <Description variant="body1" color="text.secondary">
+            Thank you for your order! Your wines will be ready for pickup as per your selected date
+            and time.
+          </Description>
+        </HeaderBox>
+      )}
 
       {/* Two Column Layout */}
       <TwoColumnGrid container spacing={4}>

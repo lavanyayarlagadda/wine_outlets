@@ -23,13 +23,13 @@ export const StyledButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "active",
 })<{ active: boolean; profile?: boolean }>(({ active, profile }) => ({
   textTransform: "none",
-  fontWeight: "bold",
+  fontWeight: 500,
   borderRadius: shape.borderRadiuspx,
   minHeight: "36px",
   backgroundColor: active ? palette.white.main : "transparent",
   color: active ? palette.black[800] : palette.grey.greyDark,
   border: active && profile ? shape.borderGreyline : "transparent",
-  boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
+  // boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
 }));
 
 export const PasswordFields = styled(Box)(() => ({
