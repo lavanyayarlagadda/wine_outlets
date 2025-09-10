@@ -25,7 +25,7 @@ export const Content = styled(Box)(({ theme }) => ({
 export const Footer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: `1px solid ${theme.palette.divider}`,
-  backgroundColor: palette.grey.border,
+  backgroundColor: palette.background.bg_light,
   position: "sticky",
   bottom: 0,
 }));

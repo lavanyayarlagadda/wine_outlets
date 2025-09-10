@@ -151,7 +151,7 @@ export const RatingBox = styled(Box)(() => ({
 
 export const RatingTypography = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1),
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   fontSize: useFontSize(16),
 }));
 
@@ -343,7 +343,7 @@ export const RatingBadge = styled(Box)(() => ({
 export const RatingText = styled(Typography)(({ theme }) => ({
   fontSize: useFontSize(16),
   lineHeight: 1.6,
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   marginBottom: theme.spacing(2),
 }));
 

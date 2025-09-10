@@ -21,7 +21,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   },
   alignItems: "flex-start",
   borderRadius: 16,
-  border: shape.borderGreyline,
+  border: shape.borderSuccess,
   padding: theme.spacing(3),
   width: "100%",
   minHeight: 210,
@@ -33,7 +33,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
 export const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   borderRadius: shape.borderRadius,
-  border: shape.borderGreyline,
+  border: shape.borderSuccess,
   padding: theme.spacing(2),
   display: "flex",
   justifyContent: "center",

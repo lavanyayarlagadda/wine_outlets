@@ -3,10 +3,10 @@ import { styled } from "@mui/material/styles";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
 import BackspaceOutlinedIcon from "@mui/icons-material/BackspaceOutlined";
+import palette from "../../themes/palette";
 export const CardContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  // border: `1px solid ${theme.palette.grey[300]}`,
   padding: theme.spacing(2),
   gap: theme.spacing(2),
   position: "relative",
@@ -59,24 +59,6 @@ export const ProductTitle = styled(Typography)(() => ({
   textAlign: "left",
 }));
 
-// export const ProductInfoRow = styled(Box)(({ theme }) => ({
-//   justifyContent: "space-between",
-//   display: "flex",
-//   alignItems: "center",
-//   gap: theme.spacing(1),
-//   marginTop: theme.spacing(1),
-//   flexWrap: "wrap",
-//   "& > *": {
-//     flex: "1 1 45%",
-//     minWidth: "160px",
-//   },
-//   [theme.breakpoints.down("sm")]: {
-//     flexDirection: "column",
-//     alignItems: "flex-start",
-//     gap: theme.spacing(0.5),
-//   },
-// }));
-
 export const ProductInfoRow = styled(Box)(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
@@ -122,7 +104,7 @@ export const RatingBox = styled(Box)(() => ({
 
 export const RatingTypography = styled(Typography)(({ theme }) => ({
   marginLeft: theme.spacing(1),
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   fontSize: useFontSize(16),
 }));
 export const InfoValues = styled(Typography)(({ theme }) => ({

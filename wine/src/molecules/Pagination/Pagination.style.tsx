@@ -21,7 +21,7 @@ export const buttonBase: SxProps<Theme> = {
   px: 3,
   borderRadius: shape.borderRadiuspx,
   color: palette.black[800],
-  border: shape.boderGrey200,
+  border: shape.borderSuccess,
   fontWeight: 600,
 };
 

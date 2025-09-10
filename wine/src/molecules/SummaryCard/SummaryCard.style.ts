@@ -6,7 +6,7 @@ import shape from "../../themes/shape";
 export const SummaryCardWrapper = styled(Box)(({ theme }) => ({
   flexShrink: 0,
   borderRadius: 16,
-  border: shape.bordergreyshade,
+  border: shape.borderSuccess,
   padding: theme.spacing(2),
   backgroundColor: palette.white.main,
   boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
@@ -42,5 +42,5 @@ export const PriceContainer = styled(Box)(() => ({
 }));
 
 export const StyledDivider = styled(Divider)(() => ({
-  borderColor: palette.grey.divider,
+  borderColor: palette.grey.light,
 }));

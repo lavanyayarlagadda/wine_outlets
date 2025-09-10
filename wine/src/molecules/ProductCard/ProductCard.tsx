@@ -120,7 +120,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             />
             <Typography
               variant="h6"
-              sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}
+              sx={{ fontSize: "1rem", fontWeight: 500, color: palette.grey.main }}
             >
               {product?.year}
             </Typography>
@@ -133,7 +133,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             />
             <Typography
               variant="body2"
-              sx={{ fontSize: "1rem", fontWeight: 500, color: theme.palette.grey[200] }}
+              sx={{ fontSize: "1rem", fontWeight: 500, color: palette.grey.main }}
             >
               {product?.region}
             </Typography>
@@ -152,7 +152,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         >
           <Typography
             variant="body2"
-            sx={{ color: theme.palette.grey[200], fontSize: "1rem", fontWeight: 500 }}
+            sx={{ color: palette.grey.main, fontSize: "1rem", fontWeight: 500 }}
           >
             <img
               src={expandIcon}
@@ -170,7 +170,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <Typography
               variant="body2"
               sx={{
-                color: theme.palette.grey[200],
+                color: palette.grey.main,
                 fontSize: "1rem",
                 fontWeight: 500,
                 display: "flex",

@@ -22,9 +22,9 @@ export const Title = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-export const Subtitle = styled(Typography)(({ theme }) => ({
+export const Subtitle = styled(Typography)(() => ({
   fontSize: "24px",
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   fontWeight: 400,
 }));
 export const CarouselWrapper = styled(Box)({

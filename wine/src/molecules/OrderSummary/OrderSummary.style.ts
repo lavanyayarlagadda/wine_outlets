@@ -6,7 +6,6 @@ import { theme } from "../../themes/theme";
 import palette from "../../themes/palette";
 
 export const MainContainer = styled(Box)(({ theme }) => ({
-  //   padding: theme.spacing(4),
   border: shape.borderSuccess,
   borderRadius: theme.shape.borderRadius,
 }));

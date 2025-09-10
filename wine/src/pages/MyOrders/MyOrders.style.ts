@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const PageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -186,8 +187,8 @@ export const RedOutlineBtn = styled(PrimaryButton)(({ theme }) => ({
 }));
 
 export const GreyOutlineBtn = styled(SecondaryButton)(({ theme }) => ({
-  color: theme.palette.grey?.[200] ?? theme.palette.text.primary,
-  border: `1px solid ${theme.palette.grey?.[200] ?? "transparent"}`,
+  color: palette.grey.main ?? theme.palette.text.primary,
+  border: shape.borderSuccess ?? "transparent",
   maxWidth: theme.spacing(18),
 }));
 

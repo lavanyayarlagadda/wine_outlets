@@ -29,6 +29,7 @@ export const ICON_COLOR = "#979797";
 export const COMMON_DEFAULT = "#ffffff";
 export const GRAY_COLOR = "#4A515C";
 export const BG_DARK = "#B1B1B1";
+export const BG_LIGHT = "#eee";
 
 export const ICON_LIGHT = "#dadada";
 export const TEXT_PRIMARY = "#212121";
@@ -47,7 +48,6 @@ export const RED_ALERT = "#f44336";
 export const GREY_TERTIARY = "#737372E5";
 
 export const JUNK_MAIN = "#542DBA";
-export const GRAY_BORDER = "#eee";
 export const GREY_Divider = "#ccc";
 export const LIGHT_BLUE = "#FAFAFA";
 export const GREY_MAIN = "#bdbdbd";
@@ -86,7 +86,6 @@ const palette = {
     500: GREY_500,
     150: GREY_150,
     light: LIGHT_GREY,
-    border: GRAY_BORDER,
     divider: GREY_Divider,
     greyMain: GREY_MAIN,
     greyDark: GREY_DARK,
@@ -134,6 +133,7 @@ const palette = {
   background: {
     default: WHITE,
     bg_dark: BG_DARK,
+    bg_light: BG_LIGHT,
   },
   blue: {
     default: BLUE,

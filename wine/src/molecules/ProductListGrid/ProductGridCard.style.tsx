@@ -54,7 +54,7 @@ export const FavoriteIcon = styled(Favorite)(() => ({
 }));
 
 export const FavoriteBorderIcon = styled(FavoriteBorder)(() => ({
-  color: palette.grey[500], // or whatever you want for border
+  color: palette.grey.main, // or whatever you want for border
 }));
 
 export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => ({
@@ -86,7 +86,7 @@ export const DetailsRow = styled(Box)(() => ({
 }));
 
 export const SmallText = styled(Typography)(() => ({
-  color: palette.grey[200],
+  color: palette.grey.main,
   fontSize: "1rem",
   display: "flex",
   alignItems: "center",

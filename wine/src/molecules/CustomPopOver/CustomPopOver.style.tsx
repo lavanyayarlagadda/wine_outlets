@@ -1,6 +1,7 @@
 import { Box, Button, Popover, styled, Typography } from "@mui/material";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
+import palette from "../../themes/palette";
 
 interface PopOverHeadingProps {
   title?: string;
@@ -48,9 +49,7 @@ export const PopOverHeading = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "title",
 })<PopOverHeadingProps>(({ theme, title }) => ({
   fontWeight: "500",
-  color: title?.toLowerCase().includes("order")
-    ? theme.palette.grey[200]
-    : theme.palette.text.primary,
+  color: title?.toLowerCase().includes("order") ? palette.grey.main : theme.palette.text.primary,
   padding: shape.baseBorderRadius,
   fontSize: useFontSize(14),
 }));

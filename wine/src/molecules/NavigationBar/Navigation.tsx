@@ -4,7 +4,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { bike, bag, map, cart, userprofile, logo, star } from "../../assets";
-import { useTheme } from "@mui/material";
 import { useNavigation } from "./Navigation.hook";
 import {
   TopBar,
@@ -47,7 +46,6 @@ import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
 import { logout, profile, myorders, mytastings, wishlist } from "../../assets";
 
 const Navigation = () => {
-  const theme = useTheme();
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
   const {
     anchorEl,
@@ -163,7 +161,7 @@ const Navigation = () => {
 
           <IconGroup>
             <SearchBox sx={{ display: { xs: "none", sm: "flex" } }}>
-              <SearchIcon sx={{ color: palette.grey.greyDark }} />
+              <SearchIcon sx={{ color: palette.grey.main }} />
               <StyledInput
                 placeholder="Search wines, brands, or regions"
                 inputProps={{ "aria-label": "search" }}
@@ -172,7 +170,7 @@ const Navigation = () => {
 
             <DropdownTriggerWithIconMargin
               sx={{
-                color: theme?.palette.grey[100],
+                color: palette.grey.main,
                 display: { xs: "none", md: "flex" },
               }}
               onClick={(e) => {
@@ -239,7 +237,7 @@ const Navigation = () => {
 
           {/* mobile view search */}
           <SearchBox sx={{ display: { xs: "flex", sm: "none" }, mt: 2 }}>
-            <SearchIcon sx={{ color: palette.grey.greyDark }} />
+            <SearchIcon sx={{ color: palette.grey.main }} />
             <StyledInput
               placeholder="Search wines, brands, or regions"
               inputProps={{ "aria-label": "search" }}

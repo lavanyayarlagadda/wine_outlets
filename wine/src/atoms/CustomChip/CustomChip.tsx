@@ -1,6 +1,5 @@
 import React from "react";
-import { Chip } from "@mui/material";
-import shape from "../../themes/shape";
+import { StyledChip } from "./CustomChip.style";
 
 interface CustomChipProps {
   label: string;
@@ -8,15 +7,7 @@ interface CustomChipProps {
 }
 
 const CustomChip: React.FC<CustomChipProps> = ({ label, onDelete }) => {
-  return (
-    <Chip
-      label={label}
-      onDelete={onDelete}
-      size="medium"
-      variant="outlined"
-      sx={{ borderRadius: shape.borderRadiuspx }}
-    />
-  );
+  return <StyledChip label={label} onDelete={onDelete} size="medium" variant="outlined" />;
 };
 
 export default CustomChip;

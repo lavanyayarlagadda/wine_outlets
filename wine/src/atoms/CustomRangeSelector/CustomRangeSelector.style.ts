@@ -18,7 +18,7 @@ export const RangeInputsWrapper = styled(Box)(() => ({
 
 export const StyledSlider = styled(Slider)(() => ({
   "& .MuiSlider-rail": {
-    color: palette.grey.divider,
+    color: palette.grey.light,
     opacity: 1,
     height: 4,
   },
@@ -27,6 +27,6 @@ export const StyledSlider = styled(Slider)(() => ({
     height: 4,
   },
   "& .MuiSlider-thumb": {
-    border: shape.borderWhite,
+    border: shape.borderSuccess,
   },
 }));

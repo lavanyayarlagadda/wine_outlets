@@ -29,7 +29,7 @@ export const Title = styled(Typography)(({ theme }) => ({
 
 export const Subtitle = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   fontWeight: 400,
   [theme.breakpoints.down("sm")]: {
     fontSize: "16px",
@@ -99,7 +99,7 @@ export const StyledImageContainer = styled(Box)(() => ({
 export const StyledCategoryLabel = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   fontWeight: 600,
-  color: palette.grey[50],
+  color: palette.grey.main,
   fontSize: "0.875rem",
   [theme.breakpoints.up("md")]: {
     fontSize: "1rem",

@@ -4,7 +4,7 @@ import palette from "../../themes/palette";
 import shape from "../../themes/shape";
 
 export const FilterWrapper = styled(Box)(({ theme }) => ({
-  border: shape.boderGrey200,
+  border: shape.borderSuccess,
   borderRadius: shape.borderRadius,
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(2),
@@ -53,7 +53,7 @@ export const HeaderTitle = styled(Typography)(() => ({
 }));
 
 export const ClearButton = styled(Button)(() => ({
-  border: shape.boderGrey200,
+  border: shape.borderSuccess,
   borderRadius: shape.borderRadiuspx,
   color: palette.black[800],
   fontSize: "14px",
@@ -73,9 +73,9 @@ export const SubCategoryButton = styled(Button)<{ selected?: boolean }>(({ selec
   textTransform: "none",
   fontWeight: 500,
   marginBottom: "8px",
-  border: selected ? shape.borderRed : shape.boderGrey200,
+  border: selected ? shape.borderRed : shape.borderSuccess,
   backgroundColor: selected ? palette.primary.light : theme.palette.common.white,
-  color: selected ? palette.primary.dark : palette.grey[200],
+  color: selected ? palette.primary.dark : palette.grey.main,
 }));
 
 export const Row = styled(Box)(() => ({

@@ -1,6 +1,7 @@
 // DealsSection.style.tsx
 import { Box, styled, Button, Typography } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const Container = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
@@ -80,11 +81,11 @@ export const StyledFilterButton = styled(Button, {
   fontSize: "0.875rem",
   borderRadius: shape.baseBorderRadius,
   backgroundColor: active ? theme.palette.primary.main : theme.palette.common.white,
-  border: `1px solid ${active ? theme.palette.primary.main : theme.palette.grey[200]}`,
+  border: `1px solid ${active ? theme.palette.primary.main : palette.grey.main}`,
   color: active ? theme.palette.common.white : theme.palette.text.primary,
   "&:hover": {
-    backgroundColor: active ? theme.palette.primary.dark : theme.palette.grey[300],
-    borderColor: active ? theme.palette.primary.dark : theme.palette.grey[200],
+    backgroundColor: active ? theme.palette.primary.dark : palette.grey.main,
+    borderColor: active ? theme.palette.primary.dark : palette.grey.main,
   },
   "& .MuiButton-startIcon": {
     marginRight: theme.spacing(1),

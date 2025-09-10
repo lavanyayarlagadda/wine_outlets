@@ -1,5 +1,6 @@
 import { Typography, Box, styled } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const CardWrapper = styled(Box)(({ theme }) => ({
   height: "300px",
@@ -29,7 +30,7 @@ export const CartTitleText = styled(Typography)(({ theme }) => ({
 
 export const SubTitleText = styled(Typography)(({ theme }) => ({
   fontSize: `${theme.typography.body2}px`,
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   marginTop: "32px",
   minHeight: "80px",
 }));

@@ -10,14 +10,14 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
       borderColor: shape.borderSuccess,
     },
     "&:hover fieldset": {
-      borderColor: palette.grey.greyMain,
+      borderColor: palette.grey.main,
     },
     "&.Mui-focused fieldset": {
       borderColor: palette.blue.default,
     },
   },
   "& .MuiInputLabel-root": {
-    color: palette.grey.greyDark,
+    color: palette.grey.main,
     fontSize: "14px",
   },
   "& .MuiOutlinedInput-input": {
@@ -38,8 +38,8 @@ export const CountrySelect = styled(Select)(() => ({
   },
 }));
 
-export const StyledLabel = styled(Typography)(({ theme }) => ({
-  color: theme.palette.grey[50],
+export const StyledLabel = styled(Typography)(() => ({
+  color: palette.grey.main,
   fontSize: "14px",
   marginBottom: "8px",
   fontWeight: 400,

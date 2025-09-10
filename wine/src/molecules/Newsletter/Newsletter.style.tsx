@@ -1,6 +1,7 @@
 // Newsletter.style.tsx
 import { Box, Button, styled, Typography } from "@mui/material";
 import shape from "../../themes/shape";
+import palette from "../../themes/palette";
 
 export const NewsletterContainer = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -75,7 +76,7 @@ export const BtnWrapperBox = styled(Box)(({ theme }) => ({
 }));
 
 export const CustomizeUnsubscribeText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.grey[400],
+  color: palette.grey.main,
   fontSize: theme.typography.subtitle2.fontSize,
   display: "block",
   [theme.breakpoints.down("sm")]: {

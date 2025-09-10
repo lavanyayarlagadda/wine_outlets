@@ -72,7 +72,7 @@ const ReusableReviewForm: React.FC<ReviewFormProps> = ({
             btnBorderColor=""
           />
           {!isSm && (
-            <span style={{ color: palette.grey.greyDark }}>Your feedback is essential for us!</span>
+            <span style={{ color: palette.grey.main }}>Your feedback is essential for us!</span>
           )}
         </ButtonHintWrapper>
       </RatingBox>

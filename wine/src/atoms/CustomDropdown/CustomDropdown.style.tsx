@@ -10,7 +10,7 @@ export const StyledFormControl = styled(FormControl)(({ theme }) => ({
       borderColor: theme.palette.success.main,
     },
     "&:hover fieldset": {
-      borderColor: palette.grey.greyMain,
+      borderColor: palette.grey.main,
     },
     "&.Mui-focused fieldset": {
       borderColor: palette.blue.default,
@@ -27,7 +27,7 @@ export const DropdownWrapper = styled(Box)<{ side?: boolean }>(({ theme, side })
   flexDirection: side ? "row" : "column",
   alignItems: side ? "center" : "flex-start",
   gap: theme.spacing(1),
-  border: side ? shape.borderDivider : "none",
+  border: side ? shape.borderSuccess : "none",
   borderRadius: side ? 4 : 0,
   padding: side ? 8 : 0,
   "& .MuiOutlinedInput-notchedOutline": {
@@ -40,8 +40,8 @@ export const DropdownWrapper = styled(Box)<{ side?: boolean }>(({ theme, side })
 
 export const StyledLabel = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "side", // prevent side from being passed to DOM
-})<{ side?: boolean }>(({ theme, side }) => ({
-  color: theme.palette.grey[50],
+})<{ side?: boolean }>(({ side }) => ({
+  color: palette.grey.main,
   fontSize: 14,
   fontWeight: 400,
   marginBottom: side ? 0 : 8,

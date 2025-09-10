@@ -11,6 +11,7 @@ import {
 } from "./HeroOverlay.style";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import CustomButton from "../CustomButton/CustomButton";
+import palette from "../../themes/palette";
 
 export interface HeroOverlayProps {
   title: string;
@@ -67,7 +68,7 @@ const HeroOverlay = ({
             onClick={onSecondBtnClick}
             bgColor={theme?.palette?.primary?.light}
             color={theme?.palette?.primary?.dark}
-            border={theme?.palette?.grey[50]}
+            border={palette?.grey.main}
           />
         </OverlayButtonGroup>
       </OverlayContentBox>

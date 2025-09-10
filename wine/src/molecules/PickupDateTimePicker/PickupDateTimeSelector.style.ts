@@ -2,6 +2,7 @@ import { Box, Button, Typography, styled } from "@mui/material";
 import shape from "../../themes/shape";
 import { theme } from "../../themes/theme";
 import { useFontSize } from "../../themes/fontSize";
+import palette from "../../themes/palette";
 
 // Popover container
 export const PopoverContent = styled(Box)(() => ({
@@ -26,7 +27,7 @@ export const PickerContainer = styled(Box)(({ theme }) => ({
 // Vertical Divider (hidden on small screens)
 export const VerticalDivider = styled(Box)(({ theme }) => ({
   width: 1,
-  backgroundColor: theme.palette.grey[300],
+  backgroundColor: palette.grey.main,
   margin: "0 16px",
   alignSelf: "stretch",
 
@@ -59,7 +60,7 @@ export const TimeSlotButton = styled(Button, {
   backgroundColor: selected
     ? theme.palette.primary.light
     : disabledSlot
-      ? theme.palette.grey[300]
+      ? palette.grey.main
       : "transparent",
   "&:hover": {
     border: selected ? shape.borderRed : shape.borderGrey2px,
@@ -67,14 +68,14 @@ export const TimeSlotButton = styled(Button, {
     backgroundColor: selected
       ? theme.palette.primary.light
       : disabledSlot
-        ? theme.palette.grey[300]
+        ? palette.grey.main
         : "transparent ",
   },
 }));
 
 export const Footer = styled(Box)(({ theme }) => ({
   padding: "8px 16px",
-  borderTop: shape.borderDivider,
+  borderTop: shape.borderSuccess,
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -90,7 +91,7 @@ export const Footer = styled(Box)(({ theme }) => ({
 export const SelectedSlotsBtn = styled(Button)(() => ({
   width: "100%",
   justifyContent: "center",
-  border: shape.borderDivider,
+  border: shape.borderSuccess,
   color: theme.palette.text.secondary,
   display: "flex",
   borderRadius: shape.baseBorderRadius,
@@ -103,7 +104,7 @@ export const Container = styled(Box)(({ theme }) => ({
 }));
 
 export const FooterButtons = styled(Button)(() => ({
-  border: shape.boderGrey200,
+  border: shape.borderSuccess,
   color: theme.palette.text.secondary,
   display: "flex",
   borderRadius: shape.baseBorderRadius,

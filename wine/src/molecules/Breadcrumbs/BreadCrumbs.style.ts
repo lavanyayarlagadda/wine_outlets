@@ -50,7 +50,7 @@ export const ProductCountBox = styled(Box)(() => ({
 
 // Typography for product count
 export const ProductCountText = styled(Typography)(() => ({
-  color: palette.grey[200],
+  color: palette.grey.main,
   variant: "body2",
 }));
 // Box wrapper for breadcrumb items

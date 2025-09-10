@@ -106,9 +106,9 @@ export const SearchBox = styled(Box)(({ theme }) => ({
 export const StyledInput = styled(InputBase)(({ theme }) => ({
   marginLeft: "8px",
   flex: 1,
-  color: palette.grey[200], // text color
+  color: palette.grey.main, // text color
   "& input::placeholder": {
-    color: palette.grey[200], // placeholder color
+    color: palette.grey.main, // placeholder color
     opacity: 1,
   },
   // Tablet styles
@@ -124,7 +124,7 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
     fontSize: "16px", // Larger text for mobile touch devices
     "& input::placeholder": {
       fontSize: "16px",
-      color: theme.palette.grey[600],
+      color: palette.grey.main,
     },
   },
   // Small mobile styles
@@ -208,7 +208,7 @@ export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({ theme })
       height: "14px",
     },
   },
-  color: theme.palette.grey[100],
+  color: palette.grey.main,
   cursor: "pointer",
 }));
 
@@ -318,12 +318,12 @@ export const StyledDrawer = styled(Drawer)(({ theme }) => ({
   },
 }));
 
-export const DrawerHeader = styled(Box)(({ theme }) => ({
+export const DrawerHeader = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "16px",
-  borderBottom: theme.palette.grey[200],
+  borderBottom: palette.grey.main,
 }));
 
 export const DrawerMenuItem = styled(Box)(() => ({
@@ -343,21 +343,21 @@ export const MobileLocationDeliveryWrapper = styled(Box)(({ theme }) => ({
     gap: "8px",
     width: "100%",
     margin: "10px 0",
-    color: theme.palette.grey[700],
+    color: palette.grey.main,
   },
 }));
 
-export const DrawerSubMenuItem = styled(Box)(({ theme }) => ({
+export const DrawerSubMenuItem = styled(Box)(() => ({
   padding: "10px 16px",
   fontSize: "14px",
-  color: theme.palette.grey[700],
+  color: palette.grey.main,
   cursor: "pointer",
 }));
 
 export const DrawerAccountSection = styled(Box)(() => ({
   marginTop: "16px",
   paddingTop: "16px",
-  borderTop: shape.boderGrey200,
+  borderTop: shape.borderSuccess,
 }));
 
 export const CloseButton = styled(IconButton)(({ theme }) => ({

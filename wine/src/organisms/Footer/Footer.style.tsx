@@ -53,7 +53,7 @@ export const StyledIconButton = styled((props: IconButtonProps) => <IconButton {
     height: 36,
     marginTop: "18px",
     "&:hover": {
-      backgroundColor: palette.grey.greyDark,
+      backgroundColor: palette.grey.main,
     },
   })
 );
@@ -74,9 +74,9 @@ export const LinksContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledLink = styled(Link)(({ theme }) => ({
+export const StyledLink = styled(Link)(() => ({
   textDecoration: "none",
-  color: theme.palette.grey[200],
+  color: palette.grey.main,
   fontSize: "0.875rem",
   "&:hover": {
     textDecoration: "underline",

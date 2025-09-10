@@ -46,7 +46,7 @@ export const DetailsRow = styled(Box)(() => ({
 }));
 
 export const SmallText = styled(Typography)(() => ({
-  color: palette.grey.greyDark,
+  color: palette.grey.main,
   fontSize: "0.75rem",
   display: "flex",
   alignItems: "center",

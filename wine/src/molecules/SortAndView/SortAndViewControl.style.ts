@@ -16,9 +16,9 @@ export const StyledFormControl = styled(FormControl)(() => ({
 }));
 
 export const ViewBox = styled(Box)(() => ({
-  backgroundColor: palette.grey.light,
+  backgroundColor: palette.background.bg_light,
   padding: "8px",
-  border: shape.borderGreyLight,
+  border: shape.borderSuccess,
   borderRadius: shape.borderRadiuspx,
   display: "flex",
   justifyContent: "center",

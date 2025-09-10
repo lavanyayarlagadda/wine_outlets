@@ -12,7 +12,7 @@ export const TabsWrapper = styled(Box, {
 })<TabsWrapperProps>(({ profile }) => ({
   display: "flex",
   justifyContent: "center",
-  backgroundColor: palette.grey.border,
+  backgroundColor: palette.background.bg_light,
   borderRadius: shape.borderRadiuspx,
   padding: "4px",
   flexDirection: profile ? "column" : "row",
@@ -27,8 +27,8 @@ export const StyledButton = styled(Button, {
   borderRadius: shape.borderRadiuspx,
   minHeight: "36px",
   backgroundColor: active ? palette.white.main : "transparent",
-  color: active ? palette.black[800] : palette.grey.greyDark,
-  border: active && profile ? shape.borderGreyline : "transparent",
+  color: active ? palette.black[800] : palette.grey.main,
+  border: active && profile ? shape.borderSuccess : "transparent",
   // boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
 }));
 

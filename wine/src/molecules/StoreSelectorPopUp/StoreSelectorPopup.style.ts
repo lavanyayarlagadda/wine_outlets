@@ -6,7 +6,7 @@ import palette from "../../themes/palette";
 
 export const TitleText = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(1),
-  color: theme.palette.grey[900],
+  color: palette.grey.main,
   ...theme.typography.h6,
   [theme.breakpoints.down("sm")]: {
     ...theme.typography.subtitle1,
@@ -29,7 +29,7 @@ export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flex: 1,
-  border: shape.borderGrey,
+  border: shape.borderSuccess,
   borderRadius: shape.baseBorderRadius * 1.5,
   padding: theme.spacing(0, 1.5),
   backgroundColor: theme.palette.background.paper,
@@ -46,7 +46,7 @@ export const SearchBoxWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const SearchIconStyled = styled(SearchIcon)(({ theme }) => ({
-  color: palette.grey[200],
+  color: palette.grey.main,
   marginRight: theme.spacing(1),
   display: "flex",
   alignItems: "center",
@@ -130,7 +130,7 @@ export const MapButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "selected",
 })<{ selected?: boolean }>(({ theme, selected }) => ({
   borderRadius: shape.baseBorderRadius * 2,
-  border: selected ? shape.borderRed : shape.borderGrey,
+  border: selected ? shape.borderRed : shape.borderSuccess,
   color: selected ? theme.palette.primary.dark : "inherit",
   textTransform: "none",
   minWidth: theme.spacing(12),

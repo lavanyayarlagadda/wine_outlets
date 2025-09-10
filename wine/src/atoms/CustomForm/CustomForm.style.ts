@@ -38,7 +38,7 @@ export const ButtonHintWrapper = styled(Box)<{ isSm: boolean }>(({ isSm }) => ({
 }));
 
 export const MobileHint = styled(Typography)({
-  color: palette.grey.greyDark, // text.secondary
+  color: palette.grey.main, // text.secondary
   textAlign: "center",
   marginTop: 8,
 });
