@@ -1,4 +1,3 @@
-// src/organisms/pages/Invoice/Invoice.tsx
 import { useNavigate, useParams } from "react-router-dom";
 import OrderConfirmed from "../../organisms/CartOverview/OrderConfirmed";
 import { Box } from "@mui/material";
@@ -25,9 +24,6 @@ export default function Invoice() {
           <StyledInvoice.BreadcrumbOrderId>{id}</StyledInvoice.BreadcrumbOrderId>
         </StyledInvoice.Breadcrumb>
       </StyledInvoice.InvoiceHeader>
-
-      {/* Render your existing order-confirmed organism.
-          If OrderConfirmed expects props (e.g. orderId) pass id */}
       <OrderConfirmed orderId={id} />
     </Box>
   );
