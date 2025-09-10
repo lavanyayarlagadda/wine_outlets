@@ -11,7 +11,6 @@ export const InvoiceHeader = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-// the rounded pill background for the arrow
 export const BackPill = styled(IconButton)(({ theme }) => ({
   background: theme.palette.action.hover,
   borderRadius: 8,

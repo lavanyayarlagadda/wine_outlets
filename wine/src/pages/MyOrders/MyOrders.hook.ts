@@ -1,4 +1,3 @@
-// myOrder.hook.tsx
 import { useCallback, useEffect, useState } from "react";
 import { deal_img2 } from "../../assets";
 
@@ -17,19 +16,18 @@ export type OrderItem = {
 export type Order = {
   orderId: string;
   date: string;
-  status: string; 
+  status: string;
   totalAmount: number;
   items: OrderItem[];
 };
 
-/** Your mock JSON (embedded for demo) */
-const MOCK_DATA: { orders: Order[] } = {
-  orders: [
+const MOCK_DATA = {
+  currentOrders: [
     {
       orderId: "ORD-2024-001",
       date: "2025-01-21",
       status: "Ready for Pickup",
-      totalAmount: 36.28,
+      totalAmount: 18.14,
       items: [
         {
           productId: "P-1001",
@@ -38,8 +36,67 @@ const MOCK_DATA: { orders: Order[] } = {
           origin: "California",
           size: "750ml - Standard",
           year: 2021,
-          quantity: 2,
+          quantity: 1,
           price: 18.14,
+          imageUrl: deal_img2,
+        },
+      ],
+    },
+    {
+      orderId: "ORD-2024-002",
+      date: "2025-02-05",
+      status: "Processing",
+      totalAmount: 42.5,
+      items: [
+        {
+          productId: "P-1002",
+          name: "Jim Beam Bourbon Whiskey",
+          brand: "Jim Beam",
+          origin: "Kentucky",
+          size: "750ml - Standard",
+          year: 2021,
+          quantity: 2,
+          price: 21.25,
+          imageUrl: deal_img2,
+        },
+      ],
+    },
+  ],
+  pastOrders: [
+    {
+      orderId: "ORD-2023-099",
+      date: "2024-12-21",
+      status: "Picked",
+      totalAmount: 28.0,
+      items: [
+        {
+          productId: "P-2001",
+          name: "Old Vine Zinfandel",
+          brand: "Old Vine",
+          origin: "California",
+          size: "750ml - Standard",
+          year: 2020,
+          quantity: 1,
+          price: 28.0,
+          imageUrl: deal_img2,
+        },
+      ],
+    },
+    {
+      orderId: "ORD-2023-100",
+      date: "2024-11-11",
+      status: "Cancelled",
+      totalAmount: 10.0,
+      items: [
+        {
+          productId: "P-3001",
+          name: "Sample Beer",
+          brand: "Brew Co",
+          origin: "Oregon",
+          size: "330ml",
+          year: 2022,
+          quantity: 2,
+          price: 5.0,
           imageUrl: deal_img2,
         },
       ],
@@ -54,8 +111,8 @@ export function formatOrderDate(value?: string | number | Date | null, locale = 
     value instanceof Date
       ? value
       : typeof value === "number"
-        ? new Date(value)
-        : new Date(String(value));
+      ? new Date(value)
+      : new Date(String(value));
 
   if (!isFinite(date.getTime())) return String(value);
 
@@ -71,59 +128,52 @@ export const formatCurrency = (value: number) =>
 
 /** Hook */
 export function useMyOrders() {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [currentOrders, setCurrentOrders] = useState<Order[]>([]);
+  const [pastOrders, setPastOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedTab, setSelectedTab] = useState<"current" | "past">("current");
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);
 
   useEffect(() => {
-    // simulate API loading
     setLoading(true);
     const t = setTimeout(() => {
-      // deep clone to avoid accidental mutation
-      const cloned = JSON.parse(JSON.stringify(MOCK_DATA.orders)) as Order[];
-      setOrders(cloned);
+      setCurrentOrders(JSON.parse(JSON.stringify(MOCK_DATA.currentOrders)));
+      setPastOrders(JSON.parse(JSON.stringify(MOCK_DATA.pastOrders)));
       setLoading(false);
-    }, 300);
+    }, 250);
 
     return () => clearTimeout(t);
   }, []);
 
   const cancelOrder = useCallback((orderId: string) => {
-    setOrders((prev) =>
-      prev.map((o) =>
-        o.orderId === orderId
-          ? {
-              ...o,
-              status: "Cancelled",
-            }
-          : o
-      )
-    );
+    setCurrentOrders((prevCurrent) => prevCurrent.filter((o) => o.orderId !== orderId));
+    setPastOrders((prevPast) => [
+      ...prevPast,
+      {
+        orderId,
+        date: new Date().toISOString(),
+        status: "Cancelled",
+        totalAmount: 0,
+        items: [],
+      },
+    ]);
   }, []);
 
   const markReadyForPickup = useCallback((orderId: string) => {
-    setOrders((prev) =>
-      prev.map((o) =>
-        o.orderId === orderId
-          ? {
-              ...o,
-              status: "Ready for Pickup",
-            }
-          : o
-      )
+    setCurrentOrders((prev) =>
+      prev.map((o) => (o.orderId === orderId ? { ...o, status: "Ready for Pickup" } : o))
     );
   }, []);
 
   const viewInvoice = useCallback((orderId: string) => {
-    // demo: set active order id so UI can open modal / route
     setActiveOrderId(orderId);
   }, []);
 
   const clearActive = useCallback(() => setActiveOrderId(null), []);
 
   return {
-    orders,
+    currentOrders,
+    pastOrders,
     loading,
     selectedTab,
     setSelectedTab,

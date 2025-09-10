@@ -45,25 +45,20 @@ import { useMyOrders, formatOrderDate, formatCurrency } from "./MyOrders.hook";
 
 export default function MyOrders() {
   const {
-    orders,
-    loading,
+    currentOrders,
+    pastOrders,
+   loading,
     selectedTab,
     setSelectedTab,
     cancelOrder,
     markReadyForPickup,
     viewInvoice,
-    // activeOrderId,
-    // clearActive,
   } = useMyOrders();
   const navigate = useNavigate();
    const [confirmOpen, setConfirmOpen] = useState(false);
  const [pendingCancelOrderId, setPendingCancelOrderId] = useState<string | null>(null);
 
-  const filtered = orders.filter((o) =>
-    selectedTab === "current"
-      ? o.status !== "Cancelled" && o.status !== "Picked"
-      : o.status === "Cancelled" || o.status === "Picked"
-  );
+   const listToRender = selectedTab === "current" ? currentOrders : pastOrders;
 
   return (
     <PageContainer>
@@ -92,10 +87,10 @@ export default function MyOrders() {
           <CircularProgress />
         ) : (
           <OrdersList>
-            {filtered.length === 0 ? (
+            {listToRender.length === 0 ? (
               <Typography color="text.secondary">No orders found.</Typography>
             ) : (
-              filtered.map((order) => {
+              listToRender.map((order) => {
                 const item = order.items[0];
                 // const isCancelled = order.status === "Cancelled";
                 // const isReady = order.status === "Ready for Pickup";
