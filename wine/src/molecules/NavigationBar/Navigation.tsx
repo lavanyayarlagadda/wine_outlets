@@ -254,7 +254,11 @@ const Navigation = () => {
 
           {/* mobile view location and delivery */}
           <MobileLocationDeliveryWrapper>
-            <DropdownTriggerWithIconMargin onClick={(e) => handleMenuOpen(e, "store")}>
+            <DropdownTriggerWithIconMargin
+              onClick={(e) => {
+                (handleMenuOpen(e, "store"), setOpen(true));
+              }}
+            >
               <img src={map} alt="map" />
               {firstStoreName}
               {menuOpen.store ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}

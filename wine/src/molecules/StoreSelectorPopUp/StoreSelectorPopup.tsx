@@ -54,6 +54,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   navigation = false,
   dropdown = false,
 }) => {
+  console.log(dropdown, open, navigation, "DROPDOWNNAVIGATION");
   if (dropdown && open && navigation) {
     return (
       <DropdownPaper elevation={3}>

@@ -83,15 +83,39 @@ export const StyledSearchButton = styled(Button)(({ theme }) => ({
 export const DropdownPaper = styled(Paper)(({ theme }) => ({
   marginTop: theme.spacing(6),
   padding: theme.spacing(2),
-  borderRadius: shape.borderRadius,
+  borderRadius: theme.shape.borderRadius,
   position: "absolute",
   zIndex: 10,
-  width: 400, // optional: fix width
-  maxHeight: 400, // fixed max height
-  overflowY: "auto", // enables vertical scroll
-  overflowX: "hidden", // prevent horizontal scroll
+  // width: "100%", // default: full width on small screens
+  maxHeight: 300, // smaller height on mobile
+  overflowY: "auto",
+  overflowX: "hidden",
   boxSizing: "border-box",
   right: "20px",
+
+  // custom scrollbar (optional, looks nicer)
+  "&::-webkit-scrollbar": {
+    width: "6px",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: theme.palette.grey[400],
+    borderRadius: 4,
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    backgroundColor: theme.palette.grey[600],
+  },
+
+  [theme.breakpoints.only("sm")]: {
+    width: 300, // fixed width on tablets & up
+    maxHeight: 300,
+    right: "0px",
+    left: "-2px",
+    marginTop: "90px",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: 400,
+    maxHeight: 350,
+  },
 }));
 
 export const StoreButtonBase = styled(ButtonBase, {
