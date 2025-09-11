@@ -5,11 +5,12 @@ import { AddToCartButton } from "./CustomButton.style";
 interface AddToCartProps {
   onClick?: () => void;
   label?: string;
+  variantType?: "filled" | "outlined";
 }
 
-const AddToCart: React.FC<AddToCartProps> = ({ onClick, label }) => {
+const AddToCart: React.FC<AddToCartProps> = ({ onClick, label, variantType }) => {
   return (
-    <AddToCartButton variant="contained" startIcon={<ShoppingCartIcon />} onClick={onClick}>
+    <AddToCartButton variant="contained" startIcon={<ShoppingCartIcon />} onClick={onClick} variantType={variantType}>
       {label}
     </AddToCartButton>
   );

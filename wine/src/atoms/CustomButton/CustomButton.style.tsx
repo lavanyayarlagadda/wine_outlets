@@ -58,22 +58,34 @@ export const IconWrapper = styled(Box)<{ border: string; color: string; bgcolor:
   })
 );
 
-export const AddToCartButton = styled(Button)(({ theme }) => ({
+export const AddToCartButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "variantType", 
+})<{ variantType?: "filled" | "outlined";}>(({ theme, variantType }) => ({
   fontSize: useFontSize(16),
-  backgroundColor: theme.palette.primary.dark, // dark red
-  color: theme.palette.white.main,
   fontWeight: 600,
   textTransform: "none",
   borderRadius: shape.borderRadiuspx,
   padding: "10px 16px",
   width: "100%",
-  "&:hover": {
-    backgroundColor: theme.palette.primary.main, // lighter red on hover
-  },
+  ...(variantType === "filled"
+    ? {
+        backgroundColor: theme.palette.primary.dark,
+        color: theme.palette.white.main,
+        "&:hover": {
+          backgroundColor: theme.palette.primary.main,
+        },
+      }
+    : {
+        backgroundColor: "transparent",
+        border: `1px solid ${theme.palette.primary.dark}`,
+        color: theme.palette.primary.dark,
+        "&:hover": {
+          backgroundColor: theme.palette.action.hover,
+        },
+      }),
+
   [theme.breakpoints.down("md")]: {
     padding: "8px 12px",
-    // fontSize: "14px",
   },
 }));
 
-//wine/src/atoms/CustomButton/CustomButton.style.tsx

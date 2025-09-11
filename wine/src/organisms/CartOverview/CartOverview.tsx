@@ -92,6 +92,7 @@ const CartOverview = () => {
             onClick={() => {
               (dispatch(setPlaceOrder(true)), window.scrollTo(0, 0));
             }}
+            variantType="filled"
           />
         </ContentWrapper>
       </LayoutContainer>

@@ -21,6 +21,8 @@ import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
+import { Box } from "@mui/material";
+import AddToCart from "../../atoms/CustomButton/AddToCart";
 interface CartProductProps {
   imageUrl: string;
   name: string;
@@ -30,6 +32,7 @@ interface CartProductProps {
   year: string;
   unitPrice: UnitPrice;
   quantity: number;
+  component?: string;
 }
 interface InfoItemProps {
   icon?: React.ReactNode;
@@ -47,6 +50,7 @@ const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
 interface PricingProps {
   price: string;
   vipPrice?: string;
+  component?: string;
 }
 
 const Pricing: React.FC<PricingProps> = ({ vipPrice, price }) => {
@@ -58,6 +62,18 @@ const Pricing: React.FC<PricingProps> = ({ vipPrice, price }) => {
     </RatingBox>
   );
 };
+
+const WishListPricingLayout: React.FC<PricingProps> = ({ vipPrice, price }) => {
+  return (
+    <RatingBox>
+      
+       <VipPriceText sx={{mr:3}}>VIP: ${price} </VipPriceText>
+       <RegularPriceText componentType="WISHLIST">$ {vipPrice}</RegularPriceText>
+     
+    </RatingBox>
+  );
+};
+
 const CartProduct: React.FC<CartProductProps> = ({
   imageUrl,
   name,
@@ -67,6 +83,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   year,
   quantity,
   unitPrice,
+  component = ""
 }) => {
   const [customQuantity, setCustomQuantity] = useState(quantity);
 
@@ -95,12 +112,25 @@ const CartProduct: React.FC<CartProductProps> = ({
         <InfoItem icon={<InfoIcon src={starIcon} alt="brand" />} label="Brand:" value={brand} />
         <InfoItem icon={<InfoIcon src={sizeIcon} alt="size" />} label="size:" value={size} />
         <InfoItem icon={<InfoIcon src={calendarIcon} alt="year" />} label="Year:" value={year} />
-        <CounterWrapper>
-          <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
-        </CounterWrapper>
-        <PricingBox>
-          <Pricing vipPrice={unitPrice.original} price={unitPrice.discounted} />
-        </PricingBox>
+        {component == "WISHLIST" ? (
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <PricingBox componentType={component}>
+              <WishListPricingLayout vipPrice={unitPrice.original} price={unitPrice.discounted} />
+            </PricingBox>
+            <CounterWrapper>
+              <AddToCart label="Add to Cart" variantType="filled" />
+            </CounterWrapper>
+          </Box>
+        ) : (
+          <>
+            <CounterWrapper>
+              <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
+            </CounterWrapper>
+            <PricingBox>
+              <Pricing vipPrice={unitPrice.original} price={unitPrice.discounted} />
+            </PricingBox>
+          </>
+        )}
       </ProductInfoRow>
     </CardContainer>
   );

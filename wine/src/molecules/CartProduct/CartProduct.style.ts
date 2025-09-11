@@ -141,10 +141,12 @@ export const BackspaceIcon = styled(IconButton, {
   },
 }));
 
-export const PricingBox = styled(Box)(() => ({
+export const PricingBox = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "componentType",
+})<{componentType?: "WISHLIST" | "DEFAULT"}>(({ componentType }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: componentType === "WISHLIST" ? "flex-start" : "flex-end",
   flex: 1,
   minWidth: "160px",
 }));
@@ -156,10 +158,12 @@ export const VipPriceText = styled(Typography)(({ theme }) => ({
   marginLeft: "10px",
 }));
 
-export const RegularPriceText = styled(Typography)(({ theme }) => ({
+export const RegularPriceText = styled(Typography,{
+  shouldForwardProp: (prop) => prop !== "componentType",
+})<{componentType?: "WISHLIST" | "DEFAULT"}>(({ theme,componentType }) => ({
   fontSize: useFontSize(18),
   fontWeight: 600,
-  textDecoration: "line-through",
+  textDecoration: componentType==="WISHLIST" ?  "none":"line-through" ,
   color: theme.palette.text.primary,
   whiteSpace: "nowrap",
 }));
@@ -170,5 +174,9 @@ export const BackSpaceIcon = styled(BackspaceOutlinedIcon)(() => ({
 
 export const CounterWrapper = styled(Box)(() => ({
   display: "inline-flex",
+  width: "auto",
+}));
+
+export const CartButtonWrapper = styled(Box)(() => ({
   width: "auto",
 }));
