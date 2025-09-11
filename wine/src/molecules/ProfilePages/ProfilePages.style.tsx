@@ -67,7 +67,7 @@ export const GridItem = styled(Grid)(() => ({
 }));
 
 export const VIPCard = styled(Card)<{ active?: boolean }>(({ active, theme }) => ({
-  backgroundColor: !active ? palette.grey.border : palette.primary.dark,
+  backgroundColor: !active ? palette.background.bg_light: palette.primary.dark,
   color: !active ? palette.black[800] : palette.white.main,
   borderRadius: "12px",
   minHeight: "280px", // increased height
