@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import {
   FooterContainer,
@@ -14,18 +14,45 @@ import {
 } from "./Footer.style";
 import { FOOTER_DATA, SOCIAL_ICONS } from "../../constant/footerData";
 import { logo } from "../../assets";
+import { StoreLocator } from "../../molecules";
+import { stores } from "../../constant/curatedData";
+import { useNavigate } from "react-router-dom";
 
 const Footer: React.FC = () => {
+  const [isStoreLocator, setIsStoreLocator] = React.useState(false);
+  const [selectedStore, setSelectedStore] = React.useState<number>(
+    stores.length > 0 ? stores[0].id : 0
+  );
+  const navigate = useNavigate();
   const renderFooterSection = (sectionData: (typeof FOOTER_DATA)[keyof typeof FOOTER_DATA]) => (
     <>
       <SectionTitle variant="h6">{sectionData.title}</SectionTitle>
       <LinksContainer>
         {sectionData.links.map((link, index) => (
-          <StyledLink key={index} href={link.href}>
+          <StyledLink
+            key={index}
+            // href={link.href}
+            onClick={(e) => {
+              if (link.text.toLowerCase() === "store locator") {
+                e.preventDefault(); // optional: stop navigation
+                setIsStoreLocator(true);
+              } else {
+                navigate(link.href); // Wines, Beer, Liquor go here
+              }
+            }}
+          >
             {link.text}
           </StyledLink>
         ))}
       </LinksContainer>
+      <StoreLocator
+        open={isStoreLocator}
+        onClose={() => setIsStoreLocator(false)}
+        selectedStoreId={selectedStore}
+        stores={stores}
+        onSelect={(id) => setSelectedStore(id)}
+        navigation={true}
+      />
     </>
   );
 
@@ -52,6 +79,7 @@ const Footer: React.FC = () => {
               </StyledIconButton>
             ))}
           </SocialIconsContainer>
+          <Typography>© 2025 Wine Outlet. All Rights Reserved.</Typography>
         </Grid>
 
         <Box

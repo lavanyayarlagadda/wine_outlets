@@ -42,6 +42,7 @@ export const CustomizedGrid = styled(Grid)(({ theme }) => ({
 export const SocialIconsContainer = styled(Box)(() => ({
   display: "flex",
   gap: "22px",
+  paddingBottom: 10,
 }));
 
 export const StyledIconButton = styled((props: IconButtonProps) => <IconButton {...props} />)(
@@ -81,4 +82,5 @@ export const StyledLink = styled(Link)(() => ({
   "&:hover": {
     textDecoration: "underline",
   },
+  cursor: "pointer",
 }));

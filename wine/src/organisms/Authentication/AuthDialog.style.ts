@@ -29,7 +29,8 @@ export const StyledButton = styled(Button, {
   backgroundColor: active ? palette.white.main : "transparent",
   color: active ? palette.black[800] : palette.grey.main,
   border: active && profile ? shape.borderSuccess : "transparent",
-  // boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
+  justifyContent: profile ? "flex-start" : "center", // align text
+  paddingLeft: profile ? "12px" : undefined, // boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
 }));
 
 export const PasswordFields = styled(Box)(() => ({

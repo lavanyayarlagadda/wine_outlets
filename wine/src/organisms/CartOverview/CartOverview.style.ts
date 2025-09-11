@@ -93,7 +93,7 @@ export const SmallAddIcon = styled(AddIcon)(() => ({
 
 export const Wrapper = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
+  padding: theme.spacing(4.5),
 }));
 
 export const HeaderBox = styled(Box)(({ theme }) => ({

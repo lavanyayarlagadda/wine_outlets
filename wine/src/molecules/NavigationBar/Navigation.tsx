@@ -1,9 +1,7 @@
 import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { bike, bag, map, cart, userprofile, logo, star } from "../../assets";
+import { bike, map, cart, userprofile, logo, star } from "../../assets";
 import { useNavigation } from "./Navigation.hook";
 import {
   TopBar,
@@ -12,7 +10,6 @@ import {
   SearchBox,
   StyledInput,
   NavWrapper,
-  NavMenu,
   HighlightMenu,
   StyledMenu,
   DropdownTriggerNoBorder,
@@ -32,7 +29,7 @@ import {
   ProfileMenuIcon,
   ProfileMenuText,
   MobileMenuIcon,
-  StyledSearchIcon 
+  StyledSearchIcon,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +46,26 @@ import { logout, profile, myorders, mytastings, wishlist } from "../../assets";
 
 const Navigation = () => {
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
+  const bannerData = {
+    banners: [
+      { id: 1, message: "Free Wine Tasting Every Friday 5-7 PM", action: { label: "", url: "" } },
+      {
+        id: 2,
+        message: "New VIP Membership - Join Today for Exclusive Benefits!",
+        action: { label: "", url: "" },
+      },
+      {
+        id: 3,
+        message: "Same-Day Pickup Available at All Locations!",
+        action: { label: "", url: "" },
+      },
+      {
+        id: 4,
+        message: "Holiday Hours: Extended Weekend Shopping",
+        action: { label: "", url: "" },
+      },
+    ],
+  };
   const {
     anchorEl,
     menuOpen,
@@ -74,7 +91,8 @@ const Navigation = () => {
     setOpen,
     open,
     setOpenLogin,
-  } = useNavigation(menuKeys);
+    currentBanner,
+  } = useNavigation(menuKeys, bannerData.banners, 2000);
   const navigate = useNavigate();
 
   const menuData = {
@@ -107,6 +125,16 @@ const Navigation = () => {
           { id: 2, listName: "Liquor2" },
           { id: 3, listName: "Liquor3" },
           { id: 4, listName: "Liquor4" },
+        ],
+      },
+      {
+        id: "4",
+        name: "Miscellaneous",
+        itemsList: [
+          { id: 1, listName: "Miscellaneous1" },
+          { id: 2, listName: "Miscellaneous2" },
+          { id: 3, listName: "Miscellaneous3" },
+          { id: 4, listName: "Miscellaneous4" },
         ],
       },
     ],
@@ -144,19 +172,24 @@ const Navigation = () => {
   return (
     <div>
       <TopBar>
+        {" "}
         <TopBarContent>
+          {" "}
           <CustomiseOfferText>
-            🎉 Free Gift with Every $100+ Order — This Week Only <span>Learn More</span>
-          </CustomiseOfferText>
-        </TopBarContent>
+            {" "}
+            🎉 {currentBanner.message}{" "}
+            <span onClick={() => navigate(currentBanner.action.url)}>
+              {" "}
+              {currentBanner.action.label}{" "}
+            </span>{" "}
+          </CustomiseOfferText>{" "}
+        </TopBarContent>{" "}
       </TopBar>
 
       <StyledAppBar>
         <StyledToolbar>
           {/* Mobile Menu Button - Add this */}
-          <CustomizeIconButton
-            onClick={handleMobileMenuOpen}
-          >
+          <CustomizeIconButton onClick={handleMobileMenuOpen}>
             <MobileMenuIcon />
           </CustomizeIconButton>
           <Logo src={logo} alt="Wine Outlet" onClick={() => navigate("/")} />
@@ -196,7 +229,7 @@ const Navigation = () => {
             <RightNavSection>
               <CustomizeIconButton
                 onClick={() => {
-                   navigate("/cartOverview");
+                  navigate("/cartOverview");
                 }}
               >
                 <img src={cart} alt="cart" />
@@ -236,6 +269,7 @@ const Navigation = () => {
                   onClick={() => {
                     (setSignIn(true), setOpenLogin(true));
                   }}
+                  variantType="filled"
                 >
                   Sign In
                 </AddToCartButton>
@@ -303,12 +337,12 @@ const Navigation = () => {
             </div>
           ))}
 
-          <NavMenu>Tastings</NavMenu>
-          <NavMenu>Events</NavMenu>
+          {/* <NavMenu>Tastings</NavMenu>
+          <NavMenu>Events</NavMenu> */}
           <HighlightMenu>
             <img src={star} alt="star" /> New Arrivals
           </HighlightMenu>
-          <NavMenu>Promotions</NavMenu>
+          {/* <NavMenu>Promotions</NavMenu> */}
         </NavWrapper>
 
         <RightNavSection>
@@ -347,9 +381,9 @@ const Navigation = () => {
               DoorDash
             </CustomDeliveryButton>
           </CustomPopover>
-          <DropdownTriggerWithGap>
+          {/* <DropdownTriggerWithGap>
             <img src={bag} alt="bag" /> Hiring Now
-          </DropdownTriggerWithGap>
+          </DropdownTriggerWithGap> */}
         </RightNavSection>
       </BottomToolbar>
 

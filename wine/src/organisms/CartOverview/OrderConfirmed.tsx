@@ -1,4 +1,4 @@
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, Box } from "@mui/material";
 import {
   Wrapper,
   HeaderBox,
@@ -12,10 +12,13 @@ import StepsCard from "../../molecules/StepsCard/StepsCard";
 import PickupInformation from "../../molecules/PickupInfo/PickupInfo";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
 import { oderConfirmed } from "../../assets";
+import { useNavigate } from "react-router-dom";
 
 type Props = { orderId?: string | null };
 
 const OrderConfirmed = ({ orderId }: Props) => {
+  const navigate = useNavigate();
+
   const steps = [
     {
       title: "We’ll prepare your order",
@@ -111,8 +114,16 @@ const OrderConfirmed = ({ orderId }: Props) => {
         {/* Right Column */}
         <ColumnGrid size={{ xs: 12, md: 6 }}>
           <Stack spacing={3} alignItems="center">
-            <StepsCard heading="What's Next?" steps={steps} />
-            {!orderId && <AddToCart label="Continue Shopping" />}
+            <Box display={"flex"} flexDirection={"column"} gap={4}>
+              <StepsCard heading="What's Next?" steps={steps} />
+              {!orderId && (
+                <AddToCart
+                  label="Continue Shopping"
+                  variantType="filled"
+                  onClick={() => navigate("/")}
+                />
+              )}
+            </Box>
           </Stack>
         </ColumnGrid>
       </TwoColumnGrid>

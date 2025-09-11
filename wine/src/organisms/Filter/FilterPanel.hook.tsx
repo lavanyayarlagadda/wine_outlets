@@ -15,6 +15,8 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const [filters, setFilters] = useState<Filters>({});
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  console.log(selectedCategory, "SLEECETDCAT");
+
   const handleSubSelect = (id: string) => {
     setSelectedSub(id === selectedSub ? null : id);
   };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTheme } from "@mui/material";
 import { Person as PersonIcon } from "@mui/icons-material";
 import { CustomTextField, CustomDropdown, CustomButton } from "../../atoms";
-import { countryOptions, storeOptions, alcoholPreferences } from "../../constant/newsletterData";
+import { countryOptions, alcoholPreferences } from "../../constant/newsletterData";
 import {
   NewsletterContainer,
   BtnWrapperBox,
@@ -12,9 +12,11 @@ import {
   CustomizeTitleText,
 } from "./Newsletter.style";
 import palette from "../../themes/palette";
+import { stores } from "../../constant/curatedData";
 
 const Newsletter: React.FC = () => {
   const theme = useTheme();
+
   const [formData, setFormData] = useState({
     fullName: "",
     countryCode: "US",
@@ -30,6 +32,11 @@ const Newsletter: React.FC = () => {
       [field]: value,
     }));
   };
+
+  const preferredStores = stores.map((store) => ({
+    label: store.name,
+    value: store.name.toLowerCase(),
+  }));
 
   return (
     <NewsletterContainer>
@@ -70,7 +77,7 @@ const Newsletter: React.FC = () => {
             label="Preferred Store"
             value={formData.preferredStore}
             onChange={handleInputChange("preferredStore")}
-            options={storeOptions}
+            options={preferredStores}
             placeholder="Select Store"
           />
 

@@ -1,12 +1,15 @@
 import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { theme } from "../../themes/theme";
 import { CustomButton, CustomTextField } from "../../atoms";
 import * as Styled from "./ProfilePages.style";
 import shape from "../../themes/shape";
+import { useProfileForm } from "./ProfilePages.hook";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const VipMembership = ({ initialData }: { initialData?: any }) => {
+  const { vipCode, handleVipCodeChange, setShowPassword, showPassword } =
+    useProfileForm(initialData);
   return (
     <>
       <Styled.Container>
@@ -27,6 +30,7 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
               color={theme.palette.primary.dark}
               btnBorderColor={theme.palette.primary.dark}
               border={shape.borderRed}
+              profile={true}
             />
           </Styled.TextBox>
           <Styled.DividerLine />
@@ -72,15 +76,16 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
             <Styled.BarcodeForm>
               <CustomTextField
                 label="VIP Bar-Code"
-                value={initialData.barcodeNumber}
-                onChange={() => {}}
+                value={vipCode}
+                onChange={handleVipCodeChange} // pass string
                 required
-                type={"password"}
+                type={showPassword ? "text" : "password"}
                 endIcon={
-                  <IconButton edge="end" disabled>
-                    <VisibilityOffIcon />
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 }
+                placeholder="Enter Your VIP-Bar Code"
               />
 
               <Styled.ButtonWrapper>

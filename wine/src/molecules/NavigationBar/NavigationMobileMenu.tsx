@@ -28,10 +28,49 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
   handleMobileMenuToggle,
 }) => {
   const navigate = useNavigate();
-  const menus: { [key: string]: string[] } = {
-    Wine: ["Red Wine", "White Wine", "Rose Wine"],
-    Beer: ["Lager", "Ale", "Stout"],
-    Liquor: ["Whiskey", "Vodka", "Rum"],
+  const menuData = {
+    menuList: [
+      {
+        id: 1,
+        name: "Wines",
+        itemsList: [
+          { id: 1, listName: "Wines1" },
+          { id: 2, listName: "Wines2" },
+          { id: 3, listName: "Wines3" },
+          { id: 4, listName: "Wines4" },
+        ],
+      },
+      {
+        id: 2,
+        name: "Beers",
+        itemsList: [
+          { id: 1, listName: "Beers1" },
+          { id: 2, listName: "Beers2" },
+          { id: 3, listName: "Beers3" },
+          { id: 4, listName: "Beers4" },
+        ],
+      },
+      {
+        id: 3,
+        name: "Liquor",
+        itemsList: [
+          { id: 1, listName: "Liquor1" },
+          { id: 2, listName: "Liquor2" },
+          { id: 3, listName: "Liquor3" },
+          { id: 4, listName: "Liquor4" },
+        ],
+      },
+      {
+        id: "4",
+        name: "Miscellaneous",
+        itemsList: [
+          { id: 1, listName: "Miscellaneous1" },
+          { id: 2, listName: "Miscellaneous2" },
+          { id: 3, listName: "Miscellaneous3" },
+          { id: 4, listName: "Miscellaneous4" },
+        ],
+      },
+    ],
   };
 
   const handleNavigation = (path: string) => {
@@ -49,29 +88,34 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
       </DrawerHeader>
 
       {/* Main Menu Items */}
-      {["Wine", "Beer", "Liquor"].map((item) => (
-        <div key={item}>
-          <DrawerMenuItem onClick={() => handleMobileMenuToggle(item)}>
-            <span>{item}</span>
-            {menuOpen[item] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+      {menuData.menuList.map((menu) => (
+        <div key={menu.id}>
+          <DrawerMenuItem onClick={() => handleMobileMenuToggle(menu.name)}>
+            {menu.name} {menuOpen[menu.name] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </DrawerMenuItem>
-          {menuOpen[item] &&
-            menus[item].map((val) => (
-              <DrawerSubMenuItem key={val} onClick={() => handleNavigation("/productsList")}>
-                {val}
+          {menuOpen[menu.name] &&
+            menu.itemsList.map((val) => (
+              <DrawerSubMenuItem
+                key={val.id}
+                onClick={() => {
+                  (navigate(`/productsList?category=${menu.name.toLowerCase()}&id=${menu.id}`),
+                    handleMobileMenuClose());
+                }}
+              >
+                {val.listName}
               </DrawerSubMenuItem>
             ))}
         </div>
       ))}
 
-      <DrawerMenuItem onClick={() => handleNavigation("/tastings")}>Tastings</DrawerMenuItem>
-      <DrawerMenuItem onClick={() => handleNavigation("/events")}>Events</DrawerMenuItem>
+      {/* <DrawerMenuItem onClick={() => handleNavigation("/tastings")}>Tastings</DrawerMenuItem>
+      <DrawerMenuItem onClick={() => handleNavigation("/events")}>Events</DrawerMenuItem> */}
       <DrawerMenuItem onClick={() => handleNavigation("/new-arrivals")}>
         <span style={{ display: "flex", alignItems: "center" }}>
           <img src={star} alt="star" style={{ marginRight: "8px" }} /> New Arrivals
         </span>
       </DrawerMenuItem>
-      <DrawerMenuItem onClick={() => handleNavigation("/promotions")}>Promotions</DrawerMenuItem>
+      {/* <DrawerMenuItem onClick={() => handleNavigation("/promotions")}>Promotions</DrawerMenuItem> */}
 
       {/* Delivery Options */}
       <DrawerMenuItem onClick={() => handleMobileMenuToggle("delivery")}>
@@ -86,7 +130,7 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
         </>
       )}
 
-      <DrawerMenuItem onClick={() => handleNavigation("/careers")}>Hiring Now</DrawerMenuItem>
+      {/* <DrawerMenuItem onClick={() => handleNavigation("/careers")}>Hiring Now</DrawerMenuItem> */}
 
       {/* Account Section */}
       {/* <DrawerAccountSection>

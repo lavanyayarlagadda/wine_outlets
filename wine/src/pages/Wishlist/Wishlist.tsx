@@ -21,9 +21,7 @@ export default function Wishlist() {
       <WishlistHeader>
         <Box>
           <Title>Wishlist</Title>
-          <Subtitle>
-            Save your favorite wines and products to explore or purchase later.
-          </Subtitle>
+          <Subtitle>Save your favorite wines and products to explore or purchase later.</Subtitle>
         </Box>
       </WishlistHeader>
 

@@ -315,5 +315,6 @@ export function useWishlist() {
     removeItem,
     addToCart,
     clearAll,
+    setError,
   };
 }

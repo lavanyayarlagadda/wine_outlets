@@ -80,7 +80,7 @@ export const Logo = styled("img")(({ theme }) => ({
 
 // 🔴 Search
 export const SearchBox = styled(Box)(({ theme }) => ({
-  display: "none", 
+  display: "none",
 
   alignItems: "center",
   padding: "4px 12px",
@@ -297,7 +297,6 @@ export const MobileMenuIcon = styled(MenuIcon)(({ theme }) => ({
 export const StyledSearchIcon = styled(SearchIcon)(() => ({
   color: palette.grey.main,
 }));
-
 
 export const IconGroup = styled(Box)(() => ({
   display: "flex",

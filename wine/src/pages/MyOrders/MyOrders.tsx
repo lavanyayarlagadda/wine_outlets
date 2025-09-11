@@ -49,7 +49,6 @@ export default function MyOrders() {
     setSelectedTab,
     cancelOrder,
     markReadyForPickup,
-    viewInvoice,
   } = useMyOrders();
   const navigate = useNavigate();
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -103,7 +102,7 @@ export default function MyOrders() {
                         console.log("reorder", id);
                         // TODO: implement reorder flow
                       }}
-                      onViewInvoice={(id) => viewInvoice(id)}
+                      onViewInvoice={(id) => navigate(`/orders/invoice/${encodeURIComponent(id)}`)}
                     />
                   );
                 }

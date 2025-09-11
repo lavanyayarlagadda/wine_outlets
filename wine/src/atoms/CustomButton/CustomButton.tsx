@@ -11,6 +11,7 @@ interface CustomButtonProps {
   btnBorderColor?: string;
   btnbgColor?: string;
   btnColor?: string;
+  profile?: boolean;
 }
 
 const CustomButton = ({
@@ -22,9 +23,15 @@ const CustomButton = ({
   btnBorderColor = "",
   btnbgColor = "",
   btnColor = "",
+  profile = false,
 }: CustomButtonProps) => {
   return (
-    <StyledButton onClick={onClick} bgColor={bgColor} btnBorderColor={btnBorderColor}>
+    <StyledButton
+      onClick={onClick}
+      bgColor={bgColor}
+      btnBorderColor={btnBorderColor}
+      profile={profile}
+    >
       <ButtonText style={{ color }}>{text}</ButtonText>
       <IconWrapper border={border} bgcolor={btnbgColor} color={btnColor}>
         <NorthEastIcon fontSize="small" />

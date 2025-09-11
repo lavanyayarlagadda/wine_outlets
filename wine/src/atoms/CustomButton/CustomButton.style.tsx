@@ -2,35 +2,38 @@ import { Button, Box, Typography, styled } from "@mui/material";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
 
-export const StyledButton = styled(Button)<{ bgColor: string; btnBorderColor: string }>(
-  ({ bgColor, btnBorderColor, theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+export const StyledButton = styled(Button)<{
+  bgColor: string;
+  btnBorderColor: string;
+  profile?: boolean;
+}>(({ bgColor, btnBorderColor, theme, profile }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: bgColor,
+  color: theme.palette.white.main,
+  borderRadius: shape.borderRadius12,
+  border: btnBorderColor ? `1px solid ${btnBorderColor}` : "",
+  padding: profile ? "2px" : "16px 12px 16px 20px",
+  textTransform: "none",
+  fontWeight: 600,
+  minWidth: "150px",
+  fontSize: profile ? "12px" : "14px",
+  "&:hover": {
     backgroundColor: bgColor,
-    color: theme.palette.white.main,
-    borderRadius: shape.borderRadius12,
-    border: btnBorderColor ? `1px solid ${btnBorderColor}` : "",
-    padding: "16px 12px 16px 20px",
-    textTransform: "none",
-    fontWeight: 600,
-    minWidth: "150px",
-    "&:hover": {
-      backgroundColor: bgColor,
-      opacity: 0.9,
-    },
-    [theme.breakpoints.down("md")]: {
-      padding: "10px 14px",
-      fontSize: "14px",
-      maxWidth: "100%",
-    },
-    [theme.breakpoints.between("md", "lg")]: {
-      padding: "12px 16px",
-      fontSize: "14px",
-      maxWidth: "250px",
-    },
-  })
-);
+    opacity: 0.9,
+  },
+  [theme.breakpoints.down("md")]: {
+    padding: profile ? "2px" : "10px 14px",
+    fontSize: "14px",
+    maxWidth: "100%",
+  },
+  [theme.breakpoints.between("md", "lg")]: {
+    padding: profile ? "2px" : "12px 16px",
+    fontSize: "14px",
+    maxWidth: "250px",
+  },
+}));
 
 export const ButtonText = styled(Typography)(({ theme }) => ({
   fontWeight: "500",
@@ -59,8 +62,8 @@ export const IconWrapper = styled(Box)<{ border: string; color: string; bgcolor:
 );
 
 export const AddToCartButton = styled(Button, {
-  shouldForwardProp: (prop) => prop !== "variantType", 
-})<{ variantType?: "filled" | "outlined";}>(({ theme, variantType }) => ({
+  shouldForwardProp: (prop) => prop !== "variantType",
+})<{ variantType?: "filled" | "outlined" }>(({ theme, variantType }) => ({
   fontSize: useFontSize(16),
   fontWeight: 600,
   textTransform: "none",
@@ -88,4 +91,3 @@ export const AddToCartButton = styled(Button, {
     padding: "8px 12px",
   },
 }));
-

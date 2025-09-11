@@ -23,9 +23,11 @@ import AddToCart from "../../atoms/CustomButton/AddToCart";
 import { useDispatch } from "react-redux";
 import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 import { useCartOverView } from "./CartOverview.hook";
+import { useNavigate } from "react-router-dom";
 
 const CartOverview = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error } = useCartOverView();
   if (error !== "") return <Typography color="error">{error}</Typography>;
 
@@ -38,7 +40,7 @@ const CartOverview = () => {
             <ProductHeader>
               <HeaderTitle>Product List</HeaderTitle>
 
-              <HeaderAction>
+              <HeaderAction onClick={() => navigate("/")}>
                 <BorderedIcon>
                   <SmallAddIcon />
                 </BorderedIcon>

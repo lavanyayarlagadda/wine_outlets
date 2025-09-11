@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { stores } from "../../constant/curatedData";
 
 type MenuState = {
@@ -9,7 +9,15 @@ type AnchorState = {
   [key: string]: HTMLElement | null;
 };
 
-export const useNavigation = (menuKeys: string[]) => {
+type Banner = {
+  id: number;
+  message: string;
+  action: { label: string; url: string };
+};
+
+export const useNavigation = (menuKeys: string[], banners: Banner[], interval = 2000) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const [menuOpen, setMenuOpen] = useState<MenuState>(
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: false }), {})
   );
@@ -25,12 +33,18 @@ export const useNavigation = (menuKeys: string[]) => {
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: null }), {})
   );
 
-  console.log(signIn, "SIGNIN");
-
   // mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const firstStoreName = stores.length > 0 ? stores[0].name : "Select Store";
   const [selectedStore, setSelectedStore] = useState<number>(stores.length > 0 ? stores[0].id : 0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % banners.length);
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [banners.length, interval]);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElProfile(event.currentTarget);
@@ -43,11 +57,16 @@ export const useNavigation = (menuKeys: string[]) => {
   const handleLoginClose = () => {
     setOpenLogin(false);
     setSignIn(false);
+    setIsSubmit(true);
   };
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, key: string) => {
-    setAnchorEl((prev) => ({ ...prev, [key]: event.currentTarget }));
-    setMenuOpen((prev) => ({ ...prev, [key]: true }));
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, menu: string) => {
+    const target = event.currentTarget; // clone reference immediately
+    setAnchorEl((prev) => ({
+      ...prev,
+      [menu]: target,
+    }));
+    setMenuOpen((prev) => ({ ...prev, [menu]: true }));
   };
 
   const handleMenuClose = (key: string) => {
@@ -99,5 +118,6 @@ export const useNavigation = (menuKeys: string[]) => {
     handleLoginClose,
     setOpen,
     open,
+    currentBanner: banners[currentIndex],
   };
 };

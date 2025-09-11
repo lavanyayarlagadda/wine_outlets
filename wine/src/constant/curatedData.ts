@@ -147,7 +147,7 @@ export const filtersData = {
         },
         {
           categoryId: "1-2",
-          categoryName: "Beer",
+          categoryName: "Beers",
           categoryCount: "50",
           categoryList: [
             { listId: "1", listName: "Lager" },
@@ -165,6 +165,17 @@ export const filtersData = {
             { listId: "2", listName: "Cabernet Aisle" },
             { listId: "3", listName: "Sparkling Aisle" },
             { listId: "4", listName: "Italian" },
+          ],
+        },
+        {
+          categoryId: "1-4",
+          categoryName: "Miscellaneous",
+          categoryCount: "28",
+          categoryList: [
+            { listId: "1", listName: "Miscellaneous1" },
+            { listId: "2", listName: "Miscellaneous2" },
+            { listId: "3", listName: "Miscellaneous3" },
+            { listId: "4", listName: "Miscellaneous4" },
           ],
         },
       ],

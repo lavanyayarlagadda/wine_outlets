@@ -23,6 +23,11 @@ export const useProfileForm = (initialData?: any) => {
 
   const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({});
   const [showPassword, setShowPassword] = useState(false);
+  const [vipCode, setVipCode] = useState(initialData?.barcodeNumber || "");
+
+  const handleVipCodeChange = (value: string) => {
+    setVipCode(value);
+  };
 
   useEffect(() => {
     if (initialData) {
@@ -91,5 +96,7 @@ export const useProfileForm = (initialData?: any) => {
     handleSubmitPassword,
     showPassword,
     setShowPassword,
+    vipCode,
+    handleVipCodeChange,
   };
 };

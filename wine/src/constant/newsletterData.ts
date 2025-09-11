@@ -13,8 +13,6 @@ export const storeOptions = [
 ];
 
 export const alcoholPreferences = [
-  { value: "wine", label: "Wine" },
-  { value: "beer", label: "Beer" },
-  { value: "spirits", label: "Spirits" },
-  { value: "all", label: "All Categories" },
+  { value: "entire collection", label: "Entire Collection" },
+  { value: "rare collection", label: "Rare Collection" },
 ];

@@ -64,13 +64,13 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
     >
       <TitleText>Find stores near me</TitleText>
 
-        <SearchContainer>
-          <SearchBoxWrapper>
-            <SearchIconStyled />
-            <StyledInput placeholder="Enter Zip Code" inputProps={{ "aria-label": "search" }} />
-          </SearchBoxWrapper>
-          <StyledSearchButton variant="contained">Search</StyledSearchButton>
-        </SearchContainer>
+      <SearchContainer>
+        <SearchBoxWrapper>
+          <SearchIconStyled />
+          <StyledInput placeholder="Enter Zip Code" inputProps={{ "aria-label": "search" }} />
+        </SearchBoxWrapper>
+        <StyledSearchButton variant="contained">Search</StyledSearchButton>
+      </SearchContainer>
       {stores.map((store) => {
         const isSelected = selectedStoreId === store.id;
         return (

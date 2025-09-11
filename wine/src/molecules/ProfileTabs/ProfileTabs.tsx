@@ -16,7 +16,7 @@ const ProfileTabs = () => {
     address: "abc",
     zipCode: "1234",
     vipMembership: {
-      isActive: true,
+      isActive: false,
       barcodeNumber: "VIP123456789",
       expiryDate: "2025-12-31",
       memberId: "1234",

@@ -14,16 +14,14 @@ export const FOOTER_DATA = {
       { text: "Contact Us", href: "#" },
       { text: "FAQs", href: "#" },
       { text: "Pickup Process", href: "#" },
-      { text: "Return & Refund Policy", href: "#" },
     ],
   },
   shopByCategory: {
     title: "Shop By Category",
     links: [
-      { text: "Wines", href: "#" },
-      { text: "Beer", href: "#" },
-      { text: "Liquor", href: "#" },
-      { text: "Events", href: "#" },
+      { text: "Wines", href: "/productsList?category=wines" },
+      { text: "Beer", href: "/productsList?category=beers" },
+      { text: "Liquor", href: "/productsList?category=liquor" },
     ],
   },
   legalInfo: {
@@ -32,7 +30,6 @@ export const FOOTER_DATA = {
       { text: "Terms & Conditions", href: "#" },
       { text: "Privacy Policy", href: "#" },
       { text: "Accessibility Statement", href: "#" },
-      { text: "Contact: info@wineoutlet.com", href: "mailto:info@wineoutlet.com" },
     ],
   },
 } as const;

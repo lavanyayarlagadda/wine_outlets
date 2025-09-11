@@ -16,13 +16,12 @@ import {
   RegularPriceText,
   BackSpaceIcon,
   CounterWrapper,
-  WishlistPriceAndCartContainer
+  WishlistPriceAndCartContainer,
 } from "./CartProduct.style";
 import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
-import { Box } from "@mui/material";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
 interface CartProductProps {
   imageUrl: string;
@@ -67,10 +66,8 @@ const Pricing: React.FC<PricingProps> = ({ vipPrice, price }) => {
 const WishListPricingLayout: React.FC<PricingProps> = ({ vipPrice, price }) => {
   return (
     <RatingBox>
-      
-       <VipPriceText sx={{mr:3}}>VIP: ${price} </VipPriceText>
-       <RegularPriceText componentType="WISHLIST">$ {vipPrice}</RegularPriceText>
-     
+      <VipPriceText sx={{ mr: 3 }}>VIP: ${price} </VipPriceText>
+      <RegularPriceText componentType="WISHLIST">$ {vipPrice}</RegularPriceText>
     </RatingBox>
   );
 };
@@ -84,7 +81,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   year,
   quantity,
   unitPrice,
-  component = ""
+  component = "",
 }) => {
   const [customQuantity, setCustomQuantity] = useState(quantity);
 
@@ -100,7 +97,7 @@ const CartProduct: React.FC<CartProductProps> = ({
         <ProductTitle>{name}</ProductTitle>
 
         <IconRow>
-          <CustomWishlist />
+          <CustomWishlist defaultSelected={true} />
           <BackspaceIcon>
             <BackSpaceIcon />
           </BackspaceIcon>

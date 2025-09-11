@@ -13,13 +13,7 @@ interface BasePopupProps {
   navigation?: boolean;
 }
 
-const CustomPopup: React.FC<BasePopupProps> = ({
-  open,
-  onClose,
-  title,
-  children,
-  footer,
-}) => {
+const CustomPopup: React.FC<BasePopupProps> = ({ open, onClose, title, children, footer }) => {
   return (
     <Styled.StyledDialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       {/* Header */}
