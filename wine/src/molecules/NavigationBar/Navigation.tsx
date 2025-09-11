@@ -190,13 +190,12 @@ const Navigation = () => {
               stores={stores}
               onSelect={(id) => setSelectedStore(id)}
               navigation={true}
-              dropdown={true}
             />
 
             <RightNavSection>
               <CustomizeIconButton
-                onClick={(e) => {
-                  (handleMenuOpen(e, "cart"), navigate("/cartOverview"));
+                onClick={() => {
+                   navigate("/cartOverview");
                 }}
               >
                 <img src={cart} alt="cart" />

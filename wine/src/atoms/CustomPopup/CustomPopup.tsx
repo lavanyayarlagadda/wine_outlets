@@ -19,7 +19,6 @@ const CustomPopup: React.FC<BasePopupProps> = ({
   title,
   children,
   footer,
-  navigation,
 }) => {
   return (
     <Styled.StyledDialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -41,7 +40,7 @@ const CustomPopup: React.FC<BasePopupProps> = ({
       <Content> {children}</Content>
 
       {/* Sticky Footer */}
-      {footer && !navigation && <Footer>{footer}</Footer>}
+      {footer && <Footer>{footer}</Footer>}
     </Styled.StyledDialog>
   );
 };

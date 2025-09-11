@@ -68,7 +68,7 @@ const HeroOverlay = ({
             onClick={onSecondBtnClick}
             bgColor={theme?.palette?.primary?.light}
             color={theme?.palette?.primary?.dark}
-            border={palette?.grey.main}
+            border={palette?.grey.light}
           />
         </OverlayButtonGroup>
       </OverlayContentBox>
