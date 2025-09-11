@@ -7,6 +7,7 @@ import {
   OverlayContent,
   Title,
   SubTitle,
+  CoverImage
 } from "./ProductCard.style";
 import { useNavigate } from "react-router-dom";
 import type { ShopCategory } from "../CategorySection";
@@ -28,17 +29,9 @@ const ProductCardSection: React.FC<{ categories: ShopCategory[] }> = ({ categori
             role="button"
           >
             <ImageWrapper>
-              <img
+              <CoverImage
                 src={item.media?.url ?? "/placeholder.svg"}
                 alt={item.productName}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                }}
               />
             </ImageWrapper>
             <OverlayContent>

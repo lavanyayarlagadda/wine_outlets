@@ -11,6 +11,8 @@ import {
   Drawer,
   ListItemIcon,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 
@@ -78,13 +80,19 @@ export const Logo = styled("img")(({ theme }) => ({
 
 // 🔴 Search
 export const SearchBox = styled(Box)(({ theme }) => ({
-  display: "flex",
+  display: "none", 
+
   alignItems: "center",
   padding: "4px 12px",
   borderRadius: shape.borderRadiuspx,
   minWidth: "300px",
   border: shape.borderSuccess,
   width: "400px",
+
+  [theme.breakpoints.up("sm")]: {
+    display: "flex",
+  },
+
   // Tablet styles
   [theme.breakpoints.down("lg")]: {
     minWidth: "250px",
@@ -228,7 +236,6 @@ export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
   },
 }));
 
-// Each menu item
 export const StyledProfileMenuItem = styled(MenuItem)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -239,7 +246,6 @@ export const StyledProfileMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-// Icon wrapper
 export const ProfileMenuIcon = styled(ListItemIcon)(() => ({
   minWidth: 30,
   display: "flex",
@@ -247,7 +253,6 @@ export const ProfileMenuIcon = styled(ListItemIcon)(() => ({
   alignItems: "center",
 }));
 
-// Text (with logout in red)
 export const ProfileMenuText = styled(Typography)<{ colorType?: string }>(
   ({ theme, colorType }) => ({
     color: colorType === "error" ? theme.palette.error.main : "inherit",
@@ -282,6 +287,17 @@ export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
     },
   },
 }));
+
+export const MobileMenuIcon = styled(MenuIcon)(({ theme }) => ({
+  fontSize: theme.typography.h5.fontSize,
+  color: palette.primary.dark,
+  marginTop: theme.spacing(1),
+}));
+
+export const StyledSearchIcon = styled(SearchIcon)(() => ({
+  color: palette.grey.main,
+}));
+
 
 export const IconGroup = styled(Box)(() => ({
   display: "flex",

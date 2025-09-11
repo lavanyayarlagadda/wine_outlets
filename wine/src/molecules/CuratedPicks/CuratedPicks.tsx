@@ -11,6 +11,7 @@ import {
   StyledWineItem,
   StyledImageContainer,
   StyledCategoryLabel,
+  ProductImage,
 } from "./CuratedPicks.style";
 import { LandingPageData } from "../../constant/LandingPageData";
 // import { curatedData } from "../../constant/curatedData";
@@ -53,12 +54,10 @@ const CuratedPicks = () => {
               <StyledWineItem>
                 <StyledImageContainer onClick={() => navigate("/productsList")}>
                   <StyledOverlay />
-                  <img
+                  <ProductImage
                     src={item.media?.url || "/placeholder.svg"}
                     alt={`${item.category} wine bottle`}
-                    width={120}
-                    height={240}
-                    style={{ objectFit: "contain" }}
+                    onClick={() => navigate("/productView")}
                   />
                 </StyledImageContainer>
 

@@ -105,3 +105,10 @@ export const StyledCategoryLabel = styled(Typography)(({ theme }) => ({
     fontSize: "1rem",
   },
 }));
+
+export const ProductImage = styled("img")(() => ({
+  width: 120,
+  height: 240,
+  objectFit: "contain",
+  display: "block",
+}));

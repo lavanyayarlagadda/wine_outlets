@@ -16,6 +16,7 @@ import {
   RegularPriceText,
   BackSpaceIcon,
   CounterWrapper,
+  WishlistPriceAndCartContainer
 } from "./CartProduct.style";
 import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
@@ -113,14 +114,14 @@ const CartProduct: React.FC<CartProductProps> = ({
         <InfoItem icon={<InfoIcon src={sizeIcon} alt="size" />} label="size:" value={size} />
         <InfoItem icon={<InfoIcon src={calendarIcon} alt="year" />} label="Year:" value={year} />
         {component == "WISHLIST" ? (
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <WishlistPriceAndCartContainer>
             <PricingBox componentType={component}>
               <WishListPricingLayout vipPrice={unitPrice.original} price={unitPrice.discounted} />
             </PricingBox>
             <CounterWrapper>
               <AddToCart label="Add to Cart" variantType="filled" />
             </CounterWrapper>
-          </Box>
+          </WishlistPriceAndCartContainer>
         ) : (
           <>
             <CounterWrapper>

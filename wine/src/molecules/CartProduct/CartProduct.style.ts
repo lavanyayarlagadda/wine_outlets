@@ -180,3 +180,9 @@ export const CounterWrapper = styled(Box)(() => ({
 export const CartButtonWrapper = styled(Box)(() => ({
   width: "auto",
 }));
+
+export const WishlistPriceAndCartContainer = styled(Box)(() => ({
+   display: "flex", 
+   justifyContent: "space-between"
+}));
+
