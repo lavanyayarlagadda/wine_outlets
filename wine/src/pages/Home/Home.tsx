@@ -15,16 +15,26 @@ import {
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import { stores } from "../../constant/curatedData";
-// import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
 
 const Home = () => {
-  const { agePopupOpen, isAgeVerified, handleVerifyAge, setOpen, open, setIsAgeVerified } =
-    useHomeLogic();
-  const [selectedStore, setSelectedStore] = React.useState<number | 0>();
+  const {
+    agePopupOpen,
+    isAgeVerified,
+    handleVerifyAge,
+    setOpen,
+    open,
+    setIsAgeVerified,
+    setSelectedStore,
+    selectedStore,
+  } = useHomeLogic();
 
   return (
     <>
-      <AgePopup open={agePopupOpen} onClose={() => {}} onVerify={handleVerifyAge} />
+      <AgePopup
+        open={agePopupOpen}
+        onClose={() => window.open("https://www.google.com/", "_blank")}
+        onVerify={handleVerifyAge}
+      />
       {isAgeVerified && (
         <StoreLocator
           open={open}
