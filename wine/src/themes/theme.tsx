@@ -7,4 +7,16 @@ export const theme = createTheme({
   palette,
   shape,
   typography: typeset,
+  components: {
+    MuiModal: {
+      defaultProps: {
+        disableScrollLock: true,
+      },
+    },
+    MuiPopover: {
+      defaultProps: {
+        disableScrollLock: true,
+      },
+    },
+  },
 });
