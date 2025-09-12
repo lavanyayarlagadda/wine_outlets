@@ -272,19 +272,30 @@ export const RightNavSection = styled(Box)(() => ({
   gap: "16px",
 }));
 
-export const CustomizeIconButton = styled(IconButton)(({ theme }) => ({
+export const CustomizeIconButton = styled(IconButton)<{ icon?: boolean }>(({ theme, icon }) => ({
   color: theme.palette.white.main,
   border: shape.borderSuccess,
   padding: "8px",
   borderRadius: shape.borderRadiuspx,
-  // Mobile styles
-  [theme.breakpoints.down("md")]: {
+
+  [theme.breakpoints.down("sm")]: {
     padding: "4px",
     border: "none",
     "& img": {
       width: "20px",
       height: "20px",
     },
+    display: "flex", // hide if icon=true, show if false
+  },
+
+  [theme.breakpoints.up("md")]: {
+    padding: "4px",
+    border: "none",
+    "& img": {
+      width: "20px",
+      height: "20px",
+    },
+    display: icon ? "flex" : "none", // show if icon=true, hide if false
   },
 }));
 
@@ -379,4 +390,69 @@ export const CloseButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.action.hover,
   borderRadius: "50%",
   padding: "4px",
+}));
+
+export const CategoryColumn = styled(Box)(() => ({
+  minWidth: 220,
+  flex: "1 1 200px",
+  marginBottom: 16,
+}));
+
+export const CategoryTitle = styled(Typography)(() => ({
+  fontWeight: 600,
+  fontSize: 14,
+  marginBottom: 10,
+  color: "#b02a37",
+  textTransform: "uppercase",
+  paddingLeft: 10,
+}));
+
+export const ColumnsWrapper = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "row",
+  gap: 20,
+  padding: "8px",
+  // flexWrap: "wrap",
+}));
+
+export const Column = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  flex: "1 1 100%", // responsive full width on mobile
+}));
+
+export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
+  fontSize: 13,
+  color: "#333",
+  padding: "4px 0",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#b02a37",
+    background: "transparent",
+  },
+}));
+
+export const ViewMoreText = styled(Typography)(() => ({
+  fontSize: 13,
+  fontWeight: 500,
+  marginTop: 8,
+  color: "#000",
+  cursor: "pointer",
+}));
+
+export const SpecialsBlock = styled(Box)(() => ({
+  background: "#fff5f5",
+  borderRadius: 8,
+  padding: 16,
+  minWidth: 220,
+  flex: "1 1 200px",
+}));
+
+export const SpecialsItem = styled(Typography)(() => ({
+  fontSize: 13,
+  color: "#b02a37",
+  fontWeight: 500,
+  marginBottom: 6,
+  cursor: "pointer",
 }));

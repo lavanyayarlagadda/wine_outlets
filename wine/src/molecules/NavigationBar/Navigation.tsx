@@ -15,7 +15,6 @@ import {
   DropdownTriggerNoBorder,
   DropdownTriggerWithGap,
   DropdownTriggerWithIconMargin,
-  DropdownMenuItem,
   RightNavSection,
   CustomiseOfferText,
   CustomizeIconButton,
@@ -30,6 +29,12 @@ import {
   ProfileMenuText,
   MobileMenuIcon,
   StyledSearchIcon,
+  CategoryColumn,
+  CategoryTitle,
+  ColumnsWrapper,
+  Column,
+  DropdownMenuItemStyled,
+  ViewMoreText,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
 import { useNavigate } from "react-router-dom";
@@ -100,41 +105,77 @@ const Navigation = () => {
       {
         id: 1,
         name: "Wines",
-        itemsList: [
-          { id: 1, listName: "Wines1" },
-          { id: 2, listName: "Wines2" },
-          { id: 3, listName: "Wines3" },
-          { id: 4, listName: "Wines4" },
+        categories: [
+          {
+            title: "Wines",
+            items: [
+              { id: 101, listName: "Cabernet Sauvignon" },
+              { id: 102, listName: "Merlot" },
+              { id: 103, listName: "Pinot Noir" },
+              { id: 104, listName: "Shiraz" },
+              { id: 105, listName: "Zinfandel" },
+              { id: 106, listName: "Malbec" },
+              { id: 107, listName: "Tempranillo" },
+              { id: 108, listName: "Sangiovese" },
+              { id: 109, listName: "Grenache" },
+              { id: 110, listName: "Barbera" },
+            ],
+          },
         ],
       },
       {
         id: 2,
-        name: "Beers",
-        itemsList: [
-          { id: 1, listName: "Beers1" },
-          { id: 2, listName: "Beers2" },
-          { id: 3, listName: "Beers3" },
-          { id: 4, listName: "Beers4" },
+        name: "Beer",
+        categories: [
+          {
+            title: "Beer",
+            items: [
+              { id: 201, listName: "Domestic Beer" },
+              { id: 202, listName: "Imported Beer" },
+              { id: 203, listName: "Micro / Specialty Beers" },
+              { id: 204, listName: "Non-Alcohol Beer" },
+              { id: 205, listName: "Malternatives" },
+              { id: 206, listName: "Keg / Party Balls" },
+              { id: 207, listName: "Hard Seltzer" },
+              { id: 208, listName: "Canned Cocktails" },
+              { id: 209, listName: "Single Bottles" },
+            ],
+          },
         ],
       },
       {
         id: 3,
         name: "Liquor",
-        itemsList: [
-          { id: 1, listName: "Liquor1" },
-          { id: 2, listName: "Liquor2" },
-          { id: 3, listName: "Liquor3" },
-          { id: 4, listName: "Liquor4" },
+        categories: [
+          {
+            title: "Liquor",
+            items: [
+              { id: 301, listName: "Whiskey" },
+              { id: 302, listName: "Bourbon" },
+              { id: 303, listName: "Cognac" },
+              { id: 304, listName: "Brandy" },
+              { id: 305, listName: "Single Malt Scotch" },
+              { id: 306, listName: "Scotch" },
+              { id: 307, listName: "Gin" },
+              { id: 308, listName: "Vodka" },
+              { id: 309, listName: "Tequila" },
+              { id: 310, listName: "Rum" },
+            ],
+          },
         ],
       },
       {
-        id: "4",
+        id: 4,
         name: "Miscellaneous",
-        itemsList: [
-          { id: 1, listName: "Miscellaneous1" },
-          { id: 2, listName: "Miscellaneous2" },
-          { id: 3, listName: "Miscellaneous3" },
-          { id: 4, listName: "Miscellaneous4" },
+        categories: [
+          {
+            title: "Miscellaneous",
+            items: [
+              { id: 401, listName: "Miscellaneous1" },
+              { id: 402, listName: "Miscellaneous2" },
+              { id: 403, listName: "Miscellaneous3" },
+            ],
+          },
         ],
       },
     ],
@@ -189,7 +230,7 @@ const Navigation = () => {
       <StyledAppBar>
         <StyledToolbar>
           {/* Mobile Menu Button - Add this */}
-          <CustomizeIconButton onClick={handleMobileMenuOpen}>
+          <CustomizeIconButton onClick={handleMobileMenuOpen} icon={false}>
             <MobileMenuIcon />
           </CustomizeIconButton>
           <Logo src={logo} alt="Wine Outlet" onClick={() => navigate("/")} />
@@ -231,12 +272,13 @@ const Navigation = () => {
                 onClick={() => {
                   navigate("/cartOverview");
                 }}
+                icon={true}
               >
                 <img src={cart} alt="cart" />
               </CustomizeIconButton>
               {isSubmit ? (
                 <>
-                  <CustomizeIconButton onClick={handleProfileClick}>
+                  <CustomizeIconButton onClick={handleProfileClick} icon={true}>
                     <img src={userprofile} alt="userProfile" />
                   </CustomizeIconButton>
                   <StyledProfileMenu
@@ -322,16 +364,41 @@ const Navigation = () => {
                 open={menuOpen[menu.name] && !mobileMenuOpen}
                 onClose={() => handleMenuClose(menu.name)}
               >
-                {menu.itemsList.map((item) => (
-                  <DropdownMenuItem
-                    key={item.id}
-                    onClick={() => {
-                      navigate(`/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`);
-                      handleMenuClose(menu.name);
-                    }}
-                  >
-                    {item.listName}
-                  </DropdownMenuItem>
+                {menu.categories?.map((category, idx) => (
+                  <CategoryColumn key={idx}>
+                    <CategoryTitle>{category.title} →</CategoryTitle>
+                    <ColumnsWrapper>
+                      {Array.from({
+                        length: Math.min(2, Math.ceil(category.items.length / 5)),
+                      }).map((_, colIdx) => {
+                        const colItems = category.items.slice(colIdx * 5, colIdx * 5 + 5);
+                        const isLastColumn =
+                          colIdx === Math.min(2, Math.ceil(category.items.length / 5)) - 1;
+
+                        return (
+                          <Column key={colIdx}>
+                            {colItems.map((item) => (
+                              <DropdownMenuItemStyled
+                                key={item.id}
+                                onClick={() => {
+                                  navigate(
+                                    `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
+                                  );
+                                  handleMenuClose(menu.name);
+                                }}
+                              >
+                                {item.listName}
+                              </DropdownMenuItemStyled>
+                            ))}
+
+                            {isLastColumn && category.items.length > 10 && (
+                              <ViewMoreText>View More →</ViewMoreText>
+                            )}
+                          </Column>
+                        );
+                      })}
+                    </ColumnsWrapper>
+                  </CategoryColumn>
                 ))}
               </StyledMenu>
             </div>

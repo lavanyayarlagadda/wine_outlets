@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { logo, star } from "../../assets";
+import { logo } from "../../assets";
 
 interface MobileNavigationProps {
   mobileMenuOpen: boolean;
@@ -73,10 +73,10 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
     ],
   };
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    handleMobileMenuClose();
-  };
+  // const handleNavigation = (path: string) => {
+  //   navigate(path);
+  //   handleMobileMenuClose();
+  // };
 
   return (
     <StyledDrawer anchor="left" open={mobileMenuOpen} onClose={handleMobileMenuClose}>
@@ -110,15 +110,15 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
 
       {/* <DrawerMenuItem onClick={() => handleNavigation("/tastings")}>Tastings</DrawerMenuItem>
       <DrawerMenuItem onClick={() => handleNavigation("/events")}>Events</DrawerMenuItem> */}
-      <DrawerMenuItem onClick={() => handleNavigation("/new-arrivals")}>
+      {/* <DrawerMenuItem onClick={() => handleNavigation("/new-arrivals")}>
         <span style={{ display: "flex", alignItems: "center" }}>
           <img src={star} alt="star" style={{ marginRight: "8px" }} /> New Arrivals
         </span>
-      </DrawerMenuItem>
+      </DrawerMenuItem> */}
       {/* <DrawerMenuItem onClick={() => handleNavigation("/promotions")}>Promotions</DrawerMenuItem> */}
 
       {/* Delivery Options */}
-      <DrawerMenuItem onClick={() => handleMobileMenuToggle("delivery")}>
+      {/* <DrawerMenuItem onClick={() => handleMobileMenuToggle("delivery")}>
         <span>Delivery</span>
         {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
       </DrawerMenuItem>
@@ -128,7 +128,7 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
           <DrawerSubMenuItem>Express Delivery</DrawerSubMenuItem>
           <DrawerSubMenuItem>Pickup</DrawerSubMenuItem>
         </>
-      )}
+      )} */}
 
       {/* <DrawerMenuItem onClick={() => handleNavigation("/careers")}>Hiring Now</DrawerMenuItem> */}
 
