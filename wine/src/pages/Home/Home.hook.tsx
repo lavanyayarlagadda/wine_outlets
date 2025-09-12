@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLoginMutation } from "../../store/apis/Auth/authenticationApis";
+// import { useLoginQuery } from "../../store/apis/Auth/authenticationApis";
 import Cookies from "js-cookie";
 
 export const useHomeLogic = () => {
@@ -8,7 +8,7 @@ export const useHomeLogic = () => {
   const [open, setOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState<number | 0>();
 
-  const [login, { data, error, isLoading }] = useLoginMutation();
+  // const { data, error, isLoading } = useLoginQuery();
 
   // 🔹 Check cookie on mount
   useEffect(() => {
@@ -28,8 +28,8 @@ export const useHomeLogic = () => {
     Cookies.set("ageVerified", "true", { expires: 180 });
 
     try {
-      const result = await login({ username: "test", password: "1234" }).unwrap();
-      console.log("Login success", result);
+      // const result = await login({ username: "test", password: "1234" }).unwrap();
+      // console.log("Login success", result);
     } catch (err) {
       console.error("Login failed", err);
     }
@@ -52,9 +52,9 @@ export const useHomeLogic = () => {
     setOpen,
     open,
     setIsAgeVerified,
-    data,
-    error,
-    isLoading,
+    // data,
+    // error,
+    // isLoading,
     selectedStore,
     setSelectedStore,
   };

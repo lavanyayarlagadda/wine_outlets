@@ -8,7 +8,7 @@ export interface Filters {
 export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Filters) => void) => {
   const [searchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category"); // e.g., "wine"
-  const selectedId = searchParams.get("id"); // e.g., "1"
+  const selectedId = searchParams.get("id");
 
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
   const [selectedNestedSub, setSelectedNestedSub] = useState<string | null>(null);

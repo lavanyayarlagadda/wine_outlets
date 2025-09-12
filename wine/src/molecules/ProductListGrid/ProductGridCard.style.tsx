@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  CircularProgress,
   IconButton,
   Typography,
   type CardMediaProps,
@@ -127,4 +128,10 @@ export const AddToCartButton = styled(Button)(({ theme }) => ({
   width: "100%",
   whiteSpace: "nowrap",
   borderRadius: shape.borderRadiuspx,
+}));
+
+export const AddToCartLoader = styled(CircularProgress)(() => ({
+  color: palette.primary.main,
+  width: 20,
+  height: 20,
 }));

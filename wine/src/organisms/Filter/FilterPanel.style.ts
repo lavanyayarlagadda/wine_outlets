@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Divider, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Skeleton, Stack, Typography } from "@mui/material";
 import palette from "../../themes/palette";
 import shape from "../../themes/shape";
 
@@ -82,4 +82,37 @@ export const Row = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   gap: "8px",
+}));
+export const SeeMoreText = styled(Typography)(({ theme }) => ({
+  cursor: "pointer",
+  color: theme.palette.primary.main,
+  marginTop: theme.spacing(1),
+}));
+
+export const LimitedListWrapper = styled(Box)(() => ({
+  maxHeight: 200,
+  overflowY: "auto",
+  paddingRight: "0.5rem",
+}));
+
+export const SubLimitedListWrapper = styled(Box)(() => ({
+  maxHeight: 250,
+  overflowY: "auto",
+}));
+
+export const SkeletonWrapper = styled(Box)(() => ({
+  padding: "1rem",
+}));
+
+export const SkeletonItem = styled(Box)(() => ({
+  marginBottom: "1rem",
+}));
+
+export const ErrorWrapper = styled(Box)(() => ({
+  padding: "1rem",
+}));
+export const StyledSkeletonRect = styled(Skeleton)(() => ({
+  height: 30,
+  borderRadius: 4,
+  marginTop: "0.25rem",
 }));

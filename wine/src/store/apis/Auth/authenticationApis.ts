@@ -1,20 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BASE_API_URL } from "../../../api.config";
+import { BASE_API_URL_BASE } from "../../../api.config";
 
 export const authenticationApi = createApi({
   reducerPath: "AthenticationApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_API_URL,
+    baseUrl: BASE_API_URL_BASE,
   }),
 
   endpoints: (builder) => ({
-    login: builder.mutation<any, any>({
-      query: (newItem) => ({
-        url: "/auth/login",
-        method: "POST",
-        body: newItem,
+    login: builder.query<any, void>({
+      query: () => ({
+        url: "/product-listing/banner",
+        method: "GET",
       }),
     }),
+
     forGotPassword: builder.mutation<any, any>({
       query: (newItem) => ({
         url: "auth/forgotPassword",
@@ -25,4 +25,4 @@ export const authenticationApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useForGotPasswordMutation } = authenticationApi;
+export const { useLoginQuery, useForGotPasswordMutation } = authenticationApi;

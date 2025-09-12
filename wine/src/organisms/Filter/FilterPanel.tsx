@@ -1,4 +1,4 @@
-import { Box, Drawer, IconButton, Typography, useMediaQuery } from "@mui/material";
+import { Box, Drawer, IconButton, Skeleton, Typography, useMediaQuery } from "@mui/material";
 import {
   Check,
   Close,
@@ -27,6 +27,12 @@ import {
   PercentageText,
   ExpandButton,
   NestedContainer,
+  SeeMoreText,
+  LimitedListWrapper,
+  SubLimitedListWrapper,
+  SkeletonWrapper,
+  StyledSkeletonRect,
+  SkeletonItem,
 } from "./FilterPanel.style";
 import { useState } from "react";
 // import { useSearchParams } from "react-router-dom";
@@ -44,6 +50,7 @@ export interface Category {
 interface Props {
   categories: Category[];
   onFilterChange?: (filters: Record<string, any>) => void;
+  isLoading: boolean;
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -52,7 +59,7 @@ const iconMap: Record<string, React.ReactNode> = {
   liquor: <Liquor fontSize="small" />,
 };
 
-const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
+const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading }) => {
   const {
     filters,
     openDrawer,
@@ -125,16 +132,13 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                 />
               ))}
               {item.categories.length > 4 && (
-                <Typography
-                  sx={{ cursor: "pointer", color: "primary.main", mt: 1 }}
-                  onClick={() => toggleSubDepartmentExpand(item.categoryId)}
-                >
+                <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.categoryId)}>
                   See More
-                </Typography>
+                </SeeMoreText>
               )}
             </NestedContainer>
           ) : (
-            <Box sx={{ maxHeight: 200, overflowY: "auto", pr: 1, pl: 2 }}>
+            <SubLimitedListWrapper>
               {item.categories.map((nestedItem: any) => (
                 <CustomCheckbox
                   key={nestedItem.categoryId}
@@ -144,14 +148,11 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                 />
               ))}
               {item.categories.length > 4 && subDepartmentCats[item.categoryId] && (
-                <Typography
-                  sx={{ cursor: "pointer", color: "primary.main", mt: 1 }}
-                  onClick={() => toggleSubDepartmentExpand(item.categoryId)}
-                >
+                <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.categoryId)}>
                   See Less
-                </Typography>
+                </SeeMoreText>
               )}
-            </Box>
+            </SubLimitedListWrapper>
           ))}
       </Box>
     );
@@ -178,16 +179,11 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                 ))}
 
                 {cat.categoryList.length > 4 && (
-                  <Typography
-                    sx={{ cursor: "pointer", color: "primary.main", mt: 1 }}
-                    onClick={() => toggleExpand(cat.categoryId)}
-                  >
-                    Show More
-                  </Typography>
+                  <SeeMoreText onClick={() => toggleExpand(cat.categoryId)}>See More</SeeMoreText>
                 )}
               </>
             ) : (
-              <Box sx={{ maxHeight: 200, overflowY: "auto", pr: 1 }}>
+              <LimitedListWrapper>
                 {cat.categoryList.map((item) => (
                   <CustomCheckbox
                     key={item.listId}
@@ -197,14 +193,9 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
                   />
                 ))}
                 {cat.categoryList.length > 4 && expandedCats[cat.categoryId] && (
-                  <Typography
-                    sx={{ cursor: "pointer", color: "primary.main", mt: 1 }}
-                    onClick={() => toggleExpand(cat.categoryId)}
-                  >
-                    See Less
-                  </Typography>
+                  <SeeMoreText onClick={() => toggleExpand(cat.categoryId)}>See Less</SeeMoreText>
                 )}
-              </Box>
+              </LimitedListWrapper>
             )}
           </>
         )}
@@ -261,30 +252,19 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
 
                     {/* Show More button */}
                     {sub.categoryList && sub.categoryList?.length > 4 && (
-                      <Typography
-                        sx={{ cursor: "pointer", color: "primary.main", mt: 1 }}
-                        onClick={() => toggleDepartmentExpand(sub.categoryId)}
-                      >
+                      <SeeMoreText onClick={() => toggleDepartmentExpand(sub.categoryId)}>
                         See More
-                      </Typography>
+                      </SeeMoreText>
                     )}
                   </>
                 ) : (
                   <>
-                    <Box
-                      sx={{
-                        maxHeight: 250,
-                        overflowY: "auto",
-                      }}
-                    >
+                    <LimitedListWrapper>
                       {sub.categoryList?.map((item: any) => renderSubCategory(item, sub))}
-                    </Box>
-                    <Typography
-                      sx={{ cursor: "pointer", color: "primary.main", mt: 1 }}
-                      onClick={() => toggleDepartmentExpand(sub.categoryId)}
-                    >
+                    </LimitedListWrapper>
+                    <SeeMoreText onClick={() => toggleDepartmentExpand(sub.categoryId)}>
                       See Less
-                    </Typography>
+                    </SeeMoreText>
                   </>
                 )}
               </ContentStack>
@@ -304,7 +284,20 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange }) => {
         </ClearButton>
       </Header>
       <StyledDivider />
-      {categories.map((cat, index) => renderCategory(cat, index))}
+
+      {isLoading ? (
+        <SkeletonWrapper>
+          {[...Array(4)].map((_, i) => (
+            <SkeletonItem key={i}>
+              <Skeleton variant="text" width={120} height={20} />
+              <StyledSkeletonRect variant="rectangular" />
+              <StyledSkeletonRect variant="rectangular" />
+            </SkeletonItem>
+          ))}
+        </SkeletonWrapper>
+      ) : (
+        categories.map((cat, index) => renderCategory(cat, index))
+      )}
     </Box>
   );
 

@@ -30,11 +30,14 @@ const Home = () => {
 
   return (
     <>
-      <AgePopup
-        open={agePopupOpen}
-        onClose={() => window.open("https://www.google.com/", "_blank")}
-        onVerify={handleVerifyAge}
-      />
+      {agePopupOpen && (
+        <AgePopup
+          open={agePopupOpen}
+          onClose={() => window.open("https://www.google.com/", "_blank")}
+          onVerify={handleVerifyAge}
+        />
+      )}
+
       {isAgeVerified && (
         <StoreLocator
           open={open}

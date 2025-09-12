@@ -3,6 +3,7 @@ import { useTheme, useMediaQuery } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import {
+  AddToCartLoader,
   FavoriteBorderIcon,
   FavoriteIcon,
   PriceText,
@@ -40,6 +41,8 @@ export interface ProductCardProps {
   onAddToCart: (id: number | string) => void;
   onToggleFavorite: (id: number | string) => void;
   isFavorite: boolean;
+  isLoading?: boolean;
+  wishListLoading?: string | null;
 }
 
 const ProductListCard: React.FC<ProductCardProps> = ({
@@ -56,6 +59,8 @@ const ProductListCard: React.FC<ProductCardProps> = ({
   onAddToCart,
   onToggleFavorite,
   isFavorite,
+  isLoading,
+  wishListLoading,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -72,7 +77,13 @@ const ProductListCard: React.FC<ProductCardProps> = ({
         />
         <FavoriteWrapper>
           <FavoriteButton onClick={() => onToggleFavorite(id)}>
-            {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            {wishListLoading === id ? (
+              <AddToCartLoader />
+            ) : isFavorite ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
           </FavoriteButton>
         </FavoriteWrapper>
       </ImageWrapper>
@@ -115,10 +126,11 @@ const ProductListCard: React.FC<ProductCardProps> = ({
           <AddToCartButton
             variant="contained"
             fullWidth={isMobile}
-            startIcon={<ShoppingCart />}
+            startIcon={isLoading ? null : <ShoppingCart />}
             onClick={() => onAddToCart(id)}
+            disabled={isLoading} // disable button while loading
           >
-            Add to Cart
+            {isLoading ? <AddToCartLoader /> : "Add to Cart"}
           </AddToCartButton>
         </FooterRow>
       </StyledCardContent>

@@ -16,6 +16,7 @@ import {
   AddToCartButton,
   FavoriteIcon,
   FavoriteBorderIcon,
+  AddToCartLoader,
 } from "./ProductGridCard.style";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
@@ -43,6 +44,8 @@ interface ProductCardProps {
   onAddToCart: (id: number | string) => void;
   onToggleFavorite: (id: number | string) => void;
   isFavorite: boolean;
+  isLoading?: boolean;
+  wishListLoading?: string | null;
 }
 
 const ProductGridCard: React.FC<ProductCardProps> = ({
@@ -50,13 +53,21 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   onAddToCart,
   onToggleFavorite,
   isFavorite,
+  isLoading,
+  wishListLoading,
 }) => {
   const navigate = useNavigate();
 
   return (
     <ResponsiveCard>
       <FavoriteButton onClick={() => onToggleFavorite(product.id)}>
-        {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        {wishListLoading === product.id ? (
+          <AddToCartLoader />
+        ) : isFavorite ? (
+          <FavoriteIcon />
+        ) : (
+          <FavoriteBorderIcon />
+        )}
       </FavoriteButton>
 
       <ProductImage
@@ -101,8 +112,12 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
           <PriceText>${product.price.toFixed(2)}</PriceText>
         </PriceRow>
 
-        <AddToCartButton onClick={() => onAddToCart(product.id)} startIcon={<ShoppingCart />}>
-          Add to Cart
+        <AddToCartButton
+          onClick={() => onAddToCart(product.id)}
+          startIcon={isLoading ? null : <ShoppingCart />}
+          disabled={isLoading} // disable while loading
+        >
+          {isLoading ? <AddToCartLoader /> : "Add to Cart"}
         </AddToCartButton>
       </ProductCardContent>
     </ResponsiveCard>
