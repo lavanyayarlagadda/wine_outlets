@@ -51,9 +51,8 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
 
-  if (selectedNames.length === 0) return null;
-
   const handleDelete = (name: string) => {
+    console.log(name, "NAME");
     dispatch(setSelectedNames(selectedNames.filter((n) => n !== name)));
   };
 
@@ -72,7 +71,7 @@ const ProductList = () => {
 
         <ContentWrapper>
           <ControlsWrapper>
-            <FilterTagList filters={selectedNames} onDelete={() => handleDelete} />
+            <FilterTagList filters={selectedNames} onDelete={handleDelete} />
             <SortAndViewControls
               sortBy={sortBy}
               onSortChange={setSortBy}
@@ -84,72 +83,80 @@ const ProductList = () => {
           <ProductsWrapper>
             <div ref={topRef} />
             <ProductsGrid view={view} columns={productsPerRow}>
-              {ProductListLoading
-                ? Array.from({ length: productsPerRow * 2 }).map((_, index) =>
-                    view === "list" ? (
-                      <StyledCard key={`skeleton-${index}`} elevation={0}>
-                        <Skeleton variant="rectangular" width="100%" height={200} />
-                        <StyledCardContent>
-                          <Skeleton variant="text" width="60%" height={30} />
-                          <Skeleton variant="text" width="40%" height={20} />
-                          <Skeleton variant="rectangular" width="100%" height={60} />
-                          <Skeleton variant="text" width="30%" height={40} />
-                          <Skeleton
-                            variant="rectangular"
-                            width="100%"
-                            height={40}
-                            style={{ marginTop: 8 }}
-                          />
-                        </StyledCardContent>
-                      </StyledCard>
-                    ) : (
-                      <StyledCard key={`skeleton-${index}`} elevation={0}>
-                        <Skeleton variant="rectangular" width="100%" height={150} />
-                        <StyledCardContent>
-                          <Skeleton variant="text" width="70%" height={25} />
-                          <Skeleton variant="text" width="50%" height={20} />
-                          <Skeleton
-                            variant="rectangular"
-                            width="100%"
-                            height={40}
-                            style={{ marginTop: 8 }}
-                          />
-                        </StyledCardContent>
-                      </StyledCard>
-                    )
+              {ProductListLoading ? (
+                Array.from({ length: productsPerRow * 2 }).map((_, index) =>
+                  view === "list" ? (
+                    <StyledCard key={`skeleton-${index}`} elevation={0}>
+                      <Skeleton variant="rectangular" width="100%" height={200} />
+                      <StyledCardContent>
+                        <Skeleton variant="text" width="60%" height={30} />
+                        <Skeleton variant="text" width="40%" height={20} />
+                        <Skeleton variant="rectangular" width="100%" height={60} />
+                        <Skeleton variant="text" width="30%" height={40} />
+                        <Skeleton
+                          variant="rectangular"
+                          width="100%"
+                          height={40}
+                          style={{ marginTop: 8 }}
+                        />
+                      </StyledCardContent>
+                    </StyledCard>
+                  ) : (
+                    <StyledCard key={`skeleton-${index}`} elevation={0}>
+                      <Skeleton variant="rectangular" width="100%" height={150} />
+                      <StyledCardContent>
+                        <Skeleton variant="text" width="70%" height={25} />
+                        <Skeleton variant="text" width="50%" height={20} />
+                        <Skeleton
+                          variant="rectangular"
+                          width="100%"
+                          height={40}
+                          style={{ marginTop: 8 }}
+                        />
+                      </StyledCardContent>
+                    </StyledCard>
                   )
-                : currentProducts?.map((product: any) =>
-                    view === "list" ? (
-                      <ProductListCard
-                        key={product.id}
-                        id={product.id}
-                        name={product.name}
-                        image={product.media.url}
-                        price={product.price}
-                        vipPrice={product.vipPrice}
-                        location={product.region}
-                        year={product.year}
-                        size={product.size}
-                        rating={product.rating}
-                        description={product.description}
-                        onAddToCart={() => handleAddToCart(product.id)}
-                        onToggleFavorite={() => handleToggleFavorite(product.id)}
-                        isFavorite={wishlist.includes(product.id)}
-                        isLoading={loadingProduct}
-                        wishListLoading={wishListLoading}
-                      />
-                    ) : (
-                      <ProductGridCard
-                        key={product.id}
-                        product={product}
-                        onAddToCart={() => handleAddToCart(product.id)}
-                        onToggleFavorite={() => handleToggleFavorite(product.id)}
-                        isFavorite={wishlist.includes(product.id)}
-                        isLoading={loadingProduct}
-                        wishListLoading={wishListLoading}
-                      />
-                    )
-                  )}
+                )
+              ) : currentProducts && currentProducts?.length > 0 ? (
+                currentProducts?.map((product: any) =>
+                  view === "list" ? (
+                    <ProductListCard
+                      key={product.id}
+                      id={product.id}
+                      name={product.name}
+                      image={product.media.url}
+                      price={product.price}
+                      vipPrice={product.vipPrice}
+                      location={product.region}
+                      year={product.year}
+                      size={product.size}
+                      rating={product.rating}
+                      description={product.description}
+                      onAddToCart={() => handleAddToCart(product.id)}
+                      onToggleFavorite={() => handleToggleFavorite(product.id)}
+                      isFavorite={wishlist.includes(product.id)}
+                      isLoading={loadingProduct}
+                      wishListLoading={wishListLoading}
+                    />
+                  ) : (
+                    <ProductGridCard
+                      key={product.id}
+                      product={product}
+                      onAddToCart={() => handleAddToCart(product.id)}
+                      onToggleFavorite={() => handleToggleFavorite(product.id)}
+                      isFavorite={wishlist.includes(product.id)}
+                      isLoading={loadingProduct}
+                      wishListLoading={wishListLoading}
+                    />
+                  )
+                )
+              ) : (
+                <div
+                  style={{ gridColumn: `span ${productsPerRow}`, textAlign: "center", padding: 40 }}
+                >
+                  No data available
+                </div>
+              )}
             </ProductsGrid>
 
             <CustomPagination count={totalPages} page={currentPage} onChange={handlePageChange} />

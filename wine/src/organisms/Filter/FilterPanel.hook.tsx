@@ -93,14 +93,19 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
 
   const handleSliderChange = (categoryId: string, value: number | number[]) => {
     const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
+
     setFilters((prev) => {
       const newFilters = { ...prev, [categoryId]: valArray };
       onFilterChange?.(newFilters);
       return newFilters;
     });
 
-    // treat slider as a single "range" label
-    dispatch(setSelectedNames([`Range: ${valArray.join(" - ")}`]));
+    const rangeLabel = `Range: ${valArray.join(" - ")}`;
+
+    const currentSelectedNames = selectedNames || [];
+    const filtered = currentSelectedNames.filter((name) => !name.startsWith("Range: "));
+
+    dispatch(setSelectedNames([...filtered, rangeLabel]));
   };
 
   const handleClearAll = () => {

@@ -73,7 +73,8 @@ export const useProductList = ({
   const [wishList] = useLazyWishListQuery();
 
   const currentProducts = ProductListData?.productList?.products?.slice(startIndex, endIndex);
-  const totalPages = ProductListData?.productList?.totalProducts;
+  const totaldataPage = ProductListData?.productList?.products;
+  const totalPages = Math.ceil(totaldataPage?.length / productsPerPage);
 
   useEffect(() => {
     setCategory(urlCategory || "");

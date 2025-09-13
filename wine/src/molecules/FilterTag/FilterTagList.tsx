@@ -7,25 +7,23 @@ interface FilterTagListProps {
   onDelete: (name: string) => void; // plain strings
 }
 
-const FilterTagList: React.FC<FilterTagListProps> = ({ filters, onDelete }) => {
-  return (
-    <Wrapper>
-      <FilterHeader>Applied filters:</FilterHeader>
-      <ChipsWrapper>
-        {filters.length > 0 ? (
-          filters.map((name) => (
-            <CustomChip
-              key={name}
-              label={name} // just show the name
-              onDelete={() => onDelete(name)}
-            />
-          ))
-        ) : (
-          <span>No filters applied</span>
-        )}
-      </ChipsWrapper>
-    </Wrapper>
-  );
-};
+const FilterTagList: React.FC<FilterTagListProps> = ({ filters, onDelete }) => (
+  <Wrapper>
+    <FilterHeader>Applied filters:</FilterHeader>
+    <ChipsWrapper>
+      {filters.length > 0 ? (
+        filters.map((name) => (
+          <CustomChip
+            key={name}
+            label={name} // just show the name
+            onDelete={() => onDelete(name)}
+          />
+        ))
+      ) : (
+        <span>No filters applied</span>
+      )}
+    </ChipsWrapper>
+  </Wrapper>
+);
 
 export default FilterTagList;
