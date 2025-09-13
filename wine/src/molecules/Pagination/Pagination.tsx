@@ -1,9 +1,16 @@
-// atoms/Pagination/index.tsx
 import React from "react";
-import { Box, Pagination, PaginationItem, Button, useMediaQuery, useTheme } from "@mui/material";
+import { Pagination } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { container, prevButton, nextButton, paginationItem } from "./Pagination.style";
+import { useTheme, useMediaQuery } from "@mui/material";
+
+import {
+  Container,
+  ButtonWrapper,
+  PrevButton,
+  NextButton,
+  StyledPaginationItem,
+} from "./Pagination.style";
 
 interface CustomPaginationProps {
   count: number;
@@ -19,22 +26,19 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({ count, page, onChan
   const handleNext = () => onChange(Math.min(page + 1, count));
 
   return (
-    <Box sx={container}>
-      {/* Previous Button */}
-      <Box sx={{ flex: 1, display: "flex", justifyContent: isMobile ? "center" : "flex-start" }}>
-        <Button
+    <Container>
+      <ButtonWrapper justify={isMobile ? "center" : "flex-start"}>
+        <PrevButton
           variant="outlined"
           startIcon={<ArrowBackIcon />}
           onClick={handlePrevious}
           disabled={page === 1}
-          sx={prevButton(isMobile)}
         >
           Previous
-        </Button>
-      </Box>
+        </PrevButton>
+      </ButtonWrapper>
 
-      {/* Page Numbers */}
-      <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
+      <ButtonWrapper justify="center">
         <Pagination
           count={count}
           page={page}
@@ -44,23 +48,21 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({ count, page, onChan
           boundaryCount={1}
           hidePrevButton
           hideNextButton
-          renderItem={(item) => <PaginationItem {...item} sx={paginationItem} />}
+          renderItem={(item) => <StyledPaginationItem {...item} />}
         />
-      </Box>
+      </ButtonWrapper>
 
-      {/* Next Button */}
-      <Box sx={{ flex: 1, display: "flex", justifyContent: isMobile ? "center" : "flex-end" }}>
-        <Button
+      <ButtonWrapper justify={isMobile ? "center" : "flex-end"}>
+        <NextButton
           variant="outlined"
           endIcon={<ArrowForwardIcon />}
           onClick={handleNext}
           disabled={page === count}
-          sx={nextButton(isMobile)}
         >
           Next
-        </Button>
-      </Box>
-    </Box>
+        </NextButton>
+      </ButtonWrapper>
+    </Container>
   );
 };
 

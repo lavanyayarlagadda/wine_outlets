@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import type { ProductViewResponse } from "../../constant/productViewData";
 import { productViewData as staticData } from "../../constant/productViewData";
-import { useBottleSizesQuery } from "../../store/apis/ProductView/productViewApi";
+import {
+  useBottleSizesQuery,
+  useProductDetailsQuery,
+} from "../../store/apis/ProductView/productViewApi";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface ProductDetailsProps {
   initialData?: ProductViewResponse;
@@ -20,7 +24,11 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
 
   const { data, isLoading } = useBottleSizesQuery({ productId: Number(productId) });
 
-  // ProductDetails state
+  const {
+    data: productDetails,
+    isLoading: productDetailLoading,
+    isError,
+  } = useProductDetailsQuery({ productId: Number(productId) });
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedVintage, setSelectedVintage] = useState<string>("");
   const [count, setCount] = useState<number>(0);
@@ -30,16 +38,20 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     setExpanded((prev) => !prev);
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load the product details");
+    }
+  }, [isError]);
+
   const toggleWishlist = () => setWishlist((prev) => !prev);
   useEffect(() => {
-    // If no initial data passed, use static data (or fetch from API)
     if (!initialData) {
       setProductViewData(staticData);
     }
   }, [initialData]);
 
   useEffect(() => {
-    // Initialize selected size & vintage when data loads
     if (productViewData?.product) {
       const product = productViewData.product;
       setSelectedSize(product.bottle_size?.[0]?.id || "");
@@ -61,5 +73,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     toggleWishlist,
     data,
     isLoading,
+    productDetails,
+    productDetailLoading,
   };
 };

@@ -55,7 +55,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     type: "category" | "sub" | "nested" = "nested",
     count?: number
   ) => {
-    // --- 1. Update IDs for API ---
     setFilters((prev) => {
       const existing = prev[categoryId] || [];
       const updated = existing.includes(value)
@@ -66,8 +65,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
       onFilterChange?.(newFilters);
       return newFilters;
     });
-
-    // --- 2. Update Names for UI ---
     let displayName = label;
     if (type === "sub" && count !== undefined) {
       displayName = `${label} (${count})`;
@@ -76,14 +73,10 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     let updatedNames: string[];
 
     if (selectedNames.includes(displayName)) {
-      // remove name
       updatedNames = selectedNames.filter((v) => v !== displayName);
     } else {
-      // add name
       updatedNames = [...selectedNames.filter((n) => !n.includes("(")), displayName];
     }
-
-    // ✅ Remove parent subcategory name if child/nested is selected
     if (type === "sub" || type === "nested") {
       updatedNames = updatedNames.filter((n) => !n.endsWith(")"));
     }
@@ -115,6 +108,11 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   };
 
   useEffect(() => {
+    if (selectedNames?.length === 0) {
+      setFilters({});
+    }
+  }, [selectedNames]);
+  useEffect(() => {
     if (categories.length === 0) return;
 
     const params = new URLSearchParams(window.location.search);
@@ -124,13 +122,10 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
 
     for (const cat of categories) {
       for (const sub of cat.subCategories || []) {
-        // Priority 1: selectedId → save only item
         if (!subFound && selectedId) {
           const selectedItem = sub.categoryList?.find((item: any) => item.listId === selectedId);
           if (selectedItem) {
             setFilters({ [sub.categoryId]: [selectedItem.listId] });
-
-            // ✅ item only
             const displayName = `${selectedItem.listName} (${selectedItem.count ?? 0})`;
             dispatch(setSelectedNames([displayName]));
 
@@ -139,20 +134,15 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
             break;
           }
         }
-
-        // Priority 2: subCategoryId → only if no children are pre-selected
         if (!subFound && subCategoryId && sub.categoryId === subCategoryId) {
           const count = Number(sub.categoryCount ?? 0);
 
           setSelectedSub(sub.categoryId);
-
-          // ✅ only subcategory name (not items)
           dispatch(setSelectedNames([`${sub.categoryName} (${count})`]));
           subFound = true;
           break;
         }
 
-        // Priority 3: selectedCategory by name → only sub
         if (
           !subFound &&
           selectedCategory &&
@@ -169,7 +159,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
         }
       }
 
-      // Fallback: main category directly
       if (
         !subFound &&
         selectedCategory &&
@@ -177,7 +166,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
       ) {
         setFilters({ [cat.categoryId]: [cat.categoryId] });
 
-        // ✅ category only
         dispatch(setSelectedNames([cat.categoryName]));
         subFound = true;
       }
@@ -187,8 +175,8 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   }, [categories, selectedCategory, selectedId]);
 
   return {
-    filters, // ids
-    selectedNames, // flat names (category / sub / nested w count)
+    filters,
+    selectedNames,
     openDrawer,
     setOpenDrawer,
     handleCheckboxChange,
@@ -199,5 +187,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     selectedNestedSub,
     setSelectedNestedSub,
     handleNestedSubSelect,
+    setFilters,
   };
 };

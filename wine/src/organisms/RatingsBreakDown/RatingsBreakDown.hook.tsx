@@ -113,5 +113,6 @@ export const useRatingsBreakdown = () => {
     handleSubmit,
     setComment,
     setRating,
+    reviewSummary,
   };
 };

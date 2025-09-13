@@ -9,6 +9,10 @@ import {
   ReviewsGrid,
   ReviewFormWrapper,
   ReviewGridItem,
+  SkeletonCircle,
+  SkeletonTextShort,
+  SkeletonTextMedium,
+  NoDataWrapper,
 } from "./RatingsBreakDown.style";
 import AverageRatingCard from "../../atoms/CustomCircularProgressBar/CustomCircularProgressBar";
 import RatingDistributionRow from "../../molecules/RatingDistributionRow/RatingDistributionRow";
@@ -16,7 +20,8 @@ import FilterButton from "../../atoms/FilterButtons/FilterButtons";
 import ReviewCard from "../../molecules/ReviewCard/ReviewCard";
 import { CustomReviewForm } from "../../atoms";
 import { useRatingsBreakdown } from "./RatingsBreakDown.hook";
-import { Skeleton, Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { SkeletonWrapper, StyledSkeletonRect } from "../Filter/FilterPanel.style";
 
 const RatingsBreakdown = () => {
   const {
@@ -25,7 +30,6 @@ const RatingsBreakdown = () => {
     getPercentage,
     filterButtons,
     filteredReviews,
-    ReviewsData,
     isLoading,
     handleSubmit,
     ReviewLoading,
@@ -33,9 +37,8 @@ const RatingsBreakdown = () => {
     comment,
     setComment,
     setRating,
+    reviewSummary,
   } = useRatingsBreakdown();
-
-  const reviewSummary = ReviewsData?.reviews?.[0];
 
   const hasReviews = reviewSummary?.length <= 0;
 
@@ -45,24 +48,23 @@ const RatingsBreakdown = () => {
         <RatingsHeader variant="h6">Ratings Breakdown</RatingsHeader>
 
         {isLoading ? (
-          // 🔹 Unified skeleton while loading
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
-            <Skeleton variant="circular" width={80} height={80} />
-            <Skeleton variant="text" width={120} />
-            <Skeleton variant="text" width={80} />
-            <Skeleton variant="rectangular" height={30} sx={{ borderRadius: 1 }} />
-            <Skeleton variant="rectangular" height={30} sx={{ borderRadius: 1 }} />
-            <Skeleton variant="rectangular" height={30} sx={{ borderRadius: 1 }} />
-            <Skeleton variant="rectangular" height={120} sx={{ borderRadius: 2 }} />
-            <Skeleton variant="rectangular" height={120} sx={{ borderRadius: 2 }} />
-            <Skeleton variant="rectangular" height={120} sx={{ borderRadius: 2 }} />
-          </Box>
+          <SkeletonWrapper>
+            <SkeletonCircle />
+            <SkeletonTextShort />
+            <SkeletonTextMedium />
+            <StyledSkeletonRect />
+            <StyledSkeletonRect />
+            <StyledSkeletonRect />
+            <StyledSkeletonRect />
+            <StyledSkeletonRect />
+            <StyledSkeletonRect />
+          </SkeletonWrapper>
         ) : hasReviews ? (
-          <Box sx={{ width: "100%", textAlign: "center", py: 6 }}>
+          <NoDataWrapper>
             <Typography variant="body1" color="text.secondary" fontStyle="italic">
               No reviews available
             </Typography>
-          </Box>
+          </NoDataWrapper>
         ) : (
           <>
             <RatingsContent>

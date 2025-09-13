@@ -23,6 +23,7 @@ import { Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { setSelectedNames } from "../../store/slices/ProductList/productListSlice";
+import { StyledSkeletonRect } from "../../organisms/Filter/FilterPanel.style";
 
 const ProductList = () => {
   const {
@@ -52,7 +53,6 @@ const ProductList = () => {
   const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
 
   const handleDelete = (name: string) => {
-    console.log(name, "NAME");
     dispatch(setSelectedNames(selectedNames.filter((n) => n !== name)));
   };
 
@@ -87,32 +87,22 @@ const ProductList = () => {
                 Array.from({ length: productsPerRow * 2 }).map((_, index) =>
                   view === "list" ? (
                     <StyledCard key={`skeleton-${index}`} elevation={0}>
-                      <Skeleton variant="rectangular" width="100%" height={200} />
+                      <StyledSkeletonRect />
                       <StyledCardContent>
                         <Skeleton variant="text" width="60%" height={30} />
                         <Skeleton variant="text" width="40%" height={20} />
-                        <Skeleton variant="rectangular" width="100%" height={60} />
+                        <StyledSkeletonRect />
                         <Skeleton variant="text" width="30%" height={40} />
-                        <Skeleton
-                          variant="rectangular"
-                          width="100%"
-                          height={40}
-                          style={{ marginTop: 8 }}
-                        />
+                        <StyledSkeletonRect />
                       </StyledCardContent>
                     </StyledCard>
                   ) : (
                     <StyledCard key={`skeleton-${index}`} elevation={0}>
-                      <Skeleton variant="rectangular" width="100%" height={150} />
+                      <StyledSkeletonRect />
                       <StyledCardContent>
                         <Skeleton variant="text" width="70%" height={25} />
                         <Skeleton variant="text" width="50%" height={20} />
-                        <Skeleton
-                          variant="rectangular"
-                          width="100%"
-                          height={40}
-                          style={{ marginTop: 8 }}
-                        />
+                        <StyledSkeletonRect />
                       </StyledCardContent>
                     </StyledCard>
                   )

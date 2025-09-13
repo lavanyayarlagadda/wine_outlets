@@ -1,48 +1,42 @@
-import type { SxProps, Theme } from "@mui/material";
-import palette from "../../themes/palette";
+import { styled } from "@mui/material/styles";
+import { Box, Button, PaginationItem } from "@mui/material";
 import shape from "../../themes/shape";
 
-export const container: SxProps<Theme> = (theme) => ({
+export const Container = styled(Box)(({ theme }) => ({
   display: "flex",
-  flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-between",
-  mt: 3,
-  mb: 3,
-  gap: 0,
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    gap: 2,
-  },
-});
+  width: "100%",
+  gap: theme.spacing(2),
+  marginTop: theme.spacing(2),
+}));
 
-export const buttonBase: SxProps<Theme> = {
-  textTransform: "none",
-  px: 3,
+export const ButtonWrapper = styled(Box)<{ justify?: "flex-start" | "center" | "flex-end" }>(
+  ({ justify }) => ({
+    flex: 1,
+    display: "flex",
+    justifyContent: justify || "flex-start",
+  })
+);
+
+export const PrevButton = styled(Button)({
+  minWidth: 100,
   borderRadius: shape.borderRadiuspx,
-  color: palette.black[800],
-  border: shape.borderSuccess,
-  fontWeight: 600,
-};
-
-export const prevButton = (isMobile: boolean): SxProps<Theme> => ({
-  ...buttonBase,
-  width: isMobile ? "100%" : "auto",
 });
 
-export const nextButton = (isMobile: boolean): SxProps<Theme> => ({
-  ...buttonBase,
-  width: isMobile ? "100%" : "auto",
+export const NextButton = styled(Button)({
+  minWidth: 100,
+  borderRadius: shape.borderRadiuspx,
 });
 
-export const paginationItem: SxProps<Theme> = {
+export const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
+  borderRadius: theme.shape.borderRadius,
+  marginLeft: theme.spacing(0.5),
+  marginRight: theme.spacing(0.5),
   "&.Mui-selected": {
-    bgcolor: palette.primary.light,
-    color: palette.primary.dark,
-    borderRadius: shape.borderRadiuspx,
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.dark,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.light,
+    },
   },
-  fontWeight: 500,
-  minWidth: 36,
-  height: 36,
-  mx: 0.5,
-};
+}));

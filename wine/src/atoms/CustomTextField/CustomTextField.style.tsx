@@ -44,3 +44,9 @@ export const StyledLabel = styled(Typography)(() => ({
   marginBottom: "8px",
   fontWeight: 400,
 }));
+
+export const ErrorText = styled(Typography)(() => ({
+  color: palette.primary.dark,
+  display: "block",
+  marginTop: 4, // mt={0.5} = 4px
+}));

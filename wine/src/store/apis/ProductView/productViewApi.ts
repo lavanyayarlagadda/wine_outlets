@@ -23,6 +23,15 @@ export const productViewApi = createApi({
         },
       }),
     }),
+    productDetails: builder.query<any, { productId: number }>({
+      query: ({ productId }) => ({
+        url: `/product-view/product-details`,
+        method: "GET",
+        params: {
+          productId,
+        },
+      }),
+    }),
 
     bottleSizes: builder.query<any, { productId: number }>({
       query: ({ productId }) => ({
@@ -46,4 +55,9 @@ export const productViewApi = createApi({
   }),
 });
 
-export const { useGetReviewsQuery, useBottleSizesQuery, useCreateReviewMutation } = productViewApi;
+export const {
+  useGetReviewsQuery,
+  useBottleSizesQuery,
+  useCreateReviewMutation,
+  useProductDetailsQuery,
+} = productViewApi;

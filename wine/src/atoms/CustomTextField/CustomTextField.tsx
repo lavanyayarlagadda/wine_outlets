@@ -1,6 +1,6 @@
 import React from "react";
-import { InputAdornment, MenuItem, Box, Typography } from "@mui/material";
-import { StyledTextField, CountrySelect, StyledLabel } from "./CustomTextField.style";
+import { InputAdornment, MenuItem, Box } from "@mui/material";
+import { StyledTextField, CountrySelect, StyledLabel, ErrorText } from "./CustomTextField.style";
 import palette from "../../themes/palette";
 
 interface DropdownOption {
@@ -82,11 +82,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
         }}
       />
 
-      {error && (
-        <Typography variant="caption" mt={0.5} display="block" sx={{ color: palette.primary.dark }}>
-          {error}
-        </Typography>
-      )}
+      {error && <ErrorText variant="caption">{error}</ErrorText>}
     </Box>
   );
 };

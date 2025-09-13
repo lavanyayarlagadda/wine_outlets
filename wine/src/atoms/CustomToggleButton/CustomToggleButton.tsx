@@ -1,5 +1,6 @@
 import React from "react";
 import { ToggleButton } from "@mui/material";
+import { IconImage } from "./CustomToggleButton.style";
 
 interface ViewToggleButtonProps {
   value: string;
@@ -10,8 +11,8 @@ interface ViewToggleButtonProps {
 
 const ViewToggleButton: React.FC<ViewToggleButtonProps> = ({ value, selected, icon, alt }) => {
   return (
-    <ToggleButton value={value} sx={{ p: 0 }}>
-      <img src={icon} alt={alt} style={{ width: 40, height: 40, opacity: selected ? 1 : 0.6 }} />
+    <ToggleButton value={value}>
+      <IconImage src={icon} alt={alt} selected={selected} />
     </ToggleButton>
   );
 };

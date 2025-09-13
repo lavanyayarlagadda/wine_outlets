@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Skeleton } from "@mui/material";
 
 // Wrapper for the whole Ratings Breakdown section
 export const RatingsWrapper = styled(Box)(() => ({
@@ -76,4 +76,24 @@ export const ReviewGridItem = styled(Grid)(() => ({
   "@media (min-width: 900px)": {
     width: "49%",
   },
+}));
+export const SkeletonCircle = styled(Skeleton)(() => ({
+  width: 80,
+  height: 80,
+}));
+
+export const SkeletonTextShort = styled(Skeleton)(() => ({
+  width: 120,
+  height: 20,
+}));
+
+export const SkeletonTextMedium = styled(Skeleton)(() => ({
+  width: 80,
+  height: 20,
+}));
+
+export const NoDataWrapper = styled(Box)(() => ({
+  width: "100%",
+  textAlign: "center",
+  padding: "48px 0",
 }));
