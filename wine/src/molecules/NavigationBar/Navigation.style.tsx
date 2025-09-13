@@ -392,10 +392,21 @@ export const CloseButton = styled(IconButton)(({ theme }) => ({
   padding: "4px",
 }));
 
-export const CategoryColumn = styled(Box)(() => ({
-  minWidth: 220,
+export const CategoryColumn = styled(Box)(({ theme }) => ({
   flex: "1 1 200px",
   marginBottom: 16,
+  minWidth: 600, // default for large screens
+
+  // Medium screens (tablet)
+  [theme.breakpoints.down("md")]: {
+    minWidth: "100%", // take full width
+  },
+
+  // Small screens (mobile)
+  [theme.breakpoints.down("sm")]: {
+    minWidth: "100%",
+    marginBottom: 8, // smaller spacing on mobile
+  },
 }));
 
 export const CategoryTitle = styled(Typography)(() => ({
@@ -404,15 +415,17 @@ export const CategoryTitle = styled(Typography)(() => ({
   marginBottom: 10,
   color: "#b02a37",
   textTransform: "uppercase",
-  paddingLeft: 10,
+  paddingLeft: 30,
 }));
 
 export const ColumnsWrapper = styled(Box)(() => ({
   display: "flex",
   flexDirection: "row",
   gap: 20,
-  padding: "8px",
-  // flexWrap: "wrap",
+  paddingLeft: "30px",
+  paddingRight: "30px",
+  paddingTop: "8px",
+  paddingBottom: "8px",
 }));
 
 export const Column = styled(Box)(() => ({

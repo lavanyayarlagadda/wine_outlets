@@ -20,6 +20,9 @@ import {
 } from "./ProductList.style";
 import { StyledCard, StyledCardContent } from "../ProductListCard/ProductListCard.style";
 import { Skeleton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../store";
+import { setSelectedNames } from "../../store/slices/ProductList/productListSlice";
 
 const ProductList = () => {
   const {
@@ -45,7 +48,14 @@ const ProductList = () => {
 
   const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
 
-  const filters = [{ label: "wines", count: 28 }];
+  const dispatch = useDispatch();
+  const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
+
+  if (selectedNames.length === 0) return null;
+
+  const handleDelete = (name: string) => {
+    dispatch(setSelectedNames(selectedNames.filter((n) => n !== name)));
+  };
 
   return (
     <>
@@ -62,7 +72,7 @@ const ProductList = () => {
 
         <ContentWrapper>
           <ControlsWrapper>
-            <FilterTagList filters={filters} onDelete={() => {}} />
+            <FilterTagList filters={selectedNames} onDelete={() => handleDelete} />
             <SortAndViewControls
               sortBy={sortBy}
               onSortChange={setSortBy}
@@ -125,7 +135,7 @@ const ProductList = () => {
                         onAddToCart={() => handleAddToCart(product.id)}
                         onToggleFavorite={() => handleToggleFavorite(product.id)}
                         isFavorite={wishlist.includes(product.id)}
-                        isLoading={loadingProduct === product.id}
+                        isLoading={loadingProduct}
                         wishListLoading={wishListLoading}
                       />
                     ) : (
@@ -135,7 +145,7 @@ const ProductList = () => {
                         onAddToCart={() => handleAddToCart(product.id)}
                         onToggleFavorite={() => handleToggleFavorite(product.id)}
                         isFavorite={wishlist.includes(product.id)}
-                        isLoading={loadingProduct === product.id}
+                        isLoading={loadingProduct}
                         wishListLoading={wishListLoading}
                       />
                     )

@@ -41,7 +41,7 @@ export interface ProductCardProps {
   onAddToCart: (id: number | string) => void;
   onToggleFavorite: (id: number | string) => void;
   isFavorite: boolean;
-  isLoading?: boolean;
+  isLoading?: string | null;
   wishListLoading?: string | null;
 }
 
@@ -128,9 +128,9 @@ const ProductListCard: React.FC<ProductCardProps> = ({
             fullWidth={isMobile}
             startIcon={isLoading ? null : <ShoppingCart />}
             onClick={() => onAddToCart(id)}
-            disabled={isLoading} // disable button while loading
+            disabled={isLoading === id} // disable button while loading
           >
-            {isLoading ? <AddToCartLoader /> : "Add to Cart"}
+            {isLoading === id ? <AddToCartLoader /> : "Add to Cart"}
           </AddToCartButton>
         </FooterRow>
       </StyledCardContent>

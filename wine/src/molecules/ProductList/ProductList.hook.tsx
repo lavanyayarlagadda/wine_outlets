@@ -53,7 +53,7 @@ export const useProductList = ({
   const { data, isLoading, error } = useFilterQuery();
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
-  const [loadingProduct, setLoadingProduct] = useState<boolean>(false);
+  const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
 
   const [addToCart] = useAddtoCartMutation();
@@ -95,9 +95,9 @@ export const useProductList = ({
     }
   }, [productListError]);
 
-  const handleAddToCart = async (productId: number) => {
+  const handleAddToCart = async (productId: any) => {
     try {
-      setLoadingProduct(true);
+      setLoadingProduct(productId);
       const newQuantity = (cartItems[productId] || 0) + 1;
       const payload = {
         productId,
@@ -106,16 +106,18 @@ export const useProductList = ({
       };
 
       const response = await addToCart(payload).unwrap();
+      console.log("ERROR1");
       setCartItems((prev) => ({
         ...prev,
         [productId]: newQuantity,
       }));
       toast.success(response.cartResponse);
     } catch (err) {
+      console.log("ERROR");
       console.error("Failed to add to cart:", err);
       toast.error("Failed to add to cart");
     } finally {
-      setLoadingProduct(false); // stop loader
+      setLoadingProduct(null); // stop loader
     }
   };
 

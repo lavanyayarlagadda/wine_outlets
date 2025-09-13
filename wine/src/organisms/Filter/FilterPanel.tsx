@@ -111,7 +111,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
           <CustomCheckbox
             label={item.listName}
             checked={(filters[sub.categoryId] || []).includes(item.listId)}
-            onChange={() => handleCheckboxChange(sub.categoryId, item.listId)}
+            onChange={() => handleCheckboxChange(sub.categoryId, item.listId, item.listName, "sub")}
           />
           {hasNested && (
             <ExpandButton onClick={() => handleNestedSubSelect(item.listId)}>
@@ -128,7 +128,14 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
                   key={nestedItem.categoryId}
                   label={nestedItem.categoryName}
                   checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
-                  onChange={() => handleCheckboxChange(sub.categoryId, nestedItem.categoryId)}
+                  onChange={() =>
+                    handleCheckboxChange(
+                      sub.categoryId,
+                      nestedItem.categoryId,
+                      nestedItem.categoryName,
+                      "nested"
+                    )
+                  }
                 />
               ))}
               {item.categories.length > 4 && (
@@ -144,7 +151,14 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
                   key={nestedItem.categoryId}
                   label={nestedItem.categoryName}
                   checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
-                  onChange={() => handleCheckboxChange(sub.categoryId, nestedItem.categoryId)}
+                  onChange={() =>
+                    handleCheckboxChange(
+                      sub.categoryId,
+                      nestedItem.categoryId,
+                      nestedItem.categoryName,
+                      "nested"
+                    )
+                  }
                 />
               ))}
               {item.categories.length > 4 && subDepartmentCats[item.categoryId] && (
@@ -174,7 +188,9 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
                     key={item.listId}
                     label={item.listName}
                     checked={(filters[cat.categoryId] || []).includes(item.listId)}
-                    onChange={() => handleCheckboxChange(cat.categoryId, item.listId)}
+                    onChange={() =>
+                      handleCheckboxChange(cat.categoryId, item.listId, item.listName, "category")
+                    }
                   />
                 ))}
 
@@ -189,7 +205,9 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
                     key={item.listId}
                     label={item.listName}
                     checked={(filters[cat.categoryId] || []).includes(item.listId)}
-                    onChange={() => handleCheckboxChange(cat.categoryId, item.listId)}
+                    onChange={() =>
+                      handleCheckboxChange(cat.categoryId, item.listId, item.listName, "category")
+                    }
                   />
                 ))}
                 {cat.categoryList.length > 4 && expandedCats[cat.categoryId] && (
@@ -231,7 +249,13 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
         {cat.subCategories?.map((sub) => (
           <Box key={sub.categoryId}>
             <SubCategoryButton
-              onClick={() => handleSubSelect(sub.categoryId)}
+              onClick={() =>
+                handleSubSelect({
+                  categoryId: sub.categoryId,
+                  categoryName: sub.categoryName,
+                  categoryCount: Number(sub.categoryCount ?? 0),
+                })
+              }
               variant={selectedSub === sub.categoryId ? "contained" : "outlined"}
               selected={selectedSub === sub.categoryId}
             >

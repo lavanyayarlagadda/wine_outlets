@@ -44,7 +44,7 @@ interface ProductCardProps {
   onAddToCart: (id: number | string) => void;
   onToggleFavorite: (id: number | string) => void;
   isFavorite: boolean;
-  isLoading?: boolean;
+  isLoading?: string | null;
   wishListLoading?: string | null;
 }
 
@@ -114,10 +114,10 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
 
         <AddToCartButton
           onClick={() => onAddToCart(product.id)}
-          startIcon={isLoading ? null : <ShoppingCart />}
-          disabled={isLoading} // disable while loading
+          startIcon={isLoading === product.id ? null : <ShoppingCart />}
+          disabled={isLoading === product.id} // disable while loading
         >
-          {isLoading ? <AddToCartLoader /> : "Add to Cart"}
+          {isLoading === product.id ? <AddToCartLoader /> : "Add to Cart"}
         </AddToCartButton>
       </ProductCardContent>
     </ResponsiveCard>
