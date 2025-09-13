@@ -33,12 +33,12 @@ const AverageRatingCard: React.FC<AverageRatingCardProps> = ({
           thickness={4}
         />
         <CircularLabel>
-          <RatingNumber variant="h4">{averageRating.toFixed(1)}</RatingNumber>
+          <RatingNumber variant="h4">{averageRating?.toFixed(1)}</RatingNumber>
         </CircularLabel>
       </CircularProgressWrapper>
 
       <RatingInfo>
-        <StarRating value={averageRating} />
+        <StarRating value={Number(averageRating)} />
         <RatingText variant="body2">{satisfaction}</RatingText>
         <RatingText variant="body2">
           {ratingCount} • {reviewCount}

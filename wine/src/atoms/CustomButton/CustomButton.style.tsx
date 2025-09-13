@@ -1,6 +1,7 @@
 import { Button, Box, Typography, styled } from "@mui/material";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
+import palette from "../../themes/palette";
 
 export const StyledButton = styled(Button)<{
   bgColor: string;
@@ -19,10 +20,20 @@ export const StyledButton = styled(Button)<{
   fontWeight: 600,
   minWidth: "150px",
   fontSize: profile ? "12px" : "14px",
+
   "&:hover": {
     backgroundColor: bgColor,
     opacity: 0.9,
   },
+
+  // override default MUI disabled styles
+  "&.Mui-disabled": {
+    backgroundColor: palette.grey.main,
+    color: theme.palette.white.main,
+    opacity: 1, // keep full opacity
+    cursor: "not-allowed",
+  },
+
   [theme.breakpoints.down("md")]: {
     padding: profile ? "2px" : "10px 14px",
     fontSize: "14px",

@@ -67,15 +67,16 @@ const ProductDetails: React.FC = () => {
     count,
     setCount,
     toggleWishlist,
+    data,
   } = UseProductView();
 
   if (!productViewData) return null;
 
   const { product } = productViewData;
 
-  const sizeOptions = product.bottle_size.map((size) => ({
-    value: size.id,
-    label: size.label,
+  const sizeOptions = data?.bottleSizes?.map((size: any) => ({
+    value: size,
+    label: size,
   }));
   const vintageOptions = product.other_vintages.map((vintage) => ({
     value: vintage.year,
@@ -148,7 +149,11 @@ const ProductDetails: React.FC = () => {
         </PricingBox>
       </PriceRow>
 
-      <AddToCart onClick={() => console.log("Added to cart")} label="Add to Cart" />
+      <AddToCart
+        onClick={() => console.log("Added to cart")}
+        label="Add to Cart"
+        variantType="filled"
+      />
 
       <DescriptionText>{product.description}</DescriptionText>
       <ProductHighlights title="Product Highlights" highlights={product.highlights} />

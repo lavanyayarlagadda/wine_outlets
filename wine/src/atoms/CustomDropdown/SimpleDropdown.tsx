@@ -33,7 +33,7 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
             <span>{placeholder}</span>
           </MenuItem>
         )}
-        {options.map((option) => (
+        {options?.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>

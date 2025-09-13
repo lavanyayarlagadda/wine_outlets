@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import type { ProductViewResponse } from "../../constant/productViewData";
 import { productViewData as staticData } from "../../constant/productViewData";
+import { useBottleSizesQuery } from "../../store/apis/ProductView/productViewApi";
+import { useLocation } from "react-router-dom";
 
 interface ProductDetailsProps {
   initialData?: ProductViewResponse;
 }
 
 export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const productId = queryParams.get("productId") || "";
+
   const [expanded, setExpanded] = useState(true);
   const [productViewData, setProductViewData] = useState<ProductViewResponse | null>(
     initialData || null
   );
+
+  const { data, isLoading } = useBottleSizesQuery({ productId: Number(productId) });
 
   // ProductDetails state
   const [selectedSize, setSelectedSize] = useState<string>("");
@@ -43,7 +51,6 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     expanded,
     toggleExpand,
     productViewData,
-    // ProductDetails state
     selectedSize,
     setSelectedSize,
     selectedVintage,
@@ -52,5 +59,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     setCount,
     wishlist,
     toggleWishlist,
+    data,
+    isLoading,
   };
 };

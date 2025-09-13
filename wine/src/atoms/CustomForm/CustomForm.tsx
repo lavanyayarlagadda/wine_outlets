@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTheme, useMediaQuery } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import {
@@ -16,9 +16,12 @@ interface ReviewFormProps {
   title?: string;
   placeholder?: string;
   buttonText?: string;
-  initialRating?: number;
+  initialRating?: number | null;
   initialComment?: string;
-  onSubmit: (review: { rating: number; comment: string }) => void;
+  onSubmit: () => void;
+  isLoading?: boolean;
+  setComment: React.Dispatch<React.SetStateAction<any>>;
+  setRating: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const ReusableReviewForm: React.FC<ReviewFormProps> = ({
@@ -28,56 +31,46 @@ const ReusableReviewForm: React.FC<ReviewFormProps> = ({
   initialRating = 0,
   initialComment = "",
   onSubmit,
+  isLoading,
+  setComment,
+  setRating,
 }) => {
-  const [rating, setRating] = useState<number | null>(initialRating);
-  const [comment, setComment] = useState<string>(initialComment);
-
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleSubmit = () => {
-    if (rating && comment.trim()) {
-      onSubmit({ rating, comment });
-      setRating(initialRating);
-      setComment(initialComment);
-    }
-  };
-
   return (
     <FormWrapper>
-      {/* Header */}
       <HeaderText variant="subtitle1">{title}</HeaderText>
-
-      {/* Comment Field */}
       <CommentField
         placeholder={placeholder}
         multiline
         rows={4}
         fullWidth
-        value={comment}
+        value={initialComment}
         onChange={(e) => setComment(e.target.value)}
       />
-
-      {/* Rating + Button */}
       <RatingBox isSm={isSm}>
-        <StyledRating value={rating} onChange={(_, newValue) => setRating(newValue)} size="large" />
+        <StyledRating
+          value={initialRating}
+          onChange={(_, newValue) => setRating(newValue)}
+          size="large"
+        />
 
         <ButtonHintWrapper isSm={isSm}>
           <CustomButton
             text={buttonText}
             bgColor={theme.palette.primary.dark}
-            onClick={handleSubmit}
+            onClick={onSubmit}
             color=""
             border=""
             btnBorderColor=""
+            isLoading={isLoading}
           />
           {!isSm && (
             <span style={{ color: palette.grey.main }}>Your feedback is essential for us!</span>
           )}
         </ButtonHintWrapper>
       </RatingBox>
-
-      {/* Mobile hint */}
       {isSm && <MobileHint>Your feedback is essential for us!</MobileHint>}
     </FormWrapper>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { StyledButton, ButtonText, IconWrapper } from "./CustomButton.style";
+import { AddToCartLoader } from "../../molecules/ProductListGrid/ProductGridCard.style";
 
 interface CustomButtonProps {
   text: string;
@@ -12,6 +13,7 @@ interface CustomButtonProps {
   btnbgColor?: string;
   btnColor?: string;
   profile?: boolean;
+  isLoading?: boolean;
 }
 
 const CustomButton = ({
@@ -24,6 +26,7 @@ const CustomButton = ({
   btnbgColor = "",
   btnColor = "",
   profile = false,
+  isLoading = false,
 }: CustomButtonProps) => {
   return (
     <StyledButton
@@ -31,10 +34,15 @@ const CustomButton = ({
       bgColor={bgColor}
       btnBorderColor={btnBorderColor}
       profile={profile}
+      disabled={isLoading}
     >
-      <ButtonText style={{ color }}>{text}</ButtonText>
-      <IconWrapper border={border} bgcolor={btnbgColor} color={btnColor}>
-        <NorthEastIcon fontSize="small" />
+      <ButtonText style={{ color }}>{isLoading ? <AddToCartLoader /> : text}</ButtonText>
+      <IconWrapper
+        border={border}
+        bgcolor={isLoading ? "transparent" : btnbgColor}
+        color={btnColor}
+      >
+        {isLoading ? null : <NorthEastIcon fontSize="small" />}
       </IconWrapper>
     </StyledButton>
   );

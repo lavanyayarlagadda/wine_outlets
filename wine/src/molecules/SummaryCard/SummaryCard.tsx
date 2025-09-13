@@ -19,7 +19,11 @@ const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
         <PriceText>${totalPrice.toFixed(2)}</PriceText>
       </PriceContainer>
 
-      <AddToCart onClick={() => console.log("Added to cart")} label="Add to Cart" />
+      <AddToCart
+        onClick={() => console.log("Added to cart")}
+        label="Add to Cart"
+        variantType="filled"
+      />
     </SummaryCardWrapper>
   );
 };

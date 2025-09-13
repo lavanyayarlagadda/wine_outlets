@@ -1,4 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import {
+  useCreateReviewMutation,
+  useGetReviewsQuery,
+} from "../../store/apis/ProductView/productViewApi";
+import { toast } from "react-toastify";
 
 export interface Review {
   rating: number;
@@ -17,34 +23,80 @@ export interface RatingsData {
   sample_reviews: Review[];
 }
 
-export const useRatingsBreakdown = (data: RatingsData) => {
+export const useRatingsBreakdown = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>("All");
 
-  const totalRatings = useMemo(
-    () => Object.values(data.ratings_distribution).reduce((a, b) => a + b, 0),
-    [data.ratings_distribution]
-  );
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const productId = queryParams.get("productId") || "";
 
-  const getPercentage = (count: number) => (totalRatings > 0 ? (count / totalRatings) * 100 : 0);
+  const [rating, setRating] = useState<number | null>(0);
+  const [comment, setComment] = useState<string>("");
+  const [createReview, { isLoading: ReviewLoading, isSuccess, isError: ReviewError }] =
+    useCreateReviewMutation();
+
+  const handleSubmit = () => {
+    if (rating && comment.trim()) {
+      createReview({
+        rating,
+        comment,
+        userId: 1,
+        productId: Number(productId),
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Review submitted successfully!");
+      setRating(0);
+      setComment("");
+    }
+    if (isError) {
+      toast.error("Failed to submit review. Please try again.");
+    }
+  }, [isSuccess, ReviewError]);
+
+  const {
+    data: ReviewsData,
+    isLoading,
+    isError,
+  } = useGetReviewsQuery({
+    productId: Number(productId),
+    page: 1,
+    limit: 10,
+    rating: selectedFilter,
+  });
+
+  const reviewSummary = ReviewsData?.reviews[0];
+
+  const totalRatings = useMemo(() => {
+    const distribution = reviewSummary?.ratings_distribution;
+    if (!distribution) return 0;
+
+    return Object.values(distribution as Record<string, number>).reduce((a, b) => a + b, 0);
+  }, [reviewSummary?.ratings_distribution]);
+
+  const getPercentage = (count: any) => (totalRatings > 0 ? (count / totalRatings) * 100 : 0);
 
   const filterButtons = useMemo(() => {
     return [
       { label: `All (${totalRatings})`, value: "All" },
-      { label: `5 Stars (${data.ratings_distribution["5_star"] || 0})`, value: "5" },
-      { label: `4 Stars (${data.ratings_distribution["4_star"] || 0})`, value: "4" },
-      { label: `3 Stars (${data.ratings_distribution["3_star"] || 0})`, value: "3" },
-      { label: `2 Stars (${data.ratings_distribution["2_star"] || 0})`, value: "2" },
-      { label: `1 Star (${data.ratings_distribution["1_star"] || 0})`, value: "1" },
+      { label: `5 Stars (${reviewSummary?.ratings_distribution["5_star"] || 0})`, value: "5" },
+      { label: `4 Stars (${reviewSummary?.ratings_distribution["4_star"] || 0})`, value: "4" },
+      { label: `3 Stars (${reviewSummary?.ratings_distribution["3_star"] || 0})`, value: "3" },
+      { label: `2 Stars (${reviewSummary?.ratings_distribution["2_star"] || 0})`, value: "2" },
+      { label: `1 Star (${reviewSummary?.ratings_distribution["1_star"] || 0})`, value: "1" },
     ];
-  }, [data.ratings_distribution, totalRatings]);
+  }, [reviewSummary?.ratings_distribution, totalRatings]);
 
-  const filteredReviews = useMemo(
-    () =>
-      selectedFilter === "All"
-        ? data.sample_reviews
-        : data.sample_reviews.filter((review) => review.rating === Number(selectedFilter)),
-    [selectedFilter, data.sample_reviews]
-  );
+  const filteredReviews = reviewSummary?.sample_reviews;
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to submit review. Please try again.");
+    }
+  }, [isError]);
 
   return {
     selectedFilter,
@@ -53,5 +105,13 @@ export const useRatingsBreakdown = (data: RatingsData) => {
     getPercentage,
     filterButtons,
     filteredReviews,
+    ReviewsData,
+    isLoading,
+    ReviewLoading,
+    rating,
+    comment,
+    handleSubmit,
+    setComment,
+    setRating,
   };
 };
