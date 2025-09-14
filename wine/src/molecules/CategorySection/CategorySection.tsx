@@ -1,34 +1,21 @@
-import React from "react";
 import { Container } from "./CategorySection.style";
 import { CustomTitleSection } from "../../atoms";
 import ProductCardSection from "./layout/ProductCard";
-import { LandingPageData } from "../../constant/LandingPageData";
-import { useNavigate } from "react-router-dom";
-
-export interface ShopCategory {
-  id: number | string;
-  productName?: string;
-  media?: { type?: string; url?: string };
-  productCount?: number;
-  categoryAction?: string;
-}
-
-interface ShopByCategorySection {
-  isVisible?: boolean;
-  title?: string;
-  subtitle?: string;
-  categories?: ShopCategory[];
-}
-
-const shopSection: ShopByCategorySection = LandingPageData?.shopByCategory ?? {};
-const title = shopSection.title ?? "Shop by Category";
-const subtitle = shopSection.subtitle ?? "Find your favorite by type.";
-const categories = shopSection.categories ?? [];
+import type { ShopByCategorySection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 
 const CategorySection = () => {
-  const navigate = useNavigate();
+  const { data: sections, } = useGetHomeSectionsQuery();
+  const shopSection: ShopByCategorySection = sections?.sections?.shopByCategory ?? {};
+  const isVisible = shopSection.isVisible ?? "";
+  const title = shopSection.title ?? "";
+  const subtitle = shopSection.subtitle ?? "";
+  const categories = shopSection.categories ?? [];
+
+  if(!isVisible) return null;
+  
   return (
-    <Container onClick={() => navigate("/productsList")}>
+    <Container>
       <CustomTitleSection title={title} subtitle={subtitle} />
       <ProductCardSection categories={categories} />
     </Container>

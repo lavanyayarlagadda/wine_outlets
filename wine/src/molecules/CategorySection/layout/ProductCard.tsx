@@ -10,7 +10,7 @@ import {
   CoverImage,
 } from "./ProductCard.style";
 import { useNavigate } from "react-router-dom";
-import type { ShopCategory } from "../CategorySection";
+import type { ShopCategory } from "../../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 const ProductCardSection: React.FC<{ categories: ShopCategory[] }> = ({ categories }) => {
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ const ProductCardSection: React.FC<{ categories: ShopCategory[] }> = ({ categori
             key={item.id}
             onClick={() => {
               if (item.categoryAction) navigate(item.categoryAction);
-              else navigate("/productsList");
             }}
             role="button"
           >

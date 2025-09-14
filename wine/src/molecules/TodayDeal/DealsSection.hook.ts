@@ -1,11 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { LandingPageData } from "../../constant/LandingPageData";
 import type { Product } from "../ProductCard/ProductCard";
+import type { DealSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 
-interface TimerConfig {
-  endTime: string;
-  format?: string;
-}
 interface DealFilterBtn {
   id: string;
   label: string;
@@ -13,20 +10,16 @@ interface DealFilterBtn {
 interface DealProductsGroup {
   [key: string]: Product[] | undefined;
 }
-interface DealSectionFromData {
-  isVisible?: boolean | string;
-  title?: string;
-  props?: { showTimer?: boolean; timer?: TimerConfig; filterButtons?: DealFilterBtn[] };
-  dealProducts?: DealProductsGroup;
-}
 
 export const useDealsSection = () => {
-  const dealSection = (LandingPageData as any)?.dealSection ?? ({} as DealSectionFromData);
+  const { data: sections} = useGetHomeSectionsQuery();
+  const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [cartItems, setCartItems] = useState<string[]>([]);
-  const title = dealSection.title ?? "Today's Deal for you!";
+  const title = dealSection.title ?? "";
   const sectionProps = dealSection.props ?? {};
   const timerConfig = sectionProps?.timer;
+  const isVisible = dealSection?.isVisible ?? false;
   const filterButtonsFromData: DealFilterBtn[] = sectionProps?.filterButtons ?? [
     { id: "trending", label: "Trending" },
   ];
@@ -193,6 +186,7 @@ export const useDealsSection = () => {
     handleToggleFavorite,
     wishlist,
     cartItems,
+    isVisible,
   };
 };
 

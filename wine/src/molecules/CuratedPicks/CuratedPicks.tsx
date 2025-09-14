@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid } from "@mui/material";
 import {
   Container,
@@ -13,34 +12,17 @@ import {
   StyledCategoryLabel,
   ProductImage,
 } from "./CuratedPicks.style";
-import { LandingPageData } from "../../constant/LandingPageData";
-// import { curatedData } from "../../constant/curatedData";
 import { useNavigate } from "react-router-dom";
-
-interface CuratedCategory {
-  id: number;
-  category: string;
-  media?: {
-    type?: string;
-    url?: string;
-  };
-  categoryAction?: string;
-}
-
-interface CuratedPicksSection {
-  isVisible?: boolean;
-  title?: string;
-  subtitle?: string;
-  categories?: CuratedCategory[];
-}
-
-const { title, subtitle, categories }: CuratedPicksSection = LandingPageData?.curatedPicks ?? {};
-// const title = curatedSection.title ?? "Shop Our Curated Picks";
-// const subtitle = curatedSection.subtitle ?? "Find your favorite by type.";
-// const categories = curatedSection.categories ?? [];
+import type { CuratedPicksSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 
 const CuratedPicks = () => {
   const navigate = useNavigate();
+  const { data: sections } = useGetHomeSectionsQuery();
+  const {isVisible, title, subtitle, categories }: CuratedPicksSection = sections?.sections?.curatedPicks ?? {};
+
+  if(!isVisible) return null;
+
   return (
     <Container>
       <HeaderSection>
@@ -52,12 +34,11 @@ const CuratedPicks = () => {
           {categories?.map((item, index) => (
             <Grid key={index}>
               <StyledWineItem>
-                <StyledImageContainer onClick={() => navigate("/productsList")}>
+                <StyledImageContainer onClick={() => navigate(item.categoryAction || "/")}>
                   <StyledOverlay />
                   <ProductImage
                     src={item.media?.url || "/placeholder.svg"}
                     alt={`${item.category} wine bottle`}
-                    onClick={() => navigate("/productView")}
                   />
                 </StyledImageContainer>
 

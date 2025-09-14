@@ -88,10 +88,10 @@ export interface CuratedCategory {
 }
 
 export interface CuratedPicksSection {
-  isVisible: boolean;
+  isVisible?: boolean;
   title?: string;
   subtitle?: string;
-  categories: CuratedCategory[];
+  categories?: CuratedCategory[];
 }
 
 // --- Everyday Slides ---
@@ -103,8 +103,8 @@ export interface EverydaySlide {
 }
 
 export interface EverydaySlidesSection {
-  isVisible: boolean;
-  slides: EverydaySlide[];
+  isVisibl?: boolean;
+  slides?: EverydaySlide[];
 }
 
 // --- Shop By Category ---
@@ -117,10 +117,10 @@ export interface ShopCategory {
 }
 
 export interface ShopByCategorySection {
-  isVisible: boolean;
+  isVisible?: boolean;
   title?: string;
   subtitle?: string;
-  categories: ShopCategory[];
+  categories?: ShopCategory[];
 }
 
 // --- Deal Section ---
@@ -160,7 +160,7 @@ export interface DealProducts {
 }
 
 export interface DealSection {
-  isVisible: boolean | string; // payload sometimes uses "true" as string
+  isVisible?: boolean | string;
   title?: string;
   props?: DealProps;
   dealProducts?: DealProducts;

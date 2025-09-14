@@ -34,8 +34,9 @@ const DealsSection: React.FC = () => {
     handleAddToCart,
     handleToggleFavorite,
     wishlist,
+    isVisible
   } = useDealsSection();
-
+  if (!isVisible) return null;
   return (
     <Container>
       <HeaderRow>
