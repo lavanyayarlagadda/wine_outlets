@@ -14,17 +14,20 @@ import {
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
-import type { LimitedTimeOfferSection , OfferItem} from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-
+import type {
+  LimitedTimeOfferSection,
+  OfferItem,
+} from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 const LimitedTimeOffersCarousel = () => {
-  const { data: sections} = useGetHomeSectionsQuery();
-  const { title, subtitle, offers, isVisible }: LimitedTimeOfferSection = sections?.sections?.limitedTimeOffer ?? {
-  isVisible: false,
-  title: "",
-  subtitle: "",
-  offers: [],
-};
+  const { data: sections } = useGetHomeSectionsQuery();
+  const { title, subtitle, offers, isVisible }: LimitedTimeOfferSection = sections?.sections
+    ?.limitedTimeOffer ?? {
+    isVisible: false,
+    title: "",
+    subtitle: "",
+    offers: [],
+  };
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -55,9 +58,7 @@ const LimitedTimeOffersCarousel = () => {
     </OfferCard>
   );
 
- 
-
-  if(!isVisible) return null; 
+  if (!isVisible) return null;
 
   return (
     <CarouselContainer>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import { useLoginQuery } from "../../store/apis/Auth/authenticationApis";
 import Cookies from "js-cookie";
 
 export const useHomeLogic = () => {
@@ -8,9 +7,6 @@ export const useHomeLogic = () => {
   const [open, setOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState<number | 0>();
 
-  // const { data, error, isLoading } = useLoginQuery();
-
-  // 🔹 Check cookie on mount
   useEffect(() => {
     const verified = Cookies.get("ageVerified");
     if (verified === "true") {

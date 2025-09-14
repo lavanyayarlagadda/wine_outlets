@@ -3,10 +3,11 @@ import { UseProductView } from "./UseProductView.hook";
 
 const ProductImageWrapper: React.FC = () => {
   const { productViewData } = UseProductView();
+  console.log(productViewData, "productViewData");
   if (!productViewData) return null;
   return (
     <ImageGallery
-      images={productViewData.product.images}
+      images={productViewData?.product?.images}
       initialIndex={0}
       thumbnailPosition="left"
       imageFit="contain"

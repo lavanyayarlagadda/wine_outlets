@@ -4,6 +4,7 @@ import type { ProductListItems } from "../../Interfaces/ProductListInterface/Pro
 const initialState: ProductListItems = {
   cartList: [],
   selectedNames: [],
+  productsData: {},
 };
 
 const ProductListSlice = createSlice({
@@ -16,8 +17,11 @@ const ProductListSlice = createSlice({
     setSelectedNames: (state, action: PayloadAction<string[]>) => {
       state.selectedNames = action.payload;
     },
+    setProductsData: (state, action: PayloadAction<any>) => {
+      state.productsData = action.payload;
+    },
   },
 });
 
-export const { setCartList, setSelectedNames } = ProductListSlice.actions;
+export const { setCartList, setSelectedNames, setProductsData } = ProductListSlice.actions;
 export default ProductListSlice.reducer;

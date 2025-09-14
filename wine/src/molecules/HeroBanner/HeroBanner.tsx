@@ -58,8 +58,8 @@ const HeroBanner = ({
 
   // const currentSlideData = slides[currentSlide];
 
-  if(!isVisible) return null;
- 
+  if (!isVisible) return null;
+
   return (
     <HeroBannerContainer
       ref={containerRef}
@@ -68,7 +68,11 @@ const HeroBanner = ({
       onTouchEnd={handleTouchEnd}
     >
       {slides.map((slide, index) => (
-        <SlideContainer key={slide.id} isActive={index === currentSlide} onClick={()=>navigate(slide?.Action || "/")}>
+        <SlideContainer
+          key={slide.id}
+          isActive={index === currentSlide}
+          onClick={() => navigate(slide?.Action || "/")}
+        >
           <SlideBackground
             backgroundImage={slide.backgroundMedia?.url ?? ""}
             role="img"

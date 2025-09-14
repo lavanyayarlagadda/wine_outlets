@@ -1,5 +1,4 @@
 import React from "react";
-import { suggestedProducts } from "../../constant/dealProduct";
 import { ProductWithDivider, SummaryCard } from "../../molecules";
 import {
   PeopleBoughtWrapper,
@@ -11,10 +10,21 @@ import {
 } from "./PeopleBought.style";
 import { usePeopleBought } from "./PeopleBought.hook";
 
-const PeopleBought: React.FC = () => {
-  const { handleAddToCart, handleToggleFavorite, currentProducts, wishlist } = usePeopleBought(
-    suggestedProducts.products
-  );
+interface PeopleProps {
+  suggestedProducts: any;
+}
+
+const PeopleBought: React.FC<PeopleProps> = ({ suggestedProducts }) => {
+  const {
+    handleAddToCart,
+    handleToggleFavorite,
+    currentProducts,
+    wishlist,
+    wishListLoading,
+    loadingProduct,
+  } = usePeopleBought(suggestedProducts?.productDetails?.suggestedProducts);
+
+  console.log(suggestedProducts, "SUGGESTEDPROUCTS");
 
   return (
     <PeopleBoughtWrapper>
@@ -24,7 +34,7 @@ const PeopleBought: React.FC = () => {
 
       <ProductsContainer>
         <ProductsWrapper>
-          {currentProducts.map((product, index) => (
+          {currentProducts?.map((product, index) => (
             <ProductWithDivider
               key={product.id}
               product={{ ...product, id: String(product.id) }}
@@ -32,6 +42,8 @@ const PeopleBought: React.FC = () => {
               onAddToCart={() => handleAddToCart(product.id)}
               onToggleFavorite={() => handleToggleFavorite(product.id)}
               isFavorite={wishlist.includes(product.id)}
+              wishListLoading={wishListLoading}
+              isLoading={loadingProduct}
             />
           ))}
         </ProductsWrapper>
@@ -39,8 +51,8 @@ const PeopleBought: React.FC = () => {
         <VerticalDivider orientation="vertical" flexItem />
 
         <SummaryCard
-          totalVipPrice={suggestedProducts.totalVipPrice}
-          totalPrice={suggestedProducts.totalPrice}
+          totalVipPrice={suggestedProducts?.productDetails?.totalViPPrice}
+          totalPrice={suggestedProducts?.productDetails?.totalPrice}
         />
       </ProductsContainer>
     </PeopleBoughtWrapper>

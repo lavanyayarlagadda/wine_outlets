@@ -46,6 +46,7 @@ const ProductList = () => {
     loadingProduct,
     ProductListLoading,
     wishListLoading,
+    totalProducts,
   } = useProductList();
 
   const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
@@ -59,7 +60,7 @@ const ProductList = () => {
 
   return (
     <>
-      <BreadcrumbHeader items={breadcrumbItems} productCount={totalPages} />
+      <BreadcrumbHeader items={breadcrumbItems} productCount={totalProducts} />
 
       <LayoutContainer>
         <SidebarWrapper>

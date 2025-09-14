@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import type { RootState } from "../../store";
-import { setSelectedNames } from "../../store/slices/ProductList/productListSlice";
+import { setProductsData, setSelectedNames } from "../../store/slices/ProductList/productListSlice";
 
 export interface Filters {
   [key: string]: any;
@@ -17,7 +17,7 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const [filters, setFilters] = useState<Filters>({});
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
+  const { selectedNames, productsData } = useSelector((state: RootState) => state.productListSlice);
   const dispatch = useDispatch();
 
   const handleNestedSubSelect = (id: string) => {
@@ -32,17 +32,15 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     const hasSelections = filters[sub.categoryId]?.length > 0;
 
     if (selectedSub === sub.categoryId) {
-      // deselect subcategory
       setSelectedSub(null);
       if (!hasSelections) {
         dispatch(setSelectedNames([]));
       }
     } else {
       setSelectedSub(sub.categoryId);
-
-      // ✅ Only save subcategory name if no children are checked
       if (!hasSelections) {
         const displayName = `${sub.categoryName} (${sub.categoryCount})`;
+        dispatch(setProductsData({ category: sub.categoryName.toLowerCase() }));
         dispatch(setSelectedNames([displayName]));
       }
     }
@@ -53,7 +51,8 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     value: string,
     label: string,
     type: "category" | "sub" | "nested" = "nested",
-    count?: number
+    count?: number,
+    categoryName?: any
   ) => {
     setFilters((prev) => {
       const existing = prev[categoryId] || [];
@@ -69,9 +68,7 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     if (type === "sub" && count !== undefined) {
       displayName = `${label} (${count})`;
     }
-
     let updatedNames: string[];
-
     if (selectedNames.includes(displayName)) {
       updatedNames = selectedNames.filter((v) => v !== displayName);
     } else {
@@ -80,23 +77,72 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     if (type === "sub" || type === "nested") {
       updatedNames = updatedNames.filter((n) => !n.endsWith(")"));
     }
-
     dispatch(setSelectedNames(updatedNames));
+    const currentProductsList = productsData;
+    const newProductsList = { ...currentProductsList };
+
+    const categoryKeyMap: Record<string, string> = {
+      size: "size",
+      occasion: "occasion",
+      vintageyear: "vintageYear",
+      brand: "brand",
+      tags: "tags",
+      customerrating: "customerRating",
+      grapevariety: "grapeVariety",
+      origin: "origin",
+    };
+
+    const normalizedCategory = categoryName?.toLowerCase().replace(/\s+/g, "");
+
+    if (normalizedCategory && categoryKeyMap[normalizedCategory]) {
+      const key = categoryKeyMap[normalizedCategory];
+      const currentValues = currentProductsList[key] || [];
+      newProductsList[key] = currentValues.includes(label)
+        ? currentValues.filter((v: string) => v !== label)
+        : [...currentValues, label];
+    } else if (type === "sub") {
+      const currentDept = currentProductsList.department || [];
+      newProductsList.department = currentDept.includes(label)
+        ? currentDept.filter((v: string) => v !== label)
+        : [...currentDept, label];
+    } else if (type === "nested") {
+      const currentSubDept = currentProductsList.subDepartment || [];
+      newProductsList.subDepartment = currentSubDept.includes(label)
+        ? currentSubDept.filter((v: string) => v !== label)
+        : [...currentSubDept, label];
+    }
+
+    dispatch(setProductsData(newProductsList));
   };
 
-  const handleSliderChange = (categoryId: string, value: number | number[]) => {
-    const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
+  const handleSliderChange = (
+    categoryId: string,
+    value: number | number[],
+    categoryName: string
+  ) => {
+    const currentProductsList = { ...productsData };
+    if (categoryName === "Price Range" && Array.isArray(value)) {
+      currentProductsList.price = { min: value[0], max: value[1] };
+    } else {
+      currentProductsList["alcoholContent"] = Array.isArray(value) ? value[0] : value;
+    }
 
+    dispatch(setProductsData(currentProductsList));
+    const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
     setFilters((prev) => {
       const newFilters = { ...prev, [categoryId]: valArray };
       onFilterChange?.(newFilters);
       return newFilters;
     });
-
-    const rangeLabel = `Range: ${valArray.join(" - ")}`;
+    const rangeLabel =
+      categoryId === "price"
+        ? `Price: ${valArray.join(" - ")}`
+        : `${categoryId}: ${valArray.join(" - ")}`;
 
     const currentSelectedNames = selectedNames || [];
-    const filtered = currentSelectedNames.filter((name) => !name.startsWith("Range: "));
+    const filtered = currentSelectedNames.filter(
+      (name) => !name.startsWith(categoryId + ":") && !name.startsWith("Price:")
+    );
 
     dispatch(setSelectedNames([...filtered, rangeLabel]));
   };

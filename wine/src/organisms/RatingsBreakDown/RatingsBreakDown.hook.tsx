@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import {
   useCreateReviewMutation,
   useGetReviewsQuery,
-} from "../../store/apis/ProductView/productViewApi";
+} from "../../store/apis/ProductView/ProductViewAPI";
 import { toast } from "react-toastify";
 
 export interface Review {

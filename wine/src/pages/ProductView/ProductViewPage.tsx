@@ -10,6 +10,7 @@ const ProductViewPage = () => {
       <ProductViewBreadCrumbs />
       <Product />
       <ProfessionalRating />
+
       <ProductView />
       <RecentlyView />
       <Newsletter />

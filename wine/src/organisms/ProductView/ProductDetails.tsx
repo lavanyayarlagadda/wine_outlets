@@ -78,10 +78,12 @@ const ProductDetails: React.FC = () => {
     value: size,
     label: size,
   }));
-  const vintageOptions = product.other_vintages.map((vintage) => ({
+  const vintageOptions = product?.other_vintages?.map((vintage) => ({
     value: vintage.year,
     label: vintage.year.toString(),
   }));
+
+  console.log(product, "PRODUCT");
 
   return (
     <DetailsContainer>

@@ -57,7 +57,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   wishListLoading,
 }) => {
   const navigate = useNavigate();
-
+  console.log(isLoading, wishListLoading, "PRODUCTIMAGEDATA");
   return (
     <ResponsiveCard>
       <FavoriteButton onClick={() => onToggleFavorite(product.id)}>
@@ -75,7 +75,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
         image={product.media.url}
         alt={product.name}
         onClick={() => {
-          navigate(`/productView?productId=${product.id}`);
+          navigate(`/productView?productId=${product.id}&size=${product.size}`);
           window.scrollTo(0, 0);
         }}
       />

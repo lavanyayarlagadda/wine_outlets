@@ -8,34 +8,34 @@ export const productListApi = createApi({
   }),
 
   endpoints: (builder) => ({
+    banner: builder.query<any, void>({
+      query: () => ({
+        url: "/product-listing/banner",
+        method: "GET",
+      }),
+    }),
     filter: builder.query<any, void>({
       query: () => ({
         url: "/product-listing/filter-list",
         method: "GET",
       }),
     }),
-    productList: builder.query<any, { category: string; page: number }>({
-      query: ({ category, page }) => ({
+    productList: builder.mutation<any, any>({
+      query: (newItem) => ({
         url: `product-listing/product-list`,
-        method: "GET",
-        params: {
-          category,
-          limit: "20",
-          page: page.toString(),
-        },
+        method: "POST",
+        body: newItem,
       }),
     }),
-    wishList: builder.query<any, { userId?: number; productId: string }>({
-      query: ({ userId, productId }) => ({
-        url: `/product-listing/wishlist`,
-        method: "GET",
-        params: {
-          userId,
-          productId,
-        },
+    wishList: builder.mutation<any, any>({
+      query: (newItem) => ({
+        url: `/product-listing/create-wishlist`,
+        method: "POST",
+        body: newItem,
       }),
     }),
   }),
 });
 
-export const { useFilterQuery, useProductListQuery, useLazyWishListQuery } = productListApi;
+export const { useFilterQuery, useProductListMutation, useWishListMutation, useBannerQuery } =
+  productListApi;

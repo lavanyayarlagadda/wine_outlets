@@ -20,7 +20,7 @@ import AppLoader from "../../atoms/AppLoader/AppLoader";
 
 const Home = () => {
   const { data: sections, error, isLoading } = useGetHomeSectionsQuery();
-  const {heroSection} = sections?.sections || {}
+  const { heroSection } = sections?.sections || {};
   const {
     agePopupOpen,
     isAgeVerified,
@@ -32,9 +32,9 @@ const Home = () => {
     selectedStore,
   } = useHomeLogic();
 
-  if(isLoading) return <AppLoader/>
+  if (isLoading) return <AppLoader />;
   //TODO: replace this with proper error component and retry logic
-  if(error) return <h5> Something Went wrong</h5> 
+  if (error) return <h5> Something Went wrong</h5>;
 
   return (
     <>
@@ -57,7 +57,11 @@ const Home = () => {
         />
       )}
       {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}
-      <HeroBanner setOpen={setOpen}  slides={heroSection?.slides} isVisible={heroSection?.isVisible} />
+      <HeroBanner
+        setOpen={setOpen}
+        slides={heroSection?.slides}
+        isVisible={heroSection?.isVisible}
+      />
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}
       {isAgeVerified && <CuratedPicks />}

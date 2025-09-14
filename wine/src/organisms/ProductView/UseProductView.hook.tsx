@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import type { ProductViewResponse } from "../../constant/productViewData";
-import { productViewData as staticData } from "../../constant/productViewData";
 import {
   useBottleSizesQuery,
   useProductDetailsQuery,
-} from "../../store/apis/ProductView/productViewApi";
+} from "../../store/apis/ProductView/ProductViewAPI";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -16,6 +15,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get("productId") || "";
+  const size = queryParams.get("size") || "";
 
   const [expanded, setExpanded] = useState(true);
   const [productViewData, setProductViewData] = useState<ProductViewResponse | null>(
@@ -28,7 +28,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     data: productDetails,
     isLoading: productDetailLoading,
     isError,
-  } = useProductDetailsQuery({ productId: Number(productId) });
+  } = useProductDetailsQuery({ itemId: Number(productId), size });
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedVintage, setSelectedVintage] = useState<string>("");
   const [count, setCount] = useState<number>(0);
@@ -47,12 +47,12 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const toggleWishlist = () => setWishlist((prev) => !prev);
   useEffect(() => {
     if (!initialData) {
-      setProductViewData(staticData);
+      setProductViewData(productDetails?.productDetails);
     }
   }, [initialData]);
 
   useEffect(() => {
-    if (productViewData?.product) {
+    if (productViewData?.productDetails?.product) {
       const product = productViewData.product;
       setSelectedSize(product.bottle_size?.[0]?.id || "");
       setSelectedVintage(product.other_vintages?.[0]?.year || "");

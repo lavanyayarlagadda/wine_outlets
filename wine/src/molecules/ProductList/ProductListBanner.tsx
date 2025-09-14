@@ -19,26 +19,24 @@ const ProductListBanner: React.FC = () => {
 
   return (
     <Container backgroundColor={palette.white.main} padding="20px 20px">
-      <CarouselSlide>
+      <CarouselSlide bgImage={current?.media?.url}>
         <ContentSection>
-          <SlideTitle variant="h2">{current.title}</SlideTitle>
-          <SlideDescription>{current.description}</SlideDescription>
+          {current?.title && <SlideTitle variant="h2">{current?.title}</SlideTitle>}
+          {current?.description && <SlideDescription>{current?.description}</SlideDescription>}
         </ContentSection>
-
-        {current.action && (
+        {current?.action && (
           <CustomButton
-            text={current.action.label}
+            text={current?.action.label}
             bgColor={theme.palette.white.main}
-            onClick={() => (window.location.href = current.action.url)}
+            onClick={() => (window.location.href = current?.action.url)}
             color={palette.primary.dark}
             border={palette.primary.dark}
             btnColor={theme.palette.white.main}
             btnbgColor={palette.primary.dark}
           />
         )}
-
         <DotsContainer>
-          {slides.map((_, index) => (
+          {slides.map((_: any, index: number) => (
             <Dot key={index} active={index === currentSlide} onClick={() => goToSlide(index)} />
           ))}
         </DotsContainer>

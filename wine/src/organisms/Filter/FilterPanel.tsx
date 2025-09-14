@@ -188,9 +188,16 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
                     key={item.listId}
                     label={item.listName}
                     checked={(filters[cat.categoryId] || []).includes(item.listId)}
-                    onChange={() =>
-                      handleCheckboxChange(cat.categoryId, item.listId, item.listName, "category")
-                    }
+                    onChange={() => {
+                      handleCheckboxChange(
+                        cat.categoryId,
+                        item.listId,
+                        item.listName,
+                        "category",
+                        undefined,
+                        cat.categoryName
+                      );
+                    }}
                   />
                 ))}
 
@@ -223,7 +230,9 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
             value={filters[cat.categoryId] || [cat.categoryRange.min, cat.categoryRange.max]}
             min={cat.categoryRange.min}
             max={cat.categoryRange.max}
-            onChange={(val: number | number[]) => handleSliderChange(cat.categoryId, val)}
+            onChange={(val: number | number[]) =>
+              handleSliderChange(cat.categoryId, val, cat.categoryName)
+            }
           />
         )}
 
@@ -238,7 +247,9 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
               }
               min={0}
               max={100}
-              onChange={(val: number | number[]) => handleSliderChange(cat.categoryId, val)}
+              onChange={(val: number | number[]) =>
+                handleSliderChange(cat.categoryId, val, cat.categoryName)
+              }
             />
             <PercentageText variant="body2">
               {filters[cat.categoryId] ?? parseInt(cat.categoryRange)}%

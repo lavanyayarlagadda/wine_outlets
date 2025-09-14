@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { BannerData as bannerData } from "../../constant/curatedData";
 import {
   useFilterQuery,
-  useProductListQuery,
-  useLazyWishListQuery,
-} from "../../store/apis/ProductList/productListApi";
+  useProductListMutation,
+  useWishListMutation,
+  useBannerQuery,
+} from "../../store/apis/ProductList/ProductListAPI";
 import { toast } from "react-toastify";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 export type ViewType = "grid" | "list";
 
@@ -57,24 +59,56 @@ export const useProductList = ({
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
 
   const [addToCart] = useAddtoCartMutation();
+  const { data: BannerData, isLoading: BannerLoading, isError } = useBannerQuery();
 
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const [category, setCategory] = useState(urlCategory || "");
 
-  const {
-    data: ProductListData,
-    isLoading: ProductListLoading,
-    error: productListError,
-  } = useProductListQuery({
-    category,
-    page: currentPage,
-  });
+  const { productsData } = useSelector((store: RootState) => store.productListSlice);
 
-  const [wishList] = useLazyWishListQuery();
+  const [
+    productList,
+    { data: ProductListData, isLoading: ProductListLoading, error: productListError },
+  ] = useProductListMutation();
+  useEffect(() => {
+    let payload: any = {
+      category: category,
+      department: "",
+      subDepartment: "",
+      size: "",
+      price: "",
+      occasion: "",
+      customerRating: "",
+      tags: "",
+      origin: "",
+      grapeVariety: "",
+      brand: "",
+      vintageYear: "",
+      alcoholContent: "",
+      limit: 20,
+      page: currentPage,
+      sort: "relevance",
+    };
+
+    if (productsData && Object.keys(productsData).length > 0) {
+      payload = { ...payload, ...productsData };
+    }
+
+    productList(payload);
+  }, [category, currentPage, productsData, productList]);
+
+  const [wishList] = useWishListMutation();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load Banner");
+    }
+  }, [isError]);
 
   const currentProducts = ProductListData?.productList?.products?.slice(startIndex, endIndex);
   const totaldataPage = ProductListData?.productList?.products;
   const totalPages = Math.ceil(totaldataPage?.length / productsPerPage);
+  const totalProducts = ProductListData?.productList?.totalProducts;
 
   useEffect(() => {
     setCategory(urlCategory || "");
@@ -107,25 +141,20 @@ export const useProductList = ({
       };
 
       const response = await addToCart(payload).unwrap();
-      console.log("ERROR1");
       setCartItems((prev) => ({
         ...prev,
         [productId]: newQuantity,
       }));
       toast.success(response.cartResponse);
     } catch (err) {
-      console.log("ERROR");
-      console.error("Failed to add to cart:", err);
       toast.error("Failed to add to cart");
     } finally {
-      setLoadingProduct(null); // stop loader
+      setLoadingProduct(null);
     }
   };
 
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId);
-
-    // 👉 If unfavoriting, just update local state, no API call
     if (isAlreadyFavorite) {
       setWishlist((prev) => prev.filter((id) => id !== productId));
       toast.success("Removed from wishlist");
@@ -135,14 +164,13 @@ export const useProductList = ({
     try {
       setWishListLoading(productId);
 
-      const data = await wishList({ userId: 1, productId }).unwrap();
+      const data = await wishList({ userId: 1, productId, storeId: 1 }).unwrap();
 
-      if (data.includes(productId)) {
+      if (data) {
         setWishlist((prev) => [...prev, productId]);
         toast.success("Added to wishlist");
       }
     } catch (err) {
-      console.error("Failed to update wishlist:", err);
       toast.error("Failed to update wishlist");
     } finally {
       setWishListLoading(null);
@@ -155,7 +183,7 @@ export const useProductList = ({
   };
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = bannerData.banners;
+  const slides = BannerData?.banner[0]?.slides ?? [];
 
   const goToSlide = (index: number) => {
     if (index >= 0 && index < slides.length) {
@@ -200,5 +228,8 @@ export const useProductList = ({
     loadingProduct,
     ProductListLoading,
     wishListLoading,
+    BannerData,
+    BannerLoading,
+    totalProducts,
   };
 };

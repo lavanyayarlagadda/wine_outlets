@@ -9,7 +9,6 @@ export const homeApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    // In your API slice
     addtoCart: builder.mutation<any, { productId: number; quantity: number; userId: number }>({
       query: (newItem) => ({
         url: "/home/add-to-cart",
@@ -27,4 +26,4 @@ export const homeApi = createApi({
   }),
 });
 
-export const { useAddtoCartMutation , useGetHomeSectionsQuery } = homeApi;
+export const { useAddtoCartMutation, useGetHomeSectionsQuery } = homeApi;

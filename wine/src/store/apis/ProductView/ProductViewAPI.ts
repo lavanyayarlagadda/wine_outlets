@@ -23,12 +23,13 @@ export const productViewApi = createApi({
         },
       }),
     }),
-    productDetails: builder.query<any, { productId: number }>({
-      query: ({ productId }) => ({
+    productDetails: builder.query<any, { itemId: number; size: any }>({
+      query: ({ itemId, size }) => ({
         url: `/product-view/product-details`,
         method: "GET",
         params: {
-          productId,
+          itemId,
+          size,
         },
       }),
     }),

@@ -11,12 +11,12 @@ export interface LinkAction {
   // your payload uses "Action", "action", "btnAction", "categoryAction", "offerAction" etc.
   // make a reusable type and mark most fields optional
   id?: ID;
-  url?: string;          // normalized URL
+  url?: string; // normalized URL
   btnText?: string;
-  btnAction?: string;    // maps to actual navigation path in payload
+  btnAction?: string; // maps to actual navigation path in payload
   categoryAction?: string;
   offerAction?: string;
-  Action?: string;       // keep original-capitalized variants if needed
+  Action?: string; // keep original-capitalized variants if needed
   action?: {
     id?: ID;
     btnText?: string;
@@ -29,10 +29,8 @@ export interface HeroSlide {
   id: ID;
   order?: number;
   backgroundMedia?: Media;
-  Action?: string; 
+  Action?: string;
 }
-
-
 
 export interface HeroSection {
   isVisible: boolean;

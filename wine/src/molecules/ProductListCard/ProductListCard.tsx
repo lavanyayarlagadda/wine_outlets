@@ -73,7 +73,10 @@ const ProductListCard: React.FC<ProductCardProps> = ({
           component="img"
           image={image}
           alt={name}
-          onClick={() => navigate("/productView")}
+          onClick={() => {
+            navigate(`/productView?productId=${id}&size=${size}`);
+            window.scrollTo(0, 0);
+          }}
         />
         <FavoriteWrapper>
           <FavoriteButton onClick={() => onToggleFavorite(id)}>

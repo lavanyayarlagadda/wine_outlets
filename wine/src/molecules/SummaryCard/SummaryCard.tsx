@@ -14,9 +14,9 @@ const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
       <StockText variant="body2">In Stock</StockText>
 
       <PriceContainer>
-        <VIPPriceText>VIP: ${totalVipPrice.toFixed(2)}</VIPPriceText>
+        <VIPPriceText>VIP: ${totalVipPrice?.toFixed(2)}</VIPPriceText>
         <StyledDivider orientation="vertical" flexItem />
-        <PriceText>${totalPrice.toFixed(2)}</PriceText>
+        <PriceText>${totalPrice?.toFixed(2)}</PriceText>
       </PriceContainer>
 
       <AddToCart
