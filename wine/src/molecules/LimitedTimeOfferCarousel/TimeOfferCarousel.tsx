@@ -11,35 +11,22 @@ import {
   Dot,
   MobileScrollWrapper,
 } from "./TimeOfferCarousel.style";
-// import { OFFERS } from "../../constant/offerData";
-import { LandingPageData } from "../../constant/LandingPageData";
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import type { LimitedTimeOfferSection , OfferItem} from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
-interface Offer {
-  id: string;
-  media: {
-    type: string;
-    url: string;
-  };
-  offerAction?: string;
-}
-interface OfferData {
-  isVisible: boolean;
-  title: string;
-  subtitle: string;
-  highlight?: string;
-  offers: Offer[];
-}
 
-const { title, subtitle, offers }: OfferData = LandingPageData?.limitedTimeOffer ?? {
+const LimitedTimeOffersCarousel = () => {
+  const { data: sections} = useGetHomeSectionsQuery();
+  const { title, subtitle, offers, isVisible }: LimitedTimeOfferSection = sections?.sections?.limitedTimeOffer ?? {
+  isVisible: false,
   title: "",
   subtitle: "",
   offers: [],
 };
-
-const LimitedTimeOffersCarousel = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -49,7 +36,7 @@ const LimitedTimeOffersCarousel = () => {
     setCurrentIndex(index);
   };
 
-  const renderOfferCard = (offer: Offer) => (
+  const renderOfferCard = (offer: OfferItem) => (
     <OfferCard key={offer.id}>
       <CardImage src={offer.media?.url} alt={`offer-${offer.id}`} />
       {/* this part may be needed later on */}
@@ -68,17 +55,19 @@ const LimitedTimeOffersCarousel = () => {
     </OfferCard>
   );
 
-  const navigate = useNavigate();
+ 
+
+  if(!isVisible) return null; 
 
   return (
     <CarouselContainer>
-      <CustomTitleSection title={title} subtitle={subtitle} />
+      <CustomTitleSection title={title || ""} subtitle={subtitle} />
       {!isMobile && (
         <>
           <CarouselWrapper>
             <CarouselTrack currentIndex={currentIndex}>
               {offers.map((offer) => (
-                <CarouselSlide key={offer.id} onClick={() => navigate("/productsList")}>
+                <CarouselSlide key={offer.id} onClick={() => navigate(offer?.offerAction || "/")}>
                   {renderOfferCard(offer)}
                 </CarouselSlide>
               ))}

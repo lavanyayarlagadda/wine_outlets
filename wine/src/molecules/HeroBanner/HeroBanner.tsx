@@ -1,5 +1,6 @@
 import React from "react";
 import { useHeroBanner } from "./HeroBanner.hook";
+import { useNavigate } from "react-router-dom";
 import {
   HeroBannerContainer,
   SlideContainer,
@@ -7,9 +8,9 @@ import {
   DotsContainer,
   Dot,
 } from "./HeroBanner.style";
-// import { HERO_BANNER_SLIDES } from "../../constant/heroBannerSlides";
-import { HeroOverlay } from "../../atoms";
+// import { HeroOverlay } from "../../atoms";
 import { LandingPageData } from "../../constant/LandingPageData";
+import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 export interface SlideData {
   id: string;
@@ -30,16 +31,19 @@ export interface SlideData {
 }
 
 export interface HeroBannerProps {
-  slides?: SlideData[];
+  slides?: HeroSlide[];
   autoPlayInterval?: number;
   height?: string | number;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  isVisible: boolean;
 }
 const HeroBanner = ({
   slides = LandingPageData.heroSection.slides,
   autoPlayInterval = 5000,
   setOpen,
+  isVisible,
 }: HeroBannerProps) => {
+  const navigate = useNavigate();
   const {
     currentSlide,
     goToSlide,
@@ -47,13 +51,15 @@ const HeroBanner = ({
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-    firstBtnAction,
-    secondBtnAction,
-    handleTagClick,
+    // firstBtnAction,
+    // secondBtnAction,
+    // handleTagClick,
   } = useHeroBanner(slides.length, autoPlayInterval, setOpen, slides);
 
-  const currentSlideData = slides[currentSlide];
+  // const currentSlideData = slides[currentSlide];
 
+  if(!isVisible) return null;
+ 
   return (
     <HeroBannerContainer
       ref={containerRef}
@@ -62,16 +68,16 @@ const HeroBanner = ({
       onTouchEnd={handleTouchEnd}
     >
       {slides.map((slide, index) => (
-        <SlideContainer key={slide.id} isActive={index === currentSlide}>
+        <SlideContainer key={slide.id} isActive={index === currentSlide} onClick={()=>navigate(slide?.Action || "/")}>
           <SlideBackground
             backgroundImage={slide.backgroundMedia?.url ?? ""}
             role="img"
-            aria-label={slide.title}
+            // aria-label={slide.title}
           />
         </SlideContainer>
       ))}
 
-      <HeroOverlay
+      {/* <HeroOverlay
         title={currentSlideData?.title || ""}
         subtitle={currentSlideData?.subtitle || ""}
         firstBtnText={currentSlideData?.firstBtnText || ""}
@@ -82,7 +88,7 @@ const HeroBanner = ({
         tagActionText={currentSlideData.tagActionText || ""}
         tagActionUrl={currentSlideData?.tagActionUrl}
         handleTagClick={handleTagClick}
-      />
+      /> */}
 
       <DotsContainer>
         {slides.map((_, index) => (

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
+import type { LandingPageResponse } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 export const homeApi = createApi({
   reducerPath: "homeApi",
@@ -16,7 +17,14 @@ export const homeApi = createApi({
         body: newItem,
       }),
     }),
+    getHomeSections: builder.query<LandingPageResponse, void>({
+      query: () => ({
+        url: "/home/sections",
+        method: "GET",
+      }),
+      // providesTags: ["HomeSections"],
+    }),
   }),
 });
 
-export const { useAddtoCartMutation } = homeApi;
+export const { useAddtoCartMutation , useGetHomeSectionsQuery } = homeApi;

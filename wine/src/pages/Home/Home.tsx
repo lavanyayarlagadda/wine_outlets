@@ -15,8 +15,12 @@ import {
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import { stores } from "../../constant/curatedData";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
+import AppLoader from "../../atoms/AppLoader/AppLoader";
 
 const Home = () => {
+  const { data: sections, error, isLoading } = useGetHomeSectionsQuery();
+  const {heroSection} = sections?.sections || {}
   const {
     agePopupOpen,
     isAgeVerified,
@@ -27,6 +31,10 @@ const Home = () => {
     setSelectedStore,
     selectedStore,
   } = useHomeLogic();
+
+  if(isLoading) return <AppLoader/>
+  //TODO: replace this with proper error component and retry logic
+  if(error) return <h5> Something Went wrong</h5> 
 
   return (
     <>
@@ -49,7 +57,7 @@ const Home = () => {
         />
       )}
       {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}
-      <HeroBanner setOpen={setOpen} />
+      <HeroBanner setOpen={setOpen}  slides={heroSection?.slides} isVisible={heroSection?.isVisible} />
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}
       {isAgeVerified && <CuratedPicks />}

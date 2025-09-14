@@ -6,7 +6,7 @@ import {
   useLazyWishListQuery,
 } from "../../store/apis/ProductList/productListApi";
 import { toast } from "react-toastify";
-import { useAddtoCartMutation } from "../../store/apis/Home/homeApi";
+import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { useLocation } from "react-router-dom";
 
 export type ViewType = "grid" | "list";

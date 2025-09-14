@@ -22,6 +22,7 @@ export const SlideContainer = styled(Box)<{ isActive: boolean }>(({ isActive }) 
   opacity: isActive ? 1 : 0,
   transition: "opacity 0.8s ease-in-out",
   zIndex: isActive ? 1 : 0,
+  cursor:"pointer"
 }));
 
 export const SlideBackground = styled(Box)<{ backgroundImage: string }>(({ backgroundImage }) => ({
