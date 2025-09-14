@@ -19,9 +19,10 @@ import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 const CuratedPicks = () => {
   const navigate = useNavigate();
   const { data: sections } = useGetHomeSectionsQuery();
-  const {isVisible, title, subtitle, categories }: CuratedPicksSection = sections?.sections?.curatedPicks ?? {};
+  const { isVisible, title, subtitle, categories }: CuratedPicksSection =
+    sections?.sections?.curatedPicks ?? {};
 
-  if(!isVisible) return null;
+  if (!isVisible) return null;
 
   return (
     <Container>

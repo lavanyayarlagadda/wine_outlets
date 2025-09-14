@@ -1,16 +1,19 @@
 // src/components/Brands/brands.hook.tsx
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import type { BrandSection,BrandItem } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type {
+  BrandSection,
+  BrandItem,
+} from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 
 export const useBrands = () => {
-  const { data: sections} = useGetHomeSectionsQuery();
+  const { data: sections } = useGetHomeSectionsQuery();
   const navigate = useNavigate();
 
   const raw = useMemo<BrandSection>(() => {
-  return sections?.sections?.brandSection || {};
-}, [sections?.sections?.brandSection]);
+    return sections?.sections?.brandSection || {};
+  }, [sections?.sections?.brandSection]);
 
   const title = raw?.title ?? "Featured Brands";
 

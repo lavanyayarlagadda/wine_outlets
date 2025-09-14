@@ -7,8 +7,11 @@ import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 export const useOrderConfirmed = () => {
   const dispatch = useDispatch();
   const { data, isLoading, isSuccess, isError } = usePlaceOrderQuery({
-    cartId: "1",
+    cartId: 1,
     paymentMethod: "credit",
+    slotId: 1,
+    userId: 1,
+    storeId: 1,
   });
 
   useEffect(() => {

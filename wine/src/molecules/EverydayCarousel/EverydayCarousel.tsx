@@ -9,7 +9,7 @@ import {
   // ContentSection,
   // SlideDescription,
   // PriceButton,
-    // IconWrapper,
+  // IconWrapper,
   DotsContainer,
   Dot,
   StyledImage,
@@ -29,12 +29,12 @@ const WineCarousel: React.FC = () => {
   return (
     <Container>
       <CarouselSlide>
-        <StyledImage 
-         src={slides[currentSlide].media.url}
-         onClick={()=>{
-          navigate(slides[currentSlide].Action || "/")
-         }}
-         />
+        <StyledImage
+          src={slides[currentSlide].media.url}
+          onClick={() => {
+            navigate(slides[currentSlide].Action || "/");
+          }}
+        />
         {/* <ContentSection>
           <SlideTitle variant="h2">{slides[currentSlide].title}</SlideTitle>
           <SlideDescription>{slides[currentSlide].description}</SlideDescription>

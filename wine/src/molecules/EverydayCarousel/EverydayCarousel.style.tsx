@@ -88,8 +88,8 @@ export const StyledImage = styled("img")(({ theme }) => ({
   width: "100%",
   height: theme.spacing(28),
   objectFit: "cover",
-  cursor: "pointer",  
-  borderRadius: theme.shape.borderRadius, 
+  cursor: "pointer",
+  borderRadius: theme.shape.borderRadius,
 }));
 
 export const ContentSection = styled(Box)(({ theme }) => ({

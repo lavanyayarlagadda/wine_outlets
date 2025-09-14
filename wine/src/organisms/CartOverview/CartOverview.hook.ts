@@ -10,7 +10,11 @@ import { toast } from "react-toastify";
 export const useCartOverView = () => {
   const dispatch = useDispatch();
   const today = new Date().toISOString().split("T")[0];
-  const { data, isLoading, isError } = useCartProductDetailsQuery({ cartId: 1, userId: 1 });
+  const { data, isLoading, isError } = useCartProductDetailsQuery({
+    cartId: 1,
+    userId: 1,
+    storeId: 1,
+  });
   const cartDetails = data?.productListing?.[0];
 
   const {

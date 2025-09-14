@@ -34,7 +34,7 @@ const DealsSection: React.FC = () => {
     handleAddToCart,
     handleToggleFavorite,
     wishlist,
-    isVisible
+    isVisible,
   } = useDealsSection();
   if (!isVisible) return null;
   return (

@@ -12,7 +12,7 @@ interface DealProductsGroup {
 }
 
 export const useDealsSection = () => {
-  const { data: sections} = useGetHomeSectionsQuery();
+  const { data: sections } = useGetHomeSectionsQuery();
   const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [cartItems, setCartItems] = useState<string[]>([]);

@@ -5,15 +5,15 @@ import type { ShopByCategorySection } from "../../store/Interfaces/LandingPageIn
 import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 
 const CategorySection = () => {
-  const { data: sections, } = useGetHomeSectionsQuery();
+  const { data: sections } = useGetHomeSectionsQuery();
   const shopSection: ShopByCategorySection = sections?.sections?.shopByCategory ?? {};
   const isVisible = shopSection.isVisible ?? "";
   const title = shopSection.title ?? "";
   const subtitle = shopSection.subtitle ?? "";
   const categories = shopSection.categories ?? [];
 
-  if(!isVisible) return null;
-  
+  if (!isVisible) return null;
+
   return (
     <Container>
       <CustomTitleSection title={title} subtitle={subtitle} />

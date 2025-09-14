@@ -8,13 +8,14 @@ export const cartCheckoutApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    cartProductDetails: builder.query<any, { cartId: number; userId: number }>({
-      query: ({ cartId, userId }) => ({
+    cartProductDetails: builder.query<any, { cartId: number; userId: number; storeId: number }>({
+      query: ({ cartId, userId, storeId }) => ({
         url: `/cart-checkout/product-listing`,
         method: "GET",
         params: {
           cartId,
           userId,
+          storeId,
         },
       }),
     }),
@@ -28,13 +29,19 @@ export const cartCheckoutApi = createApi({
         },
       }),
     }),
-    placeOrder: builder.query<any, { cartId: string; paymentMethod: string }>({
-      query: ({ cartId, paymentMethod }) => ({
+    placeOrder: builder.query<
+      any,
+      { paymentMethod: string; slotId: number; cartId: number; userId: number; storeId: number }
+    >({
+      query: ({ cartId, paymentMethod, slotId, userId, storeId }) => ({
         url: `/cart-checkout/place-order`,
         method: "GET",
         params: {
           cartId,
           paymentMethod,
+          slotId,
+          userId,
+          storeId,
         },
       }),
     }),
