@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productListSlice from "./slices/ProductList/productListSlice";
 import cartOverViewSlice from "./slices/CartOverView/CartOverView";
-import { productListApi } from "./apis/ProductList/productListApi";
-import { homeApi } from "./apis/Home/homeApi";
-import { productViewApi } from "./apis/ProductView/productViewApi";
+import { productListApi } from "./apis/ProductList/ProductListAPI";
+import { homeApi } from "./apis/Home/HomeAPI";
+import { productViewApi } from "./apis/ProductView/ProductViewAPI";
 import { cartCheckoutApi } from "./apis/CartCheckOut/CartCheckOutAPI";
 
 export const store = configureStore({
