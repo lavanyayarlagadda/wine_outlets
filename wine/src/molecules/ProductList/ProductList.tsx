@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { setSelectedNames } from "../../store/slices/ProductList/productListSlice";
 import { StyledSkeletonRect } from "../../organisms/Filter/FilterPanel.style";
+import { NoDataText } from "../../organisms/CartOverview/CartOverview.style";
 
 const ProductList = () => {
   const {
@@ -141,11 +142,7 @@ const ProductList = () => {
                   )
                 )
               ) : (
-                <div
-                  style={{ gridColumn: `span ${productsPerRow}`, textAlign: "center", padding: 40 }}
-                >
-                  No data available
-                </div>
+                <NoDataText variant="body2">No data available</NoDataText>
               )}
             </ProductsGrid>
 

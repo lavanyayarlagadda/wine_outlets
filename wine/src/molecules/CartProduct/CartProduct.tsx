@@ -125,7 +125,7 @@ const CartProduct: React.FC<CartProductProps> = ({
               <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
             </CounterWrapper>
             <PricingBox>
-              <Pricing vipPrice={unitPrice.original} price={unitPrice.discounted} />
+              <Pricing vipPrice={unitPrice?.original} price={unitPrice?.discounted} />
             </PricingBox>
           </>
         )}

@@ -3,6 +3,7 @@ import type { CartOverView } from "../../Interfaces/CartOverViewInterface/CartOv
 
 const initialState: CartOverView = {
   placeOrder: false,
+  orderResult: null,
 };
 
 const CartOverViewSlice = createSlice({
@@ -12,8 +13,11 @@ const CartOverViewSlice = createSlice({
     setPlaceOrder: (state, action: PayloadAction<boolean>) => {
       state.placeOrder = action.payload;
     },
+    setOrderResult: (state, action: PayloadAction<any>) => {
+      state.orderResult = action.payload;
+    },
   },
 });
 
-export const { setPlaceOrder } = CartOverViewSlice.actions;
+export const { setPlaceOrder, setOrderResult } = CartOverViewSlice.actions;
 export default CartOverViewSlice.reducer;

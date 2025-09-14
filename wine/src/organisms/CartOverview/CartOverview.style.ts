@@ -118,9 +118,13 @@ export const Description = styled(Typography)(() => ({
   maxWidth: 600,
 }));
 
-// Grid styles
 export const TwoColumnGrid = styled(Grid)(() => ({
   width: "100%",
 }));
 
 export const ColumnGrid = styled(Grid)(() => ({}));
+export const NoDataText = styled(Typography)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));

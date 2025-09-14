@@ -1,5 +1,4 @@
 import React from "react";
-// import { CartLeft, CartOverviewContainer, CartRight } from './CartOverview.style'
 import {
   ContentWrapper,
   LayoutContainer,
@@ -12,8 +11,8 @@ import {
   SmallAddIcon,
   LeftContent,
   CartOverViewHeader,
+  NoDataText,
 } from "../CartOverview/CartOverview.style";
-import { Typography } from "@mui/material";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
 import cartOverviewData from "../../constant/cartOverviewData";
 import OrderSummary from "../../molecules/OrderSummary/OrderSummary";
@@ -24,80 +23,95 @@ import { useDispatch } from "react-redux";
 import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 import { useCartOverView } from "./CartOverview.hook";
 import { useNavigate } from "react-router-dom";
+import { StyledSkeletonRect } from "../Filter/FilterPanel.style";
 
 const CartOverview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error } = useCartOverView();
-  if (error !== "") return <Typography color="error">{error}</Typography>;
+  const { cartDetails, isLoading, slotData, slotLoading } = useCartOverView();
+  console.log(cartDetails, "CARTDETAILS");
 
   return (
     <MainContainer>
       <CartOverViewHeader>Cart Overview</CartOverViewHeader>
-      <LayoutContainer>
-        <ProductListWrapper>
-          <LeftContent>
-            <ProductHeader>
-              <HeaderTitle>Product List</HeaderTitle>
+      {isLoading ? (
+        Array.from({ length: 3 }).map((_, idx) => (
+          <React.Fragment key={idx}>
+            <DividerLine />
+            <StyledSkeletonRect />
+          </React.Fragment>
+        ))
+      ) : cartDetails?.products?.length > 0 ? (
+        <LayoutContainer>
+          <ProductListWrapper>
+            <LeftContent>
+              <ProductHeader>
+                <HeaderTitle>Product List</HeaderTitle>
 
-              <HeaderAction onClick={() => navigate("/")}>
-                <BorderedIcon>
-                  <SmallAddIcon />
-                </BorderedIcon>
-                Continue Shopping
-              </HeaderAction>
-            </ProductHeader>
-            {cartOverviewData.items.map((item) => (
-              <>
-                <DividerLine />
-                <CartProduct
-                  key={item.id}
-                  imageUrl={item.imageUrl}
-                  name={item.name}
-                  origin={item.origin}
-                  brand={item.brand}
-                  size={item.size}
-                  year={item.year}
-                  unitPrice={item.unitPrice}
-                  quantity={item.quantity}
-                />
-              </>
-            ))}
-          </LeftContent>
-        </ProductListWrapper>
-        <ContentWrapper>
-          {cartOverviewData.cartSummary && (
-            <OrderSummary
-              title="Order Summary"
-              itemCount={cartOverviewData.cartSummary.itemCount}
-              items={[
-                { label: "Subtotal", value: cartOverviewData.cartSummary.subtotal },
-                { label: "Estimated Tax", value: cartOverviewData.cartSummary.estimatedTax },
-              ]}
-              totalItem={{ label: "Total", value: cartOverviewData.cartSummary.total }}
-              vipCodeMessage={cartOverviewData.cartSummary.vipCodeMessage}
-            />
-          )}
-          {cartOverviewData && (
-            <PickupInformation
-              title="Pickup Information"
-              storeName={cartOverviewData.pickupInfo.storeName}
-              address={cartOverviewData.pickupInfo.address}
-              phone={cartOverviewData.pickupInfo.phone}
-              hours={cartOverviewData.pickupInfo.hours}
-              footerTitle="Pickp Date & Time"
-            />
-          )}
+                <HeaderAction onClick={() => navigate("/")}>
+                  <BorderedIcon>
+                    <SmallAddIcon />
+                  </BorderedIcon>
+                  Continue Shopping
+                </HeaderAction>
+              </ProductHeader>
 
-          <AddToCart
-            label="Place Order"
-            onClick={() => {
-              (dispatch(setPlaceOrder(true)), window.scrollTo(0, 0));
-            }}
-            variantType="filled"
-          />
-        </ContentWrapper>
-      </LayoutContainer>
+              {cartDetails?.products?.map((item: any) => (
+                <>
+                  <DividerLine />
+                  <CartProduct
+                    key={item.id}
+                    imageUrl={item.imageUrl}
+                    name={item.name}
+                    origin={item.origin}
+                    brand={item.brand}
+                    size={item.size}
+                    year={item.year}
+                    unitPrice={item.unitPrice}
+                    quantity={item.quantity}
+                  />
+                </>
+              ))}
+            </LeftContent>
+          </ProductListWrapper>
+          <ContentWrapper>
+            {cartDetails?.orderSummary && (
+              <OrderSummary
+                title="Order Summary"
+                itemCount={cartOverviewData.cartSummary.itemCount}
+                items={[
+                  { label: "Subtotal", value: cartDetails?.orderSummary?.subtotal },
+                  { label: "Estimated Tax", value: cartDetails?.orderSummary?.tax },
+                ]}
+                totalItem={{ label: "Total", value: cartDetails?.orderSummary?.total }}
+                vipCodeMessage={cartOverviewData.cartSummary.vipCodeMessage}
+              />
+            )}
+            {cartOverviewData && (
+              <PickupInformation
+                title="Pickup Information"
+                storeName={cartOverviewData.pickupInfo.storeName}
+                address={cartOverviewData.pickupInfo.address}
+                phone={cartOverviewData.pickupInfo.phone}
+                hours={cartOverviewData.pickupInfo.hours}
+                footerTitle="Pickp Date & Time"
+                slotsData={slotData}
+                slotDataLoading={slotLoading}
+              />
+            )}
+
+            <AddToCart
+              label="Place Order"
+              onClick={() => {
+                (dispatch(setPlaceOrder(true)), window.scrollTo(0, 0));
+              }}
+              variantType="filled"
+            />
+          </ContentWrapper>
+        </LayoutContainer>
+      ) : (
+        <NoDataText variant="body2">No data available</NoDataText>
+      )}
     </MainContainer>
   );
 };

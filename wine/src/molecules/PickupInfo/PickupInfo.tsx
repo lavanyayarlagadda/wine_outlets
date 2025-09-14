@@ -35,6 +35,8 @@ interface PickupInformationProps {
   pickupday?: string;
   pickupDate?: string;
   pickupTime?: string;
+  slotsData?: any;
+  slotDataLoading?: boolean;
 }
 const PickupInformation: React.FC<PickupInformationProps> = ({
   title,
@@ -47,6 +49,8 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
   pickupday,
   pickupDate,
   pickupTime,
+  slotsData,
+  slotDataLoading,
 }) => {
   return (
     <MainContainer>
@@ -120,7 +124,7 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
           </Row>
         </Wrapper>
       ) : (
-        <PickupDateTimePicker />
+        <PickupDateTimePicker slotsData={slotsData} slotDataLoading={slotDataLoading} />
       )}
     </MainContainer>
   );

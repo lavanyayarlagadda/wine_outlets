@@ -7,6 +7,7 @@ import type { RootState } from "../../store";
 
 const CartOverViewPage = () => {
   const { placeOrder } = useSelector((store: RootState) => store.cartOverViewSlice);
+  console.log(placeOrder, "PLACEORDER");
   return (
     <>
       {placeOrder ? (

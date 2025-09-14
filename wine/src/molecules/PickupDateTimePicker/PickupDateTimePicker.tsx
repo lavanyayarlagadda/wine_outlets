@@ -17,15 +17,18 @@ import {
   FooterButtons,
   FooterConfirmButtons,
 } from "./PickupDateTimeSelector.style";
+import { StyledSkeletonRect } from "../../organisms/Filter/FilterPanel.style";
+import { NoDataText } from "../../organisms/CartOverview/CartOverview.style";
 
-const timeSlots = [
-  "09:15 am - 12:00 pm",
-  "12:00 pm - 03:00 pm",
-  "03:00 pm - 06:00 pm",
-  "06:00 pm - 09:45 pm",
-];
+interface PickupDateTimeSelectorProps {
+  slotsData?: any;
+  slotDataLoading?: boolean;
+}
 
-const PickupDateTimeSelector = () => {
+const PickupDateTimeSelector: React.FC<PickupDateTimeSelectorProps> = ({
+  slotsData,
+  slotDataLoading,
+}) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>("");
@@ -73,18 +76,30 @@ const PickupDateTimeSelector = () => {
 
             <TimeSlotsContainer>
               <TimeSlotsTitle>Available Time</TimeSlotsTitle>
-              {timeSlots.map((slot) => (
-                <TimeSlotButton
-                  key={slot}
-                  selected={selectedTime === slot}
-                  disabledSlot={slot === "12:00 pm - 03:00 pm"}
-                  variant={selectedTime === slot ? "outlined" : "text"}
-                  color={selectedTime === slot ? "error" : "primary"}
-                  onClick={() => setSelectedTime(slot)}
-                >
-                  {slot}
-                </TimeSlotButton>
-              ))}
+              {slotDataLoading ? (
+                <Box display="flex" gap={2} flexWrap="wrap">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <StyledSkeletonRect key={i} />
+                  ))}
+                </Box>
+              ) : slotsData?.pickupSlots?.[0]?.slots?.length > 0 ? (
+                <Box display="flex" gap={2} flexWrap="wrap">
+                  {slotsData.pickupSlots[0].slots.map((slot: any) => (
+                    <TimeSlotButton
+                      key={slot.slotId}
+                      selected={selectedTime === slot.time}
+                      disabledSlot={slot.time === "12:00 pm - 03:00 pm"}
+                      variant={selectedTime === slot.time ? "outlined" : "text"}
+                      color={selectedTime === slot.time ? "error" : "primary"}
+                      onClick={() => setSelectedTime(slot.time)}
+                    >
+                      {slot.time}
+                    </TimeSlotButton>
+                  ))}
+                </Box>
+              ) : (
+                <NoDataText>No times available</NoDataText>
+              )}
             </TimeSlotsContainer>
           </PickerContainer>
           <Footer>

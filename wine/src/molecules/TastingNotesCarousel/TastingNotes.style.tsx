@@ -17,10 +17,9 @@ export const Container = styled(Box, {
   backgroundColor: backgroundColor || theme.palette.primary.light,
   maxWidth: maxWidth || "100%",
   position: "relative",
-  marginBottom: theme.spacing(6), // replaces sx={{ mb: 6 }}
+  marginBottom: theme.spacing(6),
 }));
 
-// Slide container
 interface CarouselSlideProps {
   bgImage?: string;
   bgVideo?: string;
