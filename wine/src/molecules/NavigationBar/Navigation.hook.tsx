@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetCartCountQuery } from "../../store/apis/Home/HomeAPI";
+import { useGetCartCountQuery , useGetDeliveryPartnersQuery} from "../../store/apis/Home/HomeAPI";
 
 type MenuState = {
   [key: string]: boolean;
@@ -28,6 +28,10 @@ export const useNavigation = (
     userIP: "1",
   };
   const { data: cartData, refetch: refetchCartCount } = useGetCartCountQuery(cartQueryParams);
+  const { data: deliveryData, isLoading: deliveryLoading } = useGetDeliveryPartnersQuery({
+    storeId: storedId || undefined,
+  });
+  const deliveryPartners = deliveryData?.deliveryPartners ?? [];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cartCount, setCartCount] = useState<number>(0);
 
@@ -145,6 +149,8 @@ export const useNavigation = (
     setOpenLogin,
     cartCount,
     refetchCartCount,
+    deliveryPartners,
+    deliveryLoading,
     // auth
     openLogin,
     signIn,

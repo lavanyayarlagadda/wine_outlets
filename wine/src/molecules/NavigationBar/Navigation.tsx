@@ -1,4 +1,3 @@
-import React from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { bike, map, cart, userprofile, logo, star } from "../../assets";
@@ -101,6 +100,8 @@ const Navigation = () => {
     setOpenLogin,
     currentBanner,
     cartCount,
+    deliveryPartners,
+    deliveryLoading,
   } = useNavigation(stores, menuKeys, bannerData.banners, 2000);
 
   const navigate = useNavigate();
@@ -437,24 +438,44 @@ const Navigation = () => {
           </CustomPopover>
 
           {/* Order with popover */}
-          <CustomPopover
-            open={menuOpen.delivery && !mobileMenuOpen}
-            anchorEl={anchorEl.delivery}
-            onClose={() => handleMenuClose("delivery")}
-            title="Order with"
-            titleAlign="center"
-            showDivider={false}
-          >
-            <CustomDeliveryButton>
-              <img src={uberImg} alt="Uber Eats" />
-              Uber Eats
-            </CustomDeliveryButton>
+          {deliveryLoading ? (
+            <CustomDeliveryButton>Loading...</CustomDeliveryButton>
+          ) : deliveryPartners.length > 0 ? (
+            <CustomPopover
+              open={menuOpen.delivery && !mobileMenuOpen}
+              anchorEl={anchorEl.delivery}
+              onClose={() => handleMenuClose("delivery")}
+              title="Order with"
+              titleAlign="center"
+              showDivider={false}
+            >
+              <CustomDeliveryButton
+                onClick={() => {
+                  const navUrl = deliveryPartners.find((item) => item.name == "UberEats")?.link;
+                  if (navUrl) {
+                    navigate(navUrl);
+                  }
+                }}
+              >
+                <img src={uberImg} alt="Uber Eats" />
+                Uber Eats
+              </CustomDeliveryButton>
 
-            <CustomDeliveryButton>
-              <img src={doordashImg} alt="DoorDash" />
-              DoorDash
-            </CustomDeliveryButton>
-          </CustomPopover>
+              <CustomDeliveryButton
+                onClick={() => {
+                  const navUrl = deliveryPartners.find((item) => item.name == "DoorDash")?.link;
+                  if (navUrl) {
+                    navigate(navUrl);
+                  }
+                }}
+              >
+                <img src={doordashImg} alt="DoorDash" />
+                DoorDash
+              </CustomDeliveryButton>
+            </CustomPopover>
+          ) : (
+            <CustomDeliveryButton>No delivery partners</CustomDeliveryButton>
+          )}
           {/* <DropdownTriggerWithGap>
             <img src={bag} alt="bag" /> Hiring Now
           </DropdownTriggerWithGap> */}

@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
-import type { LandingPageResponse, RecentlyViewedSection } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type {
+  LandingPageResponse,
+  RecentlyViewedSection,
+} from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 export const homeApi = createApi({
   reducerPath: "homeApi",
@@ -78,6 +81,25 @@ export const homeApi = createApi({
       },
     }),
 
+    getDeliveryPartners: builder.query<
+      { deliveryPartners: { id: number; name: string; link?: string }[] },
+      { storeId?: string } | void
+    >({
+      query: (params) => {
+        const qs =
+          params && Object.keys(params).length
+            ? `?${Object.entries(params)
+                .filter(([, v]) => v !== undefined && v !== null && v !== "")
+                .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+                .join("&")}`
+            : "";
+        return {
+          url: `/home/delivery-partner${qs}`,
+          method: "GET",
+        };
+      },
+    }),
+
     storeLocator: builder.query<any, void>({
       // <ResponseType, ArgType>
       query: () => ({
@@ -94,5 +116,6 @@ export const {
   useSendNewsletterMutation,
   useStoreLocatorQuery,
   useGetCartCountQuery,
-  useGetRecentlyViewedQuery
+  useGetRecentlyViewedQuery,
+  useGetDeliveryPartnersQuery,
 } = homeApi;
