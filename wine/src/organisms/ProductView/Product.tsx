@@ -9,24 +9,20 @@ import {
   ProductDetailsSection,
   ProductDetailsBox,
 } from "./ProductView.style";
-import { UseProductView } from "./UseProductView.hook";
-import { StyledSkeletonRect } from "../Filter/FilterPanel.style";
 
 const Product: React.FC = () => {
-  const { productDetailLoading } = UseProductView();
-
   return (
     <ProductLayoutContainer>
       <ProductLayoutGrid container spacing={4}>
         <ProductImageSection size={{ xs: 12, md: 6 }}>
           <ProductImageBox>
-            {productDetailLoading ? <StyledSkeletonRect /> : <ProductImageWrapper />}
+            <ProductImageWrapper />
           </ProductImageBox>
         </ProductImageSection>
 
         <ProductDetailsSection size={{ xs: 12, md: 6 }}>
           <ProductDetailsBox>
-            {productDetailLoading ? <StyledSkeletonRect /> : <ProductDetails />}
+            <ProductDetails />
           </ProductDetailsBox>
         </ProductDetailsSection>
       </ProductLayoutGrid>
