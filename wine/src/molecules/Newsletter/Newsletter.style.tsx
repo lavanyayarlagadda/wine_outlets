@@ -1,4 +1,3 @@
-// Newsletter.style.tsx
 import { Box, Button, styled, Typography } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
