@@ -67,8 +67,15 @@ const CartOverview = () => {
                     brand={item.brand}
                     size={item.size}
                     year={item.year}
-                    unitPrice={item.unitPrice}
-                    quantity={item.quantity}
+                    unitPrice={item.discountedPrice}
+                    quantity={item.Quantity}
+                    isWishList={item.isWishList}
+                    PricingProps={{
+                      price: item.price,
+                      discountedPrice: item.discountedPrice,
+                      Quantity: item.Quantity,
+                      totalPrice: item.totalPrice,
+                    }}
                   />
                 </>
               ))}
@@ -78,22 +85,22 @@ const CartOverview = () => {
             {cartDetails?.orderSummary && (
               <OrderSummary
                 title="Order Summary"
-                itemCount={cartOverviewData.cartSummary.itemCount}
+                itemCount={cartDetails?.products?.length}
                 items={[
                   { label: "Subtotal", value: cartDetails?.orderSummary?.subtotal },
                   { label: "Estimated Tax", value: cartDetails?.orderSummary?.tax },
                 ]}
                 totalItem={{ label: "Total", value: cartDetails?.orderSummary?.total }}
-                vipCodeMessage={cartOverviewData.cartSummary.vipCodeMessage}
+                // vipCodeMessage={cartOverviewData.cartSummary.vipCodeMessage}
               />
             )}
-            {cartOverviewData && (
+            {cartDetails?.pickup && (
               <PickupInformation
                 title="Pickup Information"
-                storeName={cartOverviewData.pickupInfo.storeName}
-                address={cartOverviewData.pickupInfo.address}
+                storeName={cartDetails.pickup.locationName}
+                address={cartDetails.pickup.address}
                 phone={cartOverviewData.pickupInfo.phone}
-                hours={cartOverviewData.pickupInfo.hours}
+                hours={cartDetails.pickup.timeSlot}
                 footerTitle="Pickp Date & Time"
                 slotsData={slotData}
                 slotDataLoading={slotLoading}

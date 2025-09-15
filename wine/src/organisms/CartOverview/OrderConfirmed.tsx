@@ -77,7 +77,7 @@ const OrderConfirmed = ({ orderId }: Props) => {
                 <StyledSkeletonRect />
                 <StyledSkeletonRect />
               </>
-            ) : placeOrderData.length <= 0 ? (
+            ) : placeOrderData?.length <= 0 ? (
               <NoDataText>No order data available</NoDataText>
             ) : (
               <>

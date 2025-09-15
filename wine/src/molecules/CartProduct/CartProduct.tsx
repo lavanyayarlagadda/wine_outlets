@@ -17,12 +17,23 @@ import {
   BackSpaceIcon,
   CounterWrapper,
   WishlistPriceAndCartContainer,
+  ItemSubPrice,
+  ItemPrice,
 } from "./CartProduct.style";
 import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
+interface PricingProps {
+  price?: any;
+  vipPrice?: string;
+  component?: string;
+  Quantity?: number;
+  discountedPrice?: number;
+  totalPrice?: any;
+}
+
 interface CartProductProps {
   imageUrl: string;
   name: string;
@@ -33,6 +44,8 @@ interface CartProductProps {
   unitPrice: UnitPrice;
   quantity: number;
   component?: string;
+  PricingProps?: PricingProps;
+  isWishList?:boolean
 }
 interface InfoItemProps {
   icon?: React.ReactNode;
@@ -47,19 +60,21 @@ const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
     </RatingTypography>
   </RatingBox>
 );
-interface PricingProps {
-  price: string;
-  vipPrice?: string;
-  component?: string;
-}
 
-const Pricing: React.FC<PricingProps> = ({ vipPrice, price }) => {
+const Pricing: React.FC<PricingProps> = ({ Quantity, price, discountedPrice, totalPrice }) => {
   return (
-    <RatingBox>
-      {/* <StyledDivide orientation="vertical" flexItem /> */}
-      <RegularPriceText>{vipPrice}</RegularPriceText>
-      <VipPriceText>{price}</VipPriceText>
-    </RatingBox>
+    // <RatingBox>
+    //   {/* <StyledDivide orientation="vertical" flexItem /> */}
+    //   <RegularPriceText>{vipPrice}</RegularPriceText>
+    //   <VipPriceText>{price}</VipPriceText>
+    // </RatingBox>
+    <ItemSubPrice>
+      {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(discountedPrice ? discountedPrice : price)}{" "}
+      Each x {Quantity} ={" "}
+      <ItemPrice>
+        {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(totalPrice)}
+      </ItemPrice>
+    </ItemSubPrice>
   );
 };
 
@@ -82,6 +97,8 @@ const CartProduct: React.FC<CartProductProps> = ({
   quantity,
   unitPrice,
   component = "",
+  PricingProps,
+  isWishList
 }) => {
   const [customQuantity, setCustomQuantity] = useState(quantity);
 
@@ -97,7 +114,7 @@ const CartProduct: React.FC<CartProductProps> = ({
         <ProductTitle>{name}</ProductTitle>
 
         <IconRow>
-          <CustomWishlist defaultSelected={false} isLoadingCart={false} />
+          <CustomWishlist defaultSelected={isWishList} />
           <BackspaceIcon>
             <BackSpaceIcon />
           </BackspaceIcon>
@@ -125,7 +142,12 @@ const CartProduct: React.FC<CartProductProps> = ({
               <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
             </CounterWrapper>
             <PricingBox>
-              <Pricing vipPrice={unitPrice?.original} price={unitPrice?.discounted} />
+              <Pricing
+                price={PricingProps?.price}
+                discountedPrice={PricingProps?.discountedPrice}
+                Quantity={PricingProps?.Quantity}
+                totalPrice={PricingProps?.totalPrice}
+              />
             </PricingBox>
           </>
         )}

@@ -185,3 +185,13 @@ export const WishlistPriceAndCartContainer = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-between",
 }));
+
+export const ItemSubPrice = styled(Typography)(({ theme }) => ({
+  fontSize: useFontSize(14),
+  color: theme.palette.text.primary,
+}));
+export const ItemPrice = styled("span")(({ theme }) => ({
+  fontWeight: theme.typography.fontWeightMedium,
+  fontSize: useFontSize(14),
+  color: theme.palette.warning.light,
+}));

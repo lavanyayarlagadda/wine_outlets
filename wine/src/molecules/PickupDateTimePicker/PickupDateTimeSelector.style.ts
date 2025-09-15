@@ -57,6 +57,7 @@ export const TimeSlotButton = styled(Button, {
   color: selected ? theme.palette.error.dark : "black",
   pointerEvents: disabledSlot ? "none" : "auto",
   opacity: disabledSlot ? 0.5 : 1,
+  borderRadius: shape.baseBorderRadius,
   backgroundColor: selected
     ? theme.palette.primary.light
     : disabledSlot
