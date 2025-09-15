@@ -7,11 +7,14 @@ import {
 } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
+import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 
 export const useCartOverView = () => {
   const dispatch = useDispatch();
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
   const [wishlist, setWishlist] = useState<string[]>([]);
+  const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
+  const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const today = new Date().toISOString().split("T")[0];
   const { data, isLoading, isError } = useCartProductDetailsQuery({
     cartId: 1,
@@ -20,6 +23,7 @@ export const useCartOverView = () => {
   });
   const cartDetails = data?.productListing?.[0];
   const [wishList] = useWishListMutation();
+  const [addToCart] = useAddtoCartMutation();
   const {
     data: slotData,
     isLoading: slotLoading,
@@ -63,6 +67,7 @@ export const useCartOverView = () => {
   };
 
   useEffect(() => {
+    console.log("cartDetails", cartDetails)
     if (cartDetails?.products) {
       const initialWishlist = cartDetails.products
         .filter((p: any) => p.isWishList)
@@ -71,6 +76,32 @@ export const useCartOverView = () => {
       setWishlist(initialWishlist);
     }
   }, [cartDetails]);
+  
+
+  const handleAddToCart = async (productId: any, newValue?: any) => {
+    try {
+      if (!newValue) {
+        setLoadingProduct(productId);
+      }
+      const newQuantity = (cartItems[productId] || 0) + 1;
+      const payload = {
+        productId,
+        quantity: newValue ? newValue : newQuantity,
+        userId: 1,
+      };
+
+      const response = await addToCart(payload).unwrap();
+      setCartItems((prev) => ({
+        ...prev,
+        [productId]: newQuantity,
+      }));
+      toast.success(response.cartResponse);
+    } catch (err) {
+      toast.error("Failed to add to cart");
+    } finally {
+      setLoadingProduct(null);
+    }
+  };
 
   return {
     cartDetails,
@@ -79,5 +110,7 @@ export const useCartOverView = () => {
     slotLoading,
     handleToggleFavorite,
     wishListLoading,
+    handleAddToCart,
+    loadingProduct
   };
 };

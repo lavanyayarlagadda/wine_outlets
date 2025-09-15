@@ -6,7 +6,7 @@ import {
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAddtoCartMutation } from "../../store/apis/Home/homeAPI";
+import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 
 interface ProductDetailsProps {

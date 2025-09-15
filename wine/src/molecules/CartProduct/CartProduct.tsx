@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { UnitPrice } from "../../constant/cartOverviewData";
 import {
   CardContainer,
@@ -24,7 +25,6 @@ import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
-import useCartProduct from "./UseCartProduct.hook";
 
 interface PricingProps {
   price?: any;
@@ -50,6 +50,9 @@ interface CartProductProps {
   productId: string;
   handleToggleFavorite: (productId: string) => void;
   wishListLoading?: string | null;
+  handleAddToCart: (productId: string, quantity: number) => void;
+  count?: number;
+  setCount?: (newValue: number) => void;
 }
 interface InfoItemProps {
   icon?: React.ReactNode;
@@ -95,18 +98,17 @@ const CartProduct: React.FC<CartProductProps> = ({
   brand,
   size,
   year,
-  quantity,
   unitPrice,
   component = "",
   PricingProps,
   isWishList,
   handleToggleFavorite,
   productId,
-  wishListLoading
+  wishListLoading,
+  handleAddToCart,
+  quantity,
 }) => {
-  const { customQuantity, handleQuantityChange } = useCartProduct({
-    initialQuantity: quantity,
-  });
+   const [count, setCount] = useState<number>(quantity || 1);
   return (
     <CardContainer>
       <ProductImage src={imageUrl} alt={name} />
@@ -145,7 +147,14 @@ const CartProduct: React.FC<CartProductProps> = ({
         ) : (
           <>
             <CounterWrapper>
-              <CustomCounter value={customQuantity} onChange={handleQuantityChange} />
+              <CustomCounter
+                value={count && count > 0 ? count : 1}
+                // onChange={handleQuantityChange}
+                onChange={(newValue) => {
+                  setCount?.(newValue);
+                  handleAddToCart(productId, newValue);
+                }}
+              />
             </CounterWrapper>
             <PricingBox>
               <Pricing
