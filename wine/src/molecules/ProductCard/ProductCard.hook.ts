@@ -16,7 +16,7 @@ export const useProductCard = (options?: { userId?: number }) => {
           userId: Number(userId),
         };
         const res = await addToCartMutation(payload).unwrap();
-        toast.success("Cart updated");
+        toast.success("Added to Cart");
         return res;
       } catch (err: any) {
         const msg = err?.data?.error || err?.message || "Failed to update cart";

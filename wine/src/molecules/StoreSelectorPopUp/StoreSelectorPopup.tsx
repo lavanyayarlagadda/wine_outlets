@@ -54,7 +54,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
 
 const navigate = useNavigate();
 
-console.log(selectedStoreId,"SELECTEDSTOREID")
+
   return (
     <CustomPopup
       open={open}

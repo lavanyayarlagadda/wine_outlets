@@ -41,14 +41,39 @@ export const homeApi = createApi({
         body: payload,
       }),
     }),
-storeLocator: builder.query<any, void>({   // <ResponseType, ArgType>
-  query: () => ({
-    url: "/home/store-locator",
-    method: "GET",
-  }),
-}),
+    getCartCount: builder.query<any, { userId?: number; storeId?: string; userIP?: string } | void>(
+      {
+        query: (params) => {
+          //queryParams
+          const qs =
+            params && Object.keys(params).length
+              ? `?${Object.entries(params)
+                  .filter(([, v]) => v !== undefined && v !== null && v !== "")
+                  .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+                  .join("&")}`
+              : "";
+          return {
+            url: `/home/cart-count${qs}`,
+            method: "GET",
+          };
+        },
+      }
+    ),
 
+    storeLocator: builder.query<any, void>({
+      // <ResponseType, ArgType>
+      query: () => ({
+        url: "/home/store-locator",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useAddtoCartMutation, useGetHomeSectionsQuery, useSendNewsletterMutation,useStoreLocatorQuery } = homeApi;
+export const {
+  useAddtoCartMutation,
+  useGetHomeSectionsQuery,
+  useSendNewsletterMutation,
+  useStoreLocatorQuery,
+  useGetCartCountQuery,
+} = homeApi;

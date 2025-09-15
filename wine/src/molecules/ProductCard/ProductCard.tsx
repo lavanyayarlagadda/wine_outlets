@@ -242,7 +242,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <Button
                 variant="contained"
                 fullWidth={isMobile}
-                onClick={() => navigate("/cart")}
+                onClick={() => navigate("/cartOverview")}
                 sx={{
                   borderColor: theme.palette.primary.dark,
                   border: "1px solid",

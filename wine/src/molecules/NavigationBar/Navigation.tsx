@@ -37,6 +37,7 @@ import {
   ViewMoreText,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
+import { Badge } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
@@ -102,6 +103,7 @@ const Navigation = () => {
     open,
     setOpenLogin,
     currentBanner,
+    cartCount,
   } = useNavigation(menuKeys, bannerData.banners, 2000,stores);
   const navigate = useNavigate();
 
@@ -279,7 +281,9 @@ const Navigation = () => {
                 }}
                 icon={true}
               >
-                <img src={cart} alt="cart" />
+                <Badge badgeContent={cartCount ?? 0} color="primary" overlap="circular">
+                  <img src={cart} alt="cart" />
+                </Badge>
               </CustomizeIconButton>
               {isSubmit ? (
                 <>
