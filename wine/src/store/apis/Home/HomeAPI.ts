@@ -23,7 +23,22 @@ export const homeApi = createApi({
       }),
       // providesTags: ["HomeSections"],
     }),
+    sendNewsletter: builder.mutation<any, {
+      userId: number;
+      userIp: string;
+      fullName: string;
+      email: string;
+      phoneNumber: string;
+      preferredStore: string[];
+      preferredAlcohol: string[];
+    }>({
+      query: (payload) => ({
+        url: "/home/newsletter",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useAddtoCartMutation, useGetHomeSectionsQuery } = homeApi;
+export const { useAddtoCartMutation, useGetHomeSectionsQuery , useSendNewsletterMutation } = homeApi;

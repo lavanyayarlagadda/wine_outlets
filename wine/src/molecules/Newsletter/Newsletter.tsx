@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { useTheme } from "@mui/material";
+import { useSendNewsletterMutation } from "../../store/apis/Home/homeAPI";
 import { Person as PersonIcon } from "@mui/icons-material";
 import { CustomTextField, CustomDropdown, CustomButton } from "../../atoms";
 import { countryOptions, alcoholPreferences } from "../../constant/newsletterData";
@@ -14,17 +16,19 @@ import {
 import palette from "../../themes/palette";
 import { stores } from "../../constant/curatedData";
 
-const Newsletter: React.FC = () => {
-  const theme = useTheme();
-
-  const [formData, setFormData] = useState({
+const initialForm = {
     fullName: "",
     countryCode: "US",
     phoneNumber: "",
     email: "",
     preferredStore: "",
     alcoholPreferences: "",
-  });
+  }
+
+const Newsletter: React.FC = () => {
+  const theme = useTheme();
+  const [sendNewsletter, { isLoading }] = useSendNewsletterMutation();
+  const [formData, setFormData] = useState(initialForm);
 
   const handleInputChange = (field: string) => (value: string) => {
     setFormData((prev) => ({
@@ -37,6 +41,32 @@ const Newsletter: React.FC = () => {
     label: store.name,
     value: store.name.toLowerCase(),
   }));
+
+  const handleSubscribe = async () => {
+    try {
+      const payload = {
+        userId: 1, // replace with real user id from auth if available
+        userIp: "1", // replace with actual IP if you collect it; backend accepts a string "1" per your example
+        fullName: formData.fullName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        preferredStore: formData.preferredStore ? [formData.preferredStore] : [],
+        preferredAlcohol: formData.alcoholPreferences ? [formData.alcoholPreferences] : [],
+      };
+
+      await sendNewsletter(payload).unwrap();
+      toast.success("Subscribed to newsletter successfully!");
+      setFormData(initialForm);
+    } catch (err: any) {
+      const message =
+        err?.data?.error ||
+        err?.data?.details ||
+        err?.message ||
+        "Subscription failed. Please try again.";
+      toast.error(message);
+      console.error("newsletter error", err);
+    }
+  };
 
   return (
     <NewsletterContainer>
@@ -93,10 +123,11 @@ const Newsletter: React.FC = () => {
             <CustomButton
               text={"Subscribe"}
               bgColor={theme.palette.primary.dark}
-              onClick={() => console.log("subscribe")}
+              onClick={handleSubscribe}
               color={""}
               border={""}
               btnBorderColor={""}
+              isLoading={isLoading}
             />
             <CustomizeUnsubscribeText>
               Unsubscribe anytime. We respect your privacy.
