@@ -22,6 +22,7 @@ export interface Pricing {
 }
 
 export interface ProductDetails {
+  id: string;
   itemId: string;
   name: string;
   rating: number;

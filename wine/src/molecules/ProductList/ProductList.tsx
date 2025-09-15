@@ -29,7 +29,6 @@ import { NoDataText } from "../../organisms/CartOverview/CartOverview.style";
 const ProductList = () => {
   const {
     sortBy,
-    setSortBy,
     view,
     setView,
     wishlist,
@@ -47,6 +46,7 @@ const ProductList = () => {
     ProductListLoading,
     wishListLoading,
     totalProducts,
+    handleSortChange,
   } = useProductList();
 
   const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
@@ -76,7 +76,7 @@ const ProductList = () => {
             <FilterTagList filters={selectedNames} onDelete={handleDelete} />
             <SortAndViewControls
               sortBy={sortBy}
-              onSortChange={setSortBy}
+              onSortChange={handleSortChange}
               view={view}
               onViewChange={setView}
             />

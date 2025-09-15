@@ -22,5 +22,4 @@ export { default as CustomPagination } from "./Pagination/Pagination";
 export { default as ProductWithDivider } from "./ProductDivider/ProductDivider";
 export { default as SummaryCard } from "./SummaryCard/SummaryCard";
 export { default as StoreLocator } from "./StoreSelectorPopUp/StoreSelectorPopup";
-export { default as ProductView } from "./ProductView/ProductView";
 export { default as ProfileTabs } from "./ProfileTabs/ProfileTabs";

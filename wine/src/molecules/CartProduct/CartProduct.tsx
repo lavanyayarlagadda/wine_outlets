@@ -97,7 +97,7 @@ const CartProduct: React.FC<CartProductProps> = ({
         <ProductTitle>{name}</ProductTitle>
 
         <IconRow>
-          <CustomWishlist defaultSelected={true} />
+          <CustomWishlist defaultSelected={false} isLoadingCart={false} />
           <BackspaceIcon>
             <BackSpaceIcon />
           </BackspaceIcon>
@@ -116,7 +116,7 @@ const CartProduct: React.FC<CartProductProps> = ({
               <WishListPricingLayout vipPrice={unitPrice.original} price={unitPrice.discounted} />
             </PricingBox>
             <CounterWrapper>
-              <AddToCart label="Add to Cart" variantType="filled" />
+              <AddToCart label="Add to Cart" variantType="filled" onClick={() => {}} />
             </CounterWrapper>
           </WishlistPriceAndCartContainer>
         ) : (

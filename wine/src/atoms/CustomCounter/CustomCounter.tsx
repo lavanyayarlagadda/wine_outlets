@@ -14,7 +14,7 @@ interface CounterProps {
 const CustomCounter: React.FC<CounterProps> = ({
   value,
   onChange,
-  min = 0,
+  min = 1,
   max = Infinity,
   step = 1,
 }) => {

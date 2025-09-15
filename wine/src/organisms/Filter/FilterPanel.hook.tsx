@@ -30,18 +30,47 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     categoryCount: number;
   }) => {
     const hasSelections = filters[sub.categoryId]?.length > 0;
+    const categoryKey = sub.categoryName.toLowerCase();
 
     if (selectedSub === sub.categoryId) {
+      // Deselect this sub only
       setSelectedSub(null);
+
       if (!hasSelections) {
-        dispatch(setSelectedNames([]));
+        // Remove only this sub from selectedNames
+        dispatch(
+          setSelectedNames(
+            selectedNames.filter((name: string) => !name.startsWith(sub.categoryName))
+          )
+        );
+
+        // Remove only this category from productsData
+        const newData = { ...productsData };
+        delete newData[categoryKey];
+        dispatch(setProductsData(newData));
       }
     } else {
+      // Switch to new sub
       setSelectedSub(sub.categoryId);
+
       if (!hasSelections) {
         const displayName = `${sub.categoryName} (${sub.categoryCount})`;
-        dispatch(setProductsData({ category: sub.categoryName.toLowerCase() }));
-        dispatch(setSelectedNames([displayName]));
+
+        // Merge into productsData instead of replacing
+        const newData = {
+          ...productsData,
+          category: categoryKey,
+          department: "",
+          subDepartment: "", // add/override only this key
+        };
+        dispatch(setProductsData(newData));
+
+        // Keep existing names, remove duplicates of this sub, then add new one
+        const updatedNames = [
+          ...selectedNames.filter((name: string) => !name.startsWith(sub.categoryName)),
+          displayName,
+        ];
+        dispatch(setSelectedNames(updatedNames));
       }
     }
   };

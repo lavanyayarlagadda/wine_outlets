@@ -46,6 +46,7 @@ interface ProductCardProps {
   isFavorite: boolean;
   isLoading?: string | null;
   wishListLoading?: string | null;
+  noAddtoCart?: boolean;
 }
 
 const ProductGridCard: React.FC<ProductCardProps> = ({
@@ -55,13 +56,13 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   isFavorite,
   isLoading,
   wishListLoading,
+  noAddtoCart,
 }) => {
   const navigate = useNavigate();
-  console.log(isLoading, wishListLoading, "PRODUCTIMAGEDATA");
   return (
     <ResponsiveCard>
       <FavoriteButton onClick={() => onToggleFavorite(product.id)}>
-        {wishListLoading === product.id ? (
+        {wishListLoading?.toString() === product.id ? (
           <AddToCartLoader />
         ) : isFavorite ? (
           <FavoriteIcon />
@@ -107,18 +108,19 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
           </RatingBox>
         </DetailsRow>
 
-        <PriceRow>
+        <PriceRow noAddtoCart={noAddtoCart}>
           {product.vipPrice && <VIPPriceText>VIP: ${product.vipPrice.toFixed(2)}</VIPPriceText>}
           <PriceText>${product.price.toFixed(2)}</PriceText>
         </PriceRow>
-
-        <AddToCartButton
-          onClick={() => onAddToCart(product.id)}
-          startIcon={isLoading === product.id ? null : <ShoppingCart />}
-          disabled={isLoading === product.id} // disable while loading
-        >
-          {isLoading === product.id ? <AddToCartLoader /> : "Add to Cart"}
-        </AddToCartButton>
+        {!noAddtoCart && (
+          <AddToCartButton
+            onClick={() => onAddToCart(product.id)}
+            startIcon={isLoading?.toString() === product.id ? null : <ShoppingCart />}
+            disabled={isLoading?.toString() === product.id} // disable while loading
+          >
+            {isLoading?.toString() === product.id ? <AddToCartLoader /> : "Add to Cart"}
+          </AddToCartButton>
+        )}
       </ProductCardContent>
     </ResponsiveCard>
   );

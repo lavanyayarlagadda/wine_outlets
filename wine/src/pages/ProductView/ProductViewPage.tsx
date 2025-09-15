@@ -2,7 +2,7 @@ import { Newsletter, RecentlyView } from "../../molecules";
 import ProductViewBreadCrumbs from "../../organisms/ProductView/ProductViewBreadCrumbs";
 import Product from "../../organisms/ProductView/Product";
 import ProfessionalRating from "../../organisms/ProductView/ProfessionalRating";
-import { ProductView } from "../../molecules";
+import RatingsBreakdown from "../../organisms/RatingsBreakDown/RatingsBreakDown";
 
 const ProductViewPage = () => {
   return (
@@ -10,8 +10,7 @@ const ProductViewPage = () => {
       <ProductViewBreadCrumbs />
       <Product />
       <ProfessionalRating />
-
-      <ProductView />
+      <RatingsBreakdown />
       <RecentlyView />
       <Newsletter />
     </>

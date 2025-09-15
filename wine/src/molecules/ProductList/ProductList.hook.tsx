@@ -8,8 +8,9 @@ import {
 import { toast } from "react-toastify";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import { setProductsData } from "../../store/slices/ProductList/productListSlice";
 
 export type ViewType = "grid" | "list";
 
@@ -65,7 +66,7 @@ export const useProductList = ({
   const [category, setCategory] = useState(urlCategory || "");
 
   const { productsData } = useSelector((store: RootState) => store.productListSlice);
-
+  const dispatch = useDispatch();
   const [
     productList,
     { data: ProductListData, isLoading: ProductListLoading, error: productListError },
@@ -129,6 +130,15 @@ export const useProductList = ({
       });
     }
   }, [productListError]);
+  const handleSortChange = (newSort: string) => {
+    setSortBy(newSort);
+    dispatch(
+      setProductsData({
+        ...productsData,
+        sort: newSort,
+      })
+    );
+  };
 
   const handleAddToCart = async (productId: any) => {
     try {
@@ -231,5 +241,6 @@ export const useProductList = ({
     BannerData,
     BannerLoading,
     totalProducts,
+    handleSortChange,
   };
 };

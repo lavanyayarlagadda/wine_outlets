@@ -66,8 +66,12 @@ const ProductDetails: React.FC = () => {
     setSelectedVintage,
     count,
     setCount,
-    toggleWishlist,
+    handleAddToCart,
+    handleToggleFavorite,
+    wishListLoading,
+    loadingProduct,
     data,
+    productId,
   } = UseProductView();
 
   if (!productViewData) return null;
@@ -83,7 +87,7 @@ const ProductDetails: React.FC = () => {
     label: vintage.year.toString(),
   }));
 
-  console.log(product, "PRODUCT");
+  console.log(selectedSize, "PRODUCTSIZE");
 
   return (
     <DetailsContainer>
@@ -128,7 +132,7 @@ const ProductDetails: React.FC = () => {
       <ProductInfoRow>
         <SimpleDropdown
           label="Bottle Size"
-          value={selectedSize}
+          value={selectedSize?.toLowerCase()}
           onChange={setSelectedSize}
           options={sizeOptions}
           placeholder="Select size"
@@ -143,8 +147,19 @@ const ProductDetails: React.FC = () => {
       </ProductInfoRow>
       {/* Price and Rating */}
       <PriceRow>
-        <CustomCounter value={count} onChange={setCount} />
-        <CustomWishlist onToggle={toggleWishlist} />
+        <CustomCounter
+          value={count === 0 ? 1 : count}
+          onChange={(newValue) => {
+            setCount(newValue); // update state
+            handleAddToCart(productId, newValue); // call your API with productId + qty
+          }}
+        />
+        <CustomWishlist
+          onToggle={() => handleToggleFavorite(productId)}
+          isLoading={wishListLoading}
+          id={productId}
+          defaultSelected={product.isWishlisted}
+        />
 
         <PricingBox>
           <Pricing vipPrice={product?.pricing.vipPrice} price={product.pricing.price} />
@@ -152,9 +167,11 @@ const ProductDetails: React.FC = () => {
       </PriceRow>
 
       <AddToCart
-        onClick={() => console.log("Added to cart")}
+        onClick={() => handleAddToCart(Number(productId))}
         label="Add to Cart"
         variantType="filled"
+        isLoading={loadingProduct}
+        id={Number(productId)}
       />
 
       <DescriptionText>{product.description}</DescriptionText>
