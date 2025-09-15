@@ -416,6 +416,7 @@ export const CategoryTitle = styled(Typography)(() => ({
   color: "#b02a37",
   textTransform: "uppercase",
   paddingLeft: 30,
+  cursor: "pointer",
 }));
 
 export const ColumnsWrapper = styled(Box)(() => ({

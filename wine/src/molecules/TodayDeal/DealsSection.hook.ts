@@ -223,7 +223,7 @@ export const useDealsSection = () => {
     increment,
     decrement,
     cartLoading,
-    wishListLoading
+    wishListLoading,
   };
 };
 

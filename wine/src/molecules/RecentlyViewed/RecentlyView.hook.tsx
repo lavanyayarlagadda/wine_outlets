@@ -17,13 +17,13 @@ export function useRecentlyViewed<T>({
   initialSlide = 0,
   onSlideChange,
 }: UseRecentlyViewedArgs<T>) {
-    const {
-      counts,
-      add,
-      increment,
-      decrement,
-      isLoading: cartLoading,
-    } = useProductCard({ userId: 1 });
+  const {
+    counts,
+    add,
+    increment,
+    decrement,
+    isLoading: cartLoading,
+  } = useProductCard({ userId: 1 });
   const [wishList] = useWishListMutation();
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -103,7 +103,7 @@ export function useRecentlyViewed<T>({
     [scrollToSlide]
   );
 
- const handleAddToCart = async (productId: string) => {
+  const handleAddToCart = async (productId: string) => {
     await add(productId, 1);
   };
 
@@ -167,6 +167,6 @@ export function useRecentlyViewed<T>({
     increment,
     decrement,
     cartLoading,
-    wishListLoading
+    wishListLoading,
   } as const;
 }

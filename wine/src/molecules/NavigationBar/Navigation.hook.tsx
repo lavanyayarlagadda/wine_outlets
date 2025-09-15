@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetCartCountQuery , useGetDeliveryPartnersQuery} from "../../store/apis/Home/HomeAPI";
+import { useGetCartCountQuery, useGetDeliveryPartnersQuery } from "../../store/apis/Home/HomeAPI";
 
 type MenuState = {
   [key: string]: boolean;

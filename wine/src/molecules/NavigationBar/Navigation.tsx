@@ -374,7 +374,15 @@ const Navigation = () => {
               >
                 {menu.categories?.map((category, idx) => (
                   <CategoryColumn key={idx}>
-                    <CategoryTitle>{category.title} →</CategoryTitle>
+                    <CategoryTitle
+                      onClick={() => {
+                        handleMenuClose(menu.name); // close the menu first
+                        navigate(`/productsList?category=${menu.name.toLowerCase()}`); // then navigate
+                      }}
+                    >
+                      {category.title} →
+                    </CategoryTitle>
+
                     <ColumnsWrapper>
                       {Array.from({
                         length: Math.min(2, Math.ceil(category.items.length / 5)),

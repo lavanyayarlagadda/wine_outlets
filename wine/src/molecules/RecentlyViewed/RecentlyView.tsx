@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { RecentlyViewedSection, DealProducts } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type { RecentlyViewedSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import ProductCard from "../ProductCard/ProductCard";
 import {
@@ -24,11 +24,11 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   cardsPerSlide = 4,
   initialSlide = 0,
 }) => {
-    const {
+  const {
     data: recentlyViewedResp,
-    isLoading: rvLoading,
-    isError: rvError,
-  } = useGetRecentlyViewedQuery({ userId:1, limit:10 });
+    // isLoading: rvLoading,
+    // isError: rvError,
+  } = useGetRecentlyViewedQuery({ userId: 1, limit: 10 });
   const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
   const rvData = rvResp?.recentlyViewed;
   const isVisible =
