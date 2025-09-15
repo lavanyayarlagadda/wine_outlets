@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import useProductCard from "../ProductCard/ProductCard.hook";
 
 type UseRecentlyViewedArgs<T> = {
   items: readonly T[];
@@ -13,10 +14,17 @@ export function useRecentlyViewed<T>({
   initialSlide = 0,
   onSlideChange,
 }: UseRecentlyViewedArgs<T>) {
+    const {
+      counts,
+      add,
+      increment,
+      decrement,
+      isLoading: cartLoading,
+    } = useProductCard({ userId: 1 });
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastIndexRef = useRef<number>(initialSlide);
-  const [cartItems, setCartItems] = useState<string[]>([]);
+  // const [cartItems, setCartItems] = useState<string[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
 
   const [currentSlide, setCurrentSlide] = useState<number>(initialSlide);
@@ -90,8 +98,8 @@ export function useRecentlyViewed<T>({
     [scrollToSlide]
   );
 
-  const handleAddToCart = (productId: string) => {
-    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
+ const handleAddToCart = async (productId: string) => {
+    await add(productId, 1);
   };
 
   const handleToggleFavorite = (productId: string) => {
@@ -124,7 +132,12 @@ export function useRecentlyViewed<T>({
     handleAddToCart,
     handleToggleFavorite,
     scrollToSlide,
-    cartItems,
+    // cartItems,
     wishlist,
+    counts,
+    add,
+    increment,
+    decrement,
+    cartLoading
   } as const;
 }

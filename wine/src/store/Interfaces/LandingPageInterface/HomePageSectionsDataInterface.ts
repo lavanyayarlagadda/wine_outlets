@@ -196,3 +196,11 @@ export interface Sections {
 export interface LandingPageResponse {
   sections: Sections;
 }
+
+export interface RecentlyViewedSection {
+  recentlyViewed: {
+    title: string;
+    isVisible: boolean;
+    products: DealProducts[];
+  };
+}

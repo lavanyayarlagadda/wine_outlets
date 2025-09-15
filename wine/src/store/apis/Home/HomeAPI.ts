@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
-import type { LandingPageResponse } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type { LandingPageResponse, RecentlyViewedSection } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 export const homeApi = createApi({
   reducerPath: "homeApi",
@@ -59,6 +59,24 @@ export const homeApi = createApi({
         },
       }
     ),
+    getRecentlyViewed: builder.query<
+      RecentlyViewedSection,
+      { userId?: number; limit?: number } | void
+    >({
+      query: (params) => {
+        const qs =
+          params && Object.keys(params).length
+            ? `?${Object.entries(params)
+                .filter(([, v]) => v !== undefined && v !== null)
+                .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+                .join("&")}`
+            : "";
+        return {
+          url: `/home/recently-viewed${qs}`,
+          method: "GET",
+        };
+      },
+    }),
 
     storeLocator: builder.query<any, void>({
       // <ResponseType, ArgType>
@@ -76,4 +94,5 @@ export const {
   useSendNewsletterMutation,
   useStoreLocatorQuery,
   useGetCartCountQuery,
+  useGetRecentlyViewedQuery
 } = homeApi;

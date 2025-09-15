@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import React from "react";
-import { RecentlyViewedData } from "../../constant/LandingPageData";
+import type { RecentlyViewedSection, DealProducts } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import ProductCard from "../ProductCard/ProductCard";
 import {
   Container,
@@ -24,10 +24,16 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   cardsPerSlide = 4,
   initialSlide = 0,
 }) => {
-  const rvData = (RecentlyViewedData as any) ?? {};
+    const {
+    data: recentlyViewedResp,
+    isLoading: rvLoading,
+    isError: rvError,
+  } = useGetRecentlyViewedQuery({ userId:1, limit:10 });
+  const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
+  const rvData = rvResp?.recentlyViewed;
   const isVisible =
-    rvData.isVisible === undefined ? true : String(rvData.isVisible).toLowerCase() !== "false";
-  const titleText = rvData.title ?? "Recently Viewed";
+    rvData?.isVisible === undefined ? true : String(rvData?.isVisible).toLowerCase() !== "false";
+  const titleText = rvData?.title ?? "Recently Viewed";
 
   const {
     scrollRef,
@@ -37,14 +43,14 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
     handleAddToCart,
     handleToggleFavorite,
     wishlist,
+    counts,
   } = useRecentlyViewed({
-    items: Array.isArray(rvData.products) ? rvData.products : [],
+    items: Array.isArray(rvData?.products) ? rvData?.products : [],
     cardsPerSlide,
     initialSlide,
     onSlideChange,
   });
   if (!isVisible) return null;
-
   return (
     <Container>
       <HeaderWrapper>
@@ -52,7 +58,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
       </HeaderWrapper>
 
       <CarouselWrapper ref={scrollRef}>
-        {(rvData.products ?? []).map((product: any) => (
+        {(rvData?.products ?? []).map((product: any) => (
           <ProductBox key={product.id ?? product.name ?? Math.random()}>
             <ProductCard
               product={product}
@@ -60,6 +66,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
               onToggleFavorite={() => handleToggleFavorite(product.id)}
               isRecentlyViewedCard
               isFavorite={wishlist.includes(product.id)}
+              cartCount={counts[product.id] ?? 0}
             />
           </ProductBox>
         ))}
