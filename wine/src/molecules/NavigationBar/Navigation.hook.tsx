@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { stores } from "../../constant/curatedData";
+
 
 type MenuState = {
   [key: string]: boolean;
@@ -15,7 +15,7 @@ type Banner = {
   action: { label: string; url: string };
 };
 
-export const useNavigation = (menuKeys: string[], banners: Banner[], interval = 2000) => {
+export const useNavigation = (menuKeys: string[], banners: Banner[], interval = 2000,stores:any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [menuOpen, setMenuOpen] = useState<MenuState>(
@@ -35,9 +35,17 @@ export const useNavigation = (menuKeys: string[], banners: Banner[], interval = 
 
   // mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const firstStoreName = stores.length > 0 ? stores[0].name : "Select Store";
-  const [selectedStore, setSelectedStore] = useState<number>(stores.length > 0 ? stores[0].id : 0);
 
+const [selectedStore, setSelectedStore] = useState<number>(() => {
+  // 1️⃣ Check localStorage first
+  const stored = localStorage.getItem("selectedStore");
+  if (stored) return Number(stored);
+
+  // 2️⃣ Fallback to first store or 0
+  return stores?.length > 0 ? stores[0].id : 0;
+});
+
+  const firstStoreName = stores?.length > 0 ? stores[0]?.name : "Select Store";
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % banners.length);

@@ -4,7 +4,6 @@ import {
   curated_img3,
   curated_img4,
   curated_img5,
-  video,
 } from "../assets";
 
 export const curatedData = [
@@ -65,7 +64,7 @@ export const BannerData = {
       },
       media: {
         type: "video",
-        url: video,
+        url: '',
       },
       order: 1,
     },

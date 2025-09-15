@@ -33,7 +33,6 @@ export { default as instagram } from "./icons/instagram.svg";
 export { default as facebook } from "./icons/facebook.svg";
 export { default as twitter } from "./icons/twitter.svg";
 export { default as linkedin } from "./icons/linkedIn.svg";
-export { default as video } from "./banner/video.mp4";
 export { default as gridImageGrey } from "./icons/gridImageGrey.svg";
 export { default as gridImage } from "./icons/gridImage.svg";
 export { default as listImageGrey } from "./icons/listImageGrey.svg";

@@ -21,6 +21,7 @@ import {
   InfoItem,
   StoreLeftGroup,
 } from "./StoreSelectorPopup.style";
+import { useNavigate } from "react-router-dom";
 
 export interface Store {
   id: number;
@@ -28,6 +29,7 @@ export interface Store {
   address: string;
   hours: string;
   phone: string;
+  mapUrl:string;
 }
 
 interface StoreSelectorPopupProps {
@@ -49,6 +51,10 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   setIsAgeVerified,
   navigation = false,
 }) => {
+
+const navigate = useNavigate();
+
+console.log(selectedStoreId,"SELECTEDSTOREID")
   return (
     <CustomPopup
       open={open}
@@ -71,7 +77,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
         </SearchBoxWrapper>
         <StyledSearchButton variant="contained">Search</StyledSearchButton>
       </SearchContainer>
-      {stores.map((store) => {
+      {stores?.map((store) => {
         const isSelected = selectedStoreId === store.id;
         return (
           <StoreButtonBase
@@ -85,7 +91,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
           >
             <StoreHeader>
               <StoreLeftGroup>
-                <StoreName>{store.name}</StoreName>
+                <StoreName>{store?.name}</StoreName>
                 {isSelected && (
                   <MapButton
                     size="small"
@@ -94,7 +100,12 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                       <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
                     }
                     selected={isSelected}
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+  e.stopPropagation();       
+  navigate(`/${store?.mapUrl}`); 
+  onClose();                   
+}}
+
                   >
                     Open Map
                   </MapButton>

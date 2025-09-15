@@ -41,7 +41,14 @@ export const homeApi = createApi({
         body: payload,
       }),
     }),
+storeLocator: builder.query<any, void>({   // <ResponseType, ArgType>
+  query: () => ({
+    url: "/home/store-locator",
+    method: "GET",
+  }),
+}),
+
   }),
 });
 
-export const { useAddtoCartMutation, useGetHomeSectionsQuery, useSendNewsletterMutation } = homeApi;
+export const { useAddtoCartMutation, useGetHomeSectionsQuery, useSendNewsletterMutation,useStoreLocatorQuery } = homeApi;

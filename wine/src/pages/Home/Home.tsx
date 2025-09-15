@@ -14,13 +14,9 @@ import {
   StoreLocator,
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
-import { stores } from "../../constant/curatedData";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
 
 const Home = () => {
-  const { data: sections, error, isLoading } = useGetHomeSectionsQuery();
-  const { heroSection } = sections?.sections || {};
   const {
     agePopupOpen,
     isAgeVerified,
@@ -30,9 +26,13 @@ const Home = () => {
     setIsAgeVerified,
     setSelectedStore,
     selectedStore,
+    stores,
+    sections,
+    sectionsLoading,
+    error
   } = useHomeLogic();
-
-  if (isLoading) return <AppLoader />;
+  const { heroSection } = sections?.sections || {};
+  if (sectionsLoading) return <AppLoader />;
   //TODO: replace this with proper error component and retry logic
   if (error) return <h5> Something Went wrong</h5>;
 
@@ -48,19 +48,24 @@ const Home = () => {
 
       {isAgeVerified && (
         <StoreLocator
-          open={open}
-          onClose={() => setOpen(false)}
-          selectedStoreId={selectedStore}
-          stores={stores}
-          onSelect={(id) => setSelectedStore(id)}
-          setIsAgeVerified={setIsAgeVerified}
-        />
+  open={open}
+  onClose={() => setOpen(false)}
+  selectedStoreId={selectedStore}
+  stores={stores}
+  onSelect={(id) => {
+    setSelectedStore(id);
+    localStorage.setItem("selectedStore", id.toString()); // ✅ keep in sync
+    setOpen(false); // ✅ close popup here also (safe redundancy)
+  }}
+  setIsAgeVerified={setIsAgeVerified}
+/>
+
       )}
       {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}
       <HeroBanner
         setOpen={setOpen}
         slides={heroSection?.slides}
-        isVisible={heroSection?.isVisible}
+        isVisible={heroSection?.isVisible?? false}
       />
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}

@@ -44,10 +44,10 @@ import CustomPopover from "../CustomPopOver/CustomPopOver";
 import { CustomDeliveryButton } from "../CustomPopOver/CustomPopOver.style";
 import uberImg from "../../assets/orderWith/uber.svg";
 import doordashImg from "../../assets/orderWith/doordash.svg";
-import { stores } from "../../constant/curatedData";
 import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
 import { logout, profile, myorders, mytastings, wishlist } from "../../assets";
+import { useHomeLogic } from "../../pages/Home/Home.hook";
 
 const Navigation = () => {
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
@@ -71,6 +71,11 @@ const Navigation = () => {
       },
     ],
   };
+
+  const {
+    stores
+  } = useHomeLogic();
+
   const {
     anchorEl,
     menuOpen,
@@ -97,7 +102,7 @@ const Navigation = () => {
     open,
     setOpenLogin,
     currentBanner,
-  } = useNavigation(menuKeys, bannerData.banners, 2000);
+  } = useNavigation(menuKeys, bannerData.banners, 2000,stores);
   const navigate = useNavigate();
 
   const menuData = {
