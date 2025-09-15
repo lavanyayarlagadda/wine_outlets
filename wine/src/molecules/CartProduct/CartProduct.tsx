@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import type { UnitPrice } from "../../constant/cartOverviewData";
 import {
   CardContainer,
@@ -25,6 +24,8 @@ import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
+import useCartProduct from "./UseCartProduct.hook";
+
 interface PricingProps {
   price?: any;
   vipPrice?: string;
@@ -46,6 +47,9 @@ interface CartProductProps {
   component?: string;
   PricingProps?: PricingProps;
   isWishList?: boolean;
+  productId: string;
+  handleToggleFavorite: (productId: string) => void;
+  wishListLoading?: string | null;
 }
 interface InfoItemProps {
   icon?: React.ReactNode;
@@ -63,11 +67,6 @@ const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
 
 const Pricing: React.FC<PricingProps> = ({ Quantity, price, discountedPrice, totalPrice }) => {
   return (
-    // <RatingBox>
-    //   {/* <StyledDivide orientation="vertical" flexItem /> */}
-    //   <RegularPriceText>{vipPrice}</RegularPriceText>
-    //   <VipPriceText>{price}</VipPriceText>
-    // </RatingBox>
     <ItemSubPrice>
       {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
         discountedPrice ? discountedPrice : price
@@ -101,13 +100,13 @@ const CartProduct: React.FC<CartProductProps> = ({
   component = "",
   PricingProps,
   isWishList,
+  handleToggleFavorite,
+  productId,
+  wishListLoading
 }) => {
-  const [customQuantity, setCustomQuantity] = useState(quantity);
-
-  const handleQuantityChange = (newQuantity: number) => {
-    setCustomQuantity(newQuantity);
-    console.log("Updated Quantity:", newQuantity);
-  };
+  const { customQuantity, handleQuantityChange } = useCartProduct({
+    initialQuantity: quantity,
+  });
   return (
     <CardContainer>
       <ProductImage src={imageUrl} alt={name} />
@@ -116,7 +115,12 @@ const CartProduct: React.FC<CartProductProps> = ({
         <ProductTitle>{name}</ProductTitle>
 
         <IconRow>
-          <CustomWishlist defaultSelected={isWishList} />
+          <CustomWishlist
+            defaultSelected={isWishList}
+            onToggle={() => handleToggleFavorite(productId)}
+            isLoading={wishListLoading}
+            id={productId}
+          />
           <BackspaceIcon>
             <BackSpaceIcon />
           </BackspaceIcon>

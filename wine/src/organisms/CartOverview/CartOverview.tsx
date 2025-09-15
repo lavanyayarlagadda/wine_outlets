@@ -28,7 +28,7 @@ import { StyledSkeletonRect } from "../Filter/FilterPanel.style";
 const CartOverview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cartDetails, isLoading, slotData, slotLoading } = useCartOverView();
+  const { cartDetails, isLoading, slotData, slotLoading, handleToggleFavorite } = useCartOverView();
   console.log(cartDetails, "CARTDETAILS");
 
   return (
@@ -70,6 +70,9 @@ const CartOverview = () => {
                     unitPrice={item.discountedPrice}
                     quantity={item.Quantity}
                     isWishList={item.isWishList}
+                    productId={item.productId}
+                    handleToggleFavorite={handleToggleFavorite}
+                    // wishListLoading={false}
                     PricingProps={{
                       price: item.price,
                       discountedPrice: item.discountedPrice,
