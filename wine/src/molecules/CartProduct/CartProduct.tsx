@@ -45,7 +45,7 @@ interface CartProductProps {
   quantity: number;
   component?: string;
   PricingProps?: PricingProps;
-  isWishList?:boolean
+  isWishList?: boolean;
 }
 interface InfoItemProps {
   icon?: React.ReactNode;
@@ -69,7 +69,9 @@ const Pricing: React.FC<PricingProps> = ({ Quantity, price, discountedPrice, tot
     //   <VipPriceText>{price}</VipPriceText>
     // </RatingBox>
     <ItemSubPrice>
-      {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(discountedPrice ? discountedPrice : price)}{" "}
+      {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+        discountedPrice ? discountedPrice : price
+      )}{" "}
       Each x {Quantity} ={" "}
       <ItemPrice>
         {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(totalPrice)}
@@ -98,7 +100,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   unitPrice,
   component = "",
   PricingProps,
-  isWishList
+  isWishList,
 }) => {
   const [customQuantity, setCustomQuantity] = useState(quantity);
 

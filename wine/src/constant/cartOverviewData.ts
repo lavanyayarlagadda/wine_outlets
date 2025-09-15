@@ -5,7 +5,6 @@ export interface UnitPrice {
   discounted: string;
 }
 
-
 export interface CartItem {
   id: string;
   name: string;

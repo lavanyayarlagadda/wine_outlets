@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import {
   FooterContainer,
@@ -11,6 +10,9 @@ import {
   InnerWrapper,
   LogoImage,
   CustomizedGrid,
+  FooterContent,
+  FooterGridRow,
+  CopyrightText,
 } from "./Footer.style";
 import { FOOTER_DATA, SOCIAL_ICONS } from "../../constant/footerData";
 import { logo } from "../../assets";
@@ -61,10 +63,7 @@ const Footer: React.FC = () => {
       <InnerWrapper>
         {/* Logo and Social Media Section */}
         <Grid>
-          <Box sx={{ mb: 2 }}>
-            <LogoImage src={logo} />
-          </Box>
-
+          <LogoImage src={logo} />
           <SocialIconsContainer>
             {SOCIAL_ICONS.map((social, index) => (
               <StyledIconButton
@@ -79,27 +78,16 @@ const Footer: React.FC = () => {
               </StyledIconButton>
             ))}
           </SocialIconsContainer>
-          <Typography>© 2025 Wine Outlet. All Rights Reserved.</Typography>
         </Grid>
+        <FooterContent>
+          <FooterGridRow>
+            {Object.values(FOOTER_DATA).map((section, index) => (
+              <CustomizedGrid key={index}>{renderFooterSection(section)}</CustomizedGrid>
+            ))}
+          </FooterGridRow>
 
-        <Box
-          sx={{
-            display: "flex",
-            width: {
-              xs: "100%",
-              md: "60%",
-            },
-            justifyContent: "space-between",
-            flexWrap: {
-              xs: "wrap",
-              md: "nowrap",
-            },
-          }}
-        >
-          {Object.values(FOOTER_DATA).map((section, index) => (
-            <CustomizedGrid key={index}>{renderFooterSection(section)}</CustomizedGrid>
-          ))}
-        </Box>
+          <CopyrightText>© 2025 Wine Outlet. All Rights Reserved.</CopyrightText>
+        </FooterContent>
       </InnerWrapper>
     </FooterContainer>
   );

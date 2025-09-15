@@ -1,18 +1,22 @@
 import { useEffect } from "react";
-import { usePlaceOrderQuery } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
+import { usePlaceOrderMutation } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 
 export const useOrderConfirmed = () => {
   const dispatch = useDispatch();
-  const { data, isLoading, isSuccess, isError } = usePlaceOrderQuery({
-    cartId: 1,
-    paymentMethod: "credit",
-    slotId: 1,
-    userId: 1,
-    storeId: 1,
-  });
+  const [placeOrder, { data, isLoading, isSuccess, isError }] = usePlaceOrderMutation();
+
+  useEffect(() => {
+    placeOrder({
+      cartId: 1,
+      paymentMethod: "credit",
+      slotId: 1,
+      userId: 1,
+      storeId: 1,
+    });
+  }, []);
 
   useEffect(() => {
     if (isError) {

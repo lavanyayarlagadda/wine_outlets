@@ -84,3 +84,29 @@ export const StyledLink = styled(Link)(() => ({
   },
   cursor: "pointer",
 }));
+
+export const FooterContent = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: 16,
+}));
+
+export const FooterGridRow = styled(Box)(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  justifyContent: "space-between",
+  flexWrap: "wrap",
+  [theme.breakpoints.up("md")]: {
+    flexWrap: "nowrap",
+  },
+}));
+
+export const CopyrightText = styled(Typography)(({ theme }) => ({
+  color: "gray",
+  marginTop: 16,
+  fontSize: 14,
+  textAlign: "center",
+  [theme.breakpoints.up("md")]: {
+    textAlign: "left",
+  },
+}));

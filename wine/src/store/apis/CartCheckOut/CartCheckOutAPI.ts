@@ -29,24 +29,15 @@ export const cartCheckoutApi = createApi({
         },
       }),
     }),
-    placeOrder: builder.query<
-      any,
-      { paymentMethod: string; slotId: number; cartId: number; userId: number; storeId: number }
-    >({
-      query: ({ cartId, paymentMethod, slotId, userId, storeId }) => ({
+    placeOrder: builder.mutation<any, any>({
+      query: (newItem) => ({
         url: `/cart-checkout/place-order`,
-        method: "GET",
-        params: {
-          cartId,
-          paymentMethod,
-          slotId,
-          userId,
-          storeId,
-        },
+        method: "POST",
+        body: newItem,
       }),
     }),
   }),
 });
 
-export const { useCartProductDetailsQuery, useSlotDetailsQuery, usePlaceOrderQuery } =
+export const { useCartProductDetailsQuery, useSlotDetailsQuery, usePlaceOrderMutation } =
   cartCheckoutApi;
