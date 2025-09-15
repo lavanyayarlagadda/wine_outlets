@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useProductCard from "../ProductCard/ProductCard.hook";
+import { toast } from "react-toastify";
+import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 
 type UseRecentlyViewedArgs<T> = {
   items: readonly T[];
@@ -7,6 +9,7 @@ type UseRecentlyViewedArgs<T> = {
   initialSlide?: number;
   onSlideChange?: (index: number) => void;
 };
+const storedId = localStorage.getItem("selectedStore");
 
 export function useRecentlyViewed<T>({
   items,
@@ -21,6 +24,8 @@ export function useRecentlyViewed<T>({
       decrement,
       isLoading: cartLoading,
     } = useProductCard({ userId: 1 });
+  const [wishList] = useWishListMutation();
+  const [wishListLoading, setWishListLoading] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastIndexRef = useRef<number>(initialSlide);
@@ -102,10 +107,33 @@ export function useRecentlyViewed<T>({
     await add(productId, 1);
   };
 
-  const handleToggleFavorite = (productId: string) => {
-    setWishlist((prev) =>
-      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
-    );
+  const handleToggleFavorite = async (productId: string) => {
+    const isAlreadyFavorite = wishlist.includes(productId);
+    if (isAlreadyFavorite) {
+      setWishlist((prev) =>
+        prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
+      );
+      toast.success("Removed from wishlist");
+      return;
+    }
+    try {
+      setWishListLoading(productId);
+
+      const data = await wishList({
+        userId: 1,
+        productId,
+        storeId: Number(storedId) || 0,
+      }).unwrap();
+
+      if (data) {
+        setWishlist((prev) => [...prev, productId]);
+        toast.success("Added to wishlist");
+      }
+    } catch (err) {
+      toast.error("Failed to update wishlist");
+    } finally {
+      setWishListLoading(null);
+    }
   };
 
   useEffect(() => {
@@ -138,6 +166,7 @@ export function useRecentlyViewed<T>({
     add,
     increment,
     decrement,
-    cartLoading
+    cartLoading,
+    wishListLoading
   } as const;
 }

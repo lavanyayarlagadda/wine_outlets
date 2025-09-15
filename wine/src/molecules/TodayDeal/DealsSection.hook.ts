@@ -2,8 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Product } from "../ProductCard/ProductCard";
 import useProductCard from "../ProductCard/ProductCard.hook";
 import type { DealSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import { toast } from "react-toastify";
 import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
-
+import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 interface DealFilterBtn {
   id: string;
   label: string;
@@ -11,9 +12,10 @@ interface DealFilterBtn {
 interface DealProductsGroup {
   [key: string]: Product[] | undefined;
 }
-
+const storedId = localStorage.getItem("selectedStore");
 export const useDealsSection = () => {
   const { data: sections } = useGetHomeSectionsQuery();
+  const [wishList] = useWishListMutation();
   const {
     counts,
     add,
@@ -23,6 +25,7 @@ export const useDealsSection = () => {
   } = useProductCard({ userId: 1 });
   const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
+  const [wishListLoading, setWishListLoading] = useState<string | null>(null);
   const title = dealSection.title ?? "";
   const sectionProps = dealSection.props ?? {};
   const timerConfig = sectionProps?.timer;
@@ -170,10 +173,33 @@ export const useDealsSection = () => {
     await add(productId, 1);
   };
 
-  const handleToggleFavorite = (productId: string) => {
-    setWishlist((prev) =>
-      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
-    );
+  const handleToggleFavorite = async (productId: string) => {
+    const isAlreadyFavorite = wishlist.includes(productId);
+    if (isAlreadyFavorite) {
+      setWishlist((prev) =>
+        prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
+      );
+      toast.success("Removed from wishlist");
+      return;
+    }
+    try {
+      setWishListLoading(productId);
+
+      const data = await wishList({
+        userId: 1,
+        productId,
+        storeId: Number(storedId) || 0,
+      }).unwrap();
+
+      if (data) {
+        setWishlist((prev) => [...prev, productId]);
+        toast.success("Added to wishlist");
+      }
+    } catch (err) {
+      toast.error("Failed to update wishlist");
+    } finally {
+      setWishListLoading(null);
+    }
   };
   // expose everything UI needs
   return {
@@ -197,6 +223,7 @@ export const useDealsSection = () => {
     increment,
     decrement,
     cartLoading,
+    wishListLoading
   };
 };
 
