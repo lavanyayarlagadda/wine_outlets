@@ -87,8 +87,6 @@ const ProductDetails: React.FC = () => {
     label: vintage.year.toString(),
   }));
 
-  console.log(selectedSize, "PRODUCTSIZE");
-
   return (
     <DetailsContainer>
       <ProductTitle>{product.name}</ProductTitle>
