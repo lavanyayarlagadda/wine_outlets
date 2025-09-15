@@ -15,7 +15,7 @@ const useCartProduct = ({ initialQuantity }: UseCartProductParams) => {
   return {
     customQuantity,
     handleQuantityChange,
-setCustomQuantity
+    setCustomQuantity,
   };
 };
 

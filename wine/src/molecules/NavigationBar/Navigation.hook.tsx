@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetCartCountQuery } from "../../store/apis/Home/HomeAPI";
 
-
 type MenuState = {
   [key: string]: boolean;
 };
@@ -15,15 +14,19 @@ type Banner = {
   message: string;
   action: { label: string; url: string };
 };
-  const storedId = localStorage.getItem("selectedStore");
 
+export const useNavigation = (
+  stores: any,
+  menuKeys: string[] = [],
+  banners: Banner[] = [],
+  interval = 2000
+) => {
+  const storedId = localStorage.getItem("selectedStore");
   const cartQueryParams = {
     userId: 1,
     storeId: storedId || undefined,
     userIP: "1",
   };
-
-export const useNavigation = (menuKeys: string[], banners: Banner[], interval = 2000,stores:any) => {
   const { data: cartData, refetch: refetchCartCount } = useGetCartCountQuery(cartQueryParams);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cartCount, setCartCount] = useState<number>(0);
@@ -43,15 +46,19 @@ export const useNavigation = (menuKeys: string[], banners: Banner[], interval = 
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: null }), {})
   );
 
-  // mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-const [selectedStore, setSelectedStore] = useState<number>(() => {
-  if (storedId) return Number(storedId);
-  return stores?.length > 0 ? stores[0].id : 0;
-});
+  const firstStoreName = (() => {
+    if (!stores || stores.length === 0) return "Select Store";
 
-  const firstStoreName = stores?.length > 0 ? stores[0]?.name : "Select Store";
+    if (storedId) {
+      const matchedStore = stores?.find((store: any) => store?.id === Number(storedId));
+      if (matchedStore) return matchedStore.name;
+    }
+
+    return stores[0].name;
+  })();
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % banners.length);
@@ -75,7 +82,7 @@ const [selectedStore, setSelectedStore] = useState<number>(() => {
   };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, menu: string) => {
-    const target = event.currentTarget; // clone reference immediately
+    const target = event.currentTarget;
     setAnchorEl((prev) => ({
       ...prev,
       [menu]: target,
@@ -130,8 +137,7 @@ const [selectedStore, setSelectedStore] = useState<number>(() => {
     handleMobileMenuClose,
     handleMobileMenuToggle,
     firstStoreName,
-    selectedStore,
-    setSelectedStore,
+    storedId,
     anchorElProfile,
     popup,
     handleProfileClick,

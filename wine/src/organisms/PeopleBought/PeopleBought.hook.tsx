@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Product } from "../../constant/dealProduct";
-import { useAddtoCartMutation } from "../../store/apis/Home/homeAPI";
+import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 
@@ -35,7 +35,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       setLoadingProduct(null);
     }
   };
-
+  const storedId = localStorage.getItem("selectedStore");
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId);
     if (isAlreadyFavorite) {
@@ -47,7 +47,11 @@ export const usePeopleBought = (initialProducts: Product[]) => {
     try {
       setWishListLoading(productId);
 
-      const data = await wishList({ userId: 1, productId, storeId: 1 }).unwrap();
+      const data = await wishList({
+        userId: 1,
+        productId,
+        storeId: Number(storedId) || 0,
+      }).unwrap();
 
       if (data) {
         setWishlist((prev) => [...prev, productId]);

@@ -17,14 +17,16 @@ import {
 import { FOOTER_DATA, SOCIAL_ICONS } from "../../constant/footerData";
 import { logo } from "../../assets";
 import { StoreLocator } from "../../molecules";
-import { stores } from "../../constant/curatedData";
 import { useNavigate } from "react-router-dom";
+import { useNavigation } from "../../molecules/NavigationBar/Navigation.hook";
+import { useHomeLogic } from "../../pages/Home/Home.hook";
 
 const Footer: React.FC = () => {
   const [isStoreLocator, setIsStoreLocator] = React.useState(false);
-  const [selectedStore, setSelectedStore] = React.useState<number>(
-    stores.length > 0 ? stores[0].id : 0
-  );
+
+  const { stores } = useHomeLogic();
+
+  const { storedId } = useNavigation(stores);
   const navigate = useNavigate();
   const renderFooterSection = (sectionData: (typeof FOOTER_DATA)[keyof typeof FOOTER_DATA]) => (
     <>
@@ -50,9 +52,9 @@ const Footer: React.FC = () => {
       <StoreLocator
         open={isStoreLocator}
         onClose={() => setIsStoreLocator(false)}
-        selectedStoreId={selectedStore}
+        selectedStoreId={Number(storedId)}
         stores={stores}
-        onSelect={(id) => setSelectedStore(id)}
+        onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
         navigation={true}
       />
     </>

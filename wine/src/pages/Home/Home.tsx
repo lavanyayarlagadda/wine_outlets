@@ -29,7 +29,8 @@ const Home = () => {
     stores,
     sections,
     sectionsLoading,
-    error
+    error,
+    isLoading,
   } = useHomeLogic();
   const { heroSection } = sections?.sections || {};
   if (sectionsLoading) return <AppLoader />;
@@ -48,24 +49,22 @@ const Home = () => {
 
       {isAgeVerified && (
         <StoreLocator
-  open={open}
-  onClose={() => setOpen(false)}
-  selectedStoreId={selectedStore}
-  stores={stores}
-  onSelect={(id) => {
-    setSelectedStore(id);
-    localStorage.setItem("selectedStore", id.toString()); // ✅ keep in sync
-    setOpen(false); // ✅ close popup here also (safe redundancy)
-  }}
-  setIsAgeVerified={setIsAgeVerified}
-/>
-
+          open={open}
+          onClose={() => setOpen(false)}
+          selectedStoreId={selectedStore}
+          stores={stores}
+          onSelect={(id) => {
+            setSelectedStore(id);
+          }}
+          setIsAgeVerified={setIsAgeVerified}
+          isLoading={isLoading}
+        />
       )}
       {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}
       <HeroBanner
         setOpen={setOpen}
         slides={heroSection?.slides}
-        isVisible={heroSection?.isVisible?? false}
+        isVisible={heroSection?.isVisible ?? false}
       />
       {isAgeVerified && <TimeOfferCarousel />}
       {isAgeVerified && <Trending />}

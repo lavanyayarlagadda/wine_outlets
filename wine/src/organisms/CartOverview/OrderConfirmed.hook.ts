@@ -7,14 +7,14 @@ import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 export const useOrderConfirmed = () => {
   const dispatch = useDispatch();
   const [placeOrder, { data, isLoading, isSuccess, isError }] = usePlaceOrderMutation();
-
+  const storedId = localStorage.getItem("selectedStore");
   useEffect(() => {
     placeOrder({
       cartId: 1,
       paymentMethod: "credit",
       slotId: 1,
       userId: 1,
-      storeId: 1,
+      storeId: Number(storedId) || 0,
     });
   }, []);
 

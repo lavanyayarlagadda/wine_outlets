@@ -10,9 +10,7 @@ import { StyledSkeletonRect } from "../Filter/FilterPanel.style";
 import TastingNotesCarousel from "./TastingNotesCarousel/TastingNotesCarousel";
 
 const ProfessionalRating = () => {
-  const { expanded, toggleExpand, productDetails, productDetailLoading } = UseProductView();
-  console.log(productDetails, "ProfessionalRating");
-
+  const { expanded, toggleExpand, productDetailsData, productDetailLoading } = UseProductView();
   const skeletonArray = Array.from({ length: 6 });
 
   return (
@@ -28,10 +26,10 @@ const ProfessionalRating = () => {
             <RatingsGrid container spacing={2}>
               {productDetailLoading
                 ? skeletonArray.map((_, index) => <StyledSkeletonRect key={index} />)
-                : productDetails?.productDetails?.professionalRating?.length
-                  ? productDetails?.productDetails?.professionalRating.map(
+                : productDetailsData?.productDetails?.professionalRating?.length
+                  ? productDetailsData?.productDetails?.professionalRating.map(
                       (rating: any, index: number) => {
-                        const total = productDetails?.productDetails?.professionalRating.length;
+                        const total = productDetailsData?.productDetails?.professionalRating.length;
                         const isLastRowStart =
                           Math.floor(index / 3) === Math.floor((total - 1) / 3);
                         const remaining = total % 3;
@@ -57,15 +55,15 @@ const ProfessionalRating = () => {
                         );
                       }
                     )
-                  : productDetails?.productDetails &&
-                    productDetails?.productDetails?.professionalRating.length <= 0 && (
+                  : productDetailsData?.productDetails &&
+                    productDetailsData?.productDetails?.professionalRating.length <= 0 && (
                       <p>No professional ratings available.</p>
                     )}
             </RatingsGrid>
           )}
         </Container>
       </ProductLayoutContainer>
-      <TastingNotesCarousel productDetails={productDetails} />
+      <TastingNotesCarousel productDetails={productDetailsData} />
     </>
   );
 };

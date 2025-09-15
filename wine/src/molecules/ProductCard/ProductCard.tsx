@@ -46,7 +46,7 @@ interface ProductCardProps {
   isFavorite: boolean;
   cartCount: number;
   onIncrement?: (id: string) => void;
-  onDecrement?:(id: string) => void;
+  onDecrement?: (id: string) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({

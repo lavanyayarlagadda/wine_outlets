@@ -105,7 +105,7 @@ export const useProductList = ({
       toast.error("Failed to load Banner");
     }
   }, [isError]);
-
+  const storedId = localStorage.getItem("selectedStore");
   const currentProducts = ProductListData?.productList?.products?.slice(startIndex, endIndex);
   const totaldataPage = ProductListData?.productList?.products;
   const totalPages = Math.ceil(totaldataPage?.length / productsPerPage);
@@ -174,7 +174,11 @@ export const useProductList = ({
     try {
       setWishListLoading(productId);
 
-      const data = await wishList({ userId: 1, productId, storeId: 1 }).unwrap();
+      const data = await wishList({
+        userId: 1,
+        productId,
+        storeId: Number(storedId) || 0,
+      }).unwrap();
 
       if (data) {
         setWishlist((prev) => [...prev, productId]);

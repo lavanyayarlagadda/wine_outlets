@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Typography, Skeleton } from "@mui/material";
 import { Check } from "@mui/icons-material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -29,7 +29,7 @@ export interface Store {
   address: string;
   hours: string;
   phone: string;
-  mapUrl:string;
+  mapUrl: string;
 }
 
 interface StoreSelectorPopupProps {
@@ -40,6 +40,7 @@ interface StoreSelectorPopupProps {
   onSelect: (id: number) => void;
   setIsAgeVerified?: React.Dispatch<React.SetStateAction<boolean>>;
   navigation?: boolean;
+  isLoading?: boolean;
 }
 
 const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
@@ -50,10 +51,9 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   onSelect,
   setIsAgeVerified,
   navigation = false,
+  isLoading = false,
 }) => {
-
-const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   return (
     <CustomPopup
@@ -77,61 +77,84 @@ const navigate = useNavigate();
         </SearchBoxWrapper>
         <StyledSearchButton variant="contained">Search</StyledSearchButton>
       </SearchContainer>
-      {stores?.map((store) => {
-        const isSelected = selectedStoreId === store.id;
-        return (
-          <StoreButtonBase
-            key={store.id}
-            selected={isSelected}
-            onClick={() => {
-              onSelect(store.id);
-              setIsAgeVerified && setIsAgeVerified(true);
-              onClose();
-            }}
-          >
-            <StoreHeader>
-              <StoreLeftGroup>
-                <StoreName>{store?.name}</StoreName>
-                {isSelected && (
-                  <MapButton
-                    size="small"
-                    variant="outlined"
-                    endIcon={
-                      <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
-                    }
-                    selected={isSelected}
-                    onClick={(e) => {
-  e.stopPropagation();       
-  navigate(`/${store?.mapUrl}`); 
-  onClose();                   
-}}
 
-                  >
-                    Open Map
-                  </MapButton>
-                )}
-              </StoreLeftGroup>
+      {/* ✅ Skeleton Loader */}
+      {isLoading
+        ? Array.from({ length: 3 }).map((_, i) => (
+            <StoreButtonBase key={i} selected={false}>
+              <StoreHeader>
+                <StoreLeftGroup>
+                  <Skeleton variant="text" width={120} height={24} />
+                </StoreLeftGroup>
+              </StoreHeader>
 
-              {isSelected && <Check color="primary" />}
-            </StoreHeader>
+              <Skeleton variant="text" width="80%" height={20} style={{ marginTop: 8 }} />
 
-            <Typography variant="body2" color="text.secondary" mt={1}>
-              {store.address}
-            </Typography>
+              <StoreInfoRow>
+                <InfoItem>
+                  <Skeleton variant="circular" width={20} height={20} />
+                  <Skeleton variant="text" width={80} height={20} />
+                </InfoItem>
+                <InfoItem>
+                  <Skeleton variant="circular" width={20} height={20} />
+                  <Skeleton variant="text" width={80} height={20} />
+                </InfoItem>
+              </StoreInfoRow>
+            </StoreButtonBase>
+          ))
+        : stores?.map((store) => {
+            const isSelected = selectedStoreId === store.id;
+            return (
+              <StoreButtonBase
+                key={store.id}
+                selected={isSelected}
+                onClick={() => {
+                  onSelect(store.id);
+                  setIsAgeVerified && setIsAgeVerified(true);
+                  onClose();
+                }}
+              >
+                <StoreHeader>
+                  <StoreLeftGroup>
+                    <StoreName>{store?.name}</StoreName>
+                    {isSelected && (
+                      <MapButton
+                        size="small"
+                        variant="outlined"
+                        endIcon={
+                          <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
+                        }
+                        selected={isSelected}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/${store?.mapUrl}`);
+                          onClose();
+                        }}
+                      >
+                        Open Map
+                      </MapButton>
+                    )}
+                  </StoreLeftGroup>
+                  {isSelected && <Check color="primary" />}
+                </StoreHeader>
 
-            <StoreInfoRow>
-              <InfoItem>
-                <AccessTimeIcon fontSize="small" color="action" />
-                <Typography variant="body2">{store.hours}</Typography>
-              </InfoItem>
-              <InfoItem>
-                <PhoneIcon fontSize="small" color="action" />
-                <Typography variant="body2">{store.phone}</Typography>
-              </InfoItem>
-            </StoreInfoRow>
-          </StoreButtonBase>
-        );
-      })}
+                <Typography variant="body2" color="text.secondary" mt={1}>
+                  {store.address}
+                </Typography>
+
+                <StoreInfoRow>
+                  <InfoItem>
+                    <AccessTimeIcon fontSize="small" color="action" />
+                    <Typography variant="body2">{store.hours}</Typography>
+                  </InfoItem>
+                  <InfoItem>
+                    <PhoneIcon fontSize="small" color="action" />
+                    <Typography variant="body2">{store.phone}</Typography>
+                  </InfoItem>
+                </StoreInfoRow>
+              </StoreButtonBase>
+            );
+          })}
     </CustomPopup>
   );
 };

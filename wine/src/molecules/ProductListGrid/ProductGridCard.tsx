@@ -76,7 +76,9 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
         image={product.media.url}
         alt={product.name}
         onClick={() => {
-          navigate(`/productView?productId=${product.id}&size=${product.size}`);
+          navigate(
+            `/productView?productId=${product.id}&size=${product.size}&vintage=${product.year}`
+          );
           window.scrollTo(0, 0);
         }}
       />

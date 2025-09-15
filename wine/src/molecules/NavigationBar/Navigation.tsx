@@ -73,9 +73,7 @@ const Navigation = () => {
     ],
   };
 
-  const {
-    stores
-  } = useHomeLogic();
+  const { stores } = useHomeLogic();
 
   const {
     anchorEl,
@@ -97,14 +95,14 @@ const Navigation = () => {
     isSubmit,
     setIsSubmit,
     handleLoginClose,
-    selectedStore,
-    setSelectedStore,
+    storedId,
     setOpen,
     open,
     setOpenLogin,
     currentBanner,
     cartCount,
-  } = useNavigation(menuKeys, bannerData.banners, 2000,stores);
+  } = useNavigation(stores, menuKeys, bannerData.banners, 2000);
+
   const navigate = useNavigate();
 
   const menuData = {
@@ -268,9 +266,9 @@ const Navigation = () => {
             <StoreLocator
               open={open}
               onClose={() => setOpen(false)}
-              selectedStoreId={selectedStore}
+              selectedStoreId={Number(storedId)}
               stores={stores}
-              onSelect={(id) => setSelectedStore(id)}
+              onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
               navigation={true}
             />
 

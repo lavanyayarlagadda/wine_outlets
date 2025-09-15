@@ -23,14 +23,11 @@ export const productViewApi = createApi({
         },
       }),
     }),
-    productDetails: builder.query<any, { itemId: number; size: any }>({
-      query: ({ itemId, size }) => ({
+    productDetails: builder.mutation<any, any>({
+      query: (newItem) => ({
         url: `/product-view/product-details`,
-        method: "GET",
-        params: {
-          itemId,
-          size,
-        },
+        method: "POST",
+        payload: newItem,
       }),
     }),
 
@@ -60,5 +57,5 @@ export const {
   useGetReviewsQuery,
   useBottleSizesQuery,
   useCreateReviewMutation,
-  useProductDetailsQuery,
+  useProductDetailsMutation,
 } = productViewApi;

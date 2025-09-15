@@ -2,7 +2,6 @@ import { useState } from "react";
 
 export const useTastingNotesCarousel = (productDetails?: any) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(productDetails, "productDetails");
   const slides = productDetails?.productDetails?.tastingNotes;
 
   const goToSlide = (index: number) => {

@@ -74,7 +74,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
           image={image}
           alt={name}
           onClick={() => {
-            navigate(`/productView?productId=${id}&size=${size}`);
+            navigate(`/productView?productId=${id}&size=${size}&vintage=${year}`);
             window.scrollTo(0, 0);
           }}
         />

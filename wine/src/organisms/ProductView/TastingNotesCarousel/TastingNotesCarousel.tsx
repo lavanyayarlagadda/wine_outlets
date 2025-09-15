@@ -19,7 +19,6 @@ interface TastingNotesCarouselProps {
 }
 
 const TastingNotesCarousel: React.FC<TastingNotesCarouselProps> = ({ productDetails }) => {
-  console.log(productDetails, "PRODUCTDETAILS");
   const { slides, currentSlide, current, goToSlide } = useTastingNotesCarousel(productDetails);
 
   return (

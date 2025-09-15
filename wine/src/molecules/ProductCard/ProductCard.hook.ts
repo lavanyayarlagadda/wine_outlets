@@ -31,11 +31,11 @@ export const useProductCard = (options?: { userId?: number }) => {
   const add = useCallback(
     async (productId: string, quantity = 1) => {
       // increment local count first (optimistic)
-    //   setCounts((prev) => {
-    //     const prevCount = prev[productId] ?? 0;
-    //     return { ...prev, [productId]: prevCount + quantity };
-    //   });
-    setCounts((prev) => ({ ...prev, [productId]: 1 }));
+      //   setCounts((prev) => {
+      //     const prevCount = prev[productId] ?? 0;
+      //     return { ...prev, [productId]: prevCount + quantity };
+      //   });
+      setCounts((prev) => ({ ...prev, [productId]: 1 }));
       try {
         await callApi(productId, quantity);
       } catch (e) {

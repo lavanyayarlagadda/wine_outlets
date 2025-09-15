@@ -1,25 +1,31 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useGetHomeSectionsQuery, useStoreLocatorQuery } from "../../store/apis/Home/HomeAPI";
-
+import { toast } from "react-toastify";
 
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
   const [isAgeVerified, setIsAgeVerified] = useState(false);
   const [open, setOpen] = useState(false);
-const [selectedStore, setSelectedStore] = useState<number>(() => {
   const stored = localStorage.getItem("selectedStore");
-  return stored ? Number(stored) : 0; 
-});
-useEffect(() => {
-  localStorage.setItem("selectedStore", selectedStore.toString());
-}, [selectedStore]);
+  const [selectedStore, setSelectedStore] = useState<number>(() => {
+    return stored ? Number(stored) : 0;
+  });
+  useEffect(() => {
+    localStorage.setItem("selectedStore", selectedStore.toString());
+  }, [selectedStore]);
 
-
-  const {data,isLoading,isError}= useStoreLocatorQuery();
-    const { data: sections, error, isLoading:sectionsLoading } = useGetHomeSectionsQuery();
-  const stores = data?.stores
-  console.log(stores,"STORESDATA")
+  const { data, isLoading, isError } = useStoreLocatorQuery(undefined, {
+    skip: !isAgeVerified,
+  });
+  const {
+    data: sections,
+    error,
+    isLoading: sectionsLoading,
+  } = useGetHomeSectionsQuery(undefined, {
+    skip: !isAgeVerified,
+  });
+  const stores = data?.stores;
 
   useEffect(() => {
     const verified = Cookies.get("ageVerified");
@@ -33,16 +39,7 @@ useEffect(() => {
     setAgePopupOpen(false);
     setOpen(true);
     setIsAgeVerified(true);
-
-    // ✅ Save cookie for 6 months
     Cookies.set("ageVerified", "true", { expires: 180 });
-
-    try {
-      // const result = await login({ username: "test", password: "1234" }).unwrap();
-      // console.log("Login success", result);
-    } catch (err) {
-      console.error("Login failed", err);
-    }
   };
 
   const handleCategoryClick = () => {
@@ -53,6 +50,12 @@ useEffect(() => {
     console.log("view all brand");
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load Stores");
+    }
+  }, [isError]);
+
   return {
     agePopupOpen,
     isAgeVerified,
@@ -62,12 +65,12 @@ useEffect(() => {
     setOpen,
     open,
     setIsAgeVerified,
-stores,
-     isLoading,
+    stores,
+    isLoading,
     selectedStore,
     setSelectedStore,
     sections,
     error,
-    sectionsLoading
+    sectionsLoading,
   };
 };

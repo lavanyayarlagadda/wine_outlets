@@ -108,7 +108,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   handleAddToCart,
   quantity,
 }) => {
-   const [count, setCount] = useState<number>(quantity || 1);
+  const [count, setCount] = useState<number>(quantity || 1);
   return (
     <CardContainer>
       <ProductImage src={imageUrl} alt={name} />

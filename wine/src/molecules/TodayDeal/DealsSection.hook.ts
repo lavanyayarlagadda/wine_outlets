@@ -14,7 +14,13 @@ interface DealProductsGroup {
 
 export const useDealsSection = () => {
   const { data: sections } = useGetHomeSectionsQuery();
-  const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard({ userId: 1 });
+  const {
+    counts,
+    add,
+    increment,
+    decrement,
+    isLoading: cartLoading,
+  } = useProductCard({ userId: 1 });
   const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
   const title = dealSection.title ?? "";
@@ -160,9 +166,9 @@ export const useDealsSection = () => {
     }
   };
 
- const handleAddToCart = async (productId: string) => {
-  await add(productId, 1);
-};
+  const handleAddToCart = async (productId: string) => {
+    await add(productId, 1);
+  };
 
   const handleToggleFavorite = (productId: string) => {
     setWishlist((prev) =>

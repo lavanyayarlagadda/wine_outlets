@@ -1,10 +1,4 @@
-import {
-  curated_img1,
-  curated_img2,
-  curated_img3,
-  curated_img4,
-  curated_img5,
-} from "../assets";
+import { curated_img1, curated_img2, curated_img3, curated_img4, curated_img5 } from "../assets";
 
 export const curatedData = [
   {
@@ -64,7 +58,7 @@ export const BannerData = {
       },
       media: {
         type: "video",
-        url: '',
+        url: "",
       },
       order: 1,
     },

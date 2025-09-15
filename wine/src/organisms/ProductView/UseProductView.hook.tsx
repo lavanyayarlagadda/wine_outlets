@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import type { ProductViewResponse } from "../../constant/productViewData";
 import {
   useBottleSizesQuery,
-  useProductDetailsQuery,
+  useProductDetailsMutation,
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get("productId") || "";
   const size = queryParams.get("size") || "";
+  const vintage = queryParams.get("vintage") || "";
   const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -32,15 +33,35 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
 
   const { data, isLoading } = useBottleSizesQuery({ productId: Number(productId) });
 
-  const {
-    data: productDetails,
-    isLoading: productDetailLoading,
-    isError,
-  } = useProductDetailsQuery({ itemId: Number(productId), size });
+  const [productDetails, { data: productDetailsData, isLoading: productDetailLoading, isError }] =
+    useProductDetailsMutation();
   const [selectedSize, setSelectedSize] = useState<string>(size);
   const [selectedVintage, setSelectedVintage] = useState<string>("");
   const [count, setCount] = useState<number>(0);
 
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const result = await productDetails({
+          itemId: productId,
+          userId: "user123",
+          size,
+          vintageYear: vintage,
+        }).unwrap();
+
+        // result is the actual response payload
+        setProductViewData(result?.productDetails);
+      } catch (err) {
+        toast.error("Failed to load the product details");
+      }
+    };
+
+    if (productId) {
+      fetchDetails();
+    }
+  }, [productId, size, vintage]);
+
+  console.log(productDetailsData, "productDetailsData");
   const toggleExpand = () => {
     setExpanded((prev) => !prev);
   };
@@ -82,7 +103,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
       setWishlist([productId]);
     }
   }, [productId, productViewData]);
-
+  const storedId = localStorage.getItem("selectedStore");
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId) || productViewData?.product.isWishlisted;
     if (isAlreadyFavorite) {
@@ -94,7 +115,11 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     try {
       setWishListLoading(productId);
 
-      const data = await wishList({ userId: 1, productId, storeId: 1 }).unwrap();
+      const data = await wishList({
+        userId: 1,
+        productId,
+        storeId: Number(storedId) || 0,
+      }).unwrap();
 
       if (data) {
         setWishlist((prev) => [...prev, productId]);
@@ -109,16 +134,14 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
 
   useEffect(() => {
     if (!initialData) {
-      setProductViewData(productDetails?.productDetails);
+      setProductViewData(productDetailsData?.productDetails);
     }
   }, [initialData]);
 
   useEffect(() => {
     if (productViewData?.product) {
-      console.log(productViewData, "PRODUCTVIEWDATA");
-      const product = productViewData?.product;
       setSelectedSize(size);
-      setSelectedVintage(product.other_vintages?.[0]?.year || "");
+      setSelectedVintage(vintage || "");
     }
   }, [productViewData]);
 
@@ -139,7 +162,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     wishListLoading,
     data,
     isLoading,
-    productDetails,
+    productDetailsData,
     productDetailLoading,
     productId,
   };

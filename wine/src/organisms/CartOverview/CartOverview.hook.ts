@@ -16,10 +16,12 @@ export const useCartOverView = () => {
   const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const today = new Date().toISOString().split("T")[0];
+  const storedId = localStorage.getItem("selectedStore");
+
   const { data, isLoading, isError } = useCartProductDetailsQuery({
     cartId: 1,
     userId: 1,
-    storeId: 1,
+    storeId: Number(storedId) || 0,
   });
   const cartDetails = data?.productListing?.[0];
   const [wishList] = useWishListMutation();
@@ -28,7 +30,7 @@ export const useCartOverView = () => {
     data: slotData,
     isLoading: slotLoading,
     isError: slotError,
-  } = useSlotDetailsQuery({ storeId: 1, date: today });
+  } = useSlotDetailsQuery({ storeId: Number(storedId) || 0, date: today });
 
   useEffect(() => {
     if (isError) toast.error("Failed to load the Cart Product Details");
@@ -53,7 +55,11 @@ export const useCartOverView = () => {
     try {
       setWishListLoading(productId);
 
-      const data = await wishList({ userId: 1, productId, storeId: 1 }).unwrap();
+      const data = await wishList({
+        userId: 1,
+        productId,
+        storeId: storedId || undefined,
+      }).unwrap();
 
       if (data) {
         setWishlist((prev) => [...prev, productId]);
@@ -67,7 +73,7 @@ export const useCartOverView = () => {
   };
 
   useEffect(() => {
-    console.log("cartDetails", cartDetails)
+    console.log("cartDetails", cartDetails);
     if (cartDetails?.products) {
       const initialWishlist = cartDetails.products
         .filter((p: any) => p.isWishList)
@@ -76,7 +82,6 @@ export const useCartOverView = () => {
       setWishlist(initialWishlist);
     }
   }, [cartDetails]);
-  
 
   const handleAddToCart = async (productId: any, newValue?: any) => {
     try {
@@ -111,6 +116,6 @@ export const useCartOverView = () => {
     handleToggleFavorite,
     wishListLoading,
     handleAddToCart,
-    loadingProduct
+    loadingProduct,
   };
 };
