@@ -35,6 +35,10 @@ const DealsSection: React.FC = () => {
     handleToggleFavorite,
     wishlist,
     isVisible,
+    counts,
+    // increment,
+    // decrement,
+    // cartLoading,
   } = useDealsSection();
   if (!isVisible) return null;
   return (
@@ -80,6 +84,9 @@ const DealsSection: React.FC = () => {
               onAddToCart={handleAddToCart}
               onToggleFavorite={handleToggleFavorite}
               isFavorite={wishlist.includes(product.id)}
+              cartCount={counts[product.id] ?? 0}
+              // onIncrement={() => increment(product.id)}
+              // onDecrement={() => decrement(product.id)}
             />
           </CardWrapper>
         ))}

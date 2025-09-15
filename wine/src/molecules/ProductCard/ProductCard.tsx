@@ -44,6 +44,9 @@ interface ProductCardProps {
   onToggleFavorite: (id: string) => void;
   isRecentlyViewedCard?: boolean;
   isFavorite: boolean;
+  cartCount: number;
+  onIncrement?: (id: string) => void;
+  onDecrement?:(id: string) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -52,6 +55,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onToggleFavorite,
   isRecentlyViewedCard = false,
   isFavorite,
+  cartCount,
+  // onIncrement,
+  // onDecrement
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -232,25 +238,46 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 ${product?.price.toFixed(2)}
               </Typography>
             )}
-            <Button
-              variant="contained"
-              fullWidth={isMobile}
-              onClick={() => onAddToCart(product?.id)}
-              startIcon={<ShoppingCart />}
-              sx={{
-                borderColor: theme.palette.primary.dark,
-                border: "1px solid",
-                borderRadius: 1,
-                color: theme.palette.primary.dark,
-                backgroundColor: theme.palette.primary.light,
-                padding: "12px 0px",
-                textTransform: "none",
-                fontWeight: 600,
-                width: isRecentlyViewedCard ? "60%" : "100%",
-              }}
-            >
-              Add to Cart
-            </Button>
+            {(cartCount ?? 0) > 0 ? (
+              <Button
+                variant="contained"
+                fullWidth={isMobile}
+                onClick={() => navigate("/cart")}
+                sx={{
+                  borderColor: theme.palette.primary.dark,
+                  border: "1px solid",
+                  borderRadius: 1,
+                  color: "#fff",
+                  backgroundColor: theme.palette.primary.dark,
+                  padding: "12px 0px",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  width: isRecentlyViewedCard ? "60%" : "100%",
+                }}
+              >
+                Go to cart
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                fullWidth={isMobile}
+                onClick={() => onAddToCart(product?.id)}
+                startIcon={<ShoppingCart />}
+                sx={{
+                  borderColor: theme.palette.primary.dark,
+                  border: "1px solid",
+                  borderRadius: 1,
+                  color: theme.palette.primary.dark,
+                  backgroundColor: theme.palette.primary.light,
+                  padding: "12px 0px",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  width: isRecentlyViewedCard ? "60%" : "100%",
+                }}
+              >
+                Add to Cart
+              </Button>
+            )}
           </Box>
         </Box>
       </CardContent>

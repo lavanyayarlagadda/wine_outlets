@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Product } from "../ProductCard/ProductCard";
+import useProductCard from "../ProductCard/ProductCard.hook";
 import type { DealSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
 
@@ -13,9 +14,9 @@ interface DealProductsGroup {
 
 export const useDealsSection = () => {
   const { data: sections } = useGetHomeSectionsQuery();
+  const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard({ userId: 1 });
   const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
-  const [cartItems, setCartItems] = useState<string[]>([]);
   const title = dealSection.title ?? "";
   const sectionProps = dealSection.props ?? {};
   const timerConfig = sectionProps?.timer;
@@ -159,9 +160,9 @@ export const useDealsSection = () => {
     }
   };
 
-  const handleAddToCart = (productId: string) => {
-    setCartItems((prev) => (prev.includes(productId) ? prev : [...prev, productId]));
-  };
+ const handleAddToCart = async (productId: string) => {
+  await add(productId, 1);
+};
 
   const handleToggleFavorite = (productId: string) => {
     setWishlist((prev) =>
@@ -185,8 +186,11 @@ export const useDealsSection = () => {
     handleAddToCart,
     handleToggleFavorite,
     wishlist,
-    cartItems,
     isVisible,
+    counts,
+    increment,
+    decrement,
+    cartLoading,
   };
 };
 
