@@ -15,16 +15,8 @@ export const useHomeLogic = () => {
     localStorage.setItem("selectedStore", selectedStore.toString());
   }, [selectedStore]);
 
-  const { data, isLoading, isError } = useStoreLocatorQuery(undefined, {
-    skip: !isAgeVerified,
-  });
-  const {
-    data: sections,
-    error,
-    isLoading: sectionsLoading,
-  } = useGetHomeSectionsQuery(undefined, {
-    skip: !isAgeVerified,
-  });
+  const { data, isLoading, isError } = useStoreLocatorQuery();
+  const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
   const stores = data?.stores;
 
   useEffect(() => {

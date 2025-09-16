@@ -94,7 +94,7 @@ const Navigation = () => {
     isSubmit,
     setIsSubmit,
     handleLoginClose,
-    storedId,
+    selectedStore,
     setOpen,
     open,
     setOpenLogin,
@@ -267,7 +267,7 @@ const Navigation = () => {
             <StoreLocator
               open={open}
               onClose={() => setOpen(false)}
-              selectedStoreId={Number(storedId)}
+              selectedStoreId={Number(selectedStore)}
               stores={stores}
               onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
               navigation={true}

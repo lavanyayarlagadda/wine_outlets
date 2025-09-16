@@ -117,23 +117,21 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                 <StoreHeader>
                   <StoreLeftGroup>
                     <StoreName>{store?.name}</StoreName>
-                    {isSelected && (
-                      <MapButton
-                        size="small"
-                        variant="outlined"
-                        endIcon={
-                          <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
-                        }
-                        selected={isSelected}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/${store?.mapUrl}`);
-                          onClose();
-                        }}
-                      >
-                        Open Map
-                      </MapButton>
-                    )}
+                    <MapButton
+                      size="small"
+                      variant="outlined"
+                      endIcon={
+                        <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
+                      }
+                      selected={isSelected}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/${store?.mapUrl}`);
+                        onClose();
+                      }}
+                    >
+                      Open Map
+                    </MapButton>
                   </StoreLeftGroup>
                   {isSelected && <Check color="primary" />}
                 </StoreHeader>

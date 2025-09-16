@@ -63,6 +63,11 @@ export const useNavigation = (
     return stores[0].name;
   })();
 
+  const selectedStore =
+    stores?.some((store: any) => store.id === Number(storedId)) && Number(storedId) > 0
+      ? Number(storedId)
+      : stores?.[0]?.id || 0;
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % banners.length);
@@ -141,7 +146,7 @@ export const useNavigation = (
     handleMobileMenuClose,
     handleMobileMenuToggle,
     firstStoreName,
-    storedId,
+    selectedStore,
     anchorElProfile,
     popup,
     handleProfileClick,

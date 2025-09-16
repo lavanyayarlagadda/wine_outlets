@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
 
   const { stores } = useHomeLogic();
 
-  const { storedId } = useNavigation(stores);
+  const { selectedStore } = useNavigation(stores);
   const navigate = useNavigate();
   const renderFooterSection = (sectionData: (typeof FOOTER_DATA)[keyof typeof FOOTER_DATA]) => (
     <>
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
       <StoreLocator
         open={isStoreLocator}
         onClose={() => setIsStoreLocator(false)}
-        selectedStoreId={Number(storedId)}
+        selectedStoreId={Number(selectedStore)}
         stores={stores}
         onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
         navigation={true}
