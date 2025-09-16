@@ -15,13 +15,14 @@ export const StoreAddress = styled(Typography)(() => ({
   color: palette.text.secondary,
   fontWeight: 600,
   fontSize: useFontSize(16),
+  marginTop:"10px"
 }));
 
 export const PhoneTimeRow = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  //   marginTop: theme.spacing(2),
+    marginTop: "10px",
 }));
 
 export const PhoneNumber = styled(Typography)(() => ({
@@ -30,6 +31,7 @@ export const PhoneNumber = styled(Typography)(() => ({
   color: palette.text.secondary,
   display: "flex",
   gap: "5px",
+  alignItems:"center"
 }));
 
 export const PickupTime = styled(Typography)(() => ({

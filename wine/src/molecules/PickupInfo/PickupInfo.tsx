@@ -80,6 +80,7 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
             </MapButton>
           </Box>
         )}
+        <StoreName>{storeName}</StoreName>
         <StoreAddress>{address}</StoreAddress>
 
         <PhoneTimeRow>
