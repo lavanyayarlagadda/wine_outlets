@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useGetCartCountQuery, useGetDeliveryPartnersQuery } from "../../store/apis/Home/HomeAPI";
+import { useEffect, useState, useMemo } from "react";
+import { useGetCartCountQuery, useGetDeliveryPartnersQuery, useGetHeaderBannersQuery } from "../../store/apis/Home/HomeAPI";
 
 type MenuState = {
   [key: string]: boolean;
@@ -9,19 +9,25 @@ type AnchorState = {
   [key: string]: HTMLElement | null;
 };
 
-type Banner = {
-  id: number;
-  message: string;
-  action: { label: string; url: string };
-};
+// type Banner = {
+//   id: number;
+//   message: string;
+//   action: { label: string; url: string };
+// };
 
 export const useNavigation = (
   stores: any,
   menuKeys: string[] = [],
-  banners: Banner[] = [],
-  interval = 2000
+  // banners: Banner[] = [],
+  interval = 3000
 ) => {
   const storedId = localStorage.getItem("selectedStore");
+  const {
+    data: headerBannerData,
+    isLoading: headerBannerLoading,
+    isError: headerBannerError,
+    refetch: refetchHeaderBanners,
+  } = useGetHeaderBannersQuery();
   const cartQueryParams = {
     userId: 1,
     storeId: storedId || undefined,
@@ -32,6 +38,16 @@ export const useNavigation = (
     storeId: storedId || undefined,
   });
   const deliveryPartners = deliveryData?.deliveryPartners ?? [];
+  const remoteBanners =
+    headerBannerData?.banners && Array.isArray(headerBannerData.banners)
+      ? headerBannerData.banners
+      : undefined;
+
+  const bannersToUse = useMemo(() => {
+    if (remoteBanners && remoteBanners.length > 0) return remoteBanners;
+    return [];
+  }, [remoteBanners]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cartCount, setCartCount] = useState<number>(0);
 
@@ -52,6 +68,12 @@ export const useNavigation = (
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const currentBanner = (bannersToUse && bannersToUse[currentIndex]) ?? {
+    id: -1,
+    message: "",
+    action: { label: "", url: "" },
+  };
+
   const firstStoreName = (() => {
     if (!stores || stores.length === 0) return "Select Store";
 
@@ -69,12 +91,15 @@ export const useNavigation = (
       : stores?.[0]?.id || 0;
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % banners.length);
+    if (!bannersToUse || bannersToUse.length === 0) {
+      setCurrentIndex(0);
+      return;
+    }
+    const int = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % bannersToUse.length);
     }, interval);
-
-    return () => clearInterval(timer);
-  }, [banners.length, interval]);
+    return () => clearInterval(int);
+  }, [bannersToUse, interval]);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElProfile(event.currentTarget);
@@ -165,6 +190,10 @@ export const useNavigation = (
     handleLoginClose,
     setOpen,
     open,
-    currentBanner: banners[currentIndex],
+    currentBanner,
+    headerBannerLoading,
+    headerBannerError,
+    refetchHeaderBanners,
+    // currentBanner: banners[currentIndex],
   };
 };

@@ -19,6 +19,15 @@ export const homeApi = createApi({
         body: newItem,
       }),
     }),
+    getHeaderBanners: builder.query<
+      { banners: { id?: number; message: string; action: { label?: string; url?: string } }[] },
+      void
+    >({
+      query: () => ({
+        url: "/home/header-banners",
+        method: "GET",
+      }),
+    }),
     getHomeSections: builder.query<LandingPageResponse, void>({
       query: () => ({
         url: "/home/sections",
@@ -118,4 +127,5 @@ export const {
   useGetCartCountQuery,
   useGetRecentlyViewedQuery,
   useGetDeliveryPartnersQuery,
+  useGetHeaderBannersQuery,
 } = homeApi;

@@ -19,7 +19,7 @@ const Newsletter: React.FC = () => {
   const theme = useTheme();
   const { stores } = useHomeLogic();
   const { formData, handleInputChange, handleSubscribe, isLoading } = useNewsletter();
-  const preferredStores = stores.map((store: any) => ({
+  const preferredStores = stores?.map((store: any) => ({
     label: store.name,
     value: store.name.toLowerCase(),
   }));

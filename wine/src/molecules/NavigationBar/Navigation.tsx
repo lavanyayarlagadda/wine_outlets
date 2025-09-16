@@ -51,26 +51,6 @@ import { useHomeLogic } from "../../pages/Home/Home.hook";
 
 const Navigation = () => {
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
-  const bannerData = {
-    banners: [
-      { id: 1, message: "Free Wine Tasting Every Friday 5-7 PM", action: { label: "", url: "" } },
-      {
-        id: 2,
-        message: "New VIP Membership - Join Today for Exclusive Benefits!",
-        action: { label: "", url: "" },
-      },
-      {
-        id: 3,
-        message: "Same-Day Pickup Available at All Locations!",
-        action: { label: "", url: "" },
-      },
-      {
-        id: 4,
-        message: "Holiday Hours: Extended Weekend Shopping",
-        action: { label: "", url: "" },
-      },
-    ],
-  };
 
   const { stores } = useHomeLogic();
 
@@ -102,7 +82,7 @@ const Navigation = () => {
     cartCount,
     deliveryPartners,
     deliveryLoading,
-  } = useNavigation(stores, menuKeys, bannerData.banners, 2000);
+  } = useNavigation(stores, menuKeys, 2000);
 
   const navigate = useNavigate();
 
@@ -218,17 +198,19 @@ const Navigation = () => {
 
   return (
     <div>
-      <TopBar>
+      <TopBar onClick={() =>{
+         navigate(currentBanner?.action?.url || "/")
+      }}>
         {" "}
         <TopBarContent>
           {" "}
-          <CustomiseOfferText>
+          <CustomiseOfferText >
             {" "}
-            🎉 {currentBanner.message}{" "}
-            <span onClick={() => navigate(currentBanner.action.url)}>
+             {currentBanner.message}{" "}
+            {/* <span onClick={() => navigate(currentBanner?.action?.url || "/")}>
               {" "}
               {currentBanner.action.label}{" "}
-            </span>{" "}
+            </span>{" "} */}
           </CustomiseOfferText>{" "}
         </TopBarContent>{" "}
       </TopBar>

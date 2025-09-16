@@ -42,7 +42,7 @@ export const useCartOverView = () => {
   }, []);
 
   const handleToggleFavorite = async (productId: string) => {
-    console.log("ProductId", productId);
+  
 
     const isAlreadyFavorite = wishlist.includes(productId);
 

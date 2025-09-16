@@ -20,6 +20,7 @@ import palette from "../../themes/palette";
 export const TopBar = styled(Box)(({ theme }) => ({
   backgroundColor: theme?.palette?.primary?.dark,
   padding: "6px 10px",
+  cursor:"pointer"
 }));
 
 export const CustomiseOfferText = styled(Typography)(({ theme }) => ({
