@@ -14,7 +14,7 @@ import {
 } from "./CuratedPicks.style";
 import { useNavigate } from "react-router-dom";
 import type { CuratedPicksSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 
 const CuratedPicks = () => {
   const navigate = useNavigate();

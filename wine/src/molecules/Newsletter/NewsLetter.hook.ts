@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useSendNewsletterMutation } from "../../store/apis/Home/homeAPI";
+import { useSendNewsletterMutation } from "../../store/apis/Home/HomeAPI";
 
 export type NewsletterForm = {
   fullName: string;

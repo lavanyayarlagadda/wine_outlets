@@ -113,29 +113,29 @@ export const useHeroBanner = (
   };
 
   // Button actions
-  const firstBtnAction = () => {
-    if (!slides) return;
-    const slide = slides[currentSlide];
-    // if (slide.firstBtnAction) {
-    //   navigate(slide.firstBtnAction);
-    //   return;
-    // }
-    if (slide.firstBtnText === "Browse Wines") navigate("/productsList?category=wines");
-    else navigate("/productsList");
-  };
+  // const firstBtnAction = () => {
+  //   if (!slides) return;
+  //   const slide = slides[currentSlide];
+  //   // if (slide.firstBtnAction) {
+  //   //   navigate(slide.firstBtnAction);
+  //   //   return;
+  //   // }
+  //   if (slide.firstBtnText === "Browse Wines") navigate("/productsList?category=wines");
+  //   else navigate("/productsList");
+  // };
 
-  const secondBtnAction = () => {
-    if (!slides) return;
-    const slide = slides[currentSlide];
-    if (slide.secondBtnAction) {
-      if (slide.secondBtnAction === "openStoreModal" && setOpen) {
-        setOpen(true);
-        return;
-      }
-      navigate(slide.secondBtnAction);
-      return;
-    }
-  };
+  // const secondBtnAction = () => {
+  //   if (!slides) return;
+  //   const slide = slides[currentSlide];
+  //   if (slide.secondBtnAction) {
+  //     if (slide.secondBtnAction === "openStoreModal" && setOpen) {
+  //       setOpen(true);
+  //       return;
+  //     }
+  //     navigate(slide.secondBtnAction);
+  //     return;
+  //   }
+  // };
 
   // Auto-play & hover management
   useEffect(() => {
@@ -171,8 +171,8 @@ export const useHeroBanner = (
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-    firstBtnAction,
-    secondBtnAction,
+    // firstBtnAction,
+    // secondBtnAction,
     handleTagClick,
   };
 };

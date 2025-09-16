@@ -5,7 +5,7 @@ import type {
   BrandSection,
   BrandItem,
 } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 
 export const useBrands = () => {
   const { data: sections } = useGetHomeSectionsQuery();

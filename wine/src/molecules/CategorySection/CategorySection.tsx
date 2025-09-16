@@ -2,7 +2,7 @@ import { Container } from "./CategorySection.style";
 import { CustomTitleSection } from "../../atoms";
 import ProductCardSection from "./layout/ProductCard";
 import type { ShopByCategorySection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 
 const CategorySection = () => {
   const { data: sections } = useGetHomeSectionsQuery();
