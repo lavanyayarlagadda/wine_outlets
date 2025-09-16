@@ -13,12 +13,13 @@ import {
   CustomizeTitleText,
 } from "./Newsletter.style";
 import palette from "../../themes/palette";
-import { stores } from "../../constant/curatedData";
+import { useHomeLogic } from "../../pages/Home/Home.hook";
 
 const Newsletter: React.FC = () => {
   const theme = useTheme();
+  const { stores } = useHomeLogic();
   const { formData, handleInputChange, handleSubscribe, isLoading } = useNewsletter();
-  const preferredStores = stores.map((store) => ({
+  const preferredStores = stores.map((store: any) => ({
     label: store.name,
     value: store.name.toLowerCase(),
   }));
