@@ -28,7 +28,7 @@ const ProductToolbar: React.FC<ProductToolbarProps> = ({
     px={{ xs: 0, sm: 1 }}
     gap={2}
   >
-    <FilterTagList filters={filters} onDelete={onDeleteFilter} />
+    <FilterTagList filters={filters.map((f) => f.label)} onDelete={onDeleteFilter} />
     <SortAndViewContainer
       sortBy={sortBy}
       onSortChange={onSortChange}
