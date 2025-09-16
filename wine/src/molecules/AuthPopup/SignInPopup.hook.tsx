@@ -60,7 +60,6 @@ export const useSignIn = (onClose: () => void) => {
           password: form.password,
         }).unwrap();
         dispatch(setCredentials({ token: result.token, customer: result.customer }));
-        console.log("Signin successful", result);
         onClose();
       } catch (error: any) {
         console.error("Signin failed:", error);

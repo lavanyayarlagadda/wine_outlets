@@ -8,12 +8,13 @@ export const useOrderConfirmed = () => {
   const dispatch = useDispatch();
   const [placeOrder, { data, isLoading, isSuccess, isError }] = usePlaceOrderMutation();
   const storedId = localStorage.getItem("selectedStore");
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     placeOrder({
       cartId: 1,
       paymentMethod: "credit",
       slotId: 1,
-      userId: 1,
+      userId: Number(userId),
       storeId: Number(storedId) || 0,
     });
   }, []);

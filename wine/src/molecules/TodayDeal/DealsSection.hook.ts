@@ -16,13 +16,7 @@ const storedId = localStorage.getItem("selectedStore");
 export const useDealsSection = () => {
   const { data: sections } = useGetHomeSectionsQuery();
   const [wishList] = useWishListMutation();
-  const {
-    counts,
-    add,
-    increment,
-    decrement,
-    isLoading: cartLoading,
-  } = useProductCard({ userId: 1 });
+  const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard();
   const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
@@ -144,7 +138,7 @@ export const useDealsSection = () => {
 
     return () => cleanups.forEach((fn) => fn && fn());
   }, [filterButtonsRef, productCardsRef]);
-
+  const userId = localStorage.getItem("userId");
   // timer tick
   useEffect(() => {
     if (!sectionProps?.showTimer || remainingMs === null) return;
@@ -186,7 +180,7 @@ export const useDealsSection = () => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: 1,
+        userId: Number(userId),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

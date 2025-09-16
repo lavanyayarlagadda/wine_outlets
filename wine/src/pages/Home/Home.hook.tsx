@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { useGetHomeSectionsQuery, useStoreLocatorQuery } from "../../store/apis/Home/HomeAPI";
+import {
+  useGetHomeSectionsQuery,
+  useStoreLocatorQuery,
+  useStoreSearchlocatorQuery,
+} from "../../store/apis/Home/HomeAPI";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { skipToken } from "@reduxjs/toolkit/query";
+import type { RootState } from "../../store";
 
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
@@ -22,7 +29,14 @@ export const useHomeLogic = () => {
   });
 
   const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
+  const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
+  const {
+    data: searchData,
+    isLoading: searchLoading,
+    error: searchError,
+  } = useStoreSearchlocatorQuery(searchTerm ? { location: searchTerm } : skipToken);
   const stores = data?.stores;
+  const storesData = searchData?.stores;
 
   useEffect(() => {
     const verified = Cookies.get("ageVerified");
@@ -51,7 +65,10 @@ export const useHomeLogic = () => {
     if (isError) {
       toast.error("Failed to load Stores");
     }
-  }, [isError]);
+    if (searchError) {
+      toast.error("Failed to load Stores");
+    }
+  }, [isError, searchError]);
 
   return {
     agePopupOpen,
@@ -69,5 +86,7 @@ export const useHomeLogic = () => {
     sections,
     error,
     sectionsLoading,
+    searchLoading,
+    storesData,
   };
 };

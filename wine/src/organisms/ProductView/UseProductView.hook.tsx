@@ -41,13 +41,13 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const [selectedSize, setSelectedSize] = useState<string>(size);
   const [selectedVintage, setSelectedVintage] = useState<string>("");
   const [count, setCount] = useState<number>(0);
-
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const result = await productDetails({
           itemId: productId,
-          userId: "user123",
+          userId: Number(userId),
           size,
           vintageYear: vintage,
         }).unwrap();
@@ -70,9 +70,6 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
         const result = await vintageYear({
           itemId: productId,
         }).unwrap();
-
-        // result is the actual response payload
-        console.log(result, "RESULTDATA");
         setVintageYearData(result?.vintageYear);
       } catch (err) {
         toast.error("Failed to load the vintageYear details");
@@ -103,7 +100,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
       const payload = {
         productId,
         quantity: newValue ? newValue : newQuantity,
-        userId: 1,
+        userId: Number(userId),
       };
 
       const response = await addToCart(payload).unwrap();
@@ -138,7 +135,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: 1,
+        userId: Number(userId),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

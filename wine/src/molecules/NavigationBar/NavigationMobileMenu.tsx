@@ -107,46 +107,6 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
             ))}
         </div>
       ))}
-
-      {/* <DrawerMenuItem onClick={() => handleNavigation("/tastings")}>Tastings</DrawerMenuItem>
-      <DrawerMenuItem onClick={() => handleNavigation("/events")}>Events</DrawerMenuItem> */}
-      {/* <DrawerMenuItem onClick={() => handleNavigation("/new-arrivals")}>
-        <span style={{ display: "flex", alignItems: "center" }}>
-          <img src={star} alt="star" style={{ marginRight: "8px" }} /> New Arrivals
-        </span>
-      </DrawerMenuItem> */}
-      {/* <DrawerMenuItem onClick={() => handleNavigation("/promotions")}>Promotions</DrawerMenuItem> */}
-
-      {/* Delivery Options */}
-      {/* <DrawerMenuItem onClick={() => handleMobileMenuToggle("delivery")}>
-        <span>Delivery</span>
-        {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-      </DrawerMenuItem>
-      {menuOpen.delivery && (
-        <>
-          <DrawerSubMenuItem>Standard Delivery</DrawerSubMenuItem>
-          <DrawerSubMenuItem>Express Delivery</DrawerSubMenuItem>
-          <DrawerSubMenuItem>Pickup</DrawerSubMenuItem>
-        </>
-      )} */}
-
-      {/* <DrawerMenuItem onClick={() => handleNavigation("/careers")}>Hiring Now</DrawerMenuItem> */}
-
-      {/* Account Section */}
-      {/* <DrawerAccountSection>
-        <DrawerMenuItem onClick={() => handleNavigation("/account")}>My Account</DrawerMenuItem>
-        <DrawerMenuItem onClick={() => handleNavigation("/cart")}>Shopping Cart</DrawerMenuItem>
-        <DrawerMenuItem onClick={() => handleNavigation("/orders")}>Order History</DrawerMenuItem>
-        <DrawerMenuItem onClick={() => handleNavigation("/settings")}>Settings</DrawerMenuItem>
-        <DrawerMenuItem
-          onClick={() => {
-            console.log("Logout");
-            handleMobileMenuClose();
-          }}
-        >
-          Log Out
-        </DrawerMenuItem>
-      </DrawerAccountSection> */}
     </StyledDrawer>
   );
 };

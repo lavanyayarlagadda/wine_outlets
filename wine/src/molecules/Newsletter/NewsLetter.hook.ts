@@ -46,10 +46,10 @@ export const useNewsletter = () => {
       toast.error(`Please fill in: ${missingFields.join(", ")}`);
       return;
     }
-
+    const userId = localStorage.getItem("userId");
     const payload = {
-      userId: 1, // replace from auth if available
-      userIp: "1", // or collect real IP on server
+      userId: Number(userId),
+      userIp: "1",
       fullName: formData.fullName,
       email: formData.email,
       phoneNumber: formData.phoneNumber,

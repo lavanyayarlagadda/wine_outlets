@@ -5,6 +5,15 @@ export const productViewApi = createApi({
   reducerPath: "productViewApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_API_URL_BASE,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
 
   endpoints: (builder) => ({

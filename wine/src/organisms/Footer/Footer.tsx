@@ -20,13 +20,15 @@ import { StoreLocator } from "../../molecules";
 import { useNavigate } from "react-router-dom";
 import { useNavigation } from "../../molecules/NavigationBar/Navigation.hook";
 import { useHomeLogic } from "../../pages/Home/Home.hook";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const Footer: React.FC = () => {
   const [isStoreLocator, setIsStoreLocator] = React.useState(false);
 
-  const { stores } = useHomeLogic();
-
-  const { selectedStore } = useNavigation(stores);
+  const { stores, storesData } = useHomeLogic();
+  const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
+  const { selectedStore } = useNavigation(searchTerm ? storesData : stores);
   const navigate = useNavigate();
   const renderFooterSection = (sectionData: (typeof FOOTER_DATA)[keyof typeof FOOTER_DATA]) => (
     <>

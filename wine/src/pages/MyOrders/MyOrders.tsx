@@ -100,7 +100,6 @@ export default function MyOrders() {
                       order={order}
                       onReorder={(id) => {
                         console.log("reorder", id);
-                        // TODO: implement reorder flow
                       }}
                       onViewInvoice={(id) => navigate(`/orders/invoice/${encodeURIComponent(id)}`)}
                     />

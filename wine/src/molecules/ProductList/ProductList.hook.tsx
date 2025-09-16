@@ -110,7 +110,7 @@ export const useProductList = ({
   const totaldataPage = ProductListData?.productList?.products;
   const totalPages = Math.ceil(totaldataPage?.length / productsPerPage);
   const totalProducts = ProductListData?.productList?.totalProducts;
-
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     setCategory(urlCategory || "");
     setCurrentPage(1);
@@ -147,7 +147,7 @@ export const useProductList = ({
       const payload = {
         productId,
         quantity: newQuantity,
-        userId: 1,
+        userId: Number(userId),
       };
 
       const response = await addToCart(payload).unwrap();
@@ -175,7 +175,7 @@ export const useProductList = ({
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: 1,
+        userId: userId,
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

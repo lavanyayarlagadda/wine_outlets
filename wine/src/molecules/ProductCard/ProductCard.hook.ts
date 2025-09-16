@@ -2,8 +2,8 @@ import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 
-export const useProductCard = (options?: { userId?: number }) => {
-  const userId = options?.userId ?? 1;
+export const useProductCard = () => {
+  const userId = localStorage.getItem("userId");
   const [addToCartMutation, { isLoading: mutationLoading }] = useAddtoCartMutation();
   const [counts, setCounts] = useState<Record<string, number>>({});
 

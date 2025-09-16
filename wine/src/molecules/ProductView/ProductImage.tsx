@@ -25,7 +25,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, initialIndex = 0, o
     initialIndex,
     onImageChange
   );
-  console.log(images, "IMAGES");
 
   return (
     <StyledImageContainer>

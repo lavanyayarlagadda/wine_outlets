@@ -24,8 +24,6 @@ const PeopleBought: React.FC<PeopleProps> = ({ suggestedProducts }) => {
     loadingProduct,
   } = usePeopleBought(suggestedProducts?.productDetails?.suggestedProducts);
 
-  console.log(suggestedProducts, "SUGGESTEDPROUCTS");
-
   return (
     <PeopleBoughtWrapper>
       <HeaderRow>

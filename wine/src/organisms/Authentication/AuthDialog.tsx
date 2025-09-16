@@ -7,10 +7,9 @@ import { TabsWrapper, StyledButton, TabFields } from "./AuthDialog.style";
 interface AuthDialogProps {
   open: boolean;
   onClose: () => void;
-  setIsSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AuthDialog: React.FC<AuthDialogProps> = ({ open, onClose, setIsSubmit }) => {
+const AuthDialog: React.FC<AuthDialogProps> = ({ open, onClose }) => {
   const [tab, setTab] = useState<"signin" | "signup">("signin");
 
   return (
@@ -30,9 +29,9 @@ const AuthDialog: React.FC<AuthDialogProps> = ({ open, onClose, setIsSubmit }) =
 
       <TabFields>
         {tab === "signin" ? (
-          <SignIn setTab={setTab} onClose={onClose} setIsSubmit={setIsSubmit} />
+          <SignIn setTab={setTab} onClose={onClose} />
         ) : (
-          <SignUp setTab={setTab} onClose={onClose} setIsSubmit={setIsSubmit} />
+          <SignUp setTab={setTab} onClose={onClose} />
         )}
       </TabFields>
     </CustomPopup>

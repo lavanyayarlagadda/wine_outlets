@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 interface TouchState {
@@ -20,7 +19,6 @@ export const useHeroBanner = (
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-  const navigate = useNavigate();
 
   const touchState = useRef<TouchState>({
     startX: 0,
@@ -112,32 +110,6 @@ export const useHeroBanner = (
     console.log("Tag clicked");
   };
 
-  // Button actions
-  // const firstBtnAction = () => {
-  //   if (!slides) return;
-  //   const slide = slides[currentSlide];
-  //   // if (slide.firstBtnAction) {
-  //   //   navigate(slide.firstBtnAction);
-  //   //   return;
-  //   // }
-  //   if (slide.firstBtnText === "Browse Wines") navigate("/productsList?category=wines");
-  //   else navigate("/productsList");
-  // };
-
-  // const secondBtnAction = () => {
-  //   if (!slides) return;
-  //   const slide = slides[currentSlide];
-  //   if (slide.secondBtnAction) {
-  //     if (slide.secondBtnAction === "openStoreModal" && setOpen) {
-  //       setOpen(true);
-  //       return;
-  //     }
-  //     navigate(slide.secondBtnAction);
-  //     return;
-  //   }
-  // };
-
-  // Auto-play & hover management
   useEffect(() => {
     if (isAutoPlaying) startAutoPlay();
     else stopAutoPlay();

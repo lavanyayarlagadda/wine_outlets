@@ -51,8 +51,8 @@ export default function Wishlist() {
                   unitPrice={{ original: "200", discounted: "300" }}
                   quantity={2}
                   component="WISHLIST"
-                  handleToggleFavorite={()=>{}}
-                  handleAddToCart={()=>{}}
+                  handleToggleFavorite={() => {}}
+                  handleAddToCart={() => {}}
                 />
               </Grid>
             ))

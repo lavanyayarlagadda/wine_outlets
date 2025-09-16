@@ -45,11 +45,6 @@ export const useProfileForm = (initialData?: any) => {
     try {
       await profileSchema.validate(form, { abortEarly: false });
       setErrors({});
-
-      // ✅ Call your BE API here
-      console.log("Submitting to API:", form);
-
-      // Example: await api.updateProfile(form);
     } catch (err: any) {
       const validationErrors: Record<string, string> = {};
       if (err.inner) {
@@ -70,9 +65,6 @@ export const useProfileForm = (initialData?: any) => {
     try {
       await passwordSchema.validate(form, { abortEarly: false });
       setPasswordErrors({});
-
-      // Call backend API here
-      console.log("Submitting Password:", form);
     } catch (err: any) {
       const validationErrors: Record<string, string> = {};
       if (err.inner) {

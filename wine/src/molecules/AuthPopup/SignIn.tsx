@@ -11,15 +11,7 @@ import {
 } from "../../organisms/Authentication/AuthDialog.style";
 import { useSignIn } from "./SignInPopup.hook";
 
-const SignIn = ({
-  setTab,
-  onClose,
-  setIsSubmit,
-}: {
-  setTab: any;
-  onClose: any;
-  setIsSubmit: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const SignIn = ({ setTab, onClose }: { setTab: any; onClose: any }) => {
   const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } =
     useSignIn(onClose);
 
@@ -50,14 +42,7 @@ const SignIn = ({
       <ForgotPasswordBox>
         <SwitchLink onClick={() => setTab("forgotPassword")}>Forgot Password</SwitchLink>
       </ForgotPasswordBox>
-      <SubmitButton
-        type="submit"
-        variant="contained"
-        fullWidth
-        onClick={() => {
-          setIsSubmit(true);
-        }}
-      >
+      <SubmitButton type="submit" variant="contained" fullWidth>
         Submit
       </SubmitButton>
 

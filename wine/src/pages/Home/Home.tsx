@@ -15,6 +15,8 @@ import {
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const Home = () => {
   const {
@@ -31,10 +33,12 @@ const Home = () => {
     sectionsLoading,
     error,
     isLoading,
+    storesData,
+    searchLoading,
   } = useHomeLogic();
   const { heroSection } = sections?.sections || {};
+  const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
   if (sectionsLoading) return <AppLoader />;
-  //TODO: replace this with proper error component and retry logic
   if (error) return <h5> Something Went wrong</h5>;
 
   return (
@@ -52,12 +56,12 @@ const Home = () => {
           open={open}
           onClose={() => setOpen(false)}
           selectedStoreId={selectedStore}
-          stores={stores}
+          stores={searchTerm ? storesData : stores}
           onSelect={(id) => {
             setSelectedStore(id);
           }}
           setIsAgeVerified={setIsAgeVerified}
-          isLoading={isLoading}
+          isLoading={searchTerm ? searchLoading : isLoading}
         />
       )}
       {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}

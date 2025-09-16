@@ -87,7 +87,6 @@ const ProductDetails: React.FC = () => {
     value: size,
     label: size,
   }));
-  console.log(vintageYearData, "vintageYearData");
   return (
     <DetailsContainer>
       <ProductTitle>{product.name}</ProductTitle>

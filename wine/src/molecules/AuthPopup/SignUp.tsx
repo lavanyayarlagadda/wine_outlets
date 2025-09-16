@@ -18,15 +18,14 @@ import { useSignUp } from "./SignUpPopup.hook";
 interface SignUpProps {
   setTab: (tab: "signin" | "signup") => void;
   onClose: () => void;
-  setIsSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ setTab, onClose, setIsSubmit }) => {
+const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
   const { form, errors, showPassword, handleChange, setShowPassword, handleSubmit } =
     useSignUp(onClose);
 
   return (
-    <FormWrapper onSubmit={handleSubmit}>
+    <FormWrapper component="form" onSubmit={handleSubmit}>
       <CustomTextField
         label="First Name"
         value={form.firstName}
@@ -103,14 +102,7 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose, setIsSubmit }) => {
         error={errors.vipId}
       />
 
-      <SubmitButton
-        type="submit"
-        variant="contained"
-        fullWidth
-        onClick={() => {
-          setIsSubmit(true);
-        }}
-      >
+      <SubmitButton type="submit" variant="contained" fullWidth>
         Submit
       </SubmitButton>
 

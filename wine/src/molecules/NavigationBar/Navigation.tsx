@@ -48,12 +48,14 @@ import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
 import { logout, profile, myorders, mytastings, wishlist } from "../../assets";
 import { useHomeLogic } from "../../pages/Home/Home.hook";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const Navigation = () => {
   const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
 
-  const { stores } = useHomeLogic();
-
+  const { stores, storesData } = useHomeLogic();
+  const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
   const {
     anchorEl,
     menuOpen,
@@ -71,8 +73,6 @@ const Navigation = () => {
     openLogin,
     signIn,
     setSignIn,
-    isSubmit,
-    setIsSubmit,
     handleLoginClose,
     selectedStore,
     setOpen,
@@ -82,7 +82,7 @@ const Navigation = () => {
     cartCount,
     deliveryPartners,
     deliveryLoading,
-  } = useNavigation(stores, menuKeys, 2000);
+  } = useNavigation(searchTerm ? storesData : stores, menuKeys, 2000);
 
   const navigate = useNavigate();
 
@@ -195,18 +195,21 @@ const Navigation = () => {
       onClick: () => navigate("/"),
     },
   ];
+  const isToken = localStorage.getItem("token");
 
   return (
     <div>
-      <TopBar onClick={() =>{
-         navigate(currentBanner?.action?.url || "/")
-      }}>
+      <TopBar
+        onClick={() => {
+          navigate(currentBanner?.action?.url || "/");
+        }}
+      >
         {" "}
         <TopBarContent>
           {" "}
-          <CustomiseOfferText >
+          <CustomiseOfferText>
             {" "}
-             {currentBanner.message}{" "}
+            {currentBanner.message}{" "}
             {/* <span onClick={() => navigate(currentBanner?.action?.url || "/")}>
               {" "}
               {currentBanner.action.label}{" "}
@@ -250,7 +253,7 @@ const Navigation = () => {
               open={open}
               onClose={() => setOpen(false)}
               selectedStoreId={Number(selectedStore)}
-              stores={stores}
+              stores={searchTerm ? storesData : stores}
               onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
               navigation={true}
             />
@@ -266,7 +269,7 @@ const Navigation = () => {
                   <img src={cart} alt="cart" />
                 </Badge>
               </CustomizeIconButton>
-              {isSubmit ? (
+              {isToken ? (
                 <>
                   <CustomizeIconButton onClick={handleProfileClick} icon={true}>
                     <img src={userprofile} alt="userProfile" />
@@ -280,7 +283,15 @@ const Navigation = () => {
                       <StyledProfileMenuItem
                         key={option.label}
                         onClick={() => {
-                          option.onClick();
+                          if (option.label === "Logout") {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userId");
+                            localStorage.removeItem("userTypeId");
+                            localStorage.removeItem("userName");
+                            localStorage.removeItem("role");
+                          }
+
+                          option.onClick?.();
                           handleProfileClose();
                         }}
                       >
@@ -479,9 +490,7 @@ const Navigation = () => {
         handleMobileMenuClose={handleMobileMenuClose}
         handleMobileMenuToggle={handleMobileMenuToggle}
       />
-      {signIn && (
-        <AuthDialog open={openLogin} onClose={handleLoginClose} setIsSubmit={setIsSubmit} />
-      )}
+      {signIn && <AuthDialog open={openLogin} onClose={handleLoginClose} />}
     </div>
   );
 };

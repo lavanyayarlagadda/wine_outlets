@@ -30,7 +30,6 @@ const CartOverview = () => {
   const navigate = useNavigate();
   const { cartDetails, isLoading, slotData, slotLoading, handleToggleFavorite, handleAddToCart } =
     useCartOverView();
-  console.log(cartDetails, "CARTDETAILS");
 
   return (
     <MainContainer>

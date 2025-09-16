@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Skeleton } from "@mui/material";
 import { Check } from "@mui/icons-material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -22,6 +22,8 @@ import {
   StoreLeftGroup,
 } from "./StoreSelectorPopup.style";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSearchTerm } from "../../store/slices/Home/Home";
 
 export interface Store {
   id: number;
@@ -43,6 +45,18 @@ interface StoreSelectorPopupProps {
   isLoading?: boolean;
 }
 
+// 🔹 debounce hook
+const useDebounce = (value: string, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
 const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   open,
   onClose,
@@ -54,6 +68,16 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   isLoading = false,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+
+  const debouncedValue = useDebounce(inputValue, 500);
+
+  useEffect(() => {
+    if (debouncedValue.trim()) {
+      dispatch(setSearchTerm(debouncedValue));
+    }
+  }, [debouncedValue, dispatch]);
 
   return (
     <CustomPopup
@@ -73,12 +97,17 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
       <SearchContainer>
         <SearchBoxWrapper>
           <SearchIconStyled />
-          <StyledInput placeholder="Enter Zip Code" inputProps={{ "aria-label": "search" }} />
+          <StyledInput
+            placeholder="Enter Zip Code"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
         </SearchBoxWrapper>
-        <StyledSearchButton variant="contained">Search</StyledSearchButton>
+        <StyledSearchButton variant="contained" onClick={() => dispatch(setSearchTerm(inputValue))}>
+          Search
+        </StyledSearchButton>
       </SearchContainer>
 
-      {/* ✅ Skeleton Loader */}
       {isLoading
         ? Array.from({ length: 3 }).map((_, i) => (
             <StoreButtonBase key={i} selected={false}>
@@ -87,9 +116,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                   <Skeleton variant="text" width={120} height={24} />
                 </StoreLeftGroup>
               </StoreHeader>
-
               <Skeleton variant="text" width="80%" height={20} style={{ marginTop: 8 }} />
-
               <StoreInfoRow>
                 <InfoItem>
                   <Skeleton variant="circular" width={20} height={20} />

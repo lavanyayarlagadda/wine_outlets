@@ -17,10 +17,10 @@ export const useCartOverView = () => {
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const today = new Date().toISOString().split("T")[0];
   const storedId = localStorage.getItem("selectedStore");
-
+  const userId = localStorage.getItem("userId");
   const { data, isLoading, isError } = useCartProductDetailsQuery({
     cartId: 1,
-    userId: 1,
+    userId: Number(userId),
     storeId: Number(storedId) || 0,
   });
   const cartDetails = data?.productListing?.[0];
@@ -42,8 +42,6 @@ export const useCartOverView = () => {
   }, []);
 
   const handleToggleFavorite = async (productId: string) => {
-  
-
     const isAlreadyFavorite = wishlist.includes(productId);
 
     if (isAlreadyFavorite) {
@@ -56,7 +54,7 @@ export const useCartOverView = () => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: 1,
+        userId: Number(userId),
         productId,
         storeId: storedId || undefined,
       }).unwrap();
@@ -73,7 +71,6 @@ export const useCartOverView = () => {
   };
 
   useEffect(() => {
-    console.log("cartDetails", cartDetails);
     if (cartDetails?.products) {
       const initialWishlist = cartDetails.products
         .filter((p: any) => p.isWishList)
@@ -92,7 +89,7 @@ export const useCartOverView = () => {
       const payload = {
         productId,
         quantity: newValue ? newValue : newQuantity,
-        userId: 1,
+        userId: Number(userId),
       };
 
       const response = await addToCart(payload).unwrap();

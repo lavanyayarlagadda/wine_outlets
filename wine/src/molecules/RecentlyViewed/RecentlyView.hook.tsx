@@ -17,13 +17,7 @@ export function useRecentlyViewed<T>({
   initialSlide = 0,
   onSlideChange,
 }: UseRecentlyViewedArgs<T>) {
-  const {
-    counts,
-    add,
-    increment,
-    decrement,
-    isLoading: cartLoading,
-  } = useProductCard({ userId: 1 });
+  const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard();
   const [wishList] = useWishListMutation();
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -35,7 +29,7 @@ export function useRecentlyViewed<T>({
   const [currentSlide, setCurrentSlide] = useState<number>(initialSlide);
 
   const totalSlides = Math.max(1, Math.ceil(items.length / cardsPerSlide));
-
+  const userId = localStorage.getItem("userId");
   const computeIndexFromScroll = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return 0;
@@ -120,7 +114,7 @@ export function useRecentlyViewed<T>({
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: 1,
+        userId: Number(userId),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

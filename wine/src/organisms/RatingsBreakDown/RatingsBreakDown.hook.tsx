@@ -34,13 +34,13 @@ export const useRatingsBreakdown = () => {
   const [comment, setComment] = useState<string>("");
   const [createReview, { isLoading: ReviewLoading, isSuccess, isError: ReviewError }] =
     useCreateReviewMutation();
-
+  const userId = localStorage.getItem("userId");
   const handleSubmit = () => {
     if (rating && comment.trim()) {
       createReview({
         rating,
         comment,
-        userId: 1,
+        userId: Number(userId),
         productId: Number(productId),
       });
     }

@@ -12,7 +12,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
 
   const [addToCart] = useAddtoCartMutation();
   const [wishList] = useWishListMutation();
-
+  const userId = localStorage.getItem("userId");
   const handleAddToCart = async (productId: any) => {
     try {
       setLoadingProduct(productId);
@@ -20,7 +20,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       const payload = {
         productId,
         quantity: newQuantity,
-        userId: 1,
+        userId: Number(userId),
       };
 
       const response = await addToCart(payload).unwrap();
@@ -48,7 +48,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: 1,
+        userId: Number(userId),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

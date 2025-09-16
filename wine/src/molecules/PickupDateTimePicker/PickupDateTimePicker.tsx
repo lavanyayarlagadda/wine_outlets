@@ -118,7 +118,6 @@ const PickupDateTimeSelector: React.FC<PickupDateTimeSelectorProps> = ({
                   disabled={!selectedDate || !selectedTime}
                   onClick={() => {
                     handleCloseDialog();
-                    console.log("Confirmed:", selectedDate, selectedTime);
                   }}
                 >
                   Confirm

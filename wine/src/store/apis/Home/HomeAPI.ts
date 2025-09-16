@@ -9,6 +9,15 @@ export const homeApi = createApi({
   reducerPath: "homeApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_API_URL_BASE,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
 
   endpoints: (builder) => ({
@@ -110,10 +119,17 @@ export const homeApi = createApi({
     }),
 
     storeLocator: builder.query<any, void>({
-      // <ResponseType, ArgType>
       query: () => ({
         url: "/home/store-locator",
         method: "GET",
+      }),
+    }),
+
+    storeSearchlocator: builder.query<any, { location: string }>({
+      query: ({ location }) => ({
+        url: "/home/store-location-search",
+        method: "GET",
+        params: { location },
       }),
     }),
   }),
@@ -128,4 +144,5 @@ export const {
   useGetRecentlyViewedQuery,
   useGetDeliveryPartnersQuery,
   useGetHeaderBannersQuery,
+  useStoreSearchlocatorQuery,
 } = homeApi;

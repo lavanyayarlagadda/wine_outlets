@@ -3,7 +3,6 @@ import { UseProductView } from "./UseProductView.hook";
 
 const ProductImageWrapper: React.FC = () => {
   const { productViewData } = UseProductView();
-  console.log(productViewData, "productViewData");
   if (!productViewData) return null;
   return (
     <ImageGallery

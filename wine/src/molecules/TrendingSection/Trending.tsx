@@ -29,22 +29,7 @@ const Trending = () => {
             onClick={() => {
               navigate(Action || "/");
             }}
-          >
-            {/* <TextContent>
-              <Title variant="h2">{title ?? ""}</Title>
-              <Description variant="body1">{description ?? ""}</Description>
-            </TextContent>
-            <CTAButton
-              endIcon={<ArrowForwardIcon />}
-              disableRipple
-              onClick={() => {
-                navigate(Action || "/");
-                // console.log(Action);
-              }}
-            >
-              {btnText ?? ""}
-            </CTAButton> */}
-          </ContentContainer>
+          ></ContentContainer>
         </LeftSectionBox>
         <RightSectionBox>
           {cards?.map((card, index) => (

@@ -1,5 +1,9 @@
 import { useEffect, useState, useMemo } from "react";
-import { useGetCartCountQuery, useGetDeliveryPartnersQuery, useGetHeaderBannersQuery } from "../../store/apis/Home/HomeAPI";
+import {
+  useGetCartCountQuery,
+  useGetDeliveryPartnersQuery,
+  useGetHeaderBannersQuery,
+} from "../../store/apis/Home/HomeAPI";
 
 type MenuState = {
   [key: string]: boolean;
@@ -28,8 +32,10 @@ export const useNavigation = (
     isError: headerBannerError,
     refetch: refetchHeaderBanners,
   } = useGetHeaderBannersQuery();
+  const userId = localStorage.getItem("userId");
+
   const cartQueryParams = {
-    userId: 1,
+    userId: userId,
     storeId: storedId || undefined,
     userIP: "1",
   };
@@ -57,10 +63,8 @@ export const useNavigation = (
   const [anchorElProfile, setAnchorElProfile] = useState<null | HTMLElement>(null);
   const popup = Boolean(anchorElProfile);
   const [open, setOpen] = useState(false);
-  // Auth states
   const [openLogin, setOpenLogin] = useState(false);
   const [signIn, setSignIn] = useState(false);
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState<AnchorState>(
     menuKeys.reduce((acc, key) => ({ ...acc, [key]: null }), {})
@@ -112,7 +116,6 @@ export const useNavigation = (
   const handleLoginClose = () => {
     setOpenLogin(false);
     setSignIn(false);
-    setIsSubmit(true);
   };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, menu: string) => {
@@ -181,12 +184,9 @@ export const useNavigation = (
     refetchCartCount,
     deliveryPartners,
     deliveryLoading,
-    // auth
     openLogin,
     signIn,
     setSignIn,
-    isSubmit,
-    setIsSubmit,
     handleLoginClose,
     setOpen,
     open,
@@ -194,6 +194,5 @@ export const useNavigation = (
     headerBannerLoading,
     headerBannerError,
     refetchHeaderBanners,
-    // currentBanner: banners[currentIndex],
   };
 };

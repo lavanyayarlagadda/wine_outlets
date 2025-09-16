@@ -44,7 +44,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             return selectedOption ? selectedOption.label : placeholder;
           }}
         >
-          {options.map((option) => (
+          {options?.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>

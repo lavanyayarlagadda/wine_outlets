@@ -14,15 +14,20 @@ import {
 } from "./Newsletter.style";
 import palette from "../../themes/palette";
 import { useHomeLogic } from "../../pages/Home/Home.hook";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const Newsletter: React.FC = () => {
   const theme = useTheme();
-  const { stores } = useHomeLogic();
+  const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
+  const { stores, storesData } = useHomeLogic();
   const { formData, handleInputChange, handleSubscribe, isLoading } = useNewsletter();
-  const preferredStores = stores?.map((store: any) => ({
-    label: store.name,
-    value: store.name.toLowerCase(),
-  }));
+  const preferredStores = searchTerm
+    ? storesData
+    : stores?.map((store: any) => ({
+        label: store.name,
+        value: store.name.toLowerCase(),
+      }));
 
   return (
     <NewsletterContainer>
