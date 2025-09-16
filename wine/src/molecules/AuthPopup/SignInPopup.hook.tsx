@@ -1,6 +1,9 @@
 // src/hooks/signIn.hook.ts
 import { useState } from "react";
 import * as Yup from "yup";
+import { useSignInMutation } from "../../store/apis/Authentication/AuthAPI";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/slices/Auth/AuthSlice";
 
 export interface SignInForm {
   email: string;
@@ -13,6 +16,8 @@ export interface SignInErrors {
 }
 
 export const useSignIn = (onClose: () => void) => {
+  const dispatch = useDispatch();
+  const [signIn] = useSignInMutation();
   const [form, setForm] = useState<SignInForm>({ email: "", password: "" });
   const [errors, setErrors] = useState<SignInErrors>({});
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +27,8 @@ export const useSignIn = (onClose: () => void) => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    //  email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().required("Email is required"),
     password: Yup.string().min(6, "Min 6 characters").required("Password is required"),
   });
 
@@ -48,8 +54,18 @@ export const useSignIn = (onClose: () => void) => {
     e.preventDefault();
     const isValid = await validate();
     if (isValid) {
-      onClose();
-      console.log("Form submitted", form);
+      try {
+        const result = await signIn({
+          username: form.email,
+          password: form.password,
+        }).unwrap();
+        dispatch(setCredentials({ token: result.token, customer: result.customer }));
+        console.log("Signin successful", result);
+        onClose();
+      } catch (error: any) {
+        console.error("Signin failed:", error);
+        setErrors({ email: "Invalid username or password" });
+      }
     }
   };
 

@@ -28,12 +28,20 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose, setIsSubmit }) => {
   return (
     <FormWrapper onSubmit={handleSubmit}>
       <CustomTextField
-        label="Full Name"
-        value={form.fullName}
-        onChange={(val) => handleChange("fullName", val)}
+        label="First Name"
+        value={form.firstName}
+        onChange={(val) => handleChange("firstName", val)}
         startIcon={<PersonIcon />}
         required
-        error={errors.fullName}
+        error={errors.firstName}
+      />
+      <CustomTextField
+        label="Last Name"
+        value={form.lastName}
+        onChange={(val) => handleChange("lastName", val)}
+        startIcon={<PersonIcon />}
+        required
+        error={errors.lastName}
       />
 
       <CustomTextField
