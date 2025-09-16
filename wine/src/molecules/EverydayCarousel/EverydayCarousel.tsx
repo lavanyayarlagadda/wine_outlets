@@ -16,7 +16,7 @@ import {
 } from "./EverydayCarousel.style";
 import type { EverydaySlidesSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { useNavigate } from "react-router-dom";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 
 const WineCarousel: React.FC = () => {
   const { data: sections } = useGetHomeSectionsQuery();

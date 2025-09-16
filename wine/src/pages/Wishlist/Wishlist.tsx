@@ -41,6 +41,7 @@ export default function Wishlist() {
             items.map((p) => (
               <Grid key={p.wishlistId} columns={{ xs: 12, lg: 6 }}>
                 <CartProduct
+                  productId={p.itemID}
                   imageUrl={p.imageUrl || ""}
                   name={p.name}
                   origin={p.origin || ""}
@@ -50,6 +51,8 @@ export default function Wishlist() {
                   unitPrice={{ original: "200", discounted: "300" }}
                   quantity={2}
                   component="WISHLIST"
+                  handleToggleFavorite={()=>{}}
+                  handleAddToCart={()=>{}}
                 />
               </Grid>
             ))

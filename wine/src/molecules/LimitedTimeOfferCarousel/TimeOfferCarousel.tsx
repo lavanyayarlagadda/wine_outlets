@@ -13,7 +13,7 @@ import {
 } from "./TimeOfferCarousel.style";
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import type {
   LimitedTimeOfferSection,
   OfferItem,

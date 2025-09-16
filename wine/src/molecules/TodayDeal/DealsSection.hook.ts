@@ -3,7 +3,7 @@ import type { Product } from "../ProductCard/ProductCard";
 import useProductCard from "../ProductCard/ProductCard.hook";
 import type { DealSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { toast } from "react-toastify";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/homeAPI";
+import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 interface DealFilterBtn {
   id: string;
