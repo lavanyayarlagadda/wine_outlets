@@ -72,6 +72,7 @@ const ProductDetails: React.FC = () => {
     loadingProduct,
     data,
     productId,
+    vintageYearData,
   } = UseProductView();
 
   if (!productViewData) return null;
@@ -82,12 +83,11 @@ const ProductDetails: React.FC = () => {
     value: size,
     label: size,
   }));
-  const vintageOptions = [
-    { label: "2018", value: "2018" },
-    { label: "2017", value: "2017" },
-    { label: "2021", value: "2021" },
-  ];
-
+  const vintageOptions = vintageYearData?.map((size: any) => ({
+    value: size,
+    label: size,
+  }));
+  console.log(vintageYearData, "vintageYearData");
   return (
     <DetailsContainer>
       <ProductTitle>{product.name}</ProductTitle>

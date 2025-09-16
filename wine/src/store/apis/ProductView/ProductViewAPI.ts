@@ -40,6 +40,13 @@ export const productViewApi = createApi({
         },
       }),
     }),
+    vintageYear: builder.mutation<any, any>({
+      query: (newItem) => ({
+        url: `/product-view/vintage-year`,
+        method: "POST",
+        payload: newItem,
+      }),
+    }),
     createReview: builder.mutation<
       any,
       { productId: number; rating: number; userId: number; comment: string }
@@ -58,4 +65,5 @@ export const {
   useBottleSizesQuery,
   useCreateReviewMutation,
   useProductDetailsMutation,
+  useVintageYearMutation,
 } = productViewApi;

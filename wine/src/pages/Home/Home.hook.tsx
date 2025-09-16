@@ -15,7 +15,12 @@ export const useHomeLogic = () => {
     localStorage.setItem("selectedStore", selectedStore.toString());
   }, [selectedStore]);
 
-  const { data, isLoading, isError } = useStoreLocatorQuery();
+  const { data, isLoading, isError } = useStoreLocatorQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
+
   const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
   const stores = data?.stores;
 

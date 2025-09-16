@@ -3,6 +3,7 @@ import type { ProductViewResponse } from "../../constant/productViewData";
 import {
   useBottleSizesQuery,
   useProductDetailsMutation,
+  useVintageYearMutation,
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -25,6 +26,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const [addToCart] = useAddtoCartMutation();
   const [wishList] = useWishListMutation();
+  const [vintageYearData, setVintageYearData] = useState([]);
 
   const [expanded, setExpanded] = useState(true);
   const [productViewData, setProductViewData] = useState<ProductViewResponse | null>(
@@ -32,6 +34,7 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
   );
 
   const { data, isLoading } = useBottleSizesQuery({ productId: Number(productId) });
+  const [vintageYear] = useVintageYearMutation();
 
   const [productDetails, { data: productDetailsData, isLoading: productDetailLoading, isError }] =
     useProductDetailsMutation();
@@ -59,9 +62,28 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     if (productId) {
       fetchDetails();
     }
-  }, [productId, size, vintage]);
+  }, []);
 
-  console.log(productDetailsData, "productDetailsData");
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const result = await vintageYear({
+          itemId: productId,
+        }).unwrap();
+
+        // result is the actual response payload
+        console.log(result, "RESULTDATA");
+        setVintageYearData(result?.vintageYear);
+      } catch (err) {
+        toast.error("Failed to load the vintageYear details");
+      }
+    };
+
+    if (productId) {
+      fetchDetails();
+    }
+  }, []);
+
   const toggleExpand = () => {
     setExpanded((prev) => !prev);
   };
@@ -165,5 +187,6 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     productDetailsData,
     productDetailLoading,
     productId,
+    vintageYearData,
   };
 };
