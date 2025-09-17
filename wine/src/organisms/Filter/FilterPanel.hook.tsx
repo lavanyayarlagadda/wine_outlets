@@ -132,7 +132,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     dispatch(setSelectedNames(updatedNames));
     const currentProductsList = productsData;
     const newProductsList = { ...currentProductsList };
-
     const categoryKeyMap: Record<string, string> = {
       size: "size",
       occasion: "occasion",
@@ -345,8 +344,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
       dispatch(setProductsData(newProductsData));
     }
   }, [categories, selectedCategory, selectedSubName, selectedNestedName, searchParams]);
-
-  console.log(filters, selectedNames, "FILTERS");
   return {
     filters,
     selectedNames,

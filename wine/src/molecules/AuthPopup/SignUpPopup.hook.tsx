@@ -88,7 +88,6 @@ export const useSignUp = (onClose: () => void) => {
         onClose();
         toast.success(result.message || "Customer account created successfully");
       } else {
-        console.log("Form validation failed");
         toast.error("Form validation failed");
       }
     } catch (err: any) {

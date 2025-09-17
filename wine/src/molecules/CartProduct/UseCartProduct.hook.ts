@@ -9,7 +9,6 @@ const useCartProduct = ({ initialQuantity }: UseCartProductParams) => {
 
   const handleQuantityChange = (newQuantity: number) => {
     setCustomQuantity(newQuantity);
-    console.log("Updated Quantity:", newQuantity);
   };
 
   return {

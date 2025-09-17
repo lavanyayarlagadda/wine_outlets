@@ -72,7 +72,6 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
     handleNestedSubSelect,
     selectedNestedSub,
   } = useFilterPanel(categories, onFilterChange);
-  console.log(selectedNestedSub, "setSelectedNestedSub");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   useFilterQuery,
   useProductListMutation,
@@ -45,7 +45,6 @@ export const useProductList = ({
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const urlCategory = queryParams.get("category") || "";
-
   const [sortBy, setSortBy] = useState("relevance");
   const [view, setView] = useState<ViewType>("grid");
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -63,7 +62,6 @@ export const useProductList = ({
   const { data: BannerData, isLoading: BannerLoading, isError } = useBannerQuery();
 
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
-  const [category, setCategory] = useState(urlCategory || "");
 
   const { productsData } = useSelector((store: RootState) => store.productListSlice);
   const dispatch = useDispatch();
@@ -72,19 +70,52 @@ export const useProductList = ({
     { data: ProductListData, isLoading: ProductListLoading, error: productListError },
   ] = useProductListMutation();
 
-  // Memoize productsData to avoid unnecessary API calls
-  const memoProductsData = useMemo(() => {
-    return productsData && Object.keys(productsData).length > 0 ? productsData : {};
-  }, [productsData]);
-
-  const lastPayloadRef = useRef<any>(null);
+  const queryString = queryParams.toString();
 
   useEffect(() => {
-    // Wait until category is defined and valid
-    if (!category || category.trim() === "") return;
+    const payloadFromUrl: Record<string, any> = {};
 
-    const payload: any = {
-      category,
+    queryParams.forEach((value, key) => {
+      // Normalize the key (remove spaces, first word lowercase, rest capitalized)
+      const normalizedKey = key
+        .replace(/\s+/g, "") // remove spaces
+        .replace(/^[A-Z]/, (c) => c.toLowerCase());
+
+      // Handle range-type params (like priceRange, alcoholContentRange)
+      if (normalizedKey.toLowerCase().includes("range")) {
+        const parts = value.split(",");
+        const rangeObj: Record<string, number> = {};
+        parts.forEach((p) => {
+          const [k, v] = p.split(":");
+          if (k && v) {
+            rangeObj[k.trim()] = Number(v.trim());
+          }
+        });
+
+        if (normalizedKey.includes("price")) {
+          payloadFromUrl["price"] = rangeObj;
+        } else if (normalizedKey.includes("alcohol")) {
+          payloadFromUrl["alcoholContent"] = rangeObj;
+        } else {
+          payloadFromUrl[normalizedKey] = rangeObj;
+        }
+      }
+      // Handle comma-separated arrays
+      else if (value.includes(",")) {
+        payloadFromUrl[normalizedKey] = value.split(",").map((v) => v.trim());
+      }
+      // Handle single values
+      else {
+        payloadFromUrl[normalizedKey] = value.trim();
+      }
+    });
+
+    let payload: any = {
+      limit: 20,
+      page: currentPage,
+      sortBy: "relevance",
+      sortOrder: "asc",
+      category: "",
       department: "",
       subDepartment: "",
       size: "",
@@ -97,18 +128,24 @@ export const useProductList = ({
       brand: "",
       vintageYear: "",
       alcoholContent: "",
-      limit: 20,
-      page: currentPage,
-      sort: "relevance",
-      ...memoProductsData,
+      ...payloadFromUrl,
     };
 
-    // Only call API if payload is different from last call
-    if (JSON.stringify(lastPayloadRef.current) !== JSON.stringify(payload)) {
-      productList(payload);
-      lastPayloadRef.current = payload;
+    if (productsData && Object.keys(productsData).length > 0) {
+      payload = { ...payload, ...productsData };
     }
-  }, [category, currentPage, memoProductsData]);
+
+    const cleanedPayload = Object.fromEntries(
+      Object.entries(payload).filter(([key, value]) => {
+        if (value === null || value === undefined) return false;
+        if (Array.isArray(value) && value.length === 0) return false;
+        if (/^\d+$/.test(key)) return false;
+        return true;
+      })
+    );
+
+    productList(cleanedPayload);
+  }, [queryString, currentPage, productsData, productList]);
 
   const [wishList] = useWishListMutation();
 
@@ -124,7 +161,6 @@ export const useProductList = ({
   const totalProducts = ProductListData?.productList?.totalProducts;
   const userId = localStorage.getItem("userId");
   useEffect(() => {
-    setCategory(urlCategory || "");
     setCurrentPage(1);
   }, [urlCategory]);
 
