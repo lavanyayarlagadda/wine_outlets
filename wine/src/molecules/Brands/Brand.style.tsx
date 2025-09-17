@@ -15,3 +15,11 @@ export const ImageWrapper = styled(Box)({
   marginTop: "40px",
   flexWrap: "wrap",
 });
+
+export const BrandImage = styled("img")(({ theme }) => ({
+  width: theme.spacing(25),    
+  height: theme.spacing(25),     
+  objectFit: "cover",
+  borderRadius: theme.shape.borderRadius, 
+  cursor: "pointer",
+}));

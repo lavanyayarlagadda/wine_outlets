@@ -14,14 +14,16 @@ import {
   Dot,
   StyledImage,
 } from "./EverydayCarousel.style";
-import type { EverydaySlidesSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+// import type { EverydaySlidesSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { useNavigate } from "react-router-dom";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
+// import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
+import { SITE_SETTING_DEMO_DATA, type CustomBannerSection } from "../../constant/LandingPageData";
 
 const WineCarousel: React.FC = () => {
-  const { data: sections } = useGetHomeSectionsQuery();
-  const everyDaySection: EverydaySlidesSection = sections?.sections?.everyDaySlides ?? {};
-  const slides = everyDaySection.slides ?? [];
+  // const { data: sections } = useGetHomeSectionsQuery();
+   const everydayCarouselData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "custom-banner-sm-1") as CustomBannerSection;
+  // const everyDaySection: EverydaySlidesSection = sections?.sections?.everyDaySlides ?? {};
+  const slides = everydayCarouselData.content;
   const [currentSlide, setCurrentSlide] = useState(0);
   // const theme = useTheme();
   const navigate = useNavigate();
@@ -30,9 +32,9 @@ const WineCarousel: React.FC = () => {
     <Container>
       <CarouselSlide>
         <StyledImage
-          src={slides[currentSlide].media.url}
+          src={slides[currentSlide].imageUrl}
           onClick={() => {
-            navigate(slides[currentSlide].Action || "/");
+            navigate(`/productsList?tags=${slides[currentSlide]?.tags?.join(',')}`);
           }}
         />
         {/* <ContentSection>

@@ -14,9 +14,10 @@ import {
   StoreLocator,
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
-import AppLoader from "../../atoms/AppLoader/AppLoader";
+// import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import type { HeroBannerSection } from "../../constant/LandingPageData";
 
 const Home = () => {
   const {
@@ -30,16 +31,17 @@ const Home = () => {
     selectedStore,
     stores,
     sections,
-    sectionsLoading,
-    error,
+    // sectionsLoading,
+    // error,
     isLoading,
     storesData,
     searchLoading,
   } = useHomeLogic();
-  const { heroSection } = sections?.sections || {};
+  // const { heroSection } = sections?.sections || {};
+  const heroSection:HeroBannerSection = sections
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
-  if (sectionsLoading) return <AppLoader />;
-  if (error) return <h5> Something Went wrong</h5>;
+  // if (sectionsLoading) return <AppLoader />;
+  // if (error) return <h5> Something Went wrong</h5>;
 
   return (
     <>
@@ -67,7 +69,7 @@ const Home = () => {
       {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}
       <HeroBanner
         setOpen={setOpen}
-        slides={heroSection?.slides}
+        slides={heroSection?.content}
         isVisible={heroSection?.isVisible ?? false}
       />
       {isAgeVerified && <TimeOfferCarousel />}

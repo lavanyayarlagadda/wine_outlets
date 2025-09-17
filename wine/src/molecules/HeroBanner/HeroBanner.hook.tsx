@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+// import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type { BannerImageItem } from "../../constant/LandingPageData";
 
 interface TouchState {
   startX: number;
@@ -13,7 +14,7 @@ export const useHeroBanner = (
   totalSlides: number,
   autoPlayInterval = 5000,
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>,
-  slides?: HeroSlide[]
+  slides?: BannerImageItem[]
 ) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);

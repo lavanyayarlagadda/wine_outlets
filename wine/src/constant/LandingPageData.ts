@@ -4,6 +4,395 @@ import { curated_img1, curated_img2, curated_img3, curated_img4, curated_img5 } 
 import { category_img1, category_img2, category_img3, category_img4 } from "../assets";
 import { deal_img2, deal_img3 } from "../assets";
 import { willow } from "../assets";
+
+const DemoImg = "https://rukminim2.flixcart.com/image/704/844/xif0q/drinks-juice/q/m/n/375-imperium-natural-grape-wine-375ml-glass-bottle-1-rosegold-original-imah7fwvmxdfpdyz.jpeg?q=20&crop=false"
+
+const wineBrandImg = "https://img.favpng.com/16/3/15/swartland-winery-logo-silverboom-special-reserve-merlot-shiraz-2017-rioja-png-favpng-b9mQJFwQWnfJrHqrxnx1DETY1.jpg"
+
+export type LayoutType = 'carousel' | '4-column-grid';
+
+export type SizePreset = 'small' | 'medium' | 'large';
+
+export type DimensionString = `${number}*${number}`;
+
+export interface BannerImageItem {
+	imageUrl: string;
+	tags: string[];
+}
+
+export interface ProductCategoryItem {
+	id: string;
+	title: string;
+	imageUrl: string;
+	tags?: string[];
+	rating: number;
+	price: number;
+	vipPrice: number;
+	origin: string;
+	vintage: string;
+	producer: string;
+}
+
+export interface ProductCategoryListItem {
+	id: string;
+	title: string;
+	imageUrl: string;
+	tags?: string[];
+}
+
+export interface BaseSection {
+	position: number;
+	id: string;
+	layout: LayoutType;
+  isVisible: boolean;
+}
+
+export interface HeroBannerSection extends BaseSection {
+	type: 'hero-banner';
+	title?: string;
+	content: BannerImageItem[];
+}
+
+export interface BannerCollectionSection extends BaseSection {
+	type: 'banner-collection';
+	title: string;
+	subtitle: string;
+	cardSize: SizePreset | DimensionString;
+	content: BannerImageItem[];
+}
+
+export interface ProductCategoryListSection extends BaseSection {
+	type: 'product-category-list';
+	title: string;
+	subtitle: string;
+	content: ProductCategoryListItem[];
+}
+
+export interface CustomBannerSection extends BaseSection {
+	type: 'custom-banner';
+	bannerSize: SizePreset | DimensionString;
+	content: BannerImageItem[];
+}
+
+export interface SideCategoryButton {
+	label: string;
+	tag: string;
+	iconUrl?: string;
+}
+export interface ProductCollectionSection extends BaseSection {
+	type: 'product-collection';
+	title: string;
+	subtitle: string;
+	content: ProductCategoryItem[];
+}
+export interface CustomProductCategorySection extends BaseSection {
+	type: 'product-collection-custom';
+	title: string;
+	subtitle: string;
+	showTimer?: boolean;
+	endTimeIso?: string;
+	sideButtons?: SideCategoryButton[];
+	content: ProductCategoryItem[];
+}
+
+export interface FeaturedBrandSection extends BaseSection {
+	type: 'featured-brand';
+	title: string;
+	content: {
+		imageUrl: string;
+    brandName: string;
+	}[];
+}
+
+export type PageSection =
+	| HeroBannerSection
+	| BannerCollectionSection
+	| ProductCollectionSection
+	| ProductCategoryListSection
+	| CustomBannerSection
+	| CustomProductCategorySection
+	| FeaturedBrandSection;
+
+export interface SiteSettings {
+	pageSections: PageSection[];
+}
+
+export const SITE_SETTING_DEMO_DATA: SiteSettings = {
+	pageSections: [
+		{
+			position: 1,
+			type: 'hero-banner',
+			layout: 'carousel',
+			id: 'hero-1',
+      isVisible: true,
+			content: [
+				{
+					imageUrl: DemoImg,
+					tags: ['newproduct', 'limited-time-offer'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['newproduct', 'limited-time-offer'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['newproduct', 'limited-time-offer'],
+				},
+			],
+		},
+		{
+			position: 2,
+			type: 'banner-collection',
+			layout: 'carousel',
+			id: 'collection-1',
+			title: 'Limited-Time Offers',
+			subtitle: 'Uncork exclusive savings this week.',
+			cardSize: 'medium',
+       isVisible: true,
+			content: [
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine', 'limited-time-offer'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine', 'limited-time-offer'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine', 'limited-time-offer'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine', 'limited-time-offer'],
+				},
+			],
+		},
+		{
+			position: 3,
+			type: 'banner-collection',
+			layout: '4-column-grid',
+			id: 'collection-2',
+			title: 'Limited-Time Offers',
+			subtitle: 'Uncork exclusive savings this week.',
+			cardSize: '400*600',
+      isVisible: true,
+			content: [
+				{
+					imageUrl: DemoImg,
+					tags: ['trending'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['top-seller'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['new-arrival'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['seasonal'],
+				},
+        {
+					imageUrl: DemoImg,
+					tags: ['top-seller'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['new-arrival'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['seasonal'],
+				},
+			],
+		},
+		{
+			position: 4,
+			type: 'product-category-list',
+			layout: 'carousel',
+			id: 'product-category-1',
+			title: 'Shop Our Curated Picks',
+			subtitle: 'Find your favorite by type.',
+       isVisible: true,
+			content: [
+				{
+					id: 'gw-123', // TODO: Removed the id
+					title: 'Limited Edition',
+					imageUrl: DemoImg,
+					tags: ['limited-edition'],
+				},
+				{
+					id: 'gw-123',
+					title: 'Top Sellers',
+					imageUrl: DemoImg,
+					tags: ['top-sellers'],
+				},
+				{
+					id: 'gw-123',
+					imageUrl: DemoImg,
+					title: 'Wine Under $20',
+					tags: ['wine-under-20'],
+				},
+			],
+		},
+		{
+			position: 5,
+			type: 'custom-banner',
+			layout: 'carousel',
+			id: 'custom-banner-sm-1',
+			// NOTE: `bannerSize` We will have 4 sizes: small, medium, large and custom like 400*600
+			bannerSize: 'small',
+       isVisible: true,
+			// backgroundHighlight: true, // TODO: Add this feature
+			content: [
+				{
+					imageUrl: DemoImg,
+					tags: ['everyday-value'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['premium-collection'],
+				},
+			],
+		},
+		{
+			position: 6,
+			type: 'banner-collection',
+			layout: 'carousel',
+			id: 'collection-3',
+			title: 'Shop by Category',
+			subtitle: 'Find your favorite by type.',
+			cardSize: '400*600',
+       isVisible: true,
+			content: [
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine'],
+				},
+				{
+					imageUrl: DemoImg,
+					tags: ['redwine'],
+				},
+			],
+		},
+		{
+			position: 7,
+			id: 'product-collection-custom-1',
+			type: 'product-collection-custom',
+			layout: 'carousel',
+			title: 'Hot Right Now',
+			subtitle: "Deals ending soon — don't miss out",
+			showTimer: true,
+       isVisible: true,
+			endTimeIso: '2025-12-31T23:59:59.000Z',
+			sideButtons: [
+				{ label: 'Trending', tag: 'trending' },
+				{ label: 'Staff Picks', tag: 'staff-picks' },
+				{ label: 'New Arrivals', tag: 'new-arrival' },
+			],
+			content: [
+				{
+					id: 'deal-001',
+					title: 'Reserve Cabernet',
+					imageUrl: 'https://product1.jpg',
+					rating: 4.6,
+					price: 45,
+					vipPrice: 39.99,
+					origin: 'Napa Valley, USA',
+					vintage: '2019',
+					producer: 'Hillside Estate',
+					tags: ['trending'],
+				},
+				{
+					id: 'deal-002',
+					title: 'Classic Pinot Noir',
+					imageUrl: 'https://product1.jpg',
+					rating: 4.4,
+					price: 32,
+					vipPrice: 28.5,
+					origin: 'Willamette Valley, USA',
+					vintage: '2020',
+					producer: 'Red Oak Cellars',
+					tags: ['staff-picks'],
+				},
+			],
+		},
+		{
+			position: 8,
+			id: 'featured-brand-1',
+			title: 'Featured Brands',
+			type: 'featured-brand',
+			layout: 'carousel',
+       isVisible: true,
+			content: [
+				{
+					imageUrl: wineBrandImg,
+          brandName: 'Oak',
+					// TODO: Add the brand name for fetch the api
+				},
+				{
+					imageUrl: wineBrandImg,
+          brandName: 'Dom',
+				},
+				{
+					imageUrl: wineBrandImg,
+          brandName: 'Oak',
+				},
+				{
+					imageUrl: wineBrandImg,
+          brandName: 'Dom',
+				},
+			],
+		},
+		{
+			position: 9,
+			id: 'product-collection-custom-1',
+			type: 'product-collection',
+			layout: 'carousel',
+			title: 'Recently Viewed',
+			subtitle: '',
+       isVisible: true,
+			content: [
+				{
+					id: 'deal-001',
+					title: 'Reserve Cabernet',
+					imageUrl: 'https://product1.jpg',
+					rating: 4.6,
+					price: 45,
+					vipPrice: 39.99,
+					origin: 'Napa Valley, USA',
+					vintage: '2019',
+					producer: 'Hillside Estate',
+					tags: ['trending'],
+				},
+				{
+					id: 'deal-002',
+					title: 'Classic Pinot Noir',
+					imageUrl: 'https://product1.jpg',
+					rating: 4.4,
+					price: 32,
+					vipPrice: 28.5,
+					origin: 'Willamette Valley, USA',
+					vintage: '2020',
+					producer: 'Red Oak Cellars',
+					tags: ['staff-picks'],
+				},
+			],
+		},
+	],
+};
+
+
 export const LandingPageData = {
   heroSection: {
     isVisible: true,

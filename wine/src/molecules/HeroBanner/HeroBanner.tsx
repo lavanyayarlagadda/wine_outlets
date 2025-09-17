@@ -9,8 +9,8 @@ import {
   Dot,
 } from "./HeroBanner.style";
 // import { HeroOverlay } from "../../atoms";
-import { LandingPageData } from "../../constant/LandingPageData";
-import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import { LandingPageData, type BannerImageItem } from "../../constant/LandingPageData";
+// import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 export interface SlideData {
   id: string;
@@ -31,14 +31,14 @@ export interface SlideData {
 }
 
 export interface HeroBannerProps {
-  slides?: HeroSlide[];
+  slides: BannerImageItem[];
   autoPlayInterval?: number;
   height?: string | number;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   isVisible: boolean;
 }
 const HeroBanner = ({
-  slides = LandingPageData.heroSection.slides,
+  slides,
   autoPlayInterval = 5000,
   setOpen,
   isVisible,
@@ -54,12 +54,11 @@ const HeroBanner = ({
     // firstBtnAction,
     // secondBtnAction,
     // handleTagClick,
-  } = useHeroBanner(slides.length, autoPlayInterval, setOpen, slides);
+  } = useHeroBanner(slides?.length || 0, autoPlayInterval, setOpen, slides);
 
   // const currentSlideData = slides[currentSlide];
 
-  if (!isVisible) return null;
-
+  if (!isVisible || !slides) return null;
   return (
     <HeroBannerContainer
       ref={containerRef}
@@ -69,12 +68,13 @@ const HeroBanner = ({
     >
       {slides.map((slide, index) => (
         <SlideContainer
-          key={slide.id}
+          // key={slide.id}
+          key={index}
           isActive={index === currentSlide}
-          onClick={() => navigate(slide?.Action || "/")}
+          onClick={() => navigate(`/productsList?tags=${slide?.tags?.join(',')}` || "/")}
         >
           <SlideBackground
-            backgroundImage={slide.backgroundMedia?.url ?? ""}
+            backgroundImage={slide.imageUrl ?? ""}
             role="img"
             // aria-label={slide.title}
           />

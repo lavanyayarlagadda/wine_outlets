@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import {
-  useGetHomeSectionsQuery,
+  // useGetHomeSectionsQuery,
   useStoreLocatorQuery,
   useStoreSearchlocatorQuery,
 } from "../../store/apis/Home/HomeAPI";
@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { skipToken } from "@reduxjs/toolkit/query";
 import type { RootState } from "../../store";
+import { SITE_SETTING_DEMO_DATA, type HeroBannerSection } from "../../constant/LandingPageData";
+
 
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
@@ -28,7 +30,9 @@ export const useHomeLogic = () => {
     refetchOnReconnect: true,
   });
 
-  const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
+  // const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
+  // const heroSection = SITE_SETTING_DEMO_DATA.pageSections.find(s => s.type === 'hero-banner') as HeroBannerSection | undefined;
+  const sections = SITE_SETTING_DEMO_DATA.pageSections.find(s => s.type === 'hero-banner') as HeroBannerSection;
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
   const {
     data: searchData,
@@ -84,8 +88,8 @@ export const useHomeLogic = () => {
     selectedStore,
     setSelectedStore,
     sections,
-    error,
-    sectionsLoading,
+    // error,
+    // sectionsLoading,
     searchLoading,
     storesData,
   };

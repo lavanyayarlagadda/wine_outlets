@@ -13,9 +13,9 @@ export const Container = styled(Box)(({ theme }) => ({
   },
 }));
 export const Wrapper = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "space-between",
-  gap: "40px",
+  // display: "flex",
+  // justifyContent: "space-between",
+  // gap: "40px",
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     alignItems: "center",
@@ -116,19 +116,19 @@ export const CTAButton = styled(Button)({
 });
 
 export const RightSectionBox = styled(Box)(({ theme }) => ({
-  width: "70%",
+  width: "100%",
   display: "grid",
-  gridTemplateColumns: "repeat(2,1fr)",
-  gap: "40px",
+  gridTemplateColumns: "repeat(4,1fr)",
+  gap: theme.spacing(2.5),
   [theme.breakpoints.down("md")]: {
     width: "100%",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    gap: "24px",
+    gap: theme.spacing(3),
     "& > *": {
       flex: "1 1 100%",
-      maxWidth: "300px",
+      maxWidth: theme.spacing(36),
     },
   },
 }));
