@@ -8,6 +8,7 @@ import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
+import { useFontSize } from "../../themes/fontSize";
 
 export const PageContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -15,6 +16,10 @@ export const PageContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(4),
   background: theme.palette.background.default,
   minHeight: "100%",
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 export const Sidebar = styled(Paper)(({ theme }) => ({
@@ -81,17 +86,18 @@ export const OrderIdChip = styled(Chip)(({ theme }) => ({
   fontWeight: theme.typography.fontWeightMedium,
   backgroundColor: theme.palette.white?.[400] ?? theme.palette.background.paper,
   color: theme.palette.warning.light,
+  fontSize: useFontSize(16),
 }));
 
 export const DateText = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.body2.fontSize,
+  fontSize: useFontSize(16),
   color: theme.palette.black?.[800] ?? theme.palette.text.primary,
   marginLeft: theme.spacing(1),
 }));
 
 export const PriceTag = styled(Typography)(({ theme }) => ({
+  fontSize: useFontSize(16),
   fontWeight: theme.typography.fontWeightMedium,
-  fontSize: theme.typography.h6.fontSize,
   color: theme.palette.warning.light,
 }));
 
@@ -107,6 +113,11 @@ export const OrderBodyRow = styled(Box)(({ theme }) => ({
   padding: `${theme.spacing(2)} 0`,
   borderBottom: `1px solid ${theme.palette.divider}`,
   alignItems: "center",
+
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 export const ProductImage = styled(Box)(({ theme }) => ({
@@ -117,6 +128,12 @@ export const ProductImage = styled(Box)(({ theme }) => ({
   background: theme.palette.background.paper,
   boxShadow: theme.shadows[1],
   border: `1px solid ${theme.palette.success.main}`,
+    [theme.breakpoints.down("sm")]: {
+    display:"flex",
+    flexDirection:"column",
+    
+
+  },
 }));
 
 export const ProductImageImg = styled("img")(() => ({
@@ -131,6 +148,11 @@ export const ProductInfoGrid = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   gap: theme.spacing(3),
   flex: 1,
+  [theme.breakpoints.down("md")]: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+  },
 }));
 
 export const ItemCol = styled(Box)(({ theme }) => ({
@@ -139,6 +161,11 @@ export const ItemCol = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+    display: "flex",
+    alignItems: "flex-start",
+  },
 }));
 
 export const ItemColRight = styled(ItemCol)(() => ({
@@ -150,17 +177,39 @@ export const ProductTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.body2.fontSize,
 }));
 
+export const LeftContent = styled(Box)(({theme}) => ({
+ display:"flex",
+ flexDirection:"column",
+ gap:8,
+   [theme.breakpoints.down("sm")]: {
+  
+    display: "flex",
+    flexDirection:"column",
+    alignItems: "flex-start",
+  },
+}));
+
 export const ActionRow = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1.5),
   alignItems: "center",
   justifyContent: "space-between",
   marginTop: theme.spacing(2),
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
 }));
 
 export const LeftActions = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
 }));
 
 export const RightAction = styled(Box)(({ theme }) => ({
@@ -215,6 +264,11 @@ export const ItemRow = styled(Box)(({ theme }) => ({
   alignItems: "center",
   padding: `${theme.spacing(1.5)} 0`,
   borderBottom: `1px solid ${theme.palette.divider}`,
+    [theme.breakpoints.down("sm")]: {
+    display:"flex",
+    flexDirection:"column",
+
+  },
 }));
 
 export const ItemDetails = styled(Box)(({ theme }) => ({
@@ -222,6 +276,12 @@ export const ItemDetails = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
   alignItems: "center",
   flex: 1,
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    
+  },
 }));
 
 export const ItemRight = styled(Box)(({ theme }) => ({
@@ -231,6 +291,11 @@ export const ItemRight = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
   minWidth: 160,
   fontSize: theme.typography.body2.fontSize,
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirecion: "column",
+    alignItems:"flex-start"
+  },
 }));
 
 export const ItemPrice = styled("span")(({ theme }) => ({
@@ -256,6 +321,11 @@ export const OrderFooter = styled(Box)(({ theme }) => ({
   justifyContent: "flex-start",
   gap: theme.spacing(2),
   padding: `${theme.spacing(1.5)} 0 0 0`,
+    [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirecion: "column",
+    alignItems:"flex-start"
+  },
 }));
 export const ReorderButton = styled(PrimaryButton)(({ theme }) => ({
   color: theme.palette.primary.dark,

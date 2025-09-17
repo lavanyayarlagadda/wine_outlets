@@ -19,6 +19,7 @@ import {
   GreyOutlineBtn,
   OrderFooter,
   RedOutlineBtn,
+  LeftContent,
 } from "../../pages/MyOrders/MyOrders.style";
 import { InfoItem } from "../../organisms/ProductView/ProductDetails";
 import { InfoIcon } from "../ProductListCard/ProductListCard.style";
@@ -58,21 +59,23 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
                   <ProductImageImg src={item.imageUrl} alt={item.name} />
                 </ProductImage>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {/* <div style={{ display: "flex", flexDirection: "column", gap: 8 }}> */}
+                <LeftContent>
                   <ProductTitle>{item.name}</ProductTitle>
 
-                  <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                    <InfoItem
-                      icon={<InfoIcon src={sizeIcon} alt="size" />}
-                      label="Size:"
-                      value={item.size ?? "—"}
-                    />
-                  </div>
+                  {/* <div style={{ display: "flex", gap: 12, alignItems: "center" }}> */}
+                  <InfoItem
+                    icon={<InfoIcon src={sizeIcon} alt="size" />}
+                    label="Size:"
+                    value={item.size ?? "—"}
+                  />
+                  {/* </div> */}
 
                   <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>
                     Add Review
                   </GreyOutlineBtn>
-                </div>
+                </LeftContent>
+                {/* </div> */}
               </ItemDetails>
 
               <ItemRight>
