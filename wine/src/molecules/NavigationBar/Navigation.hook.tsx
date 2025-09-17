@@ -32,8 +32,8 @@ export const useNavigation = (
     isError: headerBannerError,
     refetch: refetchHeaderBanners,
   } = useGetHeaderBannersQuery();
-  const userId = localStorage.getItem("userId");
-
+  const userIdString = localStorage.getItem("userId");
+  const userId = userIdString ? Number(userIdString) : undefined;
   const cartQueryParams = {
     userId: userId,
     storeId: storedId || undefined,
@@ -71,6 +71,35 @@ export const useNavigation = (
   );
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  const mockData = [
+    "Merlot",
+    "Chardonnay",
+    "Cabernet Sauvignon",
+    "Pinot Noir",
+    "Sauvignon Blanc",
+    "Syrah",
+    "Merlot123",
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    setQuery(input);
+
+    if (input.length > 0) {
+      const filtered = mockData.filter((item) => item.toLowerCase().includes(input.toLowerCase()));
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSelectSuggestion = (suggestion: string) => {
+    setQuery(suggestion);
+    setSuggestions([]);
+  };
 
   const currentBanner = (bannersToUse && bannersToUse[currentIndex]) ?? {
     id: -1,
@@ -194,5 +223,12 @@ export const useNavigation = (
     headerBannerLoading,
     headerBannerError,
     refetchHeaderBanners,
+    handleChange,
+    handleSelectSuggestion,
+    mockData,
+    query,
+    setQuery,
+    suggestions,
+    setSuggestions,
   };
 };

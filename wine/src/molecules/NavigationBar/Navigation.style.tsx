@@ -10,11 +10,13 @@ import {
   AppBar,
   Drawer,
   ListItemIcon,
+  ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
+import { useFontSize } from "../../themes/fontSize";
 
 // 🔴 Top Bar
 export const TopBar = styled(Box)(({ theme }) => ({
@@ -470,4 +472,54 @@ export const SpecialsItem = styled(Typography)(() => ({
   fontWeight: 500,
   marginBottom: 6,
   cursor: "pointer",
+}));
+
+export const SuggestionsContainer = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: "75px",
+  marging: "auto",
+  zIndex: 10,
+  maxHeight: "200px",
+  overflowY: "auto",
+  minWidth: "400px",
+  border: "none",
+  backgroundColor: "transparent",
+  boxShadow: theme.shadows[2],
+  fontSize: useFontSize(12),
+
+  // Tablet styles
+  [theme.breakpoints.down("lg")]: {
+    top: "65px",
+    minWidth: "300px",
+  },
+  // Mobile styles
+  [theme.breakpoints.down("md")]: {
+    // top:"100px"
+    top: "50px",
+    minWidth: "265px",
+  },
+  // Small mobile styles
+  [theme.breakpoints.down("sm")]: {
+    top: "100px",
+    left: "0px",
+     minWidth: "290px",
+  },
+}));
+
+export const HighlightedText = styled("span")(({ theme }) => ({
+  color: theme.palette.junk.main,
+  fontWeight: "bold",
+}));
+export const StyledSuggestionItem = styled(ListItemButton)(({ theme }) => ({
+  border: "none",
+  textAlign: "left",
+  padding: "8px 16px",
+  width: "100%",
+  justifyContent: "flex-start",
+  color: theme.palette.text.primary,
+  backgroundColor: theme.palette.background.default,
+  fontSize: useFontSize(12),
+  "&:hover": {
+    backgroundColor: palette.white.light, 
+  },
 }));

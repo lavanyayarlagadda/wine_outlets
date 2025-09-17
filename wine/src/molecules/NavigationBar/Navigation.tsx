@@ -34,9 +34,12 @@ import {
   Column,
   DropdownMenuItemStyled,
   ViewMoreText,
+  SuggestionsContainer,
+  HighlightedText,
+  StyledSuggestionItem,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
-import { Badge } from "@mui/material";
+import { Badge, List, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
@@ -82,6 +85,12 @@ const Navigation = () => {
     cartCount,
     deliveryPartners,
     deliveryLoading,
+    query,
+
+    suggestions,
+
+    handleChange,
+    handleSelectSuggestion,
   } = useNavigation(searchTerm ? storesData : stores, menuKeys, 2000);
 
   const navigate = useNavigate();
@@ -232,8 +241,43 @@ const Navigation = () => {
               <StyledInput
                 placeholder="Search wines, brands, or regions"
                 inputProps={{ "aria-label": "search" }}
+                onChange={handleChange}
+                value={query}
               />
             </SearchBox>
+
+            {suggestions.length > 0 && (
+              <SuggestionsContainer>
+                <List>
+                  {suggestions.map((suggestion, index) => {
+                    const matchIndex = suggestion.toLowerCase().indexOf(query.toLowerCase());
+
+                    const beforeMatch = suggestion.slice(0, matchIndex);
+                    const matchedText = suggestion.slice(matchIndex, matchIndex + query.length);
+                    const afterMatch = suggestion.slice(matchIndex + query.length);
+
+                    return (
+                      <StyledSuggestionItem
+                        key={index}
+                        onClick={() => handleSelectSuggestion(suggestion)}
+                      >
+                        <Typography>
+                          {matchIndex === -1 ? (
+                            suggestion
+                          ) : (
+                            <>
+                              {beforeMatch}
+                              <HighlightedText>{matchedText}</HighlightedText>
+                              {afterMatch}
+                            </>
+                          )}
+                        </Typography>
+                      </StyledSuggestionItem>
+                    );
+                  })}
+                </List>
+              </SuggestionsContainer>
+            )}
 
             <DropdownTriggerWithIconMargin
               sx={{
@@ -326,6 +370,8 @@ const Navigation = () => {
             <StyledInput
               placeholder="Search wines, brands, or regions"
               inputProps={{ "aria-label": "search" }}
+                onChange={handleChange}
+                value={query}
             />
           </SearchBox>
 
