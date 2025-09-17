@@ -16,7 +16,7 @@ interface PeopleProps {
 
 const PeopleBought: React.FC<PeopleProps> = ({ suggestedProducts }) => {
   const {
-    handleAddToCart,
+    handleAddAllToCart,
     handleToggleFavorite,
     currentProducts,
     wishlist,
@@ -37,7 +37,7 @@ const PeopleBought: React.FC<PeopleProps> = ({ suggestedProducts }) => {
               key={product.id}
               product={{ ...product, id: String(product.id) }}
               showDivider={index < currentProducts.length - 1}
-              onAddToCart={() => handleAddToCart(product.id)}
+              // onAddToCart={() => handleAddToCart(product.id)}
               onToggleFavorite={() => handleToggleFavorite(product.id)}
               isFavorite={wishlist.includes(product.id)}
               wishListLoading={wishListLoading}
@@ -51,6 +51,8 @@ const PeopleBought: React.FC<PeopleProps> = ({ suggestedProducts }) => {
         <SummaryCard
           totalVipPrice={suggestedProducts?.productDetails?.totalViPPrice}
           totalPrice={suggestedProducts?.productDetails?.totalPrice}
+          onAddToCart={handleAddAllToCart}
+          isLoading={loadingProduct}
         />
       </ProductsContainer>
     </PeopleBoughtWrapper>

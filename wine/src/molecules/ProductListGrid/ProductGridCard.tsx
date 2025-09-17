@@ -41,7 +41,7 @@ export interface Product {
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (id: number | string) => void;
+  onAddToCart?: (id: number | string) => void;
   onToggleFavorite: (id: number | string) => void;
   isFavorite: boolean;
   isLoading?: string | null;
@@ -114,7 +114,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
           {product.vipPrice && <VIPPriceText>VIP: ${product.vipPrice.toFixed(2)}</VIPPriceText>}
           <PriceText>${product.price.toFixed(2)}</PriceText>
         </PriceRow>
-        {!noAddtoCart && (
+        {!noAddtoCart && onAddToCart && (
           <AddToCartButton
             onClick={() => onAddToCart(product.id)}
             startIcon={isLoading?.toString() === product.id ? null : <ShoppingCart />}

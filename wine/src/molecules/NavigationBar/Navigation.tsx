@@ -370,8 +370,8 @@ const Navigation = () => {
             <StyledInput
               placeholder="Search wines, brands, or regions"
               inputProps={{ "aria-label": "search" }}
-                onChange={handleChange}
-                value={query}
+              onChange={handleChange}
+              value={query}
             />
           </SearchBox>
 

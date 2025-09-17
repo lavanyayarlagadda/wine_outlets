@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../../constant/dealProduct";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { toast } from "react-toastify";
@@ -6,28 +6,36 @@ import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI
 
 export const usePeopleBought = (initialProducts: Product[]) => {
   const [wishlist, setWishlist] = useState<string[]>([]);
-  const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
+  const [cartItems, setCartItems] = useState<{ productId: number; quantity: number }[]>([]);
   const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
 
   const [addToCart] = useAddtoCartMutation();
   const [wishList] = useWishListMutation();
+
   const userId = localStorage.getItem("userId");
-  const handleAddToCart = async (productId: any) => {
+  const storedId = localStorage.getItem("selectedStore");
+
+  // always keep one entry per product with quantity = 1
+  useEffect(() => {
+    if (initialProducts?.length) {
+      const items = initialProducts.map((p) => ({
+        productId: Number(p.id),
+        quantity: 1,
+      }));
+      setCartItems(items);
+    }
+  }, [initialProducts]);
+
+  const handleAddAllToCart = async () => {
     try {
-      setLoadingProduct(productId);
-      const newQuantity = (cartItems[productId] || 0) + 1;
-      const payload = {
-        productId,
-        quantity: newQuantity,
+      setLoadingProduct("all");
+      const payload = cartItems.map((item) => ({
+        ...item,
         userId: Number(userId),
-      };
+      }));
 
       const response = await addToCart(payload).unwrap();
-      setCartItems((prev) => ({
-        ...prev,
-        [productId]: newQuantity,
-      }));
       toast.success(response.cartResponse);
     } catch (err) {
       toast.error("Failed to add to cart");
@@ -35,7 +43,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       setLoadingProduct(null);
     }
   };
-  const storedId = localStorage.getItem("selectedStore");
+
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId);
     if (isAlreadyFavorite) {
@@ -63,10 +71,11 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       setWishListLoading(null);
     }
   };
+
   return {
     wishlist,
     cartItems,
-    handleAddToCart,
+    handleAddAllToCart,
     handleToggleFavorite,
     currentProducts: initialProducts,
     loadingProduct,

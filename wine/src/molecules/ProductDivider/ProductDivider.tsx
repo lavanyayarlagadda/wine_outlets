@@ -5,7 +5,7 @@ import { CustomPlus } from "../../atoms";
 interface Props {
   product: any;
   showDivider: boolean;
-  onAddToCart: () => void;
+  onAddToCart?: () => void;
   onToggleFavorite: () => void;
   isFavorite: boolean;
   isLoading?: string | null;
@@ -25,7 +25,7 @@ const ProductWithDivider: React.FC<Props> = ({
     <>
       <ProductGridCard
         product={product}
-        onAddToCart={onAddToCart}
+        onAddToCart={onAddToCart && onAddToCart}
         onToggleFavorite={onToggleFavorite}
         isFavorite={isFavorite}
         isLoading={isLoading}

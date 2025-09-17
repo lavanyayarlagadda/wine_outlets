@@ -10,11 +10,13 @@ export const useProductCard = () => {
   const callApi = useCallback(
     async (productId: string | number, quantity: number) => {
       try {
-        const payload = {
-          productId: Number(productId),
-          quantity: Number(quantity),
-          userId: Number(userId),
-        };
+        const payload = [
+          {
+            productId: Number(productId),
+            quantity: Number(quantity),
+            userId: Number(userId),
+          },
+        ];
         const res = await addToCartMutation(payload).unwrap();
         toast.success("Added to Cart");
         return res;

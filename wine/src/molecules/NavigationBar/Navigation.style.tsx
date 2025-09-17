@@ -502,7 +502,7 @@ export const SuggestionsContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     top: "100px",
     left: "0px",
-     minWidth: "290px",
+    minWidth: "290px",
   },
 }));
 
@@ -520,6 +520,6 @@ export const StyledSuggestionItem = styled(ListItemButton)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   fontSize: useFontSize(12),
   "&:hover": {
-    backgroundColor: palette.white.light, 
+    backgroundColor: palette.white.light,
   },
 }));

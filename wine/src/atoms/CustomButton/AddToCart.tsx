@@ -4,7 +4,7 @@ import { AddToCartButton } from "./CustomButton.style";
 import { AddToCartLoader } from "../../molecules/ProductListGrid/ProductGridCard.style";
 
 interface AddToCartProps {
-  onClick: (id: number) => void;
+  onClick: (id?: number) => void;
   label?: string;
   variantType?: "filled" | "outlined";
   id?: number;
@@ -12,23 +12,20 @@ interface AddToCartProps {
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({ onClick, label, variantType, isLoading, id }) => {
+  // Check loading state
+  const isButtonLoading =
+    (isLoading != null && id != null && isLoading.toString() === id.toString()) ||
+    isLoading === "all";
+
   return (
     <AddToCartButton
       variant="contained"
-      startIcon={
-        isLoading != null && id != null && isLoading.toString() === id.toString() ? null : (
-          <ShoppingCartIcon />
-        )
-      }
-      disabled={isLoading != null && id != null && isLoading.toString() === id.toString()}
-      onClick={() => onClick(Number(id))} // <-- FIXED
+      startIcon={!isButtonLoading ? <ShoppingCartIcon /> : null}
+      disabled={isButtonLoading}
+      onClick={() => id !== undefined && onClick(id)}
       variantType={variantType}
     >
-      {isLoading != null && id != null && isLoading.toString() === id.toString() ? (
-        <AddToCartLoader />
-      ) : (
-        label
-      )}
+      {isButtonLoading ? <AddToCartLoader /> : label}
     </AddToCartButton>
   );
 };

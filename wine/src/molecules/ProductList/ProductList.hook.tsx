@@ -144,11 +144,13 @@ export const useProductList = ({
     try {
       setLoadingProduct(productId);
       const newQuantity = (cartItems[productId] || 0) + 1;
-      const payload = {
-        productId,
-        quantity: newQuantity,
-        userId: Number(userId),
-      };
+      const payload = [
+        {
+          productId,
+          quantity: newQuantity,
+          userId: Number(userId),
+        },
+      ];
 
       const response = await addToCart(payload).unwrap();
       setCartItems((prev) => ({
