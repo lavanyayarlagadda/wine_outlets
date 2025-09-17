@@ -36,6 +36,7 @@ const ProfileInformation = ({ initialData }: { initialData?: any }) => {
               onChange={(val) => handleChange("firstName", val)}
               required
               error={errors.firstName}
+              
             />
           </HalfField>
           <HalfField>

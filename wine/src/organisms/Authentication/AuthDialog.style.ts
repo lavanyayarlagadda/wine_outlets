@@ -48,6 +48,7 @@ export const TabFields = styled(Box)(() => ({
 
 export const HalfField = styled(Box)(() => ({
   flex: 1,
+  width:"100%"
 }));
 
 export const SwitchText = styled(Typography)(() => ({
