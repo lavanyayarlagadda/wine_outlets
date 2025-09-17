@@ -8,7 +8,7 @@ import BreadcrumbHeader from "../Breadcrumbs/BreadCrumbsHeader";
 import FilterTagList from "../FilterTag/FilterTagList";
 import SortAndViewControls from "../SortAndView/SortAndViewControl";
 
-import { useProductList } from "./ProductList.hook";
+import type { ProductListHookReturn } from "./ProductList.hook";
 
 import {
   LayoutContainer,
@@ -26,29 +26,49 @@ import { setSelectedNames } from "../../store/slices/ProductList/productListSlic
 import { StyledSkeletonRect } from "../../organisms/Filter/FilterPanel.style";
 import { NoDataText } from "../../organisms/CartOverview/CartOverview.style";
 
-const ProductList = () => {
-  const {
-    sortBy,
-    view,
-    setView,
-    wishlist,
-    currentPage,
-    topRef,
-    currentProducts,
-    totalPages,
-    productsPerRow,
-    handleAddToCart,
-    handleToggleFavorite,
-    handlePageChange,
-    data,
-    isLoading,
-    loadingProduct,
-    ProductListLoading,
-    wishListLoading,
-    totalProducts,
-    handleSortChange,
-  } = useProductList();
+interface ProductListProps {
+  sortBy: ProductListHookReturn["sortBy"];
+  view: ProductListHookReturn["view"];
+  setView: ProductListHookReturn["setView"];
+  wishlist: ProductListHookReturn["wishlist"];
+  currentPage: ProductListHookReturn["currentPage"];
+  topRef: ProductListHookReturn["topRef"];
+  currentProducts: ProductListHookReturn["currentProducts"];
+  totalPages: ProductListHookReturn["totalPages"];
+  productsPerRow: ProductListHookReturn["productsPerRow"];
+  handleAddToCart: ProductListHookReturn["handleAddToCart"];
+  handleToggleFavorite: ProductListHookReturn["handleToggleFavorite"];
+  handlePageChange: ProductListHookReturn["handlePageChange"];
+  data: ProductListHookReturn["data"];
+  isLoading: ProductListHookReturn["isLoading"];
+  loadingProduct: ProductListHookReturn["loadingProduct"];
+  ProductListLoading: ProductListHookReturn["ProductListLoading"];
+  wishListLoading: ProductListHookReturn["wishListLoading"];
+  totalProducts: ProductListHookReturn["totalProducts"];
+  handleSortChange: ProductListHookReturn["handleSortChange"];
+}
 
+const ProductList: React.FC<ProductListProps> = ({
+  sortBy,
+  view,
+  setView,
+  wishlist,
+  currentPage,
+  topRef,
+  currentProducts,
+  totalPages,
+  productsPerRow,
+  handleAddToCart,
+  handleToggleFavorite,
+  handlePageChange,
+  data,
+  isLoading,
+  loadingProduct,
+  ProductListLoading,
+  wishListLoading,
+  totalProducts,
+  handleSortChange,
+}) => {
   const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
 
   const dispatch = useDispatch();
