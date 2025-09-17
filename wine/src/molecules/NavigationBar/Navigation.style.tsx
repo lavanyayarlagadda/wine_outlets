@@ -502,7 +502,7 @@ export const SuggestionsContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     top: "100px",
     left: "0px",
-    minWidth: "290px",
+    minWidth: "480px",
   },
 }));
 

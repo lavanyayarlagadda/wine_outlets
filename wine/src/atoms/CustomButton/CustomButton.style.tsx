@@ -48,9 +48,9 @@ export const StyledButton = styled(Button)<{
 
 export const ButtonText = styled(Typography)(({ theme }) => ({
   fontWeight: "500",
-  fontSize: `${theme?.typography?.body2}px !important`,
+  fontSize: useFontSize(15),
   [theme.breakpoints.down("md")]: {
-    fontSize: "13px",
+    // fontSize: "13px",
   },
 }));
 
@@ -69,6 +69,7 @@ export const IconWrapper = styled(Box)<{ border: string; color: string; bgcolor:
     height: "28px",
     marginLeft: "8px",
     border: border ? `1px solid ${border}` : "",
+ 
   })
 );
 

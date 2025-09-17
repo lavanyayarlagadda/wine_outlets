@@ -4,9 +4,12 @@ import shape from "../../themes/shape";
 import { PasswordFields as OriginalPasswordFields } from "../../organisms/Authentication/AuthDialog.style";
 import palette from "../../themes/palette";
 
-export const Container = styled(Box)(() => ({
+export const Container = styled(Box)(({ theme }) => ({
   paddingLeft: "48px",
   paddingRight: "48px",
+  [theme.breakpoints.down("sm")]: {
+    padding: 0,
+  },
 }));
 
 export const HeaderBox = styled(Box)(() => ({
@@ -45,11 +48,16 @@ export const InfoText = styled(Typography)(({ theme }) => ({
     marginTop: "35px",
   },
 }));
-export const TextBox = styled(Box)({
+export const TextBox = styled(Box)(({ theme }) => ({
   flex: 1, // take remaining space beside the button
   display: "flex",
   justifyContent: "space-between",
-});
+  alignItems: "flex-start",
+  [theme.breakpoints.down("sm")]: {
+    display:"flex",
+    flexDirection:"column"
+  },
+}));
 
 export const VIPContainer = styled(Box)(({ theme }) => ({
   display: "flex",
