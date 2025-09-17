@@ -59,6 +59,7 @@ export const useSignIn = (onClose: () => void) => {
           username: form.email,
           password: form.password,
         }).unwrap();
+        localStorage.setItem("token", result.token);
         dispatch(setCredentials({ token: result.token, customer: result.customer }));
         onClose();
       } catch (error: any) {

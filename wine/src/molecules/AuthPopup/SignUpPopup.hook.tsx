@@ -77,9 +77,7 @@ export const useSignUp = (onClose: () => void) => {
           confirmPwd: form.confirmPassword,
           vipCustomerId: form.vipId,
         }).unwrap();
-
-        console.log("Signup Successful", result);
-
+        localStorage.setItem("token", result.token);
         dispatch(
           setCredentials({
             token: result.token,
