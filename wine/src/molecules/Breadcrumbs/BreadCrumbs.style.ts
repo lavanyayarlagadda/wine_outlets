@@ -2,16 +2,19 @@
 import { styled } from "@mui/material/styles";
 import { Breadcrumbs as MUIBreadcrumbs, Link, Typography, Box } from "@mui/material";
 import palette from "../../themes/palette";
+import { useFontSize } from "../../themes/fontSize";
 
 // Wrapper for the breadcrumbs container
 export const BreadcrumbsWrapper = styled(MUIBreadcrumbs)(({ theme }) => ({
   padding: theme.spacing(2),
+  fontSize:useFontSize(16)
 }));
 
 // Last breadcrumb (active one)
 export const ActiveCrumb = styled(Typography)(() => ({
   color: palette.primary.dark,
   fontWeight: 500,
+  fontSize:useFontSize(16)
 }));
 
 // Link style for clickable breadcrumbs

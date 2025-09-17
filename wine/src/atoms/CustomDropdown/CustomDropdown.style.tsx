@@ -1,6 +1,7 @@
 import { Box, FormControl, Typography, styled } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
+import { useFontSize } from "../../themes/fontSize";
 
 export const StyledFormControl = styled(FormControl)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
@@ -42,7 +43,7 @@ export const StyledLabel = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "side", // prevent side from being passed to DOM
 })<{ side?: boolean }>(({ side }) => ({
   color: palette.grey.main,
-  fontSize: 14,
+  fontSize: useFontSize(14),
   fontWeight: 400,
   marginBottom: side ? 0 : 8,
   whiteSpace: side ? "nowrap" : "normal",

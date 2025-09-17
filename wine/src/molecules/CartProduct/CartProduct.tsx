@@ -114,6 +114,7 @@ const CartProduct: React.FC<CartProductProps> = ({
       <ProductImage src={imageUrl} alt={name} />
 
       <ProductInfoRow>
+        
         <ProductTitle>{name}</ProductTitle>
 
         <IconRow>

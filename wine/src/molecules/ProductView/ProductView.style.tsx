@@ -112,6 +112,7 @@ export const ProductInfoRow = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: theme.spacing(0.5),
+    
   },
 }));
 
@@ -140,7 +141,9 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
   border: shape.borderRed,
   backgroundColor: theme.palette.primary.light,
   [theme.breakpoints.down("sm")]: {
-    padding: "0 4px",
+    // padding: "0 4px",
+    FontWeight: 400,
+    padding: 0,
   },
 }));
 
@@ -276,6 +279,7 @@ export const DetailsTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   marginBottom: theme.spacing(1.5),
   color: theme.palette.text.primary,
+  fontSize: useFontSize(16),
 }));
 
 export const DetailRow = styled(Box)(({ theme }) => ({
@@ -290,6 +294,7 @@ export const DetailLabel = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
   color: theme.palette.text.primary,
   minWidth: 100, // keeps labels aligned
+  fontSize: useFontSize(16),
 }));
 
 export const DetailValue = styled(Typography)(({ theme }) => ({
@@ -313,6 +318,22 @@ export const InfoIcon = styled("img")(({ theme }) => ({
   height: 18,
   objectFit: "contain",
   marginRight: theme.spacing(1),
+
+  // Tablet styles
+  [theme.breakpoints.down("lg")]: {
+    width: 18,
+    height: 18,
+  },
+  // Mobile styles
+  [theme.breakpoints.down("md")]: {
+    width: 16,
+    height: 16,
+  },
+  // Small mobile styles
+  [theme.breakpoints.down("sm")]: {
+    width: 16,
+    height: 16,
+  },
 }));
 
 export const RatingHeader = styled(Box)(({ theme }) => ({
@@ -328,7 +349,7 @@ export const RatingTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-export const RatingBadge = styled(Box)(() => ({
+export const RatingBadge = styled(Box)(({ theme }) => ({
   border: shape.borderRed2px,
   borderRadius: "50%",
   width: 36,
@@ -338,6 +359,10 @@ export const RatingBadge = styled(Box)(() => ({
   alignItems: "center",
   fontWeight: 600,
   //   color: theme.palette.error.main,
+  [theme.breakpoints.down("md")]: {
+    width: 30,
+    height: 30,
+  },
 }));
 
 export const RatingText = styled(Typography)(({ theme }) => ({

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
+import { useFontSize } from "../../themes/fontSize";
 
 // Main Card
 export const StyledCard = styled(Card)(({ theme }) => ({
@@ -109,9 +110,10 @@ export const StyledCardContent = styled(CardContent)(({ theme }) => ({
 
 // Product Name
 export const ProductTitle = styled(Typography)(() => ({
-  fontWeight: 700,
+  fontWeight: 600,
   marginTop: 8,
   marginBottom: 4,
+  fontSize:useFontSize(16)
 }));
 
 // Info Row

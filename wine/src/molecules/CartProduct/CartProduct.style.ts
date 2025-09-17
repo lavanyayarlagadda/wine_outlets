@@ -87,12 +87,14 @@ export const ProductInfoRow = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: theme.spacing(0.5),
-
-    "& > *": {
-      marginLeft: 0,
+    gap: theme.spacing(1),
+    marginLeft: "0px",
+    "& > *:nth-of-type(odd)": {
+      justifyContent: "flex-start",
       textAlign: "left",
+      marginLeft: "auto",
     },
+
   },
 }));
 
@@ -118,6 +120,10 @@ export const InfoIcon = styled("img")(({ theme }) => ({
   height: 18,
   objectFit: "contain",
   marginRight: theme.spacing(1),
+  [theme.breakpoints.down("md")]: {
+    width: 16,
+    height: 16,
+  },
 }));
 
 export const IconRow = styled(Box)(({ theme }) => ({
@@ -134,12 +140,17 @@ export const BackspaceIcon = styled(IconButton, {
   border: selected ? shape.borderRed : shape.borderSuccess,
   borderRadius: shape.borderRadiuspx,
   marginLeft: "8px",
+   padding: "6px",
   transition: "all 0.2s ease-in-out",
   color: selected ? theme.palette.primary.dark : theme.palette.text.primary,
   "&:hover": {
     backgroundColor: theme.palette.white[400],
   },
+   [theme.breakpoints.down("md")]: {
+    padding: "4px",
+  },
 }));
+
 
 export const PricingBox = styled(Box, {
   shouldForwardProp: (prop) => prop !== "componentType",
@@ -187,11 +198,11 @@ export const WishlistPriceAndCartContainer = styled(Box)(() => ({
 }));
 
 export const ItemSubPrice = styled(Typography)(({ theme }) => ({
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(15),
   color: theme.palette.text.primary,
 }));
 export const ItemPrice = styled("span")(({ theme }) => ({
   fontWeight: theme.typography.fontWeightMedium,
-  fontSize: useFontSize(14),
+  fontSize: useFontSize(15),
   color: theme.palette.warning.light,
 }));
