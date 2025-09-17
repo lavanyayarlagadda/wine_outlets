@@ -324,7 +324,7 @@ export const OrderFooter = styled(Box)(({ theme }) => ({
     [theme.breakpoints.down("sm")]: {
     display: "flex",
     flexDirecion: "column",
-    alignItems:"flex-start"
+    alignItems:"center"
   },
 }));
 export const ReorderButton = styled(PrimaryButton)(({ theme }) => ({

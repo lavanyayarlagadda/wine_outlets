@@ -1,5 +1,4 @@
 // src/components/molecules/PastOrderCard/PastOrderCard.tsx
-import React from "react";
 import {
   OrderCard,
   OrderHeader,
@@ -8,18 +7,18 @@ import {
   DateText,
   PriceTag,
   OrderBody,
-  ItemRow,
   ProductImage,
   ProductImageImg,
-  ItemDetails,
   ProductTitle,
-  ItemRight,
   ItemPrice,
   ItemSubPrice,
   GreyOutlineBtn,
   OrderFooter,
   RedOutlineBtn,
-  LeftContent,
+  OrderBodyRow,
+  ProductInfoGrid,
+  ItemCol,
+  ItemColRight,
 } from "../../pages/MyOrders/MyOrders.style";
 import { InfoItem } from "../../organisms/ProductView/ProductDetails";
 import { InfoIcon } from "../ProductListCard/ProductListCard.style";
@@ -53,57 +52,54 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
         {order.items.map((item) => {
           const subtotal = item.price * item.quantity;
           return (
-            <ItemRow key={item.productId}>
-              <ItemDetails>
-                <ProductImage>
-                  <ProductImageImg src={item.imageUrl} alt={item.name} />
-                </ProductImage>
+            <OrderBody key={item.productId}>
+              {/* <ItemDetails> */}
+                <OrderBodyRow>
+                  <ProductImage>
+                    <ProductImageImg src={item.imageUrl} alt={item.name} />
+                  </ProductImage>
 
-                {/* <div style={{ display: "flex", flexDirection: "column", gap: 8 }}> */}
-                <LeftContent>
-                  <ProductTitle>{item.name}</ProductTitle>
+                  <ProductInfoGrid>
+                    <ItemCol>
+                      <ProductTitle>{item.name}</ProductTitle>
+                      <InfoItem
+                        icon={<InfoIcon src={sizeIcon} alt="size" />}
+                        label="Size:"
+                        value={item.size ?? "—"}
+                      />
+                      <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>
+                        Add Review
+                      </GreyOutlineBtn>
+                    </ItemCol>
 
-                  {/* <div style={{ display: "flex", gap: 12, alignItems: "center" }}> */}
-                  <InfoItem
-                    icon={<InfoIcon src={sizeIcon} alt="size" />}
-                    label="Size:"
-                    value={item.size ?? "—"}
-                  />
-                  {/* </div> */}
-
-                  <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>
-                    Add Review
-                  </GreyOutlineBtn>
-                </LeftContent>
-                {/* </div> */}
-              </ItemDetails>
-
-              <ItemRight>
-                <div style={{ display: "flex", gap: 12, alignItems: "center", color: "#b00020" }}>
-                  <InfoIcon src={starIcon} alt="qty" />
-                  <div>Qty: {item.quantity}</div>
-                </div>
-
-                <div style={{ display: "flex", gap: 12, alignItems: "center", color: "#b00020" }}>
-                  <InfoIcon src={calendarRed} alt="year" />
-                  <div>Year: {item.year ?? "—"}</div>
-                </div>
-
-                <div style={{ height: 8 }} />
-
-                <ItemSubPrice>
-                  {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-                    item.price
-                  )}{" "}
-                  Each x 2 ={" "}
-                  <ItemPrice>
-                    {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-                      subtotal
-                    )}
-                  </ItemPrice>
-                </ItemSubPrice>
-              </ItemRight>
-            </ItemRow>
+                    <ItemColRight>
+                      <InfoItem
+                        icon={<InfoIcon src={starIcon} alt="qty" />}
+                        label="Qty:"
+                        value={item.quantity ?? "—"}
+                      />
+                      <InfoItem
+                        label="Year:"
+                        icon={<InfoIcon src={calendarRed} alt="brand" />}
+                        value={item.year ?? "—"}
+                      />
+                      <ItemSubPrice>
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(item.price)}{" "}
+                        Each x 2 ={" "}
+                        <ItemPrice>
+                          {new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }).format(subtotal)}
+                        </ItemPrice>
+                      </ItemSubPrice>
+                    </ItemColRight>
+                  </ProductInfoGrid>
+                </OrderBodyRow>
+            </OrderBody>
           );
         })}
 
