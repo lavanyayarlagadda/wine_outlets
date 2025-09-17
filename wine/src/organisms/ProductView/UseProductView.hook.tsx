@@ -97,11 +97,13 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
         setLoadingProduct(productId);
       }
       const newQuantity = (cartItems[productId] || 0) + 1;
-      const payload = {
-        productId,
-        quantity: newValue ? newValue : newQuantity,
-        userId: Number(userId),
-      };
+      const payload = [
+        {
+          productId,
+          quantity: newValue ? newValue : newQuantity,
+          userId: Number(userId),
+        },
+      ];
 
       const response = await addToCart(payload).unwrap();
       setCartItems((prev) => ({

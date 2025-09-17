@@ -6,9 +6,11 @@ import { SummaryCardWrapper, StockText, PriceContainer, StyledDivider } from "./
 interface Props {
   totalVipPrice: number;
   totalPrice: number;
+  onAddToCart?: () => void;
+  isLoading?: string | null;
 }
 
-const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
+const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice, onAddToCart, isLoading }) => {
   return (
     <SummaryCardWrapper>
       <StockText variant="body2">In Stock</StockText>
@@ -18,11 +20,14 @@ const SummaryCard: React.FC<Props> = ({ totalVipPrice, totalPrice }) => {
         <StyledDivider orientation="vertical" flexItem />
         <PriceText>${totalPrice?.toFixed(2)}</PriceText>
       </PriceContainer>
-
       <AddToCart
-        onClick={() => console.log("Added to cart")}
+        onClick={() => {
+          onAddToCart?.();
+        }}
+        id={0} // pass dummy id since your AddToCart requires it
         label="Add to Cart"
         variantType="filled"
+        isLoading={isLoading}
       />
     </SummaryCardWrapper>
   );
