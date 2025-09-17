@@ -5,6 +5,7 @@ import { useSignUpMutation } from "../../store/apis/Authentication/AuthAPI";
 import { useDispatch } from "react-redux";
 import type { SignUpResponse } from "../../store/Interfaces/AuthInterface/AuthIterface";
 import { setCredentials } from "../../store/slices/Auth/AuthSlice";
+import { toast } from "react-toastify";
 
 export interface SignUpForm {
   firstName: string;
@@ -84,10 +85,11 @@ export const useSignUp = (onClose: () => void) => {
             customer: result,
           })
         );
-
         onClose();
+        toast.success(result.message || "Customer account created successfully");
       } else {
         console.log("Form validation failed");
+        toast.error("Form validation failed");
       }
     } catch (err: any) {
       console.error("Unexpected error in handleSubmit:", err);

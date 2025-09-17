@@ -79,3 +79,13 @@ export const SubmitButton = styled(Button)(() => ({
     backgroundColor: palette.primary.main,
   },
 }));
+
+export const ResponsiveNameFields = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(2),
+
+  [theme.breakpoints.up("md")]: {
+    flexDirection: "row",
+  },
+}));

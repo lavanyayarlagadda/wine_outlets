@@ -12,6 +12,7 @@ import {
   SubmitButton,
   SwitchText,
   SwitchLink,
+  ResponsiveNameFields,
 } from "../../organisms/Authentication/AuthDialog.style";
 import { useSignUp } from "./SignUpPopup.hook";
 
@@ -26,23 +27,24 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
 
   return (
     <FormWrapper component="form" onSubmit={handleSubmit}>
-      <CustomTextField
-        label="First Name"
-        value={form.firstName}
-        onChange={(val) => handleChange("firstName", val)}
-        startIcon={<PersonIcon />}
-        required
-        error={errors.firstName}
-      />
-      <CustomTextField
-        label="Last Name"
-        value={form.lastName}
-        onChange={(val) => handleChange("lastName", val)}
-        startIcon={<PersonIcon />}
-        required
-        error={errors.lastName}
-      />
-
+      <ResponsiveNameFields>
+        <CustomTextField
+          label="First Name"
+          value={form.firstName}
+          onChange={(val) => handleChange("firstName", val)}
+          startIcon={<PersonIcon />}
+          required
+          error={errors.firstName}
+        />
+        <CustomTextField
+          label="Last Name"
+          value={form.lastName}
+          onChange={(val) => handleChange("lastName", val)}
+          startIcon={<PersonIcon />}
+          required
+          error={errors.lastName}
+        />
+      </ResponsiveNameFields>
       <CustomTextField
         label="Email"
         value={form.email}
