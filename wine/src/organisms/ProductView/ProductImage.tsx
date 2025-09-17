@@ -1,8 +1,9 @@
 import ImageGallery from "../../molecules/ProductView/ProductImage";
-import { UseProductView } from "./UseProductView.hook";
 
-const ProductImageWrapper: React.FC = () => {
-  const { productViewData } = UseProductView();
+interface ProductProps {
+  productViewData: any;
+}
+const ProductImageWrapper: React.FC<ProductProps> = ({ productViewData }) => {
   if (!productViewData) return null;
   return (
     <ImageGallery

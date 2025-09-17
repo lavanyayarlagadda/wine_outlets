@@ -8,7 +8,7 @@ import {
   StyledThumbnailList,
   StyledThumbnailMedia,
 } from "./ProductView.style";
-import { UseProductView } from "./UseProductView.hook";
+import { useProductView } from "./UseProductView.hook";
 
 interface ImageGalleryProps {
   images: { url: string }[]; // generic array of images
@@ -20,7 +20,7 @@ interface ImageGalleryProps {
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images, initialIndex = 0, onImageChange }) => {
-  const { selectedIndex, selectedImage, handleSelect } = UseProductView(
+  const { selectedIndex, selectedImage, handleSelect } = useProductView(
     images,
     initialIndex,
     onImageChange

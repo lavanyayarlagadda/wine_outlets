@@ -113,7 +113,7 @@ export const ProductTitle = styled(Typography)(() => ({
   fontWeight: 600,
   marginTop: 8,
   marginBottom: 4,
-  fontSize:useFontSize(16)
+  fontSize: useFontSize(16),
 }));
 
 // Info Row

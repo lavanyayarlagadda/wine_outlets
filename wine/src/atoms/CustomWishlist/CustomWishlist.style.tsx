@@ -10,7 +10,7 @@ export const CustomWishlistButton = styled(IconButton, {
   border: selected ? shape.borderRed : shape.borderSuccess,
   borderRadius: shape.borderRadiuspx,
   marginLeft: "8px",
-  padding:"6px",
+  padding: "6px",
   transition: "all 0.2s ease-in-out",
   color: selected ? theme.palette.primary.dark : theme.palette.text.primary,
   "&:hover": {
@@ -18,7 +18,7 @@ export const CustomWishlistButton = styled(IconButton, {
   },
   [theme.breakpoints.down("md")]: {
     padding: "4px",
-    marginLeft:"0"
+    marginLeft: "0",
   },
 }));
 

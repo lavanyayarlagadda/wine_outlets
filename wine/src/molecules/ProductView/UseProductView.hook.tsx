@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const UseProductView = (
+export const useProductView = (
   images: { url: string }[],
   initialIndex: number = 0,
   onImageChange?: (_index: number, _image: string) => void

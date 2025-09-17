@@ -3,7 +3,7 @@ import ProductViewBreadCrumbs from "../../organisms/ProductView/ProductViewBread
 import Product from "../../organisms/ProductView/Product";
 import ProfessionalRating from "../../organisms/ProductView/ProfessionalRating";
 import RatingsBreakdown from "../../organisms/RatingsBreakDown/RatingsBreakDown";
-import { UseProductView } from "../../organisms/ProductView/UseProductView.hook";
+import { useProductView } from "../../organisms/ProductView/UseProductView.hook";
 import {
   BreadcrumbSkeleton,
   ButtonSkeleton,
@@ -16,7 +16,26 @@ import {
 } from "./ProductViewPage.style";
 
 const ProductViewPage = () => {
-  const { productDetailLoading } = UseProductView();
+  const {
+    productDetailLoading,
+    productViewData,
+    expanded,
+    toggleExpand,
+    productDetailsData,
+    selectedSize,
+    setSelectedSize,
+    selectedVintage,
+    setSelectedVintage,
+    count,
+    setCount,
+    handleAddToCart,
+    handleToggleFavorite,
+    wishListLoading,
+    loadingProduct,
+    data,
+    productId,
+    vintageYearData,
+  } = useProductView();
   return (
     <>
       {productDetailLoading ? (
@@ -34,8 +53,28 @@ const ProductViewPage = () => {
       ) : (
         <>
           <ProductViewBreadCrumbs />
-          <Product />
-          <ProfessionalRating />
+          <Product
+            productViewData={productViewData}
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+            selectedVintage={selectedVintage}
+            setSelectedVintage={setSelectedVintage}
+            count={count}
+            setCount={setCount}
+            handleAddToCart={handleAddToCart}
+            handleToggleFavorite={handleToggleFavorite}
+            wishListLoading={wishListLoading}
+            loadingProduct={loadingProduct}
+            data={data}
+            productId={productId}
+            vintageYearData={vintageYearData}
+          />
+          <ProfessionalRating
+            expanded={expanded}
+            toggleExpand={toggleExpand}
+            productDetailsData={productDetailsData}
+            productDetailLoading={productDetailLoading}
+          />
         </>
       )}
 

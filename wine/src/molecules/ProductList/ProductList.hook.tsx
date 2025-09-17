@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   useFilterQuery,
   useProductListMutation,
@@ -71,9 +71,20 @@ export const useProductList = ({
     productList,
     { data: ProductListData, isLoading: ProductListLoading, error: productListError },
   ] = useProductListMutation();
+
+  // Memoize productsData to avoid unnecessary API calls
+  const memoProductsData = useMemo(() => {
+    return productsData && Object.keys(productsData).length > 0 ? productsData : {};
+  }, [productsData]);
+
+  const lastPayloadRef = useRef<any>(null);
+
   useEffect(() => {
-    let payload: any = {
-      category: category,
+    // Wait until category is defined and valid
+    if (!category || category.trim() === "") return;
+
+    const payload: any = {
+      category,
       department: "",
       subDepartment: "",
       size: "",
@@ -89,14 +100,15 @@ export const useProductList = ({
       limit: 20,
       page: currentPage,
       sort: "relevance",
+      ...memoProductsData,
     };
 
-    if (productsData && Object.keys(productsData).length > 0) {
-      payload = { ...payload, ...productsData };
+    // Only call API if payload is different from last call
+    if (JSON.stringify(lastPayloadRef.current) !== JSON.stringify(payload)) {
+      productList(payload);
+      lastPayloadRef.current = payload;
     }
-
-    productList(payload);
-  }, [category, currentPage, productsData, productList]);
+  }, [category, currentPage, memoProductsData]);
 
   const [wishList] = useWishListMutation();
 
@@ -250,3 +262,4 @@ export const useProductList = ({
     handleSortChange,
   };
 };
+export type ProductListHookReturn = ReturnType<typeof useProductList>;

@@ -14,7 +14,7 @@ interface ProductDetailsProps {
   initialData?: ProductViewResponse;
 }
 
-export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
+export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get("productId") || "";
@@ -189,3 +189,4 @@ export const UseProductView = ({ initialData }: ProductDetailsProps = {}) => {
     vintageYearData,
   };
 };
+export type ProductViewHookReturn = ReturnType<typeof useProductView>;

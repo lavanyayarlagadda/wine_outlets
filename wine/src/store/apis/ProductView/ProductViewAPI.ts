@@ -36,7 +36,7 @@ export const productViewApi = createApi({
       query: (newItem) => ({
         url: `/product-view/product-details`,
         method: "POST",
-        payload: newItem,
+        body: newItem,
       }),
     }),
 
@@ -53,7 +53,7 @@ export const productViewApi = createApi({
       query: (newItem) => ({
         url: `/product-view/vintage-year`,
         method: "POST",
-        payload: newItem,
+        body: newItem,
       }),
     }),
     createReview: builder.mutation<

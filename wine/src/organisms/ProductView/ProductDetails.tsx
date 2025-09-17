@@ -25,7 +25,7 @@ import {
 } from "../../molecules/ProductView/ProductView.style";
 import ProductHighlights from "../../molecules/ProductView/ProductHighlights";
 import palette from "../../themes/palette";
-import { UseProductView } from "./UseProductView.hook";
+import type { ProductViewHookReturn } from "./UseProductView.hook";
 
 interface InfoItemProps {
   icon?: React.ReactNode;
@@ -57,24 +57,39 @@ export const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
   </RatingBox>
 );
 
-const ProductDetails: React.FC = () => {
-  const {
-    productViewData,
-    selectedSize,
-    setSelectedSize,
-    selectedVintage,
-    setSelectedVintage,
-    count,
-    setCount,
-    handleAddToCart,
-    handleToggleFavorite,
-    wishListLoading,
-    loadingProduct,
-    data,
-    productId,
-    vintageYearData,
-  } = UseProductView();
+interface ProductDetailsProps {
+  productViewData: ProductViewHookReturn["productViewData"];
+  selectedSize: ProductViewHookReturn["selectedSize"];
+  setSelectedSize: ProductViewHookReturn["setSelectedSize"];
+  selectedVintage: ProductViewHookReturn["selectedVintage"];
+  setSelectedVintage: ProductViewHookReturn["setSelectedVintage"];
+  count: ProductViewHookReturn["count"];
+  setCount: ProductViewHookReturn["setCount"];
+  handleAddToCart: ProductViewHookReturn["handleAddToCart"];
+  handleToggleFavorite: ProductViewHookReturn["handleToggleFavorite"];
+  loadingProduct: ProductViewHookReturn["loadingProduct"];
+  wishListLoading: ProductViewHookReturn["wishListLoading"];
+  vintageYearData: ProductViewHookReturn["vintageYearData"];
+  data: ProductViewHookReturn["data"];
+  productId: ProductViewHookReturn["productId"];
+}
 
+const ProductDetails: React.FC<ProductDetailsProps> = ({
+  productViewData,
+  selectedSize,
+  setSelectedSize,
+  selectedVintage,
+  setSelectedVintage,
+  count,
+  setCount,
+  handleAddToCart,
+  handleToggleFavorite,
+  wishListLoading,
+  loadingProduct,
+  data,
+  productId,
+  vintageYearData,
+}) => {
   if (!productViewData) return null;
 
   const { product } = productViewData;

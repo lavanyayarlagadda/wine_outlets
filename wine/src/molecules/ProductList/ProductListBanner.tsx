@@ -1,5 +1,4 @@
 import React from "react";
-import { useTheme } from "@mui/material";
 import {
   Container,
   CarouselSlide,
@@ -10,13 +9,22 @@ import {
   Dot,
 } from "../EverydayCarousel/EverydayCarousel.style";
 import { CustomButton } from "../../atoms";
-import { useProductList } from "./ProductList.hook";
 import palette from "../../themes/palette";
+import type { ProductListHookReturn } from "./ProductList.hook";
 
-const ProductListBanner: React.FC = () => {
-  const theme = useTheme();
-  const { currentSlide, slides, goToSlide, current } = useProductList();
+interface ProductListBannerProps {
+  currentSlide: ProductListHookReturn["currentSlide"];
+  slides: ProductListHookReturn["slides"];
+  goToSlide: ProductListHookReturn["goToSlide"];
+  current: ProductListHookReturn["current"];
+}
 
+const ProductListBanner: React.FC<ProductListBannerProps> = ({
+  currentSlide,
+  slides,
+  goToSlide,
+  current,
+}) => {
   return (
     <Container backgroundColor={palette.white.main} padding="20px 20px">
       <CarouselSlide bgImage={current?.media?.url}>
@@ -27,11 +35,11 @@ const ProductListBanner: React.FC = () => {
         {current?.action && (
           <CustomButton
             text={current?.action.label}
-            bgColor={theme.palette.white.main}
+            bgColor={palette.white.main}
             onClick={() => (window.location.href = current?.action.url)}
             color={palette.primary.dark}
             border={palette.primary.dark}
-            btnColor={theme.palette.white.main}
+            btnColor={palette.white.main}
             btnbgColor={palette.primary.dark}
           />
         )}

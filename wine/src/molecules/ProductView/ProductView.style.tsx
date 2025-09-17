@@ -112,7 +112,6 @@ export const ProductInfoRow = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: theme.spacing(0.5),
-    
   },
 }));
 

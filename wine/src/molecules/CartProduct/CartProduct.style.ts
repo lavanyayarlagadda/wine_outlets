@@ -94,7 +94,6 @@ export const ProductInfoRow = styled(Box)(({ theme }) => ({
       textAlign: "left",
       marginLeft: "auto",
     },
-
   },
 }));
 
@@ -140,17 +139,16 @@ export const BackspaceIcon = styled(IconButton, {
   border: selected ? shape.borderRed : shape.borderSuccess,
   borderRadius: shape.borderRadiuspx,
   marginLeft: "8px",
-   padding: "6px",
+  padding: "6px",
   transition: "all 0.2s ease-in-out",
   color: selected ? theme.palette.primary.dark : theme.palette.text.primary,
   "&:hover": {
     backgroundColor: theme.palette.white[400],
   },
-   [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("md")]: {
     padding: "4px",
   },
 }));
-
 
 export const PricingBox = styled(Box, {
   shouldForwardProp: (prop) => prop !== "componentType",
