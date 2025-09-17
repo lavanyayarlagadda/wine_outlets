@@ -69,7 +69,6 @@ export const IconWrapper = styled(Box)<{ border: string; color: string; bgcolor:
     height: "28px",
     marginLeft: "8px",
     border: border ? `1px solid ${border}` : "",
- 
   })
 );
 

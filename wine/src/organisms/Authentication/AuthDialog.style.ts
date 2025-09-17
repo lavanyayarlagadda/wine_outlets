@@ -33,13 +33,13 @@ export const StyledButton = styled(Button, {
   paddingLeft: profile ? "12px" : undefined, // boxShadow: active ? "0px 2px 4px rgba(0,0,0,0.1)" : "none",
 }));
 
-export const PasswordFields = styled(Box)(({theme}) => ({
+export const PasswordFields = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: "16px",
   width: "100%",
-   [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("md")]: {
     flexDirection: "column",
-     alignItems: "flex-start",
+    alignItems: "flex-start",
   },
 }));
 export const TabFields = styled(Box)(() => ({
@@ -48,7 +48,7 @@ export const TabFields = styled(Box)(() => ({
 
 export const HalfField = styled(Box)(() => ({
   flex: 1,
-  width:"100%"
+  width: "100%",
 }));
 
 export const SwitchText = styled(Typography)(() => ({

@@ -54,8 +54,8 @@ export const TextBox = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "flex-start",
   [theme.breakpoints.down("sm")]: {
-    display:"flex",
-    flexDirection:"column"
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 

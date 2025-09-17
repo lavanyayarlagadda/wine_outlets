@@ -11,7 +11,8 @@ export interface Filters {
 export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Filters) => void) => {
   const [searchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category");
-  const selectedId = searchParams.get("id");
+  const selectedSubName = searchParams.get("subName");
+  const selectedNestedName = searchParams.get("nestedName");
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
   const [selectedNestedSub, setSelectedNestedSub] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({});
@@ -20,8 +21,30 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const { selectedNames, productsData } = useSelector((state: RootState) => state.productListSlice);
   const dispatch = useDispatch();
 
-  const handleNestedSubSelect = (id: string) => {
-    setSelectedNestedSub(id === selectedNestedSub ? null : id);
+  const handleNestedSubSelect = (
+    nested: { categoryId: string; categoryName: string },
+    parentSubId: string
+  ) => {
+    const isSelected = selectedNestedSub === nested.categoryId;
+    const newNestedId = isSelected ? null : nested.categoryId;
+    setSelectedNestedSub(newNestedId);
+
+    // ✅ Update filters for this nested category under parent sub
+    setFilters((prev) => {
+      const parentFilters = prev[parentSubId] || [];
+      const updated = isSelected
+        ? parentFilters.filter((id: string) => id !== nested.categoryId)
+        : [...parentFilters, nested.categoryId];
+      return { ...prev, [parentSubId]: updated };
+    });
+
+    let updatedNames: string[];
+    if (isSelected) {
+      updatedNames = selectedNames.filter((name) => name !== nested.categoryName);
+    } else {
+      updatedNames = [...selectedNames, nested.categoryName];
+    }
+    dispatch(setSelectedNames(updatedNames));
   };
 
   const handleSubSelect = (sub: {
@@ -189,66 +212,141 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   }, [selectedNames]);
   useEffect(() => {
     if (categories.length === 0) return;
+    if (selectedCategory) {
+      let subFound = false;
 
-    const params = new URLSearchParams(window.location.search);
-    const subCategoryId = params.get("subCategoryId");
+      for (const cat of categories) {
+        for (const sub of cat.subCategories || []) {
+          // Match the subCategory first
+          if (!subFound && selectedSubName) {
+            const selectedItem = sub.categoryList?.find(
+              (item: any) =>
+                item.listName.toLowerCase().replace(/\s+/g, "") ===
+                selectedSubName.toLowerCase().replace(/\s+/g, "")
+            );
 
-    let subFound = false;
+            if (selectedItem) {
+              setFilters({ [sub.categoryId]: [selectedItem.listId] });
+              const displayName = selectedItem.count
+                ? `${selectedItem.listName} (${selectedItem.count})`
+                : selectedItem.listName;
+              dispatch(setSelectedNames([displayName]));
+              setSelectedSub(sub.categoryId);
+              subFound = true;
 
-    for (const cat of categories) {
-      for (const sub of cat.subCategories || []) {
-        if (!subFound && selectedId) {
-          const selectedItem = sub.categoryList?.find((item: any) => item.listId === selectedId);
-          if (selectedItem) {
-            setFilters({ [sub.categoryId]: [selectedItem.listId] });
-            const displayName = `${selectedItem.listName} (${selectedItem.count ?? 0})`;
+              // ✅ Check for nested category
+              if (selectedNestedName && selectedItem.categories?.length > 0) {
+                const nestedItem = selectedItem.categories.find(
+                  (nested: any) =>
+                    nested.categoryName.toLowerCase().replace(/\s+/g, "") ===
+                    selectedNestedName.toLowerCase().replace(/\s+/g, "")
+                );
+                if (nestedItem) {
+                  setSelectedNestedSub(nestedItem.categoryId);
+
+                  // ✅ Update filters for parent sub to include nested id
+                  setFilters((prev) => ({
+                    ...prev,
+                    [sub.categoryId]: [...(prev[sub.categoryId] || []), nestedItem.categoryId],
+                  }));
+
+                  const updatedNames = [...selectedNames, nestedItem.categoryName];
+                  dispatch(setSelectedNames(updatedNames));
+                }
+              }
+
+              break;
+            }
+          }
+
+          // Existing category/sub fallback logic
+          if (
+            !subFound &&
+            selectedCategory &&
+            sub.categoryName.toLowerCase() === selectedCategory.toLowerCase()
+          ) {
+            setFilters({ [cat.categoryId]: [sub.categoryId] });
+            const displayName = `${sub.categoryName} (${sub.categoryCount ?? 0})`;
             dispatch(setSelectedNames([displayName]));
-
             setSelectedSub(sub.categoryId);
             subFound = true;
             break;
           }
         }
-        if (!subFound && subCategoryId && sub.categoryId === subCategoryId) {
-          const count = Number(sub.categoryCount ?? 0);
-
-          setSelectedSub(sub.categoryId);
-          dispatch(setSelectedNames([`${sub.categoryName} (${count})`]));
-          subFound = true;
-          break;
-        }
 
         if (
           !subFound &&
           selectedCategory &&
-          sub.categoryName.toLowerCase() === selectedCategory.toLowerCase()
+          cat.categoryName.toLowerCase() === selectedCategory.toLowerCase()
         ) {
-          setFilters({ [cat.categoryId]: [sub.categoryId] });
-
-          const displayName = `${sub.categoryName} (${sub.categoryCount ?? 0})`;
-          dispatch(setSelectedNames([displayName]));
-
-          setSelectedSub(sub.categoryId);
+          setFilters({ [cat.categoryId]: [cat.categoryId] });
+          dispatch(setSelectedNames([cat.categoryName]));
           subFound = true;
-          break;
         }
+
+        if (subFound) break;
       }
+    } else if (!selectedCategory) {
+      // ✅ Now handle URL filters
+      const urlFilters: Filters = {};
+      const urlSelectedNames: string[] = [];
+      const newProductsData: any = { ...productsData };
 
-      if (
-        !subFound &&
-        selectedCategory &&
-        cat.categoryName.toLowerCase() === selectedCategory.toLowerCase()
-      ) {
-        setFilters({ [cat.categoryId]: [cat.categoryId] });
+      searchParams.forEach((value, key) => {
+        if (!value) return;
+        const values = value.split(",").map((v) => decodeURIComponent(v.trim()));
 
-        dispatch(setSelectedNames([cat.categoryName]));
-        subFound = true;
-      }
+        // Match category by name (case-insensitive)
+        const matchedCategory = categories.find(
+          (cat) => cat.categoryName.toLowerCase() === key.toLowerCase()
+        );
+        if (!matchedCategory) return;
 
-      if (subFound) break;
+        const categoryId = matchedCategory.categoryId;
+
+        // ✅ Handle range filters
+        const isRange = values.some((v) => v.includes("min:") || v.includes("max:"));
+
+        if (isRange) {
+          let minValue: string | undefined;
+          let maxValue: string | undefined;
+
+          values.forEach((v) => {
+            const [prefix, num] = v.split(":");
+            if (prefix === "min") minValue = num;
+            if (prefix === "max") maxValue = num;
+          });
+
+          if (minValue && maxValue) {
+            urlFilters[categoryId] = [minValue, maxValue];
+            urlSelectedNames.push(`${matchedCategory.categoryName}: ${minValue} - ${maxValue}`);
+            newProductsData[categoryId] = [minValue, maxValue];
+          }
+        } else {
+          // ✅ Normal list filters
+          const matchedIds: string[] = [];
+          for (const item of matchedCategory.categoryList || []) {
+            if (values.includes(item.listName)) {
+              matchedIds.push(item.listId);
+              urlSelectedNames.push(item.listName);
+            }
+          }
+          if (matchedIds.length > 0) {
+            urlFilters[categoryId] = matchedIds;
+            newProductsData[categoryId] = matchedIds;
+          }
+        }
+      });
+
+      // ✅ Apply once at the end
+      setFilters(urlFilters);
+      dispatch(setSelectedNames(urlSelectedNames));
+
+      dispatch(setProductsData(newProductsData));
     }
-  }, [categories, selectedCategory, selectedId]);
+  }, [categories, selectedCategory, selectedSubName, selectedNestedName, searchParams]);
 
+  console.log(filters, selectedNames, "FILTERS");
   return {
     filters,
     selectedNames,

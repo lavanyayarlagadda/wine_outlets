@@ -54,51 +54,51 @@ export default function PastOrderCard({ order, onReorder, onViewInvoice }: PastO
           return (
             <OrderBody key={item.productId}>
               {/* <ItemDetails> */}
-                <OrderBodyRow>
-                  <ProductImage>
-                    <ProductImageImg src={item.imageUrl} alt={item.name} />
-                  </ProductImage>
+              <OrderBodyRow>
+                <ProductImage>
+                  <ProductImageImg src={item.imageUrl} alt={item.name} />
+                </ProductImage>
 
-                  <ProductInfoGrid>
-                    <ItemCol>
-                      <ProductTitle>{item.name}</ProductTitle>
-                      <InfoItem
-                        icon={<InfoIcon src={sizeIcon} alt="size" />}
-                        label="Size:"
-                        value={item.size ?? "—"}
-                      />
-                      <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>
-                        Add Review
-                      </GreyOutlineBtn>
-                    </ItemCol>
+                <ProductInfoGrid>
+                  <ItemCol>
+                    <ProductTitle>{item.name}</ProductTitle>
+                    <InfoItem
+                      icon={<InfoIcon src={sizeIcon} alt="size" />}
+                      label="Size:"
+                      value={item.size ?? "—"}
+                    />
+                    <GreyOutlineBtn onClick={() => console.log("add review", item.productId)}>
+                      Add Review
+                    </GreyOutlineBtn>
+                  </ItemCol>
 
-                    <ItemColRight>
-                      <InfoItem
-                        icon={<InfoIcon src={starIcon} alt="qty" />}
-                        label="Qty:"
-                        value={item.quantity ?? "—"}
-                      />
-                      <InfoItem
-                        label="Year:"
-                        icon={<InfoIcon src={calendarRed} alt="brand" />}
-                        value={item.year ?? "—"}
-                      />
-                      <ItemSubPrice>
+                  <ItemColRight>
+                    <InfoItem
+                      icon={<InfoIcon src={starIcon} alt="qty" />}
+                      label="Qty:"
+                      value={item.quantity ?? "—"}
+                    />
+                    <InfoItem
+                      label="Year:"
+                      icon={<InfoIcon src={calendarRed} alt="brand" />}
+                      value={item.year ?? "—"}
+                    />
+                    <ItemSubPrice>
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      }).format(item.price)}{" "}
+                      Each x 2 ={" "}
+                      <ItemPrice>
                         {new Intl.NumberFormat("en-US", {
                           style: "currency",
                           currency: "USD",
-                        }).format(item.price)}{" "}
-                        Each x 2 ={" "}
-                        <ItemPrice>
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          }).format(subtotal)}
-                        </ItemPrice>
-                      </ItemSubPrice>
-                    </ItemColRight>
-                  </ProductInfoGrid>
-                </OrderBodyRow>
+                        }).format(subtotal)}
+                      </ItemPrice>
+                    </ItemSubPrice>
+                  </ItemColRight>
+                </ProductInfoGrid>
+              </OrderBodyRow>
             </OrderBody>
           );
         })}

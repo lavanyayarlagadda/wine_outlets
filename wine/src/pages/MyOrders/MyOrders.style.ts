@@ -128,11 +128,9 @@ export const ProductImage = styled(Box)(({ theme }) => ({
   background: theme.palette.background.paper,
   boxShadow: theme.shadows[1],
   border: `1px solid ${theme.palette.success.main}`,
-    [theme.breakpoints.down("sm")]: {
-    display:"flex",
-    flexDirection:"column",
-    
-
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
@@ -177,14 +175,13 @@ export const ProductTitle = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.body2.fontSize,
 }));
 
-export const LeftContent = styled(Box)(({theme}) => ({
- display:"flex",
- flexDirection:"column",
- gap:8,
-   [theme.breakpoints.down("sm")]: {
-  
+export const LeftContent = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
+  [theme.breakpoints.down("sm")]: {
     display: "flex",
-    flexDirection:"column",
+    flexDirection: "column",
     alignItems: "flex-start",
   },
 }));
@@ -264,10 +261,9 @@ export const ItemRow = styled(Box)(({ theme }) => ({
   alignItems: "center",
   padding: `${theme.spacing(1.5)} 0`,
   borderBottom: `1px solid ${theme.palette.divider}`,
-    [theme.breakpoints.down("sm")]: {
-    display:"flex",
-    flexDirection:"column",
-
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
@@ -280,7 +276,6 @@ export const ItemDetails = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    
   },
 }));
 
@@ -294,7 +289,7 @@ export const ItemRight = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     display: "flex",
     flexDirecion: "column",
-    alignItems:"flex-start"
+    alignItems: "flex-start",
   },
 }));
 
@@ -321,10 +316,10 @@ export const OrderFooter = styled(Box)(({ theme }) => ({
   justifyContent: "flex-start",
   gap: theme.spacing(2),
   padding: `${theme.spacing(1.5)} 0 0 0`,
-    [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("sm")]: {
     display: "flex",
     flexDirecion: "column",
-    alignItems:"center"
+    alignItems: "center",
   },
 }));
 export const ReorderButton = styled(PrimaryButton)(({ theme }) => ({

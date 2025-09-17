@@ -72,7 +72,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
     handleNestedSubSelect,
     selectedNestedSub,
   } = useFilterPanel(categories, onFilterChange);
-
+  console.log(selectedNestedSub, "setSelectedNestedSub");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});
@@ -103,7 +103,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
   const getIcon = (name: string) => iconMap[name.toLowerCase()] ?? <LocalBar fontSize="small" />;
   const renderSubCategory = (item: any, sub: any) => {
     const hasNested = item.categories?.length > 0;
-    const isExpanded = selectedNestedSub === item.listId;
+    const isExpanded = selectedNestedSub;
 
     return (
       <Box key={item.listId}>
@@ -114,7 +114,14 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
             onChange={() => handleCheckboxChange(sub.categoryId, item.listId, item.listName, "sub")}
           />
           {hasNested && (
-            <ExpandButton onClick={() => handleNestedSubSelect(item.listId)}>
+            <ExpandButton
+              onClick={() =>
+                handleNestedSubSelect(
+                  { categoryId: item.listId, categoryName: item.listName },
+                  sub.categoryId
+                )
+              }
+            >
               {isExpanded ? <ExpandLess /> : <ExpandMore />}
             </ExpandButton>
           )}
