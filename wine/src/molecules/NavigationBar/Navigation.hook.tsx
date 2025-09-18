@@ -204,7 +204,6 @@ export const useNavigation = (
     useEffect(() => {
     if (data) {
       dispatch(setMenuList(data.menuList));
-      console.log("menuItems", menuItems)
     }
   }, [data, dispatch]);
 

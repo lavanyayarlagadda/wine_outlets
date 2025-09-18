@@ -3,7 +3,7 @@ import type { ProductListItems } from "../../Interfaces/ProductListInterface/Pro
 
 const initialState: ProductListItems = {
   cartList: [],
-  selectedNames: [],
+    selectedNames: {},
   productsData: {},
   productsViewData: null,
   vintageYearsData: [],
@@ -16,8 +16,8 @@ const ProductListSlice = createSlice({
     setCartList: (state, action: PayloadAction<string[]>) => {
       state.cartList = action.payload;
     },
-    setSelectedNames: (state, action: PayloadAction<string[]>) => {
-      state.selectedNames = action.payload;
+   setSelectedNames: (state, action: PayloadAction<Record<string, string[]>>) => {
+      state.selectedNames = action.payload; // ✅ update by object
     },
     setProductsData: (state, action: PayloadAction<any>) => {
       state.productsData = action.payload;

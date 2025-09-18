@@ -30,7 +30,7 @@ const ProductWithDivider: React.FC<Props> = ({
         isFavorite={isFavorite}
         isLoading={isLoading}
         wishListLoading={wishListLoading}
-        noAddtoCart={true}
+        noaddtocart={true}
       />
       {showDivider && <CustomPlus />}
     </>

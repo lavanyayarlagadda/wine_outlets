@@ -63,7 +63,7 @@ export const useProductList = ({
 
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
 
-  const { productsData } = useSelector((store: RootState) => store.productListSlice);
+  const { productsData,selectedNames } = useSelector((store: RootState) => store.productListSlice);
   const dispatch = useDispatch();
   const [
     productList,
@@ -72,80 +72,120 @@ export const useProductList = ({
 
   const queryString = queryParams.toString();
 
-  useEffect(() => {
-    const payloadFromUrl: Record<string, any> = {};
+useEffect(() => {
+  const payloadFromUrl: Record<string, any> = {};
 
-    queryParams.forEach((value, key) => {
-      // Normalize the key (remove spaces, first word lowercase, rest capitalized)
-      const normalizedKey = key
-        .replace(/\s+/g, "") // remove spaces
-        .replace(/^[A-Z]/, (c) => c.toLowerCase());
+  queryParams.forEach((value, key) => {
+    const normalizedKey = key
+      .replace(/\s+/g, "")
+      .replace(/^[A-Z]/, (c) => c.toLowerCase());
 
-      // Handle range-type params (like priceRange, alcoholContentRange)
-      if (normalizedKey.toLowerCase().includes("range")) {
-        const parts = value.split(",");
-        const rangeObj: Record<string, number> = {};
-        parts.forEach((p) => {
-          const [k, v] = p.split(":");
-          if (k && v) {
-            rangeObj[k.trim()] = Number(v.trim());
-          }
-        });
-
-        if (normalizedKey.includes("price")) {
-          payloadFromUrl["price"] = rangeObj;
-        } else if (normalizedKey.includes("alcohol")) {
-          payloadFromUrl["alcoholContent"] = rangeObj;
-        } else {
-          payloadFromUrl[normalizedKey] = rangeObj;
+    if (normalizedKey.toLowerCase().includes("range")) {
+      const parts = value.split(",");
+      const rangeObj: Record<string, number> = {};
+      parts.forEach((p) => {
+        const [k, v] = p.split(":");
+        if (k && v) {
+          rangeObj[k.trim()] = Number(v.trim());
         }
-      }
-      // Handle comma-separated arrays
-      else if (value.includes(",")) {
-        payloadFromUrl[normalizedKey] = value.split(",").map((v) => v.trim());
-      }
-      // Handle single values
-      else {
-        payloadFromUrl[normalizedKey] = value.trim();
-      }
-    });
+      });
 
-    let payload: any = {
-      limit: 20,
-      page: currentPage,
-      sortBy: "relevance",
-      sortOrder: "asc",
-      category: "",
-      department: "",
-      subDepartment: "",
-      size: "",
-      price: "",
-      occasion: "",
-      customerRating: "",
-      tags: "",
-      origin: "",
-      grapeVariety: "",
-      brand: "",
-      vintageYear: "",
-      alcoholContent: "",
-      ...payloadFromUrl,
-    };
-
-    if (productsData && Object.keys(productsData).length > 0) {
-      payload = { ...payload, ...productsData };
+      if (normalizedKey.includes("price")) {
+        payloadFromUrl["price"] = rangeObj;
+      } else if (normalizedKey.includes("alcohol")) {
+        payloadFromUrl["alcoholContent"] = rangeObj;
+      } else {
+        payloadFromUrl[normalizedKey] = rangeObj;
+      }
+    } else if (value.includes(",")) {
+      payloadFromUrl[normalizedKey] = value.split(",").map((v) => v.trim());
+    } else {
+      payloadFromUrl[normalizedKey] = value.trim();
     }
+  });
 
-    const cleanedPayload = Object.fromEntries(
-      Object.entries(payload).filter(([key, value]) => {
-        if (value === null || value === undefined) return false;
-        if (Array.isArray(value) && value.length === 0) return false;
-        if (/^\d+$/.test(key)) return false;
-        return true;
-      })
+  let payload: any = {
+    limit: 20,
+    page: currentPage,
+    sortBy: "relevance",
+    sortOrder: "asc",
+    category: "",
+    department: "",
+    subDepartment: "",
+    size: "",
+    price: "",
+    occasion: "",
+    customerRating: "",
+    tags: "",
+    origin: "",
+    grapeVariety: "",
+    brand: "",
+    vintageYear: "",
+    alcoholContent: "",
+    ...payloadFromUrl,
+    ...productsData,
+  };
+
+const mergedSelectedNames: Record<string, string[]> = {};
+
+Object.keys(selectedNames).forEach((key) => {
+  const normalizedKey = key.toLowerCase().replace(/\s+/g, ""); // normalize key
+  if (!mergedSelectedNames[normalizedKey]) {
+    mergedSelectedNames[normalizedKey] = [];
+  }
+  // Merge values, remove duplicates
+  mergedSelectedNames[normalizedKey] = Array.from(
+    new Set([...mergedSelectedNames[normalizedKey], ...selectedNames[key]])
+  );
+});
+
+const metaKeys = ["limit", "page", "sortBy", "sortOrder"];
+
+Object.keys(payload).forEach((key) => {
+  if (metaKeys.includes(key)) return; // skip meta keys
+if (/^\d/.test(key)) {
+    delete payload[key];
+    return;
+  }
+  const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
+  const selectedVals = mergedSelectedNames[normalizedKey];
+
+  if (!selectedVals || selectedVals.length === 0) {
+    payload[key] = Array.isArray(payload[key]) ? [] : "";
+    return;
+  }
+  if (normalizedKey === "price" ) {
+    const valStr = selectedVals[0];
+    if (valStr.includes("-")) {
+      const [minStr, maxStr] = valStr.split("-");
+      const rangeObj = { min: Number(minStr), max: Number(maxStr) };
+      payload[key] = rangeObj;
+    } else {
+      payload[key] = { min: Number(valStr), max: Number(valStr) };
+    }
+  }else {
+    // For other category values: lowercase & remove content in parentheses
+    const cleanedVals = selectedVals.map((v) =>
+      v.toLowerCase().replace(/\s*\(.*?\)\s*/g, "")
     );
 
-    productList(cleanedPayload);
-  }, [queryString, currentPage, productsData, productList]);
+    payload[key] = cleanedVals.length === 1 ? cleanedVals[0] : cleanedVals;
+  }
+});
+
+  const cleanedPayload = Object.fromEntries(
+    Object.entries(payload).filter(([ value]) => {
+      if (value === null || value === undefined) return false;
+      if (Array.isArray(value) && value.length === 0) return false;
+      if (typeof value === "string" && value === "") return false;
+      return true;
+    })
+  );
+
+  productList(cleanedPayload);
+}, [queryString, currentPage, productsData, productList, selectedNames]);
+
+
 
   const [wishList] = useWishListMutation();
 
@@ -178,12 +218,13 @@ export const useProductList = ({
       });
     }
   }, [productListError]);
+  
   const handleSortChange = (newSort: string) => {
     setSortBy(newSort);
     dispatch(
       setProductsData({
         ...productsData,
-        sort: newSort,
+        sortBy: newSort,
       })
     );
   };

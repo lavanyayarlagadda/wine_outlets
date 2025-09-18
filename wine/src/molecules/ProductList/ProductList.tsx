@@ -74,9 +74,20 @@ const ProductList: React.FC<ProductListProps> = ({
   const dispatch = useDispatch();
   const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
 
-  const handleDelete = (name: string) => {
-    dispatch(setSelectedNames(selectedNames.filter((n) => n !== name)));
-  };
+// Flatten selectedNames to just values for display
+const selectedValues = Object.values(selectedNames).flat();
+
+// Handle delete
+const handleDelete = (value: string) => {
+  // Remove the value from all keys
+  const updatedSelectedNames: Record<string, string[]> = {};
+  Object.entries(selectedNames).forEach(([key, values]) => {
+    const filtered = values.filter((v) => v !== value);
+    if (filtered.length > 0) updatedSelectedNames[key] = filtered;
+  });
+
+  dispatch(setSelectedNames(updatedSelectedNames));
+};
 
   return (
     <>
@@ -93,7 +104,7 @@ const ProductList: React.FC<ProductListProps> = ({
 
         <ContentWrapper>
           <ControlsWrapper>
-            <FilterTagList filters={selectedNames} onDelete={handleDelete} />
+            <FilterTagList filters={selectedValues} onDelete={handleDelete} />
             <SortAndViewControls
               sortBy={sortBy}
               onSortChange={handleSortChange}

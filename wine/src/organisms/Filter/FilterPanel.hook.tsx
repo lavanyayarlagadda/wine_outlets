@@ -39,16 +39,15 @@ const handleNestedSubSelect = (
   });
 
   // 🔹 Update selectedNames object
-  const key = parentSubId.toLowerCase().replace(/\s+/g, "") || "misc";
+  const key = parentSubId.toLowerCase().replace(/\s+/g, "") ;
   const current = selectedNames[key] || [];
   const updated = isSelected
     ? current.filter((name) => name !== nested.categoryName)
     : [...current, nested.categoryName];
-
   dispatch(
     setSelectedNames({
       ...selectedNames,
-      [key]: updated,
+      ["subDepartment"]: updated,
     })
   );
 };
@@ -96,7 +95,7 @@ const handleSubSelect = (sub: {
       // 🔹 Update selectedNames object
       const newSelectedNames = {
         ...selectedNames,
-        [key]: [displayName],
+        "category": [displayName],
       };
       dispatch(setSelectedNames(newSelectedNames));
     }
@@ -127,35 +126,36 @@ const handleCheckboxChange = (
   // 🔹 Display name handling
   let displayName = label;
   if (type === "sub" && count !== undefined) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     displayName = `${label} (${count})`;
   }
 
-  // 🔹 Normalize category key for selectedNames
-  const key = categoryName?.toLowerCase().replace(/\s+/g, "") || "misc";
-  const currentValues = selectedNames[key] || [];
+ // 🔹 Determine key for selectedNames
+let key: string;
+if (type === "sub") key = "department";
+else if (type === "nested") key = "subDepartment";
+// else if (type === "category") key = "category";
+else key = categoryName?.toLowerCase().replace(/\s+/g, "") || "misc";
 
-  let updatedValues: string[];
-  if (currentValues.includes(displayName)) {
-    // remove if already selected
-    updatedValues = currentValues.filter((v) => v !== displayName);
-  } else {
-    updatedValues = [...currentValues, displayName];
-  }
+// 🔹 Use label without count for storing
+const normalizedName = label;
 
-  // Remove "(count)" suffix for sub/nested types
-  if ((type === "sub" || type === "nested") && updatedValues.length > 0) {
-    updatedValues = updatedValues.map((name) =>
-      name.includes("(") ? name.replace(/\s*\(\d+\)$/, "") : name
-    );
-  }
+// 🔹 Get current values for this key
+const currentValues = selectedNames[key] || [];
 
-  // 🔹 Update selectedNames as an object
-  dispatch(
-    setSelectedNames({
-      ...selectedNames,
-      [key]: updatedValues,
-    })
-  );
+// 🔹 Add or remove the selection while preserving previous selections
+const updatedValues = currentValues.includes(normalizedName)
+  ? currentValues.filter((v) => v !== normalizedName)
+  : [...currentValues, normalizedName];
+
+// 🔹 Update selectedNames in state
+dispatch(
+  setSelectedNames({
+    ...selectedNames,
+    [key]: updatedValues,
+  })
+);
+
 
   // 🔹 Update productsData
   const currentProductsList = productsData;
@@ -201,33 +201,52 @@ const handleSliderChange = (
   categoryName: string
 ) => {
   const currentProductsList = { ...productsData };
-  
-  if (categoryName === "Price Range" && Array.isArray(value)) {
-    currentProductsList.price = { min: value[0], max: value[1] };
-  } else {
-      currentProductsList["alcoholContent"] = Array.isArray(value) ? value[0] : value;
-  }
+let storeValue: string;
+
+if (categoryName === "Price Range" && Array.isArray(value)) {
+  currentProductsList.price = { min: value[0], max: value[1] }; // keep for filtering
+  storeValue = `${value[0]}-${value[1]}`; // store as string
+} else if (categoryName === "Alcohol Content") {
+  const valStr = Array.isArray(value) ? `${value[0]}%` : `${value}%`;
+  currentProductsList.alcoholContent = valStr;
+  storeValue = valStr;
+} else {
+  storeValue = Array.isArray(value) ? value.join(",") : String(value);
+}
+
 
   dispatch(setProductsData(currentProductsList));
 
-  const valArray = Array.isArray(value)
-    ? value.map(String) // convert numbers to strings
-    : [String(value)];
-
+  // 🔹 Convert value to array for filters
+  const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
   setFilters((prev) => {
     const newFilters = { ...prev, [categoryId]: valArray };
     onFilterChange?.(newFilters);
     return newFilters;
   });
 
-  // store as string array to match selectedNames type
+  // 🔹 Update selectedNames without overwriting other keys
+  const key =
+    categoryName === "Price Range"
+      ? "price"
+      : categoryName === "Alcohol Content"
+      ? "alcoholContent"
+      : categoryId;
+
+  const currentValues = selectedNames[key] || [];
+
+  const updatedValues = currentValues.includes(storeValue)
+    ? currentValues.filter((v: string) => v !== storeValue)
+    : [...currentValues, storeValue];
+
   dispatch(
     setSelectedNames({
       ...selectedNames,
-      [categoryId]: valArray,
+      [key]: updatedValues,
     })
   );
 };
+
 
 
 
@@ -247,14 +266,37 @@ useEffect(() => {
   }
 }, [selectedNames]);
 
+
+function toCamelCase(str: string): string {
+  if (!str) return "";
+
+  // Split by spaces, filter out empty parts
+  const words = str.split(" ").filter(Boolean);
+
+  if (words.length === 0) return "";
+
+  // First word: lowercase
+  const firstWord = words[0].toLowerCase();
+
+  // Remaining words: first letter uppercase, rest lowercase
+  const restWords = words.slice(1).map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  );
+
+  return firstWord + restWords.join("");
+}
+
 useEffect(() => {
   if (categories.length === 0) return;
+
+  const newSelectedNames: Record<string, string[]> = {};
+
   if (selectedCategory) {
     let subFound = false;
 
     for (const cat of categories) {
       for (const sub of cat.subCategories || []) {
-          // Match the subCategory first
+
         if (!subFound && selectedSubName) {
           const selectedItem = sub.categoryList?.find(
             (item: any) =>
@@ -263,15 +305,19 @@ useEffect(() => {
           );
 
           if (selectedItem) {
-              setFilters({ [sub.categoryId]: [selectedItem.listId] });
-              const displayName = selectedItem.count
-                ? `${selectedItem.listName} (${selectedItem.count})`
-                : selectedItem.listName;
-              dispatch(setSelectedNames([displayName]));
+            setFilters({ [sub.categoryId]: [selectedItem.listId] });
+
+            // ✅ Save **name** instead of ID
+            const displayName = selectedItem.count
+              ? `${selectedItem.listName} (${selectedItem.count})`
+              : selectedItem.listName;
+
+            newSelectedNames["department"] = [displayName];
+
             setSelectedSub(sub.categoryId);
             subFound = true;
 
-              // ✅ Check for nested category
+            // Nested
             if (selectedNestedName && selectedItem.categories?.length > 0) {
               const nestedItem = selectedItem.categories.find(
                 (nested: any) =>
@@ -280,15 +326,13 @@ useEffect(() => {
               );
               if (nestedItem) {
                 setSelectedNestedSub(nestedItem.categoryId);
+                setFilters((prev) => ({
+                  ...prev,
+                  [sub.categoryId]: [...(prev[sub.categoryId] || []), nestedItem.categoryId],
+                }));
 
-                  // ✅ Update filters for parent sub to include nested id
-                  setFilters((prev) => ({
-                    ...prev,
-                    [sub.categoryId]: [...(prev[sub.categoryId] || []), nestedItem.categoryId],
-                  }));
-
-                  const updatedNames = [...selectedNames, nestedItem.categoryName];
-                  dispatch(setSelectedNames(updatedNames));
+                // ✅ Store name, not ID
+                newSelectedNames["subDepartment"] = [nestedItem.categoryName];
               }
             }
 
@@ -296,44 +340,45 @@ useEffect(() => {
           }
         }
 
-          // Existing category/sub fallback logic
-        if (
-          !subFound &&
-          selectedCategory &&
-          sub.categoryName.toLowerCase() === selectedCategory.toLowerCase()
+        if (!subFound && selectedCategory &&
+            sub.categoryName.toLowerCase() === selectedCategory.toLowerCase()
         ) {
-            setFilters({ [cat.categoryId]: [sub.categoryId] });
-            const displayName = `${sub.categoryName} (${sub.categoryCount ?? 0})`;
-            dispatch(setSelectedNames([displayName]));
+          setFilters({ [cat.categoryId]: [sub.categoryId] });
+
+          const displayName = `${sub.categoryName} (${sub.categoryCount ?? 0})`;
+          newSelectedNames["category"] = [displayName];
+
           setSelectedSub(sub.categoryId);
           subFound = true;
           break;
         }
       }
 
-      if (
-        !subFound &&
-        selectedCategory &&
-        cat.categoryName.toLowerCase() === selectedCategory.toLowerCase()
+      if (!subFound && selectedCategory &&
+          cat.categoryName.toLowerCase() === selectedCategory.toLowerCase()
       ) {
-          setFilters({ [cat.categoryId]: [cat.categoryId] });
-          dispatch(setSelectedNames([cat.categoryName]));
+        setFilters({ [cat.categoryId]: [cat.categoryId] });
+const camelKey = toCamelCase(cat.categoryName);
+
+// Use camelKey as the object key
+newSelectedNames[camelKey] = [cat.categoryName];
         subFound = true;
       }
 
       if (subFound) break;
     }
-    } else if (!selectedCategory) {
-      // ✅ Now handle URL filters
-      const urlFilters: Filters = {};
-      const urlSelectedNames: string[] = [];
-      const newProductsData: any = { ...productsData };
+
+    dispatch(setSelectedNames(newSelectedNames));
+
+  } else {
+    // No selectedCategory: parse URL params
+    const urlFilters: Filters = {};
+    const newProductsData: any = { ...productsData };
 
     searchParams.forEach((value, key) => {
       if (!value) return;
-        const values = value.split(",").map((v) => decodeURIComponent(v.trim()));
+      const values = value.split(",").map((v) => decodeURIComponent(v.trim()));
 
-        // Match category by name (case-insensitive)
       const matchedCategory = categories.find(
         (cat) => cat.categoryName.toLowerCase() === key.toLowerCase()
       );
@@ -341,7 +386,6 @@ useEffect(() => {
 
       const categoryId = matchedCategory.categoryId;
 
-        // ✅ Handle range filters
       const isRange = values.some((v) => v.includes("min:") || v.includes("max:"));
 
       if (isRange) {
@@ -355,33 +399,41 @@ useEffect(() => {
         });
 
         if (minValue && maxValue) {
-            urlFilters[categoryId] = [minValue, maxValue];
-            urlSelectedNames.push(`${matchedCategory.categoryName}: ${minValue} - ${maxValue}`);
-            newProductsData[categoryId] = [minValue, maxValue];
+          urlFilters[categoryId] = [minValue, maxValue];
+const camelKey = toCamelCase(matchedCategory.categoryName);
+
+          // ✅ Save **keys/names** instead of IDs
+          newSelectedNames[camelKey] = [`${minValue} - ${maxValue}`];
+
+          newProductsData[categoryId] = [minValue, maxValue];
         }
       } else {
-          // ✅ Normal list filters
+        const matchedNames: string[] = [];
         const matchedIds: string[] = [];
+
         for (const item of matchedCategory.categoryList || []) {
           if (values.includes(item.listName)) {
-              matchedIds.push(item.listId);
-              urlSelectedNames.push(item.listName);
+            matchedNames.push(item.listName); // ✅ store name
+            matchedIds.push(item.listId);      // keep ID for productsData/filter
           }
         }
-          if (matchedIds.length > 0) {
-            urlFilters[categoryId] = matchedIds;
+
+        if (matchedNames.length > 0) {
+          urlFilters[categoryId] = matchedIds;
+          const camelKey = toCamelCase(matchedCategory.categoryName);
+          newSelectedNames[camelKey] = matchedNames; // ✅ names only
           newProductsData[categoryId] = matchedIds;
         }
       }
     });
 
-      // ✅ Apply once at the end
-      setFilters(urlFilters);
-      dispatch(setSelectedNames(urlSelectedNames));
-
-      dispatch(setProductsData(newProductsData));
-    }
+    setFilters(urlFilters);
+    dispatch(setSelectedNames(newSelectedNames)); // ✅ object with names
+    dispatch(setProductsData(newProductsData));
+  }
 }, [categories, selectedCategory, selectedSubName, selectedNestedName, searchParams]);
+
+
 
 
   return {

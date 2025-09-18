@@ -98,14 +98,14 @@ export const RatingBox = styled(Box)(() => ({
   alignItems: "center",
 }));
 interface PriceRowProps {
-  noAddtoCart?: boolean;
+  noaddtocart?: boolean;
 }
-export const PriceRow = styled(Box)<PriceRowProps>(({ noAddtoCart }) => ({
+export const PriceRow = styled(Box)<PriceRowProps>(({ noaddtocart }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   gap: 16,
-  marginBottom: noAddtoCart ? 8 : 16,
+  marginBottom: noaddtocart ? 8 : 16,
 }));
 
 export const PriceText = styled(Typography)(({ theme }) => ({

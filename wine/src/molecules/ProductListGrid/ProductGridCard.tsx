@@ -46,7 +46,7 @@ interface ProductCardProps {
   isFavorite: boolean;
   isLoading?: string | null;
   wishListLoading?: string | null;
-  noAddtoCart?: boolean;
+  noaddtocart?: boolean;
 }
 
 const ProductGridCard: React.FC<ProductCardProps> = ({
@@ -56,7 +56,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   isFavorite,
   isLoading,
   wishListLoading,
-  noAddtoCart,
+  noaddtocart,
 }) => {
   const navigate = useNavigate();
   return (
@@ -110,11 +110,11 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
           </RatingBox>
         </DetailsRow>
 
-        <PriceRow noAddtoCart={noAddtoCart}>
+        <PriceRow noaddtocart={noaddtocart}>
           {product.vipPrice && <VIPPriceText>VIP: ${product.vipPrice.toFixed(2)}</VIPPriceText>}
           <PriceText>${product.price.toFixed(2)}</PriceText>
         </PriceRow>
-        {!noAddtoCart && onAddToCart && (
+        {!noaddtocart && onAddToCart && (
           <AddToCartButton
             onClick={() => onAddToCart(product.id)}
             startIcon={isLoading?.toString() === product.id ? null : <ShoppingCart />}
