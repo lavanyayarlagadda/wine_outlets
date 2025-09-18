@@ -180,7 +180,7 @@ const Navigation = () => {
           {
             title: "Promotions",
             items: [
-              { id: 501, listName: "Tasting" },
+              { id: 501, listName: "New Arrivals" },
               { id: 502, listName: "Events" },
               { id: 503, listName: "VIP Benefits" },
             ],
@@ -476,7 +476,7 @@ const Navigation = () => {
           {/* <NavMenu>Tastings</NavMenu>
           <NavMenu>Events</NavMenu> */}
           <HighlightMenu>
-            <img src={star} alt="star" /> New Arrivals
+            <img src={star} alt="star" /> Tasting
           </HighlightMenu>
           {/* <NavMenu>Promotions</NavMenu> */}
         </NavWrapper>

@@ -8,7 +8,7 @@ import {
 } from "../../store/apis/Home/HomeAPI";
 
 import { setMenuList } from "../../store/slices/MenuItems/MenuItemsSlice";
-import type { RootState } from "@reduxjs/toolkit/query";
+import type { RootState } from "../../store";
 
 type MenuState = {
   [key: string]: boolean;
