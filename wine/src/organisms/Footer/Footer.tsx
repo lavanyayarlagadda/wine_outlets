@@ -70,16 +70,18 @@ const Footer: React.FC = () => {
           <LogoImage src={logo} />
           <SocialIconsContainer>
             {SOCIAL_ICONS.map((social, index) => (
-              <StyledIconButton
+              <a
                 key={index}
-                component="a"
-                // href={social.href}
-                aria-label={social.label}
-                // target="_blank"
+                href={social.href}
+                target="_blank"
                 rel="noopener noreferrer"
+                aria-label={social.label}
+                style={{ textDecoration: "none" }}
               >
-                <img src={social.icon} />
-              </StyledIconButton>
+                <StyledIconButton>
+                  <img src={social.icon} alt={social.label} />
+                </StyledIconButton>
+              </a>
             ))}
           </SocialIconsContainer>
         </Grid>

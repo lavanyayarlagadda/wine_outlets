@@ -43,6 +43,12 @@ const Password = () => {
               onChange={(val) => handleChangePassword("oldPassword", val)}
               required
               error={passwordErrors.oldPassword}
+              type={showPassword.old ? "text" : "password"}
+              endIcon={
+                <IconButton onClick={() => setShowPassword((prev) => ({...prev, old: !prev.old }))}>
+                  {showPassword.old ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
             />
           </HalfField>
 
@@ -53,15 +59,15 @@ const Password = () => {
         <PasswordFields>
           <HalfField>
             <CustomTextField
-              label="Create Password"
+              label="New Password"
               value={passwordForm.password}
               onChange={(val) => handleChangePassword("password", val)}
               required
               error={passwordErrors.password}
-              type={showPassword ? "text" : "password"}
+              type={showPassword.new ? "text" : "password"}
               endIcon={
-                <IconButton onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                <IconButton onClick={() => setShowPassword((prev) => ({...prev, new:!prev.new}))}>
+                  {showPassword.new ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               }
             />
@@ -74,10 +80,10 @@ const Password = () => {
               onChange={(val) => handleChangePassword("confirmPassword", val)}
               required
               error={passwordErrors.confirmPassword}
-              type={showPassword ? "text" : "password"}
+              type={showPassword.confirm ? "text" : "password"}
               endIcon={
-                <IconButton onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                <IconButton onClick={() => setShowPassword((prev) => ({...prev, confirm:!prev.confirm}))}>
+                  {showPassword.confirm ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               }
             />

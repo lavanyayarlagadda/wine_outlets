@@ -7,7 +7,7 @@ import palette from "../../themes/palette";
 export const FooterContainer = styled(Box)(() => ({
   width: "100%",
   margin: "0 auto",
-  padding: "24px 30px 24px 30px",
+  padding: "24px 30px 0px 30px",
 }));
 
 export const InnerWrapper = styled(Box)(({ theme }) => ({

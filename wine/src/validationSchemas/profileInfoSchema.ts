@@ -8,9 +8,9 @@ export const profileSchema = Yup.object().shape({
   lastName: Yup.string().required("Last name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   phoneNumber: Yup.string()
-    .matches(usPhoneRegex, "Enter a valid U.S. phone number")
-    .required("Phone number is required"),
-  address: Yup.string().required("Address is required"),
+    .matches(usPhoneRegex, "Enter a valid U.S. phone number"),
+    // .required("Phone number is required"),
+  address: Yup.string(),
   zipCode: Yup.string()
     .matches(/^\d{5}(-\d{4})?$/, "Enter a valid U.S. ZIP code")
     .required("ZIP code is required"),

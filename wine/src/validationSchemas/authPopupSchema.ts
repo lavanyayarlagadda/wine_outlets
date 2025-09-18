@@ -10,6 +10,7 @@ export const signUpValidationSchema = Yup.object().shape({
   lastName: Yup.string().required("Last Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   contact: Yup.string().required("Contact Number is required"),
+  //  contact: Yup.string(),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),

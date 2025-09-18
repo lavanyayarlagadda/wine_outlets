@@ -22,7 +22,11 @@ export const useProfileForm = (initialData?: any) => {
   });
 
   const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({});
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    old: false,
+    new: false,
+    confirm: false,
+  });
   const [vipCode, setVipCode] = useState(initialData?.barcodeNumber || "");
 
   const handleVipCodeChange = (value: string) => {

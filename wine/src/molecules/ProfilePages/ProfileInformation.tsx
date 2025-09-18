@@ -65,7 +65,7 @@ const ProfileInformation = ({ initialData }: { initialData?: any }) => {
               label="Phone Number"
               value={form.phoneNumber}
               onChange={(val) => handleChange("phoneNumber", val)}
-              required
+              // required
               error={errors.phoneNumber}
             />
           </HalfField>
@@ -78,7 +78,7 @@ const ProfileInformation = ({ initialData }: { initialData?: any }) => {
               label="Address"
               value={form.address}
               onChange={(val) => handleChange("address", val)}
-              required
+              // required
               error={errors.address}
             />
           </HalfField>

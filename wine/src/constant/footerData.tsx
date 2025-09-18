@@ -37,8 +37,8 @@ export const FOOTER_DATA = {
 export const LOGO_TEXT = "LOGO TEXT";
 
 export const SOCIAL_ICONS = [
-  { icon: instagram, href: "#", label: "Instagram" },
-  { icon: facebook, href: "#", label: "Facebook" },
-  { icon: linkedin, href: "#", label: "LinkedIn" },
-  { icon: twitter, href: "#", label: "Twitter" },
+  { icon: instagram, href: "https://www.instagram.com/wine_outlet/#", label: "Instagram" },
+  { icon: facebook, href: "https://www.facebook.com/WineOutletNJ/", label: "Facebook" },
+  { icon: linkedin, href: "https://www.linkedin.com/company/wine-outlet/", label: "LinkedIn" },
+  { icon: twitter, href: "https://x.com/wineoutletnj", label: "Twitter" },
 ] as const;
