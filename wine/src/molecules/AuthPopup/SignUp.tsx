@@ -59,7 +59,7 @@ const SignUp: React.FC<SignUpProps> = ({ setTab, onClose }) => {
         value={form.contact}
         onChange={(val) => handleChange("contact", val)}
         startIcon={<PhoneIcon />}
-        required
+        // required
         error={errors.contact}
       />
 

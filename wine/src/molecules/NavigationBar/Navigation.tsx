@@ -49,7 +49,7 @@ import uberImg from "../../assets/orderWith/uber.svg";
 import doordashImg from "../../assets/orderWith/doordash.svg";
 import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
-import { logout, profile, myorders, mytastings, wishlist } from "../../assets";
+import { logout, profile, myorders,  wishlist } from "../../assets";
 import { useHomeLogic } from "../../pages/Home/Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
@@ -173,6 +173,20 @@ const Navigation = () => {
           },
         ],
       },
+       {
+        id: 5,
+        name: "Promotions",
+        categories: [
+          {
+            title: "Promotions",
+            items: [
+              { id: 501, listName: "Tasting" },
+              { id: 502, listName: "Events" },
+              { id: 503, listName: "VIP Benefits" },
+            ],
+          },
+        ],
+      },
     ],
   };
 
@@ -192,11 +206,11 @@ const Navigation = () => {
       imgSrc: wishlist,
       onClick: () => navigate("/wishlist"),
     },
-    {
-      label: "Tasting",
-      imgSrc: mytastings,
-      onClick: () => navigate("/mytastings"),
-    },
+    // {
+    //   label: "Tasting",
+    //   imgSrc: mytastings,
+    //   onClick: () => navigate("/mytastings"),
+    // },
     {
       label: "Logout",
       imgSrc: logout,

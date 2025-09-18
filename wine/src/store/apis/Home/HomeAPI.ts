@@ -4,6 +4,7 @@ import type {
   LandingPageResponse,
   RecentlyViewedSection,
 } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type { MenuResponse } from "../../Interfaces/Home/Home";
 
 export const homeApi = createApi({
   reducerPath: "homeApi",
@@ -132,6 +133,10 @@ export const homeApi = createApi({
         params: { location },
       }),
     }),
+
+    getMenuItems: builder.query<MenuResponse, void>({
+      query: () => "/home/menu-items",
+    }),
   }),
 });
 
@@ -145,4 +150,5 @@ export const {
   useGetDeliveryPartnersQuery,
   useGetHeaderBannersQuery,
   useStoreSearchlocatorQuery,
+  useGetMenuItemsQuery
 } = homeApi;
