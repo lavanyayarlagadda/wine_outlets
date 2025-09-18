@@ -11,12 +11,12 @@ interface ContainerProps {
 
 export const Container = styled(Box, {
   shouldForwardProp: (prop) =>
-    prop !== "padding" && prop !== "backgroundColor" && prop !== "maxWidth",
-})<ContainerProps>(({ theme, padding, backgroundColor, maxWidth }) => ({
+    prop !== "padding"  && prop !== "maxWidth",
+})<ContainerProps>(({  padding, maxWidth }) => ({
   width: "100%",
   margin: "0 auto",
   padding: padding || "80px 30px",
-  backgroundColor: backgroundColor || theme.palette.primary.light,
+  // backgroundColor: backgroundColor || theme.palette.primary.light,
   maxWidth: maxWidth || "100%",
   position: "relative",
 }));
@@ -29,12 +29,16 @@ interface CarouselSlideProps {
 
 export const CarouselSlide = styled(Box, {
   shouldForwardProp: (prop) => prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
-})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor, theme }) => ({
-  background: bgImage
-    ? `url(${bgImage}) center/cover no-repeat`
-    : bgVideo
-      ? "transparent"
-      : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
+})<CarouselSlideProps>(({ 
+  // bgImage, 
+  // bgVideo, 
+  // bgColor, 
+  theme }) => ({
+  // background: bgImage
+  //   ? `url(${bgImage}) center/cover no-repeat`
+  //   : bgVideo
+  //     ? "transparent"
+  //     : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
 
   borderRadius: shape.borderRadius,
   padding: "32px 32px 64px 32px",

@@ -40,6 +40,7 @@ const Newsletter: React.FC = () => {
             value={formData.fullName}
             onChange={handleInputChange("fullName")}
             placeholder="John Cena"
+            required = {true}
             startIcon={<PersonIcon sx={{ color: palette.grey.main }} />}
           />
 
@@ -49,6 +50,7 @@ const Newsletter: React.FC = () => {
             onChange={handleInputChange("phoneNumber")}
             placeholder="954589334"
             type="tel"
+            required = {true}
             isPhoneInput={true}
             countryValue={formData.countryCode}
             onCountryChange={handleInputChange("countryCode")}
@@ -61,6 +63,7 @@ const Newsletter: React.FC = () => {
             onChange={handleInputChange("email")}
             placeholder="youcanseeme@gmail.com"
             type="email"
+            required = {true}
           />
 
           {/* Second Row */}
@@ -70,6 +73,7 @@ const Newsletter: React.FC = () => {
             onChange={handleInputChange("preferredStore")}
             options={preferredStores}
             placeholder="Select Store"
+            required = {true}
           />
 
           <CustomDropdown
@@ -78,6 +82,7 @@ const Newsletter: React.FC = () => {
             onChange={handleInputChange("alcoholPreferences")}
             options={alcoholPreferences}
             placeholder="Select Preferences"
+            required = {true}
           />
 
           <BtnWrapperBox>

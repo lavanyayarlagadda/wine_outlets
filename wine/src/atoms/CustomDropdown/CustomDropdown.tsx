@@ -10,6 +10,7 @@ interface DropdownOption {
 }
 
 interface CustomDropdownProps {
+  required?: boolean;
   label: string;
   value: string;
   onChange: (value: string) => void;
@@ -27,10 +28,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   placeholder,
   fullWidth = true,
   side = false,
+  required=false
 }) => {
   return (
     <DropdownWrapper side={side}>
-      <StyledLabel side={side}>{label}</StyledLabel>
+      <StyledLabel side={side}>{label} {required && <span style={{ color: palette.primary.dark }}>*</span>}</StyledLabel>
       <StyledFormControl fullWidth={fullWidth} variant="outlined">
         <Select
           value={value}

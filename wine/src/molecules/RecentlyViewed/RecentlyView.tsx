@@ -33,8 +33,8 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   const rvData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "product-collection-custom-2") as ProductCollectionSection;
   // const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
   // const rvData = rvResp?.recentlyViewed;
-  const isVisible = rvData.isVisible ;
-  const titleText = rvData.title
+  const isVisible = rvData?.isVisible ;
+  const titleText = rvData?.title
 
   const {
     scrollRef,
