@@ -27,7 +27,7 @@ export const FOOTER_DATA = {
   legalInfo: {
     title: "Legal & Info",
     links: [
-      { text: "Terms & Conditions", href: "#" },
+      { text: "Terms & Conditions", href: "/terms" },
       { text: "Privacy Policy", href: "/privacy" },
       { text: "Accessibility Statement", href: "#" },
     ],

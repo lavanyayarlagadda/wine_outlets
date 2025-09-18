@@ -2,24 +2,27 @@ import React from "react";
 import PrivacyBaneer from "../../organisms/Banner/PrivacyBaneer";
 import DynamicAccordian from "../../molecules/DynamicAccordian/DynamicAccordian";
 // import LocalBarIcon from "@mui/icons-material/LocalBar";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import star from "../../assets/productView/star.svg";
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
-import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import DatasetOutlinedIcon from "@mui/icons-material/DatasetOutlined";
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import TransparencyCard from "../../organisms/TransparencyCard/TransparencyCard";
 const PrivacyPolicyPage = () => {
   return (
     <>
-      <PrivacyBaneer />
-      <TransparencyCard/>
+      <PrivacyBaneer
+        heading="Privacy Policy"
+        description="Wine Outlet is committed to your privacy. We are making our information policies transparent."
+      />
+      <TransparencyCard />
       <DynamicAccordian
         title="Information Collection and Use"
         content="Wine Outlet is the sole owner of the information collected on this site. We will not sell, share, or rent this information to others in ways different from what is disclosed in this statement. Wine Outlet collects information from our customers at several different points on our website."
@@ -29,7 +32,7 @@ const PrivacyPolicyPage = () => {
       <DynamicAccordian
         title="Registration"
         content="No registration is required in order to use this website, although a customer must create an account prior to any purchase. During account creation a customer is required to give their name, email address, zip code, and a password. This information is used to contact our customers about the services on our site for which they have expressed interest. It is optional for a customer to provide a phone number, but encouraged so we can have another means to contact you regarding your order."
-        icon={<PersonOutlineOutlinedIcon/>}
+        icon={<PersonOutlineOutlinedIcon />}
       />
 
       <DynamicAccordian
@@ -61,7 +64,6 @@ const PrivacyPolicyPage = () => {
         content="We use IP addresses to analyze trends, administer the site, track customer's movement, and gather broad demographic information for aggregate use. IP addresses are not linked to personally identifiable information."
         icon={<DescriptionOutlinedIcon />}
       />
-
 
       <DynamicAccordian
         title="Sharing"

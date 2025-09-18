@@ -1,13 +1,16 @@
 import React from "react";
 import { BannerContainer, BannerDiscription, BannerHeading } from "./PrivacyBanner.style";
 
-const PrivacyBaneer = () => {
+interface BannerProps {
+  heading: string;
+  description: string;
+}
+
+const PrivacyBaneer: React.FC<BannerProps> = ({ heading, description }) => {
   return (
     <BannerContainer>
-      <BannerHeading>Privacy Policy</BannerHeading>
-      <BannerDiscription>
-        Wine Outlet is committed to your privacy we are making our information policies transparent.
-      </BannerDiscription>
+      <BannerHeading>{heading}</BannerHeading>
+      <BannerDiscription>{description}</BannerDiscription>
     </BannerContainer>
   );
 };
