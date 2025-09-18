@@ -31,6 +31,7 @@ export interface ProductCategoryItem {
 	origin: string;
 	vintage: string;
 	producer: string;
+  size: string
 }
 
 export interface ProductCategoryListItem {
@@ -72,6 +73,7 @@ export interface CustomBannerSection extends BaseSection {
 	type: 'custom-banner';
 	bannerSize: SizePreset | DimensionString;
 	content: BannerImageItem[];
+  backgroundHighlight: boolean;
 }
 
 export interface SideCategoryButton {
@@ -91,7 +93,7 @@ export interface CustomProductCategorySection extends BaseSection {
 	subtitle: string;
 	showTimer?: boolean;
 	endTimeIso?: string;
-	sideButtons?: SideCategoryButton[];
+	sideButtons: SideCategoryButton[];
 	content: ProductCategoryItem[];
 }
 
@@ -218,12 +220,24 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
        isVisible: true,
 			content: [
 				{
-					id: 'gw-123', // TODO: Removed the id
+					id: 'gw-123',
 					title: 'Limited Edition',
 					imageUrl: DemoImg,
 					tags: ['limited-edition'],
 				},
 				{
+					id: 'gw-123',
+					title: 'Top Sellers',
+					imageUrl: DemoImg,
+					tags: ['top-sellers'],
+				},
+				{
+					id: 'gw-123',
+					imageUrl: DemoImg,
+					title: 'Wine Under $20',
+					tags: ['wine-under-20'],
+				},
+        {
 					id: 'gw-123',
 					title: 'Top Sellers',
 					imageUrl: DemoImg,
@@ -244,8 +258,8 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 			id: 'custom-banner-sm-1',
 			// NOTE: `bannerSize` We will have 4 sizes: small, medium, large and custom like 400*600
 			bannerSize: 'small',
-       isVisible: true,
-			// backgroundHighlight: true, // TODO: Add this feature
+      isVisible: true,
+			backgroundHighlight: true,
 			content: [
 				{
 					imageUrl: DemoImg,
@@ -265,7 +279,7 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 			title: 'Shop by Category',
 			subtitle: 'Find your favorite by type.',
 			cardSize: '400*600',
-       isVisible: true,
+      isVisible: true,
 			content: [
 				{
 					imageUrl: DemoImg,
@@ -293,7 +307,7 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 			title: 'Hot Right Now',
 			subtitle: "Deals ending soon — don't miss out",
 			showTimer: true,
-       isVisible: true,
+      isVisible: true,
 			endTimeIso: '2025-12-31T23:59:59.000Z',
 			sideButtons: [
 				{ label: 'Trending', tag: 'trending' },
@@ -304,26 +318,41 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 				{
 					id: 'deal-001',
 					title: 'Reserve Cabernet',
-					imageUrl: 'https://product1.jpg',
+					imageUrl: DemoImg,
 					rating: 4.6,
 					price: 45,
 					vipPrice: 39.99,
 					origin: 'Napa Valley, USA',
 					vintage: '2019',
+          size: '750ML',
 					producer: 'Hillside Estate',
 					tags: ['trending'],
 				},
 				{
 					id: 'deal-002',
 					title: 'Classic Pinot Noir',
-					imageUrl: 'https://product1.jpg',
+					imageUrl: DemoImg,
 					rating: 4.4,
 					price: 32,
 					vipPrice: 28.5,
+          size: '750ML',
 					origin: 'Willamette Valley, USA',
 					vintage: '2020',
 					producer: 'Red Oak Cellars',
 					tags: ['staff-picks'],
+				},
+        {
+					id: 'deal-003',
+					title: 'Classic Pinot Noir',
+					imageUrl: DemoImg,
+					rating: 4.4,
+					price: 32,
+					vipPrice: 28.5,
+          size: '750ML',
+					origin: 'Willamette Valley, USA',
+					vintage: '2020',
+					producer: 'Red Oak Cellars',
+					tags: ['staff-picks','trending','new-arrival'],
 				},
 			],
 		},
@@ -338,7 +367,6 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 				{
 					imageUrl: wineBrandImg,
           brandName: 'Oak',
-					// TODO: Add the brand name for fetch the api
 				},
 				{
 					imageUrl: wineBrandImg,
@@ -356,17 +384,17 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 		},
 		{
 			position: 9,
-			id: 'product-collection-custom-1',
+			id: 'product-collection-custom-2',
 			type: 'product-collection',
 			layout: 'carousel',
 			title: 'Recently Viewed',
 			subtitle: '',
-       isVisible: true,
+      isVisible: true,
 			content: [
 				{
 					id: 'deal-001',
 					title: 'Reserve Cabernet',
-					imageUrl: 'https://product1.jpg',
+					imageUrl: DemoImg,
 					rating: 4.6,
 					price: 45,
 					vipPrice: 39.99,
@@ -374,11 +402,12 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 					vintage: '2019',
 					producer: 'Hillside Estate',
 					tags: ['trending'],
+          size:"750ML"
 				},
 				{
 					id: 'deal-002',
 					title: 'Classic Pinot Noir',
-					imageUrl: 'https://product1.jpg',
+					imageUrl: DemoImg,
 					rating: 4.4,
 					price: 32,
 					vipPrice: 28.5,
@@ -386,6 +415,7 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
 					vintage: '2020',
 					producer: 'Red Oak Cellars',
 					tags: ['staff-picks'],
+          size:"750ML"
 				},
 			],
 		},

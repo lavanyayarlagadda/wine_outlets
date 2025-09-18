@@ -16,6 +16,7 @@ import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 import { useNavigate } from "react-router-dom";
 import { FavoriteBorderIcon, FavoriteIcon } from "../ProductListGrid/ProductGridCard.style";
+import type { ProductCategoryItem } from "../../constant/LandingPageData";
 
 // const isRecentlyViewedCard = true;
 
@@ -39,7 +40,7 @@ export interface Product {
 }
 
 interface ProductCardProps {
-  product: Product;
+  product: ProductCategoryItem;
   onAddToCart: (id: string) => void;
   onToggleFavorite: (id: string) => void;
   isRecentlyViewedCard?: boolean;
@@ -96,16 +97,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <CardMedia
         component="img"
         height={isRecentlyViewedCard ? "300" : "240"}
-        image={product?.media?.url}
-        alt={product?.name}
-        sx={{ objectFit: "contain", cursor: "pointer" }}
-        onClick={() => navigate("/productView")}
+        image={product.imageUrl}
+        alt={product.title}
+        sx={{ objectFit: "cover", cursor: "pointer" }}
+        onClick={() => navigate(`/productsList?tags=${product?.tags?.join(',')}`)}
       />
 
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}
         <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: "1rem" }}>
-          {product?.name}
+          {product?.title}
         </Typography>
 
         {/* Product Details */}
@@ -128,7 +129,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               variant="h6"
               sx={{ fontSize: "1rem", fontWeight: 500, color: palette.grey.main }}
             >
-              {product?.year}
+              {product?.vintage}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -141,7 +142,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               variant="body2"
               sx={{ fontSize: "1rem", fontWeight: 500, color: palette.grey.main }}
             >
-              {product?.region}
+              {product?.origin}
             </Typography>
           </Box>
         </Box>

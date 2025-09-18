@@ -1,44 +1,47 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Product } from "../ProductCard/ProductCard";
+// import type { Product } from "../ProductCard/ProductCard";
 import useProductCard from "../ProductCard/ProductCard.hook";
-import type { DealSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+// import type { DealSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { toast } from "react-toastify";
-import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
+// import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
-interface DealFilterBtn {
-  id: string;
-  label: string;
-}
-interface DealProductsGroup {
-  [key: string]: Product[] | undefined;
-}
+import { SITE_SETTING_DEMO_DATA, type CustomProductCategorySection } from "../../constant/LandingPageData";
+// interface DealFilterBtn {
+//   tag: string;
+//   label: string;
+// }
+// interface DealProductsGroup {
+//   [key: string]: Product[] | undefined;
+// }
 const storedId = localStorage.getItem("selectedStore");
 export const useDealsSection = () => {
-  const { data: sections } = useGetHomeSectionsQuery();
+  // const { data: sections } = useGetHomeSectionsQuery();
+  const dealsSectionData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "product-collection-custom-1") as CustomProductCategorySection;
   const [wishList] = useWishListMutation();
   const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard();
-  const dealSection: DealSection = sections?.sections?.dealSection ?? {};
+  // const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
-  const title = dealSection.title ?? "";
-  const sectionProps = dealSection.props ?? {};
-  const timerConfig = sectionProps?.timer;
-  const isVisible = dealSection?.isVisible ?? false;
-  const filterButtonsFromData: DealFilterBtn[] = sectionProps?.filterButtons ?? [
-    { id: "trending", label: "Trending" },
-  ];
-  const dealProducts: DealProductsGroup = (dealSection.dealProducts as DealProductsGroup) ?? {};
+  const {title,subtitle,showTimer,isVisible,endTimeIso,sideButtons,content} = dealsSectionData
+  // const title = dealSection.title ?? "";
+  // const sectionProps = dealSection.props ?? {};
+  const timerConfig = endTimeIso;
+  // const isVisible = dealSection?.isVisible ?? false;
+  // const filterButtonsFromData: DealFilterBtn[] = sectionProps?.filterButtons ?? [
+  //   { id: "trending", label: "Trending" },
+  // ];
+  // const dealProducts: DealProductsGroup = (dealSection.dealProducts as DealProductsGroup) ?? {};
 
   // UI state
   const [currentSlide, setCurrentSlide] = useState(0);
   const [activeFilter, setActiveFilter] = useState<string>(
-    filterButtonsFromData[0]?.id ?? "trending"
+    sideButtons[0]?.tag
   );
 
   // timer remaining ms initial calc
   const [remainingMs, setRemainingMs] = useState<number | null>(() => {
-    if (!timerConfig?.endTime) return null;
-    const ms = Date.parse(timerConfig.endTime) - Date.now();
+    if (!timerConfig) return null;
+    const ms = Date.parse(timerConfig) - Date.now();
     return Number.isFinite(ms) ? Math.max(0, ms) : null;
   });
 
@@ -47,7 +50,10 @@ export const useDealsSection = () => {
   const productCardsRef = useRef<HTMLDivElement | null>(null);
 
   // computed products & slides
-  const productsForActiveFilter: Product[] = (dealProducts[activeFilter] ?? []) as Product[];
+  // const productsForActiveFilter: Product[] = (dealProducts[activeFilter] ?? []) as Product[];
+   const productsForActiveFilter = content.filter((item)=>{
+    return item.tags?.includes(activeFilter);
+   });
   const totalSlides = Math.max(1, Math.ceil((productsForActiveFilter?.length ?? 0) / 4));
 
   const timeParts = useMemo(() => {
@@ -141,7 +147,7 @@ export const useDealsSection = () => {
   const userId = localStorage.getItem("userId");
   // timer tick
   useEffect(() => {
-    if (!sectionProps?.showTimer || remainingMs === null) return;
+    if (!showTimer || remainingMs === null) return;
     const tick = () => {
       setRemainingMs((prev) => {
         if (prev === null) return null;
@@ -151,7 +157,7 @@ export const useDealsSection = () => {
     };
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [sectionProps?.showTimer, remainingMs]);
+  }, [showTimer, remainingMs]);
 
   // handlers (exposed)
   const handleDotClick = (index: number) => {
@@ -198,9 +204,11 @@ export const useDealsSection = () => {
   // expose everything UI needs
   return {
     title,
-    showTimer: !!sectionProps?.showTimer,
+    showTimer: !!showTimer,
+    subtitle,
+    sideButtons,
     timeParts,
-    filterButtonsFromData,
+    content,
     activeFilter,
     setActiveFilter,
     productsForActiveFilter,

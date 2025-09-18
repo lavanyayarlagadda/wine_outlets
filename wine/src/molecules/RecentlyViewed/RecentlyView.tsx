@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import type { RecentlyViewedSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
+// import type { RecentlyViewedSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+// import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import ProductCard from "../ProductCard/ProductCard";
 import {
   Container,
@@ -12,6 +12,7 @@ import {
   Dot,
 } from "./RecentlyView.style";
 import { useRecentlyViewed } from "./RecentlyView.hook";
+import { SITE_SETTING_DEMO_DATA, type ProductCollectionSection } from "../../constant/LandingPageData";
 
 type RecentlyViewedProps = {
   onSlideChange?: (index: number) => void;
@@ -24,16 +25,16 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   cardsPerSlide = 4,
   initialSlide = 0,
 }) => {
-  const {
-    data: recentlyViewedResp,
-    // isLoading: rvLoading,
-    // isError: rvError,
-  } = useGetRecentlyViewedQuery({ userId: 1, limit: 10 });
-  const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
-  const rvData = rvResp?.recentlyViewed;
-  const isVisible =
-    rvData?.isVisible === undefined ? true : String(rvData?.isVisible).toLowerCase() !== "false";
-  const titleText = rvData?.title ?? "Recently Viewed";
+  // const {
+  //   data: recentlyViewedResp,
+  //   // isLoading: rvLoading,
+  //   // isError: rvError,
+  // } = useGetRecentlyViewedQuery({ userId: 1, limit: 10 });
+  const rvData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "product-collection-custom-2") as ProductCollectionSection;
+  // const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
+  // const rvData = rvResp?.recentlyViewed;
+  const isVisible = rvData.isVisible ;
+  const titleText = rvData.title
 
   const {
     scrollRef,
@@ -45,7 +46,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
     wishlist,
     counts,
   } = useRecentlyViewed({
-    items: Array.isArray(rvData?.products) ? rvData?.products : [],
+    items: Array.isArray(rvData?.content) ? rvData?.content : [],
     cardsPerSlide,
     initialSlide,
     onSlideChange,
@@ -58,7 +59,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
       </HeaderWrapper>
 
       <CarouselWrapper ref={scrollRef}>
-        {(rvData?.products ?? []).map((product: any) => (
+        {(rvData?.content ?? []).map((product: any) => (
           <ProductBox key={product.id ?? product.name ?? Math.random()}>
             <ProductCard
               product={product}

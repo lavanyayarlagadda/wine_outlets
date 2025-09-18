@@ -118,7 +118,7 @@ export const CTAButton = styled(Button)({
 export const RightSectionBox = styled(Box)(({ theme }) => ({
   width: "100%",
   display: "grid",
-  gridTemplateColumns: "repeat(4,1fr)",
+  gridTemplateColumns: "repeat(3,1fr)",
   gap: theme.spacing(2.5),
   [theme.breakpoints.down("md")]: {
     width: "100%",

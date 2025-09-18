@@ -16,13 +16,15 @@ import {
   Dot,
 } from "./DealSection.style";
 import { useDealsSection } from "./DealsSection.hook";
+import type { SideCategoryButton } from "../../constant/LandingPageData";
+import { Box } from "@mui/material";
 
 const DealsSection: React.FC = () => {
   const {
     title,
     showTimer,
     timeParts,
-    filterButtonsFromData,
+    sideButtons,
     activeFilter,
     setActiveFilter,
     productsForActiveFilter,
@@ -36,6 +38,7 @@ const DealsSection: React.FC = () => {
     wishlist,
     isVisible,
     counts,
+    // subtitle,
     // increment,
     // decrement,
     // cartLoading,
@@ -45,8 +48,10 @@ const DealsSection: React.FC = () => {
     <Container>
       <HeaderRow>
         <TitleAndTimer>
-          <TitleTypography variant="h4">{title}</TitleTypography>
-
+          <Box>
+            <TitleTypography variant="h4">{title}</TitleTypography>
+            {/* <Typography variant = "h6">{subtitle}</Typography> */}
+          </Box>
           {showTimer && (
             <TimerBox>
               <TimerChip>{String(timeParts.hours).padStart(2, "0")}</TimerChip>
@@ -59,13 +64,13 @@ const DealsSection: React.FC = () => {
         </TitleAndTimer>
 
         <FilterButtonsRow ref={filterButtonsRef}>
-          {filterButtonsFromData.map((filter) => {
-            const isActive = filter.id === activeFilter;
+          {sideButtons?.map((filter: SideCategoryButton) => {
+            const isActive = filter.tag === activeFilter;
             return (
               <StyledFilterButton
-                key={filter.id}
+                key={filter.tag}
                 active={isActive}
-                onClick={() => setActiveFilter(filter.id)}
+                onClick={() => setActiveFilter(filter.tag)}
                 startIcon={undefined}
                 variant={isActive ? "contained" : "outlined"}
               >
