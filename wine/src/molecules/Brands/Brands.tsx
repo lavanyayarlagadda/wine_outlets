@@ -11,13 +11,13 @@ const Brands = () => {
     <Container>
       <CustomTitleSection title={title} subtitle={""} />
       <ImageWrapper>
-        {brands.map((b,index) => {
+        {brands.map((b, index) => {
           return (
             <BrandImage
               key={index}
               src={b.imageUrl}
               alt={`brand-${b.brandName}`}
-              onClick={()=>handleContainerClick(b.brandName)}
+              onClick={() => handleContainerClick(b.brandName)}
             />
           );
         })}

@@ -1,4 +1,11 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, styled, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  styled,
+  Typography,
+} from "@mui/material";
 import shape from "../../themes/shape";
 import { useFontSize } from "../../themes/fontSize";
 
@@ -41,12 +48,12 @@ export const AccDetails = styled(AccordionDetails)(({ theme }) => ({
 }));
 
 // Icon wrapper with default red color
-export const IconWrapper = styled(Box)(({theme}) => ({
-  color: theme.palette.primary.dark, 
+export const IconWrapper = styled(Box)(({ theme }) => ({
+  color: theme.palette.primary.dark,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
- marginRight:"10px"
+  marginRight: "10px",
 }));
 
 // Typography for title
@@ -54,7 +61,6 @@ export const TitleText = styled(Typography)(({ theme }) => ({
   fontSize: useFontSize(18),
   fontWeight: theme.typography.h6.fontWeight,
 }));
-
 
 export const ContentText = styled(Typography)(({ theme }) => ({
   fontSize: useFontSize(14),

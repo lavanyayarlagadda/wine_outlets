@@ -1,14 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   useGetCartCountQuery,
   useGetDeliveryPartnersQuery,
   useGetHeaderBannersQuery,
-  useGetMenuItemsQuery
+  useGetMenuItemsQuery,
 } from "../../store/apis/Home/HomeAPI";
 
 import { setMenuList } from "../../store/slices/MenuItems/MenuItemsSlice";
-import type { RootState } from "../../store";
+// import type { RootState } from "../../store";
 
 type MenuState = {
   [key: string]: boolean;
@@ -32,8 +32,8 @@ export const useNavigation = (
 ) => {
   const storedId = localStorage.getItem("selectedStore");
   const dispatch = useDispatch();
-    const { data, isLoading, isError } = useGetMenuItemsQuery();
-     const menuItems = useSelector((state: RootState) => state.menu.menuList);
+  const { data } = useGetMenuItemsQuery();
+  //  const menuItems = useSelector((state: RootState) => state.menu.menuList);
   const {
     data: headerBannerData,
     isLoading: headerBannerLoading,
@@ -201,7 +201,7 @@ export const useNavigation = (
     setCartCount(Number(cartResponse.cartCount ?? ids.length));
   }, [cartData]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (data) {
       dispatch(setMenuList(data.menuList));
     }

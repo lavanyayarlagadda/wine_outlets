@@ -4,7 +4,7 @@ import palette from "../../themes/palette";
 
 export const BannerContainer = styled(Box)(({ theme }) => ({
   width: "100%",
-//   background: "linear-gradient(to right, #c21807, #d97706)",
+  //   background: "linear-gradient(to right, #c21807, #d97706)",
   background: `linear-gradient(to right, ${theme.palette.primary.main}, ${palette.yellow.default})`,
   color: theme.palette.primary.light,
   textAlign: "center",
@@ -14,7 +14,7 @@ export const BannerContainer = styled(Box)(({ theme }) => ({
 export const BannerHeading = styled(Typography)(() => ({
   fontSize: useFontSize(32),
   marginBottom: "10px",
-  fontWeight:600
+  fontWeight: 600,
 }));
 
 export const BannerDiscription = styled(Typography)(() => ({
@@ -22,5 +22,5 @@ export const BannerDiscription = styled(Typography)(() => ({
   margin: "0 auto",
   fontSize: useFontSize(18),
   lineHeight: "1.5",
-  fontWeight:600
+  fontWeight: 600,
 }));

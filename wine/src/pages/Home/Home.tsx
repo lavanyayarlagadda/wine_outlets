@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   AgePopup,
   HeroBanner,
@@ -18,6 +18,7 @@ import { useHomeLogic } from "./Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import type { HeroBannerSection } from "../../constant/LandingPageData";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const {
@@ -31,6 +32,7 @@ const Home = () => {
     selectedStore,
     stores,
     sections,
+    isError,
     // sectionsLoading,
     // error,
     isLoading,
@@ -38,10 +40,16 @@ const Home = () => {
     searchLoading,
   } = useHomeLogic();
   // const { heroSection } = sections?.sections || {};
-  const heroSection:HeroBannerSection = sections
+  const heroSection: HeroBannerSection = sections;
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
   // if (sectionsLoading) return <AppLoader />;
   // if (error) return <h5> Something Went wrong</h5>;
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load Store details");
+    }
+  }, [isError]);
 
   return (
     <>

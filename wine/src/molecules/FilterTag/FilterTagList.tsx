@@ -4,7 +4,7 @@ import { Wrapper, FilterHeader, ChipsWrapper } from "./FilterTagList.style";
 
 interface FilterTagListProps {
   filters: string[];
-  onDelete: (name: string) => void; 
+  onDelete: (name: string) => void;
 }
 
 const FilterTagList: React.FC<FilterTagListProps> = ({ filters }) => (
@@ -15,7 +15,7 @@ const FilterTagList: React.FC<FilterTagListProps> = ({ filters }) => (
         filters.map((name) => (
           <CustomChip
             key={name}
-            label={name} 
+            label={name}
             // onDelete={() => onDelete(name)}
           />
         ))

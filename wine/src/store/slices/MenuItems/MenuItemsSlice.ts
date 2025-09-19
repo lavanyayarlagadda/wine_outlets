@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { MenuResponse, MenuSection, Category } from "../../Interfaces/Home/Home";
 
-
-
 const initialState: MenuResponse = {
   menuList: [],
 };
@@ -12,7 +10,7 @@ const MenuItemsSlice = createSlice({
   name: "menu",
   initialState,
   reducers: {
-    // Replace full menu list 
+    // Replace full menu list
     setMenuList: (state, action: PayloadAction<MenuSection[]>) => {
       state.menuList = action.payload;
     },

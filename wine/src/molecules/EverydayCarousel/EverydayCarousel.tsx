@@ -21,7 +21,9 @@ import { SITE_SETTING_DEMO_DATA, type CustomBannerSection } from "../../constant
 
 const WineCarousel: React.FC = () => {
   // const { data: sections } = useGetHomeSectionsQuery();
-   const everydayCarouselData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "custom-banner-sm-1") as CustomBannerSection;
+  const everydayCarouselData = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.id === "custom-banner-sm-1"
+  ) as CustomBannerSection;
   // const everyDaySection: EverydaySlidesSection = sections?.sections?.everyDaySlides ?? {};
   const slides = everydayCarouselData.content;
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,7 +36,7 @@ const WineCarousel: React.FC = () => {
         <StyledImage
           src={slides[currentSlide].imageUrl}
           onClick={() => {
-            navigate(`/productsList?tags=${slides[currentSlide]?.tags?.join(',')}`);
+            navigate(`/productsList?tags=${slides[currentSlide]?.tags?.join(",")}`);
           }}
         />
         {/* <ContentSection>

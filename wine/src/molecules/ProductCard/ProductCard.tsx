@@ -100,9 +100,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         image={product.imageUrl}
         alt={product.title}
         sx={{ objectFit: "cover", cursor: "pointer" }}
-        onClick={() => navigate(`/productsList?tags=${product?.tags?.join(',')}`)}
+        onClick={() =>
+          navigate(
+            `productView?productId=${product.id}&size=${product.size}&vintage=${product.vintage}`
+          )
+        }
       />
-
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}
         <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: "1rem" }}>

@@ -17,10 +17,10 @@ export const ImageWrapper = styled(Box)({
 });
 
 export const BrandImage = styled("img")(({ theme }) => ({
-  width: theme.spacing(25),    
-  height: theme.spacing(25),     
+  width: theme.spacing(25),
+  height: theme.spacing(25),
   objectFit: "contain",
-  borderRadius: theme.shape.borderRadius, 
+  borderRadius: theme.shape.borderRadius,
   cursor: "pointer",
-  border: `1px solid ${theme.palette.secondary.main}`
+  border: `1px solid ${theme.palette.secondary.main}`,
 }));

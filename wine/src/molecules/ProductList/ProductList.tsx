@@ -74,20 +74,20 @@ const ProductList: React.FC<ProductListProps> = ({
   const dispatch = useDispatch();
   const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
 
-// Flatten selectedNames to just values for display
-const selectedValues = Object.values(selectedNames).flat();
+  // Flatten selectedNames to just values for display
+  const selectedValues = Object.values(selectedNames).flat();
 
-// Handle delete
-const handleDelete = (value: string) => {
-  // Remove the value from all keys
-  const updatedSelectedNames: Record<string, string[]> = {};
-  Object.entries(selectedNames).forEach(([key, values]) => {
-    const filtered = values.filter((v) => v !== value);
-    if (filtered.length > 0) updatedSelectedNames[key] = filtered;
-  });
+  // Handle delete
+  const handleDelete = (value: string) => {
+    // Remove the value from all keys
+    const updatedSelectedNames: Record<string, string[]> = {};
+    Object.entries(selectedNames).forEach(([key, values]) => {
+      const filtered = values.filter((v) => v !== value);
+      if (filtered.length > 0) updatedSelectedNames[key] = filtered;
+    });
 
-  dispatch(setSelectedNames(updatedSelectedNames));
-};
+    dispatch(setSelectedNames(updatedSelectedNames));
+  };
 
   return (
     <>

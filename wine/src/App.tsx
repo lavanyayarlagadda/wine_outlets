@@ -20,8 +20,8 @@ const CartOverview = lazy(() => import("./pages/CartOverView/CartOverViewPage"))
 const Invoice = lazy(() => import("./pages/Invoice/Invoice"));
 const Wishlist = lazy(() => import("./pages/Wishlist/Wishlist"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPlicy/PrivacyPolicyPage"));
-const TermsConditions = lazy(() => import("./pages/TermsConditions/TermsConditionsPage"))
-const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"))
+const TermsConditions = lazy(() => import("./pages/TermsConditions/TermsConditionsPage"));
+const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"));
 
 const App: React.FC = () => {
   return (
@@ -38,9 +38,11 @@ const App: React.FC = () => {
             <Route path="/cartOverview" element={<CartOverview />} />
             <Route path="/orders/invoice/:id" element={<Invoice />} />
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/privacy" element={<PrivacyPolicy/>}/>
-            <Route path="/terms" element={<TermsConditions/>}/>
-              <Route path="/aboutUs" element={<AboutUs/>}/>
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsConditions />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsConditions />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

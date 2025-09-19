@@ -28,11 +28,13 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   placeholder,
   fullWidth = true,
   side = false,
-  required=false
+  required = false,
 }) => {
   return (
     <DropdownWrapper side={side}>
-      <StyledLabel side={side}>{label} {required && <span style={{ color: palette.primary.dark }}>*</span>}</StyledLabel>
+      <StyledLabel side={side}>
+        {label} {required && <span style={{ color: palette.primary.dark }}>*</span>}
+      </StyledLabel>
       <StyledFormControl fullWidth={fullWidth} variant="outlined">
         <Select
           value={value}

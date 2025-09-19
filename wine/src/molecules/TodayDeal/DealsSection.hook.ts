@@ -5,7 +5,10 @@ import useProductCard from "../ProductCard/ProductCard.hook";
 import { toast } from "react-toastify";
 // import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
-import { SITE_SETTING_DEMO_DATA, type CustomProductCategorySection } from "../../constant/LandingPageData";
+import {
+  SITE_SETTING_DEMO_DATA,
+  type CustomProductCategorySection,
+} from "../../constant/LandingPageData";
 // interface DealFilterBtn {
 //   tag: string;
 //   label: string;
@@ -16,13 +19,16 @@ import { SITE_SETTING_DEMO_DATA, type CustomProductCategorySection } from "../..
 const storedId = localStorage.getItem("selectedStore");
 export const useDealsSection = () => {
   // const { data: sections } = useGetHomeSectionsQuery();
-  const dealsSectionData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "product-collection-custom-1") as CustomProductCategorySection;
+  const dealsSectionData = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.id === "product-collection-custom-1"
+  ) as CustomProductCategorySection;
   const [wishList] = useWishListMutation();
   const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard();
   // const dealSection: DealSection = sections?.sections?.dealSection ?? {};
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
-  const {title,subtitle,showTimer,isVisible,endTimeIso,sideButtons,content} = dealsSectionData
+  const { title, subtitle, showTimer, isVisible, endTimeIso, sideButtons, content } =
+    dealsSectionData;
   // const title = dealSection.title ?? "";
   // const sectionProps = dealSection.props ?? {};
   const timerConfig = endTimeIso;
@@ -34,9 +40,7 @@ export const useDealsSection = () => {
 
   // UI state
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [activeFilter, setActiveFilter] = useState<string>(
-    sideButtons[0]?.tag
-  );
+  const [activeFilter, setActiveFilter] = useState<string>(sideButtons[0]?.tag);
 
   // timer remaining ms initial calc
   const [remainingMs, setRemainingMs] = useState<number | null>(() => {
@@ -51,9 +55,9 @@ export const useDealsSection = () => {
 
   // computed products & slides
   // const productsForActiveFilter: Product[] = (dealProducts[activeFilter] ?? []) as Product[];
-   const productsForActiveFilter = content.filter((item)=>{
+  const productsForActiveFilter = content.filter((item) => {
     return item.tags?.includes(activeFilter);
-   });
+  });
   const totalSlides = Math.max(1, Math.ceil((productsForActiveFilter?.length ?? 0) / 4));
 
   const timeParts = useMemo(() => {

@@ -12,7 +12,10 @@ import {
   Dot,
 } from "./RecentlyView.style";
 import { useRecentlyViewed } from "./RecentlyView.hook";
-import { SITE_SETTING_DEMO_DATA, type ProductCollectionSection } from "../../constant/LandingPageData";
+import {
+  SITE_SETTING_DEMO_DATA,
+  type ProductCollectionSection,
+} from "../../constant/LandingPageData";
 
 type RecentlyViewedProps = {
   onSlideChange?: (index: number) => void;
@@ -30,11 +33,13 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   //   // isLoading: rvLoading,
   //   // isError: rvError,
   // } = useGetRecentlyViewedQuery({ userId: 1, limit: 10 });
-  const rvData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "product-collection-custom-2") as ProductCollectionSection;
+  const rvData = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.id === "product-collection-custom-2"
+  ) as ProductCollectionSection;
   // const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
   // const rvData = rvResp?.recentlyViewed;
-  const isVisible = rvData?.isVisible ;
-  const titleText = rvData?.title
+  const isVisible = rvData?.isVisible;
+  const titleText = rvData?.title;
 
   const {
     scrollRef,
