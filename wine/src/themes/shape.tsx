@@ -5,6 +5,7 @@ const shape = {
   borderRadius: "16px",
   borderRadiuspx: "8px",
   borderRadius12: "12px",
+  dashedRed: `1px dashed ${palette.primary.dark}`,
   borderRed: `1px solid ${palette.primary.dark}`,
   borderSuccess: `1px solid ${palette.success.main}`,
   borderWhiteMain: `1px solid ${palette.white.main}`,

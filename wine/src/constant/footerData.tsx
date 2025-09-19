@@ -3,7 +3,7 @@ export const FOOTER_DATA = {
   companyInfo: {
     title: "Company Info",
     links: [
-      { text: "About Us", href: "#" },
+      { text: "About Us", href: "/aboutUs" },
       { text: "Careers", href: "#" },
       { text: "Store Locator", href: "#" },
     ],

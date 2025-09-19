@@ -3,14 +3,15 @@ import { BannerContainer, BannerDiscription, BannerHeading } from "./PrivacyBann
 
 interface BannerProps {
   heading: string;
-  description: string;
+  description?: string;
 }
 
 const PrivacyBaneer: React.FC<BannerProps> = ({ heading, description }) => {
   return (
     <BannerContainer>
       <BannerHeading>{heading}</BannerHeading>
-      <BannerDiscription>{description}</BannerDiscription>
+      {description &&  <BannerDiscription>{description}</BannerDiscription>}
+     
     </BannerContainer>
   );
 };
