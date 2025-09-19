@@ -30,7 +30,7 @@ export const useNavigation = (
   // banners: Banner[] = [],
   interval = 3000
 ) => {
-  const storedId = localStorage.getItem("selectedStore");
+  const storedIdString = localStorage.getItem("selectedStore");
   const dispatch = useDispatch();
   const { data } = useGetMenuItemsQuery();
   //  const menuItems = useSelector((state: RootState) => state.menu.menuList);
@@ -42,16 +42,19 @@ export const useNavigation = (
   } = useGetHeaderBannersQuery();
   const userIdString = localStorage.getItem("userId");
   const userId = userIdString ? Number(userIdString) : undefined;
-  const cartQueryParams = {
-    userId: userId,
-    storeId: storedId || undefined,
-    userIP: "1",
-  };
+
+  const storedId = storedIdString ? Number(storedIdString) : 0;
+const cartQueryParams = {
+  userId: userId,
+  storeId: storedIdString && Number(storedIdString) > 0 ? storedIdString : undefined,
+  userIP: "1",
+};
+
   const { data: cartData, refetch: refetchCartCount } = useGetCartCountQuery(cartQueryParams);
   const { data: deliveryData, isLoading: deliveryLoading } = useGetDeliveryPartnersQuery({
-    storeId: storedId || undefined,
-  });
-  console.log
+  storeId: storedId > 0 ? storedId.toString() : '1',
+});
+
   const deliveryPartners = deliveryData?.deliveryPartners ?? [];
   const remoteBanners =
     headerBannerData?.banners && Array.isArray(headerBannerData.banners)
