@@ -51,6 +51,7 @@ export const useNavigation = (
   const { data: deliveryData, isLoading: deliveryLoading } = useGetDeliveryPartnersQuery({
     storeId: storedId || undefined,
   });
+  console.log
   const deliveryPartners = deliveryData?.deliveryPartners ?? [];
   const remoteBanners =
     headerBannerData?.banners && Array.isArray(headerBannerData.banners)

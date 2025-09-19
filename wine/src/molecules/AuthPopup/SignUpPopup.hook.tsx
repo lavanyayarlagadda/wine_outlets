@@ -3,7 +3,6 @@ import { useState } from "react";
 import { signUpValidationSchema } from "../../validationSchemas/authPopupSchema";
 import { useSignUpMutation } from "../../store/apis/Authentication/AuthAPI";
 import { useDispatch } from "react-redux";
-import type { SignUpResponse } from "../../store/Interfaces/AuthInterface/AuthIterface";
 import { setCredentials } from "../../store/slices/Auth/AuthSlice";
 import { toast } from "react-toastify";
 
@@ -68,7 +67,7 @@ export const useSignUp = (onClose: () => void) => {
     try {
       const isValid = await validate();
       if (isValid) {
-        const result: SignUpResponse = await signUp({
+                const result = await signUp({
           userName: `${form.firstName} ${form.lastName}`,
           firstName: form.firstName,
           lastName: form.lastName,
@@ -79,10 +78,11 @@ export const useSignUp = (onClose: () => void) => {
           vipCustomerId: form.vipId,
         }).unwrap();
         localStorage.setItem("token", result.token);
+                localStorage.setItem("userId", result.customer.customerId);
         dispatch(
           setCredentials({
             token: result.token,
-            customer: result,
+            customer: result.customer,
           })
         );
         onClose();

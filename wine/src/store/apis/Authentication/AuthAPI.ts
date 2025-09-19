@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
-import type { SignUpForm, SignUpResponse } from "../../Interfaces/AuthInterface/AuthIterface";
+import type { SignUpForm } from "../../Interfaces/AuthInterface/AuthIterface";
 
 export const AuthAPI = createApi({
   reducerPath: "authApi",
@@ -16,7 +16,7 @@ export const AuthAPI = createApi({
       }),
     }),
 
-    signUp: builder.mutation<SignUpResponse, SignUpForm>({
+    signUp: builder.mutation<any, SignUpForm>({
       query: (newCustomer) => ({
         url: `/customer/signup`,
         method: "POST",
