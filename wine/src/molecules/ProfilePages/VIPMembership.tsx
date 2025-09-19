@@ -6,6 +6,7 @@ import * as Styled from "./ProfilePages.style";
 import shape from "../../themes/shape";
 import { useProfileForm } from "./ProfilePages.hook";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import palette from "../../themes/palette";
 
 const VipMembership = ({ initialData }: { initialData?: any }) => {
   const { vipCode, handleVipCodeChange, setShowPassword, showPassword } =
@@ -26,8 +27,8 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
             <CustomButton
               text={"View VIP Benefits"}
               onClick={() => {}}
-              bgColor={theme.palette.white.main}
-              color={theme.palette.primary.dark}
+              bgColor={palette.white.main}
+              color={palette.primary.dark}
               btnBorderColor={theme.palette.primary.dark}
               border={shape.borderRed}
               profile={true}
@@ -81,9 +82,14 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
                 required
                 type={showPassword ? "text" : "password"}
                 endIcon={
-                  <IconButton onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
+               <IconButton
+  onClick={() =>
+    setShowPassword((prev) => ({ ...prev, old: !prev.old }))
+  }
+>
+  {showPassword.old ? <VisibilityOff /> : <Visibility />}
+</IconButton>
+
                 }
                 placeholder="Enter Your VIP-Bar Code"
               />

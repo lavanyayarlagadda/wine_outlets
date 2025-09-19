@@ -191,56 +191,56 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     dispatch(setProductsData(newProductsList));
   };
 
-  const handleSliderChange = (
-    categoryId: string,
-    value: number | number[],
-    categoryName: string
-  ) => {
-    const currentProductsList = { ...productsData };
-    let storeValue: string;
+const handleSliderChange = (
+  categoryId: string,
+  value: number | number[],
+  categoryName: string
+) => {
+  const currentProductsList = { ...productsData };
+  let storeValue: string = "";
 
-    if (categoryName === "Price Range" && Array.isArray(value)) {
-      currentProductsList.price = { min: value[0], max: value[1] }; // keep for filtering
-      storeValue = `${value[0]}-${value[1]}`; // store as string
+  if (Array.isArray(value)) {
+    if (categoryName === "Price Range") {
+      // Price logic
+      currentProductsList.price = { min: value[0], max: value[1] };
+      storeValue = `${value[0]}-${value[1]}`;
     } else if (categoryName === "Alcohol Content") {
-      const valStr = Array.isArray(value) ? `${value[0]}%` : `${value}%`;
-      currentProductsList.alcoholContent = valStr;
-      storeValue = valStr;
+      // Alcohol Content logic
+      currentProductsList.alcoholContent = { min: value[0], max: value[1] };
+      storeValue = `${value[0]}-${value[1]}`;
     } else {
-      storeValue = Array.isArray(value) ? value.join(",") : String(value);
+      // Generic case
+      storeValue = value.join(",");
     }
+  }
 
-    dispatch(setProductsData(currentProductsList));
+  dispatch(setProductsData(currentProductsList));
 
-    // 🔹 Convert value to array for filters
-    const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
-    setFilters((prev) => {
-      const newFilters = { ...prev, [categoryId]: valArray };
-      onFilterChange?.(newFilters);
-      return newFilters;
-    });
+  // 🔹 Update filters
+  const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
+  setFilters((prev) => {
+    const newFilters = { ...prev, [categoryId]: valArray };
+    onFilterChange?.(newFilters);
+    return newFilters;
+  });
 
-    // 🔹 Update selectedNames without overwriting other keys
-    const key =
-      categoryName === "Price Range"
-        ? "price"
-        : categoryName === "Alcohol Content"
-          ? "alcoholContent"
-          : categoryId;
+  // 🔹 Save only the latest value in selectedNames
+  const key =
+    categoryName === "Price Range"
+      ? "price"
+      : categoryName === "Alcohol Content"
+      ? "alcoholContent"
+      : categoryId;
 
-    const currentValues = selectedNames[key] || [];
+  dispatch(
+    setSelectedNames({
+      ...selectedNames,
+      [key]: [storeValue], // always override with latest value
+    })
+  );
+};
 
-    const updatedValues = currentValues.includes(storeValue)
-      ? currentValues.filter((v: string) => v !== storeValue)
-      : [...currentValues, storeValue];
 
-    dispatch(
-      setSelectedNames({
-        ...selectedNames,
-        [key]: updatedValues,
-      })
-    );
-  };
 
   const handleClearAll = () => {
     setFilters({});

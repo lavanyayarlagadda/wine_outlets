@@ -147,12 +147,14 @@ export const useProductList = ({
       }
       const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
       const selectedVals = mergedSelectedNames[normalizedKey];
+      console.log(selectedVals,"SELECETDVALUES")
 
       if (!selectedVals || selectedVals.length === 0) {
         payload[key] = Array.isArray(payload[key]) ? [] : "";
         return;
       }
-      if (normalizedKey === "price") {
+      if (normalizedKey === "price" || normalizedKey === "alcoholcontent") {
+        console.log(normalizedKey,"normalizedKey")
         const valStr = selectedVals[0];
         if (valStr.includes("-")) {
           const [minStr, maxStr] = valStr.split("-");
