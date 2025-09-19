@@ -14,6 +14,7 @@ export const BannerContainer = styled(Box)(({ theme }) => ({
 export const BannerHeading = styled(Typography)(() => ({
   fontSize: useFontSize(32),
   marginBottom: "10px",
+  fontWeight:600
 }));
 
 export const BannerDiscription = styled(Typography)(() => ({
@@ -21,4 +22,5 @@ export const BannerDiscription = styled(Typography)(() => ({
   margin: "0 auto",
   fontSize: useFontSize(18),
   lineHeight: "1.5",
+  fontWeight:600
 }));
