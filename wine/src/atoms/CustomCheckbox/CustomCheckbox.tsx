@@ -1,4 +1,5 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox } from "@mui/material";
+import { VerticalFormControlLabel } from "../../organisms/Filter/FilterPanel.style";
 
 interface Props {
   label: string;
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const CustomCheckbox: React.FC<Props> = ({ label, checked, onChange }) => (
-  <FormControlLabel control={<Checkbox checked={checked} onChange={onChange} />} label={label} />
+  <VerticalFormControlLabel control={<Checkbox checked={checked} onChange={onChange} />} label={label} />
 );
 
 export default CustomCheckbox;
