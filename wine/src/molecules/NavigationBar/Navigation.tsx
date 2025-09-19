@@ -49,7 +49,7 @@ import uberImg from "../../assets/orderWith/uber.svg";
 import doordashImg from "../../assets/orderWith/doordash.svg";
 import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
-import { logout, profile, myorders,  wishlist } from "../../assets";
+import { logout, profile, myorders, wishlist } from "../../assets";
 import { useHomeLogic } from "../../pages/Home/Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
@@ -173,18 +173,18 @@ const Navigation = () => {
           },
         ],
       },
-       {
-        id: 5,
-        name: "Promotions",
-        categories: [
-          {
-            title: "Promotions",
-            items: [
-              { id: 501, listName: "New Arrivals" },
-              { id: 502, listName: "Events" },
-              { id: 503, listName: "VIP Benefits" },
-            ],
-          },
+    ],
+  };
+
+  const promotionsMenuData = {
+    name: "Promotions",
+    categories: [
+      {
+        title: "Promotions",
+        items: [
+          { id: 501, listName: "New Arrivals" },
+          { id: 502, listName: "Events" },
+          { id: 503, listName: "VIP Benefits" },
         ],
       },
     ],
@@ -472,6 +472,55 @@ const Navigation = () => {
               </StyledMenu>
             </div>
           ))}
+
+          {/* Promotions Menu */}
+          <div>
+            <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, promotionsMenuData.name)}>
+              {promotionsMenuData.name}{" "}
+              {menuOpen[promotionsMenuData.name] ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}
+            </DropdownTriggerNoBorder>
+
+            <StyledMenu
+              anchorEl={anchorEl[promotionsMenuData.name]}
+              open={menuOpen[promotionsMenuData.name] && !mobileMenuOpen}
+              onClose={() => handleMenuClose(promotionsMenuData.name)}
+            >
+              {promotionsMenuData.categories.map((category, idx) => (
+                <CategoryColumn key={idx}>
+                  <CategoryTitle
+                    onClick={() => {
+                      handleMenuClose(promotionsMenuData.name);
+                      navigate(`/productsList?category=${promotionsMenuData.name.toLowerCase()}`);
+                    }}
+                  >
+                    {category.title} →
+                  </CategoryTitle>
+
+                  <ColumnsWrapper>
+                    <Column>
+                      {category.items.map((item) => (
+                        <DropdownMenuItemStyled
+                          key={item.id}
+                          onClick={() => {
+                            navigate(
+                              `/productsList?category=${promotionsMenuData.name.toLowerCase()}&id=${item.id}`
+                            );
+                            handleMenuClose(promotionsMenuData.name);
+                          }}
+                        >
+                          {item.listName}
+                        </DropdownMenuItemStyled>
+                      ))}
+                    </Column>
+                  </ColumnsWrapper>
+                </CategoryColumn>
+              ))}
+            </StyledMenu>
+          </div>
 
           {/* <NavMenu>Tastings</NavMenu>
           <NavMenu>Events</NavMenu> */}
