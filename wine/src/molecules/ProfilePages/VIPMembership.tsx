@@ -28,7 +28,7 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
               text={"View VIP Benefits"}
               onClick={() => {}}
               bgColor={palette.white.main}
-              color={theme.palette.primary.dark}
+              color={palette.primary.dark}
               btnBorderColor={theme.palette.primary.dark}
               border={shape.borderRed}
               profile={true}
