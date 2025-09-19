@@ -19,14 +19,17 @@ import { logo } from "../../assets";
 import { StoreLocator } from "../../molecules";
 import { useNavigate } from "react-router-dom";
 import { useNavigation } from "../../molecules/NavigationBar/Navigation.hook";
-import { useHomeLogic } from "../../pages/Home/Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import type { HomeHookReturn } from "../../pages/Home/Home.hook";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  stores: HomeHookReturn["stores"];
+  storesData: HomeHookReturn["storesData"];
+}
+
+const Footer: React.FC<FooterProps> = ({ stores, storesData }) => {
   const [isStoreLocator, setIsStoreLocator] = React.useState(false);
-
-  const { stores, storesData } = useHomeLogic();
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
   const { selectedStore } = useNavigation(searchTerm ? storesData : stores);
   const navigate = useNavigate();

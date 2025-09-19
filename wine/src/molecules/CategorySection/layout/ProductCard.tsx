@@ -20,11 +20,11 @@ const ProductCardSection: React.FC<{ categories: BannerImageItem[] }> = ({ categ
   return (
     <Box>
       <CustomizeCardWrapper>
-        {displayData.map((item,index) => (
+        {displayData.map((item, index) => (
           <StyledCard
             key={index}
             onClick={() => {
-              navigate(`/productsList?tags=${item?.tags?.join(',')}`);
+              navigate(`/productsList?category=${item?.tags?.join(",")}`);
             }}
             role="button"
           >

@@ -7,7 +7,7 @@ export const CardContainer = styled(Box)(({ theme }) => ({
   borderRadius: "12px",
   padding: theme.spacing(3),
   boxShadow: "0px 2px 6px rgba(0,0,0,0.08)",
-  margin:"20px"
+  margin: "20px",
 }));
 
 export const HeaderRow = styled(Box)(() => ({
@@ -26,18 +26,18 @@ export const InfoIconWrapper = styled(Box)(({ theme }) => ({
 
 export const CardHeader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.dark,
-  fontSize:useFontSize(24),
-  fontWeight:600
+  fontSize: useFontSize(24),
+  fontWeight: 600,
 }));
 
 export const ContentText = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   color: theme.palette.text.secondary,
-  fontSize:useFontSize(18)
+  fontSize: useFontSize(18),
 }));
 export const InnerCardTitle = styled(Typography)(() => ({
-  fonntSize:useFontSize(16),
-  fontWeight:500
+  fonntSize: useFontSize(16),
+  fontWeight: 500,
 }));
 
 export const InnerCard = styled(Box)(({ theme }) => ({
@@ -47,12 +47,12 @@ export const InnerCard = styled(Box)(({ theme }) => ({
   border: `1px solid ${theme.palette.grey[300]}`,
 }));
 
-export const ListContainer = styled(Box)(({theme}) => ({
+export const ListContainer = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "1fr 1fr",
   marginTop: "8px",
   gap: "8px",
-    [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("sm")]: {
     gridTemplateColumns: "1fr",
   },
 }));
@@ -64,8 +64,8 @@ export const ListItem = styled(Box)(() => ({
 }));
 
 export const ListText = styled(Typography)(({ theme }) => ({
-   color: theme.palette.text.secondary,
-   fontSize:useFontSize(16)
+  color: theme.palette.text.secondary,
+  fontSize: useFontSize(16),
 }));
 
 // Styling check icon via class

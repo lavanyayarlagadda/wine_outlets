@@ -11,7 +11,10 @@ import {
 import { useNavigate } from "react-router-dom";
 // import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 // import type { ValueSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-import { SITE_SETTING_DEMO_DATA, type BannerCollectionSection } from "../../constant/LandingPageData";
+import {
+  SITE_SETTING_DEMO_DATA,
+  type BannerCollectionSection,
+} from "../../constant/LandingPageData";
 import { CustomTitleSection } from "../../atoms";
 import { renderOfferCard } from "../LimitedTimeOfferCarousel/TimeOfferCarousel";
 import { Box } from "@mui/material";
@@ -20,8 +23,10 @@ import { Box } from "@mui/material";
 const Trending = () => {
   // const { data: sections } = useGetHomeSectionsQuery();
   // const valueSection: ValueSection = sections?.sections?.valueSection ?? {};
-  const valueSection = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "collection-2") as BannerCollectionSection;
-  const { isVisible,  content ,title , subtitle} = valueSection;
+  const valueSection = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.id === "collection-2"
+  ) as BannerCollectionSection;
+  const { isVisible, content, title, subtitle } = valueSection;
   // const { media, Action } = mainCard ?? {};
   const navigate = useNavigate();
   if (!isVisible) return null;
@@ -29,7 +34,7 @@ const Trending = () => {
   return (
     <Container>
       <Wrapper>
-        <CustomTitleSection title={title || ""} subtitle={subtitle}/>
+        <CustomTitleSection title={title || ""} subtitle={subtitle} />
         {/* <LeftSectionBox>
           <BackgroundImage backgroundImage={media?.url} />
           <ContentContainer
@@ -40,10 +45,12 @@ const Trending = () => {
         </LeftSectionBox> */}
         <RightSectionBox>
           {content?.map((card, index) => (
-            <Box onClick={()=>{
-              navigate(`/productsList?tags=${card?.tags?.join(',')}`)
-            }}>
-             {renderOfferCard(card,index)}
+            <Box
+              onClick={() => {
+                navigate(`/productsList?tags=${card?.tags?.join(",")}`);
+              }}
+            >
+              {renderOfferCard(card, index)}
             </Box>
             // below is the UI of the card with button
             // <CustomCard

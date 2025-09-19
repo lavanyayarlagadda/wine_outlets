@@ -7,12 +7,10 @@ export interface Category {
   items: string[];
 }
 
-
 export interface MenuSection {
   name: string;
   categories: Category[];
 }
-
 
 export interface MenuResponse {
   menuList: MenuSection[];

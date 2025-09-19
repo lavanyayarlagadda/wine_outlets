@@ -3,11 +3,9 @@ export interface Range {
   max: number;
 }
 
-
-
 export interface ProductListItems {
   cartList: string[];
-selectedNames: Record<string, string[]>;
+  selectedNames: Record<string, string[]>;
   productsData: any;
   productsViewData: any;
   vintageYearsData: any;

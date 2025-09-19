@@ -11,7 +11,9 @@ import { SITE_SETTING_DEMO_DATA, type FeaturedBrandSection } from "../../constan
 export const useBrands = () => {
   // const { data: sections } = useGetHomeSectionsQuery();
   const navigate = useNavigate();
-  const raw = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "featured-brand-1") as FeaturedBrandSection;
+  const raw = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.id === "featured-brand-1"
+  ) as FeaturedBrandSection;
 
   // const raw = useMemo<BrandSection>(() => {
   //   return sections?.sections?.brandSection || {};
@@ -40,7 +42,7 @@ export const useBrands = () => {
   //   return item.image ?? item.Image ?? "";
   // };
 
-  const handleContainerClick = (brand:string) => {
+  const handleContainerClick = (brand: string) => {
     navigate(`/productsList?brand=${brand}`);
   };
 

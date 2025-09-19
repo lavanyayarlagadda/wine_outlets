@@ -11,7 +11,6 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import type { RootState } from "../../store";
 import { SITE_SETTING_DEMO_DATA, type HeroBannerSection } from "../../constant/LandingPageData";
 
-
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
   const [isAgeVerified, setIsAgeVerified] = useState(false);
@@ -32,7 +31,9 @@ export const useHomeLogic = () => {
 
   // const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
   // const heroSection = SITE_SETTING_DEMO_DATA.pageSections.find(s => s.type === 'hero-banner') as HeroBannerSection | undefined;
-  const sections = SITE_SETTING_DEMO_DATA.pageSections.find(s => s.type === 'hero-banner') as HeroBannerSection;
+  const sections = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.type === "hero-banner"
+  ) as HeroBannerSection;
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
   const {
     data: searchData,
@@ -66,9 +67,6 @@ export const useHomeLogic = () => {
   };
 
   useEffect(() => {
-    if (isError) {
-      toast.error("Failed to load Stores");
-    }
     if (searchError) {
       toast.error("Failed to load Stores");
     }
@@ -92,5 +90,7 @@ export const useHomeLogic = () => {
     // sectionsLoading,
     searchLoading,
     storesData,
+    isError,
   };
 };
+export type HomeHookReturn = ReturnType<typeof useHomeLogic>;

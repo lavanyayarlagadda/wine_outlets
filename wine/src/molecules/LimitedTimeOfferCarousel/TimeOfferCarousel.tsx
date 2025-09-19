@@ -14,17 +14,21 @@ import {
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 // import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
-import { SITE_SETTING_DEMO_DATA, type BannerCollectionSection, type BannerImageItem } from "../../constant/LandingPageData";
+import {
+  SITE_SETTING_DEMO_DATA,
+  type BannerCollectionSection,
+  type BannerImageItem,
+} from "../../constant/LandingPageData";
 // import type {
 //   LimitedTimeOfferSection,
 //   OfferItem,
 // } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
-export const renderOfferCard = (offer: BannerImageItem, id:number) => (
-    <OfferCard key={id}>
-      <CardImage src={offer.imageUrl} alt={`offer-${id}`} />
-      {/* this part may be needed later on */}
-      {/* <CardOverlay>
+export const renderOfferCard = (offer: BannerImageItem, id: number) => (
+  <OfferCard key={id}>
+    <CardImage src={offer.imageUrl} alt={`offer-${id}`} />
+    {/* this part may be needed later on */}
+    {/* <CardOverlay>
         {offer.highlight && <HighlightText>{offer.highlight}</HighlightText>}
         <OfferText>{offer.highlight ? offer.title : offer.title}</OfferText>
         <OfferSubtext>
@@ -36,12 +40,14 @@ export const renderOfferCard = (offer: BannerImageItem, id:number) => (
           ))}
         </OfferSubtext>
       </CardOverlay> */}
-    </OfferCard>
-  );
+  </OfferCard>
+);
 
 const LimitedTimeOffersCarousel = () => {
-  const timeOfferData = SITE_SETTING_DEMO_DATA.pageSections.find((s) => s.id === "collection-1") as BannerCollectionSection;
-    // const { data: sections } = useGetHomeSectionsQuery();
+  const timeOfferData = SITE_SETTING_DEMO_DATA.pageSections.find(
+    (s) => s.id === "collection-1"
+  ) as BannerCollectionSection;
+  // const { data: sections } = useGetHomeSectionsQuery();
   const { title, subtitle, content, isVisible }: BannerCollectionSection = timeOfferData ?? {
     isVisible: false,
     title: "",
@@ -59,8 +65,6 @@ const LimitedTimeOffersCarousel = () => {
     setCurrentIndex(index);
   };
 
- 
-
   if (!isVisible) return null;
 
   return (
@@ -70,9 +74,12 @@ const LimitedTimeOffersCarousel = () => {
         <>
           <CarouselWrapper>
             <CarouselTrack currentIndex={currentIndex}>
-              {content.map((offer,index) => (
-                <CarouselSlide key={index} onClick={() => navigate(`/productsList?tags=${offer.tags.join(',')}` || "/")}>
-                  {renderOfferCard(offer,index)}
+              {content.map((offer, index) => (
+                <CarouselSlide
+                  key={index}
+                  onClick={() => navigate(`/productsList?tags=${offer.tags.join(",")}` || "/")}
+                >
+                  {renderOfferCard(offer, index)}
                 </CarouselSlide>
               ))}
             </CarouselTrack>
@@ -93,8 +100,8 @@ const LimitedTimeOffersCarousel = () => {
       {/* Mobile horizontal scroll */}
       {isMobile && (
         <MobileScrollWrapper>
-          {content.map((offer,index) => (
-            <CarouselSlide key={index}>{renderOfferCard(offer,index)}</CarouselSlide>
+          {content.map((offer, index) => (
+            <CarouselSlide key={index}>{renderOfferCard(offer, index)}</CarouselSlide>
           ))}
         </MobileScrollWrapper>
       )}

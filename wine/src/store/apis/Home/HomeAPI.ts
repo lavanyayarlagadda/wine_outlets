@@ -150,5 +150,5 @@ export const {
   useGetDeliveryPartnersQuery,
   useGetHeaderBannersQuery,
   useStoreSearchlocatorQuery,
-  useGetMenuItemsQuery
+  useGetMenuItemsQuery,
 } = homeApi;

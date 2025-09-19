@@ -8,7 +8,7 @@ import { cartCheckoutApi } from "./apis/CartCheckOut/CartCheckOutAPI";
 import homeSlice from "./slices/Home/Home";
 import { AuthAPI } from "./apis/Authentication/AuthAPI";
 import authSlice from "./slices/Auth/AuthSlice";
-import menuItemSlice from './slices/MenuItems/MenuItemsSlice'
+import menuItemSlice from "./slices/MenuItems/MenuItemsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +16,7 @@ export const store = configureStore({
     cartOverViewSlice: cartOverViewSlice,
     homeSlice: homeSlice,
     authSlice: authSlice,
-    menu:menuItemSlice,
+    menu: menuItemSlice,
     [productListApi.reducerPath]: productListApi.reducer,
     [productViewApi.reducerPath]: productViewApi.reducer,
     [homeApi.reducerPath]: homeApi.reducer,

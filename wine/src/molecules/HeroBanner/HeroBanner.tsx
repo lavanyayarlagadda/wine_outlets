@@ -9,7 +9,7 @@ import {
   Dot,
 } from "./HeroBanner.style";
 // import { HeroOverlay } from "../../atoms";
-import { LandingPageData, type BannerImageItem } from "../../constant/LandingPageData";
+import { type BannerImageItem } from "../../constant/LandingPageData";
 // import type { HeroSlide } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
 export interface SlideData {
@@ -37,12 +37,7 @@ export interface HeroBannerProps {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   isVisible: boolean;
 }
-const HeroBanner = ({
-  slides,
-  autoPlayInterval = 5000,
-  setOpen,
-  isVisible,
-}: HeroBannerProps) => {
+const HeroBanner = ({ slides, autoPlayInterval = 5000, setOpen, isVisible }: HeroBannerProps) => {
   const navigate = useNavigate();
   const {
     currentSlide,
@@ -71,7 +66,7 @@ const HeroBanner = ({
           // key={slide.id}
           key={index}
           isActive={index === currentSlide}
-          onClick={() => navigate(`/productsList?tags=${slide?.tags?.join(',')}` || "/")}
+          onClick={() => navigate(`/productsList?tags=${slide?.tags?.join(",")}` || "/")}
         >
           <SlideBackground
             backgroundImage={slide.imageUrl ?? ""}

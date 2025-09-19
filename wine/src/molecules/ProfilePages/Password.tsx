@@ -45,7 +45,9 @@ const Password = () => {
               error={passwordErrors.oldPassword}
               type={showPassword.old ? "text" : "password"}
               endIcon={
-                <IconButton onClick={() => setShowPassword((prev) => ({...prev, old: !prev.old }))}>
+                <IconButton
+                  onClick={() => setShowPassword((prev) => ({ ...prev, old: !prev.old }))}
+                >
                   {showPassword.old ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               }
@@ -66,7 +68,9 @@ const Password = () => {
               error={passwordErrors.password}
               type={showPassword.new ? "text" : "password"}
               endIcon={
-                <IconButton onClick={() => setShowPassword((prev) => ({...prev, new:!prev.new}))}>
+                <IconButton
+                  onClick={() => setShowPassword((prev) => ({ ...prev, new: !prev.new }))}
+                >
                   {showPassword.new ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               }
@@ -82,7 +86,9 @@ const Password = () => {
               error={passwordErrors.confirmPassword}
               type={showPassword.confirm ? "text" : "password"}
               endIcon={
-                <IconButton onClick={() => setShowPassword((prev) => ({...prev, confirm:!prev.confirm}))}>
+                <IconButton
+                  onClick={() => setShowPassword((prev) => ({ ...prev, confirm: !prev.confirm }))}
+                >
                   {showPassword.confirm ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               }

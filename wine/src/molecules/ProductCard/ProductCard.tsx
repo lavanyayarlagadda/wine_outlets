@@ -100,7 +100,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
         image={product.imageUrl}
         alt={product.title}
         sx={{ objectFit: "cover", cursor: "pointer" }}
-        onClick={() => navigate(`productView?productId=${product.id}&size=${product.size}&vintage=${product.vintage}`)}
+        onClick={() =>
+          navigate(
+            `productView?productId=${product.id}&size=${product.size}&vintage=${product.vintage}`
+          )
+        }
       />
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}

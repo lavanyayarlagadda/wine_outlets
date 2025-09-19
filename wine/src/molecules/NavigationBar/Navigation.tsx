@@ -50,14 +50,17 @@ import doordashImg from "../../assets/orderWith/doordash.svg";
 import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
 import { logout, profile, myorders, wishlist } from "../../assets";
-import { useHomeLogic } from "../../pages/Home/Home.hook";
+import type { HomeHookReturn } from "../../pages/Home/Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 
-const Navigation = () => {
-  const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
+interface NavigationProps {
+  stores: HomeHookReturn["stores"];
+  storesData: HomeHookReturn["storesData"];
+}
 
-  const { stores, storesData } = useHomeLogic();
+const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
+  const menuKeys = ["Wine", "Beer", "Liquor", "store", "delivery", "cart"];
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
   const {
     anchorEl,

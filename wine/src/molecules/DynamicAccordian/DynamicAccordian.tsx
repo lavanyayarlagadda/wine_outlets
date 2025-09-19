@@ -7,7 +7,7 @@ import {
   MainContainer,
   IconWrapper,
   TitleText,
-  ContentText
+  ContentText,
 } from "./DynamicAccordian.style";
 
 interface ReusableAccordionProps {
@@ -30,7 +30,11 @@ const DynamicAccordian: React.FC<ReusableAccordionProps> = ({
   return (
     <MainContainer>
       <AccordianContainer defaultExpanded={defaultExpanded}>
-        <AccSummary expandIcon={<ExpandMoreIcon />} aria-controls={`${title}-content`} id={`${title}-header`}>
+        <AccSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls={`${title}-content`}
+          id={`${title}-header`}
+        >
           {icon && <IconWrapper>{icon}</IconWrapper>}
           <TitleText>{title}</TitleText>
         </AccSummary>

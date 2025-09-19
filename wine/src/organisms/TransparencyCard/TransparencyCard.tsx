@@ -12,63 +12,65 @@ import {
   ListText,
   CardHeader,
   InnerCardTitle,
-  RedCheckIcon
+  RedCheckIcon,
 } from "./TransparencyCard.style";
-
 
 const TransparencyCard: React.FC = () => {
   return (
-
     <CardContainer>
       <HeaderRow>
         <InfoIconWrapper>
           <InfoOutlinedIcon />
         </InfoIconWrapper>
-        <CardHeader>
-          Transparency at Wine Outlet
-        </CardHeader>
+        <CardHeader>Transparency at Wine Outlet</CardHeader>
       </HeaderRow>
 
       <ContentText>
-        We want to make our information policies clear and accessible. This
-        privacy policy outlines how we collect, use, and protect your personal
-        information.
+        We want to make our information policies clear and accessible. This privacy policy outlines
+        how we collect, use, and protect your personal information.
       </ContentText>
 
       <InnerCard>
-        <InnerCardTitle>
-          In this policy, you'll learn about:
-        </InnerCardTitle>
+        <InnerCardTitle>In this policy, you'll learn about:</InnerCardTitle>
 
         <ListContainer>
           <ListItem>
-             <RedCheckIcon><CheckIcon /></RedCheckIcon>
+            <RedCheckIcon>
+              <CheckIcon />
+            </RedCheckIcon>
             <ListText>What personal data we collect</ListText>
           </ListItem>
 
           <ListItem>
-             <RedCheckIcon><CheckIcon /></RedCheckIcon>
+            <RedCheckIcon>
+              <CheckIcon />
+            </RedCheckIcon>
             <ListText>With whom it is shared</ListText>
           </ListItem>
 
           <ListItem>
-             <RedCheckIcon><CheckIcon /></RedCheckIcon>
+            <RedCheckIcon>
+              <CheckIcon />
+            </RedCheckIcon>
             <ListText>How we ensure its security</ListText>
           </ListItem>
 
           <ListItem>
-             <RedCheckIcon><CheckIcon /></RedCheckIcon>
+            <RedCheckIcon>
+              <CheckIcon />
+            </RedCheckIcon>
             <ListText>How we use it</ListText>
           </ListItem>
 
           <ListItem>
-             <RedCheckIcon><CheckIcon /></RedCheckIcon>
+            <RedCheckIcon>
+              <CheckIcon />
+            </RedCheckIcon>
             <ListText>How you can correct inaccuracies</ListText>
           </ListItem>
         </ListContainer>
       </InnerCard>
     </CardContainer>
-
   );
 };
 
