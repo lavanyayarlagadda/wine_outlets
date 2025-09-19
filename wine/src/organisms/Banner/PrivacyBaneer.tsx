@@ -10,8 +10,7 @@ const PrivacyBaneer: React.FC<BannerProps> = ({ heading, description }) => {
   return (
     <BannerContainer>
       <BannerHeading>{heading}</BannerHeading>
-      {description &&  <BannerDiscription>{description}</BannerDiscription>}
-     
+      {description && <BannerDiscription>{description}</BannerDiscription>}
     </BannerContainer>
   );
 };

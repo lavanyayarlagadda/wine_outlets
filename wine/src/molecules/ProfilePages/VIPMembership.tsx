@@ -82,14 +82,11 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
                 required
                 type={showPassword ? "text" : "password"}
                 endIcon={
-               <IconButton
-  onClick={() =>
-    setShowPassword((prev) => ({ ...prev, old: !prev.old }))
-  }
->
-  {showPassword.old ? <VisibilityOff /> : <Visibility />}
-</IconButton>
-
+                  <IconButton
+                    onClick={() => setShowPassword((prev) => ({ ...prev, old: !prev.old }))}
+                  >
+                    {showPassword.old ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
                 }
                 placeholder="Enter Your VIP-Bar Code"
               />

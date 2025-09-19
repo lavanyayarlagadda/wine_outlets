@@ -44,16 +44,16 @@ export const useNavigation = (
   const userId = userIdString ? Number(userIdString) : undefined;
 
   const storedId = storedIdString ? Number(storedIdString) : 0;
-const cartQueryParams = {
-  userId: userId,
-  storeId: storedIdString && Number(storedIdString) > 0 ? storedIdString : undefined,
-  userIP: "1",
-};
+  const cartQueryParams = {
+    userId: userId,
+    storeId: storedIdString && Number(storedIdString) > 0 ? storedIdString : undefined,
+    userIP: "1",
+  };
 
   const { data: cartData, refetch: refetchCartCount } = useGetCartCountQuery(cartQueryParams);
   const { data: deliveryData, isLoading: deliveryLoading } = useGetDeliveryPartnersQuery({
-  storeId: storedId > 0 ? storedId.toString() : '1',
-});
+    storeId: storedId > 0 ? storedId.toString() : "1",
+  });
 
   const deliveryPartners = deliveryData?.deliveryPartners ?? [];
   const remoteBanners =

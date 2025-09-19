@@ -16,7 +16,7 @@ const FilterTagList: React.FC<FilterTagListProps> = ({ filters }) => (
           <CustomChip
             key={name}
             label={name}
-            // onDelete={() => onDelete(name)}
+            //  onDelete={() => onDelete(name)}
           />
         ))
       ) : (

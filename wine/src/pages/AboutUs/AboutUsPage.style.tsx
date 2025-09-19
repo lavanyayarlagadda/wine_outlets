@@ -2,7 +2,6 @@ import { Box, Grid, styled, Typography } from "@mui/material";
 import { useFontSize } from "../../themes/fontSize";
 import shape from "../../themes/shape";
 
-
 export const PhilosophyContainer = styled(Box)(() => ({
   margin: "20px",
   display: "flex",
@@ -37,17 +36,14 @@ export const PhilosophyContent = styled(Typography)(() => ({
   textAlign: "center",
 }));
 
-
 export const TechSectionContainer = styled(Box)(() => ({
   padding: "20px 20px 0px 20px",
 }));
 
-
-
 export const TechGridContainer = styled(Grid)(() => ({
   display: "flex",
   alignItems: "flex-start",
-  gap: "32px", 
+  gap: "32px",
   flexWrap: "wrap",
 }));
 
@@ -83,11 +79,11 @@ export const FeatureBox = styled(Box)(() => ({
   gap: "12px",
 }));
 
-export const FeatureBoxRed = styled(FeatureBox)(({theme}) => ({
+export const FeatureBoxRed = styled(FeatureBox)(({ theme }) => ({
   borderColor: theme.palette.primary.dark,
 }));
 
-export const FeatureBoxGreen = styled(FeatureBox)(({theme}) => ({
+export const FeatureBoxGreen = styled(FeatureBox)(({ theme }) => ({
   borderColor: theme.palette.warning.light,
 }));
 
@@ -111,5 +107,3 @@ export const FeatureSubtitle = styled(Typography)(() => ({
   fontSize: useFontSize(14),
   color: "#666",
 }));
-
-

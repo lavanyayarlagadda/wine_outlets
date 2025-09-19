@@ -46,17 +46,6 @@ export const useRatingsBreakdown = () => {
     }
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Review submitted successfully!");
-      setRating(0);
-      setComment("");
-    }
-    if (isError) {
-      toast.error("Failed to submit review. Please try again.");
-    }
-  }, [isSuccess, ReviewError]);
-
   const {
     data: ReviewsData,
     isLoading,
@@ -67,6 +56,16 @@ export const useRatingsBreakdown = () => {
     limit: 10,
     rating: selectedFilter,
   });
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Review submitted successfully!");
+      setRating(0);
+      setComment("");
+    }
+    if (isError) {
+      toast.error("Failed to submit review. Please try again.");
+    }
+  }, [isSuccess, ReviewError]);
 
   const reviewSummary = ReviewsData?.reviews[0];
 

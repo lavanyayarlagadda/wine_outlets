@@ -76,7 +76,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
     setExpandedCats,
     expandedCats,
     subDepartmentCats,
-    departmentCats
+    departmentCats,
   } = useFilterPanel(categories, onFilterChange);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
@@ -88,14 +88,12 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
     }));
   };
 
-
   const toggleDepartmentExpand = (categoryId: string) => {
     setDepartmentCats((prev) => ({
       ...prev,
       [categoryId]: !prev[categoryId],
     }));
   };
-
 
   const toggleSubDepartmentExpand = (categoryId: string) => {
     setSubDepartmentCats((prev) => ({

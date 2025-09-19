@@ -67,7 +67,7 @@ export const useSignUp = (onClose: () => void) => {
     try {
       const isValid = await validate();
       if (isValid) {
-                const result = await signUp({
+        const result = await signUp({
           userName: `${form.firstName} ${form.lastName}`,
           firstName: form.firstName,
           lastName: form.lastName,
@@ -78,7 +78,7 @@ export const useSignUp = (onClose: () => void) => {
           vipCustomerId: form.vipId,
         }).unwrap();
         localStorage.setItem("token", result.token);
-                localStorage.setItem("userId", result.customer.customerId);
+        localStorage.setItem("userId", result.customer.customerId);
         dispatch(
           setCredentials({
             token: result.token,

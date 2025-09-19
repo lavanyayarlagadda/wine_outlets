@@ -18,10 +18,9 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const [filters, setFilters] = useState<Filters>({});
   const [openDrawer, setOpenDrawer] = useState(false);
   // States for see-more expansion
-const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});
-const [departmentCats, setDepartmentCats] = useState<{ [key: string]: boolean }>({});
-const [subDepartmentCats, setSubDepartmentCats] = useState<{ [key: string]: boolean }>({});
-
+  const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});
+  const [departmentCats, setDepartmentCats] = useState<{ [key: string]: boolean }>({});
+  const [subDepartmentCats, setSubDepartmentCats] = useState<{ [key: string]: boolean }>({});
 
   const { selectedNames, productsData } = useSelector((state: RootState) => state.productListSlice);
   const dispatch = useDispatch();
@@ -196,56 +195,54 @@ const [subDepartmentCats, setSubDepartmentCats] = useState<{ [key: string]: bool
     dispatch(setProductsData(newProductsList));
   };
 
-const handleSliderChange = (
-  categoryId: string,
-  value: number | number[],
-  categoryName: string
-) => {
-  const currentProductsList = { ...productsData };
-  let storeValue: string = "";
+  const handleSliderChange = (
+    categoryId: string,
+    value: number | number[],
+    categoryName: string
+  ) => {
+    const currentProductsList = { ...productsData };
+    let storeValue: string = "";
 
-  if (Array.isArray(value)) {
-    if (categoryName === "Price Range") {
-      // Price logic
-      currentProductsList.price = { min: value[0], max: value[1] };
-      storeValue = `${value[0]}-${value[1]}`;
-    } else if (categoryName === "Alcohol Content") {
-      // Alcohol Content logic
-      currentProductsList.alcoholContent = { min: value[0], max: value[1] };
-      storeValue = `${value[0]}-${value[1]}`;
-    } else {
-      // Generic case
-      storeValue = value.join(",");
+    if (Array.isArray(value)) {
+      if (categoryName === "Price Range") {
+        // Price logic
+        currentProductsList.price = { min: value[0], max: value[1] };
+        storeValue = `${value[0]}-${value[1]}`;
+      } else if (categoryName === "Alcohol Content") {
+        // Alcohol Content logic
+        currentProductsList.alcoholContent = { min: value[0], max: value[1] };
+        storeValue = `${value[0]}-${value[1]}`;
+      } else {
+        // Generic case
+        storeValue = value.join(",");
+      }
     }
-  }
 
-  dispatch(setProductsData(currentProductsList));
+    dispatch(setProductsData(currentProductsList));
 
-  // 🔹 Update filters
-  const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
-  setFilters((prev) => {
-    const newFilters = { ...prev, [categoryId]: valArray };
-    onFilterChange?.(newFilters);
-    return newFilters;
-  });
+    // 🔹 Update filters
+    const valArray = Array.isArray(value) ? value.map(String) : [String(value)];
+    setFilters((prev) => {
+      const newFilters = { ...prev, [categoryId]: valArray };
+      onFilterChange?.(newFilters);
+      return newFilters;
+    });
 
-  // 🔹 Save only the latest value in selectedNames
-  const key =
-    categoryName === "Price Range"
-      ? "price"
-      : categoryName === "Alcohol Content"
-      ? "alcoholContent"
-      : categoryId;
+    // 🔹 Save only the latest value in selectedNames
+    const key =
+      categoryName === "Price Range"
+        ? "price"
+        : categoryName === "Alcohol Content"
+          ? "alcoholContent"
+          : categoryId;
 
-  dispatch(
-    setSelectedNames({
-      ...selectedNames,
-      [key]: [storeValue], // always override with latest value
-    })
-  );
-};
-
-
+    dispatch(
+      setSelectedNames({
+        ...selectedNames,
+        [key]: [storeValue], // always override with latest value
+      })
+    );
+  };
 
   const handleClearAll = () => {
     setFilters({});
@@ -283,13 +280,10 @@ const handleSliderChange = (
     return firstWord + restWords.join("");
   }
 
-  console.log(expandedCats,"EXPANDEDCATS")
-
   useEffect(() => {
     if (categories.length === 0) return;
 
     const newSelectedNames: Record<string, string[]> = {};
-
 
     if (selectedCategory) {
       let subFound = false;
@@ -434,54 +428,59 @@ const handleSliderChange = (
       setFilters(urlFilters);
       dispatch(setSelectedNames(newSelectedNames)); // ✅ object with names
       dispatch(setProductsData(newProductsData));
-
-      
     }
   }, [categories, selectedCategory, selectedSubName, selectedNestedName, searchParams]);
   // ✅ Run expansions whenever filters or categories change
-useEffect(() => {
-  if (categories.length === 0) return;
+  useEffect(() => {
+    if (categories.length === 0) return;
 
-  const expandedCats: { [key: string]: boolean } = {};
-  const departmentCats: { [key: string]: boolean } = {};
-  const subDepartmentCats: { [key: string]: boolean } = {};
+    const expandedCats: { [key: string]: boolean } = {};
+    const departmentCats: { [key: string]: boolean } = {};
+    const subDepartmentCats: { [key: string]: boolean } = {};
 
-  categories.forEach((cat) => {
-    if (cat.categoryList?.length > 4) {
-      const selectedIds = filters[cat.categoryId] || [];
-      if (selectedIds.some((id: any) => cat.categoryList!.findIndex((item: any) => item.listId === id) > 3)) {
-        expandedCats[cat.categoryId] = true;
-      }
-    }
-
-    cat.subCategories?.forEach((sub: any) => {
-      if (sub.categoryList?.length > 4) {
-        const selectedIds = filters[sub.categoryId] || [];
-        if (selectedIds.some((id: any) => sub.categoryList!.findIndex((item: any) => item.listId === id) > 3)) {
-          departmentCats[sub.categoryId] = true;
+    categories.forEach((cat) => {
+      if (cat.categoryList?.length > 4) {
+        const selectedIds = filters[cat.categoryId] || [];
+        if (
+          selectedIds.some(
+            (id: any) => cat.categoryList!.findIndex((item: any) => item.listId === id) > 3
+          )
+        ) {
+          expandedCats[cat.categoryId] = true;
         }
-
-        sub.categoryList.forEach((item: any) => {
-          if (item.categories?.length > 4) {
-            const nestedSelectedIds = filters[sub.categoryId] || [];
-            if (
-              nestedSelectedIds.some(
-                (id: any) => item.categories!.findIndex((n: any) => n.categoryId === id) > 3
-              )
-            ) {
-              subDepartmentCats[item.categoryId] = true;
-            }
-          }
-        });
       }
+
+      cat.subCategories?.forEach((sub: any) => {
+        if (sub.categoryList?.length > 4) {
+          const selectedIds = filters[sub.categoryId] || [];
+          if (
+            selectedIds.some(
+              (id: any) => sub.categoryList!.findIndex((item: any) => item.listId === id) > 3
+            )
+          ) {
+            departmentCats[sub.categoryId] = true;
+          }
+
+          sub.categoryList.forEach((item: any) => {
+            if (item.categories?.length > 4) {
+              const nestedSelectedIds = filters[sub.categoryId] || [];
+              if (
+                nestedSelectedIds.some(
+                  (id: any) => item.categories!.findIndex((n: any) => n.categoryId === id) > 3
+                )
+              ) {
+                subDepartmentCats[item.categoryId] = true;
+              }
+            }
+          });
+        }
+      });
     });
-  });
 
-  setExpandedCats(expandedCats);
-  setDepartmentCats(departmentCats);
-  setSubDepartmentCats(subDepartmentCats);
-}, [filters, categories]);
-
+    setExpandedCats(expandedCats);
+    setDepartmentCats(departmentCats);
+    setSubDepartmentCats(subDepartmentCats);
+  }, [filters, categories]);
 
   return {
     filters,
@@ -502,6 +501,6 @@ useEffect(() => {
     setSubDepartmentCats,
     expandedCats,
     departmentCats,
-    subDepartmentCats
+    subDepartmentCats,
   };
 };

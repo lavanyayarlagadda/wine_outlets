@@ -10,6 +10,9 @@ export default [
   // Base JS recommended rules
   js.configs.recommended,
 
+  {
+    ignores: ["dist/**", "build/**", "node_modules/**"], // 🚀 skip compiled files
+  },
   // TypeScript + React + Hooks
   {
     files: ["**/*.{ts,tsx,js,jsx}"],

@@ -1,5 +1,14 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Divider, FormControlLabel, IconButton, Skeleton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  FormControlLabel,
+  IconButton,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import palette from "../../themes/palette";
 import shape from "../../themes/shape";
 
@@ -43,7 +52,7 @@ export const DrawerHeader = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
 }));
 export const ContentStack = styled(Stack)(() => ({
-  gap: "8px", 
+  gap: "8px",
 }));
 
 export const HeaderTitle = styled(Typography)(() => ({
@@ -86,8 +95,8 @@ export const Row = styled(Box)(() => ({
 export const VerticalFormControlLabel = styled(FormControlLabel)(() => ({
   display: "flex",
   flexDirection: "row", // checkbox + label in row (optional)
-  width: "100%",        // take full width
-  margin: 0,            // remove default spacing
+  width: "100%", // take full width
+  margin: 0, // remove default spacing
 }));
 export const SeeMoreText = styled(Typography)(({ theme }) => ({
   cursor: "pointer",
