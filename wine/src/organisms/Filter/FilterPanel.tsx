@@ -34,7 +34,7 @@ import {
   StyledSkeletonRect,
   SkeletonItem,
 } from "./FilterPanel.style";
-import { useState } from "react";
+// import { useState } from "react";
 // import { useSearchParams } from "react-router-dom";
 
 export interface Category {
@@ -71,10 +71,15 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
     handleSubSelect,
     handleNestedSubSelect,
     selectedNestedSub,
+    setDepartmentCats,
+    setSubDepartmentCats,
+    setExpandedCats,
+    expandedCats,
+    subDepartmentCats,
+    departmentCats
   } = useFilterPanel(categories, onFilterChange);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-  const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});
 
   const toggleExpand = (categoryId: string) => {
     setExpandedCats((prev) => ({
@@ -82,7 +87,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
       [categoryId]: !prev[categoryId],
     }));
   };
-  const [departmentCats, setDepartmentCats] = useState<{ [key: string]: boolean }>({});
+
 
   const toggleDepartmentExpand = (categoryId: string) => {
     setDepartmentCats((prev) => ({
@@ -90,7 +95,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
       [categoryId]: !prev[categoryId],
     }));
   };
-  const [subDepartmentCats, setSubDepartmentCats] = useState<{ [key: string]: boolean }>({});
+
 
   const toggleSubDepartmentExpand = (categoryId: string) => {
     setSubDepartmentCats((prev) => ({

@@ -17,6 +17,11 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const [selectedNestedSub, setSelectedNestedSub] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({});
   const [openDrawer, setOpenDrawer] = useState(false);
+  // States for see-more expansion
+const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});
+const [departmentCats, setDepartmentCats] = useState<{ [key: string]: boolean }>({});
+const [subDepartmentCats, setSubDepartmentCats] = useState<{ [key: string]: boolean }>({});
+
 
   const { selectedNames, productsData } = useSelector((state: RootState) => state.productListSlice);
   const dispatch = useDispatch();
@@ -278,10 +283,13 @@ const handleSliderChange = (
     return firstWord + restWords.join("");
   }
 
+  console.log(expandedCats,"EXPANDEDCATS")
+
   useEffect(() => {
     if (categories.length === 0) return;
 
     const newSelectedNames: Record<string, string[]> = {};
+
 
     if (selectedCategory) {
       let subFound = false;
@@ -426,8 +434,54 @@ const handleSliderChange = (
       setFilters(urlFilters);
       dispatch(setSelectedNames(newSelectedNames)); // ✅ object with names
       dispatch(setProductsData(newProductsData));
+
+      
     }
   }, [categories, selectedCategory, selectedSubName, selectedNestedName, searchParams]);
+  // ✅ Run expansions whenever filters or categories change
+useEffect(() => {
+  if (categories.length === 0) return;
+
+  const expandedCats: { [key: string]: boolean } = {};
+  const departmentCats: { [key: string]: boolean } = {};
+  const subDepartmentCats: { [key: string]: boolean } = {};
+
+  categories.forEach((cat) => {
+    if (cat.categoryList?.length > 4) {
+      const selectedIds = filters[cat.categoryId] || [];
+      if (selectedIds.some((id: any) => cat.categoryList!.findIndex((item: any) => item.listId === id) > 3)) {
+        expandedCats[cat.categoryId] = true;
+      }
+    }
+
+    cat.subCategories?.forEach((sub: any) => {
+      if (sub.categoryList?.length > 4) {
+        const selectedIds = filters[sub.categoryId] || [];
+        if (selectedIds.some((id: any) => sub.categoryList!.findIndex((item: any) => item.listId === id) > 3)) {
+          departmentCats[sub.categoryId] = true;
+        }
+
+        sub.categoryList.forEach((item: any) => {
+          if (item.categories?.length > 4) {
+            const nestedSelectedIds = filters[sub.categoryId] || [];
+            if (
+              nestedSelectedIds.some(
+                (id: any) => item.categories!.findIndex((n: any) => n.categoryId === id) > 3
+              )
+            ) {
+              subDepartmentCats[item.categoryId] = true;
+            }
+          }
+        });
+      }
+    });
+  });
+
+  setExpandedCats(expandedCats);
+  setDepartmentCats(departmentCats);
+  setSubDepartmentCats(subDepartmentCats);
+}, [filters, categories]);
+
 
   return {
     filters,
@@ -443,5 +497,11 @@ const handleSliderChange = (
     setSelectedNestedSub,
     handleNestedSubSelect,
     setFilters,
+    setExpandedCats,
+    setDepartmentCats,
+    setSubDepartmentCats,
+    expandedCats,
+    departmentCats,
+    subDepartmentCats
   };
 };
