@@ -21,7 +21,7 @@ import {
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
 export interface Product {
-  id: string;
+  itemNumber: string;
   name: string;
   year: number;
   region: string;
@@ -41,8 +41,8 @@ export interface Product {
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart?: (id: number | string) => void;
-  onToggleFavorite: (id: number | string) => void;
+  onAddToCart?: (itemNumber: number | string) => void;
+  onToggleFavorite: (itemNumber: number | string) => void;
   isFavorite: boolean;
   isLoading?: string | null;
   wishListLoading?: string | null;
@@ -61,8 +61,8 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   const navigate = useNavigate();
   return (
     <ResponsiveCard>
-      <FavoriteButton onClick={() => onToggleFavorite(product.id)}>
-        {wishListLoading?.toString() === product.id ? (
+      <FavoriteButton onClick={() => onToggleFavorite(product.itemNumber)}>
+        {wishListLoading?.toString() === product.itemNumber ? (
           <AddToCartLoader />
         ) : isFavorite ? (
           <FavoriteIcon />
@@ -77,7 +77,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
         alt={product.name}
         onClick={() => {
           navigate(
-            `/productView?productId=${product.id}&size=${product.size}&vintage=${product.year}`
+            `/productView?productId=${product.itemNumber}&size=${product.size}&vintage=${product.year}`
           );
           window.scrollTo(0, 0);
         }}
@@ -116,11 +116,11 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
         </PriceRow>
         {!noaddtocart && onAddToCart && (
           <AddToCartButton
-            onClick={() => onAddToCart(product.id)}
-            startIcon={isLoading?.toString() === product.id ? null : <ShoppingCart />}
-            disabled={isLoading?.toString() === product.id} // disable while loading
+            onClick={() => onAddToCart(product.itemNumber)}
+            startIcon={isLoading?.toString() === product.itemNumber ? null : <ShoppingCart />}
+            disabled={isLoading?.toString() === product.itemNumber} // disable while loading
           >
-            {isLoading?.toString() === product.id ? <AddToCartLoader /> : "Add to Cart"}
+            {isLoading?.toString() === product.itemNumber ? <AddToCartLoader /> : "Add to Cart"}
           </AddToCartButton>
         )}
       </ProductCardContent>

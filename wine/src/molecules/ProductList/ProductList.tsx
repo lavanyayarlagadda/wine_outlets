@@ -145,7 +145,7 @@ const ProductList: React.FC<ProductListProps> = ({
                   view === "list" ? (
                     <ProductListCard
                       key={product.id}
-                      id={product.id}
+                      itemNumber={product.itemNumber}
                       name={product.name}
                       image={product.media.url}
                       price={product.price}
@@ -155,9 +155,9 @@ const ProductList: React.FC<ProductListProps> = ({
                       size={product.size}
                       rating={product.rating}
                       description={product.description}
-                      onAddToCart={() => handleAddToCart(product.id)}
-                      onToggleFavorite={() => handleToggleFavorite(product.id)}
-                      isFavorite={wishlist.includes(product.id)}
+                      onAddToCart={() => handleAddToCart(product.itemNumber)}
+                      onToggleFavorite={() => handleToggleFavorite(product.itemNumber)}
+                      isFavorite={wishlist.includes(product.itemNumber)}
                       isLoading={loadingProduct}
                       wishListLoading={wishListLoading}
                     />
@@ -165,9 +165,9 @@ const ProductList: React.FC<ProductListProps> = ({
                     <ProductGridCard
                       key={product.id}
                       product={product}
-                      onAddToCart={() => handleAddToCart(product.id)}
-                      onToggleFavorite={() => handleToggleFavorite(product.id)}
-                      isFavorite={wishlist.includes(product.id)}
+                      onAddToCart={() => handleAddToCart(product.itemNumber)}
+                      onToggleFavorite={() => handleToggleFavorite(product.itemNumber)}
+                      isFavorite={wishlist.includes(product.itemNumber)}
                       isLoading={loadingProduct}
                       wishListLoading={wishListLoading}
                     />

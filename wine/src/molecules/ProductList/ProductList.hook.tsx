@@ -210,7 +210,15 @@ export const useProductList = ({
       toast.error("Failed to load Banner");
     }
   }, [isError]);
-  const currentProducts = ProductListData?.productList?.products ?? [];
+
+  const [currentProductsData, setCurrentProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const products = ProductListData?.productList?.products ?? [];
+    setCurrentProducts([...products]);
+  }, [ProductListData]);
+
+  const currentProducts = currentProductsData ?? [];
   const totalProducts = ProductListData?.productList?.totalProducts;
   const totalPages = Math.ceil((totalProducts || 0) / productsPerPage);
   const userId = localStorage.getItem("userId");
@@ -249,7 +257,7 @@ export const useProductList = ({
       const newQuantity = (cartItems[productId] || 0) + 1;
       const payload = [
         {
-          itemNumber:Number(productId),
+          itemNumber: productId,
           quantity: newQuantity,
           userId: Number(userId),
         },

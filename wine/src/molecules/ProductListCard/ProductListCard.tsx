@@ -28,7 +28,7 @@ import {
 } from "./ProductListCard.style";
 
 export interface ProductCardProps {
-  id: number | string;
+  itemNumber: number | string;
   image: string;
   name: string;
   location?: string;
@@ -38,15 +38,15 @@ export interface ProductCardProps {
   description?: string;
   price: number;
   vipPrice?: number;
-  onAddToCart: (id: number | string) => void;
-  onToggleFavorite: (id: number | string) => void;
+  onAddToCart: (itemNumber: number | string) => void;
+  onToggleFavorite: (itemNumber: number | string) => void;
   isFavorite: boolean;
   isLoading?: string | null;
   wishListLoading?: string | null;
 }
 
 const ProductListCard: React.FC<ProductCardProps> = ({
-  id,
+  itemNumber,
   image,
   name,
   location,
@@ -74,13 +74,13 @@ const ProductListCard: React.FC<ProductCardProps> = ({
           image={image}
           alt={name}
           onClick={() => {
-            navigate(`/productView?productId=${id}&size=${size}&vintage=${year}`);
+            navigate(`/productView?productId=${itemNumber}&size=${size}&vintage=${year}`);
             window.scrollTo(0, 0);
           }}
         />
         <FavoriteWrapper>
-          <FavoriteButton onClick={() => onToggleFavorite(id)}>
-            {wishListLoading === id ? (
+          <FavoriteButton onClick={() => onToggleFavorite(itemNumber)}>
+            {wishListLoading === itemNumber ? (
               <AddToCartLoader />
             ) : isFavorite ? (
               <FavoriteIcon />
@@ -130,10 +130,10 @@ const ProductListCard: React.FC<ProductCardProps> = ({
             variant="contained"
             fullWidth={isMobile}
             startIcon={isLoading ? null : <ShoppingCart />}
-            onClick={() => onAddToCart(id)}
-            disabled={isLoading === id} // disable button while loading
+            onClick={() => onAddToCart(itemNumber)}
+            disabled={isLoading === itemNumber} // disable button while loading
           >
-            {isLoading === id ? <AddToCartLoader /> : "Add to Cart"}
+            {isLoading === itemNumber ? <AddToCartLoader /> : "Add to Cart"}
           </AddToCartButton>
         </FooterRow>
       </StyledCardContent>

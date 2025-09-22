@@ -88,7 +88,7 @@ export const useCartOverView = () => {
       const newQuantity = (cartItems[productId] || 0) + 1;
       const payload = [
         {
-          productId,
+          itemNumber: productId,
           quantity: newValue ? newValue : newQuantity,
           userId: Number(userId),
         },
