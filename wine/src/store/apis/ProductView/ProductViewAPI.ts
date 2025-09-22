@@ -19,16 +19,17 @@ export const productViewApi = createApi({
   endpoints: (builder) => ({
     getReviews: builder.query<
       any,
-      { productId: number; page: number; limit: number; rating: string }
+      { itemId: number; page: number; limit: number; rating: string,userId:number }
     >({
-      query: ({ productId, page, limit, rating }) => ({
+      query: ({ itemId, page, limit, rating,userId }) => ({
         url: "/product-view/reviews",
         method: "GET",
         params: {
-          productId,
+          itemId,
           page,
           limit,
           rating,
+          userId
         },
       }),
     }),
@@ -58,7 +59,7 @@ export const productViewApi = createApi({
     }),
     createReview: builder.mutation<
       any,
-      { productId: number; rating: number; userId: number; comment: string }
+      { itemNumber: number; rating: number; userId: number; comment: string }
     >({
       query: (newItem) => ({
         url: `/product-view/create-review`,

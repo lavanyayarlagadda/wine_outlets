@@ -31,11 +31,12 @@ export const homeApi = createApi({
     }),
     getHeaderBanners: builder.query<
       { banners: { id?: number; message: string; action: { label?: string; url?: string } }[] },
-      void
+      {StoreId:number}
     >({
-      query: () => ({
+      query: ({StoreId}) => ({
         url: "/home/header-banners",
         method: "GET",
+        params: { StoreId },
       }),
     }),
     getHomeSections: builder.query<LandingPageResponse, void>({
@@ -126,11 +127,11 @@ export const homeApi = createApi({
       }),
     }),
 
-    storeSearchlocator: builder.query<any, { location: string }>({
-      query: ({ location }) => ({
+    storeSearchlocator: builder.mutation<any, { storeSearchText: string }>({
+      query: (newItem) => ({
         url: "/home/store-location-search",
-        method: "GET",
-        params: { location },
+        method: "POST",
+        body: newItem,
       }),
     }),
 
@@ -149,6 +150,6 @@ export const {
   useGetRecentlyViewedQuery,
   useGetDeliveryPartnersQuery,
   useGetHeaderBannersQuery,
-  useStoreSearchlocatorQuery,
+  useStoreSearchlocatorMutation,
   useGetMenuItemsQuery,
 } = homeApi;

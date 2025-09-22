@@ -39,7 +39,7 @@ export const useNavigation = (
     isLoading: headerBannerLoading,
     isError: headerBannerError,
     refetch: refetchHeaderBanners,
-  } = useGetHeaderBannersQuery();
+  } = useGetHeaderBannersQuery({StoreId:Number(storedIdString)});
   const userIdString = localStorage.getItem("userId");
   const userId = userIdString ? Number(userIdString) : undefined;
 
@@ -47,7 +47,7 @@ export const useNavigation = (
   const cartQueryParams = {
     userId: userId,
     storeId: storedIdString && Number(storedIdString) > 0 ? storedIdString : undefined,
-    userIP: "1",
+    userIP: "",
   };
 
   const { data: cartData, refetch: refetchCartCount } = useGetCartCountQuery(cartQueryParams);

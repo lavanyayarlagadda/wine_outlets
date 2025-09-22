@@ -29,7 +29,6 @@ export const useRatingsBreakdown = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get("productId") || "";
-
   const [rating, setRating] = useState<number | null>(0);
   const [comment, setComment] = useState<string>("");
   const [createReview, { isLoading: ReviewLoading, isSuccess, isError: ReviewError }] =
@@ -41,7 +40,7 @@ export const useRatingsBreakdown = () => {
         rating,
         comment,
         userId: Number(userId),
-        productId: Number(productId),
+        itemNumber: Number(productId),
       });
     }
   };
@@ -51,7 +50,8 @@ export const useRatingsBreakdown = () => {
     isLoading,
     isError,
   } = useGetReviewsQuery({
-    productId: Number(productId),
+    itemId: Number(productId),
+    userId: Number(userId),
     page: 1,
     limit: 10,
     rating: selectedFilter,

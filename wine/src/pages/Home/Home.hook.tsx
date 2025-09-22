@@ -3,11 +3,10 @@ import Cookies from "js-cookie";
 import {
   // useGetHomeSectionsQuery,
   useStoreLocatorQuery,
-  useStoreSearchlocatorQuery,
+  useStoreSearchlocatorMutation,
 } from "../../store/apis/Home/HomeAPI";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { skipToken } from "@reduxjs/toolkit/query";
 import type { RootState } from "../../store";
 import { SITE_SETTING_DEMO_DATA, type HeroBannerSection } from "../../constant/LandingPageData";
 
@@ -35,11 +34,15 @@ export const useHomeLogic = () => {
     (s) => s.type === "hero-banner"
   ) as HeroBannerSection;
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
-  const {
-    data: searchData,
-    isLoading: searchLoading,
-    error: searchError,
-  } = useStoreSearchlocatorQuery(searchTerm ? { location: searchTerm } : skipToken);
+const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
+  useStoreSearchlocatorMutation();
+
+useEffect(() => {
+  if (searchTerm) {
+    storeSearchlocator({ storeSearchText: searchTerm });
+  }
+}, [searchTerm]);
+
   const stores = data?.stores;
   const storesData = searchData?.stores;
 
