@@ -28,67 +28,60 @@ interface CarouselSlideProps {
 
 export const CarouselSlide = styled(Box, {
   shouldForwardProp: (prop) => prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
-})<CarouselSlideProps>(
-  ({
-    bgImage,
-    bgVideo,
-    bgColor,
-    theme,
-  }) => ({
-    background: bgImage
-      ? `url(${bgImage}) center/cover no-repeat`
-      : bgVideo
-        ? "transparent"
-        : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
+})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor, theme }) => ({
+  background: bgImage
+    ? `url(${bgImage}) center/cover no-repeat`
+    : bgVideo
+      ? "transparent"
+      : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
 
-    borderRadius: shape.borderRadius,
-    padding: "32px 32px 64px 32px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    minHeight: "160px",
-    position: "relative",
-    overflow: "hidden",
+  borderRadius: shape.borderRadius,
+  padding: "32px 32px 64px 32px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  minHeight: "160px",
+  position: "relative",
+  overflow: "hidden",
 
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "20px",
-      right: "60px",
-      width: "80px",
-      height: "80px",
-      background: "rgba(255, 255, 255, 0.1)",
-      borderRadius: "50%",
-      filter: "blur(20px)",
-    },
-    "&::after": {
-      content: '""',
-      position: "absolute",
-      bottom: "10px",
-      right: "120px",
-      width: "40px",
-      height: "40px",
-      background: "rgba(255, 255, 255, 0.08)",
-      borderRadius: "50%",
-      filter: "blur(15px)",
-    },
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: "20px",
+    right: "60px",
+    width: "80px",
+    height: "80px",
+    background: "rgba(255, 255, 255, 0.1)",
+    borderRadius: "50%",
+    filter: "blur(20px)",
+  },
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: "10px",
+    right: "120px",
+    width: "40px",
+    height: "40px",
+    background: "rgba(255, 255, 255, 0.08)",
+    borderRadius: "50%",
+    filter: "blur(15px)",
+  },
 
-    "& video": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      zIndex: -1,
-    },
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
-      alignItems: "flex-start",
-      padding: "24px",
-    },
-  })
-);
+  "& video": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: -1,
+  },
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    padding: "24px",
+  },
+}));
 
 export const StyledImage = styled("img")(({ theme }) => ({
   width: "100%",

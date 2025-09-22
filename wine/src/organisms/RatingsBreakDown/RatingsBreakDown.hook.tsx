@@ -115,3 +115,4 @@ export const useRatingsBreakdown = () => {
     reviewSummary,
   };
 };
+export type RatingsBreakDownHookReturn = ReturnType<typeof useRatingsBreakdown>;

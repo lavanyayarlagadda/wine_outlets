@@ -34,14 +34,14 @@ export const useHomeLogic = () => {
     (s) => s.type === "hero-banner"
   ) as HeroBannerSection;
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
-const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
-  useStoreSearchlocatorMutation();
+  const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
+    useStoreSearchlocatorMutation();
 
-useEffect(() => {
-  if (searchTerm) {
-    storeSearchlocator({ storeSearchText: searchTerm });
-  }
-}, [searchTerm]);
+  useEffect(() => {
+    if (searchTerm) {
+      storeSearchlocator({ storeSearchText: searchTerm });
+    }
+  }, [searchTerm]);
 
   const stores = data?.stores;
   const storesData = searchData?.stores;

@@ -14,6 +14,7 @@ import {
   RatingSkeleton,
   SkeletonWrapper,
 } from "./ProductViewPage.style";
+import { useRatingsBreakdown } from "../../organisms/RatingsBreakDown/RatingsBreakDown.hook";
 
 const ProductViewPage = () => {
   const {
@@ -36,6 +37,22 @@ const ProductViewPage = () => {
     productId,
     vintageYearData,
   } = useProductView();
+  const {
+    selectedFilter,
+    setSelectedFilter,
+    getPercentage,
+    filterButtons,
+    filteredReviews,
+    isLoading,
+    handleSubmit,
+    ReviewLoading,
+    rating,
+    comment,
+    setComment,
+    setRating,
+    reviewSummary,
+  } = useRatingsBreakdown();
+
   return (
     <>
       {productDetailLoading ? (
@@ -69,16 +86,34 @@ const ProductViewPage = () => {
             productId={productId}
             vintageYearData={vintageYearData}
           />
-          <ProfessionalRating
-            expanded={expanded}
-            toggleExpand={toggleExpand}
-            productDetailsData={productDetailsData}
-            productDetailLoading={productDetailLoading}
-          />
+          {productDetailsData?.productDetails?.professionalRating?.length > 0 && (
+            <ProfessionalRating
+              expanded={expanded}
+              toggleExpand={toggleExpand}
+              productDetailsData={productDetailsData}
+              productDetailLoading={productDetailLoading}
+            />
+          )}
         </>
       )}
+      {reviewSummary?.length > 0 && (
+        <RatingsBreakdown
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+          getPercentage={getPercentage}
+          filterButtons={filterButtons}
+          filteredReviews={filteredReviews}
+          isLoading={isLoading}
+          handleSubmit={handleSubmit}
+          ReviewLoading={ReviewLoading}
+          rating={rating}
+          comment={comment}
+          setComment={setComment}
+          setRating={setRating}
+          reviewSummary={reviewSummary}
+        />
+      )}
 
-      <RatingsBreakdown />
       <RecentlyView />
       <Newsletter />
     </>

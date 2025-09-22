@@ -19,27 +19,41 @@ import RatingDistributionRow from "../../molecules/RatingDistributionRow/RatingD
 import FilterButton from "../../atoms/FilterButtons/FilterButtons";
 import ReviewCard from "../../molecules/ReviewCard/ReviewCard";
 import { CustomReviewForm } from "../../atoms";
-import { useRatingsBreakdown } from "./RatingsBreakDown.hook";
+import { type RatingsBreakDownHookReturn } from "./RatingsBreakDown.hook";
 import { Typography } from "@mui/material";
 import { SkeletonWrapper, StyledSkeletonRect } from "../Filter/FilterPanel.style";
 
-const RatingsBreakdown = () => {
-  const {
-    selectedFilter,
-    setSelectedFilter,
-    getPercentage,
-    filterButtons,
-    filteredReviews,
-    isLoading,
-    handleSubmit,
-    ReviewLoading,
-    rating,
-    comment,
-    setComment,
-    setRating,
-    reviewSummary,
-  } = useRatingsBreakdown();
+interface RatingsBreakdownProps {
+  selectedFilter: RatingsBreakDownHookReturn["selectedFilter"];
+  setSelectedFilter: RatingsBreakDownHookReturn["setSelectedFilter"];
+  getPercentage: RatingsBreakDownHookReturn["getPercentage"];
+  filterButtons: RatingsBreakDownHookReturn["filterButtons"];
+  filteredReviews: RatingsBreakDownHookReturn["filteredReviews"];
+  isLoading: RatingsBreakDownHookReturn["isLoading"];
+  handleSubmit: RatingsBreakDownHookReturn["handleSubmit"];
+  ReviewLoading: RatingsBreakDownHookReturn["ReviewLoading"];
+  rating: RatingsBreakDownHookReturn["rating"];
+  comment: RatingsBreakDownHookReturn["comment"];
+  setComment: RatingsBreakDownHookReturn["setComment"];
+  setRating: RatingsBreakDownHookReturn["setRating"];
+  reviewSummary: RatingsBreakDownHookReturn["reviewSummary"];
+}
 
+const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({
+  selectedFilter,
+  setSelectedFilter,
+  getPercentage,
+  filterButtons,
+  filteredReviews,
+  isLoading,
+  handleSubmit,
+  ReviewLoading,
+  rating,
+  comment,
+  setComment,
+  setRating,
+  reviewSummary,
+}) => {
   const hasReviews = reviewSummary?.length <= 0;
 
   return (
@@ -62,7 +76,7 @@ const RatingsBreakdown = () => {
         ) : hasReviews ? (
           <NoDataWrapper>
             <Typography variant="body1" color="text.secondary" fontStyle="italic">
-              No reviews available
+              No reviews available. Add a review to get started!
             </Typography>
           </NoDataWrapper>
         ) : (

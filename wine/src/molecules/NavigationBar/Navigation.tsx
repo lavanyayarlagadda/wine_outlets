@@ -100,88 +100,6 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
   const navigate = useNavigate();
   const menuList = useSelector((state: RootState) => state.menu.menuList);
-  console.log("menuList", menuList);
-  // const menuData = {
-  //   menuList: [
-  //     {
-  //       id: 1,
-  //       name: "Wines",
-  //       categories: [
-  //         {
-  //           title: "Wines",
-  //           items: [
-  //             { id: 101, listName: "Cabernet Sauvignon" },
-  //             { id: 102, listName: "Merlot" },
-  //             { id: 103, listName: "Pinot Noir" },
-  //             { id: 104, listName: "Shiraz" },
-  //             { id: 105, listName: "Zinfandel" },
-  //             { id: 106, listName: "Malbec" },
-  //             { id: 107, listName: "Tempranillo" },
-  //             { id: 108, listName: "Sangiovese" },
-  //             { id: 109, listName: "Grenache" },
-  //             { id: 110, listName: "Barbera" },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Beer",
-  //       categories: [
-  //         {
-  //           title: "Beer",
-  //           items: [
-  //             { id: 201, listName: "Domestic Beer" },
-  //             { id: 202, listName: "Imported Beer" },
-  //             { id: 203, listName: "Micro / Specialty Beers" },
-  //             { id: 204, listName: "Non-Alcohol Beer" },
-  //             { id: 205, listName: "Malternatives" },
-  //             { id: 206, listName: "Keg / Party Balls" },
-  //             { id: 207, listName: "Hard Seltzer" },
-  //             { id: 208, listName: "Canned Cocktails" },
-  //             { id: 209, listName: "Single Bottles" },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "Liquor",
-  //       categories: [
-  //         {
-  //           title: "Liquor",
-  //           items: [
-  //             { id: 301, listName: "Whiskey" },
-  //             { id: 302, listName: "Bourbon" },
-  //             { id: 303, listName: "Cognac" },
-  //             { id: 304, listName: "Brandy" },
-  //             { id: 305, listName: "Single Malt Scotch" },
-  //             { id: 306, listName: "Scotch" },
-  //             { id: 307, listName: "Gin" },
-  //             { id: 308, listName: "Vodka" },
-  //             { id: 309, listName: "Tequila" },
-  //             { id: 310, listName: "Rum" },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "Miscellaneous",
-  //       categories: [
-  //         {
-  //           title: "Miscellaneous",
-  //           items: [
-  //             { id: 401, listName: "Miscellaneous1" },
-  //             { id: 402, listName: "Miscellaneous2" },
-  //             { id: 403, listName: "Miscellaneous3" },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // };
-
   const promotionsMenuData = {
     name: "Promotions",
     categories: [
@@ -317,7 +235,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
               open={open}
               onClose={() => setOpen(false)}
               selectedStoreId={Number(selectedStore)}
-              stores={searchTerm ? storesData : stores}
+              stores={searchTerm !== "" ? storesData : stores}
               onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
               navigation={true}
             />
@@ -498,7 +416,10 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   >
                     {menu.name} →
                   </CategoryTitle>
-                  <ColumnsWrapper id={`columns-wrapper-${menu.name}`} expanded={expandedMenus[menu.name]}>
+                  <ColumnsWrapper
+                    id={`columns-wrapper-${menu.name}`}
+                    expanded={expandedMenus[menu.name]}
+                  >
                     {(() => {
                       const itemsToShow = expandedMenus[menu.name]
                         ? menu.itemsList
@@ -522,9 +443,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                     {menu.itemsList.length > 10 && (
                       <ViewMoreText
                         expanded={expandedMenus[menu.name]}
-                        onClick={() =>{ toggleExpand(menu.name),
-                            window.scrollTo(0, 0)}
-                        }
+                        onClick={() => {
+                          (toggleExpand(menu.name), window.scrollTo(0, 0));
+                        }}
                       >
                         {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
                       </ViewMoreText>
@@ -625,7 +546,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                 onClick={() => {
                   const navUrl = deliveryPartners.find((item) => item.name == "UberEats")?.link;
                   if (navUrl) {
-                    navigate(navUrl);
+                    window.open(navUrl, "_blank");
                   }
                 }}
               >

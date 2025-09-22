@@ -42,7 +42,10 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({ count, page, onChan
         <Pagination
           count={count}
           page={page}
-          onChange={(e, value) => onChange(value)}
+          onChange={(e, value) => {
+            onChange(value);
+            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+          }}
           shape="rounded"
           siblingCount={1}
           boundaryCount={1}

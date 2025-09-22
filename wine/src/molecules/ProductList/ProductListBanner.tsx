@@ -25,7 +25,7 @@ const ProductListBanner: React.FC<ProductListBannerProps> = ({
   goToSlide,
   current,
 }) => {
-  console.log(current?.media?.url,"CURRENTDATA")
+  console.log(current?.media?.url, "CURRENTDATA");
   return (
     <Container backgroundColor={palette.white.main} padding="20px 20px">
       <CarouselSlide bgImage={current?.media?.url}>

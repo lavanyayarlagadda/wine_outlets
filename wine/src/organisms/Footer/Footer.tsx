@@ -58,7 +58,7 @@ const Footer: React.FC<FooterProps> = ({ stores, storesData }) => {
         open={isStoreLocator}
         onClose={() => setIsStoreLocator(false)}
         selectedStoreId={Number(selectedStore)}
-        stores={stores}
+        stores={searchTerm !== "" ? storesData : stores}
         onSelect={(id) => localStorage.setItem("selectedStore", id.toString())}
         navigation={true}
       />

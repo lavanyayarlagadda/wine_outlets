@@ -66,7 +66,7 @@ const Home = () => {
           open={open}
           onClose={() => setOpen(false)}
           selectedStoreId={selectedStore}
-          stores={searchTerm ? storesData : stores}
+          stores={searchTerm !== "" ? storesData : stores}
           onSelect={(id) => {
             setSelectedStore(id);
           }}

@@ -37,10 +37,11 @@ const TastingNotesCarousel: React.FC<TastingNotesCarouselProps> = ({ productDeta
           ))}
         </DotsContainer>
       </DotsWrapper>
-
-      <PeopleBoughtWrapper>
-        <PeopleBought suggestedProducts={productDetails} />
-      </PeopleBoughtWrapper>
+      {productDetails?.productDetails?.suggestedProducts?.lenght > 0 && (
+        <PeopleBoughtWrapper>
+          <PeopleBought suggestedProducts={productDetails} />
+        </PeopleBoughtWrapper>
+      )}
     </Container>
   );
 };

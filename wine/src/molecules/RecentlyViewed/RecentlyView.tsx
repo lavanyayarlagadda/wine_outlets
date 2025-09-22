@@ -16,6 +16,7 @@ import {
   SITE_SETTING_DEMO_DATA,
   type ProductCollectionSection,
 } from "../../constant/LandingPageData";
+// import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 
 type RecentlyViewedProps = {
   onSlideChange?: (index: number) => void;
@@ -28,11 +29,14 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   cardsPerSlide = 4,
   initialSlide = 0,
 }) => {
+  //   const userIdString = localStorage.getItem("userId");
+  // const userId = userIdString ? Number(userIdString) : undefined;
   // const {
   //   data: recentlyViewedResp,
-  //   // isLoading: rvLoading,
-  //   // isError: rvError,
-  // } = useGetRecentlyViewedQuery({ userId: 1, limit: 10 });
+  //   isLoading: rvLoading,
+  //   isError: rvError,
+  // } = useGetRecentlyViewedQuery({ userId: userId, limit: 10 });
+
   const rvData = SITE_SETTING_DEMO_DATA.pageSections.find(
     (s) => s.id === "product-collection-custom-2"
   ) as ProductCollectionSection;
@@ -57,6 +61,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
     onSlideChange,
   });
   if (!isVisible) return null;
+
   return (
     <Container>
       <HeaderWrapper>

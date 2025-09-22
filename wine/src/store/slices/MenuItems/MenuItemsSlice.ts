@@ -16,10 +16,7 @@ const MenuItemsSlice = createSlice({
     },
 
     // Add a new item to a section
-    addItemToSection: (
-      state,
-      action: PayloadAction<{ sectionName: string; item: MenuItem }>
-    ) => {
+    addItemToSection: (state, action: PayloadAction<{ sectionName: string; item: MenuItem }>) => {
       const section = state.menuList.find((s) => s.name === action.payload.sectionName);
       if (section) {
         section.itemsList.push(action.payload.item);

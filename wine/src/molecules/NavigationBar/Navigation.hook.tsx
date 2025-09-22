@@ -87,22 +87,21 @@ export const useNavigation = (
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
 
-
   const toggleExpand = (menuName: string) => {
-  setExpandedMenus((prev) => {
-    const newState = { ...prev, [menuName]: !prev[menuName] };
+    setExpandedMenus((prev) => {
+      const newState = { ...prev, [menuName]: !prev[menuName] };
 
-    // If expanding, reset scroll
-    if (newState[menuName]) {
-      setTimeout(() => {
-        const container = document.getElementById(`columns-wrapper-${menuName}`);
-        if (container) container.scrollTop = 0;
-      }, 0);
-    }
+      // If expanding, reset scroll
+      if (newState[menuName]) {
+        setTimeout(() => {
+          const container = document.getElementById(`columns-wrapper-${menuName}`);
+          if (container) container.scrollTop = 0;
+        }, 0);
+      }
 
-    return newState;
-  });
-};
+      return newState;
+    });
+  };
 
   const mockData = [
     "Merlot",

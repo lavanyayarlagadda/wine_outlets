@@ -23,7 +23,6 @@ const ProfessionalRating: React.FC<ProfessionalRatingProps> = ({
   productDetailLoading,
 }) => {
   const skeletonArray = Array.from({ length: 6 });
-
   return (
     <>
       <ProductLayoutContainer>
@@ -69,7 +68,9 @@ const ProfessionalRating: React.FC<ProfessionalRatingProps> = ({
           )}
         </Container>
       </ProductLayoutContainer>
-      <TastingNotesCarousel productDetails={productDetailsData} />
+      {productDetailsData?.productDetails?.tastingNotes.length > 0 && (
+        <TastingNotesCarousel productDetails={productDetailsData} />
+      )}
     </>
   );
 };

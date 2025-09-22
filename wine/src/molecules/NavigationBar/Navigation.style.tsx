@@ -193,7 +193,7 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
 
 export const DropdownTriggerNoBorder = styled(DropdownTrigger)(() => ({
   border: "none",
-  fontSize:useFontSize(14)
+  fontSize: useFontSize(14),
 }));
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
@@ -229,7 +229,6 @@ export const StyledMenu = styled(Menu)(() => ({
     borderRadius: shape.borderRadiuspx,
     marginTop: "8px",
     minWidth: "168px",
-    
   },
 }));
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
@@ -460,11 +459,12 @@ export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
   },
 }));
 
-export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expanded })=> ({
+export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expanded }) => ({
   fontSize: 13,
   fontWeight: 500,
   marginTop: 8,
-  cursor: "pointer",  gridColumn: "1 / -1", // span both columns
+  cursor: "pointer",
+  gridColumn: "1 / -1", // span both columns
   textAlign: expanded ? "right" : "left",
 }));
 
@@ -533,5 +533,3 @@ export const StyledSuggestionItem = styled(ListItemButton)(({ theme }) => ({
     backgroundColor: palette.white.light,
   },
 }));
-
-

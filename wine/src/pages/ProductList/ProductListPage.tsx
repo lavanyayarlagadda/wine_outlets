@@ -30,6 +30,7 @@ const ProductListPage = () => {
     totalProducts,
     handleSortChange,
   } = useProductList();
+
   return (
     <>
       <ProductListBanner

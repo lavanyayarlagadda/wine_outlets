@@ -31,9 +31,9 @@ export const homeApi = createApi({
     }),
     getHeaderBanners: builder.query<
       { banners: { id?: number; message: string; action: { label?: string; url?: string } }[] },
-      {StoreId:number}
+      { StoreId: number }
     >({
-      query: ({StoreId}) => ({
+      query: ({ StoreId }) => ({
         url: "/home/header-banners",
         method: "GET",
         params: { StoreId },

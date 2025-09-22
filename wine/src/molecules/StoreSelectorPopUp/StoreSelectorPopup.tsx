@@ -76,8 +76,11 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   useEffect(() => {
     if (debouncedValue.trim()) {
       dispatch(setSearchTerm(debouncedValue));
+    } else if (inputValue === "") {
+      // Clear immediately when input is empty
+      dispatch(setSearchTerm(""));
     }
-  }, [debouncedValue, dispatch]);
+  }, [debouncedValue, inputValue, dispatch]);
 
   return (
     <CustomPopup
