@@ -39,7 +39,7 @@ export const useNavigation = (
     isLoading: headerBannerLoading,
     isError: headerBannerError,
     refetch: refetchHeaderBanners,
-  } = useGetHeaderBannersQuery({StoreId:Number(storedIdString)});
+  } = useGetHeaderBannersQuery({ StoreId: Number(storedIdString) });
   const userIdString = localStorage.getItem("userId");
   const userId = userIdString ? Number(userIdString) : undefined;
 
@@ -87,12 +87,23 @@ export const useNavigation = (
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
 
+
   const toggleExpand = (menuName: string) => {
-  setExpandedMenus((prev) => ({
-    ...prev,
-    [menuName]: !prev[menuName],
-  }));
+  setExpandedMenus((prev) => {
+    const newState = { ...prev, [menuName]: !prev[menuName] };
+
+    // If expanding, reset scroll
+    if (newState[menuName]) {
+      setTimeout(() => {
+        const container = document.getElementById(`columns-wrapper-${menuName}`);
+        if (container) container.scrollTop = 0;
+      }, 0);
+    }
+
+    return newState;
+  });
 };
+
   const mockData = [
     "Merlot",
     "Chardonnay",
@@ -256,6 +267,6 @@ export const useNavigation = (
     suggestions,
     setSuggestions,
     toggleExpand,
-    expandedMenus
+    expandedMenus,
   };
 };

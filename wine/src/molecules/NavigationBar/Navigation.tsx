@@ -498,7 +498,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   >
                     {menu.name} →
                   </CategoryTitle>
-                  <ColumnsWrapper expanded={expandedMenus[menu.name]}>
+                  <ColumnsWrapper id={`columns-wrapper-${menu.name}`} expanded={expandedMenus[menu.name]}>
                     {(() => {
                       const itemsToShow = expandedMenus[menu.name]
                         ? menu.itemsList
@@ -522,7 +522,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                     {menu.itemsList.length > 10 && (
                       <ViewMoreText
                         expanded={expandedMenus[menu.name]}
-                        onClick={() => toggleExpand(menu.name)}
+                        onClick={() =>{ toggleExpand(menu.name),
+                            window.scrollTo(0, 0)}
+                        }
                       >
                         {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
                       </ViewMoreText>

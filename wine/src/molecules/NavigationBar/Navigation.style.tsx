@@ -193,7 +193,7 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
 
 export const DropdownTriggerNoBorder = styled(DropdownTrigger)(() => ({
   border: "none",
-  fontSize:useFontSize(12)
+  fontSize:useFontSize(14)
 }));
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
@@ -452,11 +452,10 @@ export const Column = styled(Box)(() => ({
 
 export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
   fontSize: 13,
-  color: "#333",
   padding: "4px 0",
   cursor: "pointer",
   "&:hover": {
-    color: "#b02a37",
+    color: palette.primary.dark,
     background: "transparent",
   },
 }));
@@ -465,7 +464,6 @@ export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expand
   fontSize: 13,
   fontWeight: 500,
   marginTop: 8,
-  color: "#000",
   cursor: "pointer",  gridColumn: "1 / -1", // span both columns
   textAlign: expanded ? "right" : "left",
 }));
@@ -480,7 +478,7 @@ export const SpecialsBlock = styled(Box)(() => ({
 
 export const SpecialsItem = styled(Typography)(() => ({
   fontSize: 13,
-  color: "#b02a37",
+  color: palette.primary.dark,
   fontWeight: 500,
   marginBottom: 6,
   cursor: "pointer",
