@@ -12,7 +12,7 @@ export const useProductCard = () => {
       try {
         const payload = [
           {
-            productId: Number(productId),
+            itemNumber: Number(productId),
             quantity: Number(quantity),
             userId: Number(userId),
           },

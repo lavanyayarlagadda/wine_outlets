@@ -22,7 +22,7 @@ export const homeApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    addtoCart: builder.mutation<any, { productId: number; quantity: number; userId: number }[]>({
+    addtoCart: builder.mutation<any, { itemNumber: number; quantity: number; userId: number }[]>({
       query: (newItem) => ({
         url: "/home/add-to-cart",
         method: "POST",

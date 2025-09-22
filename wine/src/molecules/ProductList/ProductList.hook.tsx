@@ -249,7 +249,7 @@ export const useProductList = ({
       const newQuantity = (cartItems[productId] || 0) + 1;
       const payload = [
         {
-          productId,
+          itemNumber:Number(productId),
           quantity: newQuantity,
           userId: Number(userId),
         },
