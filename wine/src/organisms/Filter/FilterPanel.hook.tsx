@@ -13,11 +13,12 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
   const selectedCategory = searchParams.get("category");
   const selectedSubName = searchParams.get("subName");
   const selectedNestedName = searchParams.get("nestedName");
+
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
   const [selectedNestedSub, setSelectedNestedSub] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({});
   const [openDrawer, setOpenDrawer] = useState(false);
-  // States for see-more expansion
+
   const [expandedCats, setExpandedCats] = useState<{ [key: string]: boolean }>({});
   const [departmentCats, setDepartmentCats] = useState<{ [key: string]: boolean }>({});
   const [subDepartmentCats, setSubDepartmentCats] = useState<{ [key: string]: boolean }>({});
@@ -90,8 +91,8 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
         const newData = {
           ...productsData,
           category: key, // assign the selected sub's key as "category"
-          department: "",
-          subDepartment: "",
+          department: [],
+          subDepartment: [],
         };
         dispatch(setProductsData(newData));
 
@@ -243,6 +244,20 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
       })
     );
   };
+const handleNestedCheckboxChange = (
+  parentId: string,
+  nestedId: string,
+  label: string
+) => {
+  // Call your existing checkbox handler
+  handleCheckboxChange(parentId, nestedId, label, "nested");
+
+  // Ensure the sub-department expands automatically
+  setSubDepartmentCats((prev) => ({
+    ...prev,
+    [parentId]: true, // force expand
+  }));
+};
 
   const handleClearAll = () => {
     setFilters({});
@@ -368,66 +383,66 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
       dispatch(setSelectedNames(newSelectedNames));
     } else {
       // No selectedCategory: parse URL params
-      const urlFilters: Filters = {};
+    const urlFilters: Filters = {};
       const newProductsData: any = { ...productsData };
 
-      searchParams.forEach((value, key) => {
-        if (!value) return;
-        const values = value.split(",").map((v) => decodeURIComponent(v.trim()));
+    searchParams.forEach((value, key) => {
+      if (!value) return;
+      const values = value.split(",").map((v) => decodeURIComponent(v.trim()));
 
         const matchedCategory = categories.find(
           (cat) => cat.categoryName.toLowerCase() === key.toLowerCase()
         );
-        if (!matchedCategory) return;
+      if (!matchedCategory) return;
 
-        const categoryId = matchedCategory.categoryId;
+      const categoryId = matchedCategory.categoryId;
 
-        const isRange = values.some((v) => v.includes("min:") || v.includes("max:"));
+      const isRange = values.some((v) => v.includes("min:") || v.includes("max:"));
 
-        if (isRange) {
-          let minValue: string | undefined;
-          let maxValue: string | undefined;
+      if (isRange) {
+        let minValue: string | undefined;
+        let maxValue: string | undefined;
 
-          values.forEach((v) => {
-            const [prefix, num] = v.split(":");
-            if (prefix === "min") minValue = num;
-            if (prefix === "max") maxValue = num;
-          });
+        values.forEach((v) => {
+          const [prefix, num] = v.split(":");
+          if (prefix === "min") minValue = num;
+          if (prefix === "max") maxValue = num;
+        });
 
-          if (minValue && maxValue) {
-            urlFilters[categoryId] = [minValue, maxValue];
+        if (minValue && maxValue) {
+          urlFilters[categoryId] = [minValue, maxValue];
             const camelKey = toCamelCase(matchedCategory.categoryName);
 
             // ✅ Save **keys/names** instead of IDs
             newSelectedNames[camelKey] = [`${minValue} - ${maxValue}`];
 
             newProductsData[categoryId] = [minValue, maxValue];
-          }
-        } else {
+        }
+      } else {
           const normalize = (str: string) => str.toLowerCase().replace(/[\s\-_]+/g, "");
 
-          const matchedNames: string[] = [];
-          const matchedIds: string[] = [];
+        const matchedNames: string[] = [];
+        const matchedIds: string[] = [];
 
-          for (const item of matchedCategory.categoryList || []) {
+        for (const item of matchedCategory.categoryList || []) {
             if (values.some((v) => normalize(v) === normalize(item.listName))) {
               matchedNames.push(item.listName); // keep proper display case
-              matchedIds.push(item.listId);
-            }
+            matchedIds.push(item.listId);
           }
+        }
 
-          if (matchedNames.length > 0) {
-            urlFilters[categoryId] = matchedIds;
+        if (matchedNames.length > 0) {
+          urlFilters[categoryId] = matchedIds;
             const camelKey = toCamelCase(matchedCategory.categoryName);
             newSelectedNames[camelKey] = matchedNames;
             newProductsData[categoryId] = matchedIds;
-          }
         }
-      });
+      }
+    });
 
-      setFilters(urlFilters);
+    setFilters(urlFilters);
       dispatch(setSelectedNames(newSelectedNames)); // ✅ object with names
-      dispatch(setProductsData(newProductsData));
+    dispatch(setProductsData(newProductsData));
     }
   }, [categories, selectedCategory, selectedSubName, selectedNestedName, searchParams]);
   // ✅ Run expansions whenever filters or categories change
@@ -502,5 +517,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
     expandedCats,
     departmentCats,
     subDepartmentCats,
+    handleNestedCheckboxChange
   };
 };

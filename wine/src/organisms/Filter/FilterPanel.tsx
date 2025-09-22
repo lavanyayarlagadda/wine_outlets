@@ -69,14 +69,13 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
     handleClearAll,
     selectedSub,
     handleSubSelect,
-    handleNestedSubSelect,
-    selectedNestedSub,
     setDepartmentCats,
     setSubDepartmentCats,
     setExpandedCats,
     expandedCats,
     subDepartmentCats,
     departmentCats,
+    handleNestedCheckboxChange
   } = useFilterPanel(categories, onFilterChange);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
@@ -103,83 +102,72 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
   };
 
   const getIcon = (name: string) => iconMap[name.toLowerCase()] ?? <LocalBar fontSize="small" />;
-  const renderSubCategory = (item: any, sub: any) => {
-    const hasNested = item.categories?.length > 0;
-    const isExpanded = selectedNestedSub;
+const renderSubCategory = (item: any, sub: any) => {
+  const hasNested = item.categories?.length > 0;
 
-    return (
-      <Box key={item.listId}>
-        <Row>
-          <CustomCheckbox
-            label={item.listName}
-            checked={(filters[sub.categoryId] || []).includes(item.listId)}
-            onChange={() => handleCheckboxChange(sub.categoryId, item.listId, item.listName, "sub")}
-          />
-          {hasNested && (
-            <ExpandButton
-              onClick={() =>
-                handleNestedSubSelect(
-                  { categoryId: item.listId, categoryName: item.listName },
-                  sub.categoryId
-                )
-              }
-            >
-              {isExpanded ? <ExpandLess /> : <ExpandMore />}
-            </ExpandButton>
-          )}
-        </Row>
-        {hasNested &&
-          isExpanded &&
-          (!subDepartmentCats[item.categoryId] ? (
-            <NestedContainer>
-              {item.categories.slice(0, 4).map((nestedItem: any) => (
-                <CustomCheckbox
-                  key={nestedItem.categoryId}
-                  label={nestedItem.categoryName}
-                  checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
-                  onChange={() =>
-                    handleCheckboxChange(
-                      sub.categoryId,
-                      nestedItem.categoryId,
-                      nestedItem.categoryName,
-                      "nested"
-                    )
-                  }
-                />
-              ))}
-              {item.categories.length > 4 && (
-                <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.categoryId)}>
-                  See More
-                </SeeMoreText>
-              )}
-            </NestedContainer>
-          ) : (
-            <SubLimitedListWrapper>
-              {item.categories.map((nestedItem: any) => (
-                <CustomCheckbox
-                  key={nestedItem.categoryId}
-                  label={nestedItem.categoryName}
-                  checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
-                  onChange={() =>
-                    handleCheckboxChange(
-                      sub.categoryId,
-                      nestedItem.categoryId,
-                      nestedItem.categoryName,
-                      "nested"
-                    )
-                  }
-                />
-              ))}
-              {item.categories.length > 4 && subDepartmentCats[item.categoryId] && (
-                <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.categoryId)}>
-                  See Less
-                </SeeMoreText>
-              )}
-            </SubLimitedListWrapper>
-          ))}
-      </Box>
+  const isExpanded =
+    subDepartmentCats[item.listId] ||
+    item.categories?.some((nestedItem: any) =>
+      (filters[sub.categoryId] || []).includes(nestedItem.categoryId)
     );
-  };
+  return (
+    <Box key={item.listId}>
+      <Row>
+        <CustomCheckbox
+          label={item.listName}
+          checked={(filters[sub.categoryId] || []).includes(item.listId)}
+          onChange={() =>
+            handleCheckboxChange(sub.categoryId, item.listId, item.listName, "sub")
+          }
+        />
+        {hasNested && (
+          <ExpandButton onClick={() => toggleSubDepartmentExpand(item.listId)}>
+            {isExpanded ? <ExpandLess /> : <ExpandMore />}
+          </ExpandButton>
+        )}
+      </Row>
+
+      {hasNested && isExpanded && (
+        <NestedContainer>
+{item.categories.slice(0, 4).map((nestedItem: any) => (
+  <CustomCheckbox
+    key={nestedItem.categoryId}
+    label={nestedItem.categoryName}
+    checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
+    onChange={() =>
+      handleNestedCheckboxChange(sub.categoryId, nestedItem.categoryId, nestedItem.categoryName)
+    }
+  />
+))}
+
+          {item.categories.length > 4 && (
+            <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.listId)}>
+              See More
+            </SeeMoreText>
+          )}
+        </NestedContainer>
+      )}
+
+      {hasNested && isExpanded && subDepartmentCats[item.listId] && item.categories.length > 4 && (
+        <SubLimitedListWrapper>
+          {item.categories.map((nestedItem: any) => (
+            <CustomCheckbox
+              key={nestedItem.categoryId}
+              label={nestedItem.categoryName}
+              checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
+             onChange={() =>
+      handleNestedCheckboxChange(sub.categoryId, nestedItem.categoryId, nestedItem.categoryName)
+    }
+            />
+          ))}
+          <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.listId)}>
+            See Less
+          </SeeMoreText>
+        </SubLimitedListWrapper>
+      )}
+    </Box>
+  );
+};
 
   const renderCategory = (cat: Category, idx: number) => (
     <FilterAccordion

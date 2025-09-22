@@ -270,7 +270,7 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
       content: [
         {
           imageUrl: "https://wine-outlet.netlify.app/homepage_images/wine.png",
-          tags: ["wines"],
+          tags: ["wine"],
         },
         {
           imageUrl: "https://wine-outlet.netlify.app/homepage_images/liquor.png",

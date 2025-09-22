@@ -62,7 +62,7 @@ export const useProductList = ({
   const { data: BannerData, isLoading: BannerLoading, isError } = useBannerQuery();
 
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
-
+const storedId = localStorage.getItem("selectedStore");
   const { productsData, selectedNames } = useSelector((store: RootState) => store.productListSlice);
   const dispatch = useDispatch();
   const [
@@ -72,113 +72,140 @@ export const useProductList = ({
 
   const queryString = queryParams.toString();
 
-  useEffect(() => {
-    const payloadFromUrl: Record<string, any> = {};
+useEffect(() => {
+  const payloadFromUrl: Record<string, any> = {};
 
-    queryParams.forEach((value, key) => {
-      const normalizedKey = key.replace(/\s+/g, "").replace(/^[A-Z]/, (c) => c.toLowerCase());
+  // Parse query params
+  queryParams.forEach((value, key) => {
+    const normalizedKey = key.replace(/\s+/g, "").replace(/^[A-Z]/, (c) => c.toLowerCase());
+    if (normalizedKey.toLowerCase().includes("range")) {
+      const parts = value.split(",");
+      const rangeObj: Record<string, number> = {};
+      parts.forEach((p) => {
+        const [k, v] = p.split(":");
+        if (k && v) rangeObj[k.trim()] = Number(v.trim());
+      });
 
-      if (normalizedKey.toLowerCase().includes("range")) {
-        const parts = value.split(",");
-        const rangeObj: Record<string, number> = {};
-        parts.forEach((p) => {
-          const [k, v] = p.split(":");
-          if (k && v) {
-            rangeObj[k.trim()] = Number(v.trim());
-          }
-        });
+      if (normalizedKey.includes("price")) payloadFromUrl["price"] = rangeObj;
+      else if (normalizedKey.includes("alcohol")) payloadFromUrl["alcoholContent"] = rangeObj;
+      else payloadFromUrl[normalizedKey] = rangeObj;
+    } else if (value.includes(",")) {
+      payloadFromUrl[normalizedKey] = value.split(",").map((v) => v.trim());
+    } else {
+      payloadFromUrl[normalizedKey] = value.trim();
+    }
+  });
 
-        if (normalizedKey.includes("price")) {
-          payloadFromUrl["price"] = rangeObj;
-        } else if (normalizedKey.includes("alcohol")) {
-          payloadFromUrl["alcoholContent"] = rangeObj;
-        } else {
-          payloadFromUrl[normalizedKey] = rangeObj;
-        }
-      } else if (value.includes(",")) {
-        payloadFromUrl[normalizedKey] = value.split(",").map((v) => v.trim());
-      } else {
-        payloadFromUrl[normalizedKey] = value.trim();
-      }
-    });
+  // Clean category
+  const cleanedCategory = productsData.category
+    ? productsData.category.replace(/\s*\(.*?\)\s*/g, "")
+    :''
 
-    let payload: any = {
-      limit: 20,
-      page: currentPage,
-      sortBy: "relevance",
-      sortOrder: "asc",
-      category: "",
-      department: "",
-      subDepartment: "",
-      size: "",
-      price: "",
-      occasion: "",
-      customerRating: "",
-      tags: "",
-      origin: "",
-      grapeVariety: "",
-      brand: "",
-      vintageYear: "",
-      alcoholContent: "",
-      ...payloadFromUrl,
-      ...productsData,
-    };
+  // Construct initial payload
+  const payload: any = {
+    limit: 20,
+    page: 1,
+    sortBy: sortBy,
+    sortOrder: "asc",
+    storeId: 6,
+    category: cleanedCategory,
+    department: Array.isArray(productsData.department)
+      ? productsData.department
+      : productsData.department
+      ? [productsData.department]
+      : [],
+    subDepartment: Array.isArray(productsData.subDepartment)
+      ? productsData.subDepartment
+      : productsData.subDepartment
+      ? [productsData.subDepartment]
+      : [],
+    size: productsData.size || [],
+    price:
+      productsData.price && typeof productsData.price === "object"
+        ? productsData.price
+        : productsData.price
+        ? { min: Number(productsData.price), max: Number(productsData.price) }
+        : {},
+    occasion: productsData.occasion || [],
+    customerRating: productsData.customerRating || [],
+    tags: productsData.tags || [],
+    origin: productsData.origin || [],
+    grapeVariety: productsData.grapeVariety || [],
+    brand: productsData.brand || [],
+    vintageYear: productsData.vintageYear || [],
+    alcoholContent:
+      productsData.alcoholContent  && typeof productsData.alcoholContent === "object"
+        ? productsData.alcoholContent
+        : productsData.alcoholContent
+        ? { min: Number(productsData.alcoholContent), max: Number(productsData.alcoholContent) }
+        : {},
+  };
 
-    const mergedSelectedNames: Record<string, string[]> = {};
-
-    Object.keys(selectedNames).forEach((key) => {
-      const normalizedKey = key.toLowerCase().replace(/\s+/g, ""); // normalize key
-      if (!mergedSelectedNames[normalizedKey]) {
-        mergedSelectedNames[normalizedKey] = [];
-      }
-      // Merge values, remove duplicates
-      mergedSelectedNames[normalizedKey] = Array.from(
-        new Set([...mergedSelectedNames[normalizedKey], ...selectedNames[key]])
-      );
-    });
-
-    const metaKeys = ["limit", "page", "sortBy", "sortOrder"];
-
-    Object.keys(payload).forEach((key) => {
-      if (metaKeys.includes(key)) return; // skip meta keys
-      if (/^\d/.test(key)) {
-        delete payload[key];
-        return;
-      }
-      const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
-      const selectedVals = mergedSelectedNames[normalizedKey];
-      if (!selectedVals || selectedVals.length === 0) {
-        payload[key] = Array.isArray(payload[key]) ? [] : "";
-        return;
-      }
-      if (normalizedKey === "price" || normalizedKey === "alcoholcontent") {
-        const valStr = selectedVals[0];
-        if (valStr.includes("-")) {
-          const [minStr, maxStr] = valStr.split("-");
-          const rangeObj = { min: Number(minStr), max: Number(maxStr) };
-          payload[key] = rangeObj;
-        } else {
-          payload[key] = { min: Number(valStr), max: Number(valStr) };
-        }
-      } else {
-        // For other category values: lowercase & remove content in parentheses
-        const cleanedVals = selectedVals.map((v) => v.toLowerCase().replace(/\s*\(.*?\)\s*/g, ""));
-
-        payload[key] = cleanedVals.length === 1 ? cleanedVals[0] : cleanedVals;
-      }
-    });
-
-    const cleanedPayload = Object.fromEntries(
-      Object.entries(payload).filter(([value]) => {
-        if (value === null || value === undefined) return false;
-        if (Array.isArray(value) && value.length === 0) return false;
-        if (typeof value === "string" && value === "") return false;
-        return true;
-      })
+  // Normalize selectedNames
+  const mergedSelectedNames: Record<string, string[]> = {};
+  Object.keys(selectedNames).forEach((key) => {
+    const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
+    if (!mergedSelectedNames[normalizedKey]) mergedSelectedNames[normalizedKey] = [];
+    mergedSelectedNames[normalizedKey] = Array.from(
+      new Set([...mergedSelectedNames[normalizedKey], ...selectedNames[key]])
     );
+  });
 
-    productList(cleanedPayload);
-  }, [queryString, currentPage, productsData, productList, selectedNames]);
+  const metaKeys = ["limit", "page", "sortBy", "sortOrder", "storeId"];
+
+  Object.keys(payload).forEach((key) => {
+    if (metaKeys.includes(key)) return; // skip meta keys
+    if (/^\d/.test(key)) {
+      delete payload[key];
+      return;
+    }
+
+    const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
+    const selectedVals = mergedSelectedNames[normalizedKey];
+
+    if (!selectedVals || selectedVals.length === 0) {
+      // Make all non-special keys arrays of strings
+      if (["category", "price", "alcoholContent"].includes(normalizedKey)) return;
+      payload[key] = [];
+      return;
+    }
+
+    if (normalizedKey === "price" || normalizedKey === "alcoholcontent") {
+      const valStr = selectedVals[0];
+      if (valStr.includes("-")) {
+        const [minStr, maxStr] = valStr.split("-");
+        payload[key] = { min: Number(minStr), max: Number(maxStr) };
+      } else {
+        payload[key] = { min: Number(valStr), max: Number(valStr) };
+      }
+    } else if (normalizedKey === "category") {
+      // Keep cleaned category value if no selectedNames exist
+      payload[key] = selectedVals.length === 1
+        ? selectedVals[0].replace(/\s*\(.*?\)\s*/g, "")
+        : selectedVals.map((v) => v.replace(/\s*\(.*?\)\s*/g, ""));
+    } else {
+      // Everything else => array of strings (cleaned)
+      payload[key] = selectedVals.map((v) => v);
+    }
+  });
+
+  // Remove empty or undefined values
+const cleanedPayload = Object.fromEntries(
+  Object.entries(payload).filter(([_, value]) => {
+    if (value === null || value === undefined) return false;
+    if (Array.isArray(value) && value.length === 0) return false;
+    if (typeof value === "string" && value === "") return false;
+    if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0) return false; // <-- skip empty objects
+    return true;
+  })
+);
+
+
+  console.log(cleanedPayload, "CLEANEDPAYLOAD");
+  productList(cleanedPayload);
+}, [queryString, currentPage, productsData, productList, selectedNames, storedId]);
+
+
 
   const [wishList] = useWishListMutation();
 
@@ -187,7 +214,6 @@ export const useProductList = ({
       toast.error("Failed to load Banner");
     }
   }, [isError]);
-  const storedId = localStorage.getItem("selectedStore");
   const currentProducts = ProductListData?.productList?.products?.slice(startIndex, endIndex);
   const totaldataPage = ProductListData?.productList?.products;
   const totalPages = Math.ceil(totaldataPage?.length / productsPerPage);
