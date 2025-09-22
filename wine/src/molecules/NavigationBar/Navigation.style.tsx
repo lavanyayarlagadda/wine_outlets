@@ -193,6 +193,7 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
 
 export const DropdownTriggerNoBorder = styled(DropdownTrigger)(() => ({
   border: "none",
+  fontSize:useFontSize(12)
 }));
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
@@ -228,6 +229,7 @@ export const StyledMenu = styled(Menu)(() => ({
     borderRadius: shape.borderRadiuspx,
     marginTop: "8px",
     minWidth: "168px",
+    
   },
 }));
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
@@ -422,14 +424,23 @@ export const CategoryTitle = styled(Typography)(() => ({
   cursor: "pointer",
 }));
 
-export const ColumnsWrapper = styled(Box)(() => ({
-  display: "flex",
-  flexDirection: "row",
-  gap: 20,
-  paddingLeft: "30px",
-  paddingRight: "30px",
-  paddingTop: "8px",
-  paddingBottom: "8px",
+// export const ColumnsWrapper = styled(Box)(() => ({
+//   display: "flex",
+//   flexDirection: "row",
+//   gap: 20,
+//   paddingLeft: "30px",
+//   paddingRight: "30px",
+//   paddingTop: "8px",
+//   paddingBottom: "8px",
+// }));
+
+export const ColumnsWrapper = styled(Box)<{ expanded?: boolean }>(({ expanded }) => ({
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)", // always 2 columns
+  gap: 16,
+  padding: "8px 30px",
+  maxHeight: expanded ? 300 : "auto",
+  overflowY: expanded ? "auto" : "visible",
 }));
 
 export const Column = styled(Box)(() => ({
@@ -450,12 +461,13 @@ export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
   },
 }));
 
-export const ViewMoreText = styled(Typography)(() => ({
+export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expanded })=> ({
   fontSize: 13,
   fontWeight: 500,
   marginTop: 8,
   color: "#000",
-  cursor: "pointer",
+  cursor: "pointer",  gridColumn: "1 / -1", // span both columns
+  textAlign: expanded ? "right" : "left",
 }));
 
 export const SpecialsBlock = styled(Box)(() => ({
@@ -523,3 +535,5 @@ export const StyledSuggestionItem = styled(ListItemButton)(({ theme }) => ({
     backgroundColor: palette.white.light,
   },
 }));
+
+

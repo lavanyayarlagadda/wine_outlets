@@ -2,14 +2,15 @@ export interface SearchState {
   searchTerm: string;
 }
 
-export interface Category {
-  title: string;
-  items: string[];
+export interface MenuItem {
+  id: number;
+  listName: string;
 }
 
 export interface MenuSection {
+  id: number;
   name: string;
-  categories: Category[];
+  itemsList: MenuItem[];
 }
 
 export interface MenuResponse {

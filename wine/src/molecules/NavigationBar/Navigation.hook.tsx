@@ -85,7 +85,14 @@ export const useNavigation = (
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
 
+  const toggleExpand = (menuName: string) => {
+  setExpandedMenus((prev) => ({
+    ...prev,
+    [menuName]: !prev[menuName],
+  }));
+};
   const mockData = [
     "Merlot",
     "Chardonnay",
@@ -248,5 +255,7 @@ export const useNavigation = (
     setQuery,
     suggestions,
     setSuggestions,
+    toggleExpand,
+    expandedMenus
   };
 };
