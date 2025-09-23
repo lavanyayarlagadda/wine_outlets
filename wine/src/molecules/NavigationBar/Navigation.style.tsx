@@ -232,7 +232,7 @@ export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({ theme })
 export const StyledMenu = styled(Menu)(() => ({
   "& .MuiPaper-root": {
     borderRadius: shape.borderRadiuspx,
-    marginTop: "25px",
+    marginTop: "16px",
     minWidth: "168px",
     
   },
