@@ -12,7 +12,7 @@ export const Wrapper = styled(Box)(() => ({
 
 export const StyledFormControl = styled(FormControl)(() => ({
   minWidth: 140,
-  paddingRight: "20px",
+  paddingRight: "0px",
 }));
 
 export const ViewBox = styled(Box)(() => ({

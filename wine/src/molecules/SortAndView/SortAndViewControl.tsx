@@ -1,12 +1,12 @@
 import React from "react";
 import { CustomDropdown, CustomToggleButton } from "../../atoms";
-import { listImage, listImageGrey, gridImage, gridImageGrey } from "../../assets";
 import {
   Wrapper,
   StyledFormControl,
   ViewBox,
   StyledToggleButtonGroup,
 } from "./SortAndViewControl.style";
+import { ViewList, ViewModule } from "@mui/icons-material";
 
 interface SortAndViewControlsProps {
   sortBy: string;
@@ -55,14 +55,12 @@ const SortAndViewControls: React.FC<SortAndViewControlsProps> = ({
           <CustomToggleButton
             value="grid"
             selected={view === "grid"}
-            icon={view === "grid" ? gridImage : gridImageGrey}
-            alt="grid view"
+            icon={<ViewModule fontSize="small" />}
           />
           <CustomToggleButton
             value="list"
             selected={view === "list"}
-            icon={view === "list" ? listImage : listImageGrey}
-            alt="list view"
+            icon={<ViewList fontSize="small" />}
           />
         </StyledToggleButtonGroup>
       </ViewBox>

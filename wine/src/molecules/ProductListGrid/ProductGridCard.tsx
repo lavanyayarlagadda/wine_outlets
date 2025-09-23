@@ -62,12 +62,11 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   noaddtocart,
 }) => {
   const navigate = useNavigate();
+  const productKey = product.itemNumber ?? product.itemId;
   return (
     <ResponsiveCard>
-      <FavoriteButton onClick={() => onToggleFavorite(product.itemNumber)}>
-        {wishListLoading?.toString() === noaddtocart ? (
-          product.itemId
-        ) : product.itemNumber ? (
+      <FavoriteButton onClick={() => onToggleFavorite(productKey)}>
+        {wishListLoading?.toString() === productKey ? (
           <AddToCartLoader />
         ) : isFavorite ? (
           <FavoriteIcon />

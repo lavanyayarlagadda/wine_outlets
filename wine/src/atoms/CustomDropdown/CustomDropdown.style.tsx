@@ -18,7 +18,7 @@ export const StyledFormControl = styled(FormControl)(({ theme }) => ({
     },
   },
   "& .MuiSelect-select": {
-    padding: "12px 14px",
+    padding: "0px 14px",
     fontSize: "14px",
   },
 }));
@@ -30,7 +30,7 @@ export const DropdownWrapper = styled(Box)<{ side?: boolean }>(({ theme, side })
   gap: theme.spacing(1),
   border: side ? shape.borderSuccess : "none",
   borderRadius: side ? 4 : 0,
-  padding: side ? 8 : 0,
+  padding: side ? 6 : 0,
   "& .MuiOutlinedInput-notchedOutline": {
     border: side ? "none" : undefined, // remove border if side is true
   },

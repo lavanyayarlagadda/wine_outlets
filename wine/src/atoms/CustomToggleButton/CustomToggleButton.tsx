@@ -1,19 +1,18 @@
+import type { ReactNode } from "react";
 import React from "react";
-import { ToggleButton } from "@mui/material";
-import { IconImage } from "./CustomToggleButton.style";
+import { StyledToggleButton, IconWrapper } from "./CustomToggleButton.style";
 
 interface ViewToggleButtonProps {
   value: string;
   selected?: boolean;
-  icon: string;
-  alt: string;
+  icon: ReactNode;
 }
 
-const ViewToggleButton: React.FC<ViewToggleButtonProps> = ({ value, selected, icon, alt }) => {
+const ViewToggleButton: React.FC<ViewToggleButtonProps> = ({ value, selected, icon }) => {
   return (
-    <ToggleButton value={value}>
-      <IconImage src={icon} alt={alt} selected={selected} />
-    </ToggleButton>
+    <StyledToggleButton value={value} selected={selected}>
+      <IconWrapper selected={selected}>{icon}</IconWrapper>
+    </StyledToggleButton>
   );
 };
 

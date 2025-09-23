@@ -57,7 +57,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
 
       const data = await wishList({
         ...getClientIdentifierForPayload(),
-        itemNumber: productId,
+        itemNumber: Number(productId),
         storeId: Number(storedId) || 0,
       }).unwrap();
 

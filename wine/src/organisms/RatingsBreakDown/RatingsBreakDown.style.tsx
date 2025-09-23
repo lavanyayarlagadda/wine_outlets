@@ -94,6 +94,7 @@ export const SkeletonTextMedium = styled(Skeleton)(() => ({
 
 export const NoDataWrapper = styled(Box)(() => ({
   width: "100%",
-  textAlign: "center",
-  padding: "48px 0",
+  textAlign: "left", // change from "center" to "left"
+  padding: "0px 0", // reduced padding
+  marginBottom: 0, // optional spacing below
 }));

@@ -145,7 +145,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
 
       const data = await wishList({
         ...getClientIdentifierForPayload(),
-        productId,
+        itemNumber: Number(productId),
         storeId: Number(storedId) || 0,
       }).unwrap();
 
