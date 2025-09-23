@@ -9,6 +9,7 @@ import {
   SITE_SETTING_DEMO_DATA,
   type CustomProductCategorySection,
 } from "../../constant/LandingPageData";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 // interface DealFilterBtn {
 //   tag: string;
 //   label: string;
@@ -148,7 +149,7 @@ export const useDealsSection = () => {
 
     return () => cleanups.forEach((fn) => fn && fn());
   }, [filterButtonsRef, productCardsRef]);
-  const userId = localStorage.getItem("userId");
+
   // timer tick
   useEffect(() => {
     if (!showTimer || remainingMs === null) return;
@@ -190,7 +191,7 @@ export const useDealsSection = () => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

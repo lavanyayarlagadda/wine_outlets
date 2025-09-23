@@ -3,18 +3,18 @@ import { usePlaceOrderMutation } from "../../store/apis/CartCheckOut/CartCheckOu
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export const useOrderConfirmed = () => {
   const dispatch = useDispatch();
   const [placeOrder, { data, isLoading, isSuccess, isError }] = usePlaceOrderMutation();
   const storedId = localStorage.getItem("selectedStore");
-  const userId = localStorage.getItem("userId");
   useEffect(() => {
     placeOrder({
       cartId: 1,
       paymentMethod: "credit",
       slotId: 1,
-      userId: Number(userId),
+      ...getClientIdentifierForPayload(),
       storeId: Number(storedId) || 0,
     });
   }, []);

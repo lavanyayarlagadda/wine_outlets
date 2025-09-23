@@ -48,7 +48,14 @@ export const productViewApi = createApi({
     }),
     createReview: builder.mutation<
       any,
-      { itemNumber: number; rating: number; userId: number; comment: string; orderId: number }
+      {
+        itemNumber: number;
+        rating: number;
+        userId: number | string;
+        comment: string;
+        orderId: number;
+        userIp: string;
+      }
     >({
       query: (newItem) => ({
         url: `/product-view/create-review`,

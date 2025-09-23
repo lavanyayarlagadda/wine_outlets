@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { setProductsData } from "../../store/slices/ProductList/productListSlice";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export type ViewType = "grid" | "list";
 
@@ -221,7 +222,6 @@ export const useProductList = ({
   const currentProducts = currentProductsData ?? [];
   const totalProducts = ProductListData?.productList?.totalProducts;
   const totalPages = Math.ceil((totalProducts || 0) / productsPerPage);
-  const userId = localStorage.getItem("userId");
   useEffect(() => {
     setCurrentPage(1);
   }, [urlCategory]);
@@ -259,7 +259,8 @@ export const useProductList = ({
         {
           itemNumber: productId,
           quantity: newQuantity,
-          userId: Number(userId),
+          ...getClientIdentifierForPayload(),
+          storeId: Number(storedId),
         },
       ];
 
@@ -268,7 +269,7 @@ export const useProductList = ({
         ...prev,
         [productId]: newQuantity,
       }));
-      toast.success(response.cartResponse);
+      toast.success(response.cartResponse.message);
     } catch (err) {
       toast.error("Failed to add to cart");
     } finally {
@@ -288,7 +289,7 @@ export const useProductList = ({
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: userId,
+        ...getClientIdentifierForPayload(),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

@@ -35,7 +35,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   //   data: recentlyViewedResp,
   //   isLoading: rvLoading,
   //   isError: rvError,
-  // } = useGetRecentlyViewedQuery({ userId: userId, limit: 10 });
+  // } = useGetRecentlyViewedQuery({ ...getClientIdentifierForPayload(),, limit: 10 });
 
   const rvData = SITE_SETTING_DEMO_DATA.pageSections.find(
     (s) => s.id === "product-collection-custom-2"

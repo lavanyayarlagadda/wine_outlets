@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 interface ProductDetailsProps {
   initialData?: ProductViewResponse;
@@ -41,14 +42,13 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const [selectedSize, setSelectedSize] = useState<string>(size);
   const [selectedVintage, setSelectedVintage] = useState<string>("");
   const [count, setCount] = useState<number>(0);
-  const userId = localStorage.getItem("userId");
   const storedId = localStorage.getItem("selectedStore");
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const result = await productDetails({
           itemId: productId,
-          userId: Number(userId),
+          ...getClientIdentifierForPayload(),
           size,
           vintageYear: Number(vintage),
           storeId: Number(storedId),
@@ -108,7 +108,8 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
         {
           itemNumber: productId,
           quantity: newValue ? newValue : newQuantity,
-          userId: Number(userId),
+          ...getClientIdentifierForPayload(),
+          storeId: Number(storedId),
         },
       ];
 
@@ -117,7 +118,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
         ...prev,
         [productId]: newQuantity,
       }));
-      toast.success(response.cartResponse);
+      toast.success(response.cartResponse.message);
     } catch (err) {
       toast.error("Failed to add to cart");
     } finally {
@@ -143,7 +144,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

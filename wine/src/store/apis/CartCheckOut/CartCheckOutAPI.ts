@@ -17,14 +17,18 @@ export const cartCheckoutApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    cartProductDetails: builder.query<any, { cartId: number; userId: number; storeId: number }>({
-      query: ({ cartId, userId, storeId }) => ({
+    cartProductDetails: builder.query<
+      any,
+      { cartId: number; userId: number | string; storeId: number; userIp: string }
+    >({
+      query: ({ cartId, userId, storeId, userIp }) => ({
         url: `/cart-checkout/product-listing`,
         method: "GET",
         params: {
           cartId,
           userId,
           storeId,
+          userIp,
         },
       }),
     }),

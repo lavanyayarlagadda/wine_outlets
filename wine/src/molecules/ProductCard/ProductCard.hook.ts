@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export const useProductCard = () => {
   const userId = localStorage.getItem("userId");
+  const storedId = localStorage.getItem("selectedStore");
   const [addToCartMutation, { isLoading: mutationLoading }] = useAddtoCartMutation();
   const [counts, setCounts] = useState<Record<string, number>>({});
 
@@ -14,7 +16,8 @@ export const useProductCard = () => {
           {
             itemNumber: Number(productId),
             quantity: Number(quantity),
-            userId: Number(userId),
+            ...getClientIdentifierForPayload(),
+            storeId: Number(storedId),
           },
         ];
         const res = await addToCartMutation(payload).unwrap();

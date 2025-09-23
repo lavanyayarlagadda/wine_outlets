@@ -16,7 +16,7 @@ export const useHomeLogic = () => {
   const [open, setOpen] = useState(false);
   const stored = localStorage.getItem("selectedStore");
   const [selectedStore, setSelectedStore] = useState<number>(() => {
-    return stored ? Number(stored) : 0;
+    return stored ? Number(stored) : 1;
   });
   useEffect(() => {
     localStorage.setItem("selectedStore", selectedStore.toString());

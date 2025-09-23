@@ -8,6 +8,7 @@ import {
 } from "../../store/apis/Home/HomeAPI";
 
 import { setMenuList } from "../../store/slices/MenuItems/MenuItemsSlice";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 // import type { RootState } from "../../store";
 
 type MenuState = {
@@ -40,14 +41,11 @@ export const useNavigation = (
     isError: headerBannerError,
     refetch: refetchHeaderBanners,
   } = useGetHeaderBannersQuery({ StoreId: Number(storedIdString) });
-  const userIdString = localStorage.getItem("userId");
-  const userId = userIdString ? Number(userIdString) : undefined;
 
   const storedId = storedIdString ? Number(storedIdString) : 0;
   const cartQueryParams = {
-    userId: userId,
+    ...getClientIdentifierForPayload(),
     storeId: storedIdString && Number(storedIdString) > 0 ? storedIdString : undefined,
-    userIP: "",
   };
 
   const { data: cartData, refetch: refetchCartCount } = useGetCartCountQuery(cartQueryParams);
@@ -215,8 +213,6 @@ export const useNavigation = (
     }
     return result;
   };
-
-  
 
   useEffect(() => {
     if (!cartData) return;

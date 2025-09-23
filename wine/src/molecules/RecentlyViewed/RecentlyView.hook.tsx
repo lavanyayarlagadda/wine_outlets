@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import useProductCard from "../ProductCard/ProductCard.hook";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 type UseRecentlyViewedArgs<T> = {
   items: readonly T[];
@@ -29,7 +30,6 @@ export function useRecentlyViewed<T>({
   const [currentSlide, setCurrentSlide] = useState<number>(initialSlide);
 
   const totalSlides = Math.max(1, Math.ceil(items.length / cardsPerSlide));
-  const userId = localStorage.getItem("userId");
   const computeIndexFromScroll = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return 0;
@@ -114,7 +114,7 @@ export function useRecentlyViewed<T>({
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
         productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

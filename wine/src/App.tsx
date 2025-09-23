@@ -9,6 +9,7 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/100.css";
 import AppLoader from "./atoms/AppLoader/AppLoader";
 import ScrollToTop from "./ScrollTop";
+import { useClientIp } from "./hooks/userIp";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
@@ -24,6 +25,8 @@ const TermsConditions = lazy(() => import("./pages/TermsConditions/TermsConditio
 const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"));
 
 const App: React.FC = () => {
+  useClientIp();
+
   return (
     <Router>
       <ScrollToTop />
@@ -41,8 +44,6 @@ const App: React.FC = () => {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/aboutUs" element={<AboutUs />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsConditions />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

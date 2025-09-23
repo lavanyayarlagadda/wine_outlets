@@ -3,6 +3,7 @@ import type { Product } from "../../constant/dealProduct";
 import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export const usePeopleBought = (initialProducts: Product[]) => {
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -12,8 +13,6 @@ export const usePeopleBought = (initialProducts: Product[]) => {
 
   const [addToCart] = useAddtoCartMutation();
   const [wishList] = useWishListMutation();
-
-  const userId = localStorage.getItem("userId");
   const storedId = localStorage.getItem("selectedStore");
 
   // always keep one entry per product with quantity = 1
@@ -32,11 +31,12 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       setLoadingProduct("all");
       const payload = cartItems.map((item) => ({
         ...item,
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
+        storeId: Number(storedId),
       }));
 
       const response = await addToCart(payload).unwrap();
-      toast.success(response.cartResponse);
+      toast.success(response.cartResponse.message);
     } catch (err) {
       toast.error("Failed to add to cart");
     } finally {
@@ -56,7 +56,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
         itemNumber: productId,
         storeId: Number(storedId) || 0,
       }).unwrap();

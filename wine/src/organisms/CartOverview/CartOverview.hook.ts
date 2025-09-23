@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 import { useAddtoCartMutation, useRemoveFromCartMutation } from "../../store/apis/Home/HomeAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export const useCartOverView = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,9 @@ export const useCartOverView = () => {
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const today = new Date().toISOString().split("T")[0];
   const storedId = localStorage.getItem("selectedStore");
-  const userId = localStorage.getItem("userId");
   const { data, isLoading, isError } = useCartProductDetailsQuery({
     cartId: 1,
-    userId: Number(userId),
+    ...getClientIdentifierForPayload(),
     storeId: Number(storedId) || 0,
   });
   const cartDetails = data?.productListing?.[0];
@@ -55,7 +55,7 @@ export const useCartOverView = () => {
       setWishListLoading(productId);
 
       const data = await wishList({
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
         productId,
         storeId: storedId || undefined,
       }).unwrap();
@@ -91,7 +91,8 @@ export const useCartOverView = () => {
         {
           itemNumber: productId,
           quantity: newValue ? newValue : newQuantity,
-          userId: Number(userId),
+          ...getClientIdentifierForPayload(),
+          storeId: Number(storedId),
         },
       ];
 
@@ -100,7 +101,7 @@ export const useCartOverView = () => {
         ...prev,
         [productId]: newQuantity,
       }));
-      toast.success(response.cartResponse);
+      toast.success(response.cartResponse.message);
     } catch (err) {
       toast.error("Failed to add to cart");
     } finally {

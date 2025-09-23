@@ -22,7 +22,16 @@ export const homeApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    addtoCart: builder.mutation<any, { itemNumber: number; quantity: number; userId: number }[]>({
+    addtoCart: builder.mutation<
+      any,
+      {
+        itemNumber: number;
+        quantity: number;
+        userId: number | string;
+        storeId: number;
+        userIp: string;
+      }[]
+    >({
       query: (newItem) => ({
         url: "/home/add-to-cart",
         method: "POST",
@@ -56,7 +65,7 @@ export const homeApi = createApi({
     sendNewsletter: builder.mutation<
       any,
       {
-        userId: number;
+        userId: number | string;
         userIp: string;
         fullName: string;
         email: string;
@@ -71,27 +80,28 @@ export const homeApi = createApi({
         body: payload,
       }),
     }),
-    getCartCount: builder.query<any, { userId?: number; storeId?: string; userIP?: string } | void>(
-      {
-        query: (params) => {
-          //queryParams
-          const qs =
-            params && Object.keys(params).length
-              ? `?${Object.entries(params)
-                  .filter(([, v]) => v !== undefined && v !== null && v !== "")
-                  .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
-                  .join("&")}`
-              : "";
-          return {
-            url: `/home/cart-count${qs}`,
-            method: "GET",
-          };
-        },
-      }
-    ),
+    getCartCount: builder.query<
+      any,
+      { userId?: number | string; storeId?: string; userIp?: string } | void
+    >({
+      query: (params) => {
+        //queryParams
+        const qs =
+          params && Object.keys(params).length
+            ? `?${Object.entries(params)
+                .filter(([, v]) => v !== undefined && v !== null && v !== "")
+                .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+                .join("&")}`
+            : "";
+        return {
+          url: `/home/cart-count${qs}`,
+          method: "GET",
+        };
+      },
+    }),
     getRecentlyViewed: builder.query<
       RecentlyViewedSection,
-      { userId?: number; limit?: number } | void
+      { userId?: number | string; limit?: number; userIp?: string } | void
     >({
       query: (params) => {
         const qs =
@@ -116,10 +126,11 @@ export const homeApi = createApi({
         const qs =
           params && Object.keys(params).length
             ? `?${Object.entries(params)
-                .filter(([, v]) => v !== undefined && v !== null && v !== "")
+                .filter(([, v]) => v !== undefined && v !== null) // remove only undefined/null
                 .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
                 .join("&")}`
             : "";
+
         return {
           url: `/home/delivery-partner${qs}`,
           method: "GET",

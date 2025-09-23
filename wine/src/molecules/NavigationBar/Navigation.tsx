@@ -273,9 +273,6 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                           if (option.label === "Logout") {
                             localStorage.removeItem("token");
                             localStorage.removeItem("userId");
-                            localStorage.removeItem("userTypeId");
-                            localStorage.removeItem("userName");
-                            localStorage.removeItem("role");
                           }
 
                           option.onClick?.();

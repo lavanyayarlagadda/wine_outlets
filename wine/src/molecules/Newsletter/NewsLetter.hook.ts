@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSendNewsletterMutation } from "../../store/apis/Home/HomeAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export type NewsletterForm = {
   fullName: string;
@@ -46,10 +47,8 @@ export const useNewsletter = () => {
       toast.error(`Please fill in: ${missingFields.join(", ")}`);
       return;
     }
-    const userId = localStorage.getItem("userId");
     const payload = {
-      userId: Number(userId),
-      userIp: "1",
+      ...getClientIdentifierForPayload(),
       fullName: formData.fullName,
       email: formData.email,
       phoneNumber: formData.phoneNumber,

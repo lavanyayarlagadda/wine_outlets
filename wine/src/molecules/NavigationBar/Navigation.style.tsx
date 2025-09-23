@@ -192,14 +192,11 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const DropdownTriggerNoBorder = styled(DropdownTrigger)<{ open?: boolean }>(
-  ({ open }) => ({
-    border: "none",
-    fontSize: useFontSize(14),
-    color: open ?  palette.primary.dark: "inherit", 
-  })
-);
-
+export const DropdownTriggerNoBorder = styled(DropdownTrigger)<{ open?: boolean }>(({ open }) => ({
+  border: "none",
+  fontSize: useFontSize(14),
+  color: open ? palette.primary.dark : "inherit",
+}));
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
   display: "flex",
@@ -234,7 +231,6 @@ export const StyledMenu = styled(Menu)(() => ({
     borderRadius: shape.borderRadiuspx,
     marginTop: "16px",
     minWidth: "168px",
-    
   },
 }));
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
@@ -496,8 +492,6 @@ export const ColumnsWrapper = styled(Box)<{ columns: number; expanded?: boolean 
   })
 );
 
-
-
 // styled component for ColumnsWrapper
 export const PromotionsWrapper = styled("div")({
   display: "grid",
@@ -512,12 +506,10 @@ export const PromotionsWrapper = styled("div")({
 });
 
 export const PromotionsColumnsWrapper = styled(Box)({
-    display: "grid",
-    gap: 16,
-    padding: "8px 30px",
-
-  
-  })
+  display: "grid",
+  gap: 16,
+  padding: "8px 30px",
+});
 
 export const Column = styled(Box)(() => ({
   display: "flex",

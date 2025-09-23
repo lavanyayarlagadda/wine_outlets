@@ -5,6 +5,7 @@ import {
   useGetReviewsMutation,
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { toast } from "react-toastify";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export interface Review {
   rating: number;
@@ -43,7 +44,7 @@ export const useRatingsBreakdown = () => {
       createReview({
         rating,
         comment,
-        userId: Number(userId),
+        ...getClientIdentifierForPayload(),
         itemNumber: Number(productId),
         orderId: orderId ?? 1,
       });
@@ -55,7 +56,7 @@ export const useRatingsBreakdown = () => {
   useEffect(() => {
     getReviews({
       itemNumber: Number(productId),
-      userId: Number(userId),
+      ...getClientIdentifierForPayload(),
       page: 1,
       limit: 10,
       rating: selectedFilter,
