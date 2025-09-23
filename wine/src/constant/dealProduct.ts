@@ -1,7 +1,7 @@
 import { deal_img2, deal_img3, deal_img4 } from "../assets";
 
 export interface Product {
-  id: string;
+  itemId: string;
   name: string; // required
   year: number; // required
   region: string; // required
@@ -27,7 +27,7 @@ export interface SuggestedProducts {
 
 export const DEAL_PRODUCT: Product[] = [
   {
-    id: "1",
+    itemId: "1",
     name: "Meiomi Pinot Noir",
     year: 2021,
     region: "California",
@@ -46,7 +46,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "2",
+    itemId: "2",
     name: "Josh Cellars Cabernet",
     year: 2020,
     region: "Napa Valley",
@@ -65,7 +65,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "3",
+    itemId: "3",
     name: "Jim Beam Bourbon Whiskey",
     year: 2022,
     region: "Kentucky",
@@ -84,7 +84,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "4",
+    itemId: "4",
     name: "La Marca Prosecco Sparkling",
     year: 2023,
     region: "Veneto",
@@ -103,7 +103,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "5",
+    itemId: "5",
     name: "Kendall Jackson Chardonnay",
     year: 2021,
     region: "Sonoma County",
@@ -122,7 +122,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "6",
+    itemId: "6",
     name: "Patron Silver Tequila",
     year: 2022,
     region: "Jalisco",
@@ -141,7 +141,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "7",
+    itemId: "7",
     name: "Barefoot Moscato",
     year: 2023,
     region: "California",
@@ -160,7 +160,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "8",
+    itemId: "8",
     name: "Grey Goose Vodka",
     year: 2022,
     region: "France",
@@ -179,7 +179,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "9",
+    itemId: "9",
     name: "19 Crimes Red Blend",
     year: 2021,
     region: "Australia",
@@ -198,7 +198,7 @@ export const DEAL_PRODUCT: Product[] = [
     },
   },
   {
-    id: "10",
+    itemId: "10",
     name: "Moët & Chandon Imperial",
     year: 2019,
     region: "Champagne",
@@ -222,7 +222,7 @@ export const suggestedProducts: SuggestedProducts = {
   totalPrice: 400,
   products: [
     {
-      id: "1",
+      itemId: "1",
       name: "Kim Crawford Wine",
       year: 2021,
       region: "California",
@@ -240,7 +240,7 @@ export const suggestedProducts: SuggestedProducts = {
       },
     },
     {
-      id: "2",
+      itemId: "2",
       name: "Wine",
       year: 2021,
       region: "California",

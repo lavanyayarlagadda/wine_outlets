@@ -159,5 +159,5 @@ export const {
   useGetHeaderBannersQuery,
   useStoreSearchlocatorMutation,
   useGetMenuItemsQuery,
-  useRemoveFromCartMutation
+  useRemoveFromCartMutation,
 } = homeApi;

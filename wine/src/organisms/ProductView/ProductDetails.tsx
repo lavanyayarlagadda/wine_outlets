@@ -102,6 +102,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
     value: size,
     label: size,
   }));
+
   return (
     <DetailsContainer>
       <ProductTitle>{product.name}</ProductTitle>
@@ -145,7 +146,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
       <ProductInfoRow>
         <SimpleDropdown
           label="Bottle Size"
-          value={selectedSize?.toLowerCase()}
+          value={selectedSize}
           onChange={setSelectedSize}
           options={sizeOptions}
           placeholder="Select size"

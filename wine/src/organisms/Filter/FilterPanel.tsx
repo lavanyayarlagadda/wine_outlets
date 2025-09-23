@@ -34,6 +34,7 @@ import {
   StyledSkeletonRect,
   SkeletonItem,
 } from "./FilterPanel.style";
+import { useState } from "react";
 // import { useState } from "react";
 // import { useSearchParams } from "react-router-dom";
 
@@ -79,6 +80,14 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
   } = useFilterPanel(categories, onFilterChange);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
+  const [seeMore, setSeeMore] = useState(false);
+  const toggleExpandDropdown = (listId: string) => {
+    setExpanded((prev) => ({
+      ...prev,
+      [listId]: !prev[listId],
+    }));
+  };
 
   const toggleExpand = (categoryId: string) => {
     setExpandedCats((prev) => ({
@@ -104,12 +113,6 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
   const getIcon = (name: string) => iconMap[name.toLowerCase()] ?? <LocalBar fontSize="small" />;
   const renderSubCategory = (item: any, sub: any) => {
     const hasNested = item.categories?.length > 0;
-
-    const isExpanded =
-      subDepartmentCats[item.listId] ||
-      item.categories?.some((nestedItem: any) =>
-        (filters[sub.categoryId] || []).includes(nestedItem.categoryId)
-      );
     return (
       <Box key={item.listId}>
         <Row>
@@ -119,13 +122,13 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
             onChange={() => handleCheckboxChange(sub.categoryId, item.listId, item.listName, "sub")}
           />
           {hasNested && (
-            <ExpandButton onClick={() => toggleSubDepartmentExpand(item.listId)}>
-              {isExpanded ? <ExpandLess /> : <ExpandMore />}
+            <ExpandButton onClick={() => toggleExpandDropdown(item.listId)}>
+              {expanded[item.listId] ? <ExpandLess /> : <ExpandMore />}
             </ExpandButton>
           )}
         </Row>
 
-        {hasNested && isExpanded && (
+        {hasNested && expanded[item.listId] && !seeMore && (
           <NestedContainer>
             {item.categories.slice(0, 4).map((nestedItem: any) => (
               <CustomCheckbox
@@ -143,37 +146,43 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
             ))}
 
             {item.categories.length > 4 && (
-              <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.listId)}>
+              <SeeMoreText
+                onClick={() => {
+                  (toggleSubDepartmentExpand(item.listId), setSeeMore(true));
+                }}
+              >
                 See More
               </SeeMoreText>
             )}
           </NestedContainer>
         )}
 
-        {hasNested &&
-          isExpanded &&
-          subDepartmentCats[item.listId] &&
-          item.categories.length > 4 && (
-            <SubLimitedListWrapper>
-              {item.categories.map((nestedItem: any) => (
-                <CustomCheckbox
-                  key={nestedItem.categoryId}
-                  label={nestedItem.categoryName}
-                  checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
-                  onChange={() =>
-                    handleNestedCheckboxChange(
-                      sub.categoryId,
-                      nestedItem.categoryId,
-                      nestedItem.categoryName
-                    )
-                  }
-                />
-              ))}
-              <SeeMoreText onClick={() => toggleSubDepartmentExpand(item.listId)}>
-                See Less
-              </SeeMoreText>
-            </SubLimitedListWrapper>
-          )}
+        {/* Show full list in SubLimitedListWrapper when See More is clicked */}
+        {hasNested && expanded[item.listId] && subDepartmentCats[item.listId] && seeMore && (
+          <SubLimitedListWrapper>
+            {item.categories.map((nestedItem: any) => (
+              <CustomCheckbox
+                key={nestedItem.categoryId}
+                label={nestedItem.categoryName}
+                checked={(filters[sub.categoryId] || []).includes(nestedItem.categoryId)}
+                onChange={() =>
+                  handleNestedCheckboxChange(
+                    sub.categoryId,
+                    nestedItem.categoryId,
+                    nestedItem.categoryName
+                  )
+                }
+              />
+            ))}
+            <SeeMoreText
+              onClick={() => {
+                (toggleSubDepartmentExpand(item.listId), setSeeMore(false));
+              }}
+            >
+              See Less
+            </SeeMoreText>
+          </SubLimitedListWrapper>
+        )}
       </Box>
     );
   };
@@ -239,6 +248,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
             onChange={(val: number | number[]) =>
               handleSliderChange(cat.categoryId, val, cat.categoryName)
             }
+            symbol={cat.categoryName === "Price Range" ? "$" : "%"}
           />
         )}
 
@@ -256,6 +266,7 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
               onChange={(val: number | number[]) =>
                 handleSliderChange(cat.categoryId, val, cat.categoryName)
               }
+              symbol={cat.categoryName === "Price Range" ? "$" : "%"}
             />
             <PercentageText variant="body2">
               {filters[cat.categoryId] ?? parseInt(cat.categoryRange)}%

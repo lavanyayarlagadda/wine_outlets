@@ -254,10 +254,47 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
       [parentId]: true, // force expand
     }));
   };
-
+  const storedId = localStorage.getItem("selectedStore");
+  const payload: any = {
+    limit: 24,
+    page: 1,
+    sortBy: "relevance",
+    sortOrder: "asc",
+    storeId: storedId,
+    category: "",
+    department: [],
+    subDepartment: [],
+    size: [],
+    price: {},
+    occasion: [],
+    customerRating: [],
+    tags: [],
+    origin: [],
+    grapeVariety: [],
+    brand: [],
+    vintageYear: [],
+    alcoholContent: {},
+  };
   const handleClearAll = () => {
+    // Clear filters
     setFilters({});
+
+    // Clear selected names in Redux
     dispatch(setSelectedNames({}));
+
+    // Reset products data
+    dispatch(setProductsData(payload));
+
+    // Clear all selected sub/nested
+    setSelectedSub(null);
+    setSelectedNestedSub(null);
+
+    // Reset all expand/collapse states
+    setExpandedCats({});
+    setDepartmentCats({});
+    setSubDepartmentCats({});
+
+    // Notify any external listener
     onFilterChange?.({});
   };
 

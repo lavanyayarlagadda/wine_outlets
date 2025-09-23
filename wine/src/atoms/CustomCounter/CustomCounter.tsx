@@ -45,19 +45,14 @@ const CustomCounter: React.FC<CounterProps> = ({
 
 export default CustomCounter;
 
-
-
-
-
-
 // interface CounterProps {
 //   value: number;
 //   // onChange: (_newValue: number) => void;
 //   min?: number;
 //   max?: number;
 //   step?: number;
-//     onAdd: () => void;       
-//   onRemove: () => void; 
+//     onAdd: () => void;
+//   onRemove: () => void;
 // }
 
 // const CustomCounter: React.FC<CounterProps> = ({
@@ -97,4 +92,3 @@ export default CustomCounter;
 // };
 
 // export default CustomCounter;
-

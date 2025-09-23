@@ -17,20 +17,11 @@ export const productViewApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    getReviews: builder.query<
-      any,
-      { itemId: number; page: number; limit: number; rating: string; userId: number }
-    >({
-      query: ({ itemId, page, limit, rating, userId }) => ({
+    getReviews: builder.mutation<any, any>({
+      query: (newItem) => ({
         url: "/product-view/reviews",
-        method: "GET",
-        params: {
-          itemId,
-          page,
-          limit,
-          rating,
-          userId,
-        },
+        method: "POST",
+        body: newItem,
       }),
     }),
     productDetails: builder.mutation<any, any>({
@@ -41,13 +32,11 @@ export const productViewApi = createApi({
       }),
     }),
 
-    bottleSizes: builder.query<any, { productId: number }>({
-      query: ({ productId }) => ({
+    bottleSizes: builder.mutation<any, any>({
+      query: (newItem) => ({
         url: `/product-view/bottle-sizes`,
-        method: "GET",
-        params: {
-          productId,
-        },
+        method: "POST",
+        body: newItem,
       }),
     }),
     vintageYear: builder.mutation<any, any>({
@@ -59,7 +48,7 @@ export const productViewApi = createApi({
     }),
     createReview: builder.mutation<
       any,
-      { itemNumber: number; rating: number; userId: number; comment: string }
+      { itemNumber: number; rating: number; userId: number; comment: string; orderId: number }
     >({
       query: (newItem) => ({
         url: `/product-view/create-review`,
@@ -71,8 +60,8 @@ export const productViewApi = createApi({
 });
 
 export const {
-  useGetReviewsQuery,
-  useBottleSizesQuery,
+  useGetReviewsMutation,
+  useBottleSizesMutation,
   useCreateReviewMutation,
   useProductDetailsMutation,
   useVintageYearMutation,

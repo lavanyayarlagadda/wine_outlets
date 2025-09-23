@@ -54,7 +54,10 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({
   setRating,
   reviewSummary,
 }) => {
-  const hasReviews = reviewSummary?.length <= 0;
+  const hasReviews =
+    reviewSummary &&
+    reviewSummary.review_count &&
+    Number(reviewSummary.review_count.split(" ")[0]) > 0;
 
   return (
     <>
@@ -73,7 +76,7 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({
             <StyledSkeletonRect />
             <StyledSkeletonRect />
           </SkeletonWrapper>
-        ) : hasReviews ? (
+        ) : !hasReviews ? (
           <NoDataWrapper>
             <Typography variant="body1" color="text.secondary" fontStyle="italic">
               No reviews available. Add a review to get started!
@@ -83,7 +86,7 @@ const RatingsBreakdown: React.FC<RatingsBreakdownProps> = ({
           <>
             <RatingsContent>
               <AverageRatingCard
-                averageRating={reviewSummary?.average_rating}
+                averageRating={Number(reviewSummary?.average_rating)}
                 satisfaction={reviewSummary?.satisfaction_percentage}
                 ratingCount={reviewSummary?.rating_count}
                 reviewCount={reviewSummary?.review_count}

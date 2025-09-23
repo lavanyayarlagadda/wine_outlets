@@ -98,8 +98,7 @@ const NavigationMobileMenu: React.FC<MobileNavigationProps> = ({
               <DrawerSubMenuItem
                 key={val.id}
                 onClick={() => {
-                  (navigate(`/productsList?category=${menu.name.toLowerCase()}&id=${menu.id}`),
-                    handleMobileMenuClose());
+                  (navigate(`/productsList?category=${menu.name}`), handleMobileMenuClose());
                 }}
               >
                 {val.listName}

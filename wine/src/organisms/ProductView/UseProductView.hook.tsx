@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { ProductViewResponse } from "../../constant/productViewData";
 import {
-  useBottleSizesQuery,
+  useBottleSizesMutation,
   useProductDetailsMutation,
   useVintageYearMutation,
 } from "../../store/apis/ProductView/ProductViewAPI";
@@ -33,7 +33,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
     initialData || null
   );
 
-  const { data, isLoading } = useBottleSizesQuery({ productId: Number(productId) });
+  const [bottleSizes, { data, isLoading }] = useBottleSizesMutation();
   const [vintageYear] = useVintageYearMutation();
 
   const [productDetails, { data: productDetailsData, isLoading: productDetailLoading, isError }] =
@@ -42,6 +42,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const [selectedVintage, setSelectedVintage] = useState<string>("");
   const [count, setCount] = useState<number>(0);
   const userId = localStorage.getItem("userId");
+  const storedId = localStorage.getItem("selectedStore");
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -49,7 +50,8 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
           itemId: productId,
           userId: Number(userId),
           size,
-          vintageYear: vintage,
+          vintageYear: Number(vintage),
+          storeId: Number(storedId),
         }).unwrap();
 
         // result is the actual response payload
@@ -63,12 +65,17 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
       fetchDetails();
     }
   }, []);
+  useEffect(() => {
+    bottleSizes({
+      itemNumber: Number(productId),
+    }).unwrap(); // optional: returns a promise with the response
+  }, [productId]);
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const result = await vintageYear({
-          itemId: productId,
+          itemNumber: productId,
         }).unwrap();
         setVintageYearData(result?.vintageYear);
       } catch (err) {
@@ -124,7 +131,6 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
       setWishlist([productId]);
     }
   }, [productId, productViewData]);
-  const storedId = localStorage.getItem("selectedStore");
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId) || productViewData?.product.isWishlisted;
     if (isAlreadyFavorite) {

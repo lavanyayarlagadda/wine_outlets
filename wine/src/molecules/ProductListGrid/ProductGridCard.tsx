@@ -21,6 +21,9 @@ import {
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
 export interface Product {
+  itemId: string;
+  pricing: any;
+  images: any;
   itemNumber: string;
   name: string;
   year: number;
@@ -62,7 +65,9 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
   return (
     <ResponsiveCard>
       <FavoriteButton onClick={() => onToggleFavorite(product.itemNumber)}>
-        {wishListLoading?.toString() === product.itemNumber ? (
+        {wishListLoading?.toString() === noaddtocart ? (
+          product.itemId
+        ) : product.itemNumber ? (
           <AddToCartLoader />
         ) : isFavorite ? (
           <FavoriteIcon />
@@ -73,7 +78,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
 
       <ProductImage
         component="img"
-        image={product.media.url}
+        image={noaddtocart ? product.images.url : product.media.url}
         alt={product.name}
         onClick={() => {
           navigate(
@@ -109,11 +114,21 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
             <SmallText>{product.rating}</SmallText>
           </RatingBox>
         </DetailsRow>
-
-        <PriceRow noaddtocart={noaddtocart}>
-          {product.vipPrice && <VIPPriceText>VIP: ${product.vipPrice.toFixed(2)}</VIPPriceText>}
-          <PriceText>${product.price.toFixed(2)}</PriceText>
-        </PriceRow>
+        {!noaddtocart ? (
+          <PriceRow noaddtocart={noaddtocart}>
+            {product?.vipPrice && (
+              <VIPPriceText>VIP: ${product?.vipPrice?.toFixed(2)}</VIPPriceText>
+            )}
+            <PriceText>${product?.price?.toFixed(2)}</PriceText>
+          </PriceRow>
+        ) : (
+          <PriceRow noaddtocart={noaddtocart}>
+            {product?.pricing?.vipPrice && (
+              <VIPPriceText>VIP: ${product?.pricing?.vipPrice?.toFixed(2)}</VIPPriceText>
+            )}
+            <PriceText>${product?.pricing?.price?.toFixed(2)}</PriceText>
+          </PriceRow>
+        )}
         {!noaddtocart && onAddToCart && (
           <AddToCartButton
             onClick={() => onAddToCart(product.itemNumber)}

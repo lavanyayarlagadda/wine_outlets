@@ -40,7 +40,7 @@ export const ProductsWrapper = styled(Box)(() => ({
   alignItems: "center",
   gap: 16,
   "@media (min-width: 900px)": {
-    flex: "0 0 60%",
+    flex: "0 0 70%",
     flexDirection: "row",
     alignItems: "center",
   },

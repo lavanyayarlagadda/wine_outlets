@@ -88,7 +88,6 @@ export const useNavigation = (
   const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
 
-
   const toggleExpand = (menuName: string) => {
     setExpandedMenus((prev) => {
       const newState = { ...prev, [menuName]: !prev[menuName] };
@@ -270,6 +269,6 @@ export const useNavigation = (
     toggleExpand,
     expandedMenus,
     selectedMenu,
-    setSelectedMenu
+    setSelectedMenu,
   };
 };

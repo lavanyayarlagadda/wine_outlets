@@ -114,7 +114,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   itemNumber,
 }) => {
   const [count, setCount] = useState<number>(quantity || 1);
- const { orderId } = useCartProduct({ initialQuantity: quantity });
+  const { orderId } = useCartProduct({ initialQuantity: quantity });
 
   return (
     <CardContainer>
@@ -131,7 +131,7 @@ const CartProduct: React.FC<CartProductProps> = ({
             id={productId}
           />
           <BackspaceIcon>
-            <BackSpaceIcon  onClick={() => orderId && handleRemoveFromCart(orderId, itemNumber)}/>
+            <BackSpaceIcon onClick={() => orderId && handleRemoveFromCart(orderId, itemNumber)} />
           </BackspaceIcon>
         </IconRow>
         <InfoItem
@@ -161,7 +161,6 @@ const CartProduct: React.FC<CartProductProps> = ({
                   setCount?.(newValue);
                   handleAddToCart(productId, newValue);
                 }}
-             
               />
 
               {/* <CustomCounter

@@ -20,7 +20,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
   useEffect(() => {
     if (initialProducts?.length) {
       const items = initialProducts.map((p) => ({
-        itemNumber: Number(p.id),
+        itemNumber: Number(p.itemId),
         quantity: 1,
       }));
       setCartItems(items);

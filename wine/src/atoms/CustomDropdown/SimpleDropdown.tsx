@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, MenuItem } from "@mui/material";
+import { Select, MenuItem, type SelectChangeEvent } from "@mui/material";
 import { StyledFormControl, StyledLabel } from "./CustomDropdown.style";
 
 interface DropdownOption {
@@ -24,11 +24,24 @@ const SimpleDropdown: React.FC<SimpleDropdownProps> = ({
   placeholder,
   fullWidth = true,
 }) => {
+  const singleOption = options?.length <= 1;
+
   return (
     <StyledFormControl fullWidth={fullWidth} variant="outlined" size="small">
       <StyledLabel>{label}</StyledLabel>
-      <Select value={value} onChange={(e) => onChange(e.target.value as string)} displayEmpty>
-        {placeholder && (
+      <Select
+        value={value}
+        onChange={(e: SelectChangeEvent<string>) => onChange(e.target.value)}
+        displayEmpty
+        IconComponent={singleOption ? () => null : undefined} // hide arrow if single option
+        MenuProps={{
+          disablePortal: true,
+          PaperProps: {
+            style: { display: singleOption ? "none" : "block" }, // prevent dropdown menu if single option
+          },
+        }}
+      >
+        {placeholder && !value && (
           <MenuItem value="">
             <span>{placeholder}</span>
           </MenuItem>

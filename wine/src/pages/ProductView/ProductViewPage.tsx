@@ -43,7 +43,6 @@ const ProductViewPage = () => {
     getPercentage,
     filterButtons,
     filteredReviews,
-    isLoading,
     handleSubmit,
     ReviewLoading,
     rating,
@@ -51,6 +50,7 @@ const ProductViewPage = () => {
     setComment,
     setRating,
     reviewSummary,
+    isLoading,
   } = useRatingsBreakdown();
 
   return (
@@ -96,23 +96,21 @@ const ProductViewPage = () => {
           )}
         </>
       )}
-      {reviewSummary?.length > 0 && (
-        <RatingsBreakdown
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-          getPercentage={getPercentage}
-          filterButtons={filterButtons}
-          filteredReviews={filteredReviews}
-          isLoading={isLoading}
-          handleSubmit={handleSubmit}
-          ReviewLoading={ReviewLoading}
-          rating={rating}
-          comment={comment}
-          setComment={setComment}
-          setRating={setRating}
-          reviewSummary={reviewSummary}
-        />
-      )}
+      <RatingsBreakdown
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+        getPercentage={getPercentage}
+        filterButtons={filterButtons}
+        filteredReviews={filteredReviews}
+        isLoading={isLoading}
+        handleSubmit={handleSubmit}
+        ReviewLoading={ReviewLoading}
+        rating={rating}
+        comment={comment}
+        setComment={setComment}
+        setRating={setRating}
+        reviewSummary={reviewSummary}
+      />
 
       <RecentlyView />
       <Newsletter />

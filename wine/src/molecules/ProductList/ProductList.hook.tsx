@@ -105,7 +105,7 @@ export const useProductList = ({
       page: currentPage,
       sortBy: sortBy,
       sortOrder: "asc",
-      storeId: 6,
+      storeId: storedId,
       category: cleanedCategory,
       department: Array.isArray(productsData.department)
         ? productsData.department

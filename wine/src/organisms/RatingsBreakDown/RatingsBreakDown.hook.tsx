@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   useCreateReviewMutation,
-  useGetReviewsQuery,
+  useGetReviewsMutation,
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { toast } from "react-toastify";
 
@@ -34,28 +34,35 @@ export const useRatingsBreakdown = () => {
   const [createReview, { isLoading: ReviewLoading, isSuccess, isError: ReviewError }] =
     useCreateReviewMutation();
   const userId = localStorage.getItem("userId");
+  const storedId = localStorage.getItem("selectedStore");
+  const cartIdString = localStorage.getItem("cartIds"); // e.g. "[123, 456]"
+  const parsedCartIds: number[] = cartIdString ? JSON.parse(cartIdString) : [];
+  const orderId = parsedCartIds[0];
   const handleSubmit = () => {
-    if (rating && comment.trim()) {
+    if (rating && comment.trim() && orderId !== null) {
       createReview({
         rating,
         comment,
         userId: Number(userId),
         itemNumber: Number(productId),
+        orderId: orderId ?? 1,
       });
     }
   };
 
-  const {
-    data: ReviewsData,
-    isLoading,
-    isError,
-  } = useGetReviewsQuery({
-    itemId: Number(productId),
-    userId: Number(userId),
-    page: 1,
-    limit: 10,
-    rating: selectedFilter,
-  });
+  const [getReviews, { data: ReviewsData, isLoading, isError }] = useGetReviewsMutation();
+
+  useEffect(() => {
+    getReviews({
+      itemNumber: Number(productId),
+      userId: Number(userId),
+      page: 1,
+      limit: 10,
+      rating: selectedFilter,
+      storeId: storedId,
+    }).unwrap(); // optional: returns a promise with the response
+  }, [productId, userId, selectedFilter, storedId]);
+
   useEffect(() => {
     if (isSuccess) {
       toast.success("Review submitted successfully!");
@@ -67,8 +74,7 @@ export const useRatingsBreakdown = () => {
     }
   }, [isSuccess, ReviewError]);
 
-  const reviewSummary = ReviewsData?.reviews[0];
-
+  const reviewSummary = ReviewsData;
   const totalRatings = useMemo(() => {
     const distribution = reviewSummary?.ratings_distribution;
     if (!distribution) return 0;

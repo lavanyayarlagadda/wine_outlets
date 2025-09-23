@@ -195,10 +195,9 @@ export const DropdownTriggerNoBorder = styled(DropdownTrigger)<{ selected?: bool
   ({ selected }) => ({
     border: "none",
     fontSize: useFontSize(14),
-    color: selected ?  palette.primary.dark: "inherit", 
+    color: selected ? palette.primary.dark : "inherit",
   })
 );
-
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
   display: "flex",

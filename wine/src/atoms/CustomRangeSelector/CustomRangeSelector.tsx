@@ -6,6 +6,7 @@ interface RangeProps {
   min: number;
   max: number;
   onChange: (value: number[]) => void;
+  symbol: string;
 }
 
 interface SingleProps {
@@ -13,11 +14,12 @@ interface SingleProps {
   min: number;
   max: number;
   onChange: (value: number) => void;
+  symbol: string;
 }
 
 type Props = (RangeProps | SingleProps) & { single?: boolean };
 
-const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, single }) => (
+const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, symbol, single }) => (
   <>
     {single ? (
       <SliderWrapper>
@@ -46,9 +48,9 @@ const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, single 
         />
 
         <RangeInputsWrapper>
-          <TextField size="small" value={`$${(value as number[])[0]}`} fullWidth />
+          <TextField size="small" value={`${symbol}${(value as number[])[0]}`} fullWidth />
           <Typography>-</Typography>
-          <TextField size="small" value={`$${(value as number[])[1]}`} fullWidth />
+          <TextField size="small" value={`${symbol}${(value as number[])[1]}`} fullWidth />
         </RangeInputsWrapper>
       </>
     )}

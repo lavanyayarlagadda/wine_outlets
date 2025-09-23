@@ -435,9 +435,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                           key={item.id}
                           onClick={() => {
                             setSelectedMenu(menu.name);
-                            navigate(
-                              `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
-                            );
+                            navigate(`/productsList?category=${menu.name}`);
                             handleMenuClose(menu.name);
                           }}
                         >
@@ -483,7 +481,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   <CategoryTitle
                     onClick={() => {
                       handleMenuClose(promotionsMenuData.name);
-                      navigate(`/productsList?category=${promotionsMenuData.name.toLowerCase()}`);
+                      navigate(`/productsList?category=${promotionsMenuData.name}`);
                     }}
                   >
                     {category.title} →
@@ -495,9 +493,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                         <DropdownMenuItemStyled
                           key={item.id}
                           onClick={() => {
-                            navigate(
-                              `/productsList?category=${promotionsMenuData.name.toLowerCase()}&id=${item.id}`
-                            );
+                            navigate(`/productsList?category=${promotionsMenuData.name}`);
                             handleMenuClose(promotionsMenuData.name);
                           }}
                         >

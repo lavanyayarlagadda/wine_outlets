@@ -34,12 +34,12 @@ const PeopleBought: React.FC<PeopleProps> = ({ suggestedProducts }) => {
         <ProductsWrapper>
           {currentProducts?.map((product, index) => (
             <ProductWithDivider
-              key={product.id}
-              product={{ ...product, id: String(product.id) }}
+              key={product.itemId}
+              product={{ ...product, itemId: String(product.itemId) }}
               showDivider={index < currentProducts.length - 1}
-              // onAddToCart={() => handleAddToCart(product.id)}
-              onToggleFavorite={() => handleToggleFavorite(product.id)}
-              isFavorite={wishlist.includes(product.id)}
+              // onAddToCart={() => handleAddToCart(product.itemId)}
+              onToggleFavorite={() => handleToggleFavorite(product.itemId)}
+              isFavorite={wishlist.includes(product.itemId)}
               wishListLoading={wishListLoading}
               isLoading={loadingProduct}
             />
