@@ -11,6 +11,7 @@ import {
   Drawer,
   ListItemIcon,
   ListItemButton,
+  Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -65,7 +66,7 @@ export const BottomToolbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: "space-between",
   background: theme.palette.white.main,
   gap: "40px",
-  padding: "20px 64px !important",
+  // padding: "20px 64px !important",
   display: "none",
   [theme.breakpoints.up("md")]: {
     display: "flex",
@@ -191,13 +192,14 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const DropdownTriggerNoBorder = styled(DropdownTrigger)<{ selected?: boolean }>(
-  ({ selected }) => ({
+export const DropdownTriggerNoBorder = styled(DropdownTrigger)<{ open?: boolean }>(
+  ({ open }) => ({
     border: "none",
     fontSize: useFontSize(14),
-    color: selected ? palette.primary.dark : "inherit",
+    color: open ?  palette.primary.dark: "inherit", 
   })
 );
+
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
   display: "flex",
@@ -230,8 +232,9 @@ export const DropdownTriggerWithIconMargin = styled(DropdownTrigger)(({ theme })
 export const StyledMenu = styled(Menu)(() => ({
   "& .MuiPaper-root": {
     borderRadius: shape.borderRadiuspx,
-    marginTop: "8px",
+    marginTop: "25px",
     minWidth: "168px",
+    
   },
 }));
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
@@ -303,6 +306,16 @@ export const CustomizeIconButton = styled(IconButton)<{ icon?: boolean }>(({ the
       height: "20px",
     },
     display: icon ? "flex" : "none", // show if icon=true, hide if false
+  },
+}));
+
+export const StyledBadge = styled(Badge)(() => ({
+  "& .MuiBadge-badge": {
+    top: "-3px", // move count up
+    right: "4px",
+    fontSize: "0.75rem",
+    height: "16px",
+    minWidth: "16px",
   },
 }));
 
@@ -416,6 +429,23 @@ export const CategoryColumn = styled(Box)(({ theme }) => ({
   },
 }));
 
+export const PromotionCategoryColumn = styled(Box)(({ theme }) => ({
+  // flex: "1 1 200px",
+  marginBottom: 16,
+  minWidth: 200, // default for large screens
+
+  // Medium screens (tablet)
+  [theme.breakpoints.down("md")]: {
+    minWidth: "100%", // take full width
+  },
+
+  // Small screens (mobile)
+  [theme.breakpoints.down("sm")]: {
+    minWidth: "100%",
+    marginBottom: 8, // smaller spacing on mobile
+  },
+}));
+
 export const CategoryTitle = styled(Typography)(() => ({
   fontWeight: 600,
   fontSize: 14,
@@ -436,14 +466,58 @@ export const CategoryTitle = styled(Typography)(() => ({
 //   paddingBottom: "8px",
 // }));
 
-export const ColumnsWrapper = styled(Box)<{ expanded?: boolean }>(({ expanded }) => ({
+// export const ColumnsWrapper = styled(Box)<{ expanded?: boolean }>(({ expanded }) => ({
+//   display: "grid",
+//   gridTemplateColumns: "repeat(2, 1fr)", // always 2 columns
+//   gap: 16,
+//   padding: "8px 30px",
+//   maxHeight: expanded ? 300 : "auto",
+//   overflowY: expanded ? "auto" : "visible",
+// }));
+
+export const ColumnsWrapper = styled(Box)<{ columns: number; expanded?: boolean }>(
+  ({ columns, expanded, theme }) => ({
+    display: "grid",
+    gridTemplateColumns: `repeat(${columns}, 1fr)`,
+    gap: 16,
+    padding: "8px 30px",
+    maxHeight: expanded ? 300 : "auto", // scrollable when expanded
+    overflowY: expanded ? "auto" : "visible",
+
+    [theme.breakpoints.down("lg")]: {
+      gridTemplateColumns: `repeat(${Math.min(columns, 3)}, 1fr)`,
+    },
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: `repeat(${Math.min(columns, 2)}, 1fr)`,
+    },
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "1fr",
+    },
+  })
+);
+
+
+
+// styled component for ColumnsWrapper
+export const PromotionsWrapper = styled("div")({
   display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)", // always 2 columns
-  gap: 16,
-  padding: "8px 30px",
-  maxHeight: expanded ? 300 : "auto",
-  overflowY: expanded ? "auto" : "visible",
-}));
+  gridTemplateColumns: "repeat(auto-fit, minmax(150px, auto))", // flexible columns
+  gap: "12px 24px", // row-gap and column-gap
+  padding: "12px 16px",
+  backgroundColor: "#fff",
+  borderRadius: "8px",
+  boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
+  width: "fit-content", // ✅ shrink-to-content
+  maxWidth: "90vw", // prevent overflowing screen
+});
+
+export const PromotionsColumnsWrapper = styled(Box)({
+    display: "grid",
+    gap: 16,
+    padding: "8px 30px",
+
+  
+  })
 
 export const Column = styled(Box)(() => ({
   display: "flex",
@@ -468,7 +542,7 @@ export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expand
   marginTop: 8,
   cursor: "pointer",
   gridColumn: "1 / -1", // span both columns
-  textAlign: expanded ? "right" : "left",
+  textAlign: expanded ? "right" : "right",
 }));
 
 export const SpecialsBlock = styled(Box)(() => ({

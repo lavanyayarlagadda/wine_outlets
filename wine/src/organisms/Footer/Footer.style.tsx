@@ -88,7 +88,7 @@ export const StyledLink = styled(Link)(() => ({
 export const FooterContent = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
-  gap: 16,
+  // gap: 16,
 }));
 
 export const FooterGridRow = styled(Box)(({ theme }) => ({

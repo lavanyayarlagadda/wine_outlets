@@ -208,6 +208,16 @@ export const useNavigation = (
     setMenuOpen(resetMenuState);
   };
 
+  const chunkArray = (arr: any[], size: number) => {
+    const result = [];
+    for (let i = 0; i < arr.length; i += size) {
+      result.push(arr.slice(i, i + size));
+    }
+    return result;
+  };
+
+  
+
   useEffect(() => {
     if (!cartData) return;
     const cartResponse = cartData?.cartResponse;
@@ -270,5 +280,6 @@ export const useNavigation = (
     expandedMenus,
     selectedMenu,
     setSelectedMenu,
+    chunkArray,
   };
 };

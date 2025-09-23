@@ -1,6 +1,6 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { bike, map, cart, userprofile, logo, star } from "../../assets";
+import { bike, map, cart, userprofile, logo, star, bag } from "../../assets";
 import { useNavigation } from "./Navigation.hook";
 import {
   TopBar,
@@ -37,9 +37,12 @@ import {
   SuggestionsContainer,
   HighlightedText,
   StyledSuggestionItem,
+  PromotionCategoryColumn,
+  PromotionsColumnsWrapper,
+  StyledBadge,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
-import { Badge, List, Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
@@ -96,14 +99,14 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
     handleSelectSuggestion,
     expandedMenus,
     toggleExpand,
-    selectedMenu,
     setSelectedMenu,
+    chunkArray,
   } = useNavigation(searchTerm ? storesData : stores, menuKeys, 2000);
 
   const navigate = useNavigate();
   const menuList = useSelector((state: RootState) => state.menu.menuList);
   const promotionsMenuData = {
-    name: "Promotions",
+    name: "PROMOTIONS",
     categories: [
       {
         title: "Promotions",
@@ -249,9 +252,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                 }}
                 icon={true}
               >
-                <Badge badgeContent={cartCount ?? 0} color="primary" overlap="circular">
+                <StyledBadge badgeContent={cartCount ?? 0} color="primary" overlap="circular">
                   <img src={cart} alt="cart" />
-                </Badge>
+                </StyledBadge>
               </CustomizeIconButton>
               {isToken ? (
                 <>
@@ -337,71 +340,11 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
       <BottomToolbar>
         <NavWrapper>
-          {/* {menuData.menuList.map((menu) => (
-            <div key={menu.id}>
-           
-              <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, menu.name)}>
-                {menu.name}{" "}
-                {menuOpen[menu.name] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </DropdownTriggerNoBorder>
-
-              <StyledMenu
-                anchorEl={anchorEl[menu.name]}
-                open={menuOpen[menu.name] && !mobileMenuOpen}
-                onClose={() => handleMenuClose(menu.name)}
-              >
-                {menu.categories?.map((category, idx) => (
-                  <CategoryColumn key={idx}>
-                    <CategoryTitle
-                      onClick={() => {
-                        handleMenuClose(menu.name); // close the menu first
-                        navigate(`/productsList?category=${menu.name.toLowerCase()}`); // then navigate
-                      }}
-                    >
-                      {category.title} →
-                    </CategoryTitle>
-
-                    <ColumnsWrapper>
-                      {Array.from({
-                        length: Math.min(2, Math.ceil(category.items.length / 5)),
-                      }).map((_, colIdx) => {
-                        const colItems = category.items.slice(colIdx * 5, colIdx * 5 + 5);
-                        const isLastColumn =
-                          colIdx === Math.min(2, Math.ceil(category.items.length / 5)) - 1;
-
-                        return (
-                          <Column key={colIdx}>
-                            {colItems.map((item) => (
-                              <DropdownMenuItemStyled
-                                key={item.id}
-                                onClick={() => {
-                                  navigate(
-                                    `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
-                                  );
-                                  handleMenuClose(menu.name);
-                                }}
-                              >
-                                {item.listName}
-                              </DropdownMenuItemStyled>
-                            ))}
-
-                            {isLastColumn && category.items.length > 10 && (
-                              <ViewMoreText>View More →</ViewMoreText>
-                            )}
-                          </Column>
-                        );
-                      })}
-                    </ColumnsWrapper>
-                  </CategoryColumn>
-                ))}
-              </StyledMenu>
-            </div>
-          ))} */}
           {menuList.map((menu) => (
             <div key={menu.id}>
               <DropdownTriggerNoBorder
                 onClick={(e) => handleMenuOpen(e, menu.name)}
-                selected={selectedMenu === menu.name}
+                open={menuOpen[menu.name]}
               >
                 {menu.name}{" "}
                 {menuOpen[menu.name] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -421,7 +364,93 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   >
                     {menu.name} →
                   </CategoryTitle>
+                  {/* <ColumnsWrapper
+                    id={`columns-wrapper-${menu.name}`}
+                    expanded={expandedMenus[menu.name]}
+                    columns={Math.ceil((expandedMenus[menu.name] ? menu.itemsList.length : 10) / 5)}
+                  >
+                    {(() => {
+                      const itemsToShow = expandedMenus[menu.name]
+                        ? menu.itemsList
+                        : menu.itemsList.slice(0, 10);
+
+                      return chunkArray(itemsToShow, 5).map((column, colIndex) => (
+                        <Column key={colIndex}>
+                          {column.map((item) => (
+                            <DropdownMenuItemStyled
+                              key={item.id}
+                              onClick={() => {
+                                setSelectedMenu(menu.name);
+                                navigate(
+                                  `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
+                                );
+                                handleMenuClose(menu.name);
+                              }}
+                            >
+                              {item.listName}
+                            </DropdownMenuItemStyled>
+                          ))}
+                        </Column>
+                      ));
+                    })()}
+
+                    {menu.itemsList.length > 10 && (
+                      <ViewMoreText
+                        expanded={expandedMenus[menu.name]}
+                        onClick={() => {
+                          toggleExpand(menu.name);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
+                      </ViewMoreText>
+                    )}
+                  </ColumnsWrapper> */}
+
                   <ColumnsWrapper
+                    id={`columns-wrapper-${menu.name}`}
+                    expanded={expandedMenus[menu.name]}
+                    columns={Math.min(
+                      Math.ceil((expandedMenus[menu.name] ? menu.itemsList.length : 10) / 5),
+                      5
+                    )} // min 1, max 5 columns
+                  >
+                    {chunkArray(
+                      expandedMenus[menu.name] ? menu.itemsList : menu.itemsList.slice(0, 10),
+                      5 // 5 items per column
+                    ).map((column, colIndex) => (
+                      <Column key={colIndex}>
+                        {column.map((item) => (
+                          <DropdownMenuItemStyled
+                            key={item.id}
+                            onClick={() => {
+                              setSelectedMenu(menu.name);
+                              navigate(
+                                `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
+                              );
+                              handleMenuClose(menu.name);
+                            }}
+                          >
+                            {item.listName}
+                          </DropdownMenuItemStyled>
+                        ))}
+                      </Column>
+                    ))}
+
+                    {menu.itemsList.length > 10 && (
+                      <ViewMoreText
+                        expanded={expandedMenus[menu.name]}
+                        onClick={() => {
+                          toggleExpand(menu.name);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
+                      </ViewMoreText>
+                    )}
+                  </ColumnsWrapper>
+
+                  {/* <ColumnsWrapper
                     id={`columns-wrapper-${menu.name}`}
                     expanded={expandedMenus[menu.name]}
                   >
@@ -435,7 +464,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                           key={item.id}
                           onClick={() => {
                             setSelectedMenu(menu.name);
-                            navigate(`/productsList?category=${menu.name}`);
+                            navigate(
+                              `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
+                            );
                             handleMenuClose(menu.name);
                           }}
                         >
@@ -454,7 +485,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                         {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
                       </ViewMoreText>
                     )}
-                  </ColumnsWrapper>
+                  </ColumnsWrapper> */}
                 </CategoryColumn>
               </StyledMenu>
             </div>
@@ -462,7 +493,10 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
           {/* Promotions Menu */}
           <div>
-            <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, promotionsMenuData.name)}>
+            <DropdownTriggerNoBorder
+              onClick={(e) => handleMenuOpen(e, promotionsMenuData.name)}
+              open={menuOpen[promotionsMenuData.name]}
+            >
               {promotionsMenuData.name}{" "}
               {menuOpen[promotionsMenuData.name] ? (
                 <KeyboardArrowUpIcon />
@@ -477,32 +511,31 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
               onClose={() => handleMenuClose(promotionsMenuData.name)}
             >
               {promotionsMenuData.categories.map((category, idx) => (
-                <CategoryColumn key={idx}>
-                  <CategoryTitle
-                    onClick={() => {
-                      handleMenuClose(promotionsMenuData.name);
-                      navigate(`/productsList?category=${promotionsMenuData.name}`);
-                    }}
-                  >
-                    {category.title} →
-                  </CategoryTitle>
-
-                  <ColumnsWrapper>
+                <PromotionCategoryColumn key={idx}>
+                  <PromotionsColumnsWrapper>
                     <Column>
-                      {category.items.map((item) => (
-                        <DropdownMenuItemStyled
-                          key={item.id}
-                          onClick={() => {
-                            navigate(`/productsList?category=${promotionsMenuData.name}`);
-                            handleMenuClose(promotionsMenuData.name);
-                          }}
-                        >
-                          {item.listName}
-                        </DropdownMenuItemStyled>
-                      ))}
+                      {category.items.map((item) => {
+                        let queryParam = `id=${item.id}`;
+
+                        if (item.listName === "New Arrivals") {
+                          queryParam = "tags=new-arrival";
+                        }
+
+                        return (
+                          <DropdownMenuItemStyled
+                            key={item.id}
+                            onClick={() => {
+                              navigate(`/productsList?${queryParam}`);
+                              handleMenuClose(promotionsMenuData.name);
+                            }}
+                          >
+                            {item.listName}
+                          </DropdownMenuItemStyled>
+                        );
+                      })}
                     </Column>
-                  </ColumnsWrapper>
-                </CategoryColumn>
+                  </PromotionsColumnsWrapper>
+                </PromotionCategoryColumn>
               ))}
             </StyledMenu>
           </div>
@@ -571,9 +604,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
           ) : (
             <CustomDeliveryButton>No delivery partners</CustomDeliveryButton>
           )}
-          {/* <DropdownTriggerWithGap>
+          <DropdownTriggerWithGap>
             <img src={bag} alt="bag" /> Hiring Now
-          </DropdownTriggerWithGap> */}
+          </DropdownTriggerWithGap>
         </RightNavSection>
       </BottomToolbar>
 
