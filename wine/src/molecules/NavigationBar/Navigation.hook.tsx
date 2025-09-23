@@ -86,6 +86,8 @@ export const useNavigation = (
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
+  const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
+
 
   const toggleExpand = (menuName: string) => {
     setExpandedMenus((prev) => {
@@ -267,5 +269,7 @@ export const useNavigation = (
     setSuggestions,
     toggleExpand,
     expandedMenus,
+    selectedMenu,
+    setSelectedMenu
   };
 };

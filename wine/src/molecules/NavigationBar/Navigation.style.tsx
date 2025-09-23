@@ -191,10 +191,14 @@ export const DropdownTrigger = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const DropdownTriggerNoBorder = styled(DropdownTrigger)(() => ({
-  border: "none",
-  fontSize: useFontSize(14),
-}));
+export const DropdownTriggerNoBorder = styled(DropdownTrigger)<{ selected?: boolean }>(
+  ({ selected }) => ({
+    border: "none",
+    fontSize: useFontSize(14),
+    color: selected ?  palette.primary.dark: "inherit", 
+  })
+);
+
 
 export const DropdownTriggerWithGap = styled(DropdownTrigger)(({ theme }) => ({
   display: "flex",

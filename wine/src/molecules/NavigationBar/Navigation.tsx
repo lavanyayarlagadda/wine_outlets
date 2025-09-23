@@ -96,6 +96,8 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
     handleSelectSuggestion,
     expandedMenus,
     toggleExpand,
+    selectedMenu,
+    setSelectedMenu,
   } = useNavigation(searchTerm ? storesData : stores, menuKeys, 2000);
 
   const navigate = useNavigate();
@@ -397,7 +399,10 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
           ))} */}
           {menuList.map((menu) => (
             <div key={menu.id}>
-              <DropdownTriggerNoBorder onClick={(e) => handleMenuOpen(e, menu.name)}>
+              <DropdownTriggerNoBorder
+                onClick={(e) => handleMenuOpen(e, menu.name)}
+                selected={selectedMenu === menu.name}
+              >
                 {menu.name}{" "}
                 {menuOpen[menu.name] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </DropdownTriggerNoBorder>
@@ -429,6 +434,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                         <DropdownMenuItemStyled
                           key={item.id}
                           onClick={() => {
+                            setSelectedMenu(menu.name);
                             navigate(
                               `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
                             );
