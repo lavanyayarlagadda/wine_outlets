@@ -1,7 +1,12 @@
-import React from "react";
-import { MenuItem, Select } from "@mui/material";
+import React, { useState, useRef } from "react";
+import { Paper, MenuItem, ClickAwayListener } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
-import { DropdownWrapper, StyledFormControl, StyledLabel } from "./CustomDropdown.style";
+import {
+  DropdownWrapper,
+  SelectedSpan,
+  StyledFormControl,
+  StyledLabel,
+} from "./CustomDropdown.style";
 import palette from "../../themes/palette";
 
 interface DropdownOption {
@@ -17,7 +22,7 @@ interface CustomDropdownProps {
   options: DropdownOption[];
   placeholder?: string;
   fullWidth?: boolean;
-  side?: boolean; // if true, label + select side by side
+  side?: boolean; // if true, label + dropdown side by side
 }
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({
@@ -30,31 +35,57 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   side = false,
   required = false,
 }) => {
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLDivElement | null>(null);
+
+  const selectedLabel = options.find((option) => option.value === value)?.label;
+
   return (
     <DropdownWrapper side={side}>
       <StyledLabel side={side}>
         {label} {required && <span style={{ color: palette.primary.dark }}>*</span>}
       </StyledLabel>
-      <StyledFormControl fullWidth={fullWidth} variant="outlined">
-        <Select
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          displayEmpty
-          IconComponent={ExpandMore}
-          renderValue={(selected) => {
-            if (!selected && placeholder)
-              return <span style={{ color: palette.grey.main }}>{placeholder}</span>;
-            const selectedOption = options.find((option) => option.value === selected);
-            return selectedOption ? selectedOption.label : placeholder;
-          }}
-        >
-          {options?.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
+      <StyledFormControl
+        fullWidth={fullWidth && !side}
+        variant="outlined"
+        ref={anchorRef}
+        onClick={() => setOpen((prev) => !prev)}
+        style={{ display: "inline-flex", flex: 1 }}
+      >
+        <SelectedSpan hasValue={!!value} side={side}>
+          {selectedLabel || placeholder || "Select"}
+          <ExpandMore />
+        </SelectedSpan>
       </StyledFormControl>
+
+      {open && anchorRef.current && (
+        <ClickAwayListener onClickAway={() => setOpen(false)}>
+          <Paper
+            elevation={3}
+            style={{
+              position: "absolute",
+              zIndex: 10,
+              marginTop: side ? 260 : 100,
+              minWidth: anchorRef.current.offsetWidth,
+              maxHeight: 200,
+              overflowY: "auto",
+            }}
+          >
+            {options.map((option) => (
+              <MenuItem
+                key={option.value}
+                selected={option.value === value}
+                onClick={() => {
+                  onChange(option.value);
+                  setOpen(false);
+                }}
+              >
+                {option.label}
+              </MenuItem>
+            ))}
+          </Paper>
+        </ClickAwayListener>
+      )}
     </DropdownWrapper>
   );
 };

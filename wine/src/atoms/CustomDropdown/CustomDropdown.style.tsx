@@ -3,26 +3,27 @@ import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
 
-export const StyledFormControl = styled(FormControl)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    backgroundColor: theme.palette.white.main,
-    borderRadius: shape.borderRadiuspx,
-    "& fieldset": {
-      borderColor: theme.palette.success.main,
-    },
-    "&:hover fieldset": {
-      borderColor: palette.grey.main,
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: palette.blue.default,
-    },
-  },
-  "& .MuiSelect-select": {
-    padding: "0px 14px",
-    fontSize: "14px",
-  },
+export const StyledFormControl = styled(FormControl)(() => ({
+  display: "flex",
+  flexDirection: "row",
 }));
+interface SelectedSpanProps {
+  hasValue?: boolean;
+  side?: boolean;
+}
 
+export const SelectedSpan = styled("span")<SelectedSpanProps>(({ hasValue, side }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  cursor: "pointer",
+  padding: "8px 12px",
+  minWidth: "100%",
+  backgroundColor: palette.white.main, // theme background
+  borderRadius: shape.borderRadiuspx, // theme border radius
+  border: side ? "none" : `1px solid ${palette.success.main}`, // theme border color
+  color: hasValue ? palette.text.primary : palette.grey.main,
+}));
 export const DropdownWrapper = styled(Box)<{ side?: boolean }>(({ theme, side }) => ({
   display: "flex",
   flexDirection: side ? "row" : "column",
