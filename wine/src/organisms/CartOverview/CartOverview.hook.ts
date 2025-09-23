@@ -7,7 +7,7 @@ import {
 } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
-import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
+import { useAddtoCartMutation, useRemoveFromCartMutation } from "../../store/apis/Home/HomeAPI";
 
 export const useCartOverView = () => {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ export const useCartOverView = () => {
   const cartDetails = data?.productListing?.[0];
   const [wishList] = useWishListMutation();
   const [addToCart] = useAddtoCartMutation();
+  const [removeFromCart] = useRemoveFromCartMutation();
   const {
     data: slotData,
     isLoading: slotLoading,
@@ -107,6 +108,31 @@ export const useCartOverView = () => {
     }
   };
 
+  const handleRemoveFromCart = async (orderId: number, itemNumber: string) => {
+    try {
+      setLoadingProduct(itemNumber);
+
+      const payload = {
+        orderId,
+        itemNumber,
+      };
+
+      const response = await removeFromCart(payload).unwrap();
+      toast.success(response.message || "Removed from cart");
+
+      // Optionally update local state to remove the item
+      setCartItems((prev) => {
+        const updated = { ...prev };
+        delete updated[itemNumber as any]; // remove item from cartItems state
+        return updated;
+      });
+    } catch (err) {
+      toast.error("Failed to remove from cart");
+    } finally {
+      setLoadingProduct(null);
+    }
+  };
+
   return {
     cartDetails,
     isLoading,
@@ -116,5 +142,6 @@ export const useCartOverView = () => {
     wishListLoading,
     handleAddToCart,
     loadingProduct,
+    handleRemoveFromCart,
   };
 };

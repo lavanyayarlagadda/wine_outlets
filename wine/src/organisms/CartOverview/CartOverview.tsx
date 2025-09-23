@@ -28,8 +28,15 @@ import { StyledSkeletonRect } from "../Filter/FilterPanel.style";
 const CartOverview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cartDetails, isLoading, slotData, slotLoading, handleToggleFavorite, handleAddToCart } =
-    useCartOverView();
+  const {
+    cartDetails,
+    isLoading,
+    slotData,
+    slotLoading,
+    handleToggleFavorite,
+    handleAddToCart,
+    handleRemoveFromCart,
+  } = useCartOverView();
 
   return (
     <MainContainer>
@@ -73,6 +80,7 @@ const CartOverview = () => {
                     productId={item.productId}
                     handleToggleFavorite={handleToggleFavorite}
                     handleAddToCart={handleAddToCart}
+                    handleRemoveFromCart={handleRemoveFromCart}
                     // wishListLoading={false}
                     PricingProps={{
                       price: item.price,
@@ -80,6 +88,8 @@ const CartOverview = () => {
                       Quantity: item.Quantity,
                       totalPrice: item.totalPrice,
                     }}
+                    // orderId={item.id}
+                    itemNumber={item.productId}
                   />
                 </>
               ))}

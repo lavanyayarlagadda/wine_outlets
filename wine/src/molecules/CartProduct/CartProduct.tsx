@@ -25,6 +25,7 @@ import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
+import useCartProduct from "./UseCartProduct.hook";
 
 interface PricingProps {
   price?: any;
@@ -51,6 +52,8 @@ interface CartProductProps {
   handleToggleFavorite: (productId: string) => void;
   wishListLoading?: string | null;
   handleAddToCart: (productId: string, quantity: number) => void;
+  itemNumber: string;
+  handleRemoveFromCart: (orderId: number, itemNumber: string) => void;
   count?: number;
   setCount?: (newValue: number) => void;
 }
@@ -107,8 +110,12 @@ const CartProduct: React.FC<CartProductProps> = ({
   wishListLoading,
   handleAddToCart,
   quantity,
+  handleRemoveFromCart,
+  itemNumber,
 }) => {
   const [count, setCount] = useState<number>(quantity || 1);
+ const { orderId } = useCartProduct({ initialQuantity: quantity });
+
   return (
     <CardContainer>
       <ProductImage src={imageUrl} alt={name} />
@@ -124,7 +131,7 @@ const CartProduct: React.FC<CartProductProps> = ({
             id={productId}
           />
           <BackspaceIcon>
-            <BackSpaceIcon />
+            <BackSpaceIcon  onClick={() => orderId && handleRemoveFromCart(orderId, itemNumber)}/>
           </BackspaceIcon>
         </IconRow>
         <InfoItem
@@ -154,7 +161,22 @@ const CartProduct: React.FC<CartProductProps> = ({
                   setCount?.(newValue);
                   handleAddToCart(productId, newValue);
                 }}
+             
               />
+
+              {/* <CustomCounter
+                value={count}
+                onAdd={() => {
+                  setCount(count + 1);
+                  handleAddToCart(productId, count + 1);
+                }}
+                onRemove={() => {
+                  // count is 1, so remove item from cart
+                   setCount(count-1);
+                  handleRemoveFromCart(1, itemNumber);
+                 
+                }}
+              /> */}
             </CounterWrapper>
             <PricingBox>
               <Pricing

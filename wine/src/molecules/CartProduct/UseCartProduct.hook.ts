@@ -6,6 +6,11 @@ interface UseCartProductParams {
 
 const useCartProduct = ({ initialQuantity }: UseCartProductParams) => {
   const [customQuantity, setCustomQuantity] = useState(initialQuantity);
+ const storedCartIds = localStorage.getItem("cartIds");
+ const parsedCartIds: number[] = storedCartIds ? JSON.parse(storedCartIds) : [];
+ const orderId = parsedCartIds[0];
+
+console.log("orderId:", orderId); 
 
   const handleQuantityChange = (newQuantity: number) => {
     setCustomQuantity(newQuantity);
@@ -15,6 +20,7 @@ const useCartProduct = ({ initialQuantity }: UseCartProductParams) => {
     customQuantity,
     handleQuantityChange,
     setCustomQuantity,
+    orderId
   };
 };
 

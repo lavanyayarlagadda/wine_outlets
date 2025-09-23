@@ -29,6 +29,13 @@ export const homeApi = createApi({
         body: newItem,
       }),
     }),
+    removeFromCart: builder.mutation<any, { orderId: number; itemNumber: string }>({
+      query: (newItem) => ({
+        url: "/home/remove-from-cart",
+        method: "POST",
+        body: newItem,
+      }),
+    }),
     getHeaderBanners: builder.query<
       { banners: { id?: number; message: string; action: { label?: string; url?: string } }[] },
       { StoreId: number }
@@ -152,4 +159,5 @@ export const {
   useGetHeaderBannersQuery,
   useStoreSearchlocatorMutation,
   useGetMenuItemsQuery,
+  useRemoveFromCartMutation
 } = homeApi;
