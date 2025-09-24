@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
-import { Paper, MenuItem, ClickAwayListener } from "@mui/material";
+import { MenuItem, ClickAwayListener } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import {
+  DropdownMenu,
   DropdownWrapper,
   SelectedSpan,
   StyledFormDropdown,
@@ -60,17 +61,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 
       {open && anchorRef.current && (
         <ClickAwayListener onClickAway={() => setOpen(false)}>
-          <Paper
-            elevation={3}
-            style={{
-              position: "absolute",
-              zIndex: 10,
-              marginTop: side ? 260 : 100,
-              minWidth: anchorRef.current.offsetWidth,
-              maxHeight: 200,
-              overflowY: "auto",
-            }}
-          >
+          <DropdownMenu anchorWidth={anchorRef.current.offsetWidth} side={side}>
             {options?.map((option) => (
               <MenuItem
                 key={option.value}
@@ -83,7 +74,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                 {option.label}
               </MenuItem>
             ))}
-          </Paper>
+          </DropdownMenu>
         </ClickAwayListener>
       )}
     </DropdownWrapper>

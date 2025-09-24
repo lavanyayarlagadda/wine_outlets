@@ -30,7 +30,7 @@ import {
 export interface ProductCardProps {
   itemNumber: number | string;
   image: string;
-  name: string;
+  itemName: string;
   location?: string;
   year?: string | number;
   size?: string;
@@ -48,7 +48,7 @@ export interface ProductCardProps {
 const ProductListCard: React.FC<ProductCardProps> = ({
   itemNumber,
   image,
-  name,
+  itemName,
   location,
   year,
   size,
@@ -72,7 +72,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
         <ProductImage
           component="img"
           image={image}
-          alt={name}
+          alt={itemName}
           onClick={() => {
             navigate(`/productView?productId=${itemNumber}&size=${size}&vintage=${year}`);
             window.scrollTo(0, 0);
@@ -92,7 +92,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
       </ImageWrapper>
 
       <StyledCardContent>
-        <ProductTitle variant="h6">{name}</ProductTitle>
+        <ProductTitle variant="h6">{itemName}</ProductTitle>
 
         <InfoRow>
           {location && (

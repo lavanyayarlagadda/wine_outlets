@@ -23,6 +23,7 @@ const Wishlist = lazy(() => import("./pages/Wishlist/Wishlist"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPlicy/PrivacyPolicyPage"));
 const TermsConditions = lazy(() => import("./pages/TermsConditions/TermsConditionsPage"));
 const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"));
+const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
 
 const App: React.FC = () => {
   useClientIp();
@@ -44,6 +45,7 @@ const App: React.FC = () => {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/contactUs" element={<ContactUs />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

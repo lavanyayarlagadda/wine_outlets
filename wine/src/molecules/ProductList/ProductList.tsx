@@ -146,7 +146,7 @@ const ProductList: React.FC<ProductListProps> = ({
                     <ProductListCard
                       key={product.id}
                       itemNumber={product.itemNumber}
-                      name={product.name}
+                      itemName={product.itemName}
                       image={product.media.url}
                       price={product.price}
                       vipPrice={product.vipPrice}

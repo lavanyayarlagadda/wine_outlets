@@ -361,7 +361,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   >
                     {menu.name} →
                   </CategoryTitle>
-                
+
                   <ColumnsWrapper
                     id={`columns-wrapper-${menu.name}`}
                     expanded={expandedMenus[menu.name]}

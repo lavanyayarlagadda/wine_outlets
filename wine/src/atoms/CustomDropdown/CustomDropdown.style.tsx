@@ -1,4 +1,4 @@
-import { Box, FormControl, Typography, styled } from "@mui/material";
+import { Box, FormControl, Paper, Typography, styled } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
@@ -42,6 +42,19 @@ export const SelectedSpan = styled("span")<SelectedSpanProps>(({ hasValue, side 
   borderRadius: shape.borderRadiuspx, // theme border radius
   border: side ? "none" : `1px solid ${palette.success.main}`, // theme border color
   color: hasValue ? palette.text.primary : palette.grey.main,
+}));
+interface DropdownMenuProps {
+  anchorWidth: number;
+  side?: boolean;
+}
+
+export const DropdownMenu = styled(Paper)<DropdownMenuProps>(({ anchorWidth, side }) => ({
+  position: "absolute",
+  zIndex: 10,
+  marginTop: side ? 260 : 100, // same logic as before
+  minWidth: anchorWidth,
+  maxHeight: 200,
+  overflowY: "auto",
 }));
 export const DropdownWrapper = styled(Box)<{ side?: boolean }>(({ theme, side }) => ({
   display: "flex",

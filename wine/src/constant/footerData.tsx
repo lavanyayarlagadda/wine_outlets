@@ -11,7 +11,7 @@ export const FOOTER_DATA = {
   customerService: {
     title: "Customer Service",
     links: [
-      { text: "Contact Us", href: "#" },
+      { text: "Contact Us", href: "/contactUs" },
       { text: "FAQs", href: "#" },
       { text: "Pickup Process", href: "#" },
     ],
