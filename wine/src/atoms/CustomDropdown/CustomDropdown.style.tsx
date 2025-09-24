@@ -3,9 +3,28 @@ import shape from "../../themes/shape";
 import palette from "../../themes/palette";
 import { useFontSize } from "../../themes/fontSize";
 
-export const StyledFormControl = styled(FormControl)(() => ({
+export const StyledFormDropdown = styled(FormControl)(() => ({
   display: "flex",
   flexDirection: "row",
+}));
+export const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: theme.palette.white.main,
+    borderRadius: shape.borderRadiuspx,
+    "& fieldset": {
+      borderColor: theme.palette.success.main,
+    },
+    "&:hover fieldset": {
+      borderColor: palette.grey.main,
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: palette.blue.default,
+    },
+  },
+  "& .MuiSelect-select": {
+    padding: "6px 14px",
+    fontSize: "14px",
+  },
 }));
 interface SelectedSpanProps {
   hasValue?: boolean;

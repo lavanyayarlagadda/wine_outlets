@@ -4,7 +4,7 @@ import { ExpandMore } from "@mui/icons-material";
 import {
   DropdownWrapper,
   SelectedSpan,
-  StyledFormControl,
+  StyledFormDropdown,
   StyledLabel,
 } from "./CustomDropdown.style";
 import palette from "../../themes/palette";
@@ -38,14 +38,14 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
-  const selectedLabel = options.find((option) => option.value === value)?.label;
+  const selectedLabel = options?.find((option) => option.value === value)?.label;
 
   return (
     <DropdownWrapper side={side}>
       <StyledLabel side={side}>
         {label} {required && <span style={{ color: palette.primary.dark }}>*</span>}
       </StyledLabel>
-      <StyledFormControl
+      <StyledFormDropdown
         fullWidth={fullWidth && !side}
         variant="outlined"
         ref={anchorRef}
@@ -56,7 +56,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           {selectedLabel || placeholder || "Select"}
           <ExpandMore />
         </SelectedSpan>
-      </StyledFormControl>
+      </StyledFormDropdown>
 
       {open && anchorRef.current && (
         <ClickAwayListener onClickAway={() => setOpen(false)}>
@@ -71,7 +71,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               overflowY: "auto",
             }}
           >
-            {options.map((option) => (
+            {options?.map((option) => (
               <MenuItem
                 key={option.value}
                 selected={option.value === value}
