@@ -361,49 +361,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   >
                     {menu.name} →
                   </CategoryTitle>
-                  {/* <ColumnsWrapper
-                    id={`columns-wrapper-${menu.name}`}
-                    expanded={expandedMenus[menu.name]}
-                    columns={Math.ceil((expandedMenus[menu.name] ? menu.itemsList.length : 10) / 5)}
-                  >
-                    {(() => {
-                      const itemsToShow = expandedMenus[menu.name]
-                        ? menu.itemsList
-                        : menu.itemsList.slice(0, 10);
-
-                      return chunkArray(itemsToShow, 5).map((column, colIndex) => (
-                        <Column key={colIndex}>
-                          {column.map((item) => (
-                            <DropdownMenuItemStyled
-                              key={item.id}
-                              onClick={() => {
-                                setSelectedMenu(menu.name);
-                                navigate(
-                                  `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
-                                );
-                                handleMenuClose(menu.name);
-                              }}
-                            >
-                              {item.listName}
-                            </DropdownMenuItemStyled>
-                          ))}
-                        </Column>
-                      ));
-                    })()}
-
-                    {menu.itemsList.length > 10 && (
-                      <ViewMoreText
-                        expanded={expandedMenus[menu.name]}
-                        onClick={() => {
-                          toggleExpand(menu.name);
-                          window.scrollTo(0, 0);
-                        }}
-                      >
-                        {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
-                      </ViewMoreText>
-                    )}
-                  </ColumnsWrapper> */}
-
+                
                   <ColumnsWrapper
                     id={`columns-wrapper-${menu.name}`}
                     expanded={expandedMenus[menu.name]}
