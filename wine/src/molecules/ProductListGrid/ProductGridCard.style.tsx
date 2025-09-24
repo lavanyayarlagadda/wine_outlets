@@ -67,6 +67,23 @@ export const ProductImage = styled(CardMedia)<ProductImageProps>(({ theme }) => 
   [theme.breakpoints.up("lg")]: { height: 300 },
 }));
 
+export const ImageFallback = styled(Box)(({ theme }) => ({
+  width: 120, // default width same as image
+  height: 250, // default height same as image
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: shape.borderRadius,
+  border: `1px solid ${palette.grey[300]}`,
+  backgroundColor: palette.grey[100],
+  color: palette.text.secondary,
+  textAlign: "center",
+  fontSize: 14,
+  cursor: "pointer",
+  [theme.breakpoints.down("sm")]: { height: 200 },
+  [theme.breakpoints.up("lg")]: { height: 300 },
+}));
+
 export const ProductCardContent = styled(CardContent)(({ theme }) => ({
   paddingTop: theme.spacing(1),
   paddingBottom: 0,

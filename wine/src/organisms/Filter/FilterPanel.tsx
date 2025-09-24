@@ -1,4 +1,4 @@
-import { Box, Drawer, IconButton, Skeleton, Typography, useMediaQuery } from "@mui/material";
+import { Box, Drawer, IconButton, Skeleton, useMediaQuery } from "@mui/material";
 import {
   Check,
   Close,
@@ -33,6 +33,8 @@ import {
   SkeletonWrapper,
   StyledSkeletonRect,
   SkeletonItem,
+  EllipsisTooltip,
+  TruncatedText,
 } from "./FilterPanel.style";
 import { useState } from "react";
 // import { useState } from "react";
@@ -289,10 +291,13 @@ const FilterPanel: React.FC<Props> = ({ categories, onFilterChange, isLoading })
             >
               <Row>
                 {getIcon(sub.categoryName)}
-                <Typography>
-                  {sub.categoryName} ({sub.categoryCount})
-                </Typography>
+                <EllipsisTooltip title={`${sub.categoryName} (${sub.categoryCount})`} arrow>
+                  <TruncatedText>
+                    {sub.categoryName} ({sub.categoryCount})
+                  </TruncatedText>
+                </EllipsisTooltip>
               </Row>
+
               <Row>{selectedSub === sub.categoryId && <Check fontSize="small" />}</Row>
             </SubCategoryButton>
             {selectedSub === sub.categoryId && (

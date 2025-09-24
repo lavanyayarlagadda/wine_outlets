@@ -17,6 +17,7 @@ import {
   FavoriteIcon,
   FavoriteBorderIcon,
   AddToCartLoader,
+  ImageFallback,
 } from "./ProductGridCard.style";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 
@@ -75,17 +76,21 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
         )}
       </FavoriteButton>
 
-      <ProductImage
-        component="img"
-        image={noaddtocart ? product.images.url : product.media.url}
-        alt={product.name}
-        onClick={() => {
-          navigate(
-            `/productView?productId=${product.itemNumber}&size=${product.size}&vintage=${product.year}`
-          );
-          window.scrollTo(0, 0);
-        }}
-      />
+      {(noaddtocart ? product.images.url : product.media.url) ? (
+        <ProductImage
+          component="img"
+          image={noaddtocart ? product.images.url : product.media.url}
+          alt={product.name}
+          onClick={() => {
+            navigate(
+              `/productView?productId=${product.itemNumber}&size=${product.size}&vintage=${product.year}`
+            );
+            window.scrollTo(0, 0);
+          }}
+        />
+      ) : (
+        <ImageFallback>No Image Available</ImageFallback>
+      )}
 
       <ProductCardContent>
         <ProductName>{product.name}</ProductName>

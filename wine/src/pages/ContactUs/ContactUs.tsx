@@ -28,6 +28,8 @@ import {
   StyledLocationIcon,
   StyledPhoneIcon,
   StyledAccessTimeIcon,
+  AddressTooltip,
+  TruncatedAddress,
 } from "./ContactUs.style";
 import {
   AllairePlaza,
@@ -171,7 +173,7 @@ const StoreCards = () => {
       />
       <CustomGrid container spacing={3}>
         {storeData.map((store, idx) => (
-          <Grid size={{ xs: 1, md: 6, sm: 6 }} key={idx}>
+          <Grid size={{ xs: 12, md: 12, sm: 12, lg: 6 }} key={idx}>
             <StoreCard>
               <StoreImage
                 src={store.images ? store.images[0] : store.image}
@@ -185,9 +187,11 @@ const StoreCards = () => {
                 <StoreTitle variant="h6">{store.name}</StoreTitle>
                 <InfoRow>
                   <StyledLocationIcon />
-
-                  <Typography variant="body2">{store.address}</Typography>
+                  <AddressTooltip title={store.address} arrow>
+                    <TruncatedAddress variant="body2">{store.address}</TruncatedAddress>
+                  </AddressTooltip>
                 </InfoRow>
+
                 <IconBox>
                   <StyledPhoneIcon />
 

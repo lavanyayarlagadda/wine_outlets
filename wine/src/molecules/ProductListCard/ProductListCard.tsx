@@ -6,6 +6,7 @@ import {
   AddToCartLoader,
   FavoriteBorderIcon,
   FavoriteIcon,
+  ImageFallback,
   PriceText,
   RatingBox,
   SmallText,
@@ -25,6 +26,7 @@ import {
   AddToCartButton,
   InfoRow,
   InfoIcon,
+  DescriptionTooltip,
 } from "./ProductListCard.style";
 
 export interface ProductCardProps {
@@ -69,15 +71,20 @@ const ProductListCard: React.FC<ProductCardProps> = ({
   return (
     <StyledCard elevation={0}>
       <ImageWrapper>
-        <ProductImage
-          component="img"
-          image={image}
-          alt={itemName}
-          onClick={() => {
-            navigate(`/productView?productId=${itemNumber}&size=${size}&vintage=${year}`);
-            window.scrollTo(0, 0);
-          }}
-        />
+        {image ? (
+          <ProductImage
+            component="img"
+            image={image}
+            alt={itemName}
+            onClick={() => {
+              navigate(`/productView?productId=${itemNumber}&size=${size}&vintage=${year}`);
+              window.scrollTo(0, 0);
+            }}
+          />
+        ) : (
+          <ImageFallback>No Image Available</ImageFallback>
+        )}
+
         <FavoriteWrapper>
           <FavoriteButton onClick={() => onToggleFavorite(itemNumber)}>
             {wishListLoading === itemNumber ? (
@@ -121,7 +128,11 @@ const ProductListCard: React.FC<ProductCardProps> = ({
           )}
         </InfoRow>
 
-        {description && <DescriptionText variant="body2">{description}</DescriptionText>}
+        {description && (
+          <DescriptionTooltip title={description} arrow>
+            <DescriptionText variant="body2">{description}</DescriptionText>
+          </DescriptionTooltip>
+        )}
 
         <FooterRow>
           {typeof vipPrice === "number" && <VIPPriceText>VIP: ${vipPrice.toFixed(2)}</VIPPriceText>}

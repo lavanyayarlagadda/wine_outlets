@@ -8,6 +8,7 @@ import {
   CardMedia,
   IconButton,
   type CardMediaProps,
+  Tooltip,
 } from "@mui/material";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
@@ -133,11 +134,32 @@ export const InfoIcon = styled("img")(() => ({
   marginRight: 6,
 }));
 
-// Description
+export const DescriptionTooltip = styled(Tooltip)(() => ({
+  cursor: "pointer",
+}));
+
 export const DescriptionText = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(2),
   minHeight: 48,
+
+  display: "-webkit-box",
+  WebkitLineClamp: 3, // limit to 3 lines
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  cursor: "pointer",
+
+  // Optional: adjust line clamp / max height for different breakpoints
+  [theme.breakpoints.up("sm")]: {
+    WebkitLineClamp: 3,
+  },
+  [theme.breakpoints.up("md")]: {
+    WebkitLineClamp: 3,
+  },
+  [theme.breakpoints.up("lg")]: {
+    WebkitLineClamp: 3,
+  },
 }));
 
 // Footer (price + button container)

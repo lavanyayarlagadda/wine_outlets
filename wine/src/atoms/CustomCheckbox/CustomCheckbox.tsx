@@ -1,5 +1,9 @@
 import { Checkbox } from "@mui/material";
-import { VerticalFormControlLabel } from "../../organisms/Filter/FilterPanel.style";
+import {
+  LabelTooltip,
+  TruncatedLabel,
+  VerticalFormControlLabel,
+} from "../../organisms/Filter/FilterPanel.style";
 
 interface Props {
   label: string;
@@ -10,7 +14,11 @@ interface Props {
 const CustomCheckbox: React.FC<Props> = ({ label, checked, onChange }) => (
   <VerticalFormControlLabel
     control={<Checkbox checked={checked} onChange={onChange} />}
-    label={label}
+    label={
+      <LabelTooltip title={label} arrow>
+        <TruncatedLabel>{label}</TruncatedLabel>
+      </LabelTooltip>
+    }
   />
 );
 

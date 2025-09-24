@@ -7,6 +7,7 @@ import {
   IconButton,
   Skeleton,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import palette from "../../themes/palette";
@@ -87,14 +88,54 @@ export const SubCategoryButton = styled(Button)<{ selected?: boolean }>(({ selec
   color: selected ? palette.primary.dark : palette.grey.main,
 }));
 
+export const EllipsisTooltip = styled(Tooltip)(() => ({
+  cursor: "pointer",
+}));
+
+export const TruncatedText = styled(Typography)(({ theme }) => ({
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: 120, // mobile
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: 200, // tablet
+  },
+  [theme.breakpoints.up("md")]: {
+    maxWidth: 220, // laptop
+  },
+  [theme.breakpoints.up("lg")]: {
+    maxWidth: 250, // desktop
+  },
+}));
+
 export const Row = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   gap: "8px",
 }));
+export const LabelTooltip = styled(Tooltip)(() => ({
+  cursor: "pointer",
+}));
+
+export const TruncatedLabel = styled(Typography)(({ theme }) => ({
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: 140, // mobile default
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: 200, // tablet
+  },
+  [theme.breakpoints.up("md")]: {
+    maxWidth: 250, // laptop
+  },
+  [theme.breakpoints.up("lg")]: {
+    maxWidth: 170, // desktop
+  },
+}));
+
 export const VerticalFormControlLabel = styled(FormControlLabel)(() => ({
   display: "flex",
-  flexDirection: "row", // checkbox + label in row (optional)
+  flexDirection: "row", // checkbox + label in row
   width: "100%", // take full width
   margin: 0, // remove default spacing
 }));

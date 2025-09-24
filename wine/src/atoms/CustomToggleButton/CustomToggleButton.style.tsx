@@ -10,8 +10,8 @@ export const IconWrapper = styled("span")<IconWrapperProps>(({ selected, theme }
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: 24, // smaller icon wrapper
-  height: 24,
+  width: 40, // smaller icon wrapper
+  height: 40,
   color: selected ? theme.palette.primary.main : theme.palette.grey[500],
   transition: "color 0.3s, transform 0.2s",
 }));
