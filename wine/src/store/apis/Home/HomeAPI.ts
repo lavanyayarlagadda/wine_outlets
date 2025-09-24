@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
 import type {
-  LandingPageResponse,
   RecentlyViewedSection,
 } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import type { MenuResponse } from "../../Interfaces/Home/Home";
+import type { SiteSettings } from "../../../constant/LandingPageData";
 
 export const homeApi = createApi({
   reducerPath: "homeApi",
@@ -55,12 +55,19 @@ export const homeApi = createApi({
         params: { StoreId },
       }),
     }),
-    getHomeSections: builder.query<LandingPageResponse, void>({
-      query: () => ({
+    getHomeSections: builder.mutation<
+      SiteSettings,
+      {
+        userId: string;
+        userIp: string;
+        storeId: string;
+      }
+    >({
+      query: (body) => ({
         url: "/home/sections",
-        method: "GET",
+        method: "POST",
+        body,
       }),
-      // providesTags: ["HomeSections"],
     }),
     sendNewsletter: builder.mutation<
       any,
@@ -161,7 +168,7 @@ export const homeApi = createApi({
 
 export const {
   useAddtoCartMutation,
-  useGetHomeSectionsQuery,
+  useGetHomeSectionsMutation,
   useSendNewsletterMutation,
   useStoreLocatorQuery,
   useGetCartCountQuery,

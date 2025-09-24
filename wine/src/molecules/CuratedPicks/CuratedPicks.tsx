@@ -13,20 +13,21 @@ import {
   ProductImage,
 } from "./CuratedPicks.style";
 import { useNavigate } from "react-router-dom";
-// import type { CuratedPicksSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-// import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
-import {
-  SITE_SETTING_DEMO_DATA,
-  type ProductCategoryListSection,
-} from "../../constant/LandingPageData";
+import type { ProductCategoryListSection } from "../../constant/LandingPageData";
+interface Props {
+  content?: ProductCategoryListSection["content"];
+  title?: string;
+  subtitle?: string;
+  isVisible?: boolean;
+}
 
-const CuratedPicks = () => {
+const CuratedPicks = ({
+  content = [],
+  title = "",
+  subtitle = "",
+  isVisible = true,
+}: Props) => {
   const navigate = useNavigate();
-  // const { data: sections } = useGetHomeSectionsQuery();
-  const curatedPicksData = SITE_SETTING_DEMO_DATA.pageSections.find(
-    (s) => s.id === "product-category-1"
-  ) as ProductCategoryListSection;
-  const { isVisible, title, subtitle, content }: ProductCategoryListSection = curatedPicksData;
 
   if (!isVisible) return null;
 

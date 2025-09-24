@@ -3,15 +3,21 @@ import { Container, ImageWrapper, BrandImage } from "./Brand.style";
 import { CustomTitleSection } from "../../atoms";
 import { useBrands } from "./Brands.hook";
 
-const Brands = () => {
-  const { title, isVisible, brands, handleContainerClick } = useBrands();
+interface Props {
+  title?: string;
+  isVisible?: boolean;
+  content?: { imageUrl: string; brandName: string }[];
+}
+
+const Brands = ({ title = "", isVisible = true, content = [] }:Props) => {
+  const { handleContainerClick } = useBrands();
 
   if (!isVisible) return null;
   return (
     <Container>
       <CustomTitleSection title={title} subtitle={""} />
       <ImageWrapper>
-        {brands.map((b, index) => {
+        {content.map((b, index) => {
           return (
             <BrandImage
               key={index}

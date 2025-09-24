@@ -38,19 +38,20 @@ export const CarouselWrapper = styled(Box)({
 export const CarouselTrack = styled(Box)<{ currentIndex: number }>(({ currentIndex }) => ({
   display: "flex",
   gap: "24px",
-  transform: `translateX(-${currentIndex * 33.33}%)`,
+  transform: `translateX(-${currentIndex * 100}%)`,
   transition: "transform 0.3s ease-in-out",
 }));
 
-// Carousel slide with aspect ratio
-export const CarouselSlide = styled(Box)({
-  minWidth: "32%",
-  boxSizing: "border-box",
-  position: "relative",
-  "@media (max-width: 900px)": {
-    minWidth: "75%",
-  },
-});
+export const CarouselSlide = styled(Box)<{ slideWidthPercent?: number }>(
+  ({ slideWidthPercent = 32, theme }) => ({
+    flex: `0 0 ${slideWidthPercent}%`,
+    boxSizing: "border-box",
+    position: "relative",
+    [theme.breakpoints.down("md")]: {
+      flex: `0 0 75%`,
+    },
+  })
+);
 
 export const MobileScrollWrapper = styled(Box)({
   display: "flex",
@@ -163,5 +164,40 @@ export const Dot = styled(Box)<{ active: boolean }>(({ active, theme }) => ({
   transition: "background-color 0.2s ease-in-out",
   "&:hover": {
     backgroundColor: active ? theme.palette.primary.dark : theme.palette.warning.light,
+  },
+}));
+
+export const GridContainer = styled(Box)<{ columns?: number }>(({ theme, columns = 4 }) => {
+  const desktopCols = Math.max(1, Math.floor(columns));
+  return {
+    display: "grid",
+    gap: theme.spacing(4),
+    gridTemplateColumns: `repeat(${desktopCols}, 1fr)`,
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: `repeat(2, 1fr)`,
+    },
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: `1fr`,
+    },
+    paddingTop: theme.spacing(2),
+  };
+});
+
+export const GridItem = styled(Box)(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  overflow: "hidden",
+  cursor: "pointer",
+  paddingTop: "66%",
+  transition: `transform ${theme.transitions.duration.short}ms ease-in-out`,
+  "&:hover": {
+    transform: "scale(1.02)",
+  },
+  "& img": {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
 }));

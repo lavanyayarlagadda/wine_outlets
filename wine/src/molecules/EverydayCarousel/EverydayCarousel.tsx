@@ -14,9 +14,7 @@ import {
   Dot,
   StyledImage,
 } from "./EverydayCarousel.style";
-// import type { EverydaySlidesSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import { useNavigate } from "react-router-dom";
-// import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import { SITE_SETTING_DEMO_DATA, type CustomBannerSection } from "../../constant/LandingPageData";
 
 const WineCarousel: React.FC = () => {
@@ -49,15 +47,16 @@ const WineCarousel: React.FC = () => {
             <NorthEastIcon fontSize="small" sx={{ color: theme.palette.white.main }} />
           </IconWrapper>
         </PriceButton> */}
-        <DotsContainer>
-          {slides.map((_, index) => (
+
+        {<DotsContainer>
+          {slides.length > 1 && slides.map((_, index) => (
             <Dot
               key={index}
               active={index === currentSlide}
               onClick={() => setCurrentSlide(index)}
             />
           ))}
-        </DotsContainer>
+        </DotsContainer>}
       </CarouselSlide>
     </Container>
   );

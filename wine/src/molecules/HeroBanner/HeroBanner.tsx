@@ -31,14 +31,15 @@ export interface SlideData {
 }
 
 export interface HeroBannerProps {
-  slides: BannerImageItem[];
   autoPlayInterval?: number;
   height?: string | number;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   isVisible: boolean;
+  content?: BannerImageItem[];
 }
-const HeroBanner = ({ slides, autoPlayInterval = 5000, setOpen, isVisible }: HeroBannerProps) => {
+const HeroBanner = ({  autoPlayInterval = 5000, setOpen, isVisible, content }: HeroBannerProps) => {
   const navigate = useNavigate();
+  const slidesData = content ?? [];
   const {
     currentSlide,
     goToSlide,
@@ -49,11 +50,11 @@ const HeroBanner = ({ slides, autoPlayInterval = 5000, setOpen, isVisible }: Her
     // firstBtnAction,
     // secondBtnAction,
     // handleTagClick,
-  } = useHeroBanner(slides?.length || 0, autoPlayInterval, setOpen, slides);
+  } = useHeroBanner(slidesData.length, autoPlayInterval, setOpen, slidesData);
 
   // const currentSlideData = slides[currentSlide];
 
-  if (!isVisible || !slides) return null;
+  if (!isVisible || slidesData.length === 0) return null;
   return (
     <HeroBannerContainer
       ref={containerRef}
@@ -61,7 +62,7 @@ const HeroBanner = ({ slides, autoPlayInterval = 5000, setOpen, isVisible }: Her
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {slides.map((slide, index) => (
+      {slidesData.map((slide, index) => (
         <SlideContainer
           // key={slide.id}
           key={index}
@@ -90,7 +91,7 @@ const HeroBanner = ({ slides, autoPlayInterval = 5000, setOpen, isVisible }: Her
       /> */}
 
       <DotsContainer>
-        {slides.map((_, index) => (
+        {slidesData.map((_, index) => (
           <Dot
             key={index}
             isActive={index === currentSlide}

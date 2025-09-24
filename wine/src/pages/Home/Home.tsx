@@ -1,23 +1,14 @@
 import React, { useEffect } from "react";
 import {
   AgePopup,
-  HeroBanner,
-  TimeOfferCarousel,
-  Trending,
-  CategorySection,
-  DealSection,
-  CuratedPicks,
-  EverydayCarousel,
-  Brand,
-  RecentlyView,
   Newsletter,
   StoreLocator,
 } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
-// import AppLoader from "../../atoms/AppLoader/AppLoader";
+import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
-import type { HeroBannerSection } from "../../constant/LandingPageData";
+import SectionRenderer from "../../organisms/HomePageSections/SectionRenderer";
 import { toast } from "react-toastify";
 
 const Home = () => {
@@ -33,23 +24,21 @@ const Home = () => {
     stores,
     sections,
     isError,
-    // sectionsLoading,
-    // error,
+    sectionsLoading,
+    error,
     isLoading,
     storesData,
     searchLoading,
   } = useHomeLogic();
-  // const { heroSection } = sections?.sections || {};
-  const heroSection: HeroBannerSection = sections;
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
-  // if (sectionsLoading) return <AppLoader />;
-  // if (error) return <h5> Something Went wrong</h5>;
 
   useEffect(() => {
     if (isError) {
       toast.error("Failed to load Store details");
     }
   }, [isError]);
+  if (sectionsLoading) return <AppLoader />;
+  if (error) return <h5> Something Went wrong...</h5>;
 
   return (
     <>
@@ -74,20 +63,7 @@ const Home = () => {
           isLoading={searchTerm ? searchLoading : isLoading}
         />
       )}
-      {/* {isAgeVerified && <HeroBanner setOpen={setOpen} />} */}
-      <HeroBanner
-        setOpen={setOpen}
-        slides={heroSection?.content}
-        isVisible={heroSection?.isVisible ?? false}
-      />
-      {isAgeVerified && <TimeOfferCarousel />}
-      {isAgeVerified && <Trending />}
-      {isAgeVerified && <CuratedPicks />}
-      {isAgeVerified && <EverydayCarousel />}
-      {isAgeVerified && <CategorySection />}
-      {isAgeVerified && <DealSection />}
-      {isAgeVerified && <Brand />}
-      {isAgeVerified && <RecentlyView />}
+      {isAgeVerified && <SectionRenderer sectionsFromApi={sections} />}
       {isAgeVerified && <Newsletter />}
     </>
   );

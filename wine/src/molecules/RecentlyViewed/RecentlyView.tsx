@@ -1,6 +1,4 @@
 import type { FC } from "react";
-// import type { RecentlyViewedSection } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
-// import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import ProductCard from "../ProductCard/ProductCard";
 import {
   Container,
@@ -12,14 +10,11 @@ import {
   Dot,
 } from "./RecentlyView.style";
 import { useRecentlyViewed } from "./RecentlyView.hook";
-import {
-  SITE_SETTING_DEMO_DATA,
-  type ProductCollectionSection,
-} from "../../constant/LandingPageData";
-// import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
-
 type RecentlyViewedProps = {
   onSlideChange?: (index: number) => void;
+  content?: any[];
+  title?: string;
+  isVisible?: boolean;
   cardsPerSlide?: number;
   initialSlide?: number;
 };
@@ -28,23 +23,10 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   onSlideChange,
   cardsPerSlide = 4,
   initialSlide = 0,
+  content = [],
+  title,
+  isVisible = true,
 }) => {
-  //   const userIdString = localStorage.getItem("userId");
-  // const userId = userIdString ? Number(userIdString) : undefined;
-  // const {
-  //   data: recentlyViewedResp,
-  //   isLoading: rvLoading,
-  //   isError: rvError,
-  // } = useGetRecentlyViewedQuery({ ...getClientIdentifierForPayload(),, limit: 10 });
-
-  const rvData = SITE_SETTING_DEMO_DATA.pageSections.find(
-    (s) => s.id === "product-collection-custom-2"
-  ) as ProductCollectionSection;
-  // const rvResp: RecentlyViewedSection | undefined = recentlyViewedResp;
-  // const rvData = rvResp?.recentlyViewed;
-  const isVisible = rvData?.isVisible;
-  const titleText = rvData?.title;
-
   const {
     scrollRef,
     currentSlide,
@@ -55,7 +37,7 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
     wishlist,
     counts,
   } = useRecentlyViewed({
-    items: Array.isArray(rvData?.content) ? rvData?.content : [],
+    items: Array.isArray(content) ? content : [],
     cardsPerSlide,
     initialSlide,
     onSlideChange,
@@ -65,11 +47,11 @@ const RecentlyViewed: FC<RecentlyViewedProps> = ({
   return (
     <Container>
       <HeaderWrapper>
-        <Title>{titleText}</Title>
+        <Title>{title}</Title>
       </HeaderWrapper>
 
       <CarouselWrapper ref={scrollRef}>
-        {(rvData?.content ?? []).map((product: any) => (
+        {content.map((product: any) => (
           <ProductBox key={product.id ?? product.name ?? Math.random()}>
             <ProductCard
               product={product}

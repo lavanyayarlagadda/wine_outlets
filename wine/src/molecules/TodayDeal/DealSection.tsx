@@ -19,12 +19,25 @@ import { useDealsSection } from "./DealsSection.hook";
 import type { SideCategoryButton } from "../../constant/LandingPageData";
 import { Box } from "@mui/material";
 
-const DealsSection: React.FC = () => {
-  const {
-    title,
+interface Props {
+  title?: string;
+  subtitle?: string;
+  showTimer?: boolean;
+  endTimeIso?: string;
+  sideButtons?: SideCategoryButton[];
+  content?: any[]; 
+  isVisible?: boolean;
+}
+
+const DealsSection: React.FC<Props> = ({title,
+    // subtitle,
     showTimer,
-    timeParts,
+    endTimeIso,
     sideButtons,
+    content,
+    isVisible,}) => {
+  const {
+    timeParts,
     activeFilter,
     setActiveFilter,
     productsForActiveFilter,
@@ -36,13 +49,12 @@ const DealsSection: React.FC = () => {
     handleAddToCart,
     handleToggleFavorite,
     wishlist,
-    isVisible,
     counts,
     // subtitle,
     // increment,
     // decrement,
     // cartLoading,
-  } = useDealsSection();
+  } = useDealsSection({ content, sideButtons, endTimeIso, showTimer });
   if (!isVisible) return null;
   return (
     <Container>

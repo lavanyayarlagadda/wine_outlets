@@ -28,15 +28,18 @@ interface CarouselSlideProps {
 
 export const CarouselSlide = styled(Box, {
   shouldForwardProp: (prop) => prop !== "bgImage" && prop !== "bgVideo" && prop !== "bgColor",
-})<CarouselSlideProps>(({ bgImage, bgVideo, bgColor, theme }) => ({
-  background: bgImage
-    ? `url(${bgImage}) center/cover no-repeat`
-    : bgVideo
-      ? "transparent"
-      : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
-
+})<CarouselSlideProps>(({ 
+  // bgImage, 
+  // bgVideo, 
+  // bgColor, 
+  theme }) => ({
+  // background: bgImage
+  //   ? `url(${bgImage}) center/cover no-repeat`
+  //   : bgVideo
+  //     ? "transparent"
+  //     : bgColor || "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
   borderRadius: shape.borderRadius,
-  padding: "32px 32px 64px 32px",
+  padding: theme.spacing(4,4,8,4),
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",

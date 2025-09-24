@@ -5,13 +5,7 @@ import { category_img1, category_img2, category_img3, category_img4 } from "../a
 import { deal_img2, deal_img3 } from "../assets";
 import { willow } from "../assets";
 
-// const DemoImg = "https://rukminim2.flixcart.com/image/704/844/xif0q/drinks-juice/q/m/n/375-imperium-natural-grape-wine-375ml-glass-bottle-1-rosegold-original-imah7fwvmxdfpdyz.jpeg?q=20&crop=false"
-
-// const DemoImg = "https://statuesque-hummingbird-5b036d.netlify.app/assets/offer_img1-FVJenRO6.svg"
-
-// const wineBrandImg = "https://img.favpng.com/16/3/15/swartland-winery-logo-silverboom-special-reserve-merlot-shiraz-2017-rioja-png-favpng-b9mQJFwQWnfJrHqrxnx1DETY1.jpg"
-
-export type LayoutType = "carousel" | "4-column-grid";
+export type LayoutType = "carousel" | "4-column-grid" | "3-column-grid";
 
 export type SizePreset = "small" | "medium" | "large";
 
@@ -261,7 +255,7 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
     {
       position: 6,
       type: "banner-collection",
-      layout: "carousel",
+      layout: "4-column-grid",
       id: "collection-3",
       title: "Shop by Category",
       subtitle: "Find your favorite by type.",

@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import {
-  // useGetHomeSectionsQuery,
+  useGetHomeSectionsMutation,
   useStoreLocatorQuery,
   useStoreSearchlocatorMutation,
 } from "../../store/apis/Home/HomeAPI";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
-import { SITE_SETTING_DEMO_DATA, type HeroBannerSection } from "../../constant/LandingPageData";
-
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
   const [isAgeVerified, setIsAgeVerified] = useState(false);
@@ -28,11 +26,8 @@ export const useHomeLogic = () => {
     refetchOnReconnect: true,
   });
 
-  // const { data: sections, error, isLoading: sectionsLoading } = useGetHomeSectionsQuery();
-  // const heroSection = SITE_SETTING_DEMO_DATA.pageSections.find(s => s.type === 'hero-banner') as HeroBannerSection | undefined;
-  const sections = SITE_SETTING_DEMO_DATA.pageSections.find(
-    (s) => s.type === "hero-banner"
-  ) as HeroBannerSection;
+const [getHomeSections, { data: sections, error, isLoading: sectionsLoading }] =
+  useGetHomeSectionsMutation();
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
   const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
     useStoreSearchlocatorMutation();
@@ -42,6 +37,14 @@ export const useHomeLogic = () => {
       storeSearchlocator({ storeSearchText: searchTerm });
     }
   }, [searchTerm]);
+
+  useEffect(() => {
+    getHomeSections({
+      userId: "12345",
+      userIp: "192.168.1.100",
+      storeId: "1",
+    });
+  }, [getHomeSections]);
 
   const stores = data?.stores;
   const storesData = searchData?.stores;
@@ -89,8 +92,8 @@ export const useHomeLogic = () => {
     selectedStore,
     setSelectedStore,
     sections,
-    // error,
-    // sectionsLoading,
+    error,
+    sectionsLoading,
     searchLoading,
     storesData,
     isError,

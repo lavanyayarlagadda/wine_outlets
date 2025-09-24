@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useTheme, useMediaQuery } from "@mui/material";
+import { useState, useEffect } from "react";
+import { useTheme, useMediaQuery, Box, } from "@mui/material";
 import {
   CarouselContainer,
   OfferCard,
@@ -10,20 +10,24 @@ import {
   DotsContainer,
   Dot,
   MobileScrollWrapper,
+  GridContainer,
+  GridItem,
 } from "./TimeOfferCarousel.style";
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
-// import { useGetHomeSectionsQuery } from "../../store/apis/Home/HomeAPI";
 import {
-  SITE_SETTING_DEMO_DATA,
-  type BannerCollectionSection,
   type BannerImageItem,
+  type LayoutType,
 } from "../../constant/LandingPageData";
-// import type {
-//   LimitedTimeOfferSection,
-//   OfferItem,
-// } from "../../store/Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 
+
+interface Props {
+  content?: BannerImageItem[];
+  title?: string;
+  subtitle?: string;
+  layout?: LayoutType;
+  isVisible?: boolean;
+}
 export const renderOfferCard = (offer: BannerImageItem, id: number) => (
   <OfferCard key={id}>
     <CardImage src={offer.imageUrl} alt={`offer-${id}`} />
@@ -42,68 +46,87 @@ export const renderOfferCard = (offer: BannerImageItem, id: number) => (
       </CardOverlay> */}
   </OfferCard>
 );
-
-const LimitedTimeOffersCarousel = () => {
-  const timeOfferData = SITE_SETTING_DEMO_DATA.pageSections.find(
-    (s) => s.id === "collection-1"
-  ) as BannerCollectionSection;
-  // const { data: sections } = useGetHomeSectionsQuery();
-  const { title, subtitle, content, isVisible }: BannerCollectionSection = timeOfferData ?? {
-    isVisible: false,
-    title: "",
-    subtitle: "",
-    content: [],
-  };
+const slidesPerView = 3;
+const LimitedTimeOffersCarousel = ({
+  content = [],
+  title = "",
+  subtitle = "",
+  layout = "carousel",
+  isVisible = true,
+}: Props) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const totalSlides = Math.max(0, content.length);
-
+  const pageCount = Math.max(1, Math.ceil(content.length / slidesPerView));
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
   };
+  useEffect(() => {
+    if (currentIndex >= pageCount) {
+      setCurrentIndex(0);
+    }
+  }, [pageCount, currentIndex]);
 
   if (!isVisible) return null;
 
   return (
     <CarouselContainer>
       <CustomTitleSection title={title || ""} subtitle={subtitle} />
-      {!isMobile && (
-        <>
-          <CarouselWrapper>
-            <CarouselTrack currentIndex={currentIndex}>
-              {content.map((offer, index) => (
-                <CarouselSlide
-                  key={index}
-                  onClick={() => navigate(`/productsList?tags=${offer.tags.join(",")}` || "/")}
-                >
-                  {renderOfferCard(offer, index)}
-                </CarouselSlide>
-              ))}
-            </CarouselTrack>
-          </CarouselWrapper>
-
-          <DotsContainer>
-            {Array.from({ length: totalSlides }).map((_, index) => (
-              <Dot
+      {layout === "4-column-grid" || layout === "3-column-grid" ? (
+        <Box sx={{ pt: 2 }}>
+          <GridContainer columns={layout === "3-column-grid" ? 3 : 4}>
+            {content.map((offer, index) => (
+              <GridItem
                 key={index}
-                active={index === currentIndex}
-                onClick={() => handleDotClick(index)}
-              />
+                onClick={() => navigate(`/productsList?tags=${(offer.tags || []).join(",")}`)}
+                role="button"
+              >
+                <img src={offer.imageUrl} alt={`offer-${index}`} />
+              </GridItem>
             ))}
-          </DotsContainer>
-        </>
-      )}
+          </GridContainer>
+        </Box>
+      ) : (
+        <>
+          {!isMobile && (
+            <>
+              <CarouselWrapper>
+                <CarouselTrack currentIndex={currentIndex}>
+                  {content.map((offer, index) => (
+                    <CarouselSlide
+                      key={index}
+                      slideWidthPercent={100 / slidesPerView}
+                      onClick={() =>
+                        navigate(`/productsList?tags=${(offer.tags || []).join(",")}` || "/")
+                      }
+                    >
+                      {renderOfferCard(offer, index)}
+                    </CarouselSlide>
+                  ))}
+                </CarouselTrack>
+              </CarouselWrapper>
 
-      {/* Mobile horizontal scroll */}
-      {isMobile && (
-        <MobileScrollWrapper>
-          {content.map((offer, index) => (
-            <CarouselSlide key={index}>{renderOfferCard(offer, index)}</CarouselSlide>
-          ))}
-        </MobileScrollWrapper>
+              {pageCount > 1 && <DotsContainer>
+                {Array.from({ length: pageCount }).map((_, index) => (
+                  <Dot
+                    key={index}
+                    active={index === currentIndex}
+                    onClick={() => handleDotClick(index)}
+                  />
+                ))}
+              </DotsContainer>}
+            </>
+          )}
+
+          {isMobile && (
+            <MobileScrollWrapper>
+              {content.map((offer, index) => (
+                <CarouselSlide key={index}>{renderOfferCard(offer, index)}</CarouselSlide>
+              ))}
+            </MobileScrollWrapper>
+          )}
+        </>
       )}
     </CarouselContainer>
   );
