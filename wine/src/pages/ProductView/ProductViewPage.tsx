@@ -15,6 +15,7 @@ import {
   SkeletonWrapper,
 } from "./ProductViewPage.style";
 import { useRatingsBreakdown } from "../../organisms/RatingsBreakDown/RatingsBreakDown.hook";
+import { Typography } from "@mui/material";
 
 const ProductViewPage = () => {
   const {
@@ -36,6 +37,9 @@ const ProductViewPage = () => {
     data,
     productId,
     vintageYearData,
+    rvData,
+    rvLoading,
+    rvError,
   } = useProductView();
   const {
     selectedFilter,
@@ -112,7 +116,18 @@ const ProductViewPage = () => {
         reviewSummary={reviewSummary}
       />
 
-      <RecentlyView />
+      {rvLoading ? (
+        <Typography>Recently Viewd Products Loading</Typography>
+      ) : rvError ? (
+        <Typography>Error loading Recently Viewed Products</Typography>
+      ) : (
+        <RecentlyView
+          content={rvData?.products ?? []}
+          title={rvData?.title}
+          isVisible={rvData?.isVisible ?? true}
+          cardsPerSlide={4}
+        />
+      )}
       <Newsletter />
     </>
   );

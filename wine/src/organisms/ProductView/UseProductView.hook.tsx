@@ -7,7 +7,7 @@ import {
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAddtoCartMutation } from "../../store/apis/Home/HomeAPI";
+import { useAddtoCartMutation,useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
@@ -27,6 +27,9 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const [addToCart] = useAddtoCartMutation();
   const [wishList] = useWishListMutation();
+  const { data: rvData, isLoading: rvLoading, isError: rvError } = useGetRecentlyViewedQuery({
+  ...getClientIdentifierForPayload(),
+  });
   const [vintageYearData, setVintageYearData] = useState([]);
 
   const [expanded, setExpanded] = useState(true);
@@ -194,6 +197,9 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
     productDetailLoading,
     productId,
     vintageYearData,
+    rvData,
+    rvLoading,
+    rvError,
   };
 };
 export type ProductViewHookReturn = ReturnType<typeof useProductView>;

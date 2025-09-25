@@ -47,6 +47,7 @@ export const CarouselWrapper = styled(Box)(({ theme }) => ({
 
 export const ProductBox = styled(Box)(({ theme }) => ({
   minWidth: "280px",
+  maxWidth: theme.spacing(40),
   flexShrink: 0,
   scrollSnapAlign: "start",
   [theme.breakpoints.up("md")]: {

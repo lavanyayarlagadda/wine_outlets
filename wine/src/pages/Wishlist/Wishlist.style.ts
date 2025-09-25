@@ -29,6 +29,7 @@ export const WishlistItemsContainer = styled(Typography)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   marginTop: theme.spacing(4),
   borderRadius: shape.baseBorderRadius * 1.5,
+  marginBottom: theme.spacing(2),
 }));
 
 export const CartGrid = styled(Grid)(({ theme }) => ({

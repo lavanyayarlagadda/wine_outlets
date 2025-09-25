@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
 import type { RecentlyViewedSection } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import type { MenuResponse } from "../../Interfaces/Home/Home";
-import type { SiteSettings } from "../../../constant/LandingPageData";
+import type { ProductCategoryItem, SiteSettings } from "../../../constant/LandingPageData";
 
 export const homeApi = createApi({
   reducerPath: "homeApi",
@@ -105,24 +105,56 @@ export const homeApi = createApi({
       },
     }),
     getRecentlyViewed: builder.query<
-      RecentlyViewedSection,
+      { title?: string; isVisible?: boolean; products: ProductCategoryItem[] },
       { userId?: number | string; limit?: number; userIp?: string } | void
     >({
       query: (params) => {
         const qs =
           params && Object.keys(params).length
             ? `?${Object.entries(params)
-                .filter(([, v]) => v !== undefined && v !== null)
-                .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
-                .join("&")}`
+              .filter(([, v]) => v !== undefined && v !== null)
+              .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+              .join("&")}`
             : "";
         return {
           url: `/home/recently-viewed${qs}`,
           method: "GET",
         };
       },
-    }),
 
+      // Transform the API response to match ProductCategoryItem[]
+      transformResponse: (response: any) => {
+        const rv = response?.recentlyViewed ?? {};
+        const productsRaw: any[] = Array.isArray(rv.products) ? rv.products : [];
+
+        const products: ProductCategoryItem[] = productsRaw.map((p) => {
+          // robust conversions & fallbacks
+          const id = p?.id ?? p?.itemNumber ?? Math.random();
+          const priceNum = Number(p?.price ?? p?.vipPrice ?? 0); // ensure number
+          const vipPriceNum = Number(p?.vipPrice ?? p?.price ?? 0);
+
+          return {
+            id: String(id),
+            title: p?.itemName ?? p?.title ?? "",
+            imageUrl: p?.media?.url ?? "",
+            tags: p?.tag ? [String(p.tag)] : undefined,
+            rating: Number(p?.rating ?? 0),
+            price: Number.isFinite(priceNum) ? priceNum : 0,
+            vipPrice: Number.isFinite(vipPriceNum) ? vipPriceNum : 0,
+            origin: p?.originName ?? p?.region ?? "",
+            vintage: p?.year ?? p?.vintage ?? "",
+            producer: p?.brandName ?? "",
+            size: p?.size ?? "",
+          } as ProductCategoryItem;
+        });
+
+        return {
+          title: rv?.title ?? "Recently Viewed",
+          isVisible: rv?.isVisible === true || String(rv?.isVisible) === "true",
+          products,
+        };
+      },
+    }),
     getDeliveryPartners: builder.query<
       { deliveryPartners: { id: number; name: string; link?: string }[] },
       { storeId?: string } | void

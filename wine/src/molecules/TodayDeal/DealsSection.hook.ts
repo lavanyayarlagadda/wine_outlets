@@ -172,7 +172,7 @@ export const useDealsSection = (sectionData?: {
 
       const data = await wishList({
         ...getClientIdentifierForPayload(),
-        itemNumber: Number(productId),
+        itemNumber: productId,
         storeId: Number(storedId) || 0,
       }).unwrap();
 

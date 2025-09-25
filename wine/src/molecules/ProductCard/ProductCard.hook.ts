@@ -10,11 +10,11 @@ export const useProductCard = () => {
   const [counts, setCounts] = useState<Record<string, number>>({});
 
   const callApi = useCallback(
-    async (productId: string | number, quantity: number) => {
+    async (productId: string, quantity: number) => {
       try {
         const payload = [
           {
-            itemNumber: Number(productId),
+            itemNumber: productId,
             quantity: Number(quantity),
             ...getClientIdentifierForPayload(),
             storeId: Number(storedId),
