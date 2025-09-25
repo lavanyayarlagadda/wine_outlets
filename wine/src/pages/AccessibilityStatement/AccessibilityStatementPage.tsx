@@ -1,7 +1,7 @@
 import React from "react";
 import PrivacyBaneer from "../../organisms/Banner/PrivacyBaneer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import EmailIcon from "@mui/icons-material/Email";
+// import EmailIcon from "@mui/icons-material/Email";
 
 import { ListItem, ListItemIcon } from "@mui/material";
 import {
@@ -10,7 +10,7 @@ import {
   SubHeadingTypography,
   BodyTypography,
   FeaturesList,
-  FeedbackContent,
+  // FeedbackContent,
   ListItemContent,
   AccessibilityMainContainer,
 } from "./AccessibilityStatement.styles";
@@ -75,7 +75,7 @@ const AccessibilityStatementPage = () => {
           </BodyTypography>
         </AccessibilityPaper>
         {/* Feedback */}
-        <AccessibilityPaper>
+        {/* <AccessibilityPaper>
           <SubHeadingTypography>Feedback & Assistance</SubHeadingTypography>
           <FeedbackContent>
             <EmailIcon color="primary" />
@@ -83,7 +83,7 @@ const AccessibilityStatementPage = () => {
               <a href="mailto:support@wineoutlet.com">support@wineoutlet.com</a>
             </BodyTypography>
           </FeedbackContent>
-        </AccessibilityPaper>
+        </AccessibilityPaper> */}
       </AccessibilityMainContainer>
     </>
   );
