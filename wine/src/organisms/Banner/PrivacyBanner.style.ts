@@ -23,4 +23,5 @@ export const BannerDiscription = styled(Typography)(() => ({
   fontSize: useFontSize(18),
   lineHeight: "1.5",
   fontWeight: 600,
+  whiteSpace: "pre-line",
 }));
