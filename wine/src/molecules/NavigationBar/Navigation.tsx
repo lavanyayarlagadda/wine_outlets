@@ -112,7 +112,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
         title: "Promotions",
         items: [
           { id: 501, listName: "New Arrivals" },
-          { id: 502, listName: "Events" },
+          // { id: 502, listName: "Events" },
           { id: 503, listName: "VIP Benefits" },
         ],
       },
@@ -125,11 +125,11 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
       imgSrc: profile,
       onClick: () => navigate("/profile"),
     },
-    {
-      label: "My Orders",
-      imgSrc: myorders,
-      onClick: () => navigate("/myorders"),
-    },
+    // {
+    //   label: "My Orders",
+    //   imgSrc: myorders,
+    //   onClick: () => navigate("/myorders"),
+    // },
     {
       label: "Wishlist",
       imgSrc: wishlist,
@@ -179,7 +179,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
           <Logo src={logo} alt="Wine Outlet" onClick={() => navigate("/")} />
 
           <IconGroup>
-            <SearchBox>
+            {/* <SearchBox>
               <StyledSearchIcon />
               <StyledInput
                 placeholder="Search wines, brands, or regions"
@@ -187,7 +187,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                 onChange={handleChange}
                 value={query}
               />
-            </SearchBox>
+            </SearchBox> */}
 
             {suggestions.length > 0 && (
               <SuggestionsContainer>
@@ -246,7 +246,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
             />
 
             <RightNavSection>
-              <CustomizeIconButton
+              {/* <CustomizeIconButton
                 onClick={() => {
                   navigate("/cartOverview");
                 }}
@@ -255,7 +255,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                 <StyledBadge badgeContent={cartCount ?? 0} color="primary" overlap="circular">
                   <img src={cart} alt="cart" />
                 </StyledBadge>
-              </CustomizeIconButton>
+              </CustomizeIconButton> */}
               {isToken ? (
                 <>
                   <CustomizeIconButton onClick={handleProfileClick} icon={true}>
@@ -305,7 +305,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
           </IconGroup>
 
           {/* mobile view search */}
-          <SearchBox sx={{ display: { xs: "flex", sm: "none" }, mt: 2 }}>
+          {/* <SearchBox sx={{ display: { xs: "flex", sm: "none" }, mt: 2 }}>
             <StyledSearchIcon />
             <StyledInput
               placeholder="Search wines, brands, or regions"
@@ -313,7 +313,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
               onChange={handleChange}
               value={query}
             />
-          </SearchBox>
+          </SearchBox> */}
 
           {/* mobile view location and delivery */}
           <MobileLocationDeliveryWrapper>
@@ -501,9 +501,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
           {/* <NavMenu>Tastings</NavMenu>
           <NavMenu>Events</NavMenu> */}
-          <HighlightMenu>
+          {/* <HighlightMenu>
             <img src={star} alt="star" /> Tasting
-          </HighlightMenu>
+          </HighlightMenu> */}
           {/* <NavMenu>Promotions</NavMenu> */}
         </NavWrapper>
 

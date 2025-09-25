@@ -5,15 +5,15 @@ export const FOOTER_DATA = {
     links: [
       { text: "About Us", href: "/aboutUs" },
       { text: "Careers", href: "/careers" },
-      { text: "Store Locator", href: "#" },
     ],
   },
   customerService: {
     title: "Customer Service",
     links: [
       { text: "Contact Us", href: "/contactUs" },
-      { text: "FAQs", href: "#" },
-      { text: "Pickup Process", href: "/pickupProcess" },
+      { text: "Store Locator", href: "#" },
+      // { text: "FAQs", href: "#" },
+      // { text: "Pickup Process", href: "/pickupProcess" },
     ],
   },
   shopByCategory: {

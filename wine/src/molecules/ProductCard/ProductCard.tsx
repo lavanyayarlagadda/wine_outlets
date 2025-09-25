@@ -242,7 +242,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 ${product?.price.toFixed(2)}
               </Typography>
             )}
-            {(cartCount ?? 0) > 0 ? (
+            {/* {(cartCount ?? 0) > 0 ? (
               <Button
                 variant="contained"
                 fullWidth={isMobile}
@@ -281,7 +281,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               >
                 Add to Cart
               </Button>
-            )}
+            )} */}
           </Box>
         </Box>
       </CardContent>
