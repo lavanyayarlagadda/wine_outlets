@@ -1,6 +1,6 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { bike, map, cart, userprofile, logo, star, bag } from "../../assets";
+import { car, map, cart, userprofile, logo, star, bag } from "../../assets";
 import { useNavigation } from "./Navigation.hook";
 import {
   TopBar,
@@ -42,7 +42,7 @@ import {
   StyledBadge,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
-import { List, Typography } from "@mui/material";
+import {  List, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";
@@ -328,7 +328,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
             </DropdownTriggerWithIconMargin>
 
             <DropdownTriggerWithGap onClick={(e) => handleMenuOpen(e, "delivery")}>
-              <img src={bike} alt="bike" /> Delivery
+              <img src={car} alt="car" /> Delivery
               {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </DropdownTriggerWithGap>
           </MobileLocationDeliveryWrapper>
@@ -505,7 +505,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
         <RightNavSection>
           <DropdownTriggerWithGap onClick={(e) => handleMenuOpen(e, "delivery")}>
-            <img src={bike} alt="bike" /> Delivery{" "}
+            <img src={car} alt="car" /> Delivery{" "}
             {menuOpen.delivery ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </DropdownTriggerWithGap>
           <CustomPopover

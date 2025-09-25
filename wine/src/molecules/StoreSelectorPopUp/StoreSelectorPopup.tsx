@@ -21,7 +21,6 @@ import {
   InfoItem,
   StoreLeftGroup,
 } from "./StoreSelectorPopup.style";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "../../store/slices/Home/Home";
 
@@ -67,7 +66,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   navigation = false,
   isLoading = false,
 }) => {
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
 
@@ -156,7 +155,8 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                       selected={isSelected}
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/${store?.mapUrl}`);
+                         const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store?.mapUrl)}`;
+                         window.open(url, "_blank");
                         onClose();
                       }}
                     >

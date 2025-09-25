@@ -32,21 +32,27 @@ export const StoreCard = styled(Card)(() => ({
   flexDirection: "column",
   height: "100%",
   overflow: "hidden",
+  border:`1px solid ${palette.grey.divider}`,
   borderRadius: 8,
   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+ transition: "all 0.3s ease-in-out", 
   "@media (min-width:600px)": {
     flexDirection: "row",
+  },
+  "&:hover": {
+    boxShadow: "0 4px 16px rgba(0,0,0,0.2)", 
+    transform: "translateY(-4px)", 
   },
 }));
 
 // Image
 export const StoreImage = styled("img")(() => ({
   width: "100%",
-  height: 200,
+  height: "100%",
   objectFit: "cover",
   cursor: "pointer",
   "@media (min-width:600px)": {
-    width: 200,
+    width: 300,
     height: "100%",
   },
 }));
@@ -183,13 +189,13 @@ export const TruncatedAddress = styled(Typography)(({ theme }) => ({
   textOverflow: "ellipsis",
   maxWidth: 300, // default for small mobile
   [theme.breakpoints.up("sm")]: {
-    maxWidth: 500, // tablet
+    maxWidth: 300, // tablet
   },
   [theme.breakpoints.up("md")]: {
     maxWidth: 500, // laptop
   },
   [theme.breakpoints.up("lg")]: {
-    maxWidth: 400, // desktop
+    maxWidth: 300, // desktop
   },
 }));
 

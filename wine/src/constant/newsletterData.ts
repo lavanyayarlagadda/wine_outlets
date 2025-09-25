@@ -15,4 +15,7 @@ export const storeOptions = [
 export const alcoholPreferences = [
   { value: "entire collection", label: "Entire Collection" },
   { value: "rare collection", label: "Rare Collection" },
+  { value: "wine", label: "Wine" },
+  { value: "beer", label: "Beer" },
+  { value: "liquor", label: "Liquor" },
 ];
