@@ -24,6 +24,15 @@ export const InfoIconWrapper = styled(Box)(({ theme }) => ({
   justifyContent: "center",
 }));
 
+export const NumberWrapper = styled(Box)(({ theme }) => ({
+  color: theme.palette.primary.dark,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontWeight:600,
+  fontSize:useFontSize(24)
+}));
+
 export const CardHeader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.dark,
   fontSize: useFontSize(24),

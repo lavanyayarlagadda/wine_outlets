@@ -22,6 +22,7 @@ const Invoice = lazy(() => import("./pages/Invoice/Invoice"));
 const Wishlist = lazy(() => import("./pages/Wishlist/Wishlist"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPlicy/PrivacyPolicyPage"));
 const TermsConditions = lazy(() => import("./pages/TermsConditions/TermsConditionsPage"));
+const PickupProcess = lazy(() => import("./pages/PickupProcess/PickupProcessPage"));
 const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"));
 const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
 
@@ -45,7 +46,8 @@ const App: React.FC = () => {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/aboutUs" element={<AboutUs />} />
-            <Route path="/contactUs" element={<ContactUs />} />
+            <Route path="/pickupProcess" element={<PickupProcess />} />
+             <Route path="/contactUs" element={<ContactUs />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

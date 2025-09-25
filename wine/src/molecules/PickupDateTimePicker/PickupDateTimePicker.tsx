@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, Box, DialogContent } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider, PickersDay, StaticDatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
 
 import {
@@ -16,6 +16,7 @@ import {
   Container,
   FooterButtons,
   FooterConfirmButtons,
+  DisabledDay,
 } from "./PickupDateTimeSelector.style";
 import { StyledSkeletonRect } from "../../organisms/Filter/FilterPanel.style";
 import { NoDataText } from "../../organisms/CartOverview/CartOverview.style";
@@ -23,12 +24,29 @@ import { NoDataText } from "../../organisms/CartOverview/CartOverview.style";
 interface PickupDateTimeSelectorProps {
   slotsData?: any;
   slotDataLoading?: boolean;
+  offDaysData?: any;
 }
 
 const PickupDateTimeSelector: React.FC<PickupDateTimeSelectorProps> = ({
   slotsData,
   slotDataLoading,
+  offDaysData,
 }) => {
+  // Convert offDaysData to a list of disabled dates
+  const disabledDates: Date[] = [];
+
+  if (offDaysData?.storeOffDays?.length) {
+    const holidays = offDaysData.storeOffDays[0].offDaysByType.holidays || [];
+    const weekOffs = offDaysData.storeOffDays[0].offDaysByType.weekOffs || [];
+    const others = offDaysData.storeOffDays[0].offDaysByType.others || [];
+
+    const allOffDays = [...holidays, ...weekOffs, ...others];
+
+    allOffDays.forEach((day: any) => {
+      disabledDates.push(new Date(day.offDate));
+    });
+  }
+
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>("");
@@ -60,6 +78,45 @@ const PickupDateTimeSelector: React.FC<PickupDateTimeSelectorProps> = ({
                   value={selectedDate}
                   onChange={(newDate) => setSelectedDate(newDate)}
                   slotProps={{ actionBar: { actions: [] } }}
+                  shouldDisableDate={(date) =>
+                    disabledDates.some(
+                      (d) =>
+                        d.getFullYear() === date.getFullYear() &&
+                        d.getMonth() === date.getMonth() &&
+                        d.getDate() === date.getDate()
+                    )
+                  }
+                  slots={{
+                    day: (props) => {
+                      const { day, outsideCurrentMonth: _outsideCurrentMonth, ...other } = props;
+
+                      const isDisabled = disabledDates.some(
+                        (d) =>
+                          d.getFullYear() === day.getFullYear() &&
+                          d.getMonth() === day.getMonth() &&
+                          d.getDate() === day.getDate()
+                      );
+
+                      if (isDisabled) {
+                        return (
+                          <DisabledDay
+                            {...other}
+                            day={day}
+                            outsideCurrentMonth={_outsideCurrentMonth}
+                          />
+                        );
+                      }
+
+                      return (
+                        <PickersDay
+                          {...other}
+                          day={day}
+                          outsideCurrentMonth={_outsideCurrentMonth}
+                          
+                        />
+                      );
+                    },
+                  }}
                 />
               </LocalizationProvider>
 
@@ -84,7 +141,7 @@ const PickupDateTimeSelector: React.FC<PickupDateTimeSelectorProps> = ({
                         color={selectedTime === slot.time ? "error" : "primary"}
                         onClick={() => setSelectedTime(slot.time)}
                       >
-                        {slot.time}
+                        {slot.time} ({slot.weekDay})
                       </TimeSlotButton>
                     ))}
                   </Box>

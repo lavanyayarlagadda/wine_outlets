@@ -3,7 +3,7 @@ import shape from "../../themes/shape";
 import { theme } from "../../themes/theme";
 import { useFontSize } from "../../themes/fontSize";
 import palette from "../../themes/palette";
-
+import { PickersDay } from "@mui/x-date-pickers";
 // Popover container
 export const PopoverContent = styled(Box)(() => ({
   display: "flex",
@@ -120,3 +120,10 @@ export const FooterConfirmButtons = styled(Button)(() => ({
   padding: "8px 16px",
   backgroundColor: theme.palette.primary.dark,
 }));
+
+export const DisabledDay = styled(PickersDay)(() => ({
+  backgroundColor: "#f5f5f5",
+  color: "#bdbdbd",
+  pointerEvents: "none",
+}));
+

@@ -13,7 +13,7 @@ export const FOOTER_DATA = {
     links: [
       { text: "Contact Us", href: "/contactUs" },
       { text: "FAQs", href: "#" },
-      { text: "Pickup Process", href: "#" },
+      { text: "Pickup Process", href: "/pickupProcess" },
     ],
   },
   shopByCategory: {

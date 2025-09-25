@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 import {
-  useCartProductDetailsQuery,
-  useSlotDetailsQuery,
+  useCartProductDetailsMutation,
+  useSlotDetailsMutation,
+  useStoreOffDaysMutation
 } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
@@ -18,20 +19,20 @@ export const useCartOverView = () => {
   const [cartItems, setCartItems] = useState<{ [productId: number]: number }>({});
   const today = new Date().toISOString().split("T")[0];
   const storedId = localStorage.getItem("selectedStore");
-  const { data, isLoading, isError } = useCartProductDetailsQuery({
-    cartId: 1,
-    ...getClientIdentifierForPayload(),
-    storeId: Number(storedId) || 0,
-  });
+  const [getCartProductDetails, { data, isLoading, isError }] = useCartProductDetailsMutation();
+  const [getSlotDetails, { data: slotData, isLoading: slotLoading, isError: slotError }] =
+    useSlotDetailsMutation();
+    const [getOffDays, {data:offDaysData, isLoading:offDaysLoading, isError:offDaysError}] = useStoreOffDaysMutation()
+  const cartOverview = data;
   const cartDetails = data?.productListing?.[0];
   const [wishList] = useWishListMutation();
   const [addToCart] = useAddtoCartMutation();
   const [removeFromCart] = useRemoveFromCartMutation();
-  const {
-    data: slotData,
-    isLoading: slotLoading,
-    isError: slotError,
-  } = useSlotDetailsQuery({ storeId: Number(storedId) || 0, date: today });
+  // const {
+  //   data: slotData,
+  //   isLoading: slotLoading,
+  //   isError: slotError,
+  // } = useSlotDetailsMutation({ storeId: Number(storedId) || 0, date: today });
 
   useEffect(() => {
     if (isError) toast.error("Failed to load the Cart Product Details");
@@ -41,6 +42,27 @@ export const useCartOverView = () => {
   useEffect(() => {
     dispatch(setPlaceOrder(false));
   }, []);
+
+  useEffect(() => {
+    getCartProductDetails({
+      ...getClientIdentifierForPayload(),
+      storeId: Number(storedId) || 0,
+      size: 10,
+      page: 1,
+    });
+  }, [getCartProductDetails, storedId]);
+
+  useEffect(() => {
+    getSlotDetails({ storeId: Number(storedId) || 0, date: today });
+  }, [getSlotDetails]);
+
+  useEffect(() => {
+    getOffDays({storeId: Number(storedId) || 0})
+  }, [getOffDays])
+
+
+
+
 
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId);
@@ -71,15 +93,15 @@ export const useCartOverView = () => {
     }
   };
 
-  useEffect(() => {
-    if (cartDetails?.products) {
-      const initialWishlist = cartDetails.products
-        .filter((p: any) => p.isWishList)
-        .map((p: any) => p.productId);
+  // useEffect(() => {
+  //   if (cartDetails?.products) {
+  //     const initialWishlist = cartDetails.products
+  //       .filter((p: any) => p.isWishList)
+  //       .map((p: any) => p.productId);
 
-      setWishlist(initialWishlist);
-    }
-  }, [cartDetails]);
+  //     setWishlist(initialWishlist);
+  //   }
+  // }, [cartDetails]);
 
   const handleAddToCart = async (productId: any, newValue?: any) => {
     try {
@@ -144,5 +166,9 @@ export const useCartOverView = () => {
     handleAddToCart,
     loadingProduct,
     handleRemoveFromCart,
+    cartOverview,
+    offDaysData,
+    offDaysLoading,
+    offDaysError
   };
 };

@@ -20,7 +20,7 @@ import {
 } from "./PickupInfo.style";
 import PickupDateTimePicker from "../PickupDateTimePicker/PickupDateTimePicker";
 import { Box, Typography } from "@mui/material";
-import { calendarRed, clock, call, mapIconSelected } from "../../assets";
+import { calendarRed, time, call, mapIconSelected } from "../../assets";
 import { MapButton, MapIconImage } from "../StoreSelectorPopUp/StoreSelectorPopup.style";
 
 interface PickupInformationProps {
@@ -37,6 +37,7 @@ interface PickupInformationProps {
   pickupTime?: string;
   slotsData?: any;
   slotDataLoading?: boolean;
+  offDaysData?:any
 }
 const PickupInformation: React.FC<PickupInformationProps> = ({
   title,
@@ -51,7 +52,9 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
   pickupTime,
   slotsData,
   slotDataLoading,
+  offDaysData
 }) => {
+  console.log("offDaysData", offDaysData)
   return (
     <MainContainer>
       <ProductHeader>
@@ -85,7 +88,7 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
 
         <PhoneTimeRow>
           <PhoneNumber>
-            {order ? <IconImage src={clock} alt="left" /> : <SmallAccessTimeIcon />}
+            {order ? <IconImage src={time} alt="left" /> : <SmallAccessTimeIcon />}
             {hours}
           </PhoneNumber>
           <PhoneNumber>
@@ -114,7 +117,7 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
 
             {/* Right side */}
             <SideBox>
-              <IconImage src={clock} alt="right" />
+              <IconImage src={time} alt="right" />
               <Box>
                 <Typography variant="subtitle1" fontWeight="bold">
                   {pickupTime}
@@ -125,10 +128,13 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
           </Row>
         </Wrapper>
       ) : (
-        <PickupDateTimePicker slotsData={slotsData} slotDataLoading={slotDataLoading} />
+        <PickupDateTimePicker slotsData={slotsData} slotDataLoading={slotDataLoading} offDaysData = {offDaysData}/>
       )}
     </MainContainer>
   );
 };
 
 export default PickupInformation;
+
+
+

@@ -14,7 +14,6 @@ import {
   NoDataText,
 } from "../CartOverview/CartOverview.style";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
-import cartOverviewData from "../../constant/cartOverviewData";
 import OrderSummary from "../../molecules/OrderSummary/OrderSummary";
 import PickupInformation from "../../molecules/PickupInfo/PickupInfo";
 import { DividerLine } from "../../molecules/OrderSummary/OrderSummary.style";
@@ -29,14 +28,17 @@ const CartOverview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    cartDetails,
     isLoading,
     slotData,
     slotLoading,
     handleToggleFavorite,
     handleAddToCart,
     handleRemoveFromCart,
+    cartOverview,
+    offDaysData
   } = useCartOverView();
+
+
 
   return (
     <MainContainer>
@@ -48,7 +50,7 @@ const CartOverview = () => {
             <StyledSkeletonRect />
           </React.Fragment>
         ))
-      ) : cartDetails?.products?.length > 0 ? (
+      ) : cartOverview?.products?.length > 0 ? (
         <LayoutContainer>
           <ProductListWrapper>
             <LeftContent>
@@ -63,18 +65,18 @@ const CartOverview = () => {
                 </HeaderAction>
               </ProductHeader>
 
-              {cartDetails?.products?.map((item: any) => (
+              {cartOverview?.products?.map((item: any) => (
                 <>
                   <DividerLine />
                   <CartProduct
-                    key={item.id}
+                    key={item.productId}
                     imageUrl={item.imageUrl}
                     name={item.name}
                     origin={item.origin}
                     brand={item.brand}
                     size={item.size}
                     year={item.year}
-                    unitPrice={item.discountedPrice}
+                    unitPrice={item.price}
                     quantity={item.Quantity}
                     isWishList={item.isWishList}
                     productId={item.productId}
@@ -96,28 +98,29 @@ const CartOverview = () => {
             </LeftContent>
           </ProductListWrapper>
           <ContentWrapper>
-            {cartDetails?.orderSummary && (
+            {cartOverview?.orderSummary && (
               <OrderSummary
                 title="Order Summary"
-                itemCount={cartDetails?.products?.length}
+                itemCount={cartOverview?.products?.length}
                 items={[
-                  { label: "Subtotal", value: cartDetails?.orderSummary?.subtotal },
-                  { label: "Estimated Tax", value: cartDetails?.orderSummary?.tax },
+                  { label: "Subtotal", value: cartOverview?.orderSummary?.subtotal },
+                  { label: "Estimated Tax", value: cartOverview?.orderSummary?.tax },
                 ]}
-                totalItem={{ label: "Total", value: cartDetails?.orderSummary?.total }}
+                totalItem={{ label: "Total", value: cartOverview?.orderSummary?.total }}
                 // vipCodeMessage={cartOverviewData.cartSummary.vipCodeMessage}
               />
             )}
-            {cartDetails?.pickup && (
+            {cartOverview?.pickup && (
               <PickupInformation
                 title="Pickup Information"
-                storeName={cartDetails.pickup.locationName}
-                address={cartDetails.pickup.address}
-                phone={cartOverviewData.pickupInfo.phone}
-                hours={cartDetails.pickup.timeSlot}
+                storeName={cartOverview.pickup.locationName}
+                address={cartOverview.pickup.address}
+                phone={cartOverview.pickup.phone}
+                hours={cartOverview.pickup.timeSlot}
                 footerTitle="Pickp Date & Time"
                 slotsData={slotData}
                 slotDataLoading={slotLoading}
+                offDaysData={offDaysData}
               />
             )}
 

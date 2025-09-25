@@ -17,26 +17,26 @@ export const cartCheckoutApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    cartProductDetails: builder.query<
+    cartProductDetails: builder.mutation<
       any,
-      { cartId: number; userId: number | string; storeId: number; userIp: string }
+      { page: number; userId: number | string; storeId: number; size: number }
     >({
-      query: ({ cartId, userId, storeId, userIp }) => ({
+      query: ({ userId, storeId, page, size }) => ({
         url: `/cart-checkout/product-listing`,
-        method: "GET",
-        params: {
-          cartId,
+        method: "POST",
+        body: {
           userId,
           storeId,
-          userIp,
+          page,
+          size,
         },
       }),
     }),
-    slotDetails: builder.query<any, { storeId: number; date: string }>({
+    slotDetails: builder.mutation<any, { storeId: number; date: string }>({
       query: ({ storeId, date }) => ({
         url: `/cart-checkout/pickup-slots`,
-        method: "GET",
-        params: {
+        method: "POST",
+        body: {
           storeId,
           date,
         },
@@ -49,8 +49,15 @@ export const cartCheckoutApi = createApi({
         body: newItem,
       }),
     }),
+    storeOffDays: builder.mutation<any, { storeId: number }>({
+      query: ({ storeId }) => ({
+        url: `/cart-checkout/store-off-days`,
+        method: "POST",
+        body: { storeId },
+      }),
+    }),
   }),
 });
 
-export const { useCartProductDetailsQuery, useSlotDetailsQuery, usePlaceOrderMutation } =
+export const { useCartProductDetailsMutation, useSlotDetailsMutation, usePlaceOrderMutation, useStoreOffDaysMutation } =
   cartCheckoutApi;
