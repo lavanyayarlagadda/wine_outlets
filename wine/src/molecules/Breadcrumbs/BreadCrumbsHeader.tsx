@@ -8,7 +8,7 @@ import {
 } from "./BreadCrumbs.style";
 
 interface BreadcrumbHeaderProps {
-  items: BreadcrumbItem[];
+  items?: BreadcrumbItem[];
   productCount?: number;
   showProductCount?: boolean;
 }
@@ -19,9 +19,7 @@ const BreadcrumbHeader: React.FC<BreadcrumbHeaderProps> = ({
   showProductCount = true,
 }) => (
   <BreadcrumbHeaderWrapper>
-    <BreadcrumbsBox>
-      <Breadcrumbs items={items} separator=">" />
-    </BreadcrumbsBox>
+    <BreadcrumbsBox>{items && <Breadcrumbs items={items} separator=">" />}</BreadcrumbsBox>
 
     {showProductCount && (
       <ProductCountBox>

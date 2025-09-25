@@ -9,11 +9,10 @@ interface Props {
   alternateColor?: string;
 }
 
-const StyledSection = styled(
-  "section",
-  { shouldForwardProp: (prop) => prop !== "applyBg" && prop !== "bg" }
-)<{ applyBg?: boolean; bg?: string }>(({ theme, applyBg, bg }) => {
-  const backgroundColor = applyBg ? bg ?? theme.palette.primary.light : undefined;
+const StyledSection = styled("section", {
+  shouldForwardProp: (prop) => prop !== "applyBg" && prop !== "bg",
+})<{ applyBg?: boolean; bg?: string }>(({ theme, applyBg, bg }) => {
+  const backgroundColor = applyBg ? (bg ?? theme.palette.primary.light) : undefined;
 
   return {
     backgroundColor,
@@ -27,23 +26,26 @@ function normalizeSections(payload: any): PageSection[] {
   return [];
 }
 
-export default function SectionRenderer({ sectionsFromApi,  alternateBackground = true,
-  alternateColor, }: Props) {
+export default function SectionRenderer({
+  sectionsFromApi,
+  alternateBackground = true,
+  alternateColor,
+}: Props) {
   const theme = useTheme();
   const sections = normalizeSections(sectionsFromApi)
     .filter((s) => s?.isVisible !== false)
     .sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
-    const bgColor = alternateColor ?? (theme.palette.primary.light ?? undefined);
+  const bgColor = alternateColor ?? theme.palette.primary.light ?? undefined;
   return (
     <>
-      {sections.map((section,i) => {
+      {sections.map((section, i) => {
         const Comp = SECTION_REGISTRY[section.type];
         if (!Comp) {
           return null;
         }
         const shouldApply = alternateBackground && i % 2 === 0 && !!bgColor;
         return (
-           <StyledSection
+          <StyledSection
             key={section.id ?? JSON.stringify(section)}
             id={section.id}
             applyBg={shouldApply}

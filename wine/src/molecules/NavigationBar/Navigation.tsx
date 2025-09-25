@@ -1,15 +1,15 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { car, map, cart, userprofile, logo, star, bag } from "../../assets";
+import { car, map, userprofile, logo, bag } from "../../assets";
 import { useNavigation } from "./Navigation.hook";
 import {
   TopBar,
   TopBarContent,
   Logo,
-  SearchBox,
-  StyledInput,
+  // SearchBox,
+  // StyledInput,
   NavWrapper,
-  HighlightMenu,
+  // HighlightMenu,
   StyledMenu,
   DropdownTriggerNoBorder,
   DropdownTriggerWithGap,
@@ -27,7 +27,7 @@ import {
   ProfileMenuIcon,
   ProfileMenuText,
   MobileMenuIcon,
-  StyledSearchIcon,
+  // StyledSearchIcon,
   CategoryColumn,
   CategoryTitle,
   ColumnsWrapper,
@@ -39,7 +39,7 @@ import {
   StyledSuggestionItem,
   PromotionCategoryColumn,
   PromotionsColumnsWrapper,
-  StyledBadge,
+  // StyledBadge,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
 import { List, Typography } from "@mui/material";
@@ -52,7 +52,7 @@ import uberImg from "../../assets/orderWith/uber.svg";
 import doordashImg from "../../assets/orderWith/doordash.svg";
 import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
-import { logout, profile, myorders, wishlist } from "../../assets";
+import { logout, profile, wishlist } from "../../assets";
 import type { HomeHookReturn } from "../../pages/Home/Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
@@ -88,14 +88,14 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
     open,
     setOpenLogin,
     currentBanner,
-    cartCount,
+    // cartCount,
     deliveryPartners,
     deliveryLoading,
     query,
 
     suggestions,
 
-    handleChange,
+    // handleChange,
     handleSelectSuggestion,
     expandedMenus,
     toggleExpand,
@@ -470,7 +470,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   <PromotionsColumnsWrapper>
                     <Column>
                       {category.items.map((item) => {
-                        let path = `/productsList?`; 
+                        let path = `/productsList?`;
 
                         if (item.listName === "New Arrivals") {
                           path = "/productsList?tags=new-arrival";

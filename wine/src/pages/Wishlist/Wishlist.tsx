@@ -18,8 +18,8 @@ export default function Wishlist() {
   const { items, loading } = useWishlist();
   const {
     data: rvData,
-    isLoading: rvLoading,
-    isError: rvError,
+    // isLoading: rvLoading,
+    // isError: rvError,
   } = useGetRecentlyViewedQuery({
     ...getClientIdentifierForPayload(),
   });

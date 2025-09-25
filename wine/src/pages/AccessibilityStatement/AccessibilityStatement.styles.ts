@@ -41,6 +41,6 @@ export const FeedbackContent = styled(Box)(() => ({
   gap: 1,
 }));
 
-export const ListItemContent =  styled(ListItemText)(() => ({
-fontSize:useFontSize(16)
+export const ListItemContent = styled(ListItemText)(() => ({
+  fontSize: useFontSize(16),
 }));

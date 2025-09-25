@@ -26,7 +26,7 @@ export interface Product {
   pricing: any;
   images: any;
   itemNumber: string;
-  name: string;
+  itemName: string;
   year: number;
   region: string;
   size: string;
@@ -80,7 +80,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
         <ProductImage
           component="img"
           image={noaddtocart ? product.images.url : product.media.url}
-          alt={product.name}
+          alt={product.itemName}
           onClick={() => {
             navigate(
               `/productView?productId=${product.itemNumber}&size=${product.size}&vintage=${product.year}`
@@ -93,7 +93,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
       )}
 
       <ProductCardContent>
-        <ProductName>{product.name}</ProductName>
+        <ProductName>{product.itemName}</ProductName>
 
         <DetailsRow>
           <SmallText>

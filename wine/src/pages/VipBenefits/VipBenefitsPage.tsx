@@ -7,7 +7,7 @@ import {
   BodyText,
   IconList,
   ListItemContent,
-  VIPMainContainer
+  VIPMainContainer,
 } from "./VipBenefits.style";
 import { ListItem, ListItemIcon } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -22,7 +22,7 @@ const VipBenefitsPage = () => {
         description="Join our exclusive club and elevate your wine experience."
       />
 
-      <VIPMainContainer >
+      <VIPMainContainer>
         <SectionHeading>VIP Membership - $10/year</SectionHeading>
         <BodyText>
           Enjoy exclusive access to savings, tastings, and events designed for wine lovers.

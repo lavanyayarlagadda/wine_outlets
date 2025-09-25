@@ -2,15 +2,15 @@ import React from "react";
 import {
   Box,
   Typography,
-  Button,
+  // Button,
   Card,
   CardContent,
   CardMedia,
   IconButton,
   useTheme,
-  useMediaQuery,
+  // useMediaQuery,
 } from "@mui/material";
-import { ShoppingCart } from "@mui/icons-material";
+// import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import shape from "../../themes/shape";
 import palette from "../../themes/palette";
@@ -52,16 +52,16 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
-  onAddToCart,
+  // onAddToCart,
   onToggleFavorite,
   isRecentlyViewedCard = false,
   isFavorite,
-  cartCount,
+  // cartCount,
   // onIncrement,
   // onDecrement
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   return (
     <Card
