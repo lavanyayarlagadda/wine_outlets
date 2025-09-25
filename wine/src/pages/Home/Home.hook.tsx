@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 export const useHomeLogic = () => {
   const [agePopupOpen, setAgePopupOpen] = useState(true);
   const [isAgeVerified, setIsAgeVerified] = useState(false);
@@ -40,11 +41,10 @@ export const useHomeLogic = () => {
 
   useEffect(() => {
     getHomeSections({
-      userId: "12345",
-      userIp: "192.168.1.100",
-      storeId: "1",
+      ...getClientIdentifierForPayload(),
+      storeId: selectedStore,
     });
-  }, [getHomeSections]);
+  }, [getHomeSections, selectedStore]);
 
   const stores = data?.stores;
   const storesData = searchData?.stores;

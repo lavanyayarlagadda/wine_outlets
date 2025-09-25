@@ -161,7 +161,7 @@ export const SITE_SETTING_DEMO_DATA: SiteSettings = {
     {
       position: 3,
       type: "banner-collection",
-      layout: "4-column-grid",
+      layout: "3-column-grid",
       id: "collection-2",
       title: "Everyday Value",
       subtitle:

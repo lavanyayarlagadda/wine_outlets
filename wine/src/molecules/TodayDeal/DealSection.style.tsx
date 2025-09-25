@@ -84,7 +84,7 @@ export const StyledFilterButton = styled(Button, {
   border: `1px solid ${active ? theme.palette.primary.main : palette.grey.main}`,
   color: active ? theme.palette.common.white : theme.palette.text.primary,
   "&:hover": {
-    backgroundColor: active ? theme.palette.primary.dark : palette.grey.main,
+    backgroundColor: active ? theme.palette.primary.dark : palette.grey[300],
     borderColor: active ? theme.palette.primary.dark : palette.grey.main,
   },
   "& .MuiButton-startIcon": {

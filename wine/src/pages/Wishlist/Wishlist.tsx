@@ -10,9 +10,19 @@ import {
 } from "./Wishlist.style";
 import { useWishlist } from "./Wishlist.hook";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
+import { RecentlyView } from "../../molecules";
+import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export default function Wishlist() {
   const { items, loading } = useWishlist();
+  const {
+    data: rvData,
+    isLoading: rvLoading,
+    isError: rvError,
+  } = useGetRecentlyViewedQuery({
+    ...getClientIdentifierForPayload(),
+  });
 
   if (loading) return <CircularProgress />;
 
@@ -52,12 +62,21 @@ export default function Wishlist() {
                   quantity={2}
                   component="WISHLIST"
                   handleToggleFavorite={() => {}}
+                  // handleAddToCart={() => {}}
+                  // itemNumber={p.itemID}
+                  // handleRemoveFromCart={() => {}}
                 />
               </Grid>
             ))
           )}
         </CartGrid>
       </WishlistItemsContainer>
+      <RecentlyView
+        content={rvData?.products ?? []}
+        title={rvData?.title}
+        isVisible={rvData?.isVisible ?? true}
+        cardsPerSlide={3}
+      />
     </WishlistContainer>
   );
 }
