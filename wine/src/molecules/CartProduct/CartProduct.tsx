@@ -24,7 +24,7 @@ import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
-import AddToCart from "../../atoms/CustomButton/AddToCart";
+// import AddToCart from "../../atoms/CustomButton/AddToCart";
 import useCartProduct from "./UseCartProduct.hook";
 
 interface PricingProps {
@@ -154,9 +154,9 @@ const CartProduct: React.FC<CartProductProps> = ({
             <PricingBox componentType={component}>
               <WishListPricingLayout vipPrice={unitPrice.original} price={unitPrice.discounted} />
             </PricingBox>
-            <CounterWrapper>
+            {/* <CounterWrapper>
               <AddToCart label="Add to Cart" variantType="filled" onClick={() => {}} />
-            </CounterWrapper>
+            </CounterWrapper> */}
           </WishlistPriceAndCartContainer>
         ) : (
           <>
