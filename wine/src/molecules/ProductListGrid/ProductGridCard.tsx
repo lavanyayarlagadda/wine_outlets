@@ -1,5 +1,5 @@
 import React from "react";
-import { ShoppingCart } from "@mui/icons-material";
+// import { ShoppingCart } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {
   ResponsiveCard,
@@ -13,7 +13,7 @@ import {
   PriceRow,
   PriceText,
   VIPPriceText,
-  AddToCartButton,
+  // AddToCartButton,
   FavoriteIcon,
   FavoriteBorderIcon,
   AddToCartLoader,
@@ -55,10 +55,10 @@ interface ProductCardProps {
 
 const ProductGridCard: React.FC<ProductCardProps> = ({
   product,
-  onAddToCart,
+  // onAddToCart,
   onToggleFavorite,
   isFavorite,
-  isLoading,
+  // isLoading,
   wishListLoading,
   noaddtocart,
 }) => {
@@ -133,7 +133,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
             <PriceText>${product?.pricing?.price?.toFixed(2)}</PriceText>
           </PriceRow>
         )}
-        {!noaddtocart && onAddToCart && (
+        {/* {!noaddtocart && onAddToCart && (
           <AddToCartButton
             onClick={() => onAddToCart(product.itemNumber)}
             startIcon={isLoading?.toString() === product.itemNumber ? null : <ShoppingCart />}
@@ -141,7 +141,7 @@ const ProductGridCard: React.FC<ProductCardProps> = ({
           >
             {isLoading?.toString() === product.itemNumber ? <AddToCartLoader /> : "Add to Cart"}
           </AddToCartButton>
-        )}
+        )} */}
       </ProductCardContent>
     </ResponsiveCard>
   );

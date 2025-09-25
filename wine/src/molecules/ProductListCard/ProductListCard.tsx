@@ -1,6 +1,6 @@
 import React from "react";
-import { useTheme, useMediaQuery } from "@mui/material";
-import { ShoppingCart } from "@mui/icons-material";
+// import { useTheme, useMediaQuery } from "@mui/material";
+// import { ShoppingCart } from "@mui/icons-material";
 import { empty_star, expandIcon, calendar, cityMap } from "../../assets";
 import {
   AddToCartLoader,
@@ -23,7 +23,7 @@ import {
   ProductTitle,
   DescriptionText,
   FooterRow,
-  AddToCartButton,
+  // AddToCartButton,
   InfoRow,
   InfoIcon,
   DescriptionTooltip,
@@ -58,14 +58,14 @@ const ProductListCard: React.FC<ProductCardProps> = ({
   description,
   price,
   vipPrice,
-  onAddToCart,
+  // onAddToCart,
   onToggleFavorite,
   isFavorite,
-  isLoading,
+  // isLoading,
   wishListLoading,
 }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
   return (
@@ -137,7 +137,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
         <FooterRow>
           {typeof vipPrice === "number" && <VIPPriceText>VIP: ${vipPrice.toFixed(2)}</VIPPriceText>}
           <PriceText>${price.toFixed(2)}</PriceText>
-          <AddToCartButton
+          {/* <AddToCartButton
             variant="contained"
             fullWidth={isMobile}
             startIcon={isLoading ? null : <ShoppingCart />}
@@ -145,7 +145,7 @@ const ProductListCard: React.FC<ProductCardProps> = ({
             disabled={isLoading === itemNumber} // disable button while loading
           >
             {isLoading === itemNumber ? <AddToCartLoader /> : "Add to Cart"}
-          </AddToCartButton>
+          </AddToCartButton> */}
         </FooterRow>
       </StyledCardContent>
     </StyledCard>

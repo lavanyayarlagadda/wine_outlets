@@ -3,8 +3,8 @@ import FilterPanel from "../../organisms/Filter/FilterPanel";
 import ProductListCard from "../ProductListCard/ProductListCard";
 import ProductGridCard from "../ProductListGrid/ProductGridCard";
 import CustomPagination from "../Pagination/Pagination";
-import { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
-import BreadcrumbHeader from "../Breadcrumbs/BreadCrumbsHeader";
+// import { type BreadcrumbItem } from "../Breadcrumbs/BreadCrumbs";
+// import BreadcrumbHeader from "../Breadcrumbs/BreadCrumbsHeader";
 import FilterTagList from "../FilterTag/FilterTagList";
 import SortAndViewControls from "../SortAndView/SortAndViewControl";
 
@@ -66,10 +66,10 @@ const ProductList: React.FC<ProductListProps> = ({
   loadingProduct,
   ProductListLoading,
   wishListLoading,
-  totalProducts,
+  // totalProducts,
   handleSortChange,
 }) => {
-  const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
+  // const breadcrumbItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, { label: "Wine" }];
 
   const dispatch = useDispatch();
   const { selectedNames } = useSelector((state: RootState) => state.productListSlice);
@@ -91,7 +91,7 @@ const ProductList: React.FC<ProductListProps> = ({
 
   return (
     <>
-      <BreadcrumbHeader items={breadcrumbItems} productCount={totalProducts} />
+      {/* <BreadcrumbHeader items={breadcrumbItems} productCount={totalProducts} /> */}
 
       <LayoutContainer>
         <SidebarWrapper>

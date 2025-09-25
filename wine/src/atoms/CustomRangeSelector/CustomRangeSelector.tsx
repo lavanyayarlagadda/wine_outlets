@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { TextField, Typography } from "@mui/material";
 import { SliderWrapper, RangeInputsWrapper, StyledSlider } from "./CustomRangeSelector.style";
 
@@ -19,9 +20,16 @@ interface SingleProps {
 
 type Props = (RangeProps | SingleProps) & { single?: boolean };
 
-const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, symbol, single }) => (
-  <>
-    {single ? (
+const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, symbol, single }) => {
+  const [inputValue, setInputValue] = useState<number[]>(value as number[]);
+
+  // Sync local state with parent value when it changes externally
+  useEffect(() => {
+    if (!single) setInputValue(value as number[]);
+  }, [value, single]);
+
+  if (single) {
+    return (
       <SliderWrapper>
         <StyledSlider
           value={value as number}
@@ -34,27 +42,53 @@ const CustomRangeSlider: React.FC<Props> = ({ value, min, max, onChange, symbol,
           }}
         />
       </SliderWrapper>
-    ) : (
-      <>
-        <StyledSlider
-          value={value as number[]}
-          min={min}
-          max={max}
-          onChange={(_, val) => {
-            if (Array.isArray(val)) {
-              (onChange as (value: number[]) => void)(val);
-            }
+    );
+  }
+
+  return (
+    <>
+      <StyledSlider
+        value={value as number[]}
+        min={min}
+        max={max}
+        onChange={(_, val) => {
+          if (Array.isArray(val)) {
+            (onChange as (value: number[]) => void)(val);
+          }
+        }}
+      />
+
+      <RangeInputsWrapper>
+        <TextField
+          size="small"
+          value={`${symbol}${inputValue[0]}`}
+          fullWidth
+          onChange={(e) => {
+            const newVal = Number(e.target.value.replace(symbol, ""));
+            setInputValue([newVal, inputValue[1]]);
+          }}
+          onBlur={() => {
+            const newMin = Math.max(min, Math.min(inputValue[0], inputValue[1]));
+            (onChange as (value: number[]) => void)([newMin, inputValue[1]]);
           }}
         />
-
-        <RangeInputsWrapper>
-          <TextField size="small" value={`${symbol}${(value as number[])[0]}`} fullWidth />
-          <Typography>-</Typography>
-          <TextField size="small" value={`${symbol}${(value as number[])[1]}`} fullWidth />
-        </RangeInputsWrapper>
-      </>
-    )}
-  </>
-);
+        <Typography>-</Typography>
+        <TextField
+          size="small"
+          value={`${symbol}${inputValue[1]}`}
+          fullWidth
+          onChange={(e) => {
+            const newVal = Number(e.target.value.replace(symbol, ""));
+            setInputValue([inputValue[0], newVal]);
+          }}
+          onBlur={() => {
+            const newMax = Math.min(max, Math.max(inputValue[1], inputValue[0]));
+            (onChange as (value: number[]) => void)([inputValue[0], newMax]);
+          }}
+        />
+      </RangeInputsWrapper>
+    </>
+  );
+};
 
 export default CustomRangeSlider;

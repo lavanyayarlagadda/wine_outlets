@@ -25,7 +25,7 @@ const SortAndViewControls: React.FC<SortAndViewControlsProps> = ({
     { label: "Relevance", value: "relevance" },
     { label: "Price: Low to High", value: "price_low_high" },
     { label: "Price: High to Low", value: "price_high_low" },
-    { label: "Customer Rating", value: "customer_rating" },
+    // { label: "Customer Rating", value: "customer_rating" },
     { label: "Popularity", value: "popularity" },
     { label: "Newest Arrivals", value: "newest_arrivals" },
     { label: "Name: A-Z", value: "name_a_z" },
