@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
-import type {
-  RecentlyViewedSection,
-} from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+import type { RecentlyViewedSection } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import type { MenuResponse } from "../../Interfaces/Home/Home";
 import type { SiteSettings } from "../../../constant/LandingPageData";
 

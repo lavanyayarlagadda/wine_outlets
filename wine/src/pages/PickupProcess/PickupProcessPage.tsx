@@ -56,10 +56,9 @@ const PickupProcessPage = () => {
         items={["The order confirmation email, and", "Their valid government-issued photo ID."]}
       />
 
-      <Newsletter/>
+      <Newsletter />
     </>
   );
 };
 
 export default PickupProcessPage;
-

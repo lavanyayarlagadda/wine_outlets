@@ -59,5 +59,9 @@ export const cartCheckoutApi = createApi({
   }),
 });
 
-export const { useCartProductDetailsMutation, useSlotDetailsMutation, usePlaceOrderMutation, useStoreOffDaysMutation } =
-  cartCheckoutApi;
+export const {
+  useCartProductDetailsMutation,
+  useSlotDetailsMutation,
+  usePlaceOrderMutation,
+  useStoreOffDaysMutation,
+} = cartCheckoutApi;
