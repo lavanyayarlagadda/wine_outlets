@@ -54,7 +54,7 @@ export const StyledIconButton = styled((props: IconButtonProps) => <IconButton {
     height: 36,
     marginTop: "18px",
     "&:hover": {
-      backgroundColor: palette.grey.main,
+      backgroundColor: palette.grey.greyMain,
     },
   })
 );
