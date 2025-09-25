@@ -51,9 +51,9 @@ interface CartProductProps {
   productId: string;
   handleToggleFavorite: (productId: string) => void;
   wishListLoading?: string | null;
-  handleAddToCart: (productId: string, quantity: number) => void;
-  itemNumber: string;
-  handleRemoveFromCart: (orderId: number, itemNumber: string) => void;
+  handleAddToCart?: (productId: string, quantity: number) => void;
+  itemNumber?: string;
+  handleRemoveFromCart?: (orderId: number, itemNumber: string) => void;
   count?: number;
   setCount?: (newValue: number) => void;
 }
@@ -131,7 +131,14 @@ const CartProduct: React.FC<CartProductProps> = ({
             id={productId}
           />
           <BackspaceIcon>
-            <BackSpaceIcon onClick={() => orderId && handleRemoveFromCart(orderId, itemNumber)} />
+            <BackSpaceIcon
+              onClick={() =>
+                orderId &&
+                handleRemoveFromCart &&
+                itemNumber &&
+                handleRemoveFromCart(orderId, itemNumber)
+              }
+            />
           </BackspaceIcon>
         </IconRow>
         <InfoItem
@@ -159,7 +166,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                 // onChange={handleQuantityChange}
                 onChange={(newValue) => {
                   setCount?.(newValue);
-                  handleAddToCart(productId, newValue);
+                  handleAddToCart && handleAddToCart(productId, newValue);
                 }}
               />
 

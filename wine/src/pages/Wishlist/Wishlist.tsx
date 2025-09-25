@@ -52,7 +52,6 @@ export default function Wishlist() {
                   quantity={2}
                   component="WISHLIST"
                   handleToggleFavorite={() => {}}
-                  handleAddToCart={() => {}}
                 />
               </Grid>
             ))
