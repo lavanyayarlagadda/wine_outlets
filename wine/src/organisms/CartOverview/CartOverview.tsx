@@ -136,7 +136,7 @@ const CartOverview = () => {
             )}
 
             <AddToCart
-              label="Place Order1"
+              label="Place Order"
               disabled={isPlaceOrderDisabled}
               id={0}
               onClick={() => handlePlaceOrder()}
