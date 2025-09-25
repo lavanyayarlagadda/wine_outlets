@@ -26,6 +26,10 @@ const PickupProcess = lazy(() => import("./pages/PickupProcess/PickupProcessPage
 const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"));
 const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
 const Career = lazy(() => import("./pages/Career/Career"));
+const AccessibilityStatement = lazy(
+  () => import("./pages/AccessibilityStatement/AccessibilityStatementPage")
+);
+const VipBenefits = lazy(() => import("./pages/VipBenefits/VipBenefitsPage"));
 
 const App: React.FC = () => {
   useClientIp();
@@ -50,6 +54,8 @@ const App: React.FC = () => {
             <Route path="/pickupProcess" element={<PickupProcess />} />
             <Route path="/contactUs" element={<ContactUs />} />
             <Route path="/careers" element={<Career />} />
+            <Route path="/accessibilityStatement" element={<AccessibilityStatement />} />
+            <Route path="/vip/benefits" element={<VipBenefits />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

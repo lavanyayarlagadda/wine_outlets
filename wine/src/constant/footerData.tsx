@@ -29,7 +29,7 @@ export const FOOTER_DATA = {
     links: [
       { text: "Terms & Conditions", href: "/terms" },
       { text: "Privacy Policy", href: "/privacy" },
-      { text: "Accessibility Statement", href: "#" },
+      { text: "Accessibility Statement", href: "/accessibilityStatement" },
     ],
   },
 } as const;

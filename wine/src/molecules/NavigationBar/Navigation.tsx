@@ -470,17 +470,21 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                   <PromotionsColumnsWrapper>
                     <Column>
                       {category.items.map((item) => {
-                        let queryParam = `id=${item.id}`;
+                        let path = `/productsList?`; 
 
                         if (item.listName === "New Arrivals") {
-                          queryParam = "tags=new-arrival";
+                          path = "/productsList?tags=new-arrival";
+                        } else if (item.listName === "VIP Benefits") {
+                          path = "/vip/benefits";
+                        } else {
+                          path = `/productsList?id=${item.id}`;
                         }
 
                         return (
                           <DropdownMenuItemStyled
                             key={item.id}
                             onClick={() => {
-                              navigate(`/productsList?${queryParam}`);
+                              navigate(path);
                               handleMenuClose(promotionsMenuData.name);
                             }}
                           >

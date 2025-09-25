@@ -7,8 +7,10 @@ import shape from "../../themes/shape";
 import { useProfileForm } from "./ProfilePages.hook";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import palette from "../../themes/palette";
+import { useNavigate } from "react-router-dom";
 
 const VipMembership = ({ initialData }: { initialData?: any }) => {
+    const navigate = useNavigate();
   const { vipCode, handleVipCodeChange, setShowPassword, showPassword } =
     useProfileForm(initialData);
   return (
@@ -26,7 +28,7 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
             </Box>
             <CustomButton
               text={"View VIP Benefits"}
-              onClick={() => {}}
+              onClick={() => navigate('/vip/benefits')}
               bgColor={palette.white.main}
               color={palette.primary.dark}
               btnBorderColor={theme.palette.primary.dark}
