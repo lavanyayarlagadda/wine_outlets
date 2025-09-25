@@ -4,14 +4,12 @@ import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 const storedId = localStorage.getItem("selectedStore");
-export const useDealsSection = (
-  sectionData?: {
-    showTimer?: boolean;
-    endTimeIso?: string;
-    sideButtons?: { tag: string; label: string }[];
-    content?: any[];
-  }
-) => {
+export const useDealsSection = (sectionData?: {
+  showTimer?: boolean;
+  endTimeIso?: string;
+  sideButtons?: { tag: string; label: string }[];
+  content?: any[];
+}) => {
   const dealsSectionData = sectionData ?? {
     showTimer: false,
     endTimeIso: undefined,
@@ -22,10 +20,8 @@ export const useDealsSection = (
   const { counts, add, increment, decrement, isLoading: cartLoading } = useProductCard();
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
-  const { showTimer, endTimeIso, sideButtons, content } =
-    dealsSectionData;
+  const { showTimer, endTimeIso, sideButtons, content } = dealsSectionData;
   const timerConfig = endTimeIso;
-
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [activeFilter, setActiveFilter] = useState<string>((() => sideButtons?.[0]?.tag ?? "")());
@@ -36,7 +32,6 @@ export const useDealsSection = (
     const ms = Date.parse(timerConfig) - Date.now();
     return Number.isFinite(ms) ? Math.max(0, ms) : null;
   });
-
 
   const filterButtonsRef = useRef<HTMLDivElement | null>(null);
   const productCardsRef = useRef<HTMLDivElement | null>(null);

@@ -66,7 +66,6 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
   navigation = false,
   isLoading = false,
 }) => {
-
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
 
@@ -155,8 +154,8 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                       selected={isSelected}
                       onClick={(e) => {
                         e.stopPropagation();
-                         const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store?.mapUrl)}`;
-                         window.open(url, "_blank");
+                        const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store?.mapUrl)}`;
+                        window.open(url, "_blank");
                         onClose();
                       }}
                     >

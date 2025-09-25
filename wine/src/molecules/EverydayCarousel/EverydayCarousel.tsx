@@ -48,15 +48,18 @@ const WineCarousel: React.FC = () => {
           </IconWrapper>
         </PriceButton> */}
 
-        {<DotsContainer>
-          {slides.length > 1 && slides.map((_, index) => (
-            <Dot
-              key={index}
-              active={index === currentSlide}
-              onClick={() => setCurrentSlide(index)}
-            />
-          ))}
-        </DotsContainer>}
+        {
+          <DotsContainer>
+            {slides.length > 1 &&
+              slides.map((_, index) => (
+                <Dot
+                  key={index}
+                  active={index === currentSlide}
+                  onClick={() => setCurrentSlide(index)}
+                />
+              ))}
+          </DotsContainer>
+        }
       </CarouselSlide>
     </Container>
   );

@@ -112,7 +112,6 @@ const PickupDateTimeSelector: React.FC<PickupDateTimeSelectorProps> = ({
                           {...other}
                           day={day}
                           outsideCurrentMonth={_outsideCurrentMonth}
-                          
                         />
                       );
                     },

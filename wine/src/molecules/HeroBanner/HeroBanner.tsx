@@ -37,7 +37,7 @@ export interface HeroBannerProps {
   isVisible: boolean;
   content?: BannerImageItem[];
 }
-const HeroBanner = ({  autoPlayInterval = 5000, setOpen, isVisible, content }: HeroBannerProps) => {
+const HeroBanner = ({ autoPlayInterval = 5000, setOpen, isVisible, content }: HeroBannerProps) => {
   const navigate = useNavigate();
   const slidesData = content ?? [];
   const {

@@ -9,7 +9,7 @@ interface Props {
   content?: { imageUrl: string; brandName: string }[];
 }
 
-const Brands = ({ title = "", isVisible = true, content = [] }:Props) => {
+const Brands = ({ title = "", isVisible = true, content = [] }: Props) => {
   const { handleContainerClick } = useBrands();
 
   if (!isVisible) return null;

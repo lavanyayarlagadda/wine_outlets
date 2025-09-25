@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTheme, useMediaQuery, Box, } from "@mui/material";
+import { useTheme, useMediaQuery, Box } from "@mui/material";
 import {
   CarouselContainer,
   OfferCard,
@@ -15,11 +15,7 @@ import {
 } from "./TimeOfferCarousel.style";
 import { CustomTitleSection } from "../../atoms";
 import { useNavigate } from "react-router-dom";
-import {
-  type BannerImageItem,
-  type LayoutType,
-} from "../../constant/LandingPageData";
-
+import { type BannerImageItem, type LayoutType } from "../../constant/LandingPageData";
 
 interface Props {
   content?: BannerImageItem[];
@@ -107,15 +103,17 @@ const LimitedTimeOffersCarousel = ({
                 </CarouselTrack>
               </CarouselWrapper>
 
-              {pageCount > 1 && <DotsContainer>
-                {Array.from({ length: pageCount }).map((_, index) => (
-                  <Dot
-                    key={index}
-                    active={index === currentIndex}
-                    onClick={() => handleDotClick(index)}
-                  />
-                ))}
-              </DotsContainer>}
+              {pageCount > 1 && (
+                <DotsContainer>
+                  {Array.from({ length: pageCount }).map((_, index) => (
+                    <Dot
+                      key={index}
+                      active={index === currentIndex}
+                      onClick={() => handleDotClick(index)}
+                    />
+                  ))}
+                </DotsContainer>
+              )}
             </>
           )}
 

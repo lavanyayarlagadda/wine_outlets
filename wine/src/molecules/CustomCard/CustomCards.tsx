@@ -13,7 +13,7 @@ import {
   CardHeader,
   InnerCardTitle,
   RedCheckIcon,
-  NumberWrapper
+  NumberWrapper,
 } from "./CustomCards.style";
 
 // Define props for reusability
@@ -31,7 +31,7 @@ const CustomCards: React.FC<InfoCardProps> = ({
   description,
   innerTitle,
   items,
-  icon = <InfoOutlinedIcon />, 
+  icon = <InfoOutlinedIcon />,
   number,
 }) => {
   return (
@@ -40,7 +40,7 @@ const CustomCards: React.FC<InfoCardProps> = ({
         {number !== undefined ? (
           <NumberWrapper>{number}.</NumberWrapper>
         ) : (
-         <InfoIconWrapper>{icon}</InfoIconWrapper>
+          <InfoIconWrapper>{icon}</InfoIconWrapper>
         )}
         <CardHeader>{header}</CardHeader>
       </HeaderRow>

@@ -4,7 +4,7 @@ import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 import {
   useCartProductDetailsMutation,
   useSlotDetailsMutation,
-  useStoreOffDaysMutation
+  useStoreOffDaysMutation,
 } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
@@ -22,7 +22,8 @@ export const useCartOverView = () => {
   const [getCartProductDetails, { data, isLoading, isError }] = useCartProductDetailsMutation();
   const [getSlotDetails, { data: slotData, isLoading: slotLoading, isError: slotError }] =
     useSlotDetailsMutation();
-    const [getOffDays, {data:offDaysData, isLoading:offDaysLoading, isError:offDaysError}] = useStoreOffDaysMutation()
+  const [getOffDays, { data: offDaysData, isLoading: offDaysLoading, isError: offDaysError }] =
+    useStoreOffDaysMutation();
   const cartOverview = data;
   const cartDetails = data?.productListing?.[0];
   const [wishList] = useWishListMutation();
@@ -57,12 +58,8 @@ export const useCartOverView = () => {
   }, [getSlotDetails]);
 
   useEffect(() => {
-    getOffDays({storeId: Number(storedId) || 0})
-  }, [getOffDays])
-
-
-
-
+    getOffDays({ storeId: Number(storedId) || 0 });
+  }, [getOffDays]);
 
   const handleToggleFavorite = async (productId: string) => {
     const isAlreadyFavorite = wishlist.includes(productId);
@@ -169,6 +166,6 @@ export const useCartOverView = () => {
     cartOverview,
     offDaysData,
     offDaysLoading,
-    offDaysError
+    offDaysError,
   };
 };

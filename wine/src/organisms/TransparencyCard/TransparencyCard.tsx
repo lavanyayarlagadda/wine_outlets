@@ -3,7 +3,7 @@ import CustomCards from "../../molecules/CustomCard/CustomCards";
 
 const TransparencyCard: React.FC = () => {
   return (
-     <CustomCards
+    <CustomCards
       header="Transparency at Wine Outlet"
       description="We want to make our information policies clear and accessible. This privacy policy outlines how we collect, use, and protect your personal information."
       innerTitle="In this policy, you'll learn about:"

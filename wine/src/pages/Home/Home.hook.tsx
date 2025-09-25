@@ -26,8 +26,8 @@ export const useHomeLogic = () => {
     refetchOnReconnect: true,
   });
 
-const [getHomeSections, { data: sections, error, isLoading: sectionsLoading }] =
-  useGetHomeSectionsMutation();
+  const [getHomeSections, { data: sections, error, isLoading: sectionsLoading }] =
+    useGetHomeSectionsMutation();
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
   const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
     useStoreSearchlocatorMutation();

@@ -32,16 +32,16 @@ export const StoreCard = styled(Card)(() => ({
   flexDirection: "column",
   height: "100%",
   overflow: "hidden",
-  border:`1px solid ${palette.grey.divider}`,
+  border: `1px solid ${palette.grey.divider}`,
   borderRadius: 8,
   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
- transition: "all 0.3s ease-in-out", 
+  transition: "all 0.3s ease-in-out",
   "@media (min-width:600px)": {
     flexDirection: "row",
   },
   "&:hover": {
-    boxShadow: "0 4px 16px rgba(0,0,0,0.2)", 
-    transform: "translateY(-4px)", 
+    boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+    transform: "translateY(-4px)",
   },
 }));
 

@@ -29,8 +29,8 @@ export const NumberWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontWeight:600,
-  fontSize:useFontSize(24)
+  fontWeight: 600,
+  fontSize: useFontSize(24),
 }));
 
 export const CardHeader = styled(Typography)(({ theme }) => ({

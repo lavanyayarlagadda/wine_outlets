@@ -25,17 +25,19 @@ interface Props {
   showTimer?: boolean;
   endTimeIso?: string;
   sideButtons?: SideCategoryButton[];
-  content?: any[]; 
+  content?: any[];
   isVisible?: boolean;
 }
 
-const DealsSection: React.FC<Props> = ({title,
-    // subtitle,
-    showTimer,
-    endTimeIso,
-    sideButtons,
-    content,
-    isVisible,}) => {
+const DealsSection: React.FC<Props> = ({
+  title,
+  // subtitle,
+  showTimer,
+  endTimeIso,
+  sideButtons,
+  content,
+  isVisible,
+}) => {
   const {
     timeParts,
     activeFilter,

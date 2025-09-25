@@ -126,4 +126,3 @@ export const DisabledDay = styled(PickersDay)(() => ({
   color: "#bdbdbd",
   pointerEvents: "none",
 }));
-

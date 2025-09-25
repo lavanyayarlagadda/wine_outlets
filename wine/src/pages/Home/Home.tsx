@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  AgePopup,
-  Newsletter,
-  StoreLocator,
-} from "../../molecules";
+import { AgePopup, Newsletter, StoreLocator } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { useSelector } from "react-redux";

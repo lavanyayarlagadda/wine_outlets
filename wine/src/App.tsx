@@ -47,7 +47,7 @@ const App: React.FC = () => {
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/pickupProcess" element={<PickupProcess />} />
-             <Route path="/contactUs" element={<ContactUs />} />
+            <Route path="/contactUs" element={<ContactUs />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

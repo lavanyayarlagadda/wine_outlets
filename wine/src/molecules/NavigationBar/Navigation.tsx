@@ -42,7 +42,7 @@ import {
   StyledBadge,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
-import {  List, Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AuthDialog from "../../organisms/Authentication/AuthDialog";
 import palette from "../../themes/palette";

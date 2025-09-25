@@ -21,12 +21,7 @@ interface Props {
   isVisible?: boolean;
 }
 
-const CuratedPicks = ({
-  content = [],
-  title = "",
-  subtitle = "",
-  isVisible = true,
-}: Props) => {
+const CuratedPicks = ({ content = [], title = "", subtitle = "", isVisible = true }: Props) => {
   const navigate = useNavigate();
 
   if (!isVisible) return null;

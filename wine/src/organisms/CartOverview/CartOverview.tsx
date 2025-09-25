@@ -35,10 +35,8 @@ const CartOverview = () => {
     handleAddToCart,
     handleRemoveFromCart,
     cartOverview,
-    offDaysData
+    offDaysData,
   } = useCartOverView();
-
-
 
   return (
     <MainContainer>
