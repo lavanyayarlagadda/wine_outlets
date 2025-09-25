@@ -56,9 +56,9 @@ export const homeApi = createApi({
     getHomeSections: builder.mutation<
       SiteSettings,
       {
-        userId: string;
+        userId: string | number;
         userIp: string;
-        storeId: string;
+        storeId: string | number;
       }
     >({
       query: (body) => ({
