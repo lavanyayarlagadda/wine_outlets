@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_API_URL_BASE } from "../../../api.config";
-import type { RecentlyViewedSection } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
+// import type { RecentlyViewedSection } from "../../Interfaces/LandingPageInterface/HomePageSectionsDataInterface";
 import type { MenuResponse } from "../../Interfaces/Home/Home";
 import type { ProductCategoryItem, SiteSettings } from "../../../constant/LandingPageData";
 
@@ -112,9 +112,9 @@ export const homeApi = createApi({
         const qs =
           params && Object.keys(params).length
             ? `?${Object.entries(params)
-              .filter(([, v]) => v !== undefined && v !== null)
-              .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
-              .join("&")}`
+                .filter(([, v]) => v !== undefined && v !== null)
+                .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+                .join("&")}`
             : "";
         return {
           url: `/home/recently-viewed${qs}`,

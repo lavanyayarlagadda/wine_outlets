@@ -168,10 +168,8 @@ export const useCartOverView = () => {
           slot: selectedTime?.slot,
         },
       };
-      const response = await placeOrderApi(payload).unwrap();
+      await placeOrderApi(payload).unwrap();
       toast.success("Order placed successfully!");
-      console.log("Place Order Response:", response);
-      // dispatch(setPlaceOrder(true));
     } catch (err) {
       toast.error("Failed to place order");
       console.error(err);

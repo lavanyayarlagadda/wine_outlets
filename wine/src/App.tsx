@@ -25,6 +25,7 @@ const TermsConditions = lazy(() => import("./pages/TermsConditions/TermsConditio
 const PickupProcess = lazy(() => import("./pages/PickupProcess/PickupProcessPage"));
 const AboutUs = lazy(() => import("./pages/AboutUs/AboutUsPage"));
 const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
+const Career = lazy(() => import("./pages/Career/Career"));
 
 const App: React.FC = () => {
   useClientIp();
@@ -48,6 +49,7 @@ const App: React.FC = () => {
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/pickupProcess" element={<PickupProcess />} />
             <Route path="/contactUs" element={<ContactUs />} />
+            <Route path="/careers" element={<Career />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
         </Routes>

@@ -4,7 +4,7 @@ export const FOOTER_DATA = {
     title: "Company Info",
     links: [
       { text: "About Us", href: "/aboutUs" },
-      { text: "Careers", href: "#" },
+      { text: "Careers", href: "/careers" },
       { text: "Store Locator", href: "#" },
     ],
   },

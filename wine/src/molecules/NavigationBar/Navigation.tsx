@@ -559,7 +559,11 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
           ) : (
             <CustomDeliveryButton>No delivery partners</CustomDeliveryButton>
           )}
-          <DropdownTriggerWithGap>
+          <DropdownTriggerWithGap
+            onClick={() => {
+              navigate("/careers");
+            }}
+          >
             <img src={bag} alt="bag" /> Hiring Now
           </DropdownTriggerWithGap>
         </RightNavSection>

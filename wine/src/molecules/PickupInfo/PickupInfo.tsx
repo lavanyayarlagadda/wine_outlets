@@ -62,7 +62,6 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
   selectedTime,
   setSelectedTime,
 }) => {
-  console.log("offDaysData", offDaysData);
   return (
     <MainContainer>
       <ProductHeader>

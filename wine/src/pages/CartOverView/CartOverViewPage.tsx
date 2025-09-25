@@ -17,7 +17,7 @@ const CartOverViewPage = () => {
   } = useGetRecentlyViewedQuery({
     ...getClientIdentifierForPayload(),
   });
-    
+
   return (
     <>
       {placeOrder ? (
@@ -25,13 +25,18 @@ const CartOverViewPage = () => {
       ) : (
         <>
           <CartOverview />
-         {rvLoading ? <Typography>Recently Viewd Products Loading</Typography> : rvError ? <Typography>Error loading Recently Viewed Products</Typography> :
-        <RecentlyView
-          content={rvData?.products ?? []}
-          title={rvData?.title}
-          isVisible={rvData?.isVisible ?? true}
-          cardsPerSlide={4}
-        />}
+          {rvLoading ? (
+            <Typography>Recently Viewd Products Loading</Typography>
+          ) : rvError ? (
+            <Typography>Error loading Recently Viewed Products</Typography>
+          ) : (
+            <RecentlyView
+              content={rvData?.products ?? []}
+              title={rvData?.title}
+              isVisible={rvData?.isVisible ?? true}
+              cardsPerSlide={4}
+            />
+          )}
         </>
       )}
 

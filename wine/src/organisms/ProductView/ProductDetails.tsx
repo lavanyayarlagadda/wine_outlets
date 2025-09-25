@@ -4,7 +4,7 @@ import { starIcon, groupIcon, sizeIcon, originIcon } from "../../assets";
 import SimpleDropdown from "../../atoms/CustomDropdown/SimpleDropdown";
 // import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
-import AddToCart from "../../atoms/CustomButton/AddToCart";
+// import AddToCart from "../../atoms/CustomButton/AddToCart";
 import ProductDetailsBlock from "../../molecules/ProductView/ProductDetailsBlock";
 
 import {
@@ -82,10 +82,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   setSelectedVintage,
   // count,
   // setCount,
-  handleAddToCart,
+  // handleAddToCart,
   handleToggleFavorite,
   wishListLoading,
-  loadingProduct,
+  // loadingProduct,
   data,
   productId,
   vintageYearData,
@@ -179,14 +179,14 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
           <Pricing vipPrice={product?.pricing.vipPrice} price={product.pricing.price} />
         </PricingBox>
       </PriceRow>
-
+      {/* 
       <AddToCart
         onClick={() => handleAddToCart(Number(productId))}
         label="Add to Cart"
         variantType="filled"
         isLoading={loadingProduct}
         id={Number(productId)}
-      />
+      /> */}
 
       <DescriptionText>{product.description}</DescriptionText>
       <ProductHighlights title="Product Highlights" highlights={product.highlights} />

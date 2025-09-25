@@ -67,4 +67,4 @@ export { default as PointPleasant } from "./contactUs/PointPleasant.png";
 export { default as PointPleasant1 } from "./contactUs/PointPleasant1.jpg";
 export { default as Secaucus } from "./contactUs/Secaucus.png";
 export { default as Secaucus1 } from "./contactUs/Secaucus1.jpg";
-export { default as clock } from "./icons/clock.svg"
+export { default as clock } from "./icons/clock.svg";

@@ -20,7 +20,6 @@ interface TastingNotesCarouselProps {
 
 const TastingNotesCarousel: React.FC<TastingNotesCarouselProps> = ({ productDetails }) => {
   const { slides, currentSlide, current, goToSlide } = useTastingNotesCarousel(productDetails);
-  console.log(productDetails.productDetails.suggestedProducts.length, "PODUCTDETAIS");
   return (
     <Container>
       <CarouselSlide bgColor={palette.white.main}>

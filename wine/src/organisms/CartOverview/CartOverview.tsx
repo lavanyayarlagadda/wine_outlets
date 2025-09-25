@@ -46,7 +46,6 @@ const CartOverview = () => {
   } = useCartOverView();
 
   const isPlaceOrderDisabled = !selectedDate || !selectedTime;
-  // console.log("cartId", cartId)
 
   return (
     <MainContainer>
