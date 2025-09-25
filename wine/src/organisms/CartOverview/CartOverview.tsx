@@ -18,14 +18,15 @@ import OrderSummary from "../../molecules/OrderSummary/OrderSummary";
 import PickupInformation from "../../molecules/PickupInfo/PickupInfo";
 import { DividerLine } from "../../molecules/OrderSummary/OrderSummary.style";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
-import { useDispatch } from "react-redux";
-import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
+// import { useDispatch } from "react-redux";
+// import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 import { useCartOverView } from "./CartOverview.hook";
 import { useNavigate } from "react-router-dom";
 import { StyledSkeletonRect } from "../Filter/FilterPanel.style";
+// import { setPlaceOrder } from "../../store/slices/CartOverView/CartOverView";
 
 const CartOverview = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     isLoading,
@@ -36,7 +37,16 @@ const CartOverview = () => {
     handleRemoveFromCart,
     cartOverview,
     offDaysData,
+    selectedDate,
+    setSelectedDate,
+    selectedTime,
+    setSelectedTime,
+    handlePlaceOrder,
+    // cartId
   } = useCartOverView();
+
+  const isPlaceOrderDisabled = !selectedDate || !selectedTime;
+  // console.log("cartId", cartId)
 
   return (
     <MainContainer>
@@ -119,14 +129,18 @@ const CartOverview = () => {
                 slotsData={slotData}
                 slotDataLoading={slotLoading}
                 offDaysData={offDaysData}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                selectedTime={selectedTime}
+                setSelectedTime={setSelectedTime}
               />
             )}
 
             <AddToCart
-              label="Place Order"
-              onClick={() => {
-                (dispatch(setPlaceOrder(true)), window.scrollTo(0, 0));
-              }}
+              label="Place Order1"
+              disabled={isPlaceOrderDisabled}
+              id={0}
+              onClick={() => handlePlaceOrder()}
               variantType="filled"
             />
           </ContentWrapper>

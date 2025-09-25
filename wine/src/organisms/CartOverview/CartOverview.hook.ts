@@ -5,6 +5,7 @@ import {
   useCartProductDetailsMutation,
   useSlotDetailsMutation,
   useStoreOffDaysMutation,
+  usePlaceOrderMutation,
 } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
@@ -25,10 +26,15 @@ export const useCartOverView = () => {
   const [getOffDays, { data: offDaysData, isLoading: offDaysLoading, isError: offDaysError }] =
     useStoreOffDaysMutation();
   const cartOverview = data;
+  const cartId = data?.cartId;
   const cartDetails = data?.productListing?.[0];
   const [wishList] = useWishListMutation();
   const [addToCart] = useAddtoCartMutation();
+  const [placeOrderApi, { isLoading: placingOrderLoading }] = usePlaceOrderMutation();
+
   const [removeFromCart] = useRemoveFromCartMutation();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedTime, setSelectedTime] = useState<{ slot: string; time: string } | null>(null);
   // const {
   //   data: slotData,
   //   isLoading: slotLoading,
@@ -153,6 +159,25 @@ export const useCartOverView = () => {
     }
   };
 
+  const handlePlaceOrder = async () => {
+    try {
+      const payload = {
+        cartId,
+        pickup: {
+          storeId: storedId,
+          slot: selectedTime?.slot,
+        },
+      };
+      const response = await placeOrderApi(payload).unwrap();
+      toast.success("Order placed successfully!");
+      console.log("Place Order Response:", response);
+      // dispatch(setPlaceOrder(true));
+    } catch (err) {
+      toast.error("Failed to place order");
+      console.error(err);
+    }
+  };
+
   return {
     cartDetails,
     isLoading,
@@ -167,5 +192,12 @@ export const useCartOverView = () => {
     offDaysData,
     offDaysLoading,
     offDaysError,
+    selectedDate,
+    setSelectedDate,
+    selectedTime,
+    setSelectedTime,
+    cartId,
+    handlePlaceOrder,
+    placingOrderLoading,
   };
 };

@@ -1,5 +1,5 @@
 import { Newsletter, RecentlyView } from "../../molecules";
-import ProductViewBreadCrumbs from "../../organisms/ProductView/ProductViewBreadCrumbs";
+// import ProductViewBreadCrumbs from "../../organisms/ProductView/ProductViewBreadCrumbs";
 import Product from "../../organisms/ProductView/Product";
 import ProfessionalRating from "../../organisms/ProductView/ProfessionalRating";
 import RatingsBreakdown from "../../organisms/RatingsBreakDown/RatingsBreakDown";
@@ -69,7 +69,7 @@ const ProductViewPage = () => {
         </SkeletonWrapper>
       ) : (
         <>
-          <ProductViewBreadCrumbs />
+          {/* <ProductViewBreadCrumbs /> */}
           <Product
             productViewData={productViewData}
             selectedSize={selectedSize}

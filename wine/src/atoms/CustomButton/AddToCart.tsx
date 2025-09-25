@@ -9,9 +9,17 @@ interface AddToCartProps {
   variantType?: "filled" | "outlined";
   id?: number;
   isLoading?: string | null;
+  disabled?: boolean;
 }
 
-const AddToCart: React.FC<AddToCartProps> = ({ onClick, label, variantType, isLoading, id }) => {
+const AddToCart: React.FC<AddToCartProps> = ({
+  onClick,
+  label,
+  variantType,
+  isLoading,
+  id,
+  disabled,
+}) => {
   // Check loading state
   const isButtonLoading =
     (isLoading != null && id != null && isLoading.toString() === id.toString()) ||
@@ -21,7 +29,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ onClick, label, variantType, isLo
     <AddToCartButton
       variant="contained"
       startIcon={!isButtonLoading ? <ShoppingCartIcon /> : null}
-      disabled={isButtonLoading}
+      disabled={disabled || isButtonLoading}
       onClick={() => id !== undefined && onClick(id)}
       variantType={variantType}
     >

@@ -38,6 +38,10 @@ interface PickupInformationProps {
   slotsData?: any;
   slotDataLoading?: boolean;
   offDaysData?: any;
+  selectedDate?: any;
+  setSelectedDate?: any;
+  selectedTime?: any;
+  setSelectedTime?: any;
 }
 const PickupInformation: React.FC<PickupInformationProps> = ({
   title,
@@ -53,6 +57,10 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
   slotsData,
   slotDataLoading,
   offDaysData,
+  selectedDate,
+  setSelectedDate,
+  selectedTime,
+  setSelectedTime,
 }) => {
   console.log("offDaysData", offDaysData);
   return (
@@ -132,6 +140,10 @@ const PickupInformation: React.FC<PickupInformationProps> = ({
           slotsData={slotsData}
           slotDataLoading={slotDataLoading}
           offDaysData={offDaysData}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
         />
       )}
     </MainContainer>

@@ -8,9 +8,9 @@ import {
   DotsWrapper,
   DotsContainer,
   Dot,
-  PeopleBoughtWrapper,
+  // PeopleBoughtWrapper,
 } from "./TastingNotes.style";
-import PeopleBought from "../../PeopleBought/PeopleBought";
+// import PeopleBought from "../../PeopleBought/PeopleBought";
 import { useTastingNotesCarousel } from "./TastingNotesCarousel.hook";
 import palette from "../../../themes/palette";
 
@@ -37,11 +37,11 @@ const TastingNotesCarousel: React.FC<TastingNotesCarouselProps> = ({ productDeta
           ))}
         </DotsContainer>
       </DotsWrapper>
-      {productDetails?.productDetails?.suggestedProducts?.length > 0 && (
+      {/* {productDetails?.productDetails?.suggestedProducts?.length > 0 && (
         <PeopleBoughtWrapper>
           <PeopleBought suggestedProducts={productDetails} />
         </PeopleBoughtWrapper>
-      )}
+      )} */}
     </Container>
   );
 };

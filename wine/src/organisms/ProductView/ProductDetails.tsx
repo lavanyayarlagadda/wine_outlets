@@ -1,8 +1,8 @@
 import React from "react";
-import { Rating } from "@mui/material";
+// import { Rating } from "@mui/material";
 import { starIcon, groupIcon, sizeIcon, originIcon } from "../../assets";
 import SimpleDropdown from "../../atoms/CustomDropdown/SimpleDropdown";
-import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
+// import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
 import AddToCart from "../../atoms/CustomButton/AddToCart";
 import ProductDetailsBlock from "../../molecules/ProductView/ProductDetailsBlock";
@@ -80,8 +80,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   setSelectedSize,
   selectedVintage,
   setSelectedVintage,
-  count,
-  setCount,
+  // count,
+  // setCount,
   handleAddToCart,
   handleToggleFavorite,
   wishListLoading,
@@ -106,12 +106,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   return (
     <DetailsContainer>
       <ProductTitle>{product.name}</ProductTitle>
-      <ProductInfoRow>
+      {/* <ProductInfoRow>
         <RatingBox>
           <Rating value={Number(product.rating)} precision={0.5} readOnly />
           <RatingTypography>({product.review_count} Reviews)</RatingTypography>
         </RatingBox>
-      </ProductInfoRow>
+      </ProductInfoRow> */}
       <ProductInfoRow>
         <InfoItem
           icon={<InfoIcon src={originIcon} alt="origin" />}
@@ -161,13 +161,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
       </ProductInfoRow>
       {/* Price and Rating */}
       <PriceRow>
-        <CustomCounter
+        {/* <CustomCounter
           value={count === 0 ? 1 : count}
           onChange={(newValue) => {
             setCount(newValue); // update state
             handleAddToCart(productId, newValue); // call your API with productId + qty
           }}
-        />
+        /> */}
         <CustomWishlist
           onToggle={() => handleToggleFavorite(productId)}
           isLoading={wishListLoading}
