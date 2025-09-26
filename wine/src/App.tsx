@@ -30,7 +30,7 @@ const AccessibilityStatement = lazy(
   () => import("./pages/AccessibilityStatement/AccessibilityStatementPage")
 );
 const VipBenefits = lazy(() => import("./pages/VipBenefits/VipBenefitsPage"));
-
+const NotFoundPage = lazy(() => import("./pages/NotFound/NotFound"));
 const App: React.FC = () => {
   useClientIp();
 
@@ -56,7 +56,7 @@ const App: React.FC = () => {
             <Route path="/careers" element={<Career />} />
             <Route path="/accessibilityStatement" element={<AccessibilityStatement />} />
             <Route path="/vip/benefits" element={<VipBenefits />} />
-            <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+            <Route path="*" element={<NotFoundPage/>} />
           </Route>
         </Routes>
       </Suspense>
