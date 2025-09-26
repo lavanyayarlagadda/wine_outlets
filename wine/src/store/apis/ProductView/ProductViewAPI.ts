@@ -49,7 +49,7 @@ export const productViewApi = createApi({
     createReview: builder.mutation<
       any,
       {
-        itemNumber: number;
+        itemNumber: string;
         rating: number;
         userId: number | string;
         comment: string;

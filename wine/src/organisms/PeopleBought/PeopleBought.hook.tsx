@@ -7,7 +7,7 @@ import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export const usePeopleBought = (initialProducts: Product[]) => {
   const [wishlist, setWishlist] = useState<string[]>([]);
-  const [cartItems, setCartItems] = useState<{ itemNumber: number; quantity: number }[]>([]);
+  const [cartItems, setCartItems] = useState<{ itemNumber: string; quantity: number }[]>([]);
   const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
   const [wishListLoading, setWishListLoading] = useState<string | null>(null);
 
@@ -19,7 +19,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
   useEffect(() => {
     if (initialProducts?.length) {
       const items = initialProducts.map((p) => ({
-        itemNumber: Number(p.itemId),
+        itemNumber: p.itemId,
         quantity: 1,
       }));
       setCartItems(items);
@@ -57,7 +57,7 @@ export const usePeopleBought = (initialProducts: Product[]) => {
 
       const data = await wishList({
         ...getClientIdentifierForPayload(),
-        itemNumber: Number(productId),
+        itemNumber: productId,
         storeId: Number(storedId) || 0,
       }).unwrap();
 

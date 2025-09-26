@@ -23,7 +23,7 @@ export const homeApi = createApi({
     addtoCart: builder.mutation<
       any,
       {
-        itemNumber: number;
+        itemNumber: string;
         quantity: number;
         userId: number | string;
         storeId: number;

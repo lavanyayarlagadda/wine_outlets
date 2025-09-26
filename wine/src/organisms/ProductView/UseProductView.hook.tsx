@@ -74,7 +74,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
   }, []);
   useEffect(() => {
     bottleSizes({
-      itemNumber: Number(productId),
+      itemNumber: productId,
     }).unwrap(); // optional: returns a promise with the response
   }, [productId]);
 
@@ -152,7 +152,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
 
       const data = await wishList({
         ...getClientIdentifierForPayload(),
-        itemNumber: Number(productId),
+        itemNumber: productId,
         storeId: Number(storedId) || 0,
       }).unwrap();
 

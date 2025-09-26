@@ -45,7 +45,7 @@ export const useRatingsBreakdown = () => {
         rating,
         comment,
         ...getClientIdentifierForPayload(),
-        itemNumber: Number(productId),
+        itemNumber: productId,
         orderId: orderId ?? 1,
       });
     }
@@ -55,7 +55,7 @@ export const useRatingsBreakdown = () => {
 
   useEffect(() => {
     getReviews({
-      itemNumber: Number(productId),
+      itemNumber: productId,
       ...getClientIdentifierForPayload(),
       page: 1,
       limit: 10,

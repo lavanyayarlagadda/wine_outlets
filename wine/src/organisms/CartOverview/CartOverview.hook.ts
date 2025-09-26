@@ -81,7 +81,7 @@ export const useCartOverView = () => {
 
       const data = await wishList({
         ...getClientIdentifierForPayload(),
-        itemNumber: Number(productId),
+        itemNumber: productId,
         storeId: storedId || undefined,
       }).unwrap();
 
