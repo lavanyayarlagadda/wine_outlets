@@ -231,6 +231,8 @@ export const StyledMenu = styled(Menu)(() => ({
     borderRadius: shape.borderRadiuspx,
     marginTop: "16px",
     minWidth: "168px",
+    maxHeight:"400px",
+    
   },
 }));
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({

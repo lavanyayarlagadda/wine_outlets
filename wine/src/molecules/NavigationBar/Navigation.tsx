@@ -411,7 +411,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                                             }}
                                           >
                                             {sub.name.length > 20
-                                              ? sub.name.slice(0, 15) + "…"
+                                              ? sub.name.slice(0, 12) + "…"
                                               : sub.name}
                                           </DropdownMenuItemStyled>
                                         </Tooltip>
