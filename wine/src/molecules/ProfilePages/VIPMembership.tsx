@@ -33,7 +33,9 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
               color={palette.primary.dark}
               btnBorderColor={theme.palette.primary.dark}
               border={shape.borderRed}
-              profile={true}
+              profile={false}
+              btnbgColor={palette.primary.dark}
+              btnColor={palette.white.main}
             />
           </Styled.TextBox>
           <Styled.DividerLine />
