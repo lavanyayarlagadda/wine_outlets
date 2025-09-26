@@ -3,7 +3,7 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { useSignInMutation } from "../../store/apis/Authentication/AuthAPI";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../store/slices/Auth/AuthSlice";
+import { setCredentials, setIsSignedIn } from "../../store/slices/Auth/AuthSlice";
 import { toast } from "react-toastify";
 
 export interface SignInForm {
@@ -64,6 +64,7 @@ export const useSignIn = (onClose: () => void) => {
         localStorage.setItem("userId", result.customer.customerId);
         dispatch(setCredentials({ token: result.token, customer: result.customer }));
         onClose();
+        dispatch(setIsSignedIn("signedIn"))
         toast.success("Login Successfully");
       } catch (error: any) {
         console.error("Signin failed:", error);

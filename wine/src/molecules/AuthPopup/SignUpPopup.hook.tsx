@@ -3,7 +3,7 @@ import { useState } from "react";
 import { signUpValidationSchema } from "../../validationSchemas/authPopupSchema";
 import { useSignUpMutation } from "../../store/apis/Authentication/AuthAPI";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../store/slices/Auth/AuthSlice";
+import { setCredentials, setIsSignedIn } from "../../store/slices/Auth/AuthSlice";
 import { toast } from "react-toastify";
 
 export interface SignUpForm {
@@ -86,6 +86,7 @@ export const useSignUp = (onClose: () => void) => {
           })
         );
         onClose();
+         dispatch(setIsSignedIn("signedIn"))
         toast.success(result.message || "Customer account created successfully");
       } else {
         toast.error("Form validation failed");
