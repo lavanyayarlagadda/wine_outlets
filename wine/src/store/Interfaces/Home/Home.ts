@@ -4,7 +4,7 @@ export interface SubDepartment {
 }
 
 export interface SearchState {
- searchTerm: string;
+  searchTerm: string;
 }
 
 export interface Department {

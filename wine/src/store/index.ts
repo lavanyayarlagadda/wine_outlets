@@ -9,6 +9,7 @@ import homeSlice from "./slices/Home/Home";
 import { AuthAPI } from "./apis/Authentication/AuthAPI";
 import authSlice from "./slices/Auth/AuthSlice";
 import menuItemSlice from "./slices/MenuItems/MenuItemsSlice";
+import productViewSlice from "./slices/ProductView/productViewSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     homeSlice: homeSlice,
     authSlice: authSlice,
     menu: menuItemSlice,
+    productViewSlice: productViewSlice,
     [productListApi.reducerPath]: productListApi.reducer,
     [productViewApi.reducerPath]: productViewApi.reducer,
     [homeApi.reducerPath]: homeApi.reducer,

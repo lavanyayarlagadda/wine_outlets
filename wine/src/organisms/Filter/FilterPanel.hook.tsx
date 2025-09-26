@@ -346,8 +346,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
             );
             if (selectedItem) {
               setFilters({ [sub.categoryId]: [selectedItem.listId] });
-
-              // ✅ Save **name** instead of ID
               const displayName = selectedItem.count
                 ? `${selectedItem.listName} (${selectedItem.count})`
                 : selectedItem.listName;

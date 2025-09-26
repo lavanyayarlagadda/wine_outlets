@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { useAddtoCartMutation, useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import { useWishListMutation } from "../../store/apis/ProductList/ProductListAPI";
 import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 interface ProductDetailsProps {
   initialData?: ProductViewResponse;
@@ -43,7 +45,8 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
 
   const [bottleSizes, { data, isLoading }] = useBottleSizesMutation();
   const [vintageYear] = useVintageYearMutation();
-
+  const { reviewsSubmit } = useSelector((state: RootState) => state.productViewSlice);
+  const { isSignedIn } = useSelector((state: RootState) => state.authSlice);
   const [productDetails, { data: productDetailsData, isLoading: productDetailLoading, isError }] =
     useProductDetailsMutation();
   const [selectedSize, setSelectedSize] = useState<string>(size);
@@ -51,32 +54,59 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
   const [count, setCount] = useState<number>(0);
   const storedId = localStorage.getItem("selectedStore");
   useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const result = await productDetails({
-          itemId: productId,
-          ...getClientIdentifierForPayload(),
-          size,
-          vintageYear: Number(vintage),
-          storeId: Number(storedId),
-        }).unwrap();
+    if (location.pathname.includes("/productView")) {
+      const fetchDetails = async () => {
+        try {
+          const result = await productDetails({
+            itemId: productId,
+            ...getClientIdentifierForPayload(),
+            size,
+            vintageYear: Number(vintage),
+            storeId: Number(storedId),
+          }).unwrap();
 
-        // result is the actual response payload
-        setProductViewData(result?.productDetails);
-      } catch (err) {
-        toast.error("Failed to load the product details");
+          // result is the actual response payload
+          setProductViewData(result?.productDetails);
+        } catch (err) {
+          toast.error("Failed to load the product details");
+        }
+      };
+
+      if (productId) {
+        fetchDetails();
       }
-    };
-
-    if (productId) {
-      fetchDetails();
     }
-  }, []);
+  }, [isSignedIn]);
   useEffect(() => {
     bottleSizes({
       itemNumber: productId,
     }).unwrap(); // optional: returns a promise with the response
   }, [productId]);
+
+  useEffect(() => {
+    if (reviewsSubmit) {
+      const fetchDetails = async () => {
+        try {
+          const result = await productDetails({
+            itemId: productId,
+            ...getClientIdentifierForPayload(),
+            size,
+            vintageYear: Number(vintage),
+            storeId: Number(storedId),
+          }).unwrap();
+
+          // result is the actual response payload
+          setProductViewData(result?.productDetails);
+        } catch (err) {
+          toast.error("Failed to load the product details");
+        }
+      };
+
+      if (productId) {
+        fetchDetails();
+      }
+    }
+  }, [reviewsSubmit]);
 
   useEffect(() => {
     const fetchDetails = async () => {

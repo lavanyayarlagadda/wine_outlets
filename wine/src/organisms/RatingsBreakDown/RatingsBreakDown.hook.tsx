@@ -6,6 +6,9 @@ import {
 } from "../../store/apis/ProductView/ProductViewAPI";
 import { toast } from "react-toastify";
 import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../store";
+import { setReviewsSubmit } from "../../store/slices/ProductView/productViewSlice";
 
 export interface Review {
   rating: number;
@@ -32,8 +35,10 @@ export const useRatingsBreakdown = () => {
   const productId = queryParams.get("productId") || "";
   const [rating, setRating] = useState<number | null>(0);
   const [comment, setComment] = useState<string>("");
+  const { isSignedIn } = useSelector((state: RootState) => state.authSlice);
   const [createReview, { isLoading: ReviewLoading, isSuccess, isError: ReviewError }] =
     useCreateReviewMutation();
+  const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
   const storedId = localStorage.getItem("selectedStore");
   const cartIdString = localStorage.getItem("cartIds"); // e.g. "[123, 456]"
@@ -54,19 +59,30 @@ export const useRatingsBreakdown = () => {
   const [getReviews, { data: ReviewsData, isLoading, isError }] = useGetReviewsMutation();
 
   useEffect(() => {
-    getReviews({
-      itemNumber: productId,
-      ...getClientIdentifierForPayload(),
-      page: 1,
-      limit: 10,
-      rating: selectedFilter,
-      storeId: storedId,
-    }).unwrap(); // optional: returns a promise with the response
-  }, [productId, userId, selectedFilter, storedId]);
+    if (location.pathname.includes("/productView")) {
+      getReviews({
+        itemNumber: productId,
+        ...getClientIdentifierForPayload(),
+        page: 1,
+        limit: 10,
+        rating: selectedFilter,
+        storeId: storedId,
+      }).unwrap();
+    }
+  }, [productId, userId, selectedFilter, storedId, isSignedIn]);
 
   useEffect(() => {
     if (isSuccess) {
+      dispatch(setReviewsSubmit(true));
       toast.success("Review submitted successfully!");
+      getReviews({
+        itemNumber: productId,
+        ...getClientIdentifierForPayload(),
+        page: 1,
+        limit: 10,
+        rating: selectedFilter,
+        storeId: storedId,
+      }).unwrap();
       setRating(0);
       setComment("");
     }
