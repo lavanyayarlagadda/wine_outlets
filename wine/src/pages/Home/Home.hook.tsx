@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import {
   useGetHomeSectionsMutation,
+  useGetRecentlyViewedQuery,
   useStoreLocatorQuery,
   useStoreSearchlocatorMutation,
 } from "../../store/apis/Home/HomeAPI";
@@ -33,6 +34,13 @@ export const useHomeLogic = () => {
   const { isSignedIn } = useSelector((state: RootState) => state.authSlice);
   const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
     useStoreSearchlocatorMutation();
+  const {
+    data: rvData,
+    isLoading: rvLoading,
+    isError: rvError,
+  } = useGetRecentlyViewedQuery({
+    ...getClientIdentifierForPayload(),
+  });
 
   useEffect(() => {
     if (searchTerm) {
@@ -101,6 +109,9 @@ export const useHomeLogic = () => {
     searchLoading,
     storesData,
     isError,
+    rvData,
+    rvLoading,
+    rvError,
   };
 };
 export type HomeHookReturn = ReturnType<typeof useHomeLogic>;

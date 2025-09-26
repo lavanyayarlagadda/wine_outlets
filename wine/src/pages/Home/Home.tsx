@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AgePopup, Newsletter, StoreLocator } from "../../molecules";
+import { AgePopup, Newsletter, RecentlyView, StoreLocator } from "../../molecules";
 import { useHomeLogic } from "./Home.hook";
 import AppLoader from "../../atoms/AppLoader/AppLoader";
 import { useSelector } from "react-redux";
@@ -25,6 +25,9 @@ const Home = () => {
     isLoading,
     storesData,
     searchLoading,
+    rvData,
+    rvLoading,
+    rvError,
   } = useHomeLogic();
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
 
@@ -60,6 +63,14 @@ const Home = () => {
         />
       )}
       {isAgeVerified && <SectionRenderer sectionsFromApi={sections} />}
+      {isAgeVerified && (
+        <RecentlyView
+          content={rvData?.products ?? []}
+          title={rvData?.title}
+          isVisible={rvData?.isVisible ?? true}
+          cardsPerSlide={4}
+        />
+      )}
       {isAgeVerified && <Newsletter />}
     </>
   );
