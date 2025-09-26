@@ -5,6 +5,9 @@ import {
 } from "../../store/apis/CartCheckOut/CartCheckOutAPI";
 import { toast } from "react-toastify";
 import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
+import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 export type WishlistItem = {
   wishlistId: string;
   itemID: string;
@@ -35,22 +38,31 @@ export function useWishlist() {
   const [getWishList, { isLoading, isError }] = useGetWishListMutation();
   const [removeWishlist] = useRemoveWishlistMutation();
   const [wishlist, setWishList] = useState<boolean>(true);
+  const { data: rvData, refetch } = useGetRecentlyViewedQuery({
+    ...getClientIdentifierForPayload(),
+  });
+
+  const { isSignedIn } = useSelector((store: RootState) => store.authSlice);
+
   useEffect(() => {
-    getWishList({
-      ...getClientIdentifierForPayload(),
-      page: 1,
-      size: 10,
-    })
-      .unwrap()
-      .then((res: any) => {
-        setItems(res.wishlist);
-        setPage(res.page);
-        setTotal(res.total);
+    if (window.location.pathname.includes("/wishlist")) {
+      getWishList({
+        ...getClientIdentifierForPayload(),
+        page: 1,
+        size: 10,
       })
-      .catch((err: any) => {
-        console.error("Failed to fetch wishlist:", err);
-      });
-  }, []);
+        .unwrap()
+        .then((res: any) => {
+          setItems(res.wishlist);
+          setPage(res.page);
+          setTotal(res.total);
+        })
+        .catch((err: any) => {
+          console.error("Failed to fetch wishlist:", err);
+        });
+      refetch();
+    }
+  }, [isSignedIn]);
 
   useEffect(() => {
     if (isError) {
@@ -84,7 +96,7 @@ export function useWishlist() {
           page: 1,
           size: 10,
         }).unwrap();
-
+        refetch();
         setItems(wishlistRes.wishlist);
         setPage(wishlistRes.page);
         setTotal(wishlistRes.total);
@@ -108,5 +120,6 @@ export function useWishlist() {
     setError,
     handleRemoveFavorite,
     wishlist,
+    rvData,
   };
 }

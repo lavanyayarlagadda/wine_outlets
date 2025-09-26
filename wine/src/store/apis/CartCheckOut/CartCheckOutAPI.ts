@@ -65,7 +65,7 @@ export const cartCheckoutApi = createApi({
     }),
     removeWishlist: builder.mutation<any, any>({
       query: (newItem) => ({
-        url: ` /my-wishlist/remove-wishlist`,
+        url: `/my-wishlist/remove-wishlist`,
         method: "POST",
         body: newItem,
       }),

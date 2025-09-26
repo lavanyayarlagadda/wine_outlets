@@ -11,14 +11,9 @@ import {
 import { useWishlist } from "./Wishlist.hook";
 import CartProduct from "../../molecules/CartProduct/CartProduct";
 import { RecentlyView } from "../../molecules";
-import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
-import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export default function Wishlist() {
-  const { items, isLoading, handleRemoveFavorite, wishlist } = useWishlist();
-  const { data: rvData } = useGetRecentlyViewedQuery({
-    ...getClientIdentifierForPayload(),
-  });
+  const { items, isLoading, handleRemoveFavorite, wishlist, rvData } = useWishlist();
 
   return (
     <WishlistContainer>
