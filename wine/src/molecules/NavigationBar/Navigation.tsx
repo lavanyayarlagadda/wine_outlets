@@ -112,7 +112,6 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
   const navigate = useNavigate();
   const menuList = useSelector((state: RootState) => state.menu.menuList);
 
-  console.log("menuList", menuList);
   const promotionsMenuData = {
     name: "PROMOTIONS",
     categories: [
@@ -387,7 +386,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                               <CategoryTitle
                                 onClick={() => {
                                   handleMenuClose(dept.title);
-                                  navigate(`/productsList?category=${dept.title.toLowerCase()}`);
+                                  navigate(
+                                    `/productsList?category=${menu.groupName}&subName=${dept.title}`
+                                  );
                                 }}
                               >
                                 {dept.title} →
@@ -405,7 +406,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                                             key={sub.id}
                                             onClick={() => {
                                               navigate(
-                                                `/productsList?category=${sub.name.toLowerCase()}&id=${sub.id}`
+                                                `/productsList?category=${menu.groupName}&subName=${dept.title}`
                                               );
                                               handleMenuClose(sub.name);
                                             }}
@@ -433,7 +434,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                             <CategoryTitle
                               onClick={() => {
                                 handleMenuClose(dept.title);
-                                navigate(`/productsList?category=${dept.title.toLowerCase()}`);
+                                navigate(
+                                  `/productsList?category=${menu.groupName}&subName=${dept.title}`
+                                );
                               }}
                             >
                               {dept.title} →
@@ -444,7 +447,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                                   key={sub.id}
                                   onClick={() => {
                                     navigate(
-                                      `/productsList?category=${sub.name.toLowerCase()}&id=${sub.id}`
+                                      `/productsList?category=${menu.groupName}&subName=${dept.title}&nestedName=${dept.title}`
                                     );
                                     handleMenuClose(sub.name);
                                   }}
@@ -498,7 +501,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                         } else if (item.listName === "VIP Benefits") {
                           path = "/vip/benefits";
                         } else {
-                          path = `/productsList?id=${item.id}`;
+                          path = `/productsList?category=WINE`;
                         }
 
                         return (

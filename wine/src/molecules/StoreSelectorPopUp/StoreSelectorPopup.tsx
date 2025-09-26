@@ -139,9 +139,9 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                 onClick={() => {
                   onSelect(store.id);
                   setIsAgeVerified && setIsAgeVerified(true);
-                  setTimeout(()=>{
-                  onClose();
-                  },(2000))
+                  setTimeout(() => {
+                    onClose();
+                  }, 2000);
                 }}
               >
                 <StoreHeader>
@@ -154,14 +154,13 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
                         <MapIconImage src={isSelected ? mapIconSelected : mapIcon} alt="map" />
                       }
                       selected={isSelected}
-                    onClick={(e) => {
-  e.stopPropagation();
-  if (store?.mapUrl) {
-    window.open(store.mapUrl, "_blank"); // open directly
-  }
-  onClose();
-}}
-
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (store?.mapUrl) {
+                          window.open(store.mapUrl, "_blank"); // open directly
+                        }
+                        onClose();
+                      }}
                     >
                       Open Map
                     </MapButton>

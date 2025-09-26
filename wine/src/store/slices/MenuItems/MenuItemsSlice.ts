@@ -43,5 +43,5 @@ const MenuItemsSlice = createSlice({
   },
 });
 
-export const {  setMenuList, addDepartment, addSubDepartment  } = MenuItemsSlice.actions;
+export const { setMenuList, addDepartment, addSubDepartment } = MenuItemsSlice.actions;
 export default MenuItemsSlice.reducer;

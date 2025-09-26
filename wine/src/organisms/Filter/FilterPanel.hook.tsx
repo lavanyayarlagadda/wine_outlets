@@ -344,7 +344,6 @@ export const useFilterPanel = (categories: any[], onFilterChange?: (filters: Fil
                 item.listName.toLowerCase().replace(/\s+/g, "") ===
                 selectedSubName.toLowerCase().replace(/\s+/g, "")
             );
-
             if (selectedItem) {
               setFilters({ [sub.categoryId]: [selectedItem.listId] });
 

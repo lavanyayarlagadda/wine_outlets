@@ -1,7 +1,7 @@
 export interface AuthState {
   token: string | null;
   customer: any | null;
-  isSignedIn:string;
+  isSignedIn: string;
   isLoggedIn: boolean;
 }
 

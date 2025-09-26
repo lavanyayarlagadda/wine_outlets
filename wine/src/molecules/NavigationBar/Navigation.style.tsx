@@ -231,8 +231,7 @@ export const StyledMenu = styled(Menu)(() => ({
     borderRadius: shape.borderRadiuspx,
     marginTop: "16px",
     minWidth: "168px",
-    maxHeight:"400px",
-    
+    maxHeight: "400px",
   },
 }));
 export const StyledProfileMenu = styled(Menu)(({ theme }) => ({
@@ -533,7 +532,7 @@ export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
 }));
 
 export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expanded }) => ({
-  fontSize:useFontSize(12),
+  fontSize: useFontSize(12),
   fontWeight: 500,
   marginTop: 8,
   cursor: "pointer",

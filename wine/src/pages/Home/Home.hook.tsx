@@ -30,7 +30,7 @@ export const useHomeLogic = () => {
   const [getHomeSections, { data: sections, error, isLoading: sectionsLoading }] =
     useGetHomeSectionsMutation();
   const { searchTerm } = useSelector((state: RootState) => state.homeSlice);
-    const { isSignedIn } = useSelector((state: RootState) => state.authSlice);
+  const { isSignedIn } = useSelector((state: RootState) => state.authSlice);
   const [storeSearchlocator, { data: searchData, isLoading: searchLoading, error: searchError }] =
     useStoreSearchlocatorMutation();
 
@@ -40,7 +40,7 @@ export const useHomeLogic = () => {
     }
   }, [searchTerm]);
 
- useEffect(() => {
+  useEffect(() => {
     if (location.pathname === "/") {
       const payload = {
         ...getClientIdentifierForPayload(),

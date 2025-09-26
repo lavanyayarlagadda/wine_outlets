@@ -86,7 +86,7 @@ export const useSignUp = (onClose: () => void) => {
           })
         );
         onClose();
-         dispatch(setIsSignedIn("signedIn"))
+        dispatch(setIsSignedIn("signedIn"));
         toast.success(result.message || "Customer account created successfully");
       } else {
         toast.error("Form validation failed");

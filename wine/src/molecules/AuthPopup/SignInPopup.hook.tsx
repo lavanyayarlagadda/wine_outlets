@@ -64,7 +64,7 @@ export const useSignIn = (onClose: () => void) => {
         localStorage.setItem("userId", result.customer.customerId);
         dispatch(setCredentials({ token: result.token, customer: result.customer }));
         onClose();
-        dispatch(setIsSignedIn("signedIn"))
+        dispatch(setIsSignedIn("signedIn"));
         toast.success("Login Successfully");
       } catch (error: any) {
         console.error("Signin failed:", error);

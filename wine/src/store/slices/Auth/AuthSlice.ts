@@ -5,7 +5,7 @@ const initialState: AuthState = {
   token: null,
   customer: null,
   isLoggedIn: false,
-  isSignedIn:'guest'
+  isSignedIn: "guest",
 };
 
 const AuthSlice = createSlice({
@@ -22,11 +22,11 @@ const AuthSlice = createSlice({
       state.customer = null;
       state.isLoggedIn = false;
     },
-    setIsSignedIn:(state,action:PayloadAction<any>)=>{
-      state.isSignedIn = action.payload
-    }
+    setIsSignedIn: (state, action: PayloadAction<any>) => {
+      state.isSignedIn = action.payload;
+    },
   },
 });
 
-export const { setCredentials, logout,setIsSignedIn } = AuthSlice.actions;
+export const { setCredentials, logout, setIsSignedIn } = AuthSlice.actions;
 export default AuthSlice.reducer;
