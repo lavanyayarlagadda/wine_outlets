@@ -26,8 +26,6 @@ const Home = () => {
     storesData,
     searchLoading,
     rvData,
-    rvLoading,
-    rvError,
   } = useHomeLogic();
   const { searchTerm } = useSelector((store: RootState) => store.homeSlice);
 

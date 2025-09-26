@@ -21,9 +21,7 @@ export const Card = styled(Box)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   boxShadow: theme.shadows[4],
   background:
-    theme.palette.mode === "light"
-      ? theme.palette.common.white
-      : theme.palette.background.paper,
+    theme.palette.mode === "light" ? theme.palette.common.white : theme.palette.background.paper,
 }));
 
 export const Illustration = styled("div")(({ theme }) => ({
@@ -56,6 +54,6 @@ export const Actions = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-export const BackButton = styled(Button)(({ theme }) => ({
+export const BackButton = styled(Button)(() => ({
   minWidth: 140,
 }));

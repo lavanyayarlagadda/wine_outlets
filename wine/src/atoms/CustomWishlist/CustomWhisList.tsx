@@ -22,7 +22,7 @@ const CustomWishlist: React.FC<CustomWishlistProps> = ({
 }) => {
   const [selected, setSelected] = useState(defaultSelected);
   const handleToggle = () => {
-    const newValue = !selected;
+    const newValue = defaultSelected ? true : !selected;
     setSelected(newValue);
     if (onToggle) onToggle(newValue);
   };

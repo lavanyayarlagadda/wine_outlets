@@ -56,6 +56,20 @@ export const cartCheckoutApi = createApi({
         body: { storeId },
       }),
     }),
+    getWishList: builder.mutation<any, any>({
+      query: (newItem) => ({
+        url: `/my-wishlist/wishlist`,
+        method: "POST",
+        body: newItem,
+      }),
+    }),
+    removeWishlist: builder.mutation<any, any>({
+      query: (newItem) => ({
+        url: ` /my-wishlist/remove-wishlist`,
+        method: "POST",
+        body: newItem,
+      }),
+    }),
   }),
 });
 
@@ -64,4 +78,6 @@ export const {
   useSlotDetailsMutation,
   usePlaceOrderMutation,
   useStoreOffDaysMutation,
+  useGetWishListMutation,
+  useRemoveWishlistMutation,
 } = cartCheckoutApi;

@@ -56,7 +56,7 @@ const App: React.FC = () => {
             <Route path="/careers" element={<Career />} />
             <Route path="/accessibilityStatement" element={<AccessibilityStatement />} />
             <Route path="/vip/benefits" element={<VipBenefits />} />
-            <Route path="*" element={<NotFoundPage/>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>

@@ -38,6 +38,7 @@ export const useHomeLogic = () => {
     data: rvData,
     isLoading: rvLoading,
     isError: rvError,
+    refetch,
   } = useGetRecentlyViewedQuery({
     ...getClientIdentifierForPayload(),
   });
@@ -55,6 +56,7 @@ export const useHomeLogic = () => {
         storeId: selectedStore,
       };
       getHomeSections(payload);
+      refetch();
     }
   }, [location.pathname, selectedStore, isSignedIn]);
 

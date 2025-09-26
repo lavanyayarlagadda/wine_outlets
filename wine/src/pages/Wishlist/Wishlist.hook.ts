@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { deal_img3 } from "../../assets";
+import {
+  useGetWishListMutation,
+  useRemoveWishlistMutation,
+} from "../../store/apis/CartCheckOut/CartCheckOutAPI";
+import { toast } from "react-toastify";
+import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 export type WishlistItem = {
   wishlistId: string;
   itemID: string;
@@ -20,282 +25,40 @@ export type WishlistResponse = {
   wishlist: WishlistItem[];
 };
 
-const MOCK_RESPONSE: WishlistResponse = {
-  page: 1,
-  size: 10,
-  total: 2,
-  wishlist: [
-    {
-      wishlistId: "W001",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W002",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W003",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W001",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W002",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W003",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W001",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W002",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W003",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W001",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W002",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W003",
-      itemID: "P001",
-      name: "Château Margaux - 2018",
-      brand: "Château Margaux",
-      origin: "California",
-      year: 2018,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-    {
-      wishlistId: "W004",
-      itemID: "P002",
-      name: "Jim Bean Bourbon Whiskey",
-      brand: "Jim Beam",
-      origin: "California",
-      year: 2021,
-      size: "750ml - Standard",
-      price: 16.53,
-      vipPrice: 12.62,
-      imageUrl: deal_img3,
-    },
-  ],
-};
-
 export function useWishlist() {
   const [items, setItems] = useState<WishlistItem[]>([]);
-  const [page, setPage] = useState<number>(MOCK_RESPONSE.page);
-  const [size] = useState<number>(MOCK_RESPONSE.size);
-  const [total, setTotal] = useState<number>(MOCK_RESPONSE.total);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(1);
+  const [size] = useState<number>(10);
+  const [total, setTotal] = useState<number>(0);
   const [error, setError] = useState<string>("");
+  const storedId = localStorage.getItem("selectedStore");
+  const [getWishList, { isLoading, isError }] = useGetWishListMutation();
+  const [removeWishlist] = useRemoveWishlistMutation();
+  const [wishlist, setWishList] = useState<boolean>(true);
+  useEffect(() => {
+    getWishList({
+      ...getClientIdentifierForPayload(),
+      page: 1,
+      size: 10,
+    })
+      .unwrap()
+      .then((res: any) => {
+        setItems(res.wishlist);
+        setPage(res.page);
+        setTotal(res.total);
+      })
+      .catch((err: any) => {
+        console.error("Failed to fetch wishlist:", err);
+      });
+  }, []);
 
   useEffect(() => {
-    setLoading(true);
-    // simulate API call
-    const t = setTimeout(() => {
-      setItems(MOCK_RESPONSE.wishlist);
-      setPage(MOCK_RESPONSE.page);
-      setTotal(MOCK_RESPONSE.total);
-      setLoading(false);
-    }, 200);
-
-    return () => clearTimeout(t);
-  }, []);
-
-  const removeItem = useCallback((wishlistId: string) => {
-    setItems((prev) => prev.filter((p) => p.wishlistId !== wishlistId));
-    setTotal((prev) => Math.max(0, prev - 1));
-  }, []);
+    if (isError) {
+      toast.error("Failed to load Wishlist");
+    }
+  }, [isError]);
 
   const addToCart = useCallback((wishlistId: string) => {
-    // In real app: call API/store. For demo, remove from wishlist.
     setItems((prev) => prev.filter((p) => p.wishlistId !== wishlistId));
     setTotal((prev) => Math.max(0, prev - 1));
   }, []);
@@ -305,16 +68,45 @@ export function useWishlist() {
     setTotal(0);
   }, []);
 
+  const handleRemoveFavorite = useCallback(
+    async (wishlistId: string) => {
+      setWishList(true);
+      try {
+        const payload = {
+          ...getClientIdentifierForPayload(),
+          itemNumber: wishlistId,
+          storeId: storedId,
+        };
+        await removeWishlist(payload).unwrap();
+        toast.success("Item removed from wishlist");
+        const wishlistRes = await getWishList({
+          ...getClientIdentifierForPayload(),
+          page: 1,
+          size: 10,
+        }).unwrap();
+
+        setItems(wishlistRes.wishlist);
+        setPage(wishlistRes.page);
+        setTotal(wishlistRes.total);
+      } catch (err: any) {
+        console.error("Failed to remove item:", err);
+        toast.error("Failed to remove item from wishlist");
+      }
+    },
+    [removeWishlist, getWishList]
+  );
+
   return {
     items,
     page,
     size,
     total,
-    loading,
+    isLoading,
     error,
-    removeItem,
     addToCart,
     clearAll,
     setError,
+    handleRemoveFavorite,
+    wishlist,
   };
 }

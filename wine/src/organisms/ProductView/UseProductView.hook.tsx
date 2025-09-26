@@ -33,6 +33,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
     data: rvData,
     isLoading: rvLoading,
     isError: rvError,
+    refetch,
   } = useGetRecentlyViewedQuery({
     ...getClientIdentifierForPayload(),
   });
@@ -76,6 +77,7 @@ export const useProductView = ({ initialData }: ProductDetailsProps = {}) => {
         fetchDetails();
       }
     }
+    refetch();
   }, [isSignedIn]);
   useEffect(() => {
     bottleSizes({

@@ -24,9 +24,6 @@ import { starIcon, sizeIcon, originIcon } from "../../assets";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import CustomCounter from "../../atoms/CustomCounter/CustomCounter";
 import CustomWishlist from "../../atoms/CustomWishlist/CustomWhisList";
-// import AddToCart from "../../atoms/CustomButton/AddToCart";
-import useCartProduct from "./UseCartProduct.hook";
-
 interface PricingProps {
   price?: any;
   vipPrice?: string;
@@ -110,11 +107,8 @@ const CartProduct: React.FC<CartProductProps> = ({
   wishListLoading,
   handleAddToCart,
   quantity,
-  handleRemoveFromCart,
-  itemNumber,
 }) => {
   const [count, setCount] = useState<number>(quantity || 1);
-  const { orderId } = useCartProduct({ initialQuantity: quantity });
 
   return (
     <CardContainer>
@@ -131,14 +125,7 @@ const CartProduct: React.FC<CartProductProps> = ({
             id={productId}
           />
           <BackspaceIcon>
-            <BackSpaceIcon
-              onClick={() =>
-                orderId &&
-                handleRemoveFromCart &&
-                itemNumber &&
-                handleRemoveFromCart(orderId, itemNumber)
-              }
-            />
+            <BackSpaceIcon onClick={() => handleToggleFavorite(productId)} />
           </BackspaceIcon>
         </IconRow>
         <InfoItem

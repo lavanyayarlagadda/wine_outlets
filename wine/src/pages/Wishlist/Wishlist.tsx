@@ -1,4 +1,4 @@
-import { CircularProgress, Divider, Grid, Box } from "@mui/material";
+import { Divider, Grid, Box, Skeleton } from "@mui/material";
 import { HeaderTitle, ProductHeader } from "../../molecules/OrderSummary/OrderSummary.style";
 import {
   WishlistContainer,
@@ -15,16 +15,10 @@ import { useGetRecentlyViewedQuery } from "../../store/apis/Home/HomeAPI";
 import { getClientIdentifierForPayload } from "../../utils/useClientIdentifier";
 
 export default function Wishlist() {
-  const { items, loading } = useWishlist();
-  const {
-    data: rvData,
-    // isLoading: rvLoading,
-    // isError: rvError,
-  } = useGetRecentlyViewedQuery({
+  const { items, isLoading, handleRemoveFavorite, wishlist } = useWishlist();
+  const { data: rvData } = useGetRecentlyViewedQuery({
     ...getClientIdentifierForPayload(),
   });
-
-  if (loading) return <CircularProgress />;
 
   return (
     <WishlistContainer>
@@ -45,7 +39,21 @@ export default function Wishlist() {
         <Divider />
 
         <CartGrid>
-          {items.length === 0 ? (
+          {isLoading ? (
+            // Skeleton Loader (shows 3 placeholders)
+            Array.from(new Array(3)).map((_, index) => (
+              <Grid key={index} columns={{ xs: 12, lg: 6 }}>
+                <Box display="flex" gap={2} p={2}>
+                  <Skeleton variant="rectangular" width={100} height={120} />
+                  <Box flex={1}>
+                    <Skeleton variant="text" width="80%" height={30} />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton variant="text" width="40%" />
+                  </Box>
+                </Box>
+              </Grid>
+            ))
+          ) : items.length === 0 ? (
             <Box>No items in wishlist.</Box>
           ) : (
             items.map((p) => (
@@ -57,20 +65,22 @@ export default function Wishlist() {
                   origin={p.origin || ""}
                   brand={p.brand || ""}
                   size={p.size || ""}
-                  year={"1928"}
-                  unitPrice={{ original: "200", discounted: "300" }}
+                  year={p.year?.toString() || ""}
+                  unitPrice={{
+                    original: p.price.toString() || "",
+                    discounted: p.vipPrice?.toString() || "",
+                  }}
                   quantity={2}
                   component="WISHLIST"
-                  handleToggleFavorite={() => {}}
-                  // handleAddToCart={() => {}}
-                  // itemNumber={p.itemID}
-                  // handleRemoveFromCart={() => {}}
+                  handleToggleFavorite={() => handleRemoveFavorite(p.itemID)}
+                  isWishList={wishlist}
                 />
               </Grid>
             ))
           )}
         </CartGrid>
       </WishlistItemsContainer>
+
       <RecentlyView
         content={rvData?.products ?? []}
         title={rvData?.title}
