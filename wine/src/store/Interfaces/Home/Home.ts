@@ -3,6 +3,10 @@ export interface SubDepartment {
   name: string;
 }
 
+export interface SearchState {
+ searchTerm: string;
+}
+
 export interface Department {
   title: string;
   subDepartments: SubDepartment[];

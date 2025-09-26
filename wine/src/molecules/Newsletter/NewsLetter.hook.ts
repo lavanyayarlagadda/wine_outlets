@@ -38,7 +38,7 @@ export const useNewsletter = () => {
     const missingFields: string[] = [];
 
     if (!formData.fullName?.trim()) missingFields.push("Full Name");
-    if (!formData.phoneNumber?.trim()) missingFields.push("Phone Number");
+    // if (!formData.phoneNumber?.trim()) missingFields.push("Phone Number");
     if (!formData.email?.trim()) missingFields.push("Email");
     if (!formData.preferredStore?.trim()) missingFields.push("Preferred Store");
     if (!formData.alcoholPreferences?.trim()) missingFields.push("Alcohol Preferences");

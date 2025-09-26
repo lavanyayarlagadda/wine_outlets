@@ -50,7 +50,7 @@ const Newsletter: React.FC = () => {
             onChange={handleInputChange("phoneNumber")}
             placeholder="954589334"
             type="tel"
-            required={true}
+            // required={true}
             isPhoneInput={true}
             countryValue={formData.countryCode}
             onCountryChange={handleInputChange("countryCode")}

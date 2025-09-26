@@ -5,7 +5,7 @@ export const HeroBannerContainer = styled(Box)(() => ({
   position: "relative",
   // width: "98vw",
   width: "100%",
-  height: "calc(100vh - 200px)",
+  height: "calc(100vh - 180px)",
   overflow: "hidden",
   // cursor: "grab",
   "&:active": {
