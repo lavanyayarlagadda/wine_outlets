@@ -386,7 +386,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                             <CategoryColumn key={dept.title}>
                               <CategoryTitle
                                 onClick={() => {
-                                  handleMenuClose(menu.groupName);
+                                  handleMenuClose(dept.title);
                                   navigate(`/productsList?category=${dept.title.toLowerCase()}`);
                                 }}
                               >
@@ -405,9 +405,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                                             key={sub.id}
                                             onClick={() => {
                                               navigate(
-                                                `/productsList?category=${dept.title.toLowerCase()}&id=${sub.id}`
+                                                `/productsList?category=${sub.name.toLowerCase()}&id=${sub.id}`
                                               );
-                                              handleMenuClose(menu.groupName);
+                                              handleMenuClose(sub.name);
                                             }}
                                           >
                                             {sub.name.length > 20
@@ -444,9 +444,9 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                                   key={sub.id}
                                   onClick={() => {
                                     navigate(
-                                      `/productsList?category=${dept.title.toLowerCase()}&id=${sub.id}`
+                                      `/productsList?category=${sub.name.toLowerCase()}&id=${sub.id}`
                                     );
-                                    handleMenuClose(menu.groupName);
+                                    handleMenuClose(sub.name);
                                   }}
                                 >
                                   {sub.name} →
