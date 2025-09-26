@@ -279,3 +279,600 @@ export const useNavigation = (
     chunkArray,
   };
 };
+
+
+
+// {
+//   "menuList": [
+//     {
+//       "id": 1,
+//       "groupName": "WINE",
+//       "departments": [
+//         {
+//           "title": "CABERNET AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC CABERNET"
+//             },
+//             {
+//               "id": 2,
+//               "name": "DOMESTIC CABERNET BLENDS"
+//             },
+//             {
+//               "id": 3,
+//               "name": "IMPORTED CABERNET"
+//             },
+//             {
+//               "id": 4,
+//               "name": "IMPORTED CABERNET BLENDS"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "CHARDONNAY AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC CHARDONNAY"
+//             },
+//             {
+//               "id": 2,
+//               "name": "IMPORTED CHARDONNAY"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "FINE WINE COOLER",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "ALL FINE WINE COOLER ITEMS"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "FRENCH",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "FRENCH RED"
+//             },
+//             {
+//               "id": 2,
+//               "name": "FRENCH WHITE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "GWERTS/GRUNER VETLINER",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "GEWURTZTRAMINER"
+//             },
+//             {
+//               "id": 2,
+//               "name": "GRUNER VETLINER"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "ITALIAN",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "ITALIAN RED"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "JUG/BOX WINE AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "BOXED WINES"
+//             },
+//             {
+//               "id": 2,
+//               "name": "JUG WINES"
+//             },
+//             {
+//               "id": 3,
+//               "name": "SANGRIA"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "KOSHER",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "KOSHER"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "LOCAL NJ/NY WINE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "LOCAL NJ/NY WINE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "MAGNUMS",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "ALL DOMESTIC MAGNUM WINE"
+//             },
+//             {
+//               "id": 2,
+//               "name": "ALL IMPORTED MAGNUM WINE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "MALBEC",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "ARGENTINIAN"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "MERLOT",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC MERLOT"
+//             },
+//             {
+//               "id": 2,
+//               "name": "IMPORTED MERLOT"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "ORGANIC WINE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "ORGANIC WINE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "OTHER WHITE VARIETAL",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "CHENIN BLANC"
+//             },
+//             {
+//               "id": 2,
+//               "name": "MOSCATO D'ASTI"
+//             },
+//             {
+//               "id": 3,
+//               "name": "OTHER WHITE VARIETALS"
+//             },
+//             {
+//               "id": 4,
+//               "name": "VIOGNIER"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "PINOT GRIGIO/GAVI",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC PINOT GRIGIO"
+//             },
+//             {
+//               "id": 2,
+//               "name": "GAVI"
+//             },
+//             {
+//               "id": 3,
+//               "name": "IMPORTED PINOT GRIGIO"
+//             },
+//             {
+//               "id": 4,
+//               "name": "OTHER WHITE VARIETALS"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "PINOT NOIR AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "BURGUNDY"
+//             },
+//             {
+//               "id": 2,
+//               "name": "DOMESTIC PINOT NOIR"
+//             },
+//             {
+//               "id": 3,
+//               "name": "IMPORTED PINOT NOIR"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "PORT/DESSERT WINE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DESSERT WINE"
+//             },
+//             {
+//               "id": 2,
+//               "name": "PORT"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "PORT/NY-NJ AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "NY/NJ/KOSHER WINES"
+//             },
+//             {
+//               "id": 2,
+//               "name": "PORT/DESSERT/OTHER"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "PORTUGUESE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "PORTUGUESE RED"
+//             },
+//             {
+//               "id": 2,
+//               "name": "PORTUGUESE WHITE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "RED BLEND",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC RED BLEND"
+//             },
+//             {
+//               "id": 2,
+//               "name": "IMPORTED RED BLEND"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "RHONE/GRENACH/CARMEN/PET SIRAH",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "CARMENERE"
+//             },
+//             {
+//               "id": 2,
+//               "name": "GRENACHE"
+//             },
+//             {
+//               "id": 3,
+//               "name": "PETIT SIRAH"
+//             },
+//             {
+//               "id": 4,
+//               "name": "RHONE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "RIESLING",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC RIESLING"
+//             },
+//             {
+//               "id": 2,
+//               "name": "IMPORTED RIESLING"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "ROSE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "STILL ROSE WINE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "SAKE/NON-ALCOHOLIC",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "NON-ALCOHOLIC WINE"
+//             },
+//             {
+//               "id": 2,
+//               "name": "SAKE/MEAD/GLUWEIN"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "SAUVIGNON BLANC",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC SAUVIGNON BLANC"
+//             },
+//             {
+//               "id": 2,
+//               "name": "IMPORTED SAUVIGNON BLANC"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "SHIRAZ/SYRAH",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "SHIRAZ/SHIRAZ BLENDS"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "SPANISH",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "SPANISH REDS"
+//             },
+//             {
+//               "id": 2,
+//               "name": "SPANISH WHITE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "SPARKLING AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "CHAMPAGNE"
+//             },
+//             {
+//               "id": 2,
+//               "name": "OTHER SPARKLING"
+//             },
+//             {
+//               "id": 3,
+//               "name": "SMALL BOTTLES/SPLITS ETC."
+//             },
+//             {
+//               "id": 4,
+//               "name": "STILL SWEET RED WINE"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "SPLITS/SMALL BOTTLES",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "SPLITS/SMALL BOTTLES"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "ZINFANDEL",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "DOMESTIC ZIN"
+//             },
+//             {
+//               "id": 2,
+//               "name": "IMPORTED ZIN"
+//             }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       "id": 2,
+//       "groupName": "LIQUOR",
+//       "departments": [
+//         {
+//           "title": "LIQUOR",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "BOURBON"
+//             },
+//             {
+//               "id": 2,
+//               "name": "BRANDY"
+//             },
+//             {
+//               "id": 3,
+//               "name": "CHECKOUT COUNTER - SMALL SIZES"
+//             },
+//             {
+//               "id": 4,
+//               "name": "COGNAC"
+//             },
+//             {
+//               "id": 5,
+//               "name": "CORDIALS"
+//             },
+//             {
+//               "id": 6,
+//               "name": "GIN"
+//             },
+//             {
+//               "id": 7,
+//               "name": "HERBAL LIQUEUR"
+//             },
+//             {
+//               "id": 8,
+//               "name": "PREPARED COCKTAILS/RTD"
+//             },
+//             {
+//               "id": 9,
+//               "name": "RUM"
+//             },
+//             {
+//               "id": 10,
+//               "name": "SCOTCH"
+//             },
+//             {
+//               "id": 11,
+//               "name": "SINGLE MALT SCOTCH"
+//             },
+//             {
+//               "id": 12,
+//               "name": "TEQUILA"
+//             },
+//             {
+//               "id": 13,
+//               "name": "VODKA"
+//             },
+//             {
+//               "id": 14,
+//               "name": "WHISKEY"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "LIQUOR SPECIAL",
+//           "subDepartments": []
+//         }
+//       ]
+//     },
+//     {
+//       "id": 3,
+//       "groupName": "BEER",
+//       "departments": [
+//         {
+//           "title": "BEER",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "CANNED COCKTAILS"
+//             },
+//             {
+//               "id": 2,
+//               "name": "DOMESTIC BEER"
+//             },
+//             {
+//               "id": 3,
+//               "name": "HARD CIDER"
+//             },
+//             {
+//               "id": 4,
+//               "name": "HARD SELTZER"
+//             },
+//             {
+//               "id": 5,
+//               "name": "IMPORTED BEER"
+//             },
+//             {
+//               "id": 6,
+//               "name": "KEG/PARTY BALLS"
+//             },
+//             {
+//               "id": 7,
+//               "name": "MALTERNATIVES"
+//             },
+//             {
+//               "id": 8,
+//               "name": "MICRO/SPECIALTY BEERS"
+//             },
+//             {
+//               "id": 9,
+//               "name": "NON-ALCOHOL BEER"
+//             },
+//             {
+//               "id": 10,
+//               "name": "SINGLE BOTTLES"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "BEER SPECIAL",
+//           "subDepartments": []
+//         }
+//       ]
+//     },
+//     {
+//       "id": 8,
+//       "groupName": "MISCELLANEOUS",
+//       "departments": [
+//         {
+//           "title": "HEMP",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "CBD"
+//             },
+//             {
+//               "id": 2,
+//               "name": "THC / DELTA-9"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "INTERNET",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "INTERNET"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "MIXER AISLE",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "ALCOHOLIC MIXERS"
+//             },
+//             {
+//               "id": 2,
+//               "name": "NON-ALCOHOLIC MIXERS"
+//             }
+//           ]
+//         },
+//         {
+//           "title": "NON-ALCOHOLIC",
+//           "subDepartments": [
+//             {
+//               "id": 1,
+//               "name": "NON-ALCOHOLIC LIQUOR"
+//             },
+//             {
+//               "id": 2,
+//               "name": "NON-ALCOHOLIC WINE"
+//             }
+//           ]
+//         }
+//       ]
+//     }
+//   ]
+// }
+
+

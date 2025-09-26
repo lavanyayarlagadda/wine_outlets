@@ -33,12 +33,17 @@ import {
   ColumnsWrapper,
   Column,
   DropdownMenuItemStyled,
-  ViewMoreText,
+  // ViewMoreText,
   SuggestionsContainer,
   HighlightedText,
   StyledSuggestionItem,
   PromotionCategoryColumn,
   PromotionsColumnsWrapper,
+  MenuContentWrapper,
+  LeftColumn,
+  RightColumn,
+  SpecialBox,
+
   // StyledBadge,
 } from "./Navigation.style";
 import MobileMenu from "./NavigationMobileMenu";
@@ -56,6 +61,7 @@ import { logout, profile, wishlist } from "../../assets";
 import type { HomeHookReturn } from "../../pages/Home/Home.hook";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import { Tooltip } from "@mui/material";
 
 interface NavigationProps {
   stores: HomeHookReturn["stores"];
@@ -98,22 +104,24 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
     // handleChange,
     handleSelectSuggestion,
     expandedMenus,
-    toggleExpand,
-    setSelectedMenu,
+    // toggleExpand,
+    // setSelectedMenu,
     chunkArray,
   } = useNavigation(searchTerm ? storesData : stores, menuKeys, 2000);
 
   const navigate = useNavigate();
   const menuList = useSelector((state: RootState) => state.menu.menuList);
+
+  console.log("menuList", menuList);
   const promotionsMenuData = {
     name: "PROMOTIONS",
     categories: [
       {
         title: "Promotions",
         items: [
-          { id: 501, listName: "New Arrivals" },
+          { id: 501, listName: "NEW ARRIVALS" },
           // { id: 502, listName: "Events" },
-          { id: 503, listName: "VIP Benefits" },
+          { id: 503, listName: "VIP BENEFITS" },
         ],
       },
     ],
@@ -337,114 +345,127 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
       <BottomToolbar>
         <NavWrapper>
-          {menuList.map((menu) => (
-            <div key={menu.id}>
-              <DropdownTriggerNoBorder
-                onClick={(e) => handleMenuOpen(e, menu.name)}
-                open={menuOpen[menu.name]}
-              >
-                {menu.name}{" "}
-                {menuOpen[menu.name] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </DropdownTriggerNoBorder>
+          {menuList?.map((menu) => {
+            const specialDepartments = menu.departments.filter((dept) =>
+              dept.title.toLowerCase().includes("special")
+            );
 
-              <StyledMenu
-                anchorEl={anchorEl[menu.name]}
-                open={menuOpen[menu.name] && !mobileMenuOpen}
-                onClose={() => handleMenuClose(menu.name)}
-              >
-                <CategoryColumn>
-                  <CategoryTitle
-                    onClick={() => {
-                      handleMenuClose(menu.name); // close the menu first
-                      navigate(`/productsList?category=${menu.name.toLowerCase()}`); // then navigate
-                    }}
-                  >
-                    {menu.name} →
-                  </CategoryTitle>
+            return (
+              <div key={menu.id}>
+                {/* Show groupName */}
+                <DropdownTriggerNoBorder
+                  onClick={(e) => handleMenuOpen(e, menu.groupName)}
+                  open={menuOpen[menu.groupName]}
+                >
+                  {menu.groupName}{" "}
+                  {menuOpen[menu.groupName] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </DropdownTriggerNoBorder>
 
-                  <ColumnsWrapper
-                    id={`columns-wrapper-${menu.name}`}
-                    expanded={expandedMenus[menu.name]}
-                    columns={Math.min(
-                      Math.ceil((expandedMenus[menu.name] ? menu.itemsList.length : 10) / 5),
-                      5
-                    )} // min 1, max 5 columns
-                  >
-                    {chunkArray(
-                      expandedMenus[menu.name] ? menu.itemsList : menu.itemsList.slice(0, 10),
-                      5 // 5 items per column
-                    ).map((column, colIndex) => (
-                      <Column key={colIndex}>
-                        {column.map((item) => (
-                          <DropdownMenuItemStyled
-                            key={item.id}
-                            onClick={() => {
-                              setSelectedMenu(menu.name);
-                              navigate(
-                                `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
-                              );
-                              handleMenuClose(menu.name);
-                            }}
-                          >
-                            {item.listName}
-                          </DropdownMenuItemStyled>
+                <StyledMenu
+                  anchorEl={anchorEl[menu.groupName]}
+                  open={menuOpen[menu.groupName] && !mobileMenuOpen}
+                  onClose={() => handleMenuClose(menu.groupName)}
+                >
+                  <MenuContentWrapper>
+                    {/* Left side: normal departments */}
+                    <LeftColumn>
+                      {menu.departments
+                        .filter((dept) => !dept.title.toLowerCase().includes("special"))
+                        .map((dept) => {
+                          // Get subDepartments (slice if not expanded)
+                          const subDepartments = expandedMenus[dept.title]
+                            ? dept.subDepartments
+                            : dept.subDepartments.slice(0, 10);
+
+                          // Split into columns of 5 items
+                          const chunkSize = 5; // 5 items per column
+                          const columns = Math.ceil(subDepartments.length / chunkSize);
+                          const chunks = chunkArray(subDepartments, chunkSize);
+
+                          return (
+                            <CategoryColumn key={dept.title}>
+                              <CategoryTitle
+                                onClick={() => {
+                                  handleMenuClose(menu.groupName);
+                                  navigate(`/productsList?category=${dept.title.toLowerCase()}`);
+                                }}
+                              >
+                                {dept.title} →
+                              </CategoryTitle>
+                              {menu.groupName !== "WINE" && (
+                                <ColumnsWrapper
+                                  expanded={expandedMenus[dept.title]}
+                                  columns={columns}
+                                >
+                                  {chunks.map((column, colIndex) => (
+                                    <Column key={colIndex}>
+                                      {column.map((sub) => (
+                                        <Tooltip title={sub.name} arrow placement="top">
+                                          <DropdownMenuItemStyled
+                                            key={sub.id}
+                                            onClick={() => {
+                                              navigate(
+                                                `/productsList?category=${dept.title.toLowerCase()}&id=${sub.id}`
+                                              );
+                                              handleMenuClose(menu.groupName);
+                                            }}
+                                          >
+                                            {sub.name.length > 20
+                                              ? sub.name.slice(0, 15) + "…"
+                                              : sub.name}
+                                          </DropdownMenuItemStyled>
+                                        </Tooltip>
+                                      ))}
+                                    </Column>
+                                  ))}
+                                </ColumnsWrapper>
+                              )}
+                            </CategoryColumn>
+                          );
+                        })}
+                    </LeftColumn>
+
+                    {/* Right side: render only if specials exist */}
+                    {specialDepartments.length > 0 && (
+                      <RightColumn>
+                        {specialDepartments.map((dept) => (
+                          <SpecialBox key={dept.title}>
+                            <CategoryTitle
+                              onClick={() => {
+                                handleMenuClose(dept.title);
+                                navigate(`/productsList?category=${dept.title.toLowerCase()}`);
+                              }}
+                            >
+                              {dept.title} →
+                            </CategoryTitle>
+                            {dept.subDepartments.length > 0 ? (
+                              dept.subDepartments.map((sub) => (
+                                <DropdownMenuItemStyled
+                                  key={sub.id}
+                                  onClick={() => {
+                                    navigate(
+                                      `/productsList?category=${dept.title.toLowerCase()}&id=${sub.id}`
+                                    );
+                                    handleMenuClose(menu.groupName);
+                                  }}
+                                >
+                                  {sub.name} →
+                                </DropdownMenuItemStyled>
+                              ))
+                            ) : (
+                              <DropdownMenuItemStyled>
+                                No promotions available
+                              </DropdownMenuItemStyled>
+                            )}
+                          </SpecialBox>
                         ))}
-                      </Column>
-                    ))}
-
-                    {menu.itemsList.length > 10 && (
-                      <ViewMoreText
-                        expanded={expandedMenus[menu.name]}
-                        onClick={() => {
-                          toggleExpand(menu.name);
-                          window.scrollTo(0, 0);
-                        }}
-                      >
-                        {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
-                      </ViewMoreText>
+                      </RightColumn>
                     )}
-                  </ColumnsWrapper>
-
-                  {/* <ColumnsWrapper
-                    id={`columns-wrapper-${menu.name}`}
-                    expanded={expandedMenus[menu.name]}
-                  >
-                    {(() => {
-                      const itemsToShow = expandedMenus[menu.name]
-                        ? menu.itemsList
-                        : menu.itemsList.slice(0, 10);
-
-                      return itemsToShow.map((item) => (
-                        <DropdownMenuItemStyled
-                          key={item.id}
-                          onClick={() => {
-                            setSelectedMenu(menu.name);
-                            navigate(
-                              `/productsList?category=${menu.name.toLowerCase()}&id=${item.id}`
-                            );
-                            handleMenuClose(menu.name);
-                          }}
-                        >
-                          {item.listName}
-                        </DropdownMenuItemStyled>
-                      ));
-                    })()}
-
-                    {menu.itemsList.length > 10 && (
-                      <ViewMoreText
-                        expanded={expandedMenus[menu.name]}
-                        onClick={() => {
-                          (toggleExpand(menu.name), window.scrollTo(0, 0));
-                        }}
-                      >
-                        {expandedMenus[menu.name] ? "View Less ←" : "View More →"}
-                      </ViewMoreText>
-                    )}
-                  </ColumnsWrapper> */}
-                </CategoryColumn>
-              </StyledMenu>
-            </div>
-          ))}
+                  </MenuContentWrapper>
+                </StyledMenu>
+              </div>
+            );
+          })}
 
           {/* Promotions Menu */}
           <div>

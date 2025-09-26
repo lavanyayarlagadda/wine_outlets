@@ -411,7 +411,8 @@ export const CloseButton = styled(IconButton)(({ theme }) => ({
 export const CategoryColumn = styled(Box)(({ theme }) => ({
   flex: "1 1 200px",
   marginBottom: 16,
-  minWidth: 600, // default for large screens
+  minWidth: 250, // smaller minimum
+  maxWidth: 500, // default for large screens
 
   // Medium screens (tablet)
   [theme.breakpoints.down("md")]: {
@@ -479,6 +480,7 @@ export const ColumnsWrapper = styled(Box)<{ columns: number; expanded?: boolean 
     padding: "8px 30px",
     maxHeight: expanded ? 300 : "auto",
     overflowY: expanded ? "auto" : "visible",
+    maxWidth: columns * 180, // prevent full stretch
 
     [theme.breakpoints.down("lg")]: {
       gridTemplateColumns: `repeat(${Math.min(columns, 3)}, 1fr)`,
@@ -519,7 +521,7 @@ export const Column = styled(Box)(() => ({
 }));
 
 export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
-  fontSize: 13,
+  fontSize: useFontSize(14),
   padding: "4px 0",
   cursor: "pointer",
   "&:hover": {
@@ -529,7 +531,7 @@ export const DropdownMenuItemStyled = styled(MenuItem)(() => ({
 }));
 
 export const ViewMoreText = styled(Typography)<{ expanded?: boolean }>(({ expanded }) => ({
-  fontSize: 13,
+  fontSize:useFontSize(12),
   fontWeight: 500,
   marginTop: 8,
   cursor: "pointer",
@@ -602,3 +604,48 @@ export const StyledSuggestionItem = styled(ListItemButton)(({ theme }) => ({
     backgroundColor: palette.white.light,
   },
 }));
+
+export const MenuContentWrapper = styled("div")({
+  display: "flex",
+  gap: "20px",
+  alignItems: "flex-start",
+});
+
+export const LeftColumn = styled("div")({
+  flex: 1,
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "20px",
+  maxWidth: "700px",
+});
+
+export const RightColumn = styled("div")({
+  flex: "0 0 auto",
+  padding: "0px 30px 0px 0px",
+  width: "auto", // width only as per content
+  maxWidth: "350px", // optional limit
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+});
+
+export const SpecialBox = styled("div")({
+  // background: palette.primary.light,
+  // border: shape.borderRed,
+  // borderRadius: "8px",
+  // padding: "12px",
+});
+
+export const SpecialTitle = styled("h4")({
+  fontWeight: "bold",
+  color: palette.primary.dark,
+  marginBottom: "8px",
+});
+
+export const SpecialItem = styled("div")({
+  padding: "6px 0",
+  cursor: "pointer",
+  "&:hover": {
+    textDecoration: "underline",
+  },
+});

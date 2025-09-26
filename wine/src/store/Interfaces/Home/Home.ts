@@ -1,16 +1,17 @@
-export interface SearchState {
-  searchTerm: string;
+export interface SubDepartment {
+  id: number;
+  name: string;
 }
 
-export interface MenuItem {
-  id: number;
-  listName: string;
+export interface Department {
+  title: string;
+  subDepartments: SubDepartment[];
 }
 
 export interface MenuSection {
   id: number;
-  name: string;
-  itemsList: MenuItem[];
+  groupName: string;
+  departments: Department[];
 }
 
 export interface MenuResponse {
