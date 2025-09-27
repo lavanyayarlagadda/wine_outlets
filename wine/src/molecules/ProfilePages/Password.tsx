@@ -19,6 +19,7 @@ const Password = () => {
     handleSubmitPassword,
     showPassword,
     setShowPassword,
+    handleUpdatePassword
   } = useProfileForm();
 
   return (
@@ -101,7 +102,7 @@ const Password = () => {
           <CustomButton
             text={"Save"}
             bgColor={theme.palette.primary.dark}
-            onClick={() => console.log("save")}
+            onClick={handleUpdatePassword}
             color={""}
             border={""}
             btnBorderColor={""}

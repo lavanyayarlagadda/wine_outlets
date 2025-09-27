@@ -10,6 +10,8 @@ import { AuthAPI } from "./apis/Authentication/AuthAPI";
 import authSlice from "./slices/Auth/AuthSlice";
 import menuItemSlice from "./slices/MenuItems/MenuItemsSlice";
 import productViewSlice from "./slices/ProductView/productViewSlice";
+import { profileApi } from "./apis/MyProfile/MyProfileAPI";
+import MyProfileSlice from "./slices/MyProfile/MyProfileSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,11 +21,13 @@ export const store = configureStore({
     authSlice: authSlice,
     menu: menuItemSlice,
     productViewSlice: productViewSlice,
+    profileSlice:MyProfileSlice,
     [productListApi.reducerPath]: productListApi.reducer,
     [productViewApi.reducerPath]: productViewApi.reducer,
     [homeApi.reducerPath]: homeApi.reducer,
     [cartCheckoutApi.reducerPath]: cartCheckoutApi.reducer,
     [AuthAPI.reducerPath]: AuthAPI.reducer,
+    [profileApi.reducerPath]:profileApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -31,7 +35,8 @@ export const store = configureStore({
       .concat(homeApi.middleware)
       .concat(productViewApi.middleware)
       .concat(cartCheckoutApi.middleware)
-      .concat(AuthAPI.middleware),
+      .concat(AuthAPI.middleware)
+      .concat(profileApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

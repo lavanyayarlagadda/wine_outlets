@@ -11,7 +11,9 @@ import { theme } from "../../themes/theme";
 import * as Styled from "./ProfilePages.style";
 
 const ProfileInformation = ({ initialData }: { initialData?: any }) => {
-  const { form, errors, handleChange, handleSubmit } = useProfileForm(initialData);
+  const { form, errors, handleChange, handleSubmit, handleUpdateProfile, updating } =
+    useProfileForm(initialData);
+
 
   return (
     <Styled.Container>
@@ -96,9 +98,9 @@ const ProfileInformation = ({ initialData }: { initialData?: any }) => {
         {/* Save Button */}
         <Styled.ButtonWrapper>
           <CustomButton
-            text={"Save"}
+            text={updating ? "Saving..." : "Save"}
             bgColor={theme.palette.primary.dark}
-            onClick={() => console.log("save")}
+            onClick={handleUpdateProfile}
             color={""}
             border={""}
             btnBorderColor={""}

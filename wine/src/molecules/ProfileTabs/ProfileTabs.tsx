@@ -4,25 +4,30 @@ import ProfileInformation from "../ProfilePages/ProfileInformation";
 import VIPMembership from "../ProfilePages/VIPMembership";
 import Password from "../ProfilePages/Password";
 import * as Styled from "./ProfileTabs.style";
+import type { CustomerProfile } from "../../store/Interfaces/MyProfile/MyProfileInterface";
 
-const ProfileTabs = () => {
+interface ProfileTabsProps {
+  profileData: CustomerProfile;
+}
+
+const ProfileTabs = ({ profileData }: ProfileTabsProps) => {
   const [tab, setTab] = useState<"profile" | "vip" | "pwd">("profile");
-  const ProfileData = {
-    CustomerID: "1",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phoneNumber: "+1 9876543210",
-    address: "abc",
-    zipCode: "1234",
-    vipMembership: {
-      isActive: false,
-      barcodeNumber: "VIP123456789",
-      expiryDate: "2025-12-31",
-      memberId: "1234",
-      memberName: "MEMBERNAME",
-    },
-  };
+  // const ProfileData = {
+  //   CustomerID: "1",
+  //   firstName: "John",
+  //   lastName: "Doe",
+  //   email: "john.doe@example.com",
+  //   phoneNumber: "+1 9876543210",
+  //   address: "abc",
+  //   zipCode: "1234",
+  //   vipMembership: {
+  //     isActive: false,
+  //     barcodeNumber: "VIP123456789",
+  //     expiryDate: "2025-12-31",
+  //     memberId: "1234",
+  //     memberName: "MEMBERNAME",
+  //   },
+  // };
 
   return (
     <Styled.ProfileTabsContainer>
@@ -45,9 +50,9 @@ const ProfileTabs = () => {
 
       <Styled.TabFieldsStyled>
         {tab === "profile" ? (
-          <ProfileInformation initialData={ProfileData} />
+          <ProfileInformation initialData={profileData} />
         ) : tab === "vip" ? (
-          <VIPMembership initialData={ProfileData.vipMembership} />
+          <VIPMembership initialData={profileData} />
         ) : (
           <Password />
         )}

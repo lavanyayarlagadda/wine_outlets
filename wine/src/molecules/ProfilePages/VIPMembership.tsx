@@ -11,8 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 const VipMembership = ({ initialData }: { initialData?: any }) => {
   const navigate = useNavigate();
-  const { vipCode, handleVipCodeChange, setShowPassword, showPassword } =
+  const { vipCode, handleVipCodeChange, setShowPassword, showPassword, handleUpdateProfile, updating } =
     useProfileForm(initialData);
+
   return (
     <>
       <Styled.Container>
@@ -44,7 +45,7 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
         <Styled.VIPContainer>
           {/* VIP Card */}
           <Styled.GridItem>
-            <Styled.VIPCard active={initialData.isActive}>
+            <Styled.VIPCard active={initialData.vipMembership.isActive}>
               {/* Top Row: Title + Expiry Date */}
               <Styled.CardTopRow>
                 <Typography variant="h6" fontWeight="bold">
@@ -53,7 +54,7 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
                 <Box>
                   <Typography variant="body2">Expire Date</Typography>
                   <Typography variant="body2" fontWeight="bold">
-                    {initialData.isActive ? initialData.expiryDate : ""}
+                    {initialData.vipMembership.isActive ? initialData.vipMembership.expiryDate : ""}
                   </Typography>
                 </Box>
               </Styled.CardTopRow>
@@ -63,13 +64,15 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
                 <Box>
                   <Typography variant="body2">Member Name</Typography>
                   <Typography variant="body1" fontWeight="bold">
-                    {initialData.isActive ? initialData.memberName : ""}
+                    {initialData.vipMembership.isActive ? initialData.name : ""}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography variant="body2">Member ID</Typography>
                   <Typography variant="body1" fontWeight="bold">
-                    {initialData.isActive ? initialData.memberId : ""}
+                    {initialData.vipMembership.isActive
+                      ? initialData.vipMembership.barcodeNumber
+                      : ""}
                   </Typography>
                 </Box>
               </Styled.CardBottomRow>
@@ -84,7 +87,7 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
                 value={vipCode}
                 onChange={handleVipCodeChange} // pass string
                 required
-                type={showPassword ? "text" : "password"}
+                type={showPassword.old ? "password" : "text"}
                 endIcon={
                   <IconButton
                     onClick={() => setShowPassword((prev) => ({ ...prev, old: !prev.old }))}
@@ -97,9 +100,9 @@ const VipMembership = ({ initialData }: { initialData?: any }) => {
 
               <Styled.ButtonWrapper>
                 <CustomButton
-                  text={"Save"}
+                  text={updating ? "Saving..." : "Save"}
+                  onClick={handleUpdateProfile}
                   bgColor={theme.palette.primary.dark}
-                  onClick={() => console.log("save")}
                   color=""
                 />
               </Styled.ButtonWrapper>
