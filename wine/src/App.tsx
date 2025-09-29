@@ -10,6 +10,7 @@ import "@fontsource/inter/100.css";
 import AppLoader from "./atoms/AppLoader/AppLoader";
 import ScrollToTop from "./ScrollTop";
 import { useClientIp } from "./hooks/userIp";
+import InternalServer from "./pages/InternalServerError/InternalServer";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ProductsList = lazy(() => import("./pages/ProductList/ProductListPage"));
@@ -56,6 +57,7 @@ const App: React.FC = () => {
             <Route path="/careers" element={<Career />} />
             <Route path="/accessibilityStatement" element={<AccessibilityStatement />} />
             <Route path="/vip/benefits" element={<VipBenefits />} />
+            <Route path="/serverError" element={<InternalServer />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
