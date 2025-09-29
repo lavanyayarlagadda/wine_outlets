@@ -87,7 +87,7 @@ const StoreSelectorPopup: React.FC<StoreSelectorPopupProps> = ({
       title="Select Your Store"
       footer={
         <Typography variant="caption" color="text.secondary">
-          <strong>Note:</strong> If no store is selected, Wall WineOutlet will be used as default.
+          <strong>Note:</strong> If no store is selected, Manasquan Wine Outlet will be used as default.
           You can change your store preference at any time using the store selector in the header.
         </Typography>
       }
