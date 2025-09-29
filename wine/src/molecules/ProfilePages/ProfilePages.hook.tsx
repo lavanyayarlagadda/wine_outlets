@@ -12,8 +12,8 @@ export const useProfileForm = (initialData?: any) => {
   const [updateProfile, { isLoading: updating }] = useUpdateProfileMutation();
   const [updatePassword] = useUpdatePasswordMutation();
   const [form, setForm] = useState({
-    firstName: initialData?.firstName || "",
-    lastName: initialData?.lastName || "",
+    firstName: initialData?.firstname || "",
+    lastName: initialData?.lastname || "",
     email: initialData?.email || "",
     phoneNumber: initialData?.phone || "",
     address: initialData?.address || "",
@@ -99,7 +99,7 @@ export const useProfileForm = (initialData?: any) => {
   };
 
   const handleUpdateProfile = async () => {
-
+    console.log("handleUpdateProfile");
     try {
       await profileSchema.validate(form, { abortEarly: false });
       setErrors({});
@@ -107,9 +107,12 @@ export const useProfileForm = (initialData?: any) => {
       const payload = {
         CustomerID: cunstomerId ?? "",
         name: `${form.firstName} ${form.lastName}`,
+        firstname: form.firstname,
+        lastname: form.lastname,
         email: form.email,
         phone: form.phoneNumber,
         address: form.address,
+        zipCode: form.zipCode,
         // vipMembership: form.vipMembership,
         vipMembership: {
           ...form.vipMembership,
@@ -117,7 +120,7 @@ export const useProfileForm = (initialData?: any) => {
           barcodeNumber: vipCode,
         },
       };
-
+console.log("Up", payload)
       const response = await updateProfile(payload).unwrap();
       toast.success("Profile updated successfully!");
       console.log("Updated profile:", response);
@@ -135,7 +138,6 @@ export const useProfileForm = (initialData?: any) => {
   };
 
   const handleUpdatePassword = async () => {
-
     if (passwordForm.password !== passwordForm.confirmPassword) {
       toast.error("New password and confirm password do not match!");
       return;
@@ -153,7 +155,7 @@ export const useProfileForm = (initialData?: any) => {
         toast.success(response.message);
         setPasswordForm({ oldPassword: "", password: "", confirmPassword: "" });
       } else if (response.error) {
-        toast.error(response.error); 
+        toast.error(response.error);
       }
     } catch (err: any) {
       toast.error(err?.data?.error || "Failed to update password");

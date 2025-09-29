@@ -34,19 +34,19 @@ const ProfileInformation = ({ initialData }: { initialData?: any }) => {
           <HalfField>
             <CustomTextField
               label="First Name"
-              value={form.firstName}
-              onChange={(val) => handleChange("firstName", val)}
+              value={form.firstname}
+              onChange={(val) => handleChange("firstname", val)}
               required
-              error={errors.firstName}
+              error={errors.firstname}
             />
           </HalfField>
           <HalfField>
             <CustomTextField
               label="Last Name"
-              value={form.lastName}
-              onChange={(val) => handleChange("lastName", val)}
+              value={form.lastname}
+              onChange={(val) => handleChange("lastname", val)}
               required
-              error={errors.lastName}
+              error={errors.lastname}
             />
           </HalfField>
         </PasswordFields>
