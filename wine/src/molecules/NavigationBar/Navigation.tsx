@@ -59,9 +59,10 @@ import { StoreLocator } from "..";
 import { AddToCartButton } from "../../atoms/CustomButton/CustomButton.style";
 import { logout, profile, wishlist } from "../../assets";
 import type { HomeHookReturn } from "../../pages/Home/Home.hook";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { Tooltip } from "@mui/material";
+import { setIsSignedIn } from "../../store/slices/Auth/AuthSlice";
 
 interface NavigationProps {
   stores: HomeHookReturn["stores"];
@@ -111,7 +112,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
 
   const navigate = useNavigate();
   const menuList = useSelector((state: RootState) => state.menu.menuList);
-
+const dispatch = useDispatch();
   const promotionsMenuData = {
     name: "PROMOTIONS",
     categories: [
@@ -280,6 +281,7 @@ const Navigation: React.FC<NavigationProps> = ({ stores, storesData }) => {
                           if (option.label === "Logout") {
                             localStorage.removeItem("token");
                             localStorage.removeItem("userId");
+                            dispatch(setIsSignedIn("guest"))
                           }
 
                           option.onClick?.();
