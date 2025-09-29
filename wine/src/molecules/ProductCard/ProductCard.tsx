@@ -17,6 +17,7 @@ import palette from "../../themes/palette";
 import { useNavigate } from "react-router-dom";
 import { FavoriteBorderIcon, FavoriteIcon } from "../ProductListGrid/ProductGridCard.style";
 import type { ProductCategoryItem } from "../../constant/LandingPageData";
+import CustomTooltip from "../CustomTooltip/CustomTooltip";
 
 // const isRecentlyViewedCard = true;
 
@@ -74,6 +75,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           transform: "translateY(-2px)",
         },
         transition: "all 0.3s ease",
+        width: 280
       }}
     >
       {/* Favorite Button */}
@@ -97,6 +99,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <CardMedia
         component="img"
         height={isRecentlyViewedCard ? "300" : "240"}
+        width = {"100%"}
         image={product.imageUrl}
         alt={product.title}
         sx={{ objectFit: "cover", cursor: "pointer" }}
@@ -108,9 +111,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
       />
       <CardContent sx={{ p: 2 }}>
         {/* Product Name */}
-        <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: "1rem" }}>
-          {product?.title}
-        </Typography>
+        <CustomTooltip
+          text={product?.title}
+          maxLength={15}
+          maxWidth={200}
+          variant="h6"
+          sx={{ fontWeight: 600, mb: 2, fontSize: "1rem" }}
+        />
 
         {/* Product Details */}
         <Box
@@ -141,12 +148,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
               alt={"city map"}
               style={{ width: "24px", height: "24px", marginRight: "5px" }}
             />
-            <Typography
+            <CustomTooltip
+              text={product?.origin}
+              maxLength={10}
+              maxWidth={150}
               variant="body2"
               sx={{ fontSize: "1rem", fontWeight: 500, color: palette.grey.main }}
-            >
-              {product?.origin}
-            </Typography>
+            />
           </Box>
         </Box>
 
